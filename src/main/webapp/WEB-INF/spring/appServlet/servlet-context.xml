@@ -19,20 +19,28 @@
 	<!-- Configures Handler Interceptors -->	
 	<mvc:interceptors>
 		<!-- Changes the locale when a 'locale' request parameter is sent; e.g. /?locale=de -->
-		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName">
+				<value>lang</value>
+			</property>
+		</bean>
 	</mvc:interceptors>
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources/ directory -->
-	<mvc:resources mapping="/resources/**" location="/resources/" />
-
 	<!-- Saves a locale change using a cookie -->
-	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale">
+			<value>en_US</value>
+		</property>
+	</bean>
 
 	<!-- Application Message Bundle -->
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="defaultEncoding" value="UTF-8"/>
-		<property name="basename" value="/WEB-INF/messages/messages" />
-		<property name="cacheSeconds" value="0" />
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="basename">
+			<value>classpath:messages</value>
+		</property>
 	</bean>
 
 	<!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->

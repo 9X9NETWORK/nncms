@@ -46,7 +46,6 @@ import com.nncloudtv.service.SessionService;
 import com.nncloudtv.web.CmsApiController;
 
 @Controller
-@RequestMapping(value="cms")
 public class CmsController {
 	
 	protected static final Logger log = Logger.getLogger(CmsController.class.getName());
@@ -82,7 +81,7 @@ public class CmsController {
 		if (mso.getType() == Mso.TYPE_TCO) {
 			model.addAttribute("logoutUrl", "/cms/logout");
 		} else {
-			model.addAttribute("logoutUrl", "/" + mso.getName() + "/logout");
+			model.addAttribute("logoutUrl", "/cms/" + mso.getName() + "/logout");
 		}
 		
 		return model;
@@ -98,7 +97,7 @@ public class CmsController {
 	public String genericCMSLogout(HttpServletResponse resp, Model model) {
 		CookieHelper.deleteCookie(resp, CookieHelper.USER);
 		model.asMap().clear();
-		return "redirect:/9x9";
+		return "redirect:../";
 	}
 	/*
 	@RequestMapping(value = "channelManagement", method = RequestMethod.GET)
@@ -179,7 +178,7 @@ public class CmsController {
 				}
 				if (cmsTab.equals("admin")) {
 					model.asMap().clear();
-					return "redirect:/cms/channelManagement";
+					return "redirect:/channelManagement";
 				}
 				mso.setLogoUrl(MsoConfigManager.getExternalRootPath() + "/images/9x9.tv.png");
 				model = setAttributes(model, mso);
@@ -221,9 +220,9 @@ public class CmsController {
 		if (sessionMso != null && sessionMso.getId() == mso.getId()) {
 			model.asMap().clear();
 			if (mso.getType() == Mso.TYPE_ENTERPRISE)
-				return "redirect:/cms/" + msoName + "/channelSetManagement";
+				return "redirect:/" + msoName + "/channelSetManagement";
 			else
-				return "redirect:/cms/" + msoName + "/channelManagement";
+				return "redirect:/" + msoName + "/channelManagement";
 		} else {
 			Cookie[] cookies = request.getCookies();
 			if (cookies != null) {
@@ -264,7 +263,7 @@ public class CmsController {
 		MsoManager msoMngr = new MsoManager();
 		NnUserManager userMngr = new NnUserManager();
 		Locale locale = request.getLocale();
-		MessageSource messageSource = new ClassPathXmlApplicationContext();
+		MessageSource messageSource = new ClassPathXmlApplicationContext("locale.xml");
 		
 		Mso mso = msoMngr.findByName(msoName);
 		if (mso == null)
@@ -305,9 +304,9 @@ public class CmsController {
 		}
 		model.asMap().clear();
 		if (mso.getType() == Mso.TYPE_ENTERPRISE)
-			return "redirect:/cms/" + msoName + "/channelSetManagement";
+			return "redirect:/" + msoName + "/channelSetManagement";
 		else
-			return "redirect:/cms/" + msoName + "/channelManagement";
+			return "redirect:/" + msoName + "/channelManagement";
 	}
 	
 	@RequestMapping(value = "{msoName}/logout")
@@ -315,7 +314,7 @@ public class CmsController {
 		SessionService sessionService = new SessionService(request);
 		sessionService.removeSession(response);
 		model.asMap().clear();
-		return "redirect:/cms/" + msoName + "/admin";
+		return "redirect:/" + msoName + "/admin";
 	}
 	
 	@RequestMapping(value = "{msoName}/{cmsTab}")
@@ -353,7 +352,7 @@ public class CmsController {
 		} else {
 			sessionService.removeSession(response);
 			model.asMap().clear();
-			return "redirect:/cms/" + msoName + "/admin";
+			return "redirect:/" + msoName + "/admin";
 		}
 	}
 	
