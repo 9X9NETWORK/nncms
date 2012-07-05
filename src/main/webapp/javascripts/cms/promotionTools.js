@@ -398,6 +398,8 @@ var page$ = {
             log('pages count: ' + sns.pages.length);
             for (i in sns.pages) {
               var page = sns.pages[i];
+              if (!page.name)
+                continue;
               $('<option/>').val(page.id).text(page.name).appendTo('.facebook_select');
               page$.facebookPages[page.id] = page;
             }
