@@ -1,4 +1,4 @@
-package com.nncloudtv.web;
+package com.nncloudtv.nncms.web;
 
 import java.io.IOException;
 import java.security.SignatureException;
@@ -43,6 +43,7 @@ import com.nncloudtv.service.MsoConfigManager;
 import com.nncloudtv.service.MsoManager;
 import com.nncloudtv.service.NnUserManager;
 import com.nncloudtv.service.SessionService;
+import com.nncloudtv.web.CmsApiController;
 
 @Controller
 @RequestMapping(value="cms")
