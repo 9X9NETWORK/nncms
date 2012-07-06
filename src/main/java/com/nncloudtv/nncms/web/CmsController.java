@@ -136,7 +136,7 @@ public class CmsController {
 		if (userToken == null) {
 			log.warning("user not login");
 			model.asMap().clear();
-			return "redirect:/9x9";
+			return "redirect:../9x9";
 		} else {
 			NnUserManager userMngr = new NnUserManager();
 			MsoManager msoMngr = new MsoManager();
