@@ -1,0 +1,439 @@
+/*-----------------------------------------------------------------------------
+[TABLE OF CONTENTS]
+    +content-main
+        =lightbox-create-channel
+        =lightbox-facebook
+-----------------------------------------------------------------------------*/
+
+.blockOverlay {
+    position: absolute !important;
+    top: 45px !important;
+    background-color: #777 !important;
+}
+
+.blockMsg {
+    top: 50% !important;
+    left: 50% !important;
+    width: auto !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.lightbox-content {
+    display: none;
+}
+
+/**
+*
+* =lightbox-create-channel
+*
+**/
+
+#lightbox-create-channel {
+    display: none;
+    margin: -171px 0 0 -321px;
+    text-align: center;
+}
+
+#lightbox-create-channel h3 {
+    margin-bottom: 15px;
+}
+
+#lightbox-create-channel p.desc {
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#lightbox-create-channel p.create {
+    position: relative;
+    width: 180px;
+    margin: 0 auto 20px;
+    border: 3px dashed #fff;
+}
+
+#lightbox-create-channel p.create a {
+    display: block;
+    width: 180px;
+    height: 180px;
+    text-indent: -100000px;
+    behavior: url(PIE.htc);
+}
+
+#lightbox-create-channel p.create a:hover {
+    background-color: #7f7f7f\9;
+    box-shadow: 0 0 15px 3px #fff, 0 0 15px 1px #fff inset;
+    behavior: url(PIE.htc);
+}
+
+#lightbox-create-channel p.create img {
+    position: absolute;
+    top: 47px;
+    left: 77px;
+    border: none;
+}
+
+#lightbox-create-channel p.create span {
+    position: absolute;
+    top: 100px;
+    left: 28px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    text-indent: 0;
+    cursor: pointer;
+}
+
+#lightbox-create-channel p.btns {
+    width: 188px;
+    margin: 0 auto;
+}
+
+/**
+*
+* =lightbox-facebook
+*
+**/
+
+#lightbox-facebook {
+    position: relative;
+    display: none;
+    margin: -108px 0 0 -213px;
+    text-align: left;
+    cursor: default;
+}
+
+#lightbox-facebook h3 {
+    height: 26px;
+    padding-left: 10px;
+    background: url(../images/bg_blue_bar.png) repeat-x;
+}
+
+#lightbox-facebook h3 img {
+    vertical-align: middle;
+}
+
+#lightbox-facebook .btn-close {
+    display: block;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 9px;
+    height: 10px;
+    background: url(../images/btn_fb_close.png) no-repeat 0 0;
+    text-indent: -100000px;
+}
+
+#lightbox-facebook .btn-close:hover {
+    background: url(../images/btn_fb_close_press.png) no-repeat 0 0;
+}
+
+#lightbox-facebook .content {
+    overflow: hidden;
+    min-height: 120px;
+    padding: 15px 50px 0 15px;
+    background-color: #fff;
+    font-size: 13px;
+}
+
+#lightbox-facebook .content p {
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+#lightbox-facebook .content p.confirm span {
+    float: left;
+    width: 14px;
+    height: 15px;
+    margin-right: 10px;
+    background: url(../images/check_box.png) no-repeat 0 0;
+}
+
+#lightbox-facebook .content p.confirm span a {
+    display: block;
+    width: 14px;
+    height: 15px;
+    text-indent: -100000px;
+}
+
+#lightbox-facebook .content p.confirm span.on a,
+#lightbox-facebook .content p.confirm span       a:hover {
+    background: url(../images/icon_check.png) no-repeat center;
+}
+
+#lightbox-facebook .button {
+    position: relative;
+    height: 54px;
+    border-top: 1px solid #ccc;
+    background-color: #efefef;
+}
+
+#lightbox-facebook .button .fb-ok {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 77px;
+    height: 34px;
+    background: url(../images/btn_fb_ok.png) no-repeat 0 0;
+    text-indent: -100000px;
+}
+
+#lightbox-facebook .button .fb-ok:hover {
+    background-position: 0 -34px;
+}
+
+/**
+*
+* =lightbox-upload-video
+*
+**/
+
+.lightbox-upload-video {
+    display: none;
+    width: 635px;
+    height: 422px;
+    margin: -211px 0 0 -317px;
+    padding: 0 0 0 11px;
+    background: url(../images/bg_popup_box_left.png) no-repeat 0 0;
+    cursor: default;
+}
+
+.lightbox-upload-video .btn-save               span input,
+.lightbox-upload-video .btn-cancel           span input,
+.lightbox-upload-video .btn-upload-file span input {
+    padding: 0 10px;
+}
+
+.lightbox-upload-video h3 {
+    text-align: center;
+}
+
+.lightbox-upload-video .upload-audio {
+    height: 422px;
+    padding-right: 11px;
+    background: url(../images/bg_popup_box_right.png) no-repeat right 0;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap {
+    position: relative;
+    height: 399px;
+    padding: 23px 5px 0 0;
+    background: url(../images/bg_popup_box_middle.png) repeat-x;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap .btn-close {
+    display: block;
+    position: absolute;
+    top: 7px;
+    right: -3px;
+    width: 22px;
+    height: 24px;
+    background: url(../images/btn_popup_close.png) no-repeat 0 0;
+    text-indent: -100000px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap .btn-close:hover {
+    background: url(../images/btn_popup_close_on.png) no-repeat 0 0;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap p.required {
+    margin-bottom: 10px;
+    color: #777;
+    font-size: 13px;
+    text-align: right;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form {
+    position: relative;
+    height: 326px;
+    padding: 0 0 0 8px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput {
+    overflow: auto;
+    margin-bottom: 18px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput label {
+    float: left;
+    width: 109px;
+    height: 26px;
+    margin-right: 10px;
+    padding: 0 0 0 10px;
+    color: #777;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 26px;
+    text-align: left;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput label acronym {
+    margin-left: -10px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield {
+    position: relative;
+    overflow: auto;
+    color: #999;
+    font-size: 13px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .notice {
+    float: left;
+    margin-top: 15px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .highlight {
+    color: #f00;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield p.btns {
+    float: left;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield p.text {
+    overflow: hidden;
+    float: left;
+    width: 470px;
+    height: 31px;
+    margin-right: 10px;
+    padding: 0 0 0 3px;
+    background: url(../images/popup_input_box_left.png) no-repeat 0 0;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield p.text span {
+    display: block;
+    padding-right: 3px;
+    background: url(../images/popup_input_box_right.png) no-repeat right 0;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield p.text span .text {
+    width: 465px;
+    height: 32px;
+    padding-left: 2px;
+    border: none;
+    background: url(../images/popup_input_box_middle.png) repeat-x;
+    color: #777;
+    font-family: Helvetica;
+    font-size: 13px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield p.img {
+    float: left;
+    width: 129px;
+    height: 82px;
+    margin-right: 10px;
+    background: url(../images/thumbnail_box2_lg.png) no-repeat 0 0;
+    line-height: 82px;
+    text-align: center;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield p.img img {
+    vertical-align: middle;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .upload-func {
+    position: relative;
+    float: left;
+    height: 80px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .upload-func .radio-list {
+    overflow: hidden;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .upload-func .radio-list .radio {
+    float: left;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .upload-func .radio-list .radio a {
+    float: left;
+    height: 19px;
+    padding-left: 25px;
+    background: url(../images/btn_radio_off.png) no-repeat 0 0;
+    color: #777;
+    line-height: 18px;
+    text-decoration: none;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .upload-func .radio-list .radio.on a,
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .upload-func .radio-list .radio       a:hover {
+    background: url(../images/btn_radio_on.png) no-repeat 0 0;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .upload-func .radio-list .first {
+    margin-right: 40px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .upload-func .upload {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .upload-func .img-url {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 331px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .upload-func .img-url .text {
+    width: 328px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .upload-func .upload a {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .form-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45px;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .form-btn .notice {
+    color: #f00;
+    font-size: 13px;
+    text-align: right;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .form-btn .form-btn-wrap {
+    float: right;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .form-btn .form-btn-wrap .btns {
+    float: left;
+}
+
+.lightbox-upload-video .upload-audio .upload-audio-wrap form .form-btn .form-btn-wrap .btn-cancel {
+    margin-right: 10px;
+}
+
+/**
+*
+* =lightbox-play-video
+*
+**/
+
+#lightbox-play-video {
+    display: none;
+    width: 707px;
+    height: 490px;
+    margin: -245px 0 0 -354px;
+}
+
+#lightbox-play-video .btns {
+    width: 240px;
+    margin: 20px auto 0;
+}
+
+#lightbox-play-video .btns a {
+    width: 237px;
+}

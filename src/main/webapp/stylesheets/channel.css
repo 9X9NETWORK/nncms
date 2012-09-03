@@ -1,0 +1,590 @@
+/*-----------------------------------------------------------------------------
+[TABLE OF CONTENTS]
+    +content-main
+        =channel-list
+-----------------------------------------------------------------------------*/
+
+/**
+*
+* =channel-list
+*
+**/
+
+#channel-list {
+    width: 100%;
+    border-right: 1px solid #A4A09B;
+    border-left: 1px solid #A4A09B;
+    background: url(../images/bg_divider.png) repeat-x 0 top;
+}
+
+#channel-list li {
+    position: relative;
+    background: url(../images/bg_divider.png) repeat-x 0 bottom;
+}
+
+#channel-list li:hover {
+    background: url(../images/bg_main2.png) repeat -210px 0;
+}
+
+/* =photo-list
+**************************************/
+
+#channel-list li .photo-list {
+    position: relative;
+    float: left;
+    width: 232px;
+    padding: 7px 4px 4px 8px;
+}
+
+#channel-list li .photo-list img {
+    float: left;
+    margin: 0 5px 5px 0;
+    border: none;
+}
+
+#channel-list li .photo-list a img.watermark {
+    display: none;
+    position: absolute;
+    top: 34px;
+    left: 68px;
+    z-index: 10;
+}
+
+#channel-list li .photo-list a:hover img.img {
+    background-color: #fff;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+}
+
+#channel-list li .photo-list a:hover img.watermark {
+    display: block;
+}
+
+/* =info
+**************************************/
+
+#channel-list li .info {
+    float: left;
+    overflow: hidden;
+}
+
+#channel-list li .info h3 {
+    padding: 5px 0 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+#channel-list li .info h3 a {
+    color: #777;
+    text-decoration: none;
+}
+
+#channel-list li .info h3 a:hover {
+    color: #999;
+}
+
+#channel-list li .info p {
+    float: left;
+    margin-right: 40px;
+    font-size: 13px;
+    text-align: center;
+}
+
+#channel-list li .info p span {
+    display: block;
+    font-size: 21px;
+}
+
+/* =func-wrap
+**************************************/
+
+#channel-list li .func-wrap {
+    float: right;
+    position: relative;
+    width: 200px;
+    height: 103px;
+}
+
+#channel-list li .func-wrap p.time {
+    padding: 10px 0 0;
+    font-size: 13px;
+}
+
+#channel-list li .func-wrap .func-btns {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    float: left;
+    padding: 0 0 0 4px;
+    background: url(../images/edit_box_left.png) no-repeat 0 0;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap {
+    padding: 0 3px 0 0;
+    background: url(../images/edit_box_right.png) no-repeat right 0;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul {
+    height: 31px;
+    padding: 0 7px 0 15px;
+    border: none;
+    background: url(../images/edit_box_middle.png) repeat 0 0;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li {
+    position: relative;
+    float: left;
+    margin-right: 8px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li:hover {
+    background: none;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a {
+    display: block;
+    width: 22px;
+    height: 25px;
+    margin: 2px 0 0;
+    background: url(../images/btns.png) no-repeat;
+    text-indent: -100000px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.add {
+    background-position: 0 -550px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.add.disable,
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.add.disable:hover {
+    background-position: 0 -600px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.add:hover {
+    background-position: -23px -550px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.detail {
+    background-position: 0 -652px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.detail.disable,
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.detail.disable:hover {
+    background-position: 0 -702px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.detail:hover {
+    background-position: -23px -652px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting {
+    background-position: 0 -754px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting.disable,
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting.disable:hover {
+    background-position: 0 -804px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting:hover {
+    background-position: -23px -754px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.del {
+    background-position: 0 -856px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.del.disable,
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.del.disable:hover {
+    background-position: 0 -906px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.del:hover {
+    background-position: -23px -856px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a .tip {
+    display: none;
+    position: absolute;
+    top: -27px;
+    left: -20px;
+    height: 32px;
+    background: url(../images/bg_tip_bottom.png) no-repeat 23px bottom;
+    color: #777;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.add .tip {
+    width: 160px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.detail .tip {
+    width: 90px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting .tip {
+    left: -50px;
+    width: 120px;
+    background-position: 54px bottom;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.del .tip {
+    left: -90px;
+    width: 135px;
+    background-position: 95px bottom;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a .tip .tip-left {
+    display: block;
+    height: 28px;
+    padding-left: 7px;
+    background: url(../images/bg_tip_bottom_left.png) no-repeat 0 0;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a .tip .tip-right {
+    display: block;
+    height: 28px;
+    padding-right: 7px;
+    background: url(../images/bg_tip_bottom_right.png) no-repeat right 0;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a .tip .tip-middle {
+    display: block;
+    height: 28px;
+    background: url(../images/bg_tip_bottom_middle.png) repeat-x;
+    line-height: 28px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a:hover .tip {
+    display: block;
+}
+
+#channel-list li .func-wrap p.drag {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    width: 34px;
+    height: 99px;
+    background: #ddd url(../images/icon_move.png) no-repeat center center;
+    text-indent: -100000px;
+}
+
+#channel-list li .func-wrap p.drag {
+    background: #eee url(../images/icon_move.png) no-repeat center center;
+}
+
+#channel-list li .func-wrap p.drag:hover {
+    cursor:url(../images/icon_drop.png), move;
+}
+
+/**
+*
+* =settingForm
+*
+**/
+
+#content-main-wrap form {
+    position: relative;
+    padding: 0 0 40px 0;
+}
+
+#content-main-wrap form .fminput {
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+#content-main-wrap form .fminput label {
+    float: left;
+    width: 130px;
+    padding: 0 10px 0 10px;
+    color: #777;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#content-main-wrap form .fminput label acronym {
+    margin-left: -10px;
+}
+
+#content-main-wrap form .fminput .fmfield {
+    position: relative;
+    overflow: auto;
+    color: #999;
+    font-size: 13px;
+}
+
+#content-main-wrap form .fminput .fmfield p.text {
+    float: left;
+    height: 29px;
+    margin-right: 10px;
+    padding-left: 4px;
+    background: url(../images/input_box_left.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield p.text span {
+    display: block;
+    padding-right: 4px;
+    background: url(../images/input_box_right.png) no-repeat right 0;
+}
+
+#content-main-wrap form .fminput .fmfield p.text span .text {
+    width: 180px;
+    height: 29px;
+    border: none;
+    background: url(../images/input_box_middle.png) repeat-x;
+    color: #777;
+    font-family: Helvetica;
+    font-size: 13px;
+}
+
+#content-main-wrap form .fminput .fmfield p.text span .tag {
+    width: 485px;
+}
+
+#content-main-wrap form .fminput .fmfield p.textarea {
+    float: left;
+    overflow: hidden;
+    height: 92px;
+    margin-right: 10px;
+    padding-left: 4px;
+    background: url(../images/input_box_left_lg.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield p.textarea span {
+    display: block;
+    padding-right: 4px;
+    background: url(../images/input_box_right_lg.png) no-repeat right 0;
+}
+
+#content-main-wrap form .fminput .fmfield p.textarea span .textarea {
+    overflow: hidden;
+    width: 485px;
+    height: 87px;
+    padding-bottom: 5px;
+    border: none;
+    background: url(../images/input_box_middle_lg.png) repeat-x;
+    color: #777;
+    font-family: Helvetica;
+    font-size: 13px;
+}
+
+#content-main-wrap form .fminput .fmfield p.img {
+    float: left;
+    overflow: hidden;
+    width: 129px;
+    height: 62px;
+    margin-right: 10px;
+    padding: 10px 0 10px 0;
+    background: url(../images/thumbnail_box_lg.png) no-repeat 0 0;
+    text-align: center;
+}
+
+#content-main-wrap form .fminput .fmfield p.btns {
+    float: left;
+}
+
+#content-main-wrap form .fminput .fmfield p.btns span a {
+    height: 22px;
+    padding: 5px 35px 0 35px;
+}
+
+#content-main-wrap form .fminput .fmfield .select {
+	position: relative;
+    overflow: auto;
+    float: left;
+	width: 180px;
+	height: 29px;
+    margin-right: 10px;
+    padding-left: 4px;
+    background: url(../images/input_box_left.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .select.disable {
+    background: url(../images/input_box_left_disable.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .select .select-btn {
+	padding: 0;
+	width: 22px;
+	height: 23px;
+	background: url(../images/btns.png) 0 -400px no-repeat;
+	position: absolute;
+	top: 3px;
+	right: 5px;
+	z-index: 55;
+	cursor: pointer;
+}
+
+#content-main-wrap form .fminput .fmfield .select.disable .select-btn,
+#content-main-wrap form .fminput .fmfield .select .select-btn:hover {
+	background: url(../images/btns.png) no-repeat 0 -501px;
+}
+
+#content-main-wrap form .fminput .fmfield .select .select-txt {
+    overflow: hidden;
+    height: 29px;
+    padding: 0 4px 0 0;
+    background: url(../images/input_box_right.png) no-repeat right 0;
+    font-size: 13px;
+    line-height: 29px;
+    white-space: nowrap;
+    text-indent: 5px;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
+}
+
+#content-main-wrap form .fminput .fmfield .select.disable .select-txt {
+    background: url(../images/input_box_right_disable.png) no-repeat right 0;
+}
+
+#content-main-wrap form .fminput .fmfield .select .select-txt a {
+    display: block;
+    height: 29px;
+    padding-right: 4px;
+    background: url(../images/input_box_middle.png) repeat-x;
+    color: #999;
+    text-decoration: none;
+}
+
+#content-main-wrap form .fminput .fmfield .select.disable .select-txt a {
+    background: url(../images/input_box_middle_disable.png) repeat-x;
+}
+
+#content-main-wrap form .fminput .fmfield img.icon {
+    float: left;
+    margin: 6px 12px 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield a.switch-on {
+    float: left;
+    width: 63px;
+    height: 25px;
+    margin: 3px 5px 0 0;
+    background: url(../images/btn_on.png) no-repeat 0 0;
+    color: #777;
+    line-height: 25px;
+    text-decoration: none;
+    text-indent: 5px;
+}
+
+#content-main-wrap form .fminput .fmfield a.switch-off {
+    float: left;
+    width: 63px;
+    height: 25px;
+    margin: 3px 5px 0 0;
+    background: url(../images/btn_off.png) no-repeat 0 0;
+    color: #777;
+    line-height: 25px;
+    text-decoration: none;
+    text-indent: 33px;
+}
+
+#content-main-wrap form .fminput .fmfield .tag-list {
+    padding-top: 5px;
+}
+
+#content-main-wrap form .fminput .fmfield .tag-list h4,
+#content-main-wrap form .fminput .fmfield .tag-list ul {
+    float: left;
+    margin-right: 5px;
+}
+
+#content-main-wrap form .fminput .fmfield .tag-list ul {
+    width: 450px;
+}
+
+#content-main-wrap form .fminput .fmfield .tag-list ul li {
+    float: left;
+    height: 20px;
+    margin: 0 5px 5px 0;
+    padding-left: 4px;
+    background: url(../images/tag_left_on.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .tag-list ul li span {
+    display: block;
+    padding-right: 4px;
+    background: url(../images/tag_right_on.png) no-repeat right 0;
+}
+
+#content-main-wrap form .fminput .fmfield .tag-list ul li span a {
+    display: block;
+    height: 20px;
+    background: url(../images/tag_middle_on.png) repeat-x;
+    color: #999;
+    font-size: 13px;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+#content-main-wrap form .fminput .fmfield .tag-list ul li:hover,
+#content-main-wrap form .fminput .fmfield .tag-list ul li.on {
+    background: url(../images/tag_left_disable.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .tag-list ul li:hover span,
+#content-main-wrap form .fminput .fmfield .tag-list ul li.on    span {
+    background: url(../images/tag_right_disable.png) no-repeat right 0;
+}
+
+#content-main-wrap form .fminput .fmfield .tag-list ul li:hover span a,
+#content-main-wrap form .fminput .fmfield .tag-list ul li.on    span a {
+    background: url(../images/tag_middle_disable.png) repeat-x;
+}
+
+#content-main-wrap form .fminput .fmfield .notice {
+    line-height: 20px;
+}
+
+#content-main-wrap form .fminput .fmfield .notice.img-upload {
+    position: absolute;
+    top: 33px;
+    left: 140px;
+}
+
+#content-main-wrap form .fminput .fmfield .notice.upload-notice {
+    position: absolute;
+    top: 56px;
+    left: 140px;
+    color: #f00;
+}
+
+#content-main-wrap form .form-btn {
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#content-main-wrap form .form-btn .form-btn-wrap {
+    float: right;
+}
+
+#content-main-wrap form .form-btn .form-btn-wrap .notice,
+#content-main-wrap form .form-btn .form-btn-wrap .btns {
+    float: left;
+}
+
+#content-main-wrap form .form-btn .form-btn-wrap .notice {
+    height: 31px;
+    line-height: 31px;
+    margin-right: 10px;
+    color: #f00;
+    font-size: 13px;
+}
+
+#content-main-wrap form .form-btn .form-btn-wrap .btns span input {
+    padding: 0 10px;
+    font-family: Helvetica, Arial, clean, Microsoft JhengHei, Apple LiGothic, SimHei, PMingLiU, sans-serif;
+    font-size: 15px;
+}
+
+#content-main-wrap form .form-btn .form-btn-wrap .btn-cancel {
+    margin-right: 10px;
+}

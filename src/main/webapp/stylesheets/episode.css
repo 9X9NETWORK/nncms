@@ -1,0 +1,460 @@
+/*-----------------------------------------------------------------------------
+[TABLE OF CONTENTS]
+    +content-main
+        =my-channel
+-----------------------------------------------------------------------------*/
+
+/**
+*
+* =ep-time-list
+*
+**/
+
+#ep-time-list,
+#ep-no {
+    position: relative;
+    width: 781px;
+    margin: 64px 0 53px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+@media all and (max-width: 1372px) {
+    #ep-time-list,
+    #ep-no {
+        margin-left: 0;
+    }
+}
+
+@media all and (max-width: 1828px) and (min-width: 1373px) {
+    #ep-time-list,
+    #ep-no {
+        margin-left: 15%;
+    }
+}
+
+@media all and (min-width: 1829px) {
+    #ep-time-list,
+    #ep-no {
+        margin-left: 15%;
+    }
+}
+
+#ep-time-list h3,
+#ep-no               h3 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#ep-time-list .btns {
+    width: 300px;
+    margin: 0 auto 20px;
+}
+
+/**
+*
+* =selected-episode
+*
+**/
+
+#selected-episode {
+    position: relative;
+    clear: both;
+    width: 781px;
+    margin: 0;
+    padding-bottom: 30px;
+}
+
+#selected-episode .episode-pager {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    width: 780px;
+    height: 9px;
+}
+
+#selected-episode .episode-pager a {
+    display: inline-block;
+    width: 8px;
+    height: 9px;
+    margin: 0 7px;
+    background: url(../images/icon_dot_off.png) no-repeat 0 0;
+    text-indent: -100000px;
+}
+
+#selected-episode .episode-pager a.active,
+#selected-episode .episode-pager a:hover {
+    background: url(../images/icon_dot_on.png) no-repeat 0 0;
+}
+
+#selected-episode .wrapper {
+    position: relative;
+}
+
+#selected-episode .wrapper ul {
+    overflow: hidden;
+    width: 781px;
+    height: 275px;
+    margin: 0 auto;
+}
+
+#selected-episode .wrapper ul li {
+    height: 275px;
+}
+
+#selected-episode .wrapper ul li img {
+    display: block;
+    border: none;
+}
+
+#selected-episode .wrapper ul li .img {
+    height: 211px;
+    padding: 0 0 0 2px;
+    background: url(../images/banner_border_left.png) no-repeat 0 0;
+}
+
+#selected-episode .wrapper ul li .img img {
+    margin-left: -2px;
+}
+
+#selected-episode .wrapper ul li .desc a {
+    display: block;
+    padding: 0 2px 0 0;
+    background: url(../images/banner_border_right.png) no-repeat right 0;
+}
+
+#selected-episode .wrapper ul li .desc a img {
+    display: block;
+    overflow: hidden;
+    width: 781px;
+    height: 211px;
+    border: none;
+    background: url(../images/banner_border_middle.png) repeat-x 0 top;
+}
+
+#selected-episode .wrapper ul li .desc {
+    height: 64px;
+    padding: 0 0 0 5px;
+    background: url(../images/banner_white_left.png) no-repeat 0 0;
+}
+
+#selected-episode .wrapper ul li .desc p {
+    padding: 0 5px 0 0;
+    background: url(../images/banner_white_right.png) no-repeat right 0;
+}
+
+#selected-episode .wrapper ul li .desc p span {
+    display: block;
+    height: 63px;
+    background: url(../images/banner_white_middle.png) repeat-x;
+    font-size: 22px;
+    line-height: 63px;
+}
+
+/**
+*
+* =ep-no
+*
+**/
+
+#ep-no .desc {
+    margin-bottom: 20px;
+    font-size: 13px;
+    text-align: center;
+}
+
+#ep-no .desc span {
+    font-weight: bold;
+}
+
+/**
+*
+* =ep-list
+*
+**/
+
+#ep-list {
+    position: relative;
+}
+
+#ep-list ul {
+    padding-bottom: 10px;
+}
+
+#ep-list ul.un-pub,
+#ep-list ul li.title {
+    background: url(../images/bg_divider.png) repeat-x 0 bottom;
+}
+
+#ep-list ul.un-pub {
+    margin-bottom: 10px;
+}
+
+#ep-list ul li {
+    position: relative;
+    margin-bottom: 14px;
+}
+
+#ep-list ul li a.warning {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    z-index: 49;
+    width: 15px;
+    height: 14px;
+    margin-top: -7px;
+    background: url(../images/icon_warning.png) no-repeat 0 0;
+    text-indent: -100000px;
+}
+
+#ep-list ul li a.warning .tip {
+    display: none;
+    position: absolute;
+    bottom: -33px;
+    left: -10px;
+    z-index: 49;
+    width: 180px;
+    height: 28px;
+    padding-top: 2px;
+    background: url(../images/bg_tip_top.png) no-repeat 10px top;
+    color: #777;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+}
+
+#ep-list ul li a.warning .tip .tip-left {
+    display: block;
+    height: 28px;
+    padding-left: 7px;
+    background: url(../images/bg_tip_top_left.png) no-repeat 0 bottom;
+}
+
+#ep-list ul li a.warning .tip .tip-right {
+    display: block;
+    height: 28px;
+    padding-right: 7px;
+    background: url(../images/bg_tip_top_right.png) no-repeat right bottom;
+}
+
+#ep-list ul li a.warning .tip .tip-middle {
+    display: block;
+    height: 28px;
+    background: url(../images/bg_tip_top_middle.png) repeat-x bottom;
+    line-height: 28px;
+}
+
+#ep-list ul li a.warning:hover .tip {
+    display: block;
+}
+
+#ep-list ul li .episode,
+#ep-list ul li .curator,
+#ep-list ul li .time,
+#ep-list ul li .views {
+    float: left;
+    font-size: 13px;
+}
+
+#ep-list ul li p.episode,
+#ep-list ul li p.curator,
+#ep-list ul li p.time,
+#ep-list ul li p.views {
+    padding-bottom: 5px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#ep-list ul li .episode-info {
+    float: right;
+}
+
+#ep-list ul li p.episode {
+    padding-left: 30px;
+}
+
+#ep-list ul li .curator {
+    width: 140px;
+}
+
+#ep-list ul li .time {
+    width: 155px;
+}
+
+#ep-list ul li .views {
+    width: 85px;
+}
+
+#ep-list ul li .episode {
+    position: relative;
+    overflow: hidden;
+    width: 355px;
+    padding-left: 30px;
+}
+
+@media all and (max-width: 1372px) {
+    #ep-list ul li .episode {
+        width: 355px;
+    }
+}
+
+@media all and (max-width: 1828px) and (min-width: 1373px) {
+    #ep-list ul li .episode {
+        width: 555px;
+    }
+}
+
+@media all and (min-width: 1829px) {
+    #ep-list ul li .episode {
+        width: 45%;
+    }
+}
+
+#ep-list ul li .episode p.img {
+    position: relative;
+    float: left;
+    overflow: hidden;
+    width: 80px;
+    height: 45px;
+    margin-right: 10px;
+    padding: 10px;
+    background: url(../images/thumbnail_box_sm.png) no-repeat 0 0;
+    text-align: center;
+}
+
+#ep-list ul li .episode p.img a ,
+#ep-list ul li .episode p.img a img {
+    display: block;
+    border: none;
+}
+
+#ep-list ul li .episode p.img a img.watermark {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -16px 0 0 -16px;
+}
+
+#ep-list ul li .episode p.img a:hover img.watermark {
+    display: block;
+}
+
+#ep-list ul li .episode p.no-img {
+    position: relative;
+    float: left;
+    overflow: hidden;
+    width: 100px;
+    height: 65px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+#ep-list ul li .episode p.img       span,
+#ep-list ul li .episode p.no-img span {
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 32px;
+    height: 14px;
+    background: url(../images/time_box.png) no-repeat 0 0;
+    color: #fff;
+    font-size: 11px;
+    line-height: 14px;
+    text-align: center;
+}
+
+#ep-list ul li .episode h3 {
+    margin-bottom: 10px;
+    padding-top: 3px;
+    font-weight: bold;
+    font-family: Helvetica;
+    font-size: 15px;
+}
+
+#ep-list ul li .episode .btns {
+    float: left;
+    padding: 0 0 0 4px;
+    background: url(../images/edit_box_left.png) no-repeat 0 0;
+}
+
+#ep-list ul li .episode .btns .btn-wrap {
+    padding: 0 3px 0 0;
+    background: url(../images/edit_box_right.png) no-repeat right 0;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul {
+    overflow: hidden;
+    height: 31px;
+    padding: 0 7px 0 5px;
+    border: none;
+    background: url(../images/edit_box_middle.png) repeat 0 0;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li {
+    float: left;
+    margin-right: 12px;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li a {
+    float: left;
+    height: 25px;
+    margin: 3px 0 0;
+    color: #777;
+    line-height: 28px;
+    text-decoration: none;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li a.disable,
+#ep-list ul li .episode .btns .btn-wrap ul li a:hover {
+    color: #999;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li a.edit span,
+#ep-list ul li .episode .btns .btn-wrap ul li a.del   span {
+    float: left;
+    width: 20px;
+    height: 25px;
+    margin-right: 7px;
+    background: url(../images/btns.png) no-repeat;
+    text-indent: -100000px;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li a.edit span {
+    background-position: 0 -1060px;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li a.edit.disable             span,
+#ep-list ul li .episode .btns .btn-wrap ul li a.edit.disable:hover span {
+    background-position: 0 -1110px;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li a.edit:hover span {
+    background-position: -23px -1060px;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li a.del span {
+    background-position: 0 -856px;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li a.del.disable             span,
+#ep-list ul li .episode .btns .btn-wrap ul li a.del.disable:hover span {
+    background-position: 0 -906px;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li a.del:hover span {
+    background-position: -23px -856px;
+}
+
+#ep-list ul li .time  p,
+#ep-list ul li .views p {
+    margin-bottom: 10px;
+}
+
+#ep-list ul li .curator p a {
+    color: #777;
+    text-decoration: none;
+}
