@@ -147,7 +147,9 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
+                    <!--
 					<warSourceExcludes>images/, stylesheets/, javascripts/, videos/, installer/</warSourceExcludes>
+                    -->
 					<warName>cms</warName>
 				</configuration>
 			</plugin>
