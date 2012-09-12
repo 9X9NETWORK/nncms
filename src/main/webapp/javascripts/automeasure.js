@@ -1,6 +1,8 @@
 function autoWidth() {
     $('#content-main').width($(window).width() - 210 - 40);      //210: 左側選單寬度    40: scrollbar 寬度
     $('.epcurate-curation #content-main').width($(window).width());
+    $('#epcurate-curation .tab-content .result-list ul').width($(window).width() - $('#epcurate-curation #video-player .video').width() - 60);
+    $('#epcurate-curation .tab-content .result-list a.video-next').css('left', $(window).width() - 35 + 'px');
 }
 
 function autoHeight() {

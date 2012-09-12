@@ -402,7 +402,6 @@ overflow:hidden;
 margin:0 0 15px 0;
 }
 
-
 #selected-profile {
 width: 80px;
 white-space: nowrap;
@@ -411,6 +410,12 @@ text-overflow: ellipsis;
 -o-text-overflow: ellipsis;
 -ms-text-overflow: ellipsis;
 -moz-binding: url('ellipsis.xml#ellipsis');
+}
+#profile-dropdown {
+width: 120px;
+}
+#profile-dropdown li {
+width: 102px;
 }
 .dropdown {
 width: 158px;
@@ -427,9 +432,6 @@ left: 0;
 z-index: 60;
 display: none;
 }
-#profile-dropdown {
-width: 120px;
-}
 .dropdown li {
 padding: 0 9px;
 width: 140px;
@@ -440,9 +442,6 @@ background: #d2d2d2;
 border-top: #f5f5f5 1px solid;
 border-bottom: #c9c9c9 1px solid;
 cursor: pointer;
-}
-#profile-dropdown li {
-width: 102px;
 }
 .dropdown li:first-child {
 border-top: none;

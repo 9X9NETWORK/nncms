@@ -9,6 +9,7 @@
     position: absolute !important;
     top: 45px !important;
     background-color: #777 !important;
+    cursor: default !important;
 }
 
 .blockMsg {
@@ -17,6 +18,7 @@
     width: auto !important;
     border: none !important;
     background: transparent !important;
+    cursor: default !important;
 }
 
 .lightbox-content {
