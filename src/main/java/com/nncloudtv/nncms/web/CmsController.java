@@ -14,7 +14,7 @@ public class CmsController {
 	
 	protected static final Logger log = Logger.getLogger(CmsController.class.getName());
 	
-	@RequestMapping("{html}.html")
+	@RequestMapping("/{html}.html")
 	public String html(HttpServletRequest req, HttpServletResponse resp, @PathVariable String html) {
 	    log.info(html);
 	    return "/" + html + ".html";
