@@ -16,8 +16,10 @@ public class CmsController {
 	
 	@RequestMapping("/{html}.html")
 	public String html(HttpServletRequest req, HttpServletResponse resp, @PathVariable String html) {
+	    
 	    log.info(html);
-	    return "/" + html + ".html";
+	    
+	    return html;
 	}
 	
 }

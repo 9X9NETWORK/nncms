@@ -132,9 +132,9 @@
                            <maxIdleTime>360000</maxIdleTime>
                         </connector>
                     </connectors>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <scanIntervalSeconds>6</scanIntervalSeconds>
 					<webAppConfig>
-						<contextPath>/cms</contextPath>
+						<contextPath>/</contextPath>
 					</webAppConfig>
 				</configuration>
 			</plugin>
