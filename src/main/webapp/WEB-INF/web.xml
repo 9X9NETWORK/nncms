@@ -35,11 +35,9 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-    <!--
 	<servlet-mapping>
 		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
-    -->
 
 </web-app>
