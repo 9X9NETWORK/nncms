@@ -1,4 +1,4 @@
-﻿(function($) {
+(function($) {
         $.fn.ellipsis = function()
         {
                 return this.each(function()

@@ -114,6 +114,7 @@ var nn = { };
 		201: function(jqXHR, textStatus) { },
 		400: function(jqXHR, textStatus) { },
 		401: function(jqXHR, textStatus) { },
+		403: function(jqXHR, textStatus) { },
 		404: function(jqXHR, textStatus) { },
 		500: function(jqXHR, textStatus) { }
 	};

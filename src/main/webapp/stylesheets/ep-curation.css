@@ -12,11 +12,15 @@
     position: static;
 }
 
+p.auto-height {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
 /* +epcurate-curation
 *----------------------------------------------------------------------------*/
 
 #epcurate-curation {
-    padding-bottom: 20px;
     background: url(../images/bg_tab_bar2.png) repeat-x;
 }
 
@@ -31,13 +35,14 @@
 **/
 
 #epcurate-curation #video-player {
+    position: relative;
     float: left;
-    margin-top: 56px;
 }
 
-#epcurate-curation #video-player .video {
+#epcurate-curation #video-player .video,
+#epcurate-curation #video-player .video #youTubePlayer {
     width: 349px;
-    height: 196px;
+    height: 240px;
     background-color: #000;
 }
 
@@ -48,8 +53,11 @@
 **/
 
 #video-control {
+    display: none;
     overflow: hidden;
-    position: relative;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 44px;
     background-color: #000;
@@ -180,13 +188,13 @@
 }
 
 #play-time {
-    width: 90px;
+    width: 285px;
     height: 25px;
     margin-right: 1px;
     padding: 3px 5px 0 0;
     background: #000 url(../images/btn_controls.png) 0 -448px no-repeat;
     background: #000 url(../images/bg_controlbar.png) 0 bottom repeat-x;
-    font-size: 13px;
+    font-size: 11px;
     line-height: 25px;
     text-align: right;
 }
@@ -204,7 +212,7 @@
     height: 13px;
     background: url(../images/btn_controls.png) 0 -700px;
     position: absolute;
-    top: 7px;
+    top: 9px;
     left: 8px;
     cursor: pointer;
 }
@@ -240,7 +248,7 @@
 
 #epcurate-curation ul.tabs {
     overflow: hidden;
-    padding-top: 15px;
+    padding: 16px 0 0 349px;
 }
 
 #epcurate-curation ul.tabs li {
@@ -309,16 +317,20 @@ padding-right: 8px;
 **/
 
 #epcurate-curation .tab-content ul.yt-category {
-    overflow: hidden;
-    padding: 15px 0 0 60px;
+	height: 24px;
+	margin-bottom: 3px;
 }
 
 #epcurate-curation .tab-content ul.yt-category li {
     float: left;
     height: 29px;
-    margin-right: 12px;
+    margin: -8px 12px 0 0;
     padding-right: 14px;
     background: url(../images/line01.png) no-repeat right center;
+}
+
+#epcurate-curation .tab-content ul.yt-category li:first-child {
+	margin-left: 60px;
 }
 
 #epcurate-curation .tab-content ul.yt-category li.playlist,
@@ -440,13 +452,14 @@ padding-right: 8px;
 
 #epcurate-curation #cur-add textarea {
     width: 600px;
-    height: 150px;
+    height: 139px;
     margin-bottom: 10px;
     padding: 5px;
     border: 1px solid #ccc;
     color: #999;
     font-family: Helvetica;
     font-size: 13px;
+	resize: none; 
 }
 
 #epcurate-curation #cur-add p.notice {
@@ -485,12 +498,13 @@ padding-right: 8px;
 #epcurate-curation #cur-add .func .btns {
     float: right;
     width: 70px;
+	margin: 0;
 }
 
 #epcurate-curation #cur-edit {
     float: left;
-    width: 612px;
-    padding: 20px 0 0 55px;
+    width: 595px;
+    padding: 0 0 0 55px;
     color: #777;
     font-size: 13px;
 }
@@ -500,9 +514,26 @@ padding-right: 8px;
     margin: 0 0 20px 0;
 }
 
+#epcurate-curation #cur-edit h3 span {
+    float: none;
+    margin: 0;
+}
+
+#epcurate-curation #cur-edit p.desc {
+    height: 60px;
+    line-height: 21px;
+}
+
 #epcurate-curation #cur-edit p a {
+    float: none;
+    margin: 0;
     color: #777;
     font-weight: bold;
+}
+
+#epcurate-curation #cur-edit .edit-time {
+	overflow: hidden;
+    padding-top: 20px;
 }
 
 #epcurate-curation #cur-edit .set-time {
@@ -552,6 +583,7 @@ padding-right: 8px;
     background: url(../images/bg_calander_highlight.png) no-repeat 0 0;
     color: #fff;
     font-family: Helvetica;
+	font-weight: bold;
     font-size: 13px;
     line-height: 21px;
     text-align: center;
@@ -590,7 +622,8 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit ul {
-    float: right;
+    /*float: right;    time-trim*/
+    float: left;
 }
 
 #epcurate-curation #cur-edit ul li {
@@ -607,12 +640,17 @@ padding-right: 8px;
     background: url(../images/icon_mobile.png) no-repeat 0 0;
 }
 
+#epcurate-curation #cur-edit ul li.outside {
+    padding-left: 25px;
+    background: url(../images/icon_not_playable.png) no-repeat 0 0;
+}
+
 #epcurate-curation #cur-edit .edit-title {
-	overflow: hidden;
+	padding-top: 8px;
 }
 
 #epcurate-curation #cur-edit .edit-title h5 {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 	color: #777;
 	font-size: 13px;
 }
@@ -622,135 +660,192 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .edit-title .wrap {
+	position: relative;
 	float: left;
+    width: 287px;
+	height: 230px;
 }
 
 #epcurate-curation #cur-edit .text-container {
-	width: 250px;
-    margin-bottom: 20px;
+    margin-bottom: 4px;
 }
 
-#epcurate-curation #cur-edit .text-container p {
+#epcurate-curation #cur-edit .text-container textarea {
+    width: 220px;
+    height: 50px;
+    margin-bottom: 7px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    color: #999;
+    font-family: Helvetica;
+    font-size: 13px;
+	resize: none; 
+}
+
+#epcurate-curation #cur-edit .edit-title.disable textarea {
+    background: url(../images/input_box_middle_lg_disable.png) repeat-x 0 -5px;
+}
+
+#epcurate-curation #cur-edit .font-container {
+    margin-bottom: 5px;
+}
+
+#epcurate-curation #cur-edit .font-container p {
     font-weight: bold;
 	margin: 0 0 8px 0;
 }
 
-#epcurate-curation #cur-edit .text-container .text-func {
-    float: left;
+#epcurate-curation #cur-edit .font-container .text-func {
+    width: 219px;
     padding-left: 3px;
     background: url(../images/popup_input_box_left.png) no-repeat 0 0;
 }
 
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap {
     padding-right: 3px;
     background: url(../images/popup_input_box_right.png) no-repeat right 0;
 }
 
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul {
 	height: 28px;
 	padding: 3px 1px 0 4px;
     background: url(../images/popup_input_box_middle.png) repeat-x;
 }
 
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li {
 	position: relative;
     float: left;
     margin: 0 3px 0 0;
-}
-
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a {
-    display: block;
-    width: 22px;
-    height: 29px;
-    background: url(../images/btns.png) no-repeat 0 0;
     text-indent: -100000px;
 }
 
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-bold {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .radio,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .radio span,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .radio span input,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .checker,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .checker span,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .checker span input {
+    display: block;
+    width: 22px;
+    height: 29px;
+    margin: 0;
+    text-indent: -100000px;
+    cursor: pointer;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .radio span,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .checker span {
+    background: url(../images/btns.png) no-repeat 0 0;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-weight,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-style,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-center,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-right {
+    width: 22px;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-weight span {
 	background-position: 0 -1163px;
 }
 
-#epcurate-curation #cur-edit .edit-title.disable .text-container .text-func .func-wrap ul li a.font-bold,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-bold.disable,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-bold:hover {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-weight .checker.disabled span,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-weight .checker span.checked,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-weight .checker:hover span {
 	background-position: 0 -1213px;
 }
 
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-italic {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-style span {
 	background-position: 0 -1263px;
 }
 
-#epcurate-curation #cur-edit .edit-title.disable .text-container .text-func .func-wrap ul li a.font-italic,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-italic.disable,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-italic:hover {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-style .checker.disabled span,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-style .checker span.checked,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-style .checker:hover span {
 	background-position: 0 -1313px;
 }
 
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-color {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-color {
+    position: relative;
 	width: 33px;
 	background-position: 0 -1363px;
 }
 
-#epcurate-curation #cur-edit .edit-title.disable .text-container .text-func .func-wrap ul li a.font-color,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-color.disable,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-color:hover {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-color span {
+    display: block;
+    position: absolute;
+    top: 16px;
+    left: 5px;
+    width: 12px;
+    height: 3px;
+    background-color: #fff;
+}
+
+#epcurate-curation #cur-edit .edit-title.disable .font-container .text-func .func-wrap ul li a.font-color span {
+    background-color: #fff !important;
+}
+
+#epcurate-curation #cur-edit .edit-title.disable .font-container .text-func .func-wrap ul li a.font-color,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-color.disable,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-color:hover {
 	background-position: 0 -1413px;
 }
 
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-l {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-l {
 	background-position: 0 -1463px;
 }
 
-#epcurate-curation #cur-edit .edit-title.disable .text-container .text-func .func-wrap ul li a.font-l,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-l.disable,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-l:hover {
+#epcurate-curation #cur-edit .edit-title.disable .font-container .text-func .func-wrap ul li a.font-l,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-l.disable,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-l:hover {
 	background-position: 0 -1515px;
 }
 
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-s {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-s {
 	background-position: 0 -1565px;
 }
 
-#epcurate-curation #cur-edit .edit-title.disable .text-container .text-func .func-wrap ul li a.font-s,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-s.disable,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-s:hover {
+#epcurate-curation #cur-edit .edit-title.disable .font-container .text-func .func-wrap ul li a.font-s,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-s.disable,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-s:hover {
 	background-position: 0 -1615px;
 }
 
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-left {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left span {
 	background-position: 0 -1667px;
 }
 
-#epcurate-curation #cur-edit .edit-title.disable .text-container .text-func .func-wrap ul li a.font-left,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-left.disable,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-left:hover {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left .radio.disabled span,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left .radio span.checked,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left .radio:hover span {
 	background-position: 0 -1718px;
 }
 
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-center {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-center span {
 	background-position: 0 -1769px;
 }
 
-#epcurate-curation #cur-edit .edit-title.disable .text-container .text-func .func-wrap ul li a.font-center,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-center.disable,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-center:hover {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-center .radio.disabled span,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-center .radio span.checked,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-center .radio:hover span {
 	background-position: 0 -1820px;
 }
 
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-right {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-right span {
 	background-position: 0 -1871px;
 }
 
-#epcurate-curation #cur-edit .edit-title.disable .text-container .text-func .func-wrap ul li a.font-right,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-right.disable,
-#epcurate-curation #cur-edit .text-container .text-func .func-wrap ul li a.font-right:hover {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-right .radio.disabled span,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-right .radio span.checked,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-right .radio:hover span {
 	background-position: 0 -1922px;
 }
 
 #epcurate-curation #cur-edit .effect-container {
-	clear: both;
-	width: 250px;
-	margin-bottom: 20px;
+    float: left;
 }
 
 #epcurate-curation #cur-edit .effect-container p {
@@ -760,21 +855,26 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .effect-container p.effect-demo {
 	float: left;
+    overflow: hidden;
 	width: 95px;
 	height: 59px;
-	margin-right: 18px;
+	margin: 0 18px 0 0;
 	background-color: #000;
 	line-height: 59px;
 	text-align: center;
 }
 
 #epcurate-curation #cur-edit .effect-container p.effect-demo span {
+    display: block;
+    width: 95px;
+    height: 59px;
+    line-height: 59px;
 	color: #fff;
 	font-size: 20px;
 }
 
 #epcurate-curation #cur-edit .duration-container {
-	width: 250px;
+	float: left;
 }
 
 #epcurate-curation #cur-edit .duration-container h5 {
@@ -804,8 +904,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .background-container {
 	position: relative;
-	float: right;
-	width: 310px;
+	float: left;
 	margin-bottom: 10px;
 }
 
@@ -815,22 +914,38 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .background-container p.radio-list {
+	margin-bottom: 5px;
 	padding: 5px 0;
 }
 
 #epcurate-curation #cur-edit .background-container .bg-color {
 	position: relative;
-	height: 138px;
 }
 
 #epcurate-curation #cur-edit .background-container .bg-color a {
 	display: block;
+    position: relative;
 	width: 36px;
 	height: 29px;
 	background: url(../images/btns.png) no-repeat 0 -1973px;
 	text-indent: -100000px;
 }
 
+#epcurate-curation #cur-edit .background-container .bg-color a span {
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: 5px;
+    width: 14px;
+    height: 14px;
+    background-color: #000;
+}
+
+#epcurate-curation #cur-edit .edit-title.disable .background-container .bg-color a span {
+    background-color: #000 !important;
+}
+
+#epcurate-curation #cur-edit .edit-title.disable .background-container .bg-color a,
 #epcurate-curation #cur-edit .background-container .bg-color a:hover {
 	background-position: 0 -2024px;
 }
@@ -841,12 +956,10 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .background-container .bg-img p.img {
 	float: left;
-	width: 129px;
-	height: 82px;
+	width: 95px;
+	height: 59px;
 	margin: 0 10px 10px 0;
-	background: url(../images/thumbnail_box2_lg.png) no-repeat 0 0;
-	line-height: 82px;
-	text-align: center;
+	background-color: #000;
 }
 
 #epcurate-curation #cur-edit .background-container .bg-img p.img img {
@@ -856,7 +969,7 @@ padding-right: 8px;
 #epcurate-curation #cur-edit .background-container .bg-img .btns {
 	float: left;
 	width: 120px;
-	margin: 52px 0 0;
+	margin: 32px 0 0;
 	font-weight: normal;
 }
 
@@ -878,6 +991,9 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .btn-container {
+	position: absolute;
+	bottom: 0;
+	right: 0;
 	float: right;
 }
 
@@ -907,7 +1023,7 @@ padding-right: 8px;
 	line-height: 28px;
 }
 
-#epcurate-curation #cur-edit .edit-title .btn-container .btn-edit,
+#epcurate-curation #cur-edit .edit-title                 .btn-container .btn-edit,
 #epcurate-curation #cur-edit .edit-title.disable .btn-container .btn-del,
 #epcurate-curation #cur-edit .edit-title.disable .btn-container .btn-cancel,
 #epcurate-curation #cur-edit .edit-title.disable .btn-container .btn-done {
@@ -959,50 +1075,74 @@ padding-right: 8px;
 	cursor: pointer;
 }
 
+#content-main #epcurate-curation #cur-edit .font-container a span.c-fff,
+#epcurate-curation #cur-edit .background-container .bg-color a span.c-fff,
 #epcurate-curation #cur-edit .color-list li.c-fff {
 	background-color: #fff;
 }
 
+#content-main #epcurate-curation #cur-edit .font-container a span.c-eee,
+#epcurate-curation #cur-edit .background-container .bg-color a span.c-eee,
 #epcurate-curation #cur-edit .color-list li.c-eee {
 	background-color: #eee;
 }
 
+#content-main #epcurate-curation #cur-edit .font-container a span.c-bbb,
+#epcurate-curation #cur-edit .background-container .bg-color a span.c-bbb,
 #epcurate-curation #cur-edit .color-list li.c-bbb {
 	background-color: #bbb;
 }
 
+#content-main #epcurate-curation #cur-edit .font-container a span.c-777,
+#epcurate-curation #cur-edit .background-container .bg-color a span.c-777,
 #epcurate-curation #cur-edit .color-list li.c-777 {
 	background-color: #777;
 }
 
+#content-main #epcurate-curation #cur-edit .font-container a span.c-333,
+#epcurate-curation #cur-edit .background-container .bg-color a span.c-333,
 #epcurate-curation #cur-edit .color-list li.c-333 {
 	background-color: #333;
 }
 
+#content-main #epcurate-curation #cur-edit .font-container a span.c-000,
+#epcurate-curation #cur-edit .background-container .bg-color a span.c-000,
 #epcurate-curation #cur-edit .color-list li.c-000 {
 	background-color: #000;
 }
 
+#content-main #epcurate-curation #cur-edit .font-container a span.c-f00,
+#epcurate-curation #cur-edit .background-container .bg-color a span.c-f00,
 #epcurate-curation #cur-edit .color-list li.c-f00 {
 	background-color: #f00;
 }
 
+#content-main #epcurate-curation #cur-edit .font-container a span.c-f60,
+#epcurate-curation #cur-edit .background-container .bg-color a span.c-f60,
 #epcurate-curation #cur-edit .color-list li.c-f60 {
 	background-color: #f60;
 }
 
+#content-main #epcurate-curation #cur-edit .font-container a span.c-ff0,
+#epcurate-curation #cur-edit .background-container .bg-color a span.c-ff0,
 #epcurate-curation #cur-edit .color-list li.c-ff0 {
 	background-color: #ff0;
 }
 
+#content-main #epcurate-curation #cur-edit .font-container a span.c-090,
+#epcurate-curation #cur-edit .background-container .bg-color a span.c-090,
 #epcurate-curation #cur-edit .color-list li.c-090 {
 	background-color: #090;
 }
 
+#content-main #epcurate-curation #cur-edit .font-container a span.c-03f,
+#epcurate-curation #cur-edit .background-container .bg-color a span.c-03f,
 #epcurate-curation #cur-edit .color-list li.c-03f {
 	background-color: #03f;
 }
 
+#content-main #epcurate-curation #cur-edit .font-container a span.c-60f,
+#epcurate-curation #cur-edit .background-container .bg-color a span.c-60f,
 #epcurate-curation #cur-edit .color-list li.c-60f {
 	background-color: #60f;
 }
@@ -1011,45 +1151,25 @@ padding-right: 8px;
 	border-top: none;
 }
 
-#epcurate-curation #cur-edit .text-container a.font-color:hover .color-list,
+#epcurate-curation #cur-edit .font-container a.font-color:hover .color-list,
 #epcurate-curation #cur-edit .background-container .bg-color a:hover .color-list {
 	display: block;
+}
+
+#epcurate-curation #cur-edit .edit-title.disable .font-container a.font-color:hover .color-list,
+#epcurate-curation #cur-edit .edit-title.disable .background-container .bg-color a:hover .color-list {
+	display: none;
 }
 
 #epcurate-curation #cur-edit .radio-list {
     overflow: hidden;
 }
 
-#epcurate-curation #cur-edit .radio-list .radio {
+#epcurate-curation #cur-edit .radio-list label {
     float: left;
 }
 
-#epcurate-curation #cur-edit .radio-list .radio a {
-    float: left;
-    height: 19px;
-    padding-left: 25px;
-    background: url(../images/btn_radio_off.png) no-repeat 0 0;
-    color: #777;
-    line-height: 18px;
-    text-decoration: none;
-}
-
-#epcurate-curation #cur-edit .radio-list .radio.on a,
-#epcurate-curation #cur-edit .radio-list .radio       a:hover {
-    background: url(../images/btn_radio_on.png) no-repeat 0 0;
-}
-
-#epcurate-curation #cur-edit .edit-title.disable .radio-list .radio a,
-#epcurate-curation #cur-edit .edit-title.disable .radio-list .radio a:hover {
-    background: url(../images/btn_radio_off_disable.png) no-repeat 0 0;
-}
-
-#epcurate-curation #cur-edit .edit-title.disable .radio-list .radio.on a,
-#epcurate-curation #cur-edit .edit-title.disable .radio-list .radio.on a:hover {
-    background: url(../images/btn_radio_on_disable.png) no-repeat 0 0;
-}
-
-#epcurate-curation #cur-edit .radio-list .first {
+#epcurate-curation #cur-edit .radio-list label.first {
     margin-right: 40px;
 }
 
@@ -1104,11 +1224,11 @@ padding-right: 8px;
     text-decoration: none;
 }
 
-#epcurate-curation #cur-edit .select .select-txt .select-list {
-	display: none;
+#epcurate-curation #cur-edit .select .select-list {
+    display: none;
 	position: absolute;
 	top: 28px;
-	left: -3px;
+	left: 1px;
 	z-index: 60;
 	float: none;
 	width: 100px;
@@ -1121,7 +1241,11 @@ padding-right: 8px;
 	border-radius: 0 0 5px 5px;
 }
 
-#epcurate-curation #cur-edit .select .select-txt .select-list li {
+#epcurate-curation #cur-edit .duration-container .select .select-list {
+    width: 146px;
+}
+
+#epcurate-curation #cur-edit .select .select-list li {
 	margin: 0;
 	padding: 0 9px;
 	border-top: #f5f5f5 1px solid;
@@ -1132,16 +1256,15 @@ padding-right: 8px;
 	cursor: pointer;
 }
 
-#epcurate-curation #cur-edit .select .select-txt .select-list li:first-child {
+#epcurate-curation #cur-edit .select .select-list li:first-child {
 	border-top: none;
 }
 
-#epcurate-curation #cur-edit .select .select-txt .select-list li:hover {
+#epcurate-curation #cur-edit .select .select-list li:hover {
 	background: #e4e4e4;
 }
 
-#epcurate-curation #cur-edit .edit-title .select,
-#epcurate-curation #cur-edit .select.disable {
+#epcurate-curation #cur-edit .edit-title.disable .select {
     background: url(../images/input_box_left_disable.png) no-repeat 0 0;
 }
 
@@ -1151,13 +1274,11 @@ padding-right: 8px;
 	background: url(../images/btns.png) no-repeat 0 -501px;
 }
 
-#epcurate-curation #cur-edit .edit-title .select .select-txt,
-#epcurate-curation #cur-edit .select.disable .select-txt {
+#epcurate-curation #cur-edit .edit-title.disable .select .select-txt {
     background: url(../images/input_box_right_disable.png) no-repeat right 0;
 }
 
-#epcurate-curation #cur-edit .edit-title .select .select-txt a,
-#epcurate-curation #cur-edit .select.disable .select-txt a {
+#epcurate-curation #cur-edit .edit-title.disable .select .select-txt a {
 	color: #999;
     background: url(../images/input_box_middle_disable.png) repeat-x;
 }
@@ -1171,6 +1292,9 @@ padding-right: 8px;
 
 #epcurate-curation .tab-content .result-list {
     position: relative;
+	float: left;
+	height: 222px;
+	padding: 5px 0 0 55px;
 }
 
 #epcurate-curation #cur-library .result-list ul {
@@ -1190,36 +1314,42 @@ padding-right: 8px;
     margin-right: 50px;
 }
 
+#epcurate-curation #cur-uploads .result-list .btn-upload a {
+    padding-right: 10px;
+	padding-left: 10px;
+}
+
 #epcurate-curation .tab-content .result-list .yt-connect {
     float: left;
 }
 
 #epcurate-curation .tab-content .result-list .yt-connect img.youtube {
-    margin: 30px 0 27px 273px;
+    margin: 20px 0 23px 273px;
 }
 
 #epcurate-curation .tab-content .result-list .yt-connect .btns {
     width: 148px;
-    margin: 0 0 0 255px;
+    margin: 0 0 0 258px;
 }
 
 #epcurate-curation .tab-content .result-list a.video-next,
 #epcurate-curation .tab-content .result-list a.video-prev {
     display: block;
     position: absolute;
-    top: 73px;
+    top: 50%;
     width: 17px;
     height: 28px;
+	margin: -14px 0 0;
     text-indent: -100000px;
 }
 
 #epcurate-curation .tab-content .result-list a.video-prev {
-    left: 370px;
+    left: 20px;
     background: url(../images/btn_switch_left.png) no-repeat 0 0;
 }
 
 #epcurate-curation .tab-content .result-list a.video-next {
-    left: 975px;
+    right: 20px;
     background: url(../images/btn_switch_right.png) no-repeat 0 0;
 }
 
@@ -1232,10 +1362,13 @@ padding-right: 8px;
 }
 
 #epcurate-curation .tab-content .result-list ul {
+/*
     min-width: 610px;
     position: absolute;
     top: 10px;
     left: 407px;
+*/
+	
 }
 
 #epcurate-curation .tab-content .result-list ul li {
@@ -1269,13 +1402,13 @@ padding-right: 8px;
 #epcurate-curation .tab-content .result-list ul li p.img span {
     display: block;
     position: absolute;
-    bottom: 9px;
-    right: 9px;
+    bottom: 10px;
+    right: 10px;
     width: 32px;
     height: 14px;
     background: url(../images/time_box.png) no-repeat 0 0;
     color: #fff;
-    font-size: 10px;
+    font-size: 11px;
     line-height: 14px;
     text-align: center;
 }
@@ -1353,7 +1486,7 @@ padding-right: 8px;
     display: none;
     position: absolute;
     top: 70px;
-    left: 0;
+    left: -20px;
     z-index: 60;
     padding-left: 3px;
     background: url(../images/bubble_left.png) no-repeat 0 0;
@@ -1365,7 +1498,7 @@ padding-right: 8px;
 #epcurate-curation .tab-content .result-list ul li p.tip-arrow {
     display: none;
     position: absolute;
-    top: 54px;
+    top: 55px;
     left: 40px;
 }
 
@@ -1384,6 +1517,11 @@ padding-right: 8px;
 #epcurate-curation .tab-content .result-list ul li .video-tip .video-bubble-wrap p {
     margin-bottom: 10px;
     padding: 0 5px;
+}
+
+#epcurate-curation .tab-content .result-list ul li .video-tip .video-bubble-wrap p.desc {
+	height: 66px;
+	margin-bottom: 15px;
 }
 
 #epcurate-curation .tab-content .result-list ul li .video-tip .video-bubble-wrap p.region-no {
@@ -1427,8 +1565,9 @@ padding-right: 8px;
 **/
 
 #storyboard {
+    position: relative;
     clear: both;
-    padding: 11px 0 50px 17px;
+    padding: 0 0 0 17px;
     background-color: #eee;
 }
 
@@ -1444,9 +1583,13 @@ padding-right: 8px;
     font-weight: normal;
 }
 
+#storyboard p em {
+    font-style: normal;
+}
+
 #storyboard .storyboard-list {
     position: relative;
-    height: 59px;
+    height: 95px;
 }
 
 #storyboard .storyboard-list p.notice {
@@ -1463,6 +1606,7 @@ padding-right: 8px;
     width: 5700px;
     min-width: 1024px;
     height: 59px;
+    padding-left: 2px;
     background: url(../images/icon-frame.png) repeat-x;
 }
 
@@ -1474,11 +1618,23 @@ padding-right: 8px;
     margin: 0 20px 0 0;
 }
 
-#storyboard .storyboard-list ul li img.warning {
+#storyboard .storyboard-list ul li span.warning,
+#storyboard .storyboard-list ul li span.error {
+    display: block;
 	position: absolute;
     top: -5px;
     left: -5px;
     z-index: 40;
+    width: 19px;
+    height: 18px;
+}
+
+#storyboard .storyboard-list ul li span.warning {
+    background: url(../images/icon_yellow_warning.png) no-repeat 0 0;
+}
+
+#storyboard .storyboard-list ul li span.error {
+    background: url(../images/icon_red_warning.png) no-repeat 0 0;
 }
 
 #storyboard .storyboard-list ul li p.img {
@@ -1489,6 +1645,7 @@ padding-right: 8px;
     margin-bottom: 3px;
     background: url(../images/thumbnail_box_sm.png) no-repeat 0 0;
     margin: -4px 0 0 -4px;
+	cursor: url(../images/Cursor-moz_grab.png), move;
 }
 
 #storyboard .storyboard-list ul li p.img img {
@@ -1499,19 +1656,20 @@ padding-right: 8px;
 #storyboard .storyboard-list ul li p.img span {
     display: block;
     position: absolute;
-    bottom: 9px;
-    right: 9px;
+    bottom: 10px;
+    right: 10px;
     width: 32px;
     height: 14px;
     background: url(../images/time_box.png) no-repeat 0 0;
     color: #fff;
-    font-size: 10px;
+    font-size: 11px;
     line-height: 14px;
     text-align: center;
 }
 
 #storyboard .storyboard-list ul li h4 {
     width: 95px;
+    height: 32px;
     padding-left: 5px;
     font-weight: normal;
     font-size: 13px;
@@ -1522,7 +1680,7 @@ padding-right: 8px;
     top: 28px;
     left: -11px;
     z-index: 51;
-    width: 114px;
+    width: 113px;
     height: 23px;
 }
 
@@ -1538,21 +1696,23 @@ padding-right: 8px;
 #storyboard .storyboard-list ul li p.title a.begin-title,
 #storyboard .storyboard-list ul li .hover-func a.begin-title:hover {
     float: left;
-    background-position: 0 -2070px;
+	margin: 0;
+    background-position: 0 -2075px;
 }
 
 #storyboard .storyboard-list ul li p.title a.end-title,
 #storyboard .storyboard-list ul li .hover-func a.end-title:hover {
     float: right;
-    background-position: 0 -2124px;
+	margin: 0;
+    background-position: 0 -2129px;
 }
 
 #storyboard .storyboard-list ul li p.title a.begin-title:hover {
-    background-position: 0 -2286px;
+    background-position: 1px -2291px;
 }
 
 #storyboard .storyboard-list ul li p.title a.end-title:hover {
-    background-position: 0 -2341px;
+    background-position: 1px -2346px;
 }
 
 #storyboard .storyboard-list ul li p.title a.begin-title .tip,
@@ -1615,6 +1775,7 @@ padding-right: 8px;
     z-index: 52;
     width: 80px;
     height: 45px;
+	cursor: url(../images/Cursor-moz_grab.png), move;
 }
 
 #storyboard .storyboard-list ul li .hover-func a.video-del {
@@ -1662,12 +1823,14 @@ padding-right: 8px;
 
 #storyboard .storyboard-list ul li .hover-func a.begin-title {
     left: -19px;
-    background-position: 0 -2177px;
+	margin-top: 2px;
+    background-position: 0 -2183px;
 }
 
 #storyboard .storyboard-list ul li .hover-func a.end-title {
     right: -14px;
-    background-position: 0 -2232px;
+	margin-top: 2px;
+    background-position: 0 -2238px;
 }
 
 #storyboard .storyboard-list ul li .hover-func a.begin-title .tip,
@@ -1728,4 +1891,46 @@ padding-right: 8px;
 #storyboard .storyboard-list ul li .hover-func a.end-title:hover     .tip,
 #storyboard .storyboard-list ul li:hover .hover-func {
     display: block;
+}
+
+#storyboard #storyboard-slider {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	width: 99%;
+	height: 10px;
+}
+
+#storyboard #storyboard-slider .slider-h {
+    position: relative;
+    width: 100%;
+    height: 10px;
+}
+
+.ui-slider-handle,
+.jScrollPaneDrag {
+    height: 10px;
+}
+
+@media all and (min-height: 800px) and (min-width: 1280px) {
+    #epcurate-curation ul.tabs {
+        padding-left: 608px;
+    }
+	#epcurate-curation #video-player .video,
+    #epcurate-curation #video-player .video #youTubePlayer    {
+		width: 608px;
+		height: 386px;
+	}
+    #epcurate-curation #cur-add textarea {
+        height: 290px;
+    }
+    #epcurate-curation #cur-edit .edit-title .wrap {
+        height: 378px;
+    }
+    #epcurate-curation #cur-edit p.desc {
+        height: 130px;
+    }
+	#play-time {
+		width: 543px;
+	}
 }

@@ -4,18 +4,24 @@
 <link rel="stylesheet" href="stylesheets/style.css" />
 <link rel="stylesheet" href="stylesheets/lightbox.css" />
 <link rel="stylesheet" href="stylesheets/episode.css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+<script src="javascripts/nn-sdk.js"></script>
 <script src="javascripts/jquery.mousewheel.min.js"></script>
-<script src="javascripts/vertical.slider.js"></script>
 <script src="javascripts/jquery.ellipsis.js"></script>
+<script src="javascripts/jquery.blockUI.js"></script>
 <script src="javascripts/jquery.corner.js"></script>
-<!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-<script src="javascripts/automeasure.js"></script>
+<script src="javascripts/jquery.toggleval.min.js"></script>
+<script src="javascripts/jquery.cycle.all.js"></script>
+<script src="javascripts/jquery.tmpl.min.js"></script>
+<script src="javascripts/jquery.cookie.js"></script>
+<script src="javascripts/json2.js"></script>
+<script src="javascripts/purl.js"></script>
+<script src="javascripts/vertical.slider.js"></script>
 <script src="javascripts/basic.js"></script>
-<title>9x9.tv</title>
+<script src="javascripts/controller.js"></script>
+<script src="javascripts/episode.js"></script>
+<title>9x9.tv - Episode list</title>
 </head>
 <body>
 
@@ -70,8 +76,6 @@
 <h3><a href="index.html">Studio</a></h3>
 <ul>
 <li class="on"><span><a href="index.html">My Channels</a></span></li>
-<li><span><a href="library-first.html">My Library</a></span></li>
-<li><span><a href="uploads-first.html">My Uploads</a></span></li>
 </ul>
 </div>
 </div>
@@ -80,26 +84,46 @@
 <div id="content-wrap">
 
 <div id="content-nav">
+<script id="episode-nav-tmpl" type="text/x-jquery-tmpl">
+{{if contentType == CMS_CONF.YOUR_FAVORITE}}
+&nbsp;
+{{else}}
 <div id="func-nav">
 <ul>
-<li class="active"><a href="episode-list-first.html" class="episode">Episode list</a></li>
-<li><a href="channel-setting.html" class="setting">Settings</a></li>
+<li class="active"><a href="episode-list.html?id=${id}" class="episode">Episode list</a></li>
+<li><a href="channel-setting.html?id=${id}" class="setting">Settings</a></li>
 </ul>
 </div>
+{{/if}}
+</script>
 </div>
 
 <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
 
 <div id="content-main">
 <div id="title-func" class="clearfix">
-<h2>Go to the world　&gt; Episode list (30) <a href="#" class="reload">reload<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Reload episode list</span></span></span></span></a></h2>
-<p class="curate btns"><span><a href="#">Curate a new episode</a></span></p>
+<h2><span id="channel-name"></span> &gt; Episode list (<span id="episode-counter"></span>)</h2>
+<p class="curate btns"><span><a href="" id="episode-curate">Curate a new episode</a></span></p>
 </div>
-
 <div id="content-main-wrap">
 <div class="constrain">
-<div id="ep-list">
-<ul class="un-pub">
+<!-- template = #episode-favorite-first-tmpl or #episode-favorite-list-tmpl -->
+<!-- template = #episode-first-tmpl or #episode-list-tmpl -->
+</div>
+</div>
+</div>
+
+<script id="episode-favorite-first-tmpl" type="text/x-jquery-tmpl">
+<div id="ep-no">
+<h3><img src="images/text_don't-have-episode-yet.png" alt="" /></h3>
+<p class="desc">Click on <span>Favorite</span> button when watching channels to collect more episodes</p>
+<img src="images/graphic_mockup.png" alt="" />
+</div>
+</script>
+
+<script id="episode-favorite-list-tmpl" type="text/x-jquery-tmpl">
+<div id="ep-list" class="favorite">
+<ul id="episode-list">
 <li class="title clearfix">
 <p class="episode">Episode</p>
 <div class="episode-info">
@@ -107,327 +131,197 @@
 <p class="views">Views</p>
 </div>
 </li>
+<!-- template = #episode-favorite-list-tmpl-item -->
+</ul>
+</div>
+</script>
+
+<script id="episode-favorite-list-tmpl-item" type="text/x-jquery-tmpl">
 <li class="clearfix">
 <div class="episode">
 <p class="img">
-<a href="#" class="_target">
+<a href="${playbackUrl}" class="_target">
+<span class="mask"></span>
 <img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
+<img src="${imageUrl}" alt="" width="80" height="45" />
 </a>
-<span>13:43</span>
+<span>${duration}</span>
 </p>
-<h3>Mutton Busters</h3>
+<h3><a href="${playbackUrl}" target="_blank">${name}</a></h3>
 <div class="btns">
-<div class="btn-wrap">
+<div class="btn-wrap disable">
 <ul>
-<li><a href="channel-setting.html" class="edit"><span></span>Edit</a></li>
-<li><a href="#" class="del"><span></span>Delete</a></li>
+<li><a href="#" class="edit disable"><span></span>Edit</a></li>
+<li><a href="#" class="del disable"><span></span>Delete</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div class="episode-info">
 <div class="time">
-<p>Draft</p>
-<p>2012-06-19 06:00 pub</p>
+<p>${$item.timeConverter(publishDate)} pub</p>
 </div>
 <div class="views">
-<p>0</p>
+<p>${cntView}</p>
 </div>
 </div>
 </li>
+</script>
+
+<script id="episode-first-tmpl" type="text/x-jquery-tmpl">
+<div id="ep-time-list">
+<h3><img src="images/text_don't-have-episode-yet.png" alt="" /></h3>
+<p class="btns"><span><a href="epcurate-info.html?cid=${id}">Curate new episode to tell a story</a></span></p>
+<div id="selected-episode">
+<p class="episode-pager">
+<a href="#" class="active">。</a>
+<a href="#">。</a>
+<a href="#">。</a>
+<a href="#">。</a>
+</p>
+<div class="wrapper">
+<ul class="content">
+<li>
+<div class="img"><a href="epcurate-info.html?cid=${id}"><img src="images/banner_01.png" alt="" width="781" height="274" /></a></div>
+<div class="desc"><p><span><strong>Curate online videos</strong> into each single episode.</span></p></div>
+</li>
+<li>
+<div class="img"><a href="epcurate-info.html?cid=${id}"><img src="images/banner_02.png" alt="" width="781" height="274" /></a></div>
+<div class="desc"><p><span>Tell your story by <strong>arranging the video sequence.</strong></span></p></div>
+</li>
+<li>
+<div class="img"><a href="epcurate-info.html?cid=${id}"><img src="images/banner_03.png" alt="" width="781" height="274" /></a></div>
+<div class="desc"><p><span><strong>Trim the videos and add titles</strong> to make your episodes more intriguing.</span></p></div>
+</li>
+<li>
+<div class="img"><a href="epcurate-info.html?cid=${id}"><img src="images/banner_04.png" alt="" width="781" height="274" /></a></div>
+<div class="desc"><p><span><strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically.</span></p></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</script>
+
+<script id="episode-list-tmpl" type="text/x-jquery-tmpl">
+<div id="ep-list">
+<ul id="episode-list">
+<li class="title clearfix">
+<p class="episode">Episode</p>
+<div class="episode-info">
+<p class="time">Publish time</p>
+<p class="views">Views</p>
+</div>
+</li>
+<!-- template = #episode-list-tmpl-item -->
+</ul>
+</div>
+</script>
+
+<script id="episode-list-tmpl-item" type="text/x-jquery-tmpl">
 <li class="clearfix">
+<!--<a href="#" class="warning">warning.png<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Include not playable videos</span></span></span></span></a>-->
 <div class="episode">
 <p class="img">
 <a href="#" class="_target">
+<span class="mask"></span>
 <img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
+<img src="${imageUrl}" alt="" width="80" height="45" />
 </a>
-<span>13:43</span>
+<span>${duration}</span>
 </p>
-<h3>Wesley Gives a Tour</h3>
+<h3><a href="#" target="_blank">${name}</a></h3>
 <div class="btns">
-<div class="btn-wrap">
+<div class="btn-wrap enable">
 <ul>
-<li><a href="channel-setting.html" class="edit"><span></span>Edit</a></li>
-<li><a href="#" class="del"><span></span>Delete</a></li>
+<li><a href="epcurate-curation.html?id=${id}" class="edit"><span></span>Edit</a></li>
+<li><a href="/api/episodes/${id}" class="del"><span></span>Delete</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div class="episode-info">
 <div class="time">
-<p>Draft</p>
-<p>2012-06-19 06:00 pub</p>
+<p>${$item.timeConverter(publishDate)} pub</p>
 </div>
 <div class="views">
-<p>0</p>
+<p>${cntView}</p>
 </div>
 </div>
 </li>
-</ul>
-<ul>
-<li class="clearfix">
-<a href="#" class="warning">warning.png<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Include not playable videos</span></span></span></span></a>
-<div class="episode">
-<p class="img">
-<a href="#" class="_target">
-<img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-</a>
-<span>13:43</span>
-</p>
-<h3>Mutton Busters</h3>
-<div class="btns">
-<div class="btn-wrap">
-<ul>
-<li><a href="channel-setting.html" class="edit"><span></span>Edit</a></li>
-<li><a href="#" class="del"><span></span>Delete</a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="episode-info">
-<div class="time">
-<p>2012-06-19 06:00 pub</p>
-</div>
-<div class="views">
-<p>0</p>
-</div>
-</div>
-</li>
-<li class="clearfix">
-<div class="episode">
-<p class="img">
-<a href="#" class="_target">
-<img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-</a>
-<span>13:43</span>
-</p>
-<h3>Wesley Gives a Tour</h3>
-<div class="btns">
-<div class="btn-wrap">
-<ul>
-<li><a href="channel-setting.html" class="edit"><span></span>Edit</a></li>
-<li><a href="#" class="del"><span></span>Delete</a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="episode-info">
-<div class="time">
-<p>2012-06-19 06:00 pub</p>
-</div>
-<div class="views">
-<p>0</p>
-</div>
-</div>
-</li>
-<li class="clearfix">
-<div class="episode">
-<p class="img">
-<a href="#" class="_target">
-<img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-</a>
-<span>13:43</span>
-</p>
-<h3>Mutton Busters</h3>
-<div class="btns">
-<div class="btn-wrap">
-<ul>
-<li><a href="channel-setting.html" class="edit"><span></span>Edit</a></li>
-<li><a href="#" class="del"><span></span>Delete</a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="episode-info">
-<div class="time">
-<p>2012-06-19 06:00 pub</p>
-</div>
-<div class="views">
-<p>0</p>
-</div>
-</div>
-</li>
-<li class="clearfix">
-<div class="episode">
-<p class="img">
-<a href="#" class="_target">
-<img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-</a>
-<span>13:43</span>
-</p>
-<h3>Wesley Gives a Tour</h3>
-<div class="btns">
-<div class="btn-wrap">
-<ul>
-<li><a href="channel-setting.html" class="edit"><span></span>Edit</a></li>
-<li><a href="#" class="del"><span></span>Delete</a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="episode-info">
-<div class="time">
-<p>2012-06-19 06:00 pub</p>
-</div>
-<div class="views">
-<p>0</p>
-</div>
-</div>
-</li>
-<li class="clearfix">
-<div class="episode">
-<p class="img">
-<a href="#" class="_target">
-<img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-</a>
-<span>13:43</span>
-</p>
-<h3>Mutton Busters</h3>
-<div class="btns">
-<div class="btn-wrap">
-<ul>
-<li><a href="channel-setting.html" class="edit"><span></span>Edit</a></li>
-<li><a href="#" class="del"><span></span>Delete</a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="episode-info">
-<div class="time">
-<p>2012-06-19 06:00 pub</p>
-</div>
-<div class="views">
-<p>0</p>
-</div>
-</div>
-</li>
-<li class="clearfix">
-<div class="episode">
-<p class="img">
-<a href="#" class="_target">
-<img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-</a>
-<span>13:43</span>
-</p>
-<h3>Wesley Gives a Tour</h3>
-<div class="btns">
-<div class="btn-wrap">
-<ul>
-<li><a href="channel-setting.html" class="edit"><span></span>Edit</a></li>
-<li><a href="#" class="del"><span></span>Delete</a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="episode-info">
-<div class="time">
-<p>2012-06-19 06:00 pub</p>
-</div>
-<div class="views">
-<p>0</p>
-</div>
-</div>
-</li>
-<li class="clearfix">
-<div class="episode">
-<p class="img">
-<a href="#" class="_target">
-<img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-</a>
-<span>13:43</span>
-</p>
-<h3>Mutton Busters</h3>
-<div class="btns">
-<div class="btn-wrap">
-<ul>
-<li><a href="channel-setting.html" class="edit"><span></span>Edit</a></li>
-<li><a href="#" class="del"><span></span>Delete</a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="episode-info">
-<div class="time">
-<p>2012-06-19 06:00 pub</p>
-</div>
-<div class="views">
-<p>0</p>
-</div>
-</div>
-</li>
-<li class="clearfix">
-<div class="episode">
-<p class="img">
-<a href="#" class="_target">
-<img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-</a>
-<span>13:43</span>
-</p>
-<h3>Wesley Gives a Tour</h3>
-<div class="btns">
-<div class="btn-wrap">
-<ul>
-<li><a href="channel-setting.html" class="edit"><span></span>Edit</a></li>
-<li><a href="#" class="del"><span></span>Delete</a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="episode-info">
-<div class="time">
-<p>2012-06-19 06:00 pub</p>
-</div>
-<div class="views">
-<p>0</p>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
+</script>
 
 </div>
 <!--============================== content-main start ========================-->
 
 <!--============================== footer start ==============================-->
-<!-- Footer Begin -->
 <p id="footer-control"></p>
+
 <div id="footer">
-  <ul id="footer-list">
-    <li id="siteinfo">
-      <p id="btn-siteinfo"></p>
-      <p id="selected-siteinfo">Company</p>
-      <ul id="siteinfo-dropdown" class="dropdown">
-        <li class="on">Company</li>
-        <li>Blog</li>
-        <li>Forum</li>
-      </ul>
-    </li>
-    <li id="sitelang">
-      <p id="btn-sitelang"></p>
-      <p id="selected-sitelang">English Site</p>
-      <ul id="sitelang-dropdown" class="dropdown">
-        <li class="on">English Site</li>
-        <li>中文網站</li>
-      </ul>
-    </li>
-  </ul>
-  <p id="copyright"><span>&copy; 2012 9x9.tv.  All right reserved</span></p>
+	<ul id="footer-list">
+		<li>
+			<p class="select-txt">About Us</p>
+			<p class="select-btn"></p>
+			<ul class="select-list">
+				<li>About us</li>
+				<li>Help</li>
+				<li>Report</li>
+				<li>Terms & Policy</li>
+				<li>Contact us</li>
+				<li>Partners</li>
+				<li>Curators</li>
+				<li>Press</li>
+				<li>Curation Contest</li>
+			</ul>
+		</li>
+		<li>
+			<p class="select-txt">Language</p>
+			<p class="select-btn"></p>
+			<ul class="select-list">
+				<li>English</li>
+				<li>中文</li>
+			</ul>
+		</li>
+		<li>
+			<p class="select-txt">Region</p>
+			<p class="select-btn"></p>
+			<ul class="select-list">
+				<li>US</li>
+				<li>Taiwan</li>
+			</ul>
+		</li>
+	</ul>
 </div>
 <!--============================== footer close ==============================-->
+
+<div id="overlay-s">
+<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle">Saving...</span></span></p>
+</div>
+
+<div id="system-error" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">You are not authorized to edit episodes in this channel.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="delete-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Are you sure you want to delete this episode?</p>
+<div class="overlay-btn">
+<p class="btns btn-del"><span><a href="#">Delete</a></span></p>
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+</div>
+</div>
+</div>
+</div>
 
 </body>
 </html>

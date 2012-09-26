@@ -3,70 +3,31 @@
 <meta charset="utf-8" />
 <link rel="stylesheet" href="stylesheets/style.css" />
 <link rel="stylesheet" href="stylesheets/lightbox.css" />
+<link rel="stylesheet" href="stylesheets/uniform.css" />
 <link rel="stylesheet" href="stylesheets/epcurate.css" />
 <link rel="stylesheet" href="stylesheets/ep-curation.css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+<script src="javascripts/nn-sdk.js"></script>
 <script src="javascripts/jquery.mousewheel.min.js"></script>
-<script src="javascripts/horizontal-slider.js"></script>
 <script src="javascripts/jquery.ellipsis.js"></script>
 <script src="javascripts/jquery.blockUI.js"></script>
 <script src="javascripts/jquery.corner.js"></script>
-<!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-<script src="javascripts/automeasure.js"></script>
-<!--<script src="javascripts/basic.js"></script>-->
+<script src="javascripts/jquery.toggleval.min.js"></script>
+<script src="javascripts/jquery.uniform.min.js"></script>
+<script src="javascripts/jquery.swfobject.min.js"></script>
+<script src="javascripts/jquery.titlecard.js"></script>
+<script src="javascripts/jquery.tmpl.min.js"></script>
+<script src="javascripts/jquery.cookie.js"></script>
+<script src="javascripts/json2.js"></script>
+<script src="javascripts/purl.js"></script>
+<script src="javascripts/horizontal-slider.js"></script>
+<script src="javascripts/basic.js"></script>
+<script src="javascripts/controller.js"></script>
 <script src="javascripts/curation.js"></script>
-<title>9x9.tv</title>
+<title>9x9.tv - Episode Curation - Curation</title>
 </head>
 <body>
-
-<div id="lightbox-upload-video" class="lightbox-content lightbox-upload-video">
-<div class="upload-audio">
-<div class="upload-audio-wrap">
-<a href="#" class="btn-close">Close</a>
-<h3><img src="images/text_audio_file.png" alt="Upload Audio File" title="Upload Audio File" /></h3>
-<p class="required"><acronym title="Required field" class="mark-required">*</acronym>Required field</p>
-<form name="lightboxUploadForm" id="lightboxUploadForm" method="get" action="uploads-list.html">
-<div class="fminput">
-<label><acronym title="Required field" class="mark-required">*</acronym>Upload file</label>
-<div class="fmfield">
-<p class="btns btn-upload-file"><span><input type="button" name="fileName" value="Select file from your computer" /></span></p>
-<p class="notice clear">Support mp3 file.</p>
-</div>
-</div>
-<div class="fminput">
-<label><acronym title="Required field" class="mark-required">*</acronym>File title</label>
-<div class="fmfield">
-<p class="text"><span><input type="text" name="title" id="title" maxlength="100" value="" class="text" /></span></p>
-</div>
-</div>
-<div class="fminput">
-<label>Playback image</label>
-<div class="fmfield">
-<p class="img"><img src="images/logo_2.png" alt="" width="57" height="44" /></p>
-<div class="upload-func">
-<p class="radio-list">
-<span class="radio first on"><a href="#" class="radio-upload">Upload file</a></span>
-<span class="radio"><a href="#" class="radio-url">From URL</a></span>
-</p>
-<p class="btns upload"><span><a href="#">Upload</a></span></p>
-<p class="img-url text"><span><input type="text" name="imgUrl" id="imgUrl" maxlength="100" value="Copy and paste image URL here" class="text" /></span></p>
-</div>
-<span class="notice clear">Better results with 720x480 or higher resolution image.</span>
-</div>
-</div>
-<div class="form-btn">
-<div class="form-btn-wrap">
-<p class="btns btn-cancel"><span><input type="reset" value="Cancel" /></span></p>
-<p class="btns btn-save"><span><input type="submit" value="Save" /></span></p>
-</div>
-</div>
-</form>
-</div>
-</div>
-</div>
 
 <!--============================== header start ==============================-->
 <div id="header" class="hide">
@@ -116,901 +77,206 @@
 
 <div id="epcurate-nav">
 <div class="epcurate-nav-wrap">
-<h3><a href="#">Episode Curation</a></h3>
+<h3><a href="#" id="epcurate-nav-back" class="btn-back">Back<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Leave</span></span></span></span></a><a href="#">Episode Curation</a></h3>
 <ul>
-<li>Information</li>
+<li><a href="#" id="epcurate-nav-info">Information</a></li>
 <li class="on">Curation</li>
-<li>Publish</li>
+<li><a href="#" id="epcurate-nav-publish">Publish</a></li>
 </ul>
 </div>
 </div>
 
+<script id="epcurate-nav-publish-tmpl" type="text/x-jquery-tmpl">
+<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Please curate some videos first.</span></span></span></span>
+</script>
+
 <!--============================== content-main start ========================-->
 <div id="content-wrap" class="epcurate-curation">
-<form name="epcurateForm" id="epcurateForm" method="get" action="" class="clearfix">
+<form name="epcurateForm" id="epcurateForm" method="get" action="" class="clearfix curation">
+<input type="hidden" name="id" id="id" value="" />
+<input type="hidden" name="channelId" id="channelId" value="" />
+
+<script id="epcurate-info-tmpl" type="text/x-jquery-tmpl">
+<input type="hidden" name="name" id="name" value="${name}" />
+<input type="hidden" name="intro" id="intro" value="${intro}" />
+</script>
 
 <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
 
 <div id="content-main">
-<div id="content-main-wrap">
+<div id="content-main-wrap" class="curation">
 <div class="constrain">
 <div id="epcurate-curation" class="clearfix">
+<ul class="tabs">
+<li class="first last on"><span><a href="#cur-add" class="cur-add">Add Video</a></span></li>
+<li class="last hide on"><span><a href="#cur-edit" class="cur-edit">Edit</a></span></li>
+</ul>
+
+<div class="curation-content clearfix">
+<p class="auto-height"></p>
 <div id="video-player">
 <div class="video"></div>
 <div id="video-control">
-<p id="play-dragger"></p>
-<div id="progress-bar">
-<p id="loaded"></p>
-<p id="played"></p>
-</div>
 <ul>
-<li id="btn-prev"></li>
-<li id="btn-pause"></li>
-<li id="btn-next"></li>
-<li id="volume-control">
-<p id="btn-volume" class="loud"></p>
-<p id="volume-bar"></p>
-<p id="volume-dragger"></p>
-</li>
-<li id="play-time">
-<span id="played-length">0:14</span><span class="divider">/</span><span id="total-length">3:25</span>
-</li>
-<li id="btn-expand"></li>
+<li id="btn-play"></li>
+<li id="btn-pause" class="hide"></li>
+<li id="play-time"></li>
 </ul>
 </div>
 </div>
 
-<ul class="tabs">
-<li class="first on"><span><a href="#cur-youtube" class="cur-youtube">My YouTube</a></span></li>
-<li><span><a href="#cur-library" class="cur-library">My Library</a></span></li>
-<li><span><a href="#cur-uploads" class="cur-uploads">My Uploads</a></span></li>
-<li class="last"><span><a href="#cur-add" class="cur-add">Add Video</a></span></li>
-<li class="last on hide"><span><a href="#cur-edit" class="cur-edit">Edit</a></span></li>
-</ul>
-
-<div id="cur-youtube" class="tab-content">
-<ul class="yt-category">
-<li class="on"><a href="#yt-history">Watch history</a></li>
-<li><a href="#yt-uploads">Uploads</a></li>
-<li class="playlist"><a href="#yt-playlists">Playlists</a></li>
-<li class="last">
-<div class="select disable">
-<p class="select-btn"></p>
-<p class="select-txt"><a href="#"></a></p>
-</div>
-</li>
-</ul>
-
-<div id="yt-history" class="result-list">
-<div class="yt-connect">
-<a href="#"><img src="images/icon_youtube_lg.png" alt="YouTube" title="YouTube" class="youtube" /></a>
-<p class="btns"><span><a href="#">Connect to YouTube</a></span></p>
-</div>
-</div>
-
-<div id="yt-uploads" class="result-list hide">
-<a href="#" class="video-prev">Prev</a>
-<a href="#" class="video-next">Next</a>
-<ul class="clearfix">
-<li>
-<img src="images/icon_red_warning.png" alt="Warning" class="warning" />
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="play-no">Not playable outside Youtube</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<img src="images/icon_yellow_warning.png" alt="Warning" class="warning" />
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-</ul>
-</div>
-
-<div id="yt-playlists" class="result-list hide">
-<a href="#" class="video-prev">Prev</a>
-<a href="#" class="video-next">Next</a>
-<ul class="clearfix">
-<li>
-<img src="images/icon_red_warning.png" alt="Warning" class="warning" />
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="play-no">Not playable outside Youtube</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<img src="images/icon_yellow_warning.png" alt="Warning" class="warning" />
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-
-<div id="cur-library" class="tab-content hide">
-<div class="no-video">
-<img src="images/text_novideo.png" alt="" />
-<p class="btns btn-add"><span><a href="#">Add some videos</a></span></p>
-</div>
-<div class="result-list clearfix hide">
-<a href="#" class="video-prev">Prev</a>
-<a href="#" class="video-next">Next</a>
-<ul class="clearfix">
-<li>
-<img src="images/icon_red_warning.png" alt="Warning" class="warning" />
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="play-no">Not playable outside Youtube</p>
-</div>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-
-<div id="cur-uploads" class="tab-content hide">
-<div class="no-video">
-<img src="images/text_noupload.png" alt="" />
-<p class="btns btn-upload"><span><a href="#">Upload audio file</a></span></p>
-</div>
-<div class="result-list clearfix hide">
-<p class="btns btn-upload"><span><a href="#">Upload audio file</a></span></p>
-<a href="#" class="video-prev">Prev</a>
-<a href="#" class="video-next">Next</a>
-<ul class="clearfix">
-<li>
-<img src="images/icon_red_warning.png" alt="Warning" class="warning" />
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="play-no">Not playable outside Youtube</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<img src="images/icon_yellow_warning.png" alt="Warning" class="warning" />
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
-</p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
-<p class="hover-func">
-<a href="#" class="video-play">Video Play</a>
-</p>
-<p class="tip-arrow"><img src="images/bubble_arrow_up.png" alt="" /></p>
-<div class="video-tip">
-<div class="video-bubble">
-<div class="video-bubble-wrap">
-<p>Kate Nash Song - Live in Paradiso</p>
-<p>From <a href="#">Youtube.com</a><br />By <a href="#">John</a><br/>on 2012-12-08</p>
-<p>kara Guardi & Jason Reeves singing "terrified" no copyright infringements ...</p>
-<p class="region-no">Not playable in some regions</p>
-<p class="mobile-no">Not playable on mobile device</p>
-</div>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-
-<div id="cur-add" class="tab-content hide">
+<div id="cur-add" class="tab-content clearfix">
 <p>Add video by URL</p>
-<textarea name="description" id="description" cols="80" class="textarea">Paste YouTube video URLs to add (separate with different lines)</textarea>
-<p class="notice">You have reached the maximum amount 0f 50 videos.</p>
+<textarea name="videourl" id="videourl" cols="80" class="textarea">Paste YouTube video URLs to add (separate with different lines)</textarea>
+<p class="notice">You have reached the maximum amount of 50 videos.</p>
 <div class="func">
-<p class="checkbox"><a href="#">Also add to My Library</a></p>
-<p class="btns btn-add"><span><a href="#">Add</a></span></p>
+<p class="btns btn-add"><span><a href="#" id="btn-add-videourl">Add</a></span></p>
 </div>
 </div>
 
-<div id="cur-edit" class="tab-content hide">
-<div class="edit-title disable">
+<div id="cur-edit" class="tab-content clearfix hide">
+<div id="video-info" class="edit-time hide">
+<!-- template = #video-info-tmpl -->
+</div>
+
+<script id="video-info-tmpl" type="text/x-jquery-tmpl">
+<h3><span class="uploader">${uploader}</span> - <span class="title">${name}</span></h3>
+<p><span class="duration">${$item.durationConverter(duration)}</span> | From <a href="${fileUrl}" target="_blank">YouTube.com</a> | By <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> on <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span></p>
+<p class="desc ellipsis multiline">${intro}</p>
+{{if isEmbedLimited || isZoneLimited || isMobileLimited}}
+<ul>
+{{if isEmbedLimited}}
+<li class="outside">Not playable outside Youtube</li>
+{{else}}
+{{if isZoneLimited}}
+<li class="region">Not playable in some regions</li>
+{{/if}}
+{{if isMobileLimited}}
+<li class="device">Not playable on mobile device</li>
+{{/if}}
+{{/if}}
+</ul>
+{{/if}}
+</script>
+
+<!--
+<div class="edit-title hide disable">
 <div class="wrap">
-<div class="text-container clearfix">
+<div class="text-container">
 <h5>Text</h5>
+<textarea name="text" id="text" cols="80" class="textarea">My Video</textarea>
+</div>
+
+<div class="font-container">
+<h5>Font</h5>
 <div class="text-func clearfix">
 <div class="func-wrap clearfix">
 <ul>
-<li><a href="#" class="font-bold">粗體</a></li>
-<li><a href="#" class="font-italic">斜體</a></li>
-<li><a href="#" class="font-color">字體顏色
+<li class="font-weight"><input type="checkbox" name="fontWeight" value="bold" id="fontWeight" />粗體</li>
+<li class="font-style"><input type="checkbox" name="fontStyle" value="italic" id="fontStyle" />斜體</li>
+<li><a href="#" class="font-color">字體顏色<span></span>
 <ul class="color-list">
-<li class="c-fff">#ffffff</li>
-<li class="c-eee">#eeeeee</li>
-<li class="c-bbb">#bbbbbb</li>
-<li class="c-777">#777777</li>
-<li class="c-333">#333333</li>
-<li class="c-000">#000000</li>
-<li class="c-f00">#ff0000</li>
-<li class="c-f60">#ff6600</li>
-<li class="c-ff0">#ffff00</li>
-<li class="c-090">#009900</li>
-<li class="c-03f">#0033ff</li>
-<li class="c-60f">#6600ff</li>
+<li class="c-fff" data-meta="#ffffff">#ffffff</li>
+<li class="c-eee" data-meta="#eeeeee">#eeeeee</li>
+<li class="c-bbb" data-meta="#bbbbbb">#bbbbbb</li>
+<li class="c-777" data-meta="#777777">#777777</li>
+<li class="c-333" data-meta="#333333">#333333</li>
+<li class="c-000" data-meta="#000000">#000000</li>
+<li class="c-f00" data-meta="#ff0000">#ff0000</li>
+<li class="c-f60" data-meta="#ff6600">#ff6600</li>
+<li class="c-ff0" data-meta="#ffff00">#ffff00</li>
+<li class="c-090" data-meta="#009900">#009900</li>
+<li class="c-03f" data-meta="#0033ff">#0033ff</li>
+<li class="c-60f" data-meta="#6600ff">#6600ff</li>
 </ul>
 </a>
+<input type="hidden" name="fontColor" id="fontColor" value="#ffffff" />
+<input type="hidden" name="fontSize" id="fontSize" value="20" />
 </li>
 <li><a href="#" class="font-l">字體放大</a></li>
 <li><a href="#" class="font-s">字體縮小</a></li>
-<li><a href="#" class="font-left">文字置左</a></li>
-<li><a href="#" class="font-center">文字置中</a></li>
-<li><a href="#" class="font-right">文字置右</a></li>
+<li class="align-left"><input type="radio" name="align" value="left" id="align_left" />置左</li>
+<li class="align-center"><input type="radio" name="align" value="center" id="align_center" />置中</li>
+<li class="align-right"><input type="radio" name="align" value="right" id="align_right" />置右</li>
 </ul>
 </div>
 </div>
 </div>
 
-<div class="effect-container clearfix">
-<h5>Change Effect</h5>
+<div class="effect-container">
+<h5>Effect</h5>
 <p class="effect-demo"><span>9x9.tv</span></p>
 <div class="select">
 <p class="select-btn"></p>
-<div class="select-txt"><a href="#">none
+<div class="select-txt"><a href="#">None</a></div>
 <ul class="select-list">
-<li>Blind</li>
-<li>Clip</li>
-<li>Fade</li>
+<li data-meta="none">None</li>
+<li data-meta="fade">Fade</li>
+<li data-meta="blind">Blind</li>
+<li data-meta="clip">Clip</li>
+<li data-meta="fold">Fold</li>
+<li data-meta="drop">Drop</li>
 </ul>
-</a></div>
+<input type="hidden" name="effect" id="effect" value="none" />
+</div>
 </div>
 </div>
 
-<div class="duration-container clearfix">
-<h5>Duration</h5>
-<div class="select">
-<p class="select-btn"></p>
-<div class="select-txt"><a href="#">0
-<ul class="dropdown">
-<li>1.0</li>
-<li>1.5</li>
-<li>2.0</li>
-</ul>
-</a>
-</div>
-</div>
-<p class="notice hide">Invalid duration, please try again.</p>
-</div>
-</div>
-
+<div class="wrap">
 <div class="background-container">
 <h5>Background</h5>
 <p class="radio-list">
-<span class="radio first on"><a href="#" class="radio-bgcolor">Color</a></span>
-<span class="radio"><a href="#" class="radio-bgimg">Image</a></span>
+<label for="bg_color" class="first"><input type="radio" name="bg" value="color" id="bg_color" checked="checked" />Color</label>
+<label for="bg_image"><input type="radio" name="bg" value="image" id="bg_image" />Image</label>
 </p>
 <div class="bg-color">
-<a href="#">背景顏色
+<a href="#">背景顏色<span></span>
 <ul class="color-list">
-<li class="c-fff">#ffffff</li>
-<li class="c-eee">#eeeeee</li>
-<li class="c-bbb">#bbbbbb</li>
-<li class="c-777">#777777</li>
-<li class="c-333">#333333</li>
-<li class="c-000">#000000</li>
-<li class="c-f00">#ff0000</li>
-<li class="c-f60">#ff6600</li>
-<li class="c-ff0">#ffff00</li>
-<li class="c-090">#009900</li>
-<li class="c-03f">#0033ff</li>
-<li class="c-60f">#6600ff</li>
+<li class="c-fff" data-meta="#ffffff">#ffffff</li>
+<li class="c-eee" data-meta="#eeeeee">#eeeeee</li>
+<li class="c-bbb" data-meta="#bbbbbb">#bbbbbb</li>
+<li class="c-777" data-meta="#777777">#777777</li>
+<li class="c-333" data-meta="#333333">#333333</li>
+<li class="c-000" data-meta="#000000">#000000</li>
+<li class="c-f00" data-meta="#ff0000">#ff0000</li>
+<li class="c-f60" data-meta="#ff6600">#ff6600</li>
+<li class="c-ff0" data-meta="#ffff00">#ffff00</li>
+<li class="c-090" data-meta="#009900">#009900</li>
+<li class="c-03f" data-meta="#0033ff">#0033ff</li>
+<li class="c-60f" data-meta="#6600ff">#6600ff</li>
 </ul>
 </a>
+<input type="hidden" name="backgroundColor" id="backgroundColor" value="#000000" />
 </div>
 <div class="bg-img hide">
-<p class="img"><img src="images/logo_2.png" alt="" width="57" height="44" /></p>
+<p class="img"></p>
 <p class="btns upload"><span><a href="#">Upload</a></span></p>
-<p class="notice">Better results with 720x480 or higher resolution image.<span class="hide">Please upload jpeg, png, or gif file.</span></p>
+<p class="notice">Better results with 720x480 image.</p>
+<p class="notice highlight hide">Please upload jpeg, png, or gif file.</p>
+<input type="hidden" name="backgroundImage" id="backgroundImage" value="" />
 </div>
+</div>
+
+<div class="duration-container">
+<h5>Duration</h5>
+<div class="select">
+<p class="select-btn"></p>
+<div class="select-txt"><a href="#">7</a></div>
+<ul class="select-list">
+<li data-meta="5">5</li>
+<li data-meta="6">6</li>
+<li data-meta="7">7</li>
+<li data-meta="8">8</li>
+<li data-meta="9">9</li>
+<li data-meta="10">10</li>
+<li data-meta="12">12</li>
+<li data-meta="14">14</li>
+<li data-meta="16">16</li>
+<li data-meta="18">18</li>
+</ul>
+<input type="hidden" name="duration" id="duration" value="7" />
+</div>
+<p class="notice">Invalid duration, please try again.</p>
 </div>
 
 <div class="btn-container">
@@ -1020,57 +286,30 @@
 <p class="btns btn-edit"><span><a href="#">Edit file</a></span></p>
 </div>
 </div>
+</div>
+-->
 
-<div class="edit-time hide">
-<h3>Bruno Mars - "The Lazy Song" MV</h3>
-<p>02:35 (original 03:25) | From <a href="#">YouTube.com</a> | By <a href="#">BrunoMars</a> on 2007-06-11</p>
-<p class="desc">
-Kate Nash singing Skeleton Song - Live in Paradiso - Amsterdam 04/02/2008<br />
-Kate Nash singing Skeleton Song - Live in Paradiso - Amsterdam 04/02/2008<br />
-Kate Nash singing Skeleton Song - Live in Paradiso - Amsterdam 04/02/2008
-</p>
-<div class="set-time">
-<div class="time-wrap">
-<div class="start-time">
-<span>Start from</span>
-<p class="time disable"><input type="text" name="startH" id="startH" maxlength="2" value="00" class="time" disabled="disabled" /> :</p>
-<p class="time disable"><input type="text" name="startM" id="startM" maxlength="2" value="00" class="time" disabled="disabled" /> :</p>
-<p class="time disable"><input type="text" name="startS" id="startS" maxlength="2" value="00" class="time" disabled="disabled" /></p>
 </div>
-<div class="end-time">
-<span>To</span>
-<p class="time disable"><input type="text" name="startH" id="startH" maxlength="2" value="00" class="time" disabled="disabled" /> :</p>
-<p class="time disable"><input type="text" name="startM" id="startM" maxlength="2" value="00" class="time" disabled="disabled" /> :</p>
-<p class="time disable"><input type="text" name="startS" id="startS" maxlength="2" value="00" class="time" disabled="disabled" /></p>
-</div>
-</div>
-<div class="btn-wrap">
-<p class="notice">Invalid time, please try again.</p>
-<p class="btns btn-edit"><span><a href="#">Edit</a></span></p>
-<p class="btns btn-cancel hide"><span><a href="#">Cancel</a></span></p>
-<p class="btns btn-done hide"><span><a href="#">Done</a></span></p>
-</div>
-</div>
-<ul>
-<li class="region">Not playable in some regions</li>
-<li class="device">Not playable on mobile device</li>
-</ul>
-</div>
+<p class="auto-height clear"></p>
 </div>
 </div>
 
 <div id="storyboard">
-<p>Episode storyboard (50 videos left)<span>Duration 00:17:32</span></p>
-<div class="storyboard-list">
-<p class="notice">+Drag & drop videos here</p>
-<ul>
+<p class="auto-height"></p>
+<p>Episode storyboard (<em id="totalLeft">50</em> videos left)<span>Duration <em id="totalDuration">00:00:00</em></span></p>
+<div id="storyboard-wrap" class="storyboard-list">
+<p class="notice">+ Add videos here</p>
+<ul id="storyboard-list">
+<!-- template = #storyboard-list-tmpl-item -->
+
+<!--
 <li>
-<img src="images/icon_yellow_warning.png" alt="Warning" class="warning" />
+<span class="warning"></span>
 <p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
+<img src="http://i.ytimg.com/vi/nCgQDjiotG0/default.jpg" alt="" width="80" height="45" />
+<span class="time">02:10</span>
 </p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
+<h4 class="ellipsis multiline">Google Chrome Speed Tests</h4>
 <p class="title">
 <a href="#" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Preview Title</span></span></span></span></a>
 <a href="#" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Preview Title</span></span></span></span></a>
@@ -1082,10 +321,10 @@ Kate Nash singing Skeleton Song - Live in Paradiso - Amsterdam 04/02/2008
 </li>
 <li>
 <p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
+<img src="http://i.ytimg.com/vi/yhS9LnDoo_w/default.jpg" alt="" width="80" height="45" />
+<span class="time">06:06</span>
 </p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
+<h4 class="ellipsis multiline">The Chemical Brothers - The Test (2003 - Remaster)</h4>
 <p class="hover-func">
 <a href="#" class="video-del">Video Del</a>
 <a href="#" class="video-play">Video Play</a>
@@ -1095,10 +334,10 @@ Kate Nash singing Skeleton Song - Live in Paradiso - Amsterdam 04/02/2008
 </li>
 <li>
 <p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
+<img src="http://i.ytimg.com/vi/ubNF9QNEQLA/default.jpg" alt="" width="80" height="45" />
+<span class="time">01:55</span>
 </p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
+<h4 class="ellipsis multiline">Test Your Awareness : Whodunnit?</h4>
 <p class="title">
 <a href="#" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Preview Title</span></span></span></span></a>
 <a href="#" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Preview Title</span></span></span></span></a>
@@ -1110,10 +349,10 @@ Kate Nash singing Skeleton Song - Live in Paradiso - Amsterdam 04/02/2008
 </li>
 <li>
 <p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
+<img src="http://i.ytimg.com/vi/4G60hM1W_mk/default.jpg" alt="" width="80" height="45" />
+<span class="time">05:12</span>
 </p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
+<h4 class="ellipsis multiline">Hearing Test</h4>
 <p class="hover-func">
 <a href="#" class="video-del">Video Del</a>
 <a href="#" class="video-play">Video Play</a>
@@ -1122,12 +361,12 @@ Kate Nash singing Skeleton Song - Live in Paradiso - Amsterdam 04/02/2008
 </p>
 </li>
 <li>
-<img src="images/icon_red_warning.png" alt="Warning" class="warning" />
+<span class="error"></span>
 <p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
+<img src="http://i.ytimg.com/vi/vJG698U2Mvo/default.jpg" alt="" width="80" height="45" />
+<span class="time">01:22</span>
 </p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
+<h4 class="ellipsis multiline">selective attention test</h4>
 <p class="title">
 <a href="#" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Preview Title</span></span></span></span></a>
 <a href="#" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Preview Title</span></span></span></span></a>
@@ -1139,10 +378,10 @@ Kate Nash singing Skeleton Song - Live in Paradiso - Amsterdam 04/02/2008
 </li>
 <li>
 <p class="img">
-<img src="thumbnail/04.jpg" alt="" width="80" height="45" />
-<span class="time">13:43</span>
+<img src="http://i.ytimg.com/vi/CWyrp3hu4KE/default.jpg" alt="" width="80" height="45" />
+<span class="time">01:38</span>
 </p>
-<h4 class="ellipsis multiline">kara DioGuardi singing terrified</h4>
+<h4 class="ellipsis multiline">Color Blindness test - Real !</h4>
 <p class="hover-func">
 <a href="#" class="video-del">Video Del</a>
 <a href="#" class="video-play">Video Play</a>
@@ -1150,16 +389,42 @@ Kate Nash singing Skeleton Song - Live in Paradiso - Amsterdam 04/02/2008
 <a href="#" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Add Title</span></span></span></span></a>
 </p>
 </li>
+-->
 </ul>
+
+<script id="storyboard-list-tmpl-item" type="text/x-jquery-tmpl">
+<li data-ytid="${ytId}">
+{{if isEmbedLimited || isZoneLimited || isMobileLimited}}
+{{if isEmbedLimited}}
+<span class="error"></span>
+{{else}}
+<span class="warning"></span>
+{{/if}}
+{{/if}}
+<p class="img">
+<img src="${imageUrl}" alt="" width="80" height="45" />
+<span class="time">${$item.durationConverter(duration)}</span>
+</p>
+<h4 class="ellipsis multiline">${name}</h4>
+<p class="hover-func">
+<a href="#" class="video-del">Video Del</a>
+<a href="#" class="video-play">Video Play</a>
+</p>
+</li>
+</script>
+
 </div>
+
+<div id="storyboard-slider"><div class="slider-h"></div></div>
+<p class="auto-height"></p>
 </div>
 
 <div class="form-btn">
 <div class="wrap">
-<p class="back info"><a href="epcurate-info.html">&lt; Back to Information</a></p>
-<p class="btns btn-leave"><span><input type="button" value="Leave" /></span></p>
-<p class="btns btn-save"><span><input type="submit" value="Save" /></span></p>
-<p class="next"><a href="epcurate-publish.html">Next to Publish &gt;</a></p>
+<p class="back"><a href="epcurate-info.html" id="form-btn-back">&lt; Back to Information</a></p>
+<p class="btns btn-leave"><span><input type="button" id="form-btn-leave" value="Leave" /></span></p>
+<p class="btns btn-save"><span><input type="button" id="form-btn-save" value="Save" /></span></p>
+<p class="next"><a href="epcurate-publish.html" id="form-btn-next">Next to Publish &gt;</a></p>
 </div>
 </div>
 </div>
@@ -1171,31 +436,73 @@ Kate Nash singing Skeleton Song - Live in Paradiso - Amsterdam 04/02/2008
 <!--============================== content-main start ========================-->
 
 <!--============================== footer start ==============================-->
-<!-- Footer Begin -->
 <p id="footer-control" class="hide"></p>
+
 <div id="footer" class="hide">
-  <ul id="footer-list">
-    <li id="siteinfo">
-      <p id="btn-siteinfo"></p>
-      <p id="selected-siteinfo">Company</p>
-      <ul id="siteinfo-dropdown" class="dropdown">
-        <li class="on">Company</li>
-        <li>Blog</li>
-        <li>Forum</li>
-      </ul>
-    </li>
-    <li id="sitelang">
-      <p id="btn-sitelang"></p>
-      <p id="selected-sitelang">English Site</p>
-      <ul id="sitelang-dropdown" class="dropdown">
-        <li class="on">English Site</li>
-        <li>中文網站</li>
-      </ul>
-    </li>
-  </ul>
-  <p id="copyright"><span>&copy; 2012 9x9.tv.  All right reserved</span></p>
+	<ul id="footer-list">
+		<li>
+			<p class="select-txt">About Us</p>
+			<p class="select-btn"></p>
+			<ul class="select-list">
+				<li>About us</li>
+				<li>Help</li>
+				<li>Report</li>
+				<li>Terms & Policy</li>
+				<li>Contact us</li>
+				<li>Partners</li>
+				<li>Curators</li>
+				<li>Press</li>
+				<li>Curation Contest</li>
+			</ul>
+		</li>
+		<li>
+			<p class="select-txt">Language</p>
+			<p class="select-btn"></p>
+			<ul class="select-list">
+				<li>English</li>
+				<li>中文</li>
+			</ul>
+		</li>
+		<li>
+			<p class="select-txt">Region</p>
+			<p class="select-btn"></p>
+			<ul class="select-list">
+				<li>US</li>
+				<li>Taiwan</li>
+			</ul>
+		</li>
+	</ul>
 </div>
 <!--============================== footer close ==============================-->
+
+<div id="overlay-s">
+<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle">Saving...</span></span></p>
+</div>
+
+<div id="system-error" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">You are not authorized to edit this episode.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+<div class="overlay-btn">
+<p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+</div>
+</div>
+</div>
+</div>
 
 </body>
 </html>

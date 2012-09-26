@@ -1,91 +1,78 @@
-/* scrollbar ("#faq-content", "#faq-list", "#faq-slider"); */
+// scrollbar("#storyboard-wrap", "#storyboard-list", "#storyboard-slider");
 
-function scrollbar (outer, inner, sliderwrap)
-  {
-  /* change the main div to overflow-hidden as we can use the slider now */
-  $(outer).css ('overflow', 'hidden');
+function scrollbar(outer, inner, sliderwrap) {
+    // change the main div to overflow-hidden as we can use the slider now
+    //$(outer).css('overflow', 'hidden');
 
-  /* compare the height of the scroll content to the scroll pane to see if we need a scrollbar */
-  var difference = $(inner).height() - $(outer).height();
+    // compare the height of the scroll content to the scroll pane to see if we need a scrollbar
+    var difference = $(inner).width() - $(outer).width();
 
-  if (difference > 0)
-    {
-    log ('slider on: ' + sliderwrap);
-    $(sliderwrap).show();
-    var proportion = difference / $(inner).height();
+    if (difference > 0) {
+        $(sliderwrap).show();
+        var proportion = difference / $(inner).width();
 
-    /* set the proportional height - round it to make sure everything adds up correctly later on */
-    var handleHeight = Math.round ((1-proportion)*$(outer).height());
-    handleHeight -= handleHeight % 2; 
+        // set the proportional height - round it to make sure everything adds up correctly later on
+        var handleWidth = $(outer).width() - (proportion * $(outer).width());
 
-    /* set up the slider */
+        // set up the slider
+        $(sliderwrap + ' .slider-h').slider({
+            orientation: 'horizontal',
+            min: 0,
+            max: 100,
+            value: 0,
+            slide: function (event, ui) {
+                // scroll content when slide is dragged
+                var leftValue = -(ui.value / 100 * difference);
+                // move the top up (negative value) by the percentage the slider has been moved times the difference in height
+                $(inner).css({ left: leftValue });
+            },
+            change: function (event, ui) {
+                // scroll content when the slider is changed by a click outside the handle or by the mousewheel
+                var leftValue = -(ui.value / 100 * difference);
+                // move the top up (negative value) by the percentage the slider has been moved times the difference in height
+                $(inner).css({ left: leftValue });
+            }
+        });
 
-    $(sliderwrap + ' .slider-vertical').slider (
-      {
-      min: 0,
-      max: 100,
-      value: 100,
-      slide: function (event, ui)
-        {
-        /* scroll content when slide is dragged */
-        var topValue = -((100-ui.value)*difference/100);
-        /* move the top up (negative value) by the percentage the slider has been moved times the difference in height */
-        $(inner).css ({ top: topValue });
-        },
-      change: function (event, ui)
-        {
-        /* scroll content when the slider is changed by a click outside the handle or by the mousewheel */
-        var topValue = -((100-ui.value)*difference/100);
-        /* move the top up (negative value) by the percentage the slider has been moved times the difference in height */
-        $(inner).css ({ top: topValue });
+        // set the handle height and bottom margin so the middle of the handle is in line with the slider
+        $(sliderwrap + " .ui-slider-handle").css({ width: handleWidth });
+
+        // remember the original slider height ONCE, and always used the saved value
+        var origSliderWidth = $(sliderwrap).attr("data-orig-slider-width");
+        if (!origSliderWidth) {
+            origSliderWidth = $(sliderwrap + " .slider-h").width();
+            $(sliderwrap).attr("data-orig-slider-width", origSliderWidth);
         }
-      });
 
-    /* set the handle height and bottom margin so the middle of the handle is in line with the slider */
-    $(sliderwrap + " .ui-slider-handle").css ({ height: handleHeight, 'margin-bottom': -0.5 * handleHeight });
+        // the height through which the handle can move needs to be the original height minus the handle height
+        var sliderWidth = origSliderWidth - handleWidth;
 
-    /* remember the original slider height ONCE, and always used the saved value */
-    var origSliderHeight = $(sliderwrap).attr ("data-orig-slider-height");
-    if (!origSliderHeight)
-      {
-      origSliderHeight = $(sliderwrap + " .slider-vertical").height();
-      $(sliderwrap).attr ("data-orig-slider-height", origSliderHeight);
-      }
+        // so the slider needs to have both top and bottom margins equal to half the difference
+        var sliderMargin = (origSliderWidth - sliderWidth) * 0.5;
 
-    /* the height through which the handle can move needs to be the original height minus the handle height */
-    var sliderHeight = origSliderHeight - handleHeight;
-
-    /* so the slider needs to have both top and bottom margins equal to half the difference */
-    var sliderMargin =  (origSliderHeight - sliderHeight) * 0.5;
-
-    $(sliderwrap + " .ui-slider").css ({ height: sliderHeight, 'margin-top': sliderMargin });
-    } 
-  else
-    {
-    log ('slider off: ' + sliderwrap);
-    $(sliderwrap).hide();
+        $(sliderwrap + " .ui-slider").css({ width: sliderWidth });
+    } else {
+        $(sliderwrap).hide();
     }
 
-  $(sliderwrap + " .ui-slider").unbind ('click');
-  $(sliderwrap + " .ui-slider").click (function (event) { event.stopPropagation(); });
-   
-  $(sliderwrap + " .slider-wrap").unbind ('click');
-  $(sliderwrap + " .slider-wrap").click (function (event)
-    {
-    /* clicks on the wrap outside the slider range */
-    var offsetTop = $(this).offset().top;
-    /* find the click point, subtract the offset, and calculate percentage of the slider clicked */
-    var clickValue = (event.pageY-offsetTop) * 100 / $(this).height();
-    $(sliderwrap + " .slider-vertical").slider ("value", 100-clickValue);
+    $(sliderwrap + " .ui-slider").unbind('click');
+    $(sliderwrap + " .ui-slider").click(function (event) { event.stopPropagation(); });
+/*
+    $(outer + ", " + sliderwrap + " .slider-wrap").unbind('click');
+    $(outer + ", " + sliderwrap + " .slider-wrap").click(function (event) {
+        // clicks on the wrap outside the slider range
+        var offsetLeft = $(this).offset().left;
+        // find the click point, subtract the offset, and calculate percentage of the slider clicked
+        var clickValue = (event.pageX - offsetLeft) * 100 / $(this).width();
+        $(sliderwrap + " .slider-h").slider("value", 100 - clickValue);
     }); 
-	 
-  $(outer + ", " + sliderwrap + " .slider-wrap").unbind ('mousewheel');
-  $(outer + ", " + sliderwrap + " .slider-wrap").mousewheel (function (event, delta)
-    {
-    var speed = 5;
-    var sliderVal = $(sliderwrap + " .slider-vertical").slider ("value");
-    sliderVal += (delta*speed);
-    $(sliderwrap + " .slider-vertical").slider ("value", sliderVal);
-    event.preventDefault();
+*/
+    $(outer + ", " + sliderwrap + " .slider-wrap").unbind('mousewheel');
+    $(outer + ", " + sliderwrap + " .slider-wrap").mousewheel(function (event, delta) {
+        var speed = 5;
+        var sliderVal = $(sliderwrap + " .slider-h").slider("value");
+        sliderVal += (delta * speed);
+        $(sliderwrap + " .slider-h").slider("value", sliderVal);
+        event.preventDefault();
     });
-  }
+}

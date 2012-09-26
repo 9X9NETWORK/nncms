@@ -3,32 +3,82 @@
 <meta charset="utf-8" />
 <link rel="stylesheet" href="stylesheets/style.css" />
 <link rel="stylesheet" href="stylesheets/lightbox.css" />
-
 <link rel="stylesheet" href="stylesheets/jquery.datepick.css" />
 <link rel="stylesheet" href="stylesheets/epcurate.css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+<script src="javascripts/nn-sdk.js"></script>
 <script src="javascripts/jquery.mousewheel.min.js"></script>
-<script src="javascripts/vertical.slider.js"></script>
 <script src="javascripts/jquery.ellipsis.js"></script>
 <script src="javascripts/jquery.blockUI.js"></script>
 <script src="javascripts/jquery.corner.js"></script>
-<!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-<script src="javascripts/automeasure.js"></script>
+<script src="javascripts/jquery.toggleval.min.js"></script>
+<script src="javascripts/jquery.cycle.all.js"></script>
+<script src="javascripts/jquery.tmpl.min.js"></script>
+<script src="javascripts/jquery.cookie.js"></script>
+<script src="javascripts/json2.js"></script>
+<script src="javascripts/purl.js"></script>
+<script src="javascripts/swfupload/swfupload.js"></script>
+<script src="javascripts/vertical.slider.js"></script>
 <script src="javascripts/basic.js"></script>
+<script src="javascripts/controller.js"></script>
 <script src="javascripts/epcurate.js"></script>
-<title>9x9.tv</title>
+<title>9x9.tv - Episode Curation - Publish</title>
 </head>
 <body>
 
+<!--============================== header start ==============================-->
+<div id="header" class="hide">
+  <p id="logo"></p>
+  <ul id="nav">
+    <li id="home"><span>Home</span></li>
+    <li id="guide"><span>Guide</span></li>
+    <li id="browse"> <span>Browse</span>
+      <ul id="browse-dropdown" class="dropdown">
+        <li>All</li>
+        <li>Animals & Pets</li>
+        <li>Art & Design</li>
+        <li>Autos & Vehicles</li>
+        <li>Cartoons & Animation</li>
+        <li>Comedy</li>
+        <li>Fashion, Food & Living</li>
+        <li>Gaming</li>
+        <li>How-To</li>
+        <li>Education & Lectures</li>
+        <li>Music</li>
+        <li>News</li>
+        <li>Nonprofits & Faith</li>
+        <li>People, Blogs & Shorts</li>
+        <li>Science</li>
+        <li>Sports & Health</li>
+        <li>Tech & Apps</li>
+        <li>TV & Film</li>
+      </ul>
+    </li>
+    <li id="search">
+      <p id="btn-search"></p>
+      <input type="text" class="textfield" value="Search" id="search-field">
+    </li>
+    <li id="profile">
+      <p id="btn-profile"></p>
+      <p id="selected-profile">Snowball</p>
+      <ul id="profile-dropdown" class="dropdown">
+        <li>My page</li>
+        <li>Studio</li>
+        <li>Settings</li>
+        <li>Log out</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!--============================== header close ==============================-->
+
 <div id="epcurate-nav">
 <div class="epcurate-nav-wrap">
-<h3><a href="#">Episode Curation</a></h3>
+<h3><a href="#" id="epcurate-nav-back" class="btn-back">Back<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Leave</span></span></span></span></a><a href="#">Episode Curation</a></h3>
 <ul>
-<li>Information</li>
-<li>Curation</li>
+<li><a href="#" id="epcurate-nav-info">Information</a></li>
+<li><a href="#" id="epcurate-nav-curation">Curation</a></li>
 <li class="on">Publish</li>
 </ul>
 </div>
@@ -36,15 +86,12 @@
 
 <!--============================== content-main start ========================-->
 <div id="content-wrap" class="epcurate-publish">
-<form name="epcurateForm" id="epcurateForm" method="get" action="">
+<form name="epcurateForm" id="epcurateForm" method="get" action="" class="clearfix publish">
+<input type="hidden" name="id" id="id" value="" />
+<input type="hidden" name="channelId" id="channelId" value="" />
 
 <div id="content-nav">
-<div id="func-nav">
-<ul>
-<li class="active"><a href="epcurate-publish.html" class="publish">Publish settings</a></li>
-<li><a href="epcurate-shopping.html" class="shopping">Shopping information</a></li>
-</ul>
-</div>
+&nbsp;
 </div>
 
 <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
@@ -52,39 +99,29 @@
 <div id="content-main">
 <div id="content-main-wrap">
 <div class="constrain">
-<div id="epcurate-info">
-<div class="fminput">
+<div id="epcurate-publish">
+<div class="fminput clearfix">
 <label>Episode thumbnail</label>
 <div class="fmfield">
-<div class="img-list">
+<div id="thumbnail-list" class="img-list">
 <a href="#" class="img-prev">Prev</a>
 <a href="#" class="img-next">Next</a>
-<ul>
-<li><a href="#"><img src="thumbnail/04.jpg" alt="" width="110" height="62" /></a></li>
+<img src="images/loading.gif" alt="" class="loading" />
+<ul id="img-list">
+<!-- template = #img-list-tmpl-item -->
 </ul>
+
+<script id="img-list-tmpl-item" type="text/x-jquery-tmpl">
+<li><img src="${imageUrl}" alt="${name}" /></li>
+</script>
+
 </div>
 <div class="img-upload-func">
-<p class="btns"><span><a href="#">Upload</a></span></p>
-<p class="upload-notice">Better results with 720x480 or higher resolution image</p>
-</div>
-</div>
-</div>
-<div class="fminput">
-<label>Return schedule</label>
-<div class="fmfield">
-<p class="checkbox"><a href="#">Set rerun schedule</a></p>
-<div id="date-time">
-<div class="datepicker"></div>
-<div class="select">
-<p class="select-btn"></p>
-<p class="select-txt"><a href="#">Select a time</a></p>
-<ul  class="dropdown">
-<li>08:00 PM</li>
-<li>09:00 PM</li>
-<li>10:00 PM</li>
-<li>11:00 PM</li>
-</ul>
-</div>
+<p id="uploadThumbnail">Upload</p>
+<p class="notice">Better results with 720x480 or higher resolution image</p>
+<p class="notice highlight hide">Please upload jpeg, png, or gif files.</p>
+<input type="hidden" name="imageUrl" id="imageUrl" value="" />
+<input type="hidden" name="imageUrlOld" id="imageUrlOld" value="" />
 </div>
 </div>
 </div>
@@ -95,19 +132,84 @@
 
 <div class="form-btn">
 <div class="wrap">
-<p class="back"><a href="epcurate-curation.html">&lt; Back to Curation</a></p>
-<p class="btns btn-leave"><span><input type="button" value="Leave" /></span></p>
-<p class="btns btn-save"><span><input type="submit" value="Save" /></span></p>
-</div>
-<div class="publish-btn">
-<p class="btns btn-revert"><span><input type="button" value="Revert to draft" /></span></p>
-<p class="btns glow btn-publish"><span><input type="button" value="Publish" /></span></p>
+<p class="back"><a href="epcurate-curation.html" id="form-btn-back">&lt; Back to Curation</a></p>
+<p class="btns btn-leave"><span><input type="button" id="form-btn-leave" value="Leave" /></span></p>
+<p class="btns btn-save"><span><input type="button" id="form-btn-save" value="Save" /></span></p>
 </div>
 </div>
 
 </form>
 </div>
 <!--============================== content-main start ========================-->
+
+<!--============================== footer start ==============================-->
+<p id="footer-control" class="hide"></p>
+
+<div id="footer" class="hide">
+	<ul id="footer-list">
+		<li>
+			<p class="select-txt">About Us</p>
+			<p class="select-btn"></p>
+			<ul class="select-list">
+				<li>About us</li>
+				<li>Help</li>
+				<li>Report</li>
+				<li>Terms & Policy</li>
+				<li>Contact us</li>
+				<li>Partners</li>
+				<li>Curators</li>
+				<li>Press</li>
+				<li>Curation Contest</li>
+			</ul>
+		</li>
+		<li>
+			<p class="select-txt">Language</p>
+			<p class="select-btn"></p>
+			<ul class="select-list">
+				<li>English</li>
+				<li>中文</li>
+			</ul>
+		</li>
+		<li>
+			<p class="select-txt">Region</p>
+			<p class="select-btn"></p>
+			<ul class="select-list">
+				<li>US</li>
+				<li>Taiwan</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<!--============================== footer close ==============================-->
+
+<div id="overlay-s">
+<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle">Saving...</span></span></p>
+</div>
+
+<div id="system-error" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">You are not authorized to edit this episode.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+<div class="overlay-btn">
+<p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+</div>
+</div>
+</div>
+</div>
 
 </body>
 </html>

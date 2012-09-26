@@ -14,7 +14,7 @@
 #ep-no {
     position: relative;
     width: 781px;
-    margin: 64px 0 53px;
+	margin-top: 4px;
     padding-bottom: 30px;
     text-align: center;
 }
@@ -72,6 +72,7 @@
     overflow: hidden;
     width: 780px;
     height: 9px;
+	line-height: 9px;
 }
 
 #selected-episode .episode-pager a {
@@ -159,8 +160,8 @@
 **/
 
 #ep-no .desc {
-    margin-bottom: 20px;
-    font-size: 13px;
+    margin-bottom: 10px;
+    font-size: 15px;
     text-align: center;
 }
 
@@ -179,7 +180,7 @@
 }
 
 #ep-list ul {
-    padding-bottom: 10px;
+    padding-bottom: 8px;
 }
 
 #ep-list ul.un-pub,
@@ -187,13 +188,17 @@
     background: url(../images/bg_divider.png) repeat-x 0 bottom;
 }
 
+#ep-list ul li.title {
+    margin-bottom: 12px;
+}
+
 #ep-list ul.un-pub {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 #ep-list ul li {
     position: relative;
-    margin-bottom: 14px;
+    margin-bottom: 6px;
 }
 
 #ep-list ul li a.warning {
@@ -209,15 +214,14 @@
 }
 
 #ep-list ul li a.warning .tip {
-    display: none;
+	display: none;
     position: absolute;
-    bottom: -33px;
-    left: -10px;
+    top: 12px;
+    left: -160px;
     z-index: 49;
     width: 180px;
     height: 28px;
     padding-top: 2px;
-    background: url(../images/bg_tip_top.png) no-repeat 10px top;
     color: #777;
     font-size: 13px;
     text-align: center;
@@ -225,24 +229,30 @@
     text-indent: 0;
 }
 
+#ep-list ul li a.warning .tip img {
+	position: absolute;
+	top: 0;
+	left: 160px;
+}
+
 #ep-list ul li a.warning .tip .tip-left {
     display: block;
     height: 28px;
     padding-left: 7px;
-    background: url(../images/bg_tip_top_left.png) no-repeat 0 bottom;
+    background: url(../images/bg_tip_left.png) no-repeat 0 bottom;
 }
 
 #ep-list ul li a.warning .tip .tip-right {
     display: block;
     height: 28px;
     padding-right: 7px;
-    background: url(../images/bg_tip_top_right.png) no-repeat right bottom;
+    background: url(../images/bg_tip_right.png) no-repeat right bottom;
 }
 
 #ep-list ul li a.warning .tip .tip-middle {
     display: block;
     height: 28px;
-    background: url(../images/bg_tip_top_middle.png) repeat-x bottom;
+    background: url(../images/bg_tip_middle.png) repeat-x bottom;
     line-height: 28px;
 }
 
@@ -269,6 +279,7 @@
 
 #ep-list ul li .episode-info {
     float: right;
+	padding-bottom: 4px;
 }
 
 #ep-list ul li p.episode {
@@ -330,14 +341,31 @@
     border: none;
 }
 
+#ep-list ul li .episode p.img a span.mask {
+	display: none;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 9;
+	width: 80px;
+	height: 45px;
+	background: none;
+    background-color: #fff;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+}
+
 #ep-list ul li .episode p.img a img.watermark {
     display: none;
     position: absolute;
     top: 50%;
     left: 50%;
+	z-index: 10;
     margin: -16px 0 0 -16px;
 }
 
+#ep-list ul li .episode p.img a:hover span.mask,
 #ep-list ul li .episode p.img a:hover img.watermark {
     display: block;
 }
@@ -368,11 +396,20 @@
 }
 
 #ep-list ul li .episode h3 {
-    margin-bottom: 10px;
+    margin-bottom: 13px;
     padding-top: 3px;
     font-weight: bold;
     font-family: Helvetica;
-    font-size: 15px;
+    font-size: 13px;
+}
+
+#ep-list ul li .episode h3 a {
+	color: #777;
+	text-decoration: none;
+}
+
+#ep-list ul li .episode h3 a:hover {
+	color: #999;
 }
 
 #ep-list ul li .episode .btns {
@@ -449,6 +486,10 @@
     background-position: -23px -856px;
 }
 
+#ep-list ul li .episode .btns .btn-wrap ul li a.disable {
+	cursor: default;
+}
+
 #ep-list ul li .time  p,
 #ep-list ul li .views p {
     margin-bottom: 10px;
@@ -456,5 +497,15 @@
 
 #ep-list ul li .curator p a {
     color: #777;
+	font-weight: bold;
     text-decoration: none;
+}
+
+#ep-list ul li .curator p a:hover {
+	color: #999;
+}
+
+#ep-list p.more {
+	width: 120px;
+	margin: 0 auto;
 }
