@@ -493,6 +493,7 @@ $(function () {
             $('#overlay-s').fadeIn();
             $('#overlay-s .overlay-content').css('margin-left', '-43px');
             var totalDuration = 0,
+                programLength = $('#storyboard-list li').length,
                 firstImageUrl = $('#storyboard-list li:first').tmplItem().data.imageUrl,
                 tmplItem = null,
                 tmplItemData = {},
@@ -514,20 +515,20 @@ $(function () {
                 programList.push(programItem);
             });
             if (isInsertMode) {
-                // insert mode: create episode --> create programs --> update episode with rerun
+                // insert mode: insert episode --> insert programs --> update episode with rerun
                 var parameter = {
                     name: $('#name').val(),
                     intro: $('#intro').val(),
                     imageUrl: firstImageUrl,
                     duration: totalDuration     // api readonly
                 };
-                // create episode
+                // insert episode
                 nn.api('POST', '/api/channels/' + $('#channelId').val() + '/episodes', parameter, function (episode) {
                     // from insert mode change to update mode
                     // rebuild cookie and hidden episode id
                     rebuildCrumbAndParam($('#channelId').val(), episode.id);
                     $.each(programList, function (idx, programItem) {
-                        // create programs
+                        // insert program
                         nn.api('POST', '/api/episodes/' + episode.id + '/programs', programItem, function (program) {
                             // update program.id to DOM
                             tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
@@ -560,25 +561,75 @@ $(function () {
                 });
             } else {
                 // update mode
-                // important rule: first POST and PUT then DELETE
-                alert('TODO update.');
-                // TODO insert program POST /api/episodes/{episodeId}/programs
-                // TODO update program PUT /api/programs/{programId}
-                // TODO delete program DELETE /api/programs/{programId} if any DELETE programIds list (deleteIdList)
-                $('#overlay-s').hide();
-                $('#overlay-s .overlay-middle').html('Changes were saved successfully');
-                $('#overlay-s .overlay-content').css('margin-left', '-132px');
-                $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
-                    // redirect
-                    if (!src                                                                                        // from nature action
-                            || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
-                        return false;
+                // !important rule: first POST and PUT then DELETE
+                $('#storyboard-list li').each(function (i) {
+                    programItem = $(this).tmplItem().data;
+                    if (programItem.id) {
+                        // update program
+                        $.extend(programItem, {
+                            subSeq: i + 1
+                        });
+                        nn.api('PUT', '/api/programs/' + programItem.id, programItem, function (program) {
+                            // nothing to do
+                        });
                     } else {
-                        var nextstep = 'epcurate-curation.html';
-                        if (src && '' !== $(src.target).attr('href')) {
-                            nextstep = $(src.target).attr('href');
+                        // insert program
+                        $.extend(programItem, {
+                            channelId: $('#channelId').val(),
+                            subSeq: i + 1,
+                            contentType: 1
+                        });
+                        nn.api('POST', '/api/episodes/' + $('#id').val() + '/programs', programItem, function (program) {
+                            // update program.id to DOM
+                            tmplItem = $('#storyboard-list li:eq(' + i + ')').tmplItem();
+                            tmplItemData = tmplItem.data;
+                            tmplItemData.id = program.id;
+                            tmplItem.update();
+                        });
+                    }
+                    if (i === (programLength - 1)) {
+                        // delete program
+                        if (deleteIdList.length > 0) {
+                            $.each(deleteIdList, function (j, k) {
+                                nn.api('DELETE', '/api/programs/' + k, null, function (data) {
+                                    if (j === (deleteIdList.length - 1)) {
+                                        $('#overlay-s').hide();
+                                        $('#overlay-s .overlay-middle').html('Changes were saved successfully');
+                                        $('#overlay-s .overlay-content').css('margin-left', '-132px');
+                                        $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
+                                            // redirect
+                                            if (!src                                                                                        // from nature action
+                                                    || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
+                                                return false;
+                                            } else {
+                                                var nextstep = 'epcurate-curation.html';
+                                                if (src && '' !== $(src.target).attr('href')) {
+                                                    nextstep = $(src.target).attr('href');
+                                                }
+                                                location.href = nextstep;
+                                            }
+                                        });
+                                    }
+                                });
+                            });
+                        } else {
+                            $('#overlay-s').hide();
+                            $('#overlay-s .overlay-middle').html('Changes were saved successfully');
+                            $('#overlay-s .overlay-content').css('margin-left', '-132px');
+                            $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
+                                // redirect
+                                if (!src                                                                                        // from nature action
+                                        || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
+                                    return false;
+                                } else {
+                                    var nextstep = 'epcurate-curation.html';
+                                    if (src && '' !== $(src.target).attr('href')) {
+                                        nextstep = $(src.target).attr('href');
+                                    }
+                                    location.href = nextstep;
+                                }
+                            });
                         }
-                        location.href = nextstep;
                     }
                 });
             }

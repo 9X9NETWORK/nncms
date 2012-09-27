@@ -200,10 +200,10 @@ function buildEpcurateCuration(fm, crumb) {
                     }
                     crumb = $.extend({}, crumb, episode);
                     $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
-                    // TODO GET programs /api/episodes/{episodeId}/programs
-                    // TODO merge 9x9 api and youtube api (ytId, uploader, uploadDate, isZoneLimited, isMobileLimited, isEmbedLimited)
+                    // merge 9x9 api and youtube api (ytId, uploader, uploadDate, isZoneLimited, isMobileLimited, isEmbedLimited)
+                    // TODO async order bug subSeq
                     // TODO GET /api/programs/{programId}/title_cards or GET /api/episodes/{episodeId}/title_cards
-                    var patternLong = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
+                    var normalPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
                         programItem = {},
                         programList = [],
                         ytData = null,
@@ -211,7 +211,7 @@ function buildEpcurateCuration(fm, crumb) {
                         ytList = [];
                     nn.api('GET', '/api/episodes/' + $('#id').val() + '/programs', null, function (programs) {
                         $.each(programs, function (idx, programItem) {
-                            if (patternLong.test(programItem.fileUrl)) {
+                            if (normalPattern.test(programItem.fileUrl)) {
                                 programList.push(programItem);
                             }
                         });
