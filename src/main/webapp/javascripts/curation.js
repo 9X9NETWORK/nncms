@@ -126,8 +126,6 @@ $(function () {
         $('#cur-add .notice').fadeOut();
     });
     $('#btn-add-videourl').click(function () {
-        // TODO total video left and total duration
-        // TODO You have reached the maximum amount of 50 videos.
         var videoUrl = $.trim($('#videourl').val()),
             urlList = videoUrl.split('\n'),
             patternLong = /^http(?:s)?:\/\/www.youtube.com\/watch\?/,
@@ -139,6 +137,7 @@ $(function () {
             invalidList = [];
         if ('Paste YouTube video URLs to add (separate with different lines)' === videoUrl) {
             $('#videourl').get(0).focus();
+            $('#cur-add .notice').text('Paste YouTube video URLs to add (separate with different lines).').show();
             return false;
         }
         $('#storyboard-list li').each(function () {
@@ -164,6 +163,11 @@ $(function () {
             normalList = jQuery.map(matchList, function (k, i) {
                 return 'http://www.youtube.com/watch?v=' + k;
             });
+            if ((existList.length + matchList.length) > CMS_CONF.PROGRAM_MAX) {
+                $('#videourl').val(normalList.join('\n'));
+                $('#cur-add .notice').text('You have reached the maximum amount of 50 videos.').show();
+                return false;
+            }
             var ytData = null,
                 ytItem = {},
                 ytList = [];
@@ -218,41 +222,48 @@ $(function () {
                         }, 1000);
                     }
                 });
-                nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + key + '?alt=jsonc&v=2', null, function (youtubes) {
-                    ytData = $.parseJSON(youtubes).data;
-                    ytItem = {
-                        ytId: ytData.id,
-                        fileUrl: normalList[idx],
-                        imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
-                        duration: ytData.duration,
-                        name: ytData.title,
-                        intro: ytData.description,
-                        uploader: ytData.uploader,
-                        uploadDate: ytData.uploaded,    // TODO conver uploaded to timestamp
-                        isZoneLimited: ((ytData.restrictions) ? true : false),
-                        isMobileLimited: ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false),
-                        isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
-                    };
-                    ytList.push(ytItem);
-                    if (idx === (matchList.length - 1)) {
-                        // setTimeout ON PURPOSE to wait api (async)
-                        setTimeout(function () {
-                            $('#storyboard-list-tmpl-item').tmpl(ytList, {
-                                durationConverter: function (duration) {
-                                    var durationMin = parseInt(duration / 60, 10).toString(),
-                                        durationSec = parseInt(duration % 60, 10).toString();
-                                    if (durationMin.length < 2) {
-                                        durationMin = '0' + durationMin;
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://gdata.youtube.com/feeds/api/videos/' + key + '?alt=jsonc&v=2',
+                    data: null,
+                    dataType: 'json',
+                    success: function (youtubes) {
+                        ytData = youtubes.data;
+                        ytItem = {
+                            ytId: ytData.id,
+                            fileUrl: normalList[idx],
+                            imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
+                            duration: ytData.duration,
+                            name: ytData.title,
+                            intro: ytData.description,
+                            uploader: ytData.uploader,
+                            uploadDate: ytData.uploaded,    // TODO conver uploaded to timestamp
+                            isZoneLimited: ((ytData.restrictions) ? true : false),
+                            isMobileLimited: ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false),
+                            isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
+                        };
+                        ytList.push(ytItem);
+                        if (idx === (matchList.length - 1)) {
+                            // setTimeout ON PURPOSE to wait api (async)
+                            setTimeout(function () {
+                                $('#storyboard-list-tmpl-item').tmpl(ytList, {
+                                    durationConverter: function (duration) {
+                                        var durationMin = parseInt(duration / 60, 10).toString(),
+                                            durationSec = parseInt(duration % 60, 10).toString();
+                                        if (durationMin.length < 2) {
+                                            durationMin = '0' + durationMin;
+                                        }
+                                        if (durationSec.length < 2) {
+                                            durationSec = '0' + durationSec;
+                                        }
+                                        return durationMin + ':' + durationSec;
                                     }
-                                    if (durationSec.length < 2) {
-                                        durationSec = '0' + durationSec;
-                                    }
-                                    return durationMin + ':' + durationSec;
-                                }
-                            }).prependTo('#storyboard-list');
-                            $('.form-btn .btn-save').removeClass('disable');
-                            $('#form-btn-save').removeAttr('disabled');
-                        }, 1000);
+                                }).prependTo('#storyboard-list');
+                                $('.form-btn .btn-save').removeClass('disable');
+                                $('#form-btn-save').removeAttr('disabled');
+                                sumStoryboardInfo();
+                            }, 1000);
+                        }
                     }
                 });
             });
@@ -291,12 +302,13 @@ $(function () {
     });
 
     // video del
-    // TODO if video have programId to keep DELETE programIds list
-    // TODO update total video left and total duration after del
+    // if video have programId to keep DELETE programIds list
+    var deleteIdList = [];
     $('#storyboard-list').on('click', 'li .hover-func a.video-del', function () {
         var length = $('#storyboard-list li').length;
         var eq = $('#storyboard-list li.playing').index();
         var deleting = $(this).parent().parent();
+        var tmplItemData = deleting.tmplItem().data;
         if (deleting.hasClass('playing') && (length - eq - 1) > 0) {
             // video-info-tmpl (auto turn by del)
             var elemtli = deleting.next('li');
@@ -306,13 +318,25 @@ $(function () {
             $('#storyboard li').removeClass('playing').removeClass('next-playing');
             elemtli.addClass('playing');
             elemtli.next().addClass('next-playing');
+            if (tmplItemData.id) {
+                deleteIdList.push(tmplItemData.id);
+            }
             deleting.remove();
         } else {
             if (length > 1) {
                 if (deleting.hasClass('playing') && (length - eq - 1) == 0) {
-                    // TODO return to first video OR close Edit tab and active Add Video tab
-                    $('#video-player .video').html('');
-                    $('#video-info').html('');
+                    // video-info-tmpl (auto turn by del)
+                    // return to first video
+                    var elemtli = $('#storyboard-list li:first');
+                    buildVideoInfo(elemtli);
+                    playVideoAndTitlecard(elemtli);
+
+                    $('#storyboard li').removeClass('playing').removeClass('next-playing');
+                    elemtli.addClass('playing');
+                    elemtli.next().addClass('next-playing');
+                }
+                if (tmplItemData.id) {
+                    deleteIdList.push(tmplItemData.id);
                 }
                 deleting.remove();
             } else {
@@ -323,6 +347,10 @@ $(function () {
                 });
             }
         }
+        nn.log({
+            deleteIdList: deleteIdList
+        });
+        sumStoryboardInfo();
         return false;
     });
 
@@ -343,7 +371,7 @@ $(function () {
         $('#video-control').show();
 
         var index = $(this).parent().parent().index(),
-            elemt = $('#storyboard-list li:gt(' + index + ')').data('title');
+            elemt = $('#storyboard-list li:eq(' + index + ')').data('title');
         if (elemt && elemt.text) {
             //var tmpl = $('#titlecard-tmpl').tmpl(elemt);
             //$('#video-player .video').html(tmpl);
@@ -376,7 +404,7 @@ $(function () {
     // titlecard control
     $('#btn-play').click(function () {
         var index = $('#storyboard-list li.edit').index(),
-            elemt = $('#storyboard-list li:gt(' + index + ')').data('title');
+            elemt = $('#storyboard-list li:eq(' + index + ')').data('title');
         $(this).addClass('hide');
         $('#btn-pause').removeClass('hide');
         $('#video-player .video').titlecard(elemt);
@@ -486,12 +514,12 @@ $(function () {
                 programList.push(programItem);
             });
             if (isInsertMode) {
-                // create episode --> create programs --> update episode with rerun
+                // insert mode: create episode --> create programs --> update episode with rerun
                 var parameter = {
                     name: $('#name').val(),
                     intro: $('#intro').val(),
-                    duration: totalDuration,
-                    imageUrl: firstImageUrl
+                    imageUrl: firstImageUrl,
+                    duration: totalDuration     // api readonly
                 };
                 // create episode
                 nn.api('POST', '/api/channels/' + $('#channelId').val() + '/episodes', parameter, function (episode) {
@@ -501,7 +529,7 @@ $(function () {
                     $.each(programList, function (idx, programItem) {
                         // create programs
                         nn.api('POST', '/api/episodes/' + episode.id + '/programs', programItem, function (program) {
-                            // update program.id
+                            // update program.id to DOM
                             tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                             tmplItemData = tmplItem.data;
                             tmplItemData.id = program.id;
@@ -531,13 +559,28 @@ $(function () {
                     });
                 });
             } else {
+                // update mode
+                // important rule: first POST and PUT then DELETE
                 alert('TODO update.');
-                // TODO PUT /api/episodes/{episodesId}
-                // TODO duration
-                // TODO first POST and PUT then DELETE
-                // TODO insert programs POST /api/episodes/{episodeId}/programs
-                // TODO update programs PUT /api/programs/{programId}
-                // TODO DELETE /api/programs/{programId} if any DELETE programIds list
+                // TODO insert program POST /api/episodes/{episodeId}/programs
+                // TODO update program PUT /api/programs/{programId}
+                // TODO delete program DELETE /api/programs/{programId} if any DELETE programIds list (deleteIdList)
+                $('#overlay-s').hide();
+                $('#overlay-s .overlay-middle').html('Changes were saved successfully');
+                $('#overlay-s .overlay-content').css('margin-left', '-132px');
+                $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
+                    // redirect
+                    if (!src                                                                                        // from nature action
+                            || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
+                        return false;
+                    } else {
+                        var nextstep = 'epcurate-curation.html';
+                        if (src && '' !== $(src.target).attr('href')) {
+                            nextstep = $(src.target).attr('href');
+                        }
+                        location.href = nextstep;
+                    }
+                });
             }
         }
         return false;
@@ -550,8 +593,8 @@ $(function () {
 });
 
 function chkCurationData(fm) {
-    var cntEpisode = $('#storyboard-list li').length;
-    if (cntEpisode <= 0) {
+    var cntProgram = $('#storyboard-list li').length;
+    if (cntProgram <= 0) {
         $('#system-error .content').html('There must be at least one video in this episode.');
         $.blockUI.defaults.overlayCSS.opacity = '0.9';
         $.blockUI({
@@ -559,7 +602,7 @@ function chkCurationData(fm) {
         });
         return false;
     }
-    if (cntEpisode > 50) {
+    if (cntProgram > CMS_CONF.PROGRAM_MAX) {
         $('#system-error .content').html('You have reached the maximum amount of 50 videos.');
         $.blockUI.defaults.overlayCSS.opacity = '0.9';
         $.blockUI({
@@ -644,7 +687,7 @@ function buildVideoInfo(elemt) {
 function playVideoAndTitlecard(elemtli) {
     if (elemtli.children('.title').length > 0) {
         var index = elemtli.index(),
-            elemt = $('#storyboard-list li:gt(' + index + ')').data('title');
+            elemt = $('#storyboard-list li:eq(' + index + ')').data('title');
         if (elemt && elemt.text) {
             $('#video-player .video').titlecard(elemt, function () {
                 setTimeout(function() {
@@ -655,4 +698,34 @@ function playVideoAndTitlecard(elemtli) {
     } else {
         loadVideo(elemtli.data('ytid'));
     }
+}
+
+function sumStoryboardInfo() {
+    var length = $('#storyboard-list li').length,
+        leftLength = CMS_CONF.PROGRAM_MAX - length,
+        duration = 0;
+
+    if (leftLength < 0) {
+        leftLength = 0;
+    }
+    $('#storyboard-list li').each(function (i) {
+        duration += $(this).tmplItem().data.duration;
+    });
+    var durationMin = parseInt(duration / 60, 10),
+        durationSec = parseInt(duration % 60, 10),
+        durationHou = parseInt(durationMin / 60, 10);
+    if (durationHou.toString().length < 2) {
+        durationHou = '0' + durationHou;
+    }
+    if (durationMin >= 60) {
+        durationMin = parseInt(durationMin % 60, 10);
+    }    
+    if (durationMin.toString().length < 2) {
+        durationMin = '0' + durationMin;
+    }
+    if (durationSec.toString().length < 2) {
+        durationSec = '0' + durationSec;
+    }
+    $('#storyboard-length').html(leftLength);
+    $('#storyboard-duration').html(durationHou + ':' + durationMin + ':' + durationSec);
 }

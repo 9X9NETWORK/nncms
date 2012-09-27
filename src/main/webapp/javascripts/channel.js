@@ -215,6 +215,7 @@ $(function () {
         return false;
     });
     $('#settingForm .btn-save').click(function () {
+        // update mode
         if (chkData(document.settingForm) && CMS_CONF.USER_DATA.id && $(this).hasClass('enable') && CMS_CONF.USER_URL.param('id') > 0) {
             $('#overlay-s').fadeIn();
             $('#overlay-s .overlay-content').css('margin-left', '-43px');
@@ -231,6 +232,7 @@ $(function () {
         return false;
     });
     $('#settingForm .btn-create').click(function () {
+        // insert mode
         if (chkData(document.settingForm) && CMS_CONF.USER_DATA.id && $(this).hasClass('enable')) {
             $('#overlay-s').fadeIn();
             $('#overlay-s .overlay-content').css('margin-left', '-43px');

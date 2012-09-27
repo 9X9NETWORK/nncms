@@ -3,6 +3,7 @@
 var CMS_CONF = {
     IS_DEBUG: true,
     YOUR_FAVORITE: 11,
+    PROGRAM_MAX: 50,
     LANG_MAP: {
         'en': 'English',
         'zh': 'Chinese',
@@ -200,11 +201,68 @@ function buildEpcurateCuration(fm, crumb) {
                     crumb = $.extend({}, crumb, episode);
                     $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
                     // TODO GET programs /api/episodes/{episodeId}/programs
-                    //nn.api('GET', '/api/episodes/' + $('#id').val() + '/programs', null, function (programs) {
-                    //});
-                    // TODO GET titlecard
+                    // TODO merge 9x9 api and youtube api (ytId, uploader, uploadDate, isZoneLimited, isMobileLimited, isEmbedLimited)
                     // TODO GET /api/programs/{programId}/title_cards or GET /api/episodes/{episodeId}/title_cards
-                    // TODO merge 9x9 api and youtube api
+                    var patternLong = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
+                        programItem = {},
+                        programList = [],
+                        ytData = null,
+                        ytItem = {},
+                        ytList = [];
+                    nn.api('GET', '/api/episodes/' + $('#id').val() + '/programs', null, function (programs) {
+                        $.each(programs, function (idx, programItem) {
+                            if (patternLong.test(programItem.fileUrl)) {
+                                programList.push(programItem);
+                            }
+                        });
+                        $.each(programList, function (idx, programItem) {
+                            $.ajax({
+                                type: 'GET',
+                                url: 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.substr(-11) + '?alt=jsonc&v=2',
+                                data: null,
+                                dataType: 'json',
+                                success: function (youtubes) {
+                                    ytData = youtubes.data;
+                                    ytItem = {
+                                        ytId: ytData.id,
+                                        fileUrl: programItem.fileUrl,
+                                        imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
+                                        duration: ytData.duration,
+                                        name: ytData.title,
+                                        intro: ytData.description,
+                                        uploader: ytData.uploader,
+                                        uploadDate: ytData.uploaded,    // TODO conver uploaded to timestamp
+                                        isZoneLimited: ((ytData.restrictions) ? true : false),
+                                        isMobileLimited: ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false),
+                                        isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
+                                    };
+                                    ytItem = $.extend(programItem, ytItem);
+                                    ytList.push(ytItem);
+                                    if (idx === (programList.length - 1)) {
+                                        // setTimeout ON PURPOSE to wait api (async)
+                                        setTimeout(function () {
+                                            $('#storyboard-list-tmpl-item').tmpl(ytList, {
+                                                durationConverter: function (duration) {
+                                                    var durationMin = parseInt(duration / 60, 10).toString(),
+                                                        durationSec = parseInt(duration % 60, 10).toString();
+                                                    if (durationMin.length < 2) {
+                                                        durationMin = '0' + durationMin;
+                                                    }
+                                                    if (durationSec.length < 2) {
+                                                        durationSec = '0' + durationSec;
+                                                    }
+                                                    return durationMin + ':' + durationSec;
+                                                }
+                                            }).prependTo('#storyboard-list');
+                                            $('.form-btn .btn-save').removeClass('disable');
+                                            $('#form-btn-save').removeAttr('disabled');
+                                            sumStoryboardInfo();
+                                        }, 1000);
+                                    }
+                                }
+                            });
+                        });
+                    });
                     $('#epcurate-nav-info, #epcurate-nav-publish, #form-btn-save, #form-btn-back, #form-btn-next').click(function (e) {
                         $(fm).trigger('submit', e);
                         return false;
