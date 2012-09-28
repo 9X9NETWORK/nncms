@@ -20,6 +20,10 @@ var nn = { };
 	
 	nn.log = function(message, type) {
 		
+		if (!window.console || !window.console.log || !console || !console.log)
+			return;
+
+
 		if (typeof type == 'undefined') {
 			type = 'info';
 		} else if (typeof nn.logTypes[type] == 'undefined') {
