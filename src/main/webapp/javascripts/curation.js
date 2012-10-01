@@ -121,6 +121,7 @@ $(function () {
         $(this).parent().parent().addClass('on');
         $('#epcurate-curation .tab-content').addClass('hide');
         $('#' + showBlock[1]).removeClass('hide');
+        $('#video-player .video').html('');
         return false;
     });
 

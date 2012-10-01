@@ -4,6 +4,10 @@
         =my-channel
 -----------------------------------------------------------------------------*/
 
+#title-func {
+    padding-bottom: 12px;
+}
+
 /**
 *
 * =ep-time-list
@@ -177,10 +181,11 @@
 
 #ep-list {
     position: relative;
+    margin-top: -5px;
 }
 
 #ep-list ul {
-    padding-bottom: 8px;
+    padding: 0 0 8px 0;
 }
 
 #ep-list ul.un-pub,

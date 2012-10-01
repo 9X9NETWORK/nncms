@@ -204,6 +204,9 @@ function buildEpcurateCuration(fm, crumb) {
                         });
                         return;
                     }
+                    $('#overlay-s .overlay-middle').html('Processing...');
+                    $('#overlay-s').fadeIn();
+                    $('#overlay-s .overlay-content').css('margin-left', '-65px');
                     crumb = $.extend({}, crumb, episode);
                     $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
                     // merge 9x9 api and youtube api (ytId, uploader, uploadDate, isZoneLimited, isMobileLimited, isEmbedLimited)
@@ -250,6 +253,7 @@ function buildEpcurateCuration(fm, crumb) {
                                         }
                                         sumStoryboardInfo();
                                         $('.ellipsis').ellipsis();
+                                        $('#overlay-s').hide();
                                     }, 1000);
                                 }
                             });
@@ -292,6 +296,7 @@ function buildEpcurateCuration(fm, crumb) {
                                         }
                                         sumStoryboardInfo();
                                         $('.ellipsis').ellipsis();
+                                        $('#overlay-s').hide();
                                     }, 1000);
                                 }
                             }, 'json');
@@ -305,7 +310,7 @@ function buildEpcurateCuration(fm, crumb) {
             });
         });
     }
-}
+}   // end of buildEpcurateCuration()
 
 function buildEpcuratePublish(fm, crumb) {
     nn.log(crumb, 'debug');
@@ -398,7 +403,7 @@ function buildEpcuratePublish(fm, crumb) {
             });
         });
     });
-}
+}   // end of buildEpcuratePublish()
 
 function buildEpcurateInfo(fm, crumb) {
     nn.log(crumb, 'debug');
@@ -509,7 +514,7 @@ function buildEpcurateInfo(fm, crumb) {
             });
         });
     }
-}
+}   // end of buildEpcurateInfo()
 
 function listEpisode(id) {
     if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
@@ -529,6 +534,9 @@ function listEpisode(id) {
                 });
                 return;
             }
+            $('#overlay-s .overlay-middle').html('Processing...');
+            $('#overlay-s').fadeIn();
+            $('#overlay-s .overlay-content').css('margin-left', '-65px');
             nn.api('GET', '/api/channels/' + id, null, function (channel) {
                 // setup channel data
                 $('#episode-nav-tmpl').tmpl(channel).appendTo('#content-nav');
@@ -573,6 +581,7 @@ function listEpisode(id) {
                         } else {
                             $('#episode-favorite-first-tmpl').tmpl().appendTo('#content-main-wrap .constrain');
                         }
+                        $('#overlay-s').hide();
                     });
                 } else {
                     nn.api('GET', '/api/channels/' + id + '/episodes?anticache=' + (new Date()).getTime(), null, function (episodes) {
@@ -626,6 +635,7 @@ function listEpisode(id) {
                                 cleartypeNoBg: true
                             });
                         }
+                        $('#overlay-s').hide();
                     });
                 }
             });
@@ -639,7 +649,7 @@ function listEpisode(id) {
         });
         return;
     }
-}
+}   // end of listEpisode()
 
 function updateChannel(id) {
     if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
@@ -738,7 +748,7 @@ function updateChannel(id) {
         });
         return;
     }
-}
+}   // end of updateChannel()
 
 function createChannel() {
     $('#settingForm .btn-cancel, #settingForm .btn-create').removeClass('disable').addClass('enable');
@@ -746,6 +756,9 @@ function createChannel() {
 
 function listChannel() {
     if (CMS_CONF.USER_DATA.id) {
+        $('#overlay-s .overlay-middle').html('Processing...');
+        $('#overlay-s').fadeIn();
+        $('#overlay-s .overlay-content').css('margin-left', '-65px');
         nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (channels) {
             var cntChannel = channels.length;
             $('#channel-counter').html(cntChannel);
@@ -794,11 +807,12 @@ function listChannel() {
                     });
                 }
             }
+            $('#overlay-s').hide();
         });
     } else {
         location.href = '../';
     }
-}
+}   // end of listChannel()
 
 function fadeEpcurateHeaderAndFooter() {
     var cmsEpe = $.cookie('cms-epe');

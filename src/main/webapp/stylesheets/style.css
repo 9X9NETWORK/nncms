@@ -878,6 +878,44 @@ background: #e4e4e4;
     padding: 4px 10px 0;
 }
 
+#title-func .caption {
+    overflow: hidden;
+    clear: both;
+    padding-top: 17px;
+    background: url(../images/bg_divider.png) repeat-x 0 bottom;
+}
+
+#title-func .caption p.episode,
+#title-func .caption p.curator,
+#title-func .caption p.time,
+#title-func .caption p.views {
+    float: left;
+    padding-bottom: 5px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#title-func .caption .episode-info {
+    float: right;
+	padding-bottom: 4px;
+}
+
+#title-func .caption  p.episode {
+    padding-left: 30px;
+}
+
+#title-func .caption .curator {
+    width: 140px;
+}
+
+#title-func .caption .time {
+    width: 155px;
+}
+
+#title-func .caption .views {
+    width: 85px;
+}
+
 /* +content-nav
 *----------------------------------------------------------------------------*/
 

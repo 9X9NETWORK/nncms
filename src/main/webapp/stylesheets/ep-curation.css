@@ -520,6 +520,11 @@ padding-right: 8px;
     margin: 0 0 20px 0;
 }
 
+#epcurate-curation #cur-edit h3 {
+    overflow: hidden;
+    height: 20px;
+}
+
 #epcurate-curation #cur-edit h3 span {
     float: none;
     margin: 0;
@@ -1842,7 +1847,6 @@ padding-right: 8px;
 }
 
 #storyboard .storyboard-list ul li .hover-func {
-    display: none;
     position: absolute;
     top: 9px;
     left: 9px;
@@ -1959,11 +1963,19 @@ padding-right: 8px;
     line-height: 30px;
 }
 
+#content-main #storyboard .storyboard-list ul li .hover-func a {
+    display: none;
+}
+
+#content-main #storyboard .storyboard-list ul li.playing .hover-func a.video-play {
+    display: block;
+}
+
 #storyboard .storyboard-list ul li p.title a.begin-title:hover         .tip,
 #storyboard .storyboard-list ul li p.title a.end-title:hover             .tip,
 #storyboard .storyboard-list ul li .hover-func a.begin-title:hover .tip,
 #storyboard .storyboard-list ul li .hover-func a.end-title:hover     .tip,
-#storyboard .storyboard-list ul li:hover .hover-func {
+#content-main #storyboard .storyboard-list ul li:hover .hover-func a {
     display: block;
 }
 

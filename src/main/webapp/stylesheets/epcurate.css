@@ -226,7 +226,6 @@
 }
 
 #content-wrap form .fminput .fmfield p.textarea span .textarea {
-    overflow: hidden;
     width: 427px;
     height: 82px;
 	margin-bottom: 7px;
@@ -577,6 +576,11 @@
 #content-wrap form .form-btn .wrap                   p span input,
 #content-wrap form .form-btn .glow-btns .btns span input {
     padding: 0 10px;
+}
+
+#content-wrap form .form-btn .wrap .disable a,
+#content-wrap form .form-btn .wrap .disable input {
+    cursor: default;
 }
 
 #content-wrap form .form-btn .wrap a {

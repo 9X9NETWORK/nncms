@@ -119,7 +119,7 @@
 </div>
 
 <script id="video-info-tmpl" type="text/x-jquery-tmpl">
-<h3><span class="uploader">${uploader}</span> - <span class="title">${name}</span></h3>
+<h3 class="ellipsis multiline"><span class="uploader">${uploader}</span> - <span class="title">${name}</span></h3>
 <p><span class="duration">${$item.durationConverter(duration)}</span> | From <a href="${fileUrl}" target="_blank">YouTube.com</a> | By <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> on <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span></p>
 <p class="desc ellipsis multiline">${intro}</p>
 {{if isEmbedLimited || isZoneLimited || isMobileLimited}}
