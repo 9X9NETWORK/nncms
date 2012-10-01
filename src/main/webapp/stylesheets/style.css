@@ -275,6 +275,11 @@ abbr, acronym {
 	position: relative;
 }
 
+#nav li a {
+    color: #777;
+    text-decoration: none;
+}
+
 #nav li#home, #nav li#guide, #nav li#browse {
 padding: 0 0 0 35px;
 width: 56px;
@@ -1044,6 +1049,11 @@ padding: 4px 10px 0;
 	background: url(../images/bg_input.png) 0 -50px no-repeat;
 	font-size: 13px;
 	line-height: 28px;
+}
+
+#footer ul#footer-list li a {
+    color: #777;
+    text-decoration: none;
 }
 
 #footer ul#footer-list li p.select-btn {

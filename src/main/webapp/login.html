@@ -2,11 +2,54 @@
 <head>
 <meta charset="utf-8" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="javascripts/nn-sdk.js"></script>
+<script src="javascripts/purl.js"></script>
 <title>9x9.tv - Login</title>
 </head>
 <body>
 
-<form method="post" action="/api/login">
+<script type="text/javascript">
+// <![CDATA[
+$(function () {
+    $('#loginForm').submit(function () {
+        var fm = this,
+            pattern = /^[\w\-]+(\.[\w\-]+)*@([\w\-]+\.)+[a-zA-Z]{2,7}$/;
+        fm.email.value = $.trim(fm.email.value);
+        fm.password.value = $.trim(fm.password.value);
+        if ('' === fm.email.value) {
+            alert('Please input email field!');
+            fm.email.focus();
+            return false;
+        }
+        if (!pattern.test(fm.email.value)) {
+            alert('Email format error!');
+            fm.email.select();
+            fm.email.focus();
+            return false;
+        }
+        if ('' === fm.password.value) {
+            alert('Please input password field!');
+            fm.password.focus();
+            return false;
+        }
+        var qrystring = $(this).serialize(),
+            parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
+        nn.api('POST', '/api/login', parameter, function (user) {
+            if (!user || !user.id) {
+                alert('Login failed, please try again.');
+            } else {
+                location.href = './';
+            }
+            return false;
+        });
+        return false;
+    });
+});
+// ]]>
+</script>
+
+<form id="loginForm" name="loginForm" method="post" action="/api/login">
+<h1>9x9.tv Member Login</h1>
 <p>
 <label for="email">email: <input type="text" name="email" id="email" value="" /></label>
 </p>

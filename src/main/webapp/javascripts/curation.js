@@ -1,16 +1,16 @@
 $(function () {
     function setSpace() {
-        var epcurateNavHeight = $('#epcurate-nav').height();
-        var autoHeight = $('p.auto-height:first').height();
-        var windowHeight = $(window).height();
-        var curationHeight = $('#epcurate-curation').height() - (autoHeight * 2);
-        var storyboardHeight = $('#storyboard').height() - (autoHeight * 2);
-        var btnsHeight = $('#content-main .form-btn').height();
-        var extraHeight = windowHeight - curationHeight - storyboardHeight - btnsHeight - epcurateNavHeight;
-        var windowWidth = $(window).width();
-        var videoWidth = $('#epcurate-curation #video-player .video').width();
-        var curAddWidth = $('#epcurate-curation #cur-add').width();
-        var curEditWidth = $('#epcurate-curation #cur-edit').width();
+        var epcurateNavHeight = $('#epcurate-nav').height(),
+            autoHeight = $('p.auto-height:first').height(),
+            windowHeight = $(window).height(),
+            curationHeight = $('#epcurate-curation').height() - (autoHeight * 2),
+            storyboardHeight = $('#storyboard').height() - (autoHeight * 2),
+            btnsHeight = $('#content-main .form-btn').height(),
+            extraHeight = windowHeight - curationHeight - storyboardHeight - btnsHeight - epcurateNavHeight,
+            windowWidth = $(window).width(),
+            videoWidth = $('#epcurate-curation #video-player .video').width(),
+            curAddWidth = $('#epcurate-curation #cur-add').width(),
+            curEditWidth = $('#epcurate-curation #cur-edit').width();
         $('p.auto-height').height(extraHeight / 4);
         if (windowWidth > 1016) {
             $('#epcurate-curation #cur-add').css('padding-left', (windowWidth - videoWidth - curAddWidth) / 2 + 'px');
@@ -29,19 +29,10 @@ $(function () {
             videoWidth: videoWidth,
             curAddWidth: curAddWidth,
             curEditWidth: curEditWidth
-        });
+        }, 'debug');
     }
     setSpace();
     scrollbar("#storyboard-wrap", "#storyboard-list", "#storyboard-slider");
-
-    // uniform
-    $('#cur-edit input, #cur-edit textarea, #cur-edit select').uniform();
-
-    // storyboard sortable
-    $('#storyboard-list').sortable({
-        cursor: 'move',
-        revert: true
-    });
 
     // common unblock
     $('body').keyup(function (e) {
@@ -62,35 +53,46 @@ $(function () {
     });
 
     // leave and unsave
-    var hasFormChange = false;
+    function confirmExit() {
+        if ($('body').hasClass('has-change')) {
+            return 'Unsaved changes will be lost, are you sure you want to leave?';
+        }
+    }
+    window.onbeforeunload = confirmExit;
+    $('body').removeClass('has-change');
     $('#epcurateForm').change(function () {
-        hasFormChange = true;
+        $('body').addClass('has-change');
     });
     $('#epcurate-nav-back').click(function () {
-        if (hasFormChange) {
+        if ($('#name').length > 0 && '' != $('#name').val() && '' == $('#id').val()) {
+            $('body').addClass('has-change');
+        }
+        if ($('body').hasClass('has-change')) {
             $.blockUI.defaults.overlayCSS.opacity = '0.9';
             $.blockUI({
                 message: $('#unsave-prompt')
             });
-            return false;
         } else {
             location.href = $(this).attr('href');
-            return false;
         }
+        return false;
     });
     $('#content-wrap .form-btn').on('click', '#form-btn-leave', function () {
-        if (hasFormChange) {
+        if ($('#name').length > 0 && '' != $('#name').val() && '' == $('#id').val()) {
+            $('body').addClass('has-change');
+        }
+        if ($('body').hasClass('has-change')) {
             $.blockUI.defaults.overlayCSS.opacity = '0.9';
             $.blockUI({
                 message: $('#unsave-prompt')
             });
-            return false;
         } else {
             location.href = $('#form-btn-leave').data('leaveUrl');
-            return false;
         }
+        return false;
     });
     $('#unsave-prompt .btn-leave').click(function () {
+        $('body').removeClass('has-change');
         $.unblockUI();
         location.href = $('#form-btn-leave').data('leaveUrl');
         return false;
@@ -98,6 +100,18 @@ $(function () {
     $('.unblock, .btn-close, .btn-no').click(function () {
         $.unblockUI();
         return false;
+    });
+
+    // uniform
+    $('#cur-edit input, #cur-edit textarea, #cur-edit select').uniform();
+
+    // storyboard sortable
+    $('#storyboard-list').sortable({
+        cursor: 'move',
+        revert: true,
+        change: function(event, ui) {
+            $('body').addClass('has-change');
+        }
     });
 
     // common tabs
@@ -123,9 +137,10 @@ $(function () {
     // Add Video
     $('#cur-add textarea').toggleVal();
     $('#cur-add textarea').click(function () {
-        $('#cur-add .notice').fadeOut();
+        $('#cur-add .notice').addClass('hide').hide();
     });
     $('#btn-add-videourl').click(function () {
+        $('#cur-add .notice').addClass('hide').hide();
         var videoUrl = $.trim($('#videourl').val()),
             urlList = videoUrl.split('\n'),
             patternLong = /^http(?:s)?:\/\/www.youtube.com\/watch\?/,
@@ -137,7 +152,7 @@ $(function () {
             invalidList = [];
         if ('Paste YouTube video URLs to add (separate with different lines)' === videoUrl) {
             $('#videourl').get(0).focus();
-            $('#cur-add .notice').text('Paste YouTube video URLs to add (separate with different lines).').show();
+            $('#cur-add .notice').text('Paste YouTube video URLs to add (separate with different lines).').removeClass('hide').show();
             return false;
         }
         $('#storyboard-list li').each(function () {
@@ -155,7 +170,7 @@ $(function () {
                 matchKey = '';
                 invalidList.push(url);
             }
-            if ('' !== matchKey && -1 === $.inArray(matchKey, existList) && -1 === $.inArray(matchKey, matchList)) {
+            if ('' !== matchKey) {
                 matchList.push(matchKey);
             }
         });
@@ -165,19 +180,23 @@ $(function () {
             });
             if ((existList.length + matchList.length) > CMS_CONF.PROGRAM_MAX) {
                 $('#videourl').val(normalList.join('\n'));
-                $('#cur-add .notice').text('You have reached the maximum amount of 50 videos.').show();
+                $('#cur-add .notice').text('You have reached the maximum amount of 50 videos.').removeClass('hide').show();
                 return false;
             }
+            $('body').addClass('has-change');
+            $('#overlay-s .overlay-middle').html('Processing...');
+            $('#overlay-s').fadeIn();
+            $('#overlay-s .overlay-content').css('margin-left', '-65px');
             var ytData = null,
                 ytItem = {},
                 ytList = [];
             $.each(matchList, function (idx, key) {
-                nn.on(400, function (jqXHR, textStatus) {
+                nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
                     invalidList.push(normalList[idx]);
                     nn.log(textStatus + ': ' + jqXHR.responseText, 'warning');
                     nn.log(normalList[idx], 'debug');
                     $('#videourl').val(invalidList.join('\n'));
-                    $('#cur-add .notice').text('Invalid URL, please try again.').show();
+                    $('#cur-add .notice').text('Invalid URL, please try again!').removeClass('hide').show();
                     if (idx === (matchList.length - 1)) {
                         // setTimeout ON PURPOSE to wait api (async)
                         setTimeout(function () {
@@ -194,84 +213,64 @@ $(function () {
                                     return durationMin + ':' + durationSec;
                                 }
                             }).prependTo('#storyboard-list');
-                        }, 1000);
-                    }
-                });
-                nn.on(404, function (jqXHR, textStatus) {
-                    invalidList.push(normalList[idx]);
-                    nn.log(textStatus + ': ' + jqXHR.responseText, 'warning');
-                    nn.log(normalList[idx], 'debug');
-                    $('#videourl').val(invalidList.join('\n'));
-                    $('#cur-add .notice').text('Invalid URL, please try again.').show();
-                    if (idx === (matchList.length - 1)) {
-                        // setTimeout ON PURPOSE to wait api (async)
-                        setTimeout(function () {
-                            $('#storyboard-list-tmpl-item').tmpl(ytList, {
-                                durationConverter: function (duration) {
-                                    var durationMin = parseInt(duration / 60, 10).toString(),
-                                        durationSec = parseInt(duration % 60, 10).toString();
-                                    if (durationMin.length < 2) {
-                                        durationMin = '0' + durationMin;
-                                    }
-                                    if (durationSec.length < 2) {
-                                        durationSec = '0' + durationSec;
-                                    }
-                                    return durationMin + ':' + durationSec;
-                                }
-                            }).prependTo('#storyboard-list');
-                        }, 1000);
-                    }
-                });
-                $.ajax({
-                    type: 'GET',
-                    url: 'http://gdata.youtube.com/feeds/api/videos/' + key + '?alt=jsonc&v=2',
-                    data: null,
-                    dataType: 'json',
-                    success: function (youtubes) {
-                        ytData = youtubes.data;
-                        ytItem = {
-                            ytId: ytData.id,
-                            fileUrl: normalList[idx],
-                            imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
-                            duration: ytData.duration,
-                            name: ytData.title,
-                            intro: ytData.description,
-                            uploader: ytData.uploader,
-                            uploadDate: ytData.uploaded,    // TODO conver uploaded to timestamp
-                            isZoneLimited: ((ytData.restrictions) ? true : false),
-                            isMobileLimited: ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false),
-                            isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
-                        };
-                        ytList.push(ytItem);
-                        if (idx === (matchList.length - 1)) {
-                            // setTimeout ON PURPOSE to wait api (async)
-                            setTimeout(function () {
-                                $('#storyboard-list-tmpl-item').tmpl(ytList, {
-                                    durationConverter: function (duration) {
-                                        var durationMin = parseInt(duration / 60, 10).toString(),
-                                            durationSec = parseInt(duration % 60, 10).toString();
-                                        if (durationMin.length < 2) {
-                                            durationMin = '0' + durationMin;
-                                        }
-                                        if (durationSec.length < 2) {
-                                            durationSec = '0' + durationSec;
-                                        }
-                                        return durationMin + ':' + durationSec;
-                                    }
-                                }).prependTo('#storyboard-list');
+                            if ($('#storyboard-list li').length > 0) {
                                 $('.form-btn .btn-save').removeClass('disable');
                                 $('#form-btn-save').removeAttr('disabled');
-                                sumStoryboardInfo();
-                            }, 1000);
-                        }
+                            }
+                            sumStoryboardInfo();
+                            $('#overlay-s').hide();
+                            $('.ellipsis').ellipsis();
+                        }, 1000);
                     }
                 });
+                nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + key + '?alt=jsonc&v=2', null, function (youtubes) {
+                    ytData = youtubes.data;
+                    ytItem = {
+                        ytId: ytData.id,
+                        fileUrl: normalList[idx],
+                        imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
+                        duration: ytData.duration,
+                        name: ytData.title,
+                        intro: ytData.description,
+                        uploader: ytData.uploader,
+                        uploadDate: ytData.uploaded,    // TODO conver uploaded to timestamp
+                        isZoneLimited: ((ytData.restrictions) ? true : false),
+                        isMobileLimited: ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false),
+                        isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
+                    };
+                    ytList[idx] = ytItem;
+                    if (idx === (matchList.length - 1)) {
+                        // setTimeout ON PURPOSE to wait api (async)
+                        setTimeout(function () {
+                            $('#storyboard-list-tmpl-item').tmpl(ytList, {
+                                durationConverter: function (duration) {
+                                    var durationMin = parseInt(duration / 60, 10).toString(),
+                                        durationSec = parseInt(duration % 60, 10).toString();
+                                    if (durationMin.length < 2) {
+                                        durationMin = '0' + durationMin;
+                                    }
+                                    if (durationSec.length < 2) {
+                                        durationSec = '0' + durationSec;
+                                    }
+                                    return durationMin + ':' + durationSec;
+                                }
+                            }).prependTo('#storyboard-list');
+                            if ($('#storyboard-list li').length > 0) {
+                                $('.form-btn .btn-save').removeClass('disable');
+                                $('#form-btn-save').removeAttr('disabled');
+                            }
+                            sumStoryboardInfo();
+                            $('#overlay-s').hide();
+                            $('.ellipsis').ellipsis();
+                        }, 1000);
+                    }
+                }, 'json');
             });
         }
         $('#videourl').val('');
         if (invalidList.length > 0) {
             $('#videourl').val(invalidList.join('\n'));
-            $('#cur-add .notice').text('Invalid URL, please try again.').show();
+            $('#cur-add .notice').text('Invalid URL, please try again.').removeClass('hide').show();
         }
         return false;
     });
@@ -305,10 +304,11 @@ $(function () {
     // if video have programId to keep DELETE programIds list
     var deleteIdList = [];
     $('#storyboard-list').on('click', 'li .hover-func a.video-del', function () {
-        var length = $('#storyboard-list li').length;
-        var eq = $('#storyboard-list li.playing').index();
-        var deleting = $(this).parent().parent();
-        var tmplItemData = deleting.tmplItem().data;
+        $('body').addClass('has-change');
+        var length = $('#storyboard-list li').length,
+            eq = $('#storyboard-list li.playing').index(),
+            deleting = $(this).parent().parent(),
+            tmplItemData = deleting.tmplItem().data;
         if (deleting.hasClass('playing') && (length - eq - 1) > 0) {
             // video-info-tmpl (auto turn by del)
             var elemtli = deleting.next('li');
@@ -347,9 +347,7 @@ $(function () {
                 });
             }
         }
-        nn.log({
-            deleteIdList: deleteIdList
-        });
+        nn.log(deleteIdList, 'debug');
         sumStoryboardInfo();
         return false;
     });
@@ -434,6 +432,43 @@ $(function () {
         return false;
     });
 
+    // font
+    $('.font-container .font-l').click(function() {
+        $('.font-container .font-s').removeClass('disable');
+        var size = parseInt($('#fontSize').val(), 10);
+        if(size >= 48) {
+            $(this).addClass('disable');
+        } else {
+            $('#fontSize').val(size += 1);
+            $('#titlecard-inner').css('font-size', size + 'pt');
+        }
+    });
+    $('.font-container .font-s').click(function() {
+        $('.font-container .font-l').removeClass('disable');
+        var size = parseInt($('#fontSize').val(), 10);
+        if(size <= 6) {
+            $(this).addClass('disable');
+        } else {
+            $('#fontSize').val(size -= 1);
+            $('#titlecard-inner').css('font-size', size + 'pt');
+        }
+    });
+    function switchFontAlign(flag) {
+        if ('left' == flag) {
+            $('#titlecard-inner').css('text-align', 'left');
+        }
+        if ('center' == flag) {
+            $('#titlecard-inner').css('text-align', 'center');
+        }
+        if ('right' == flag) {
+            $('#titlecard-inner').css('text-align', 'right');
+        }
+    }
+    switchFontAlign($('input[name=align]:checked').val());
+    $('input[name=align]').click(function () {
+        switchFontAlign($(this).val());
+    });
+
     // edit select dropdown
     $('#cur-edit').on('click', '.enable .select-btn, .enable .select-txt', function (event) {
         $('.select-list').hide();
@@ -457,9 +492,14 @@ $(function () {
     $('#cur-edit .edit-title .effect-container .select-list li').click(function () {
         var selectedEffect = $(this).data('meta');
         $('#epcurate-curation #cur-edit .effect-container p.effect-demo span').effect(selectedEffect, 2000);
+        $('#effect').val(selectedEffect);
         setTimeout(function () {
             $('#epcurate-curation #cur-edit .effect-container p.effect-demo span').removeAttr('style').hide().fadeIn();
         }, 2000);
+    });
+    $('#cur-edit .edit-title .duration-container .select-list li').click(function () {
+        var selectedDuration = $(this).data('meta');
+        $('#duration').val(selectedDuration);
     });
 
     // background switch
@@ -467,9 +507,11 @@ $(function () {
         if ('image' == flag) {
             $('#cur-edit .background-container .bg-color').addClass('hide');
             $('#cur-edit .background-container .bg-img').removeClass('hide');
+            $('#titlecard-outer img').show();
         } else {
             $('#cur-edit .background-container .bg-color').removeClass('hide');
             $('#cur-edit .background-container .bg-img').addClass('hide');
+            $('#titlecard-outer img').hide();
         }
     }
     switchBackground($('input[name=bg]:checked').val());
@@ -483,12 +525,24 @@ $(function () {
         $(this).parent().prev('span').attr('class', colorCode);
         $(this).parent().parent().next('input').val($(this).data('meta'));
     });
+    $('.background-container .color-list li').click(function() {
+        var colorCode = $(this).attr('class');
+        var selectedBg = $(this).data('meta');
+        $('#titlecard-outer').attr('class', colorCode);
+        $('#backgroundColor').val(selectedBg);
+    });
+    $('.font-container .color-list li').click(function() {
+        var colorCode = $(this).attr('class');
+        var selectedColor = $(this).data('meta');
+        $('#titlecard-inner').attr('class', colorCode);
+        $('#fontColor').val(selectedColor);
+    });
 
     // save
     $('#epcurateForm').submit(function (e, src) {
         var isInsertMode = ('' == $('#id').val());
         // Episode Curation - Curation
-        if ($(e.target).hasClass('curation') && chkCurationData(this)) {
+        if ($(e.target).hasClass('curation') && chkCurationData(this, src)) {
             $('#overlay-s .overlay-middle').html('Saving...');
             $('#overlay-s').fadeIn();
             $('#overlay-s .overlay-content').css('margin-left', '-43px');
@@ -500,18 +554,13 @@ $(function () {
                 programItem = {},
                 programList = [];
             $('#storyboard-list li').each(function (i) {
-                tmplItemData = $(this).tmplItem().data;
-                totalDuration += tmplItemData.duration;
-                programItem = {
-                    channelId: $('#channelId').val(),
+                programItem = $(this).tmplItem().data;
+                totalDuration += programItem.duration;
+                $.extend(programItem, {
+                    channelId: $('#channelId').val(),   // api readonly
                     subSeq: i + 1,
-                    intro: tmplItemData.intro,
-                    name: tmplItemData.name,
-                    imageUrl: tmplItemData.imageUrl,
-                    duration: tmplItemData.duration,
-                    fileUrl: tmplItemData.fileUrl,
                     contentType: 1
-                };
+                });
                 programList.push(programItem);
             });
             if (isInsertMode) {
@@ -543,6 +592,7 @@ $(function () {
                                     $('#overlay-s .overlay-content').css('margin-left', '-132px');
                                     $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
                                         // redirect
+                                        $('body').removeClass('has-change');
                                         if (!src                                                                                        // from nature action
                                                 || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
                                             return false;
@@ -575,7 +625,7 @@ $(function () {
                     } else {
                         // insert program
                         $.extend(programItem, {
-                            channelId: $('#channelId').val(),
+                            channelId: $('#channelId').val(),   // api readonly
                             subSeq: i + 1,
                             contentType: 1
                         });
@@ -598,6 +648,7 @@ $(function () {
                                         $('#overlay-s .overlay-content').css('margin-left', '-132px');
                                         $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
                                             // redirect
+                                            $('body').removeClass('has-change');
                                             if (!src                                                                                        // from nature action
                                                     || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
                                                 return false;
@@ -618,6 +669,7 @@ $(function () {
                             $('#overlay-s .overlay-content').css('margin-left', '-132px');
                             $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
                                 // redirect
+                                $('body').removeClass('has-change');
                                 if (!src                                                                                        // from nature action
                                         || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
                                     return false;
@@ -641,12 +693,26 @@ $(function () {
         setSpace();
         scrollbar("#storyboard-wrap", "#storyboard-list", "#storyboard-slider");
     });
+
+    // Amazon S3 upload
+    if ($('#uploadThumbnail').length > 0) {
+        uploadImage();
+    }
 });
 
-function chkCurationData(fm) {
+function chkCurationData(fm, src) {
     var cntProgram = $('#storyboard-list li').length;
     if (cntProgram <= 0) {
-        $('#system-error .content').html('There must be at least one video in this episode.');
+        if ('' == $('#id').val() && src && ('epcurate-nav-info' === $(src.target).attr('id') || 'form-btn-back' === $(src.target).attr('id'))) {
+            $('body').removeClass('has-change');
+            var nextstep = 'epcurate-info.html';
+            if (src && '' !== $(src.target).attr('href')) {
+                nextstep = $(src.target).attr('href');
+            }
+            location.href = nextstep;
+            return false;
+        }
+        $('#system-error .content').html('Please curate some videos first.');
         $.blockUI.defaults.overlayCSS.opacity = '0.9';
         $.blockUI({
             message: $('#system-error')
@@ -665,8 +731,8 @@ function chkCurationData(fm) {
 }
 
 function loadVideo(videoID) {
-    var videoWidth = $('#video-player .video').width();
-    var videoHeight = $('#video-player .video').height();
+    var videoWidth = $('#video-player .video').width(),
+        videoHeight = $('#video-player .video').height();
     $('#video-player .video').flash({
         id: 'youTubePlayer',
         swf: 'http://www.youtube.com/v/' + videoID + '?version=3&enablejsapi=1&playerapiid=player1&autohide=0',
@@ -693,16 +759,16 @@ function onYouTubePlayerReady(playerId) {
 }
 
 function onYouTubePlayerStateChange(newState) {
-    var length = $('#storyboard-list li').length;
-    var eq = $('#storyboard-list li.playing').index();
+    var length = $('#storyboard-list li').length,
+        eq = $('#storyboard-list li.playing').index();
     // unstarted (-1), ended (0), playing (1), paused (2), buffering (3), video cued (5)
     if (-1 == newState) {
         youTubePlayerObj.playVideo();
     }
     if (0 == newState && (length - eq - 1) > 0) {
         // video-info-tmpl (auto turn by play)
-        var activeID = $('#storyboard-list li.playing').children('.video-id').val();
-        var elemtli = $('#storyboard-list li.next-playing');
+        var activeID = $('#storyboard-list li.playing').children('.video-id').val(),
+            elemtli = $('#storyboard-list li.next-playing');
         buildVideoInfo(elemtli);
         playVideoAndTitlecard(elemtli);
 
@@ -733,6 +799,7 @@ function buildVideoInfo(elemt) {
             return durationMin + ':' + durationSec;
         }
     }).prependTo('#video-info');
+    $('.ellipsis').ellipsis();
 }
 
 function playVideoAndTitlecard(elemtli) {
@@ -755,8 +822,7 @@ function sumStoryboardInfo() {
     var length = $('#storyboard-list li').length,
         leftLength = CMS_CONF.PROGRAM_MAX - length,
         duration = 0;
-
-    if (leftLength < 0) {
+    if (isNaN(leftLength) || leftLength < 0) {
         leftLength = 0;
     }
     $('#storyboard-list li').each(function (i) {
@@ -770,7 +836,7 @@ function sumStoryboardInfo() {
     }
     if (durationMin >= 60) {
         durationMin = parseInt(durationMin % 60, 10);
-    }    
+    }
     if (durationMin.toString().length < 2) {
         durationMin = '0' + durationMin;
     }
@@ -779,4 +845,92 @@ function sumStoryboardInfo() {
     }
     $('#storyboard-length').html(leftLength);
     $('#storyboard-duration').html(durationHou + ':' + durationMin + ':' + durationSec);
+}
+
+function uploadImage() {
+    var parameter = {
+        'prefix': 'cms',
+        'type':   'image',
+        'size':   20485760,
+        'acl':    'public-read'
+    };
+    nn.api('GET', '/api/s3/attributes?anticache=' + (new Date()).getTime(), parameter, function (s3attr) {
+        var timestamp = (new Date()).getTime();
+        var handlerFileDialogStart = function () {
+            $('.background-container .highlight').addClass('hide');
+        };
+        var handlerUploadProgress = function (file, completed /* completed bytes */, total /* total bytes */) {
+            $('.background-container p.img .loading').show();
+             swfu.setButtonText('<span class="uploadstyle">Uploading...</span>');
+        };
+        var handlerUploadSuccess = function (file, serverData, recievedResponse) {
+            $('.background-container p.img .loading').hide();
+            swfu.setButtonText('<span class="uploadstyle">Upload</span>');
+            if (!file.type) {
+                file.type = nn.getFileTypeByName(file.name);
+            }
+            this.setButtonDisabled(false); // enable upload button again
+            var url = 'http://' + s3attr['bucket'] + '.s3.amazonaws.com/' + parameter['prefix'] + '-thumbnail-' + timestamp + '-' + file.size + file.type.toLowerCase();
+            $('#thumbnail-backgroundImage').attr('src', url + '?n=' + Math.random());
+            $('#backgroundImage').val(url);
+        };
+        var handlerUploadError = function (file, code, message) {
+            $('.background-container p.img .loading').hide();
+            swfu.setButtonText('<span class="uploadstyle">Upload</span>');
+            this.setButtonDisabled(false);
+            if (code == -280) { // user cancel upload
+                alert(message); // show some error prompt
+            } else {
+                alert(message); // show some error prompt
+            }
+        };
+        var handlerFileQueue = function (file) {
+            if (!file.type) {
+                file.type = nn.getFileTypeByName(file.name); // Mac Chrome compatible
+            }
+            var postParams = {
+                "AWSAccessKeyId": s3attr['id'],
+                "key":            parameter['prefix'] + '-thumbnail-' + timestamp + '-' + file.size + file.type.toLowerCase(), // upload file name, TODO: need convention
+                "acl":            parameter['acl'],
+                "policy":         s3attr['policy'],
+                "signature":      s3attr['signature'],
+                "content-type":   parameter['type'],
+                "success_action_status": "201"
+            };
+            this.setPostParams(postParams);
+            this.startUpload(file.id);
+            this.setButtonDisabled(true);
+        };
+        var handlerFileQueueError = function (file, code, message) {
+            if (code == -130) { // error file type
+                $('.background-container .highlight').removeClass('hide');
+            }
+        };
+        var settings = {
+            flash_url:                  'javascripts/swfupload/swfupload.swf',
+            upload_url:                 'http://' + s3attr['bucket'] + '.s3.amazonaws.com/', // http://9x9tmp-ds.s3.amazonaws.com/
+            file_size_limit:            parameter['size'],
+            file_types:                 '*.jpg; *.png; *.gif',
+            file_types_description:     'Thumbnail',
+            file_post_name:             'file',
+            button_placeholder:         $('#uploadThumbnail').get(0),
+            button_image_url:           'images/btn-load.png',
+            button_width:               '129',
+            button_height:              '29',
+            button_text:                '<span class="uploadstyle">Upload</span>',
+            button_text_style:          '.uploadstyle { color: #777777; font-family: Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
+            button_action:              SWFUpload.BUTTON_ACTION.SELECT_FILE,
+            button_cursor:              SWFUpload.CURSOR.HAND,
+            button_window_mode :        SWFUpload.WINDOW_MODE.TRANSPARENT,
+            http_success :              [ 201 ],
+            file_dialog_start_handler:  handlerFileDialogStart,
+            upload_progress_handler:    handlerUploadProgress,
+            upload_success_handler:     handlerUploadSuccess,
+            upload_error_handler:       handlerUploadError,
+            file_queued_handler:        handlerFileQueue,
+            file_queue_error_handler:   handlerFileQueueError,
+            debug:                      false
+        };
+        var swfu = new SWFUpload(settings);
+    });
 }

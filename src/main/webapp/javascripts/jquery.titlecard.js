@@ -85,17 +85,17 @@
  */
 
 (function ($) {
-    nn.initialize();
-
     $.fn.titlecard = function (options, callback) {
-        nn.log(options, 'debug');
-        nn.log(callback, 'debug');
+        nn.log({
+            options: options,
+            callback: callback
+        }, 'debug');
 
         // param overloading check
         var playedCallback = null,
             cancelCallback = null;
         if ('undefined' === typeof options) {
-            nn.log('play with default values');
+            nn.log('play with default values', 'debug');
             playedCallback = null;
         } else {
             var isPassParamCheck = false;
@@ -103,10 +103,10 @@
                 if ('cancel' === options) {
                     isPassParamCheck = true;
                     if ('function' === typeof callback) {
-                        nn.log('setup cancel callback');
+                        nn.log('setup cancel callback', 'debug');
                         cancelCallback = callback;
                     }
-                    nn.log('cancel playing title card, release resources');
+                    nn.log('cancel playing title card, release resources', 'debug');
                     $(this)
                         .clearQueue()
                         .stop()
@@ -124,7 +124,7 @@
                 return;
             }
             if ('function' === typeof options || 'function' === typeof callback) {
-                nn.log('setup played callback');
+                nn.log('setup played callback', 'debug');
                 if ('function' === typeof options) {
                     isPassParamCheck = true;
                     playedCallback = options;
@@ -136,7 +136,7 @@
             if ('object' === typeof options) {
                 // include null object
                 isPassParamCheck = true;
-                nn.log('setup options');
+                nn.log('setup options', 'debug');
             }
             if (!isPassParamCheck) {
                 nn.log('param error nothing to do', 'error');
@@ -146,8 +146,10 @@
 
         // setup options
         var opts = $.extend({}, $.fn.titlecard.defaults, options || {});
-        nn.log(opts, 'debug');
-        nn.log(playedCallback, 'debug');
+        nn.log({
+            opts: opts,
+            playedCallback: playedCallback
+        }, 'debug');
 
         return this.each(function () {
             var $this = $(this),
@@ -278,17 +280,17 @@
                 break;
             }
 
-            var debug = [];
-            debug.push('wrapWidth: ' + wrapWidth);
-            debug.push('wrapHeight: ' + wrapHeight);
-            debug.push('selfWidth: ' + selfWidth);
-            debug.push('selfHeight: ' + selfHeight);
-            debug.push('selfTop: ' + selfTop);
-            debug.push('selfLeft: ' + selfLeft);
-            debug.push('startSec: ' + startSec);
-            debug.push('delaySec: ' + delaySec);
-            debug.push('endingSec: ' + endingSec);
-            nn.log(debug, 'debug');
+            nn.log({
+                wrapWidth: wrapWidth,
+                wrapHeight: wrapHeight,
+                selfWidth: selfWidth,
+                selfHeight: selfHeight,
+                selfTop: selfTop,
+                selfLeft: selfLeft,
+                startSec: startSec,
+                delaySec: delaySec,
+                endingSec: endingSec
+            }, 'debug');
         });
     };
 

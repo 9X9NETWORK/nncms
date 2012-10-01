@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="0" />
 <link rel="stylesheet" href="stylesheets/style.css" />
 <link rel="stylesheet" href="stylesheets/lightbox.css" />
 <link rel="stylesheet" href="stylesheets/channel.css" />
@@ -35,7 +38,7 @@
 <span>Create a<br />new channel</span>
 </a>
 </p>
-<p class="btns unblock"><span><a href="index.html">Not right now, thanks!</a></span></p>
+<p class="btns unblock"><span><a href="./">Not right now, thanks!</a></span></p>
 </div>
 </script>
 
@@ -43,42 +46,17 @@
 <div id="header">
   <p id="logo"></p>
   <ul id="nav">
-    <li id="home"><span>Home</span></li>
-    <li id="guide"><span>Guide</span></li>
-    <li id="browse"> <span>Browse</span>
-      <ul id="browse-dropdown" class="dropdown">
-        <li>All</li>
-        <li>Animals & Pets</li>
-        <li>Art & Design</li>
-        <li>Autos & Vehicles</li>
-        <li>Cartoons & Animation</li>
-        <li>Comedy</li>
-        <li>Fashion, Food & Living</li>
-        <li>Gaming</li>
-        <li>How-To</li>
-        <li>Education & Lectures</li>
-        <li>Music</li>
-        <li>News</li>
-        <li>Nonprofits & Faith</li>
-        <li>People, Blogs & Shorts</li>
-        <li>Science</li>
-        <li>Sports & Health</li>
-        <li>Tech & Apps</li>
-        <li>TV & Film</li>
-      </ul>
-    </li>
-    <li id="search">
-      <p id="btn-search"></p>
-      <input type="text" class="textfield" value="Search" id="search-field">
-    </li>
+    <li id="home"><span><a href="/#!home">Home</a></span></li>
+    <li id="guide"><span><a href="/#!guide">Guide</a></span></li>
+    <li id="browse"><span><a href="/#!directory">Browse</a></span></li>
     <li id="profile">
       <p id="btn-profile"></p>
-      <p id="selected-profile">Snowball</p>
+      <p id="selected-profile">Guest</p>
       <ul id="profile-dropdown" class="dropdown">
-        <li>My page</li>
-        <li>Studio</li>
-        <li>Settings</li>
-        <li>Log out</li>
+        <li><a id="profile-mypage" href="/#!curator=profileUrl">My page</a></li>
+        <li><a href="./">Studio</a></li>
+        <li><a href="/#!settings">Settings</a></li>
+        <li><a id="profile-logout" href="/api/login">Log out</a></li>
       </ul>
     </li>
   </ul>
@@ -87,9 +65,9 @@
 
 <div id="studio-nav">
 <div class="studio-nav-wrap">
-<h3><a href="index.html">Studio</a></h3>
+<h3><a href="./">Studio</a></h3>
 <ul>
-<li class="on"><span><a href="index.html">My Channels</a></span></li>
+<li class="on"><span><a href="./">My Channels</a></span></li>
 </ul>
 </div>
 </div>
@@ -118,7 +96,7 @@
 <script id="channel-list-tmpl-item" type="text/x-jquery-tmpl">
 <li class="clearfix">
 <div class="photo-list">
-<a href="#" target="_blank">
+<a href="/#!${id}" target="_blank">
 {{if moreImageUrl_1 == 'images/episode_default1.png'}}
 <span>No Episodes</span>
 {{/if}}
@@ -173,46 +151,49 @@
 
 <!--============================== footer start ==============================-->
 <p id="footer-control"></p>
-
 <div id="footer">
-	<ul id="footer-list">
-		<li>
-			<p class="select-txt">About Us</p>
-			<p class="select-btn"></p>
-			<ul class="select-list">
-				<li>About us</li>
-				<li>Help</li>
-				<li>Report</li>
-				<li>Terms & Policy</li>
-				<li>Contact us</li>
-				<li>Partners</li>
-				<li>Curators</li>
-				<li>Press</li>
-				<li>Curation Contest</li>
-			</ul>
-		</li>
-		<li>
-			<p class="select-txt">Language</p>
-			<p class="select-btn"></p>
-			<ul class="select-list">
-				<li>English</li>
-				<li>中文</li>
-			</ul>
-		</li>
-		<li>
-			<p class="select-txt">Region</p>
-			<p class="select-btn"></p>
-			<ul class="select-list">
-				<li>US</li>
-				<li>Taiwan</li>
-			</ul>
-		</li>
-	</ul>
+  <ul id="footer-list">
+    <li>
+      <p class="select-txt">About Us</p>
+      <p class="select-btn"></p>
+      <ul class="select-list">
+        <li><a href="/#!about=about">About us</a></li>
+        <li><a href="/#!about=help">Help</a></li>
+        <li><a href="/#!about=report">Report</a></li>
+        <li><a href="/#!about=terms">Terms & Policy</a></li>
+        <li><a href="/#!about=contact">Contact us</a></li>
+        <li><a href="/#!about=partners">Partners</a></li>
+        <li><a href="/#!about=curators">Curators</a></li>
+        <li><a href="/#!about=press">Press</a></li>
+        <li><a href="/#!about=contest">Curation Contest</a></li>
+      </ul>
+    </li>
+    <li>
+      <p class="select-txt">Language</p>
+      <p class="select-btn"></p>
+      <ul class="select-list">
+        <li>English</li>
+        <li>中文</li>
+      </ul>
+    </li>
+  </ul>
 </div>
 <!--============================== footer close ==============================-->
 
 <div id="overlay-s">
 <p class="overlay-content"><span class="overlay-right"><span class="overlay-middle">Saving...</span></span></p>
+</div>
+
+<div id="system-error" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">You are not authorized to edit this channel.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
 </div>
 
 <div id="delete-prompt" class="lightbox-content overlay-l">
@@ -222,6 +203,19 @@
 <p class="content">Are you sure you want to delete this channel? All data will be removed permanently.</p>
 <div class="overlay-btn">
 <p class="btns btn-del"><span><a href="#">Delete</a></span></p>
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+<div class="overlay-btn">
+<p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
 <p class="btns btn-no"><span><a href="#">No</a></span></p>
 </div>
 </div>

@@ -1,9 +1,6 @@
 $(function () {
     scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
     setFormHeight();
-    if ($('#uploadThumbnail').length > 0) {
-        uploadImage();
-    }
 
     // common unblock
     $('body').keyup(function (e) {
@@ -25,6 +22,63 @@ $(function () {
         if ($('body').hasClass('has-error')) {
             location.replace('index.html');
         }
+        return false;
+    });
+
+    // leave and unsave
+    function confirmExit() {
+        if ($('body').hasClass('has-change')) {
+            return 'Unsaved changes will be lost, are you sure you want to leave?';
+        }
+    }
+    window.onbeforeunload = confirmExit;
+    $('body').removeClass('has-change');
+    $('#settingForm').change(function () {
+        $('body').addClass('has-change');
+    });
+    $('#header #logo, #header a, #studio-nav a, #content-nav a, #footer a').click(function (e) {
+        if ($('body').hasClass('has-change')) {
+            if (e && $(e.target).attr('href')) {
+                $('body').data('leaveUrl', $(e.target).attr('href'));
+            }
+            if (e && $(e.target).attr('id')) {
+                $('body').data('leaveId', $(e.target).attr('id'));
+            }
+            $.blockUI.defaults.overlayCSS.opacity = '0.9';
+            $.blockUI({
+                message: $('#unsave-prompt')
+            });
+            return false;
+        }
+    });
+    $('#settingForm .btn-cancel').click(function () {
+        var fm = document.settingForm;
+        if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
+            $('body').addClass('has-change');
+        }
+        if ($('body').hasClass('has-change')) {
+            $('body').data('leaveUrl', 'index.html');
+            $.blockUI.defaults.overlayCSS.opacity = '0.9';
+            $.blockUI({
+                message: $('#unsave-prompt')
+            });
+        } else {
+            location.href = 'index.html';
+        }
+        return false;
+    });
+    $('#unsave-prompt .btn-leave').click(function () {
+        $('body').removeClass('has-change');
+        $.unblockUI();
+        if ('' != $('body').data('leaveId') && -1 !== $.inArray($('body').data('leaveId'), ['logo', 'profile-logout'])) {
+            $('#' + $('body').data('leaveId')).trigger('click');
+        } else {
+            location.href = $('body').data('leaveUrl');
+        }
+        return false;
+    });
+    $('.unblock, .btn-close, .btn-no').click(function () {
+        $.unblockUI();
         return false;
     });
 
@@ -114,6 +168,7 @@ $(function () {
         return false;
     });
     $('#settingForm').on('click', '.select .select-list li', function () {
+        $('body').addClass('has-change');
         var selectOption = $(this).text();
         var metadata = $(this).data('meta');
         // region (sphere) relate to category
@@ -125,7 +180,7 @@ $(function () {
                 $('#browse-category').html('');
                 var sphere = metadata;
                 if ('other' === sphere) { sphere = 'en'; }
-                nn.api('GET', '/api/categories', { lang: sphere }, function (categories) {
+                nn.api('GET', '/api/categories?anticache=' + (new Date()).getTime(), { lang: sphere }, function (categories) {
                     $.each(categories, function (i, list) {
                         CMS_CONF.CATEGORY_MAP[list.id] = list.name;
                     });
@@ -141,7 +196,7 @@ $(function () {
         }
         // category relate to tags
         if ('browse-category' === $(this).parent().attr('id')) {
-            nn.api('GET', '/api/tags', { categoryId: metadata }, function (tags) {
+            nn.api('GET', '/api/tags?anticache=' + (new Date()).getTime(), { categoryId: metadata }, function (tags) {
                 $('#tag-list').html('');
                 if (tags && tags.length > 0) {
                     $('.tag-list').removeClass('hide');
@@ -170,6 +225,7 @@ $(function () {
 
     // channel form tag
     $('#tag-list').on('click', 'li span a', function () {
+        $('body').addClass('has-change');
         var temp = [];
         var currentTags = $('#tag').val();
         var clickedTag = $.trim($(this).text());
@@ -198,25 +254,10 @@ $(function () {
     });
 
     // channel form button
-    $('#settingForm .btn-cancel').click(function () {
-        $.blockUI.defaults.overlayCSS.opacity = '0.9';
-        $.blockUI({
-            message: $('#unsave-prompt')
-        });
-        return false;
-    });
-    $('#unsave-prompt .btn-leave').click(function () {
-        $.unblockUI();
-        location.href = 'index.html';
-        return false;
-    });
-    $('.unblock, .btn-close, .btn-no').click(function () {
-        $.unblockUI();
-        return false;
-    });
     $('#settingForm .btn-save').click(function () {
         // update mode
         if (chkData(document.settingForm) && CMS_CONF.USER_DATA.id && $(this).hasClass('enable') && CMS_CONF.USER_URL.param('id') > 0) {
+            $('#overlay-s .overlay-middle').html('Saving...');
             $('#overlay-s').fadeIn();
             $('#overlay-s .overlay-content').css('margin-left', '-43px');
             nn.on(400, function (jqXHR, textStatus) {
@@ -224,9 +265,14 @@ $(function () {
                     alert(textStatus + ': ' + jqXHR.responseText);
                 });
             });
-            var parameter = $('#settingForm').serialize();
+            var qrystring = $('#settingForm').serialize(),
+                parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
             nn.api('PUT', '/api/channels/' + CMS_CONF.USER_URL.param('id'), parameter, function (data) {
-                location.href = 'index.html';
+                $('#overlay-s').hide();
+                $('#overlay-s .overlay-middle').html('Changes were saved successfully');
+                $('#overlay-s .overlay-content').css('margin-left', '-132px');
+                $('#overlay-s').fadeIn().delay(3000).fadeOut();
+                $('body').removeClass('has-change');
             });
         }
         return false;
@@ -234,6 +280,7 @@ $(function () {
     $('#settingForm .btn-create').click(function () {
         // insert mode
         if (chkData(document.settingForm) && CMS_CONF.USER_DATA.id && $(this).hasClass('enable')) {
+            $('#overlay-s .overlay-middle').html('Saving...');
             $('#overlay-s').fadeIn();
             $('#overlay-s .overlay-content').css('margin-left', '-43px');
             nn.on(400, function (jqXHR, textStatus) {
@@ -241,9 +288,17 @@ $(function () {
                     alert(textStatus + ': ' + jqXHR.responseText);
                 });
             });
-            var parameter = $('#settingForm').serialize();
+            // note: channel-add.html hard code hidden field isPublic=true
+            var qrystring = $('#settingForm').serialize(),
+                parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
             nn.api('POST', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels', parameter, function (data) {
-                location.href = 'index.html';
+                $('#overlay-s').hide();
+                $('#overlay-s .overlay-middle').html('Changes were saved successfully');
+                $('#overlay-s .overlay-content').css('margin-left', '-132px');
+                $('#overlay-s').fadeIn().delay(3000).fadeOut(function () {
+                    $('body').removeClass('has-change');
+                    location.href = 'index.html';
+                });
             });
         }
         return false;
@@ -256,6 +311,11 @@ $(function () {
         setFormHeight();
         scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
     });
+
+    // Amazon S3 upload
+    if ($('#uploadThumbnail').length > 0) {
+        uploadImage();
+    }
 });
 
 function chkData(fm) {
@@ -309,8 +369,8 @@ function uploadImage() {
         'size':   20485760,
         'acl':    'public-read'
     };
-    nn.api('GET', '/api/s3/attributes', parameter, function (s3attr) {
-        var timestamp = (new Date()).getTime(); // 產生 timestamp 作為上傳檔名
+    nn.api('GET', '/api/s3/attributes?anticache=' + (new Date()).getTime(), parameter, function (s3attr) {
+        var timestamp = (new Date()).getTime();
         var handlerFileDialogStart = function () {
             $('.upload-img .upload-notice').addClass('hide');
         };
@@ -367,25 +427,23 @@ function uploadImage() {
             file_size_limit:            parameter['size'],
             file_types:                 '*.jpg; *.png; *.gif',
             file_types_description:     'Thumbnail',
-            file_post_name:             'file', // hardcode
-            button_placeholder:         $('#uploadThumbnail').get(0), // 按鈕放置處的 DOM
-            button_image_url:           'images/btn-load.png', // 按鈕的圖檔，四幅式
+            file_post_name:             'file',
+            button_placeholder:         $('#uploadThumbnail').get(0),
+            button_image_url:           'images/btn-load.png',
             button_width:               '129',
             button_height:              '29',
             button_text:                '<span class="uploadstyle">Upload</span>',
-            button_text_style:          '.uploadstyle { color: #777777; font-family: Helvetica; font-size: 15px; text-align: center; }',
-            button_action:              SWFUpload.BUTTON_ACTION.SELECT_FILE, // hardcode
-            button_cursor:              SWFUpload.CURSOR.HAND, // hardcode
-            button_window_mode :        SWFUpload.WINDOW_MODE.TRANSPARENT, // hardcode
+            button_text_style:          '.uploadstyle { color: #777777; font-family: Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
+            button_action:              SWFUpload.BUTTON_ACTION.SELECT_FILE,
+            button_cursor:              SWFUpload.CURSOR.HAND,
+            button_window_mode :        SWFUpload.WINDOW_MODE.TRANSPARENT,
             http_success :              [ 201 ],
-            // 名種 callback 函式 //
             file_dialog_start_handler:  handlerFileDialogStart,
             upload_progress_handler:    handlerUploadProgress,
             upload_success_handler:     handlerUploadSuccess,
             upload_error_handler:       handlerUploadError,
             file_queued_handler:        handlerFileQueue,
             file_queue_error_handler:   handlerFileQueueError,
-            // Debug Mode //
             debug:                      false
         };
         var swfu = new SWFUpload(settings);

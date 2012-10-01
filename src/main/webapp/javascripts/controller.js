@@ -1,5 +1,5 @@
-/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document */
-/* jslint eqeq: true, unparam: true, sloppy: true, todo: true, vars: true */
+/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo */
+/* jslint eqeq: true, regexp: true, unparam: true, sloppy: true, todo: true, vars: true */
 var CMS_CONF = {
     IS_DEBUG: true,
     YOUR_FAVORITE: 11,
@@ -28,6 +28,7 @@ var CMS_CONF = {
 };
 
 nn.initialize();
+nn.debug(CMS_CONF.IS_DEBUG);
 nn.on(400, function (jqXHR, textStatus) {
     if (CMS_CONF.IS_DEBUG) {
         alert(textStatus + ': ' + jqXHR.responseText);
@@ -39,6 +40,9 @@ nn.on(401, function (jqXHR, textStatus) {
 });
 nn.on(403, function (jqXHR, textStatus) {
     location.replace('index.html');
+});
+nn.on(404, function (jqXHR, textStatus) {
+    // nothing to do
 });
 nn.on(500, function (jqXHR, textStatus) {
     if (CMS_CONF.IS_DEBUG) {
@@ -56,6 +60,8 @@ $(function () {
             } else {
                 CMS_CONF.USER_DATA = user;
                 var userUrlFile = CMS_CONF.USER_URL.attr('file');
+                $('#selected-profile').text(CMS_CONF.USER_DATA.name);
+                $('#profile-mypage').attr('href', '/#!curator=' + CMS_CONF.USER_DATA.profileUrl);
                 if ('' === userUrlFile || 'index.html' === userUrlFile) {
                     listChannel();
                 }
@@ -115,7 +121,7 @@ function buildEpcurateCuration(fm, crumb) {
             return;
         }
         if (cid > 0 && !isNaN(cid) && CMS_CONF.USER_DATA.id) {
-            nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels', null, function (data) {
+            nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
                 var channelIds = [];
                 if (data.length > 0) {
                     $.each(data, function (i, list) {
@@ -172,7 +178,7 @@ function buildEpcurateCuration(fm, crumb) {
                 });
                 return;
             }
-            nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels', null, function (data) {
+            nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
                 var channelIds = [];
                 if (data.length > 0) {
                     $.each(data, function (i, list) {
@@ -201,66 +207,94 @@ function buildEpcurateCuration(fm, crumb) {
                     crumb = $.extend({}, crumb, episode);
                     $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
                     // merge 9x9 api and youtube api (ytId, uploader, uploadDate, isZoneLimited, isMobileLimited, isEmbedLimited)
-                    // TODO async order bug subSeq
                     // TODO GET /api/programs/{programId}/title_cards or GET /api/episodes/{episodeId}/title_cards
                     var normalPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
                         programItem = {},
                         programList = [],
+                        invalidList = [],
                         ytData = null,
                         ytItem = {},
                         ytList = [];
-                    nn.api('GET', '/api/episodes/' + $('#id').val() + '/programs', null, function (programs) {
+                    nn.api('GET', '/api/episodes/' + $('#id').val() + '/programs?anticache=' + (new Date()).getTime(), null, function (programs) {
                         $.each(programs, function (idx, programItem) {
                             if (normalPattern.test(programItem.fileUrl)) {
                                 programList.push(programItem);
                             }
                         });
                         $.each(programList, function (idx, programItem) {
-                            $.ajax({
-                                type: 'GET',
-                                url: 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.substr(-11) + '?alt=jsonc&v=2',
-                                data: null,
-                                dataType: 'json',
-                                success: function (youtubes) {
-                                    ytData = youtubes.data;
-                                    ytItem = {
-                                        ytId: ytData.id,
-                                        fileUrl: programItem.fileUrl,
-                                        imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
-                                        duration: ytData.duration,
-                                        name: ytData.title,
-                                        intro: ytData.description,
-                                        uploader: ytData.uploader,
-                                        uploadDate: ytData.uploaded,    // TODO conver uploaded to timestamp
-                                        isZoneLimited: ((ytData.restrictions) ? true : false),
-                                        isMobileLimited: ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false),
-                                        isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
-                                    };
-                                    ytItem = $.extend(programItem, ytItem);
-                                    ytList.push(ytItem);
-                                    if (idx === (programList.length - 1)) {
-                                        // setTimeout ON PURPOSE to wait api (async)
-                                        setTimeout(function () {
-                                            $('#storyboard-list-tmpl-item').tmpl(ytList, {
-                                                durationConverter: function (duration) {
-                                                    var durationMin = parseInt(duration / 60, 10).toString(),
-                                                        durationSec = parseInt(duration % 60, 10).toString();
-                                                    if (durationMin.length < 2) {
-                                                        durationMin = '0' + durationMin;
-                                                    }
-                                                    if (durationSec.length < 2) {
-                                                        durationSec = '0' + durationSec;
-                                                    }
-                                                    return durationMin + ':' + durationSec;
+                            nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
+                                invalidList.push(programItem.fileUrl);
+                                nn.log(textStatus + ': ' + jqXHR.responseText, 'warning');
+                                nn.log(programItem.fileUrl, 'debug');
+                                $('#videourl').val(invalidList.join('\n'));
+                                $('#cur-add .notice').text('Invalid URL, please try again!').removeClass('hide').show();
+                                if (idx === (programList.length - 1)) {
+                                    // setTimeout ON PURPOSE to wait api (async)
+                                    setTimeout(function () {
+                                        $('#storyboard-list-tmpl-item').tmpl(ytList, {
+                                            durationConverter: function (duration) {
+                                                var durationMin = parseInt(duration / 60, 10).toString(),
+                                                    durationSec = parseInt(duration % 60, 10).toString();
+                                                if (durationMin.length < 2) {
+                                                    durationMin = '0' + durationMin;
                                                 }
-                                            }).prependTo('#storyboard-list');
+                                                if (durationSec.length < 2) {
+                                                    durationSec = '0' + durationSec;
+                                                }
+                                                return durationMin + ':' + durationSec;
+                                            }
+                                        }).prependTo('#storyboard-list');
+                                        if ($('#storyboard-list li').length > 0) {
                                             $('.form-btn .btn-save').removeClass('disable');
                                             $('#form-btn-save').removeAttr('disabled');
-                                            sumStoryboardInfo();
-                                        }, 1000);
-                                    }
+                                        }
+                                        sumStoryboardInfo();
+                                        $('.ellipsis').ellipsis();
+                                    }, 1000);
                                 }
                             });
+                            nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.substr(-11) + '?alt=jsonc&v=2', null, function (youtubes) {
+                                ytData = youtubes.data;
+                                ytItem = {
+                                    ytId: ytData.id,
+                                    fileUrl: programItem.fileUrl,
+                                    imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
+                                    duration: ytData.duration,
+                                    name: ytData.title,
+                                    intro: ytData.description,
+                                    uploader: ytData.uploader,
+                                    uploadDate: ytData.uploaded,    // TODO conver uploaded to timestamp
+                                    isZoneLimited: ((ytData.restrictions) ? true : false),
+                                    isMobileLimited: ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false),
+                                    isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
+                                };
+                                ytItem = $.extend(programItem, ytItem);
+                                ytList[idx] = ytItem;
+                                if (idx === (programList.length - 1)) {
+                                    // setTimeout ON PURPOSE to wait api (async)
+                                    setTimeout(function () {
+                                        $('#storyboard-list-tmpl-item').tmpl(ytList, {
+                                            durationConverter: function (duration) {
+                                                var durationMin = parseInt(duration / 60, 10).toString(),
+                                                    durationSec = parseInt(duration % 60, 10).toString();
+                                                if (durationMin.length < 2) {
+                                                    durationMin = '0' + durationMin;
+                                                }
+                                                if (durationSec.length < 2) {
+                                                    durationSec = '0' + durationSec;
+                                                }
+                                                return durationMin + ':' + durationSec;
+                                            }
+                                        }).prependTo('#storyboard-list');
+                                        if ($('#storyboard-list li').length > 0) {
+                                            $('.form-btn .btn-save').removeClass('disable');
+                                            $('#form-btn-save').removeAttr('disabled');
+                                        }
+                                        sumStoryboardInfo();
+                                        $('.ellipsis').ellipsis();
+                                    }, 1000);
+                                }
+                            }, 'json');
                         });
                     });
                     $('#epcurate-nav-info, #epcurate-nav-publish, #form-btn-save, #form-btn-back, #form-btn-next').click(function (e) {
@@ -303,7 +337,7 @@ function buildEpcuratePublish(fm, crumb) {
             });
             return;
         }
-        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels', null, function (data) {
+        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
             var channelIds = [];
             if (data.length > 0) {
                 $.each(data, function (i, list) {
@@ -329,7 +363,7 @@ function buildEpcuratePublish(fm, crumb) {
                     });
                     return;
                 }
-                nn.api('GET', '/api/episodes/' + $('#id').val() + '/programs', null, function (programs) {
+                nn.api('GET', '/api/episodes/' + $('#id').val() + '/programs?anticache=' + (new Date()).getTime(), null, function (programs) {
                     $('#img-list-tmpl-item').tmpl(programs).appendTo('#img-list');
                     if ('' != episode.imageUrl) {
                         var hasMatch = false;
@@ -382,7 +416,7 @@ function buildEpcurateInfo(fm, crumb) {
     if ('' == eid) {
         // insert mode: data from cookie
         if (cid > 0 && !isNaN(cid) && CMS_CONF.USER_DATA.id) {
-            nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels', null, function (data) {
+            nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
                 var channelIds = [];
                 if (data.length > 0) {
                     $.each(data, function (i, list) {
@@ -439,7 +473,7 @@ function buildEpcurateInfo(fm, crumb) {
                 });
                 return;
             }
-            nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels', null, function (data) {
+            nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
                 var channelIds = [];
                 if (data.length > 0) {
                     $.each(data, function (i, list) {
@@ -479,7 +513,7 @@ function buildEpcurateInfo(fm, crumb) {
 
 function listEpisode(id) {
     if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
-        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels', null, function (data) {
+        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
             var channelIds = [];
             if (data.length > 0) {
                 $.each(data, function (i, list) {
@@ -498,11 +532,10 @@ function listEpisode(id) {
             nn.api('GET', '/api/channels/' + id, null, function (channel) {
                 // setup channel data
                 $('#episode-nav-tmpl').tmpl(channel).appendTo('#content-nav');
-                $('#channel-name').text(channel.name);
-                $('#episode-curate').attr('href', 'epcurate-info.html?cid=' + id);
+                $('#title-func-tmpl').tmpl(channel).appendTo('#title-func');
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                     $('#title-func p').remove();
-                    nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/my_favorites', null, function (favorites) {
+                    nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/my_favorites?anticache=' + (new Date()).getTime(), null, function (favorites) {
                         var cntEpisode = favorites.length;
                         $('#episode-counter').html(cntEpisode);
                         $('#content-main-wrap .constrain').html('');
@@ -522,6 +555,17 @@ function listEpisode(id) {
                                              + ((hour >= 10) ? hour : '0' + hour) + ':'
                                              + ((min >= 10) ? min : '0' + min);
                                     return time;
+                                },
+                                durationConverter: function (duration) {
+                                    var durationMin = parseInt(duration / 60, 10).toString(),
+                                        durationSec = parseInt(duration % 60, 10).toString();
+                                    if (durationMin.length < 2) {
+                                        durationMin = '0' + durationMin;
+                                    }
+                                    if (durationSec.length < 2) {
+                                        durationSec = '0' + durationSec;
+                                    }
+                                    return durationMin + ':' + durationSec;
                                 }
                             }).appendTo('#episode-list');
                             autoHeight();
@@ -531,7 +575,7 @@ function listEpisode(id) {
                         }
                     });
                 } else {
-                    nn.api('GET', '/api/channels/' + id + '/episodes', null, function (episodes) {
+                    nn.api('GET', '/api/channels/' + id + '/episodes?anticache=' + (new Date()).getTime(), null, function (episodes) {
                         var cntEpisode = episodes.length;
                         $('#episode-counter').html(cntEpisode);
                         $('#content-main-wrap .constrain').html('');
@@ -551,6 +595,17 @@ function listEpisode(id) {
                                              + ((hour >= 10) ? hour : '0' + hour) + ':'
                                              + ((min >= 10) ? min : '0' + min);
                                     return time;
+                                },
+                                durationConverter: function (duration) {
+                                    var durationMin = parseInt(duration / 60, 10).toString(),
+                                        durationSec = parseInt(duration % 60, 10).toString();
+                                    if (durationMin.length < 2) {
+                                        durationMin = '0' + durationMin;
+                                    }
+                                    if (durationSec.length < 2) {
+                                        durationSec = '0' + durationSec;
+                                    }
+                                    return durationMin + ':' + durationSec;
                                 }
                             }).appendTo('#episode-list');
                             autoHeight();
@@ -588,7 +643,7 @@ function listEpisode(id) {
 
 function updateChannel(id) {
     if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
-        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels', null, function (data) {
+        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
             var channelIds = [];
             if (data.length > 0) {
                 $.each(data, function (i, list) {
@@ -620,6 +675,7 @@ function updateChannel(id) {
                 $('#channel-name').text(channel.name);
                 $('#name').val(channel.name);
                 $('#imageUrl').val(channel.imageUrl);
+                $('#imageUrlOld').val(channel.imageUrl);
                 if ('' != $.trim(channel.imageUrl)) {
                     $('#thumbnail-imageUrl').attr('src', channel.imageUrl + '?n=' + Math.random());
                 }
@@ -634,7 +690,7 @@ function updateChannel(id) {
                     $('.category').removeClass('disable').addClass('enable');
                     var sphere = channel.sphere;
                     if ('other' === sphere) { sphere = 'en'; }
-                    nn.api('GET', '/api/categories', { lang: sphere }, function (categories) {
+                    nn.api('GET', '/api/categories?anticache=' + (new Date()).getTime(), { lang: sphere }, function (categories) {
                         $.each(categories, function (i, list) {
                             CMS_CONF.CATEGORY_MAP[list.id] = list.name;
                         });
@@ -647,7 +703,7 @@ function updateChannel(id) {
                         if ('' != channel.categoryId && CMS_CONF.CATEGORY_MAP[channel.categoryId]) {
                             $('.tag-list').removeClass('hide');
                             $('#categoryId-select-txt').text(CMS_CONF.CATEGORY_MAP[channel.categoryId]);
-                            nn.api('GET', '/api/tags', { categoryId: channel.categoryId }, function (tags) {
+                            nn.api('GET', '/api/tags?anticache=' + (new Date()).getTime(), { categoryId: channel.categoryId }, function (tags) {
                                 $('#tag-list').html('');
                                 if (tags && tags.length > 0) {
                                     $('.tag-list').removeClass('hide');
@@ -690,7 +746,7 @@ function createChannel() {
 
 function listChannel() {
     if (CMS_CONF.USER_DATA.id) {
-        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels', null, function (channels) {
+        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (channels) {
             var cntChannel = channels.length;
             $('#channel-counter').html(cntChannel);
             if (cntChannel > 0) {

@@ -52,15 +52,19 @@ $(function () {
         $(".dropdown").parents("li").removeClass("on").children(".on").removeClass("on");
     });
 
-    /* Header Browse Dropdown */
-    $("#browse").click(function (event) {
-        showDropdown("#browse");
-        $('#footer p.select-btn').removeClass('on');
-        event.stopPropagation();
+    $('#logo').click(function () {
+        if (!$('body').hasClass('has-change')) {
+            location.href = '/';
+            return false;
+        }
     });
-    $("#browse-dropdown li").click(function () {
-        $("#browse").removeClass("on");
-        $("#browse-dropdown").hide();
+    $('#profile-logout').click(function () {
+        if (!$('body').hasClass('has-change')) {
+            nn.api('DELETE', '/api/login', null, function (data) {
+                location.href = '/';
+            });
+            return false;            
+        }
     });
 
     // Header Profile Dropdown

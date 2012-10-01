@@ -3,27 +3,59 @@
  *
  * Please refer to http://202.5.224.193/louis/9x9-sdk-usage/ for usage
  *
+ * ChangeLog:
+ *
+ *   + 2012-08-23 v0.0.1 by Louis
+ *     - first version
+ *     - api(), log(), i18n()
+ *
+ *   + 2012-09-27 v0.0.2 by Louis
+ *     - nn.on() multiple hook
+ *     - nn.api() supports YouTube API
+ *
+ *   + 2012-10-01 v0.0.3 by Louis
+ *     - nn.when()
+ *     - disable ajax cache
+ *
+ * download url:
+ *
+ *   http://dev.teltel.com/louis/9x9-sdk-usage/js/release/v0.0.2/nn-sdk.js
+ *
  * @author	Louis Jeng <louis.jeng@9x9.tv>
- * @version	0.0.1
- * @since	2012-08-23
+ * @version	0.0.2
+ * @since	2012-09-28
  */
 
 var nn = { };
 
 (function(nn) {
 	
-	nn.initialize = function() {
-		// NOTE: 'this' is denote 'nn' object itself, but not always.
+	nn.initialize = function(callback) {
+		// NOTE: 'this' is denote 'nn' object itself, but not always does.
+        
+        if (typeof $ == 'undefined') {
+            nn.log('nn: jQuery is missing!', 'error');
+            return;
+        }
 		
 		nn.log('nn: initialized');
+        
+        if (typeof callback == 'function') {
+            return callback(nn);
+        }
+        return nn;
 	};
 	
 	nn.log = function(message, type) {
-		
-		if (!window.console || !window.console.log || !console || !console.log)
-			return;
-
-
+	
+        var blackbird = function() { };
+        
+        if ((typeof window == 'undefined' || typeof window.console == 'undefined' || typeof window.console.log == 'undefined') &&
+            (typeof console == 'undefined' || typeof console.log == 'undefined')) {
+            
+            return;
+        }
+        
 		if (typeof type == 'undefined') {
 			type = 'info';
 		} else if (typeof nn.logTypes[type] == 'undefined') {
@@ -60,7 +92,7 @@ var nn = { };
 				if (typeof console.debug == 'function') {
 					console.debug(message);
 				} else if (typeof console.log == 'function') {
-					console.log('[v] ' + message);
+					console.log(message);
 				}
 				break;
 				
@@ -69,7 +101,7 @@ var nn = { };
 		}
 	};
 	
-	nn.api = function(method, resourceURI, parameter, callback) {
+	nn.api = function(method, resourceURI, parameter, callback, dataType) {
 		
 		nn.log('nn.api: ' + method + ' "' + resourceURI + '"');
 		nn.log(parameter, 'debug');
@@ -81,27 +113,45 @@ var nn = { };
 		
 		var localParameter = null;
 		var localCallback = null;
-		
+        var localDataType = null;
+        
 		if (typeof parameter == 'function') {
 			localCallback = parameter;
-		} else if (typeof parameter != 'undefined') {
+            if (typeof callback == 'string') {
+                localDataType = callback;
+                nn.log('dataType = ' + localDataType);
+            }
+		} else if (typeof parameter == 'object' || (typeof parameter == 'string' && 
+                                                    $.inArray(parameter, [ 'xml', 'html', 'script', 'json', 'text' ]) < 0)) {
+            
 			localParameter = parameter;
-			if (typeof callback == 'function')
+			if (typeof callback == 'function') {
 				localCallback = callback;
-		}
+                if (typeof dataType == 'string') {
+                    localDataType = dataType;
+                    nn.log('dataType = ' + localDataType);
+                }
+            } else if (typeof callback == 'string') {
+                    localDataType = callback;
+                    nn.log('dataType = ' + localDataType);
+            }
+		} else if (typeof parameter == 'string') {
+            
+            localDataType = parameter;
+            nn.log('dataType = ' + localDataType);
+        }
 		
-		var jqAjax = $.ajax({
+		var _dfd = $.ajax({
 			'url':        resourceURI,
 			'type':       method,
+            'cache':      false,
 			'data':       localParameter,
+            'dataType':   localDataType,
 			'statusCode': nn.apiHooks,
 			'success': function(data, textStatus, jqXHR) {
 				nn.log('nn.api: HTTP ' + jqXHR.status + ' ' + jqXHR.statusText);
 				nn.log('nn.api: textStatus = ' + textStatus, 'debug');
 				nn.log(data, 'debug');
-				if (typeof localCallback == 'function') {
-					localCallback(data);
-				}
 			},
 			'error': function(jqXHR, textStatus) {
 				nn.log('nn.api: ' + jqXHR.status + ' ' + jqXHR.statusText, 'warning');
@@ -109,9 +159,55 @@ var nn = { };
 				nn.log('nn.api: responseText = ' + jqXHR.responseText);
 			}
 		});
+        if (typeof localCallback == 'function') {
+            
+            _dfd.done(localCallback);
+        }
 		
-		return jqAjax.promise();
+		return _dfd.promise();
 	};
+    
+    nn.when = function(promises) {
+        
+        var _dfd = $.Deferred();
+        var count = promises.length;
+        
+        if (!$.isArray(promises)) {
+            nn.log('nn.when(): parameter error', 'error');
+            _dfd.reject();
+            return _dfd.promise();
+        }
+        
+        nn.log('nn.when(): ' + count + ' promises');
+        var resolved = true;
+        
+        $.each(promises, function(i, promise) {
+            
+            promise.done(function() {
+                
+                nn.log('nn.when(): promise ' + i + ' commited');
+                
+            }).fail(function() {
+                
+                nn.log('nn.when(): promise ' + i + ' not commited', 'warning');
+                resolved = false;
+                
+            }).always(function() {
+                
+                count = count - 1;
+                nn.log(count + ' promises left');
+                if (count == 0) {
+                    if (resolved) {
+                        _dfd.resolve();
+                    } else {
+                        _dfd.reject();
+                    }
+                }
+            });
+        });
+        
+        return _dfd.promise();
+    },
 	
 	nn.apiHooks = {
 		200: function(jqXHR, textStatus) { },
@@ -124,7 +220,11 @@ var nn = { };
 	};
 	
 	nn.on = function(type, hook) {
-		if (typeof nn.apiHooks[type] != 'undefined') {
+        if ($.isArray(type)) {
+            $.each(type, function(i, item) {
+                nn.on(item, hook);
+            });
+		} else if (typeof nn.apiHooks[type] != 'undefined') {
 			nn.log('nn.on: hook on [' + type + ']');
 			nn.apiHooks[type] = hook;
 		}
@@ -159,8 +259,19 @@ var nn = { };
 		'info':    true, // turns log on/off separately
 		'warning': true,
 		'error':   true,
-		'debug':   true
+		'debug':   false
 	};
+    
+    nn.debug = function(turnOn) {
+        if (typeof turnOn == 'undefined') {
+            return nn.logTypes['debug'];
+        }
+        if (turnOn) {
+            nn.logTypes['debug'] = true;
+        } else {
+            nn.logTypes['debug'] = false;
+        }
+    };
 	
 	nn.getFileTypeByName = function(name) {
 		

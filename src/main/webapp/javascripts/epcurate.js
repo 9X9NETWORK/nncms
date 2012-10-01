@@ -1,8 +1,5 @@
 $(function () {
     scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
-    if ($('#uploadThumbnail').length > 0) {
-        uploadImage();
-    }
 
     // common unblock
     $('body').keyup(function (e) {
@@ -23,43 +20,54 @@ $(function () {
     });
 
     // leave and unsave
-    var hasFormChange = false;
+    function confirmExit() {
+        if ($('body').hasClass('has-change')) {
+            return 'Unsaved changes will be lost, are you sure you want to leave?';
+        }
+    }
+    window.onbeforeunload = confirmExit;
+    $('body').removeClass('has-change');
     $('#epcurateForm').change(function () {
-        hasFormChange = true;
+        $('body').addClass('has-change');
     });
     $('#epcurate-nav-back').click(function () {
         var fm = document.epcurateForm;
-        if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
-            hasFormChange = true;
+        if ($('#name').length > 0 && '' != $('#name').val() && '' == $('#id').val()) {
+            $('body').addClass('has-change');
         }
-        if (hasFormChange) {
+        if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
+            $('body').addClass('has-change');
+        }
+        if ($('body').hasClass('has-change')) {
             $.blockUI.defaults.overlayCSS.opacity = '0.9';
             $.blockUI({
                 message: $('#unsave-prompt')
             });
-            return false;
         } else {
             location.href = $(this).attr('href');
-            return false;
         }
+        return false;
     });
     $('#content-wrap .form-btn').on('click', '#form-btn-leave', function () {
         var fm = document.epcurateForm;
-        if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
-            hasFormChange = true;
+        if ($('#name').length > 0 && '' != $('#name').val() && '' == $('#id').val()) {
+            $('body').addClass('has-change');
         }
-        if (hasFormChange) {
+        if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
+            $('body').addClass('has-change');
+        }
+        if ($('body').hasClass('has-change')) {
             $.blockUI.defaults.overlayCSS.opacity = '0.9';
             $.blockUI({
                 message: $('#unsave-prompt')
             });
-            return false;
         } else {
             location.href = $('#form-btn-leave').data('leaveUrl');
-            return false;
         }
+        return false;
     });
     $('#unsave-prompt .btn-leave').click(function () {
+        $('body').removeClass('has-change');
         $.unblockUI();
         location.href = $('#form-btn-leave').data('leaveUrl');
         return false;
@@ -71,9 +79,10 @@ $(function () {
 
     // save
     $('#epcurateForm').submit(function (e, src) {
-        var isInsertMode = ('' == $('#id').val());
+        var isInsertMode = ('' == $('#id').val()),
+            nextstep = 'epcurate-curation.html';
         // Episode Curation - Information
-        if ($(e.target).hasClass('info') && chkInfoData(this)) {
+        if ($(e.target).hasClass('info') && chkInfoData(this, src)) {
             $('#overlay-s .overlay-middle').html('Saving...');
             $('#overlay-s').fadeIn();
             $('#overlay-s .overlay-content').css('margin-left', '-43px');
@@ -86,12 +95,19 @@ $(function () {
                 $('#overlay-s .overlay-content').css('margin-left', '-132px');
                 $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
                     // redirect
+                    $('body').removeClass('has-change');
                     if (!src                                                                                        // from nature action
                             || (src && 'form-btn-save' === $(src.target).attr('id'))                                // from btn-save
-                            || (isInsertMode && (src && 'epcurate-nav-publish' === $(src.target).attr('id')))) {    // from insert mode and nav-publish
+                            || (src && 'epcurate-nav-publish' === $(src.target).attr('id'))) {                      // from insert mode and nav-publish
+                        if (src && 'epcurate-nav-publish' === $(src.target).attr('id')) {
+                            $('#system-error .content').html('Please curate some videos first.');
+                            $.blockUI.defaults.overlayCSS.opacity = '0.9';
+                            $.blockUI({
+                                message: $('#system-error')
+                            });
+                        }
                         return false;
                     } else {
-                        var nextstep = 'epcurate-curation.html';
                         if (src && '' !== $(src.target).attr('href')) {
                             nextstep = $(src.target).attr('href');
                         }
@@ -110,12 +126,11 @@ $(function () {
                     $('#overlay-s .overlay-content').css('margin-left', '-132px');
                     $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
                         // redirect
+                        $('body').removeClass('has-change');
                         if (!src                                                                                        // from nature action
-                                || (src && 'form-btn-save' === $(src.target).attr('id'))                                // from btn-save
-                                || (isInsertMode && (src && 'epcurate-nav-publish' === $(src.target).attr('id')))) {    // from insert mode and nav-publish
+                                || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
                             return false;
                         } else {
-                            var nextstep = 'epcurate-curation.html';
                             if (src && '' !== $(src.target).attr('href')) {
                                 nextstep = $(src.target).attr('href');
                             }
@@ -126,7 +141,7 @@ $(function () {
             }
         }
         // Episode Curation - Publish
-        if ($(e.target).hasClass('publish') && chkPublishData(this)) {
+        if ($(e.target).hasClass('publish') && chkPublishData(this, src)) {
             if ($('#id').val() > 0) {
                 $('#overlay-s .overlay-middle').html('Saving...');
                 $('#overlay-s').fadeIn();
@@ -141,11 +156,11 @@ $(function () {
                     $('#overlay-s .overlay-content').css('margin-left', '-132px');
                     $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
                         // redirect
+                        $('body').removeClass('has-change');
                         if (!src                                                                                        // from nature action
                                 || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
                             return false;
                         } else {
-                            var nextstep = 'epcurate-curation.html';
                             if (src && '' !== $(src.target).attr('href')) {
                                 nextstep = $(src.target).attr('href');
                             }
@@ -157,19 +172,32 @@ $(function () {
         }
         return false;
     });
+
+    // Amazon S3 upload
+    if ($('#uploadThumbnail').length > 0) {
+        uploadImage();
+    }
 });
 
-function chkPublishData(fm) {
+function chkPublishData(fm, src) {
     fm.imageUrl.value = $.trim(fm.imageUrl.value);
     return true;
 }
 
-function chkInfoData(fm) {
+function chkInfoData(fm, src) {
     fm.name.value = $.trim(fm.name.value);
     fm.intro.value = $.trim(fm.intro.value);
     if ('' === fm.name.value) {
         $('.fmfield .notice').removeClass('hide');
         fm.name.focus();
+        return false;
+    }
+    if ('' == $('#id').val() && src && 'epcurate-nav-publish' === $(src.target).attr('id')) {
+        $('#system-error .content').html('Please curate some videos first.');
+        $.blockUI.defaults.overlayCSS.opacity = '0.9';
+        $.blockUI({
+            message: $('#system-error')
+        });
         return false;
     }
     return true;
@@ -182,7 +210,7 @@ function uploadImage() {
         'size':   20485760,
         'acl':    'public-read'
     };
-    nn.api('GET', '/api/s3/attributes', parameter, function (s3attr) {
+    nn.api('GET', '/api/s3/attributes?anticache=' + (new Date()).getTime(), parameter, function (s3attr) {
         var timestamp = (new Date()).getTime();
         var handlerFileDialogStart = function () {
             $('.img-upload-func .highlight').addClass('hide');
@@ -252,16 +280,16 @@ function uploadImage() {
             file_size_limit:            parameter['size'],
             file_types:                 '*.jpg; *.png; *.gif',
             file_types_description:     'Thumbnail',
-            file_post_name:             'file', // hardcode
+            file_post_name:             'file',
             button_placeholder:         $('#uploadThumbnail').get(0),
             button_image_url:           'images/btn-load.png',
             button_width:               '129',
             button_height:              '29',
             button_text:                '<span class="uploadstyle">Upload</span>',
-            button_text_style:          '.uploadstyle { color: #777777; font-family: Helvetica; font-size: 15px; text-align: center; }',
-            button_action:              SWFUpload.BUTTON_ACTION.SELECT_FILE, // hardcode
-            button_cursor:              SWFUpload.CURSOR.HAND, // hardcode
-            button_window_mode :        SWFUpload.WINDOW_MODE.TRANSPARENT, // hardcode
+            button_text_style:          '.uploadstyle { color: #777777; font-family: Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
+            button_action:              SWFUpload.BUTTON_ACTION.SELECT_FILE,
+            button_cursor:              SWFUpload.CURSOR.HAND,
+            button_window_mode :        SWFUpload.WINDOW_MODE.TRANSPARENT,
             http_success :              [ 201 ],
             file_dialog_start_handler:  handlerFileDialogStart,
             upload_progress_handler:    handlerUploadProgress,
