@@ -1,5 +1,6 @@
 $(function () {
     scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
+    setFormWidth();
 
     // common unblock
     $('body').keyup(function (e) {
@@ -90,10 +91,7 @@ $(function () {
             if (isInsertMode) {
                 // save to cookie
                 $.cookie('cms-crumb', $(this).serialize());
-                $('#overlay-s').hide();
-                $('#overlay-s .overlay-middle').html('Changes were saved successfully');
-                $('#overlay-s .overlay-content').css('margin-left', '-132px');
-                $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
+                $('#overlay-s').fadeOut(1000, function () {
                     // redirect
                     $('body').removeClass('has-change');
                     if (!src                                                                                        // from nature action
@@ -121,10 +119,7 @@ $(function () {
                     intro: $('#intro').val()
                 };
                 nn.api('PUT', '/api/episodes/' + $('#id').val(), params, function (episode) {
-                    $('#overlay-s').hide();
-                    $('#overlay-s .overlay-middle').html('Changes were saved successfully');
-                    $('#overlay-s .overlay-content').css('margin-left', '-132px');
-                    $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
+                    $('#overlay-s').fadeOut(1000, function () {
                         // redirect
                         $('body').removeClass('has-change');
                         if (!src                                                                                        // from nature action
@@ -151,12 +146,10 @@ $(function () {
                     imageUrl: $('#imageUrl').val()
                 };
                 nn.api('PUT', '/api/episodes/' + $('#id').val(), params, function (episode) {
-                    $('#overlay-s').hide();
-                    $('#overlay-s .overlay-middle').html('Changes were saved successfully');
-                    $('#overlay-s .overlay-content').css('margin-left', '-132px');
-                    $('#overlay-s').fadeIn().delay(3000).fadeOut(0, function () {
+                    $('#overlay-s').fadeOut(1000, function () {
                         // redirect
                         $('body').removeClass('has-change');
+                        $('#imageUrlOld').val(episode.imageUrl);
                         if (!src                                                                                        // from nature action
                                 || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
                             return false;
@@ -201,6 +194,15 @@ function chkInfoData(fm, src) {
         return false;
     }
     return true;
+}
+
+function setFormWidth() {
+    var windowWidth  = $(window).width()
+
+    if (windowWidth > 1220) {
+        $('input.text').width(windowWidth - 600);
+        $('textarea.textarea').width(windowWidth - 610);
+    }
 }
 
 function uploadImage() {
@@ -258,7 +260,7 @@ function uploadImage() {
             }
             var postParams = {
                 "AWSAccessKeyId": s3attr['id'],
-                "key":            parameter['prefix'] + '-thumbnail-' + timestamp + '-' + file.size + file.type.toLowerCase(), // upload file name, TODO: need convention
+                "key":            parameter['prefix'] + '-thumbnail-' + timestamp + '-' + file.size + file.type.toLowerCase(),
                 "acl":            parameter['acl'],
                 "policy":         s3attr['policy'],
                 "signature":      s3attr['signature'],

@@ -385,15 +385,35 @@
     text-align: center;
 }
 
-#ep-list ul li .episode p.img       span,
-#ep-list ul li .episode p.no-img span {
+#ep-list ul li .episode p.img       span.duration,
+#ep-list ul li .episode p.no-img span.duration {
     display: block;
     position: absolute;
     bottom: 10px;
     right: 10px;
-    width: 32px;
+    float: right;
     height: 14px;
-    background: url(../images/time_box.png) no-repeat 0 0;
+    padding: 0 0 0 2px;
+    background: url(../images/time_box_left.png) no-repeat 0 0;
+}
+
+#ep-list ul li .episode p.img       span .time-right,
+#ep-list ul li .episode p.no-img span .time-right {
+    display: block;
+    float: left;
+    height: 14px;
+    margin: 0;
+    padding: 0 2px 0 0;
+    background: url(../images/time_box_right.png) no-repeat right 0;
+}
+
+#ep-list ul li .episode p.img       span .time-middle,
+#ep-list ul li .episode p.no-img span .time-middle {
+    display: block;
+    float: left;
+    height: 14px;
+    margin: 0;
+    background: url(../images/time_box_middle.png) repeat-x;
     color: #fff;
     font-size: 11px;
     line-height: 14px;

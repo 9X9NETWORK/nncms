@@ -1,3 +1,4 @@
+/* predefine global variables here: jQuery nn */
 /*jslint eqeq: true, sloppy: true, vars: true */
 /*!
  * jQuery Title Card Player plugin
@@ -6,9 +7,11 @@
  * @requires    jQuery UI v1.8.23 or later
  * @requires    9x9 SDK (nn-sdk.js)
  * @author      Chih-Wen Yang <chihwen@doubleservice.com>
- * @version     1.3.2
+ * @version     1.4.0
  *
  * - Change Log:
+ *      1.4.0:  2012/10/01 - 1. Adjusted html structure (added wrapper-middle div) for effect improvement.
+ *                           2. Setup all nn.log() to debug level for turn off console log by default.
  *      1.3.2:  2012/09/13 - 1. Adjusted duration distribution feature by effect kind (drop).
  *                           2. Adjusted effect hide behavior (immediate disappear no animate).
  *      1.3.1:  2012/09/13 - 1. Improved cancel (stop) feature.
@@ -53,11 +56,11 @@
  *     fontWeight: 'bold',
  *     backgroundColor: 'black',
  *     backgroundImage: 'http://ecample.com/sample.jpg'
- * }, function() {
+ * }, function () {
  *     // call back after title card played
  * });
  * // cancel playing title card and release resources
- * $('#canvas').titlecard('cancel', function() {});
+ * $('#canvas').titlecard('cancel', function () {});
  * </script>
  *
  * -------------------------------------------
@@ -110,13 +113,13 @@
                     $(this)
                         .clearQueue()
                         .stop()
-                        .children()
+                        .children()                                 // wrapper-outer
                             .clearQueue()
                             .stop()
-                            .children()
+                            .children()                             // wrapper-middle and img
                                 .clearQueue()
                                 .stop()
-                            .end()
+                            .end()                                  // wrapper-outer
                             .hide('fast', cancelCallback);
                 } else {
                     nn.log('param error nothing to do', 'error');
@@ -163,6 +166,7 @@
                 fontWeight = opts.fontWeight,
                 wrapperId = (this.id) ? (this.id + '-') : '',
                 wrapperOuter = wrapperId + 'wrapper-outer',
+                wrapperMiddle = wrapperId + 'wrapper-middle',
                 wrapperInner = wrapperId + 'wrapper-inner',
                 wrapperHtml = '';
 
@@ -184,10 +188,11 @@
 
             // basic html structure and css style
             wrapperHtml = '<div class="' + wrapperOuter + '">';
+            wrapperHtml += '<div class="' + wrapperMiddle + '"><div class="' + wrapperInner + '"></div></div>';
             if ('' != opts.backgroundImage) {
                 wrapperHtml += '<img src="' + opts.backgroundImage + '" style="width: 100%; height: 100%; border: none;" />';
             }
-            wrapperHtml += '<div class="' + wrapperInner + '"></div></div>';
+            wrapperHtml += '</div>';
             $this.show().wrapInner(wrapperHtml).children('.' + wrapperOuter).hide().css({
                 display: 'block',
                 position: 'relative',
@@ -196,6 +201,11 @@
                 width: width + 'px',
                 height: height + 'px',
                 backgroundColor: opts.backgroundColor
+            }).children('.' + wrapperMiddle).hide().css({
+                display: 'block',
+                position: 'absolute',
+                width: '100%',
+                height: '100%'
             }).children('.' + wrapperInner).hide().html(text).css({
                 display: 'block',
                 position: 'absolute',
@@ -211,8 +221,8 @@
             // vertical align
             var wrapWidth = $this.children('.' + wrapperOuter).width(),
                 wrapHeight = $this.children('.' + wrapperOuter).height(),
-                selfWidth = $this.children().children('.' + wrapperInner).width(),
-                selfHeight = $this.children().children('.' + wrapperInner).height(),
+                selfWidth = $this.children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).width(),
+                selfHeight = $this.children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).height(),
                 selfLeft = 0,
                 selfTop = 0;
             if (wrapWidth > selfWidth) {
@@ -221,7 +231,7 @@
             if (wrapHeight > selfHeight) {
                 selfTop = (wrapHeight - selfHeight) / 2;
             }
-            $this.children().children('.' + wrapperInner).css({
+            $this.children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).css({
                 top: selfTop + 'px',
                 left: selfLeft + 'px'
             });
@@ -263,12 +273,12 @@
             case 'scale':
             case 'shake':
             case 'slide':
-                $this.children().show(startStandbySec).children('.' + wrapperInner).hide().show(effect, {}, startSec).delay(delaySec).hide(effect, {}, endingSec, function () {
+                $this.children().show(startStandbySec).children('.' + wrapperMiddle).hide().show(effect, {}, startSec).delay(delaySec).hide(effect, {}, endingSec, function () {
                     $this.children().delay(endingStandbySec).hide(0, playedCallback);
                 });
                 break;
             case 'fade':
-                $this.children().show(startStandbySec).children('.' + wrapperInner).hide().fadeIn(startSec).delay(delaySec).fadeOut(endingSec, function () {
+                $this.children().show(startStandbySec).children('.' + wrapperMiddle).hide().fadeIn(startSec).delay(delaySec).fadeOut(endingSec, function () {
                     $this.children().delay(endingStandbySec).hide(0, playedCallback);
                 });
                 break;

@@ -268,14 +268,21 @@ abbr, acronym {
 }
 
 #nav li {
+	position: relative;
+	float: left;
 	height: 28px;
 	font-size: 14px;
 	line-height: 28px;
-	float: left;
-	position: relative;
 }
 
 #nav li a {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 54px;
+    height: 28px;
+    padding: 0 0 0 35px;
     color: #777;
     text-decoration: none;
 }
@@ -502,9 +509,16 @@ cursor: pointer;
 #profile-dropdown {
 width: 120px;
 }
+
 #profile-dropdown li {
-width: 102px;
+    width: 102px;
 }
+
+#profile-dropdown li a {
+    width: 84px;
+    padding: 0 9px;
+}
+
 .dropdown {
 width: 158px;
 border: #b2b2b2 1px solid;
@@ -669,27 +683,27 @@ background: #e4e4e4;
 
 #epcurate-nav .epcurate-nav-wrap ul li {
     float: left;
-    width: 133px;
-    height: 30px;
     margin: -5px -8px 0 0;
     background: url(../images/btn_nav.png) no-repeat 0 0;
-	font-weight: bold;
-    line-height: 30px;
-    text-align: center;
 }
 
-#epcurate-nav .epcurate-nav-wrap ul li.on {
-    background-position: 0 -45px;
-    color: #999;
-}
-
+#epcurate-nav .epcurate-nav-wrap ul li.on,
 #epcurate-nav .epcurate-nav-wrap ul li a {
+    display: block;
     position: relative;
+    width: 133px;
+    height: 30px;
+    line-height: 30px;
+    background: url(../images/btn_nav.png) no-repeat 0 0;
     color: #777;
+    font-weight: bold;
+    text-align: center;
     text-decoration: none;
 }
 
+#epcurate-nav .epcurate-nav-wrap ul li.on,
 #epcurate-nav .epcurate-nav-wrap ul li a:hover {
+    background-position: 0 -45px;
     color: #999;
 }
 
@@ -1090,6 +1104,7 @@ padding: 4px 10px 0;
 }
 
 #footer ul#footer-list li a {
+    display: block;
     color: #777;
     text-decoration: none;
 }

@@ -79,7 +79,7 @@ p.auto-height {
 }
 
 #loaded {
-    width: 50%;
+    width: 100%;
     height: 8px;
     background: #666;
     position: absolute;
@@ -89,7 +89,7 @@ p.auto-height {
 }
 
 #played {
-    width: 30%;
+    width: 0;
     height:8px;
     background: #aeaeae;
     position: absolute;
@@ -1440,16 +1440,6 @@ padding-right: 8px;
     background: url(../images/btn_switch_right_press.png) no-repeat 0 0;
 }
 
-#epcurate-curation .tab-content .result-list ul {
-/*
-    min-width: 610px;
-    position: absolute;
-    top: 10px;
-    left: 407px;
-*/
-	
-}
-
 #epcurate-curation .tab-content .result-list ul li {
 	position: relative;
     float: left;
@@ -1657,6 +1647,10 @@ padding-right: 8px;
     font-size: 13px;
 }
 
+#storyboard p.episode-storyboard {
+    margin-bottom: 36px;
+}
+
 #storyboard p span {
     margin-left: 25px;
     font-weight: normal;
@@ -1671,7 +1665,21 @@ padding-right: 8px;
     height: 95px;
 }
 
+#storyboard .storyboard-list #storyboard-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 5700px;
+    height: 122px;
+    min-width: 1024px;
+    margin: -31px 0 0 -9px;
+}
+
 #storyboard .storyboard-list p.notice {
+    position: absolute;
+    top: 31px;
+    left: 9px;
     width: 84px;
     padding: 10px 5px 0 5px;
     font-weight: normal;
@@ -1680,11 +1688,11 @@ padding-right: 8px;
 
 #storyboard .storyboard-list ul {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 31px;
+    left: 9px;
     width: 5700px;
     min-width: 1024px;
-    height: 59px;
+    height: 92px;
     padding-left: 2px;
     background: url(../images/icon-frame.png) repeat-x;
 }
@@ -1693,12 +1701,13 @@ padding-right: 8px;
     position: relative;
     float: left;
     width: 94px;
-    height: 59px;
+    height: 92px;
     margin: 0 20px 0 0;
 }
 
-#storyboard .storyboard-list ul li span.warning,
-#storyboard .storyboard-list ul li span.error {
+#storyboard .storyboard-list ul li a.warning,
+#storyboard .storyboard-list ul li a.warning2,
+#storyboard .storyboard-list ul li a.error {
     display: block;
 	position: absolute;
     top: -5px;
@@ -1708,12 +1717,75 @@ padding-right: 8px;
     height: 18px;
 }
 
-#storyboard .storyboard-list ul li span.warning {
+#storyboard .storyboard-list ul li a.warning,
+#storyboard .storyboard-list ul li a.warning2 {
     background: url(../images/icon_yellow_warning.png) no-repeat 0 0;
 }
 
-#storyboard .storyboard-list ul li span.error {
+#storyboard .storyboard-list ul li a.error {
     background: url(../images/icon_red_warning.png) no-repeat 0 0;
+}
+
+#storyboard .storyboard-list ul li a.error       .tip,
+#storyboard .storyboard-list ul li a.warning   .tip,
+#storyboard .storyboard-list ul li a.warning2 .tip {
+    display: none;
+    position: absolute;
+    top: -30px;
+    left: -7px;
+    width: 200px;
+    height: 32px;
+    color: #777;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+}
+
+#storyboard .storyboard-list ul li a.warning2 .tip {
+    width: 310px;
+}
+
+#storyboard .storyboard-list ul li a.error       .tip img,
+#storyboard .storyboard-list ul li a.warning   .tip img,
+#storyboard .storyboard-list ul li a.warning2 .tip img {
+	position: absolute;
+	bottom: 1px;
+	left: 11px;
+	border: none;
+}
+
+#storyboard .storyboard-list ul li a.error       .tip .tip-left,
+#storyboard .storyboard-list ul li a.warning   .tip .tip-left,
+#storyboard .storyboard-list ul li a.warning2 .tip .tip-left {
+    display: block;
+    height: 28px;
+    padding-left: 7px;
+    background: url(../images/bg_tip_left.png) no-repeat 0 0;
+}
+
+#storyboard .storyboard-list ul li a.error       .tip .tip-right,
+#storyboard .storyboard-list ul li a.warning   .tip .tip-right,
+#storyboard .storyboard-list ul li a.warning2 .tip .tip-right {
+    display: block;
+    height: 28px;
+    padding-right: 7px;
+    background: url(../images/bg_tip_right.png) no-repeat right 0;
+}
+
+#storyboard .storyboard-list ul li a.error       .tip .tip-middle,
+#storyboard .storyboard-list ul li a.warning   .tip .tip-middle,
+#storyboard .storyboard-list ul li a.warning2 .tip .tip-middle {
+    display: block;
+    height: 28px;
+    background: url(../images/bg_tip_middle.png) repeat-x;
+    line-height: 28px;
+}
+
+#storyboard .storyboard-list ul li a.error:hover       .tip,
+#storyboard .storyboard-list ul li a.warning:hover   .tip,
+#storyboard .storyboard-list ul li a.warning2:hover .tip {
+    display: block;
 }
 
 #storyboard .storyboard-list ul li p.img {
@@ -1732,14 +1804,31 @@ padding-right: 8px;
     margin: 10px 0 0 10px;
 }
 
-#storyboard .storyboard-list ul li p.img span {
+#storyboard .storyboard-list ul li p.img span.time {
     display: block;
     position: absolute;
     bottom: 10px;
     right: 10px;
-    width: 32px;
+    float: right;
     height: 14px;
-    background: url(../images/time_box.png) no-repeat 0 0;
+    margin: 0;
+    padding: 0 0 0 2px;
+    background: url(../images/time_box_left.png) no-repeat 0 0;
+}
+
+#storyboard .storyboard-list ul li p.img span.time .time-right {
+    display: block;
+    height: 14px;
+    margin: 0;
+    padding: 0 2px 0 0;
+    background: url(../images/time_box_right.png) no-repeat right 0;
+}
+
+#storyboard .storyboard-list ul li p.img span.time .time-right .time-middle {
+    display: block;
+    height: 14px;
+    margin: 0;
+    background: url(../images/time_box_middle.png) repeat-x;
     color: #fff;
     font-size: 11px;
     line-height: 14px;
@@ -2003,7 +2092,7 @@ padding-right: 8px;
         padding-left: 608px;
     }
 	#epcurate-curation #video-player .video,
-    #epcurate-curation #video-player .video #youTubePlayer    {
+    #epcurate-curation #video-player .video #youTubePlayer {
 		width: 608px;
 		height: 386px;
 	}

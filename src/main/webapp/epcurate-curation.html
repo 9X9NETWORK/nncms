@@ -15,7 +15,6 @@
 <script src="javascripts/jquery.mousewheel.min.js"></script>
 <script src="javascripts/jquery.ellipsis.js"></script>
 <script src="javascripts/jquery.blockUI.js"></script>
-<script src="javascripts/jquery.corner.js"></script>
 <script src="javascripts/jquery.toggleval.min.js"></script>
 <script src="javascripts/jquery.uniform.min.js"></script>
 <script src="javascripts/jquery.swfobject.min.js"></script>
@@ -65,10 +64,6 @@
 </div>
 </div>
 
-<script id="epcurate-nav-publish-tmpl" type="text/x-jquery-tmpl">
-<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Please curate some videos first.</span></span></span></span>
-</script>
-
 <!--============================== content-main start ========================-->
 <div id="content-wrap" class="epcurate-curation">
 <form name="epcurateForm" id="epcurateForm" method="get" action="" class="clearfix curation">
@@ -96,6 +91,11 @@
 <div id="video-player">
 <div class="video"></div>
 <div id="video-control">
+<p id="play-dragger"></p>
+<div id="progress-bar">
+<p id="loaded"></p>
+<p id="played"></p>
+</div>
 <ul>
 <li id="btn-play"></li>
 <li id="btn-pause" class="hide"></li>
@@ -107,7 +107,7 @@
 <div id="cur-add" class="tab-content clearfix">
 <p>Add video by URL</p>
 <textarea name="videourl" id="videourl" cols="80" class="textarea">Paste YouTube video URLs to add (separate with different lines)</textarea>
-<p class="notice hide"></p>
+<p class="notice hide">You have reached the maximum amount of 50 videos.</p>
 <div class="func">
 <p class="btns btn-add"><span><a href="#" id="btn-add-videourl">Add</a></span></p>
 </div>
@@ -119,7 +119,7 @@
 </div>
 
 <script id="video-info-tmpl" type="text/x-jquery-tmpl">
-<h3 class="ellipsis multiline"><span class="uploader">${uploader}</span> - <span class="title">${name}</span></h3>
+<h3 class="ellipsis multiline"><span class="title">${name}</span></h3>
 <p><span class="duration">${$item.durationConverter(duration)}</span> | From <a href="${fileUrl}" target="_blank">YouTube.com</a> | By <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> on <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span></p>
 <p class="desc ellipsis multiline">${intro}</p>
 {{if isEmbedLimited || isZoneLimited || isMobileLimited}}
@@ -276,18 +276,19 @@
 
 <div id="storyboard">
 <p class="auto-height"></p>
-<p>Episode storyboard (<em id="storyboard-length">50</em> videos left)<span>Duration <em id="storyboard-duration">00:00:00</em></span></p>
+<p class="episode-storyboard">Episode storyboard (<em id="storyboard-length">50</em> videos left)<span>Duration <em id="storyboard-duration">00:00:00</em></span></p>
 <div id="storyboard-wrap" class="storyboard-list">
+<div id="storyboard-list">
 <p class="notice">+ Add videos here</p>
-<ul id="storyboard-list">
-<!-- template = #storyboard-list-tmpl-item -->
+<ul id="storyboard-listing">
+<!-- template = #storyboard-listing-tmpl-item -->
 
 <!--
 <li>
-<span class="warning"></span>
+<a href="#" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Not playable in some regions</span></span></span></span></a>
 <p class="img">
 <img src="http://i.ytimg.com/vi/nCgQDjiotG0/default.jpg" alt="" width="80" height="45" />
-<span class="time">02:10</span>
+<span class="time"><span class="time-right"><span class="time-middle">02:13:10</span></span></span>
 </p>
 <h4 class="ellipsis multiline">Google Chrome Speed Tests</h4>
 <p class="title">
@@ -302,7 +303,7 @@
 <li>
 <p class="img">
 <img src="http://i.ytimg.com/vi/yhS9LnDoo_w/default.jpg" alt="" width="80" height="45" />
-<span class="time">06:06</span>
+<span class="time"><span class="time-right"><span class="time-middle">06:06</span></span></span>
 </p>
 <h4 class="ellipsis multiline">The Chemical Brothers - The Test (2003 - Remaster)</h4>
 <p class="hover-func">
@@ -315,7 +316,7 @@
 <li>
 <p class="img">
 <img src="http://i.ytimg.com/vi/ubNF9QNEQLA/default.jpg" alt="" width="80" height="45" />
-<span class="time">01:55</span>
+<span class="time"><span class="time-right"><span class="time-middle">01:55</span></span></span>
 </p>
 <h4 class="ellipsis multiline">Test Your Awareness : Whodunnit?</h4>
 <p class="title">
@@ -330,7 +331,7 @@
 <li>
 <p class="img">
 <img src="http://i.ytimg.com/vi/4G60hM1W_mk/default.jpg" alt="" width="80" height="45" />
-<span class="time">05:12</span>
+<span class="time"><span class="time-right"><span class="time-middle">05:12</span></span></span>
 </p>
 <h4 class="ellipsis multiline">Hearing Test</h4>
 <p class="hover-func">
@@ -341,10 +342,10 @@
 </p>
 </li>
 <li>
-<span class="error"></span>
+<a href="#" class="error"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Not playable outside YouTube</span></span></span></span></a>
 <p class="img">
 <img src="http://i.ytimg.com/vi/vJG698U2Mvo/default.jpg" alt="" width="80" height="45" />
-<span class="time">01:22</span>
+<span class="time"><span class="time-right"><span class="time-middle">01:22</span></span></span>
 </p>
 <h4 class="ellipsis multiline">selective attention test</h4>
 <p class="title">
@@ -359,9 +360,22 @@
 <li>
 <p class="img">
 <img src="http://i.ytimg.com/vi/CWyrp3hu4KE/default.jpg" alt="" width="80" height="45" />
-<span class="time">01:38</span>
+<span class="time"><span class="time-right"><span class="time-middle">02:13:10</span></span></span>
 </p>
 <h4 class="ellipsis multiline">Color Blindness test - Real !</h4>
+<p class="hover-func">
+<a href="#" class="video-del">Video Del</a>
+<a href="#" class="video-play">Video Play</a>
+<a href="#" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Add Title</span></span></span></span></a>
+<a href="#" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Add Title</span></span></span></span></a>
+</p>
+</li>
+<li>
+<p class="img">
+<img src="http://i.ytimg.com/vi/0vu23EbuBVI/default.jpg" alt="" width="80" height="45" />
+<span class="time"><span class="time-right"><span class="time-middle">44:10</span></span></span>
+</p>
+<h4 class="ellipsis multiline">Physics / 100 Greatest Discoveries - Documentary [Full Length]</h4>
 <p class="hover-func">
 <a href="#" class="video-del">Video Del</a>
 <a href="#" class="video-play">Video Play</a>
@@ -372,18 +386,27 @@
 -->
 </ul>
 
-<script id="storyboard-list-tmpl-item" type="text/x-jquery-tmpl">
+<script id="storyboard-listing-tmpl-item" type="text/x-jquery-tmpl">
 <li data-ytid="${ytId}">
 {{if isEmbedLimited || isZoneLimited || isMobileLimited}}
 {{if isEmbedLimited}}
-<span class="error"></span>
+<a href="#" class="error"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Not playable outside YouTube</span></span></span></span></a>
 {{else}}
-<span class="warning"></span>
+{{if isZoneLimited && isMobileLimited}}
+<a href="#" class="warning2"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Not playable in some regions & on mobile device</span></span></span></span></a>
+{{else}}
+{{if isZoneLimited}}
+<a href="#" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Not playable in some regions</span></span></span></span></a>
+{{/if}}
+{{if isMobileLimited}}
+<a href="#" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Not playable on mobile device</span></span></span></span></a>
+{{/if}}
+{{/if}}
 {{/if}}
 {{/if}}
 <p class="img">
 <img src="${imageUrl}" alt="" width="80" height="45" />
-<span class="time">${$item.durationConverter(duration)}</span>
+<span class="time"><span class="time-right"><span class="time-middle">${$item.durationConverter(duration)}</span></span></span>
 </p>
 <h4 class="ellipsis multiline">${name}</h4>
 <p class="hover-func">
@@ -393,6 +416,7 @@
 </li>
 </script>
 
+</div>
 </div>
 
 <div id="storyboard-slider"><div class="slider-h"></div></div>

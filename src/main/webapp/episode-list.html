@@ -13,7 +13,6 @@
 <script src="javascripts/jquery.mousewheel.min.js"></script>
 <script src="javascripts/jquery.ellipsis.js"></script>
 <script src="javascripts/jquery.blockUI.js"></script>
-<script src="javascripts/jquery.corner.js"></script>
 <script src="javascripts/jquery.toggleval.min.js"></script>
 <script src="javascripts/jquery.cycle.all.js"></script>
 <script src="javascripts/jquery.tmpl.min.js"></script>
@@ -81,8 +80,11 @@
 <div id="content-main">
 <div id="title-func" class="clearfix">
 <script id="title-func-tmpl" type="text/x-jquery-tmpl">
-<h2><span id="channel-name">${name}</span> &gt; Episode list (<span id="episode-counter"></span>)</h2>
+<h2><span id="channel-name">${name}</span> &gt; Episode list (<span id="episode-counter">${$item.cntEpisode}</span>)</h2>
+{{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}
 <p class="curate btns"><span><a href="epcurate-info.html?cid=${id}" id="episode-curate">Curate a new episode</a></span></p>
+{{/if}}
+{{if $item.cntEpisode > 0}}
 <div class="caption">
 <p class="episode">Episode</p>
 <div class="episode-info">
@@ -90,6 +92,7 @@
 <p class="views">Views</p>
 </div>
 </div>
+{{/if}}
 </script>
 </div>
 <div id="content-main-wrap">
@@ -101,6 +104,7 @@
 </div>
 
 <script id="episode-favorite-first-tmpl" type="text/x-jquery-tmpl">
+<br />
 <div id="ep-no">
 <h3><img src="images/text_don't-have-episode-yet.png" alt="" /></h3>
 <p class="desc">Click on <span>Favorite</span> button when watching channels to collect more episodes</p>
@@ -125,7 +129,7 @@
 <img src="images/icon_playlist.png" alt="" class="watermark" />
 <img src="${imageUrl}" alt="" width="80" height="45" />
 </a>
-<span>${$item.durationConverter(duration)}</span>
+<span class="duration"><span class="time-right"><span class="time-middle">${$item.durationConverter(duration)}</span></span></span>
 </p>
 <h3><a href="${playbackUrl}" target="_blank">${name}</a></h3>
 <div class="btns">
@@ -149,6 +153,7 @@
 </script>
 
 <script id="episode-first-tmpl" type="text/x-jquery-tmpl">
+<br />
 <div id="ep-time-list">
 <h3><img src="images/text_don't-have-episode-yet.png" alt="" /></h3>
 <p class="btns"><span><a href="epcurate-info.html?cid=${id}">Curate new episode to tell a story</a></span></p>
@@ -201,7 +206,7 @@
 <img src="images/icon_playlist.png" alt="" class="watermark" />
 <img src="${imageUrl}" alt="" width="80" height="45" />
 </a>
-<span>${$item.durationConverter(duration)}</span>
+<span class="duration"><span class="time-right"><span class="time-middle">${$item.durationConverter(duration)}</span></span></span>
 </p>
 <h3><a href="${playbackUrl}" target="_blank">${name}</a></h3>
 <div class="btns">

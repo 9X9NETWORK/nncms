@@ -167,7 +167,6 @@
 
 #content-wrap form .fminput .fmfield p.text {
     float: left;
-    width: 440px;
     height: 29px;
     margin: 0 10px 10px 0;
     padding-left: 4px;
@@ -212,7 +211,7 @@
 
 #content-wrap form .fminput .fmfield p.textarea {
     overflow: hidden;
-    width: 440px;
+    float: left;
     height: 92px;
     margin: 0 10px 10px 0;
     padding-left: 4px;
@@ -227,11 +226,12 @@
 
 #content-wrap form .fminput .fmfield p.textarea span .textarea {
     width: 427px;
-    height: 82px;
-	margin-bottom: 7px;
+    height: 78px;
+    margin: 1px 0 0;
     padding: 5px;
     border: none;
-    background: url(../images/input_box_middle_lg.png) repeat-x;
+    border-top: 1px solid #b5b5b5;
+	border-bottom: 1px solid #b5b5b5;
     color: #777;
     font-family: Helvetica;
     font-size: 13px;
@@ -581,6 +581,20 @@
 #content-wrap form .form-btn .wrap .disable a,
 #content-wrap form .form-btn .wrap .disable input {
     cursor: default;
+}
+
+#content-wrap form .form-btn .wrap .btns.disable {
+    background: url(../images/bg_btn_left_press.png) no-repeat 0 0;
+}
+
+#content-wrap form .form-btn .wrap .btns.disable span {
+    background: url(../images/bg_btn_right_press.png) no-repeat right 0;
+}
+
+#content-wrap form .form-btn .wrap .btns.disable span a,
+#content-wrap form .form-btn .wrap .btns.disable span input {
+    background: url(../images/bg_btn_middle_press.png) repeat 0 0;
+    color: #999;
 }
 
 #content-wrap form .form-btn .wrap a {

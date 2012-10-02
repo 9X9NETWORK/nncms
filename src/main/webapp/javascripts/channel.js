@@ -37,6 +37,10 @@ $(function () {
         $('body').addClass('has-change');
     });
     $('#header #logo, #header a, #studio-nav a, #content-nav a, #footer a').click(function (e) {
+        var fm = document.settingForm;
+        if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
+            $('body').addClass('has-change');
+        }
         if ($('body').hasClass('has-change')) {
             if (e && $(e.target).attr('href')) {
                 $('body').data('leaveUrl', $(e.target).attr('href'));
@@ -99,17 +103,17 @@ $(function () {
             $('#overlay-s').fadeIn();
             $('#overlay-s .overlay-content').css('margin-left', '-43px');
             nn.api('DELETE', $('#channel-list li.deleting').data('deleteId'), null, function (data) {
-                $('#overlay-s').hide();
                 if ('OK' == data) {
-                    $('#channel-counter').html($('#channel-counter').html() - 1);
-                    $('#channel-list li.deleting').remove();
-                    $('#content-main-wrap').height($('#content-main-wrap').height() - 103); // 103: li height
-                    scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
-                    $('#overlay-s .overlay-middle').html('Changes were saved successfully');
-                    $('#overlay-s .overlay-content').css('margin-left', '-132px');
-                    $('#overlay-s').fadeIn().delay(3000).fadeOut();
+                    $('#overlay-s').fadeOut(1000, function () {
+                        $('#channel-counter').html($('#channel-counter').html() - 1);
+                        $('#channel-list li.deleting').remove();
+                        $('#content-main-wrap').height($('#content-main-wrap').height() - 103); // 103: li height
+                        scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
+                    });
                 } else {
-                    alert('Delete error');
+                    $('#overlay-s').fadeOut(0, function () {
+                        alert('Delete error');
+                    });
                 }
             });
         } else {
@@ -261,18 +265,17 @@ $(function () {
             $('#overlay-s').fadeIn();
             $('#overlay-s .overlay-content').css('margin-left', '-43px');
             nn.on(400, function (jqXHR, textStatus) {
-                $('#overlay-s').hide(0, function () {
+                $('#overlay-s').fadeOut(0, function () {
                     alert(textStatus + ': ' + jqXHR.responseText);
                 });
             });
             var qrystring = $('#settingForm').serialize(),
                 parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
-            nn.api('PUT', '/api/channels/' + CMS_CONF.USER_URL.param('id'), parameter, function (data) {
-                $('#overlay-s').hide();
-                $('#overlay-s .overlay-middle').html('Changes were saved successfully');
-                $('#overlay-s .overlay-content').css('margin-left', '-132px');
-                $('#overlay-s').fadeIn().delay(3000).fadeOut();
-                $('body').removeClass('has-change');
+            nn.api('PUT', '/api/channels/' + CMS_CONF.USER_URL.param('id'), parameter, function (channel) {
+                $('#overlay-s').fadeOut(1000, function () {
+                    $('body').removeClass('has-change');
+                    $('#imageUrlOld').val(channel.imageUrl);
+                });
             });
         }
         return false;
@@ -284,19 +287,17 @@ $(function () {
             $('#overlay-s').fadeIn();
             $('#overlay-s .overlay-content').css('margin-left', '-43px');
             nn.on(400, function (jqXHR, textStatus) {
-                $('#overlay-s').hide(0, function () {
+                $('#overlay-s').fadeOut(0, function () {
                     alert(textStatus + ': ' + jqXHR.responseText);
                 });
             });
             // note: channel-add.html hard code hidden field isPublic=true
             var qrystring = $('#settingForm').serialize(),
                 parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
-            nn.api('POST', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels', parameter, function (data) {
-                $('#overlay-s').hide();
-                $('#overlay-s .overlay-middle').html('Changes were saved successfully');
-                $('#overlay-s .overlay-content').css('margin-left', '-132px');
-                $('#overlay-s').fadeIn().delay(3000).fadeOut(function () {
+            nn.api('POST', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels', parameter, function (channel) {
+                $('#overlay-s').fadeOut(1000, function () {
                     $('body').removeClass('has-change');
+                    $('#imageUrlOld').val(channel.imageUrl);
                     location.href = 'index.html';
                 });
             });
@@ -405,7 +406,7 @@ function uploadImage() {
             }
             var postParams = {
                 "AWSAccessKeyId": s3attr['id'],
-                "key":            parameter['prefix'] + '-thumbnail-' + timestamp + '-' + file.size + file.type.toLowerCase(), // upload file name, TODO: need convention
+                "key":            parameter['prefix'] + '-thumbnail-' + timestamp + '-' + file.size + file.type.toLowerCase(),
                 "acl":            parameter['acl'],
                 "policy":         s3attr['policy'],
                 "signature":      s3attr['signature'],

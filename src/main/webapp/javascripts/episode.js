@@ -41,17 +41,17 @@ $(function () {
             $('#overlay-s').fadeIn();
             $('#overlay-s .overlay-content').css('margin-left', '-43px');
             nn.api('DELETE', $('#ep-list li.deleting').data('deleteId'), null, function (data) {
-                $('#overlay-s').hide();
                 if ('OK' == data) {
-                    $('#episode-counter').html($('#episode-counter').html() - 1);
-                    $('#ep-list ul li.deleting').remove();
-                    $('#content-main-wrap').height($('#content-main-wrap').height() - 71);  // 71: li height
-                    scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
-                    $('#overlay-s .overlay-middle').html('Changes were saved successfully');
-                    $('#overlay-s .overlay-content').css('margin-left', '-132px');
-                    $('#overlay-s').fadeIn().delay(3000).fadeOut();
+                    $('#overlay-s').fadeOut(1000, function () {
+                        $('#episode-counter').html($('#episode-counter').html() - 1);
+                        $('#ep-list ul li.deleting').remove();
+                        $('#content-main-wrap').height($('#content-main-wrap').height() - 71);  // 71: li height
+                        scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
+                    });
                 } else {
-                    alert('Delete error');
+                    $('#overlay-s').fadeOut(0, function () {
+                        alert('Delete error');
+                    });
                 }
             });
         } else {
