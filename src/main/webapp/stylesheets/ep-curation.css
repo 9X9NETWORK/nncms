@@ -446,7 +446,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-add {
     float: left;
-    width: 610px;
+    width: 552px;
     padding: 20px 0 0 30px;
 }
 
@@ -456,16 +456,29 @@ padding-right: 8px;
     font-size: 13px;
 }
 
-#epcurate-curation #cur-add textarea {
-    width: 600px;
-    height: 139px;
+#epcurate-curation #cur-add p.textarea {
+    width: 552px;
     margin-bottom: 10px;
-    padding: 5px;
-    border: 1px solid #ccc;
+    padding: 4px 0 0;
+    background: url(../images/input_box_top_vertical.png) no-repeat 0 0;
+}
+
+#epcurate-curation #cur-add p.textarea span {
+    display: block;
+    padding: 0 0 3px;
+    background: url(../images/input_box_bottom_vertical.png) no-repeat 0 bottom;
+}
+
+#epcurate-curation #cur-add p.textarea span textarea {
+    width: 542px;
+    height: 149px;
+    padding: 0 5px;
+    border: none;
+    background: url(../images/input_box_middle_vertical.png) repeat-y;
     color: #999;
     font-family: Helvetica;
     font-size: 13px;
-	resize: none; 
+	resize: none;
 }
 
 #epcurate-curation #cur-add p.notice {
@@ -1670,7 +1683,7 @@ padding-right: 8px;
     top: 0;
     left: 0;
     overflow: hidden;
-    width: 5700px;
+    width: 5908px;
     height: 122px;
     min-width: 1024px;
     margin: -31px 0 0 -9px;
@@ -1690,7 +1703,7 @@ padding-right: 8px;
     position: absolute;
     top: 31px;
     left: 9px;
-    width: 5700px;
+    width: 5908px;
     min-width: 1024px;
     height: 92px;
     padding-left: 2px;
@@ -2096,7 +2109,7 @@ padding-right: 8px;
 		width: 608px;
 		height: 386px;
 	}
-    #epcurate-curation #cur-add textarea {
+    #epcurate-curation #cur-add p.textarea span textarea {
         height: 290px;
     }
     #epcurate-curation #cur-edit .edit-title .wrap {

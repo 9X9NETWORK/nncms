@@ -104,7 +104,6 @@
 </div>
 
 <script id="episode-favorite-first-tmpl" type="text/x-jquery-tmpl">
-<br />
 <div id="ep-no">
 <h3><img src="images/text_don't-have-episode-yet.png" alt="" /></h3>
 <p class="desc">Click on <span>Favorite</span> button when watching channels to collect more episodes</p>
@@ -125,13 +124,12 @@
 <div class="episode">
 <p class="img">
 <a href="${playbackUrl}" target="_blank">
-<span class="mask"></span>
 <img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="${imageUrl}" alt="" width="80" height="45" />
+<img src="${imageUrl}" alt="" width="80" height="45" class="img" />
 </a>
-<span class="duration"><span class="time-right"><span class="time-middle">${$item.durationConverter(duration)}</span></span></span>
+<span class="duration"><span class="time-right"><span class="time-middle">${formatDuration(duration)}</span></span></span>
 </p>
-<h3><a href="${playbackUrl}" target="_blank">${name}</a></h3>
+<h3 class="ellipsis"><a href="${playbackUrl}" target="_blank">${name}</a></h3>
 <div class="btns">
 <div class="btn-wrap disable">
 <ul>
@@ -143,7 +141,7 @@
 </div>
 <div class="episode-info">
 <div class="time">
-<p>${$item.timeConverter(publishDate)} pub</p>
+<p>${formatTimestamp(publishDate)} pub</p>
 </div>
 <div class="views">
 <p>${cntView}</p>
@@ -153,7 +151,6 @@
 </script>
 
 <script id="episode-first-tmpl" type="text/x-jquery-tmpl">
-<br />
 <div id="ep-time-list">
 <h3><img src="images/text_don't-have-episode-yet.png" alt="" /></h3>
 <p class="btns"><span><a href="epcurate-info.html?cid=${id}">Curate new episode to tell a story</a></span></p>
@@ -202,13 +199,12 @@
 <div class="episode">
 <p class="img">
 <a href="${playbackUrl}" target="_blank">
-<span class="mask"></span>
 <img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="${imageUrl}" alt="" width="80" height="45" />
+<img src="${imageUrl}" alt="" width="80" height="45" class="img" />
 </a>
-<span class="duration"><span class="time-right"><span class="time-middle">${$item.durationConverter(duration)}</span></span></span>
+<span class="duration"><span class="time-right"><span class="time-middle">${formatDuration(duration)}</span></span></span>
 </p>
-<h3><a href="${playbackUrl}" target="_blank">${name}</a></h3>
+<h3 class="ellipsis"><a href="${playbackUrl}" target="_blank">${name}</a></h3>
 <div class="btns">
 <div class="btn-wrap enable">
 <ul>
@@ -220,7 +216,7 @@
 </div>
 <div class="episode-info">
 <div class="time">
-<p>${$item.timeConverter(publishDate)} pub</p>
+<p>${formatTimestamp(publishDate)} pub</p>
 </div>
 <div class="views">
 <p>${cntView}</p>

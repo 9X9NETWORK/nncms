@@ -32,11 +32,13 @@ $(function () {
         $('body').addClass('has-change');
     });
     $('#epcurate-nav-back').click(function () {
-        var fm = document.epcurateForm;
-        if ($('#name').length > 0 && '' != $('#name').val() && '' == $('#id').val()) {
-            $('body').addClass('has-change');
+        if (document.epcurateForm) {
+            var fm = document.epcurateForm;
+            if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
+                $('body').addClass('has-change');
+            }
         }
-        if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
+        if ($('#name').length > 0 && '' != $('#name').val() && '' == $('#id').val()) {
             $('body').addClass('has-change');
         }
         if ($('body').hasClass('has-change')) {
@@ -50,11 +52,13 @@ $(function () {
         return false;
     });
     $('#content-wrap .form-btn').on('click', '#form-btn-leave', function () {
-        var fm = document.epcurateForm;
-        if ($('#name').length > 0 && '' != $('#name').val() && '' == $('#id').val()) {
-            $('body').addClass('has-change');
+        if (document.epcurateForm) {
+            var fm = document.epcurateForm;
+            if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
+                $('body').addClass('has-change');
+            }
         }
-        if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
+        if ($('#name').length > 0 && '' != $('#name').val() && '' == $('#id').val()) {
             $('body').addClass('has-change');
         }
         if ($('body').hasClass('has-change')) {
@@ -164,6 +168,11 @@ $(function () {
             }
         }
         return false;
+    });
+
+    $(window).resize(function () {
+        setFormWidth();
+        scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
     });
 
     // Amazon S3 upload

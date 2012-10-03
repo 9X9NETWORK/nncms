@@ -1,36 +1,4 @@
 $(function () {
-    function setSpace() {
-        var epcurateNavHeight = $('#epcurate-nav').height(),
-            autoHeight = $('p.auto-height:first').height(),
-            windowHeight = $(window).height(),
-            curationHeight = $('#epcurate-curation').height() - (autoHeight * 2),
-            storyboardHeight = $('#storyboard').height() - (autoHeight * 2),
-            btnsHeight = $('#content-main .form-btn').height(),
-            extraHeight = windowHeight - curationHeight - storyboardHeight - btnsHeight - epcurateNavHeight,
-            windowWidth = $(window).width(),
-            videoWidth = $('#epcurate-curation #video-player .video').width(),
-            curAddWidth = $('#epcurate-curation #cur-add').width(),
-            curEditWidth = $('#epcurate-curation #cur-edit').width();
-        $('p.auto-height').height(extraHeight / 4);
-        if (windowWidth > 1016) {
-            $('#epcurate-curation #cur-add').css('padding-left', (windowWidth - videoWidth - curAddWidth) / 2 + 'px');
-            $('#epcurate-curation #cur-edit').css('padding-left', (windowWidth - videoWidth - curEditWidth) / 2 + 'px');
-        }
-        // TODO check
-        nn.log({
-            epcurateNavHeight: epcurateNavHeight,
-            autoHeight: autoHeight,
-            windowHeight: windowHeight,
-            curationHeight: curationHeight,
-            storyboardHeight: storyboardHeight,
-            btnsHeight: btnsHeight,
-            extraHeight: extraHeight,
-            windowWidth: windowWidth,
-            videoWidth: videoWidth,
-            curAddWidth: curAddWidth,
-            curEditWidth: curEditWidth
-        }, 'debug');
-    }
     setSpace();
     scrollbar("#storyboard-wrap", "#storyboard-list", "#storyboard-slider");
 
@@ -207,19 +175,7 @@ $(function () {
                     if (idx === (matchList.length - 1)) {
                         // ON PURPOSE to wait api (async)
                         $('#overlay-s').fadeOut(1000, function () {
-                            $('#storyboard-listing-tmpl-item').tmpl(ytList, {
-                                durationConverter: function (duration) {
-                                    var durationMin = parseInt(duration / 60, 10).toString(),
-                                        durationSec = parseInt(duration % 60, 10).toString();
-                                    if (durationMin.length < 2) {
-                                        durationMin = '0' + durationMin;
-                                    }
-                                    if (durationSec.length < 2) {
-                                        durationSec = '0' + durationSec;
-                                    }
-                                    return durationMin + ':' + durationSec;
-                                }
-                            }).prependTo('#storyboard-listing');
+                            $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
                             if ($('#storyboard-list li').length > 0) {
                                 $('.form-btn .btn-save').removeClass('disable');
                                 $('#form-btn-save').removeAttr('disabled');
@@ -241,26 +197,14 @@ $(function () {
                         uploader: ytData.uploader,
                         uploadDate: ytData.uploaded,    // TODO conver uploaded to timestamp
                         isZoneLimited: ((ytData.restrictions) ? true : false),
-                        isMobileLimited: ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false),
+                        isMobileLimited: (((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false),
                         isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
                     };
                     ytList[idx] = ytItem;
                     if (idx === (matchList.length - 1)) {
                         // ON PURPOSE to wait api (async)
                         $('#overlay-s').fadeOut(1000, function () {
-                            $('#storyboard-listing-tmpl-item').tmpl(ytList, {
-                                durationConverter: function (duration) {
-                                    var durationMin = parseInt(duration / 60, 10).toString(),
-                                        durationSec = parseInt(duration % 60, 10).toString();
-                                    if (durationMin.length < 2) {
-                                        durationMin = '0' + durationMin;
-                                    }
-                                    if (durationSec.length < 2) {
-                                        durationSec = '0' + durationSec;
-                                    }
-                                    return durationMin + ':' + durationSec;
-                                }
-                            }).prependTo('#storyboard-listing');
+                            $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
                             if ($('#storyboard-list li').length > 0) {
                                 $('.form-btn .btn-save').removeClass('disable');
                                 $('#form-btn-save').removeAttr('disabled');
@@ -742,6 +686,39 @@ function chkCurationData(fm, src) {
     return true;
 }
 
+function setSpace() {
+    var epcurateNavHeight = $('#epcurate-nav').height(),
+        autoHeight = $('p.auto-height:first').height(),
+        windowHeight = $(window).height(),
+        curationHeight = $('#epcurate-curation').height() - (autoHeight * 2),
+        storyboardHeight = $('#storyboard').height() - (autoHeight * 2),
+        btnsHeight = $('#content-main .form-btn').height(),
+        extraHeight = windowHeight - curationHeight - storyboardHeight - btnsHeight - epcurateNavHeight,
+        windowWidth = $(window).width(),
+        videoWidth = $('#epcurate-curation #video-player .video').width(),
+        curAddWidth = $('#epcurate-curation #cur-add').width(),
+        curEditWidth = $('#epcurate-curation #cur-edit').width();
+    $('p.auto-height').height(extraHeight / 4);
+    if (windowWidth > 1016) {
+        $('#epcurate-curation #cur-add').css('padding-left', (windowWidth - videoWidth - curAddWidth) / 2 + 'px');
+        $('#epcurate-curation #cur-edit').css('padding-left', (windowWidth - videoWidth - curEditWidth) / 2 + 'px');
+    }
+    // TODO check
+    nn.log({
+        epcurateNavHeight: epcurateNavHeight,
+        autoHeight: autoHeight,
+        windowHeight: windowHeight,
+        curationHeight: curationHeight,
+        storyboardHeight: storyboardHeight,
+        btnsHeight: btnsHeight,
+        extraHeight: extraHeight,
+        windowWidth: windowWidth,
+        videoWidth: videoWidth,
+        curAddWidth: curAddWidth,
+        curEditWidth: curEditWidth
+    }, 'debug');
+}
+
 function loadVideo(videoID) {
     var videoWidth = $('#video-player .video').width(),
         videoHeight = $('#video-player .video').height();
@@ -798,17 +775,6 @@ function buildVideoInfo(elemt) {
         uploadDateConverter: function (uploadDate) {
             var datetemp = uploadDate.split('T');
             return datetemp[0];
-        },
-        durationConverter: function (duration) {
-            var durationMin = parseInt(duration / 60, 10).toString(),
-                durationSec = parseInt(duration % 60, 10).toString();
-            if (durationMin.length < 2) {
-                durationMin = '0' + durationMin;
-            }
-            if (durationSec.length < 2) {
-                durationSec = '0' + durationSec;
-            }
-            return durationMin + ':' + durationSec;
         }
     }).prependTo('#video-info');
     $('.ellipsis').ellipsis();
@@ -858,29 +824,6 @@ function sumStoryboardInfo() {
     $('#storyboard-length').html(leftLength);
     $('#storyboard-duration').html(durationHou + ':' + durationMin + ':' + durationSec);
     $('#storyboard-list .notice').css('left', parseInt((114 * length) + 9, 10) + 'px');
-}
-
-function formatDuration(duration) {
-    var durationMin = parseInt(duration / 60, 10);
-    var durationSec = parseInt(duration % 60, 10);
-    var durationHou = parseInt(durationMin / 60, 10);
-    if (durationHou.toString().length < 2) {
-        durationHou = '0' + durationHou;
-    }
-    if (durationMin >= 60) {
-        durationMin = parseInt(durationMin % 60, 10);
-    }
-    if (durationMin.toString().length < 2) {
-        durationMin = '0' + durationMin;
-    }
-    if (durationSec.toString().length < 2) {
-        durationSec = '0' + durationSec;
-    }
-    if (durationHou >= 0) {
-        $('#storyboard-list p.img span.time').html(durationHou + ':' + durationMin + ':' + durationSec);
-    } else {
-        $('#storyboard-list p.img span.time').html(durationMin + ':' + durationSec);
-    }
 }
 
 function uploadImage() {

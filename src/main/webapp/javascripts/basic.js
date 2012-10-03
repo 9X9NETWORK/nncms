@@ -23,6 +23,44 @@ function autoHeight() {
     $('#main-wrap-slider').attr('data-orig-slider-height', sliderHeight);
 }
 
+function formatTimestamp(timestamp) {
+    var a = new Date(timestamp),
+        year = a.getFullYear(),
+        month = a.getMonth() + 1,
+        date = a.getDate(),
+        hour = a.getHours(),
+        min = a.getMinutes(),
+        time = year + '-'
+             + ((month >= 10) ? month : '0' + month) + '-'
+             + ((date >= 10) ? date : '0' + date) + ' '
+             + ((hour >= 10) ? hour : '0' + hour) + ':'
+             + ((min >= 10) ? min : '0' + min);
+    return time;
+}
+
+function formatDuration(duration) {
+    var durationMin = parseInt(duration / 60, 10),
+        durationSec = parseInt(duration % 60, 10),
+        durationHou = parseInt(durationMin / 60, 10);
+    if (durationHou > 0 && durationHou.toString().length < 2) {
+        durationHou = '0' + durationHou;
+    }
+    if (durationMin >= 60) {
+        durationMin = parseInt(durationMin % 60, 10);
+    }
+    if (durationMin.toString().length < 2) {
+        durationMin = '0' + durationMin;
+    }
+    if (durationSec.toString().length < 2) {
+        durationSec = '0' + durationSec;
+    }
+    if (durationHou > 0) {
+        return durationHou + ':' + durationMin + ':' + durationSec;
+    } else {
+        return durationMin + ':' + durationSec;
+    }
+}
+
 $(function () {
     /* Auto Measure */
     autoWidth();

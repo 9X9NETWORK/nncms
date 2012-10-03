@@ -106,7 +106,7 @@
 
 <div id="cur-add" class="tab-content clearfix">
 <p>Add video by URL</p>
-<textarea name="videourl" id="videourl" cols="80" class="textarea">Paste YouTube video URLs to add (separate with different lines)</textarea>
+<p class="textarea"><span><textarea name="videourl" id="videourl" cols="80" class="textarea">Paste YouTube video URLs to add (separate with different lines)</textarea></span></p>
 <p class="notice hide">You have reached the maximum amount of 50 videos.</p>
 <div class="func">
 <p class="btns btn-add"><span><a href="#" id="btn-add-videourl">Add</a></span></p>
@@ -120,7 +120,7 @@
 
 <script id="video-info-tmpl" type="text/x-jquery-tmpl">
 <h3 class="ellipsis multiline"><span class="title">${name}</span></h3>
-<p><span class="duration">${$item.durationConverter(duration)}</span> | From <a href="${fileUrl}" target="_blank">YouTube.com</a> | By <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> on <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span></p>
+<p><span class="duration">${formatDuration(duration)}</span> | From <a href="${fileUrl}" target="_blank">YouTube.com</a> | By <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> on <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span></p>
 <p class="desc ellipsis multiline">${intro}</p>
 {{if isEmbedLimited || isZoneLimited || isMobileLimited}}
 <ul>
@@ -406,7 +406,7 @@
 {{/if}}
 <p class="img">
 <img src="${imageUrl}" alt="" width="80" height="45" />
-<span class="time"><span class="time-right"><span class="time-middle">${$item.durationConverter(duration)}</span></span></span>
+<span class="time"><span class="time-right"><span class="time-middle">${formatDuration(duration)}</span></span></span>
 </p>
 <h4 class="ellipsis multiline">${name}</h4>
 <p class="hover-func">

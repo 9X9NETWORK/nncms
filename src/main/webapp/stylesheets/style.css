@@ -683,7 +683,7 @@ background: #e4e4e4;
 
 #epcurate-nav .epcurate-nav-wrap ul li {
     float: left;
-    margin: -5px -8px 0 0;
+    margin: -5px -10px 0 0;
     background: url(../images/btn_nav.png) no-repeat 0 0;
 }
 
@@ -705,6 +705,10 @@ background: #e4e4e4;
 #epcurate-nav .epcurate-nav-wrap ul li a:hover {
     background-position: 0 -45px;
     color: #999;
+}
+
+#epcurate-nav .epcurate-nav-wrap ul li a:hover {
+    height: 27px;
 }
 
 #epcurate-nav .epcurate-nav-wrap .tip {
