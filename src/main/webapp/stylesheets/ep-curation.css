@@ -458,18 +458,18 @@ padding-right: 8px;
 
 #epcurate-curation #cur-add p.textarea {
     width: 552px;
-    margin-bottom: 10px;
     padding: 4px 0 0;
     background: url(../images/input_box_top_vertical.png) no-repeat 0 0;
 }
 
 #epcurate-curation #cur-add p.textarea span {
     display: block;
-    padding: 0 0 3px;
+    padding: 0 0 4px;
     background: url(../images/input_box_bottom_vertical.png) no-repeat 0 bottom;
 }
 
 #epcurate-curation #cur-add p.textarea span textarea {
+    display: block;
     width: 542px;
     height: 149px;
     padding: 0 5px;

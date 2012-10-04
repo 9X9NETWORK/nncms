@@ -1,4 +1,4 @@
-/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace */
+/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth */
 /* jslint eqeq: true, regexp: true, unparam: true, sloppy: true, todo: true, vars: true */
 var CMS_CONF = {
     IS_DEBUG: true,
@@ -147,6 +147,9 @@ function buildEpcurateCuration(fm, crumb) {
                         });
                         return;
                     }
+                    $('#overlay-s .overlay-middle').html('Processing...');
+                    $('#overlay-s').fadeIn();
+                    $('#overlay-s .overlay-content').css('margin-left', '-65px');
                     $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
                     $('.form-btn .btn-save').addClass('disable');
                     $('#form-btn-save').attr('disabled', 'disabled');
@@ -156,6 +159,7 @@ function buildEpcurateCuration(fm, crumb) {
                     });
                     setSpace();
                     scrollbar("#storyboard-wrap", "#storyboard-list", "#storyboard-slider");
+                    $('#overlay-s').fadeOut();
                 });
             });
         } else {
@@ -218,7 +222,9 @@ function buildEpcurateCuration(fm, crumb) {
                         invalidList = [],
                         ytData = null,
                         ytItem = {},
-                        ytList = [];
+                        ytList = [],
+                        beginTitleCard = null,
+                        endTitleCard = null;
                     nn.api('GET', '/api/episodes/' + $('#id').val() + '/programs?anticache=' + (new Date()).getTime(), null, function (programs) {
                         $.each(programs, function (idx, programItem) {
                             if (normalPattern.test(programItem.fileUrl)) {
@@ -234,7 +240,7 @@ function buildEpcurateCuration(fm, crumb) {
                                 $('#cur-add .notice').text('Invalid URL, please try again!').removeClass('hide').show();
                                 if (idx === (programList.length - 1)) {
                                     // ON PURPOSE to wait api (async)
-                                    $('#overlay-s').fadeOut(1000, function () {
+                                    setTimeout(function () {
                                         $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
                                         if ($('#storyboard-list li').length > 0) {
                                             $('.form-btn .btn-save').removeClass('disable');
@@ -242,38 +248,66 @@ function buildEpcurateCuration(fm, crumb) {
                                         }
                                         sumStoryboardInfo();
                                         $('.ellipsis').ellipsis();
-                                    });
+                                        $('#overlay-s').fadeOut();
+                                    }, 1000);
                                 }
                             });
                             nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.substr(-11) + '?alt=jsonc&v=2', null, function (youtubes) {
-                                ytData = youtubes.data;
-                                ytItem = {
-                                    ytId: ytData.id,
-                                    fileUrl: programItem.fileUrl,
-                                    imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
-                                    duration: ytData.duration,
-                                    name: ytData.title,
-                                    intro: ytData.description,
-                                    uploader: ytData.uploader,
-                                    uploadDate: ytData.uploaded,    // TODO conver uploaded to timestamp
-                                    isZoneLimited: ((ytData.restrictions) ? true : false),
-                                    isMobileLimited: (((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false),
-                                    isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
-                                };
-                                ytItem = $.extend(programItem, ytItem);
-                                ytList[idx] = ytItem;
-                                if (idx === (programList.length - 1)) {
-                                    // ON PURPOSE to wait api (async)
-                                    $('#overlay-s').fadeOut(1000, function () {
-                                        $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
-                                        if ($('#storyboard-list li').length > 0) {
-                                            $('.form-btn .btn-save').removeClass('disable');
-                                            $('#form-btn-save').removeAttr('disabled');
+                                //nn.api('GET', '/api/programs/' + programItem.id + '/title_cards', null, function (title_card) {
+                                    var title_card = [];
+                                    beginTitleCard = null;
+                                    endTitleCard = null;
+                                    if (title_card.length > 0) {
+                                        if (title_card[1]) {
+                                            if (1 == title_card[1].type) {
+                                                beginTitleCard = title_card[0];
+                                                endTitleCard = title_card[1];
+                                            } else {
+                                                beginTitleCard = title_card[1];
+                                                endTitleCard = title_card[0];
+                                            }
+                                        } else {
+                                            if (title_card[0]) {
+                                                if (0 == title_card[0].type) {
+                                                    beginTitleCard = title_card[0];
+                                                } else {
+                                                    endTitleCard = title_card[0];
+                                                }
+                                            }
                                         }
-                                        sumStoryboardInfo();
-                                        $('.ellipsis').ellipsis();
-                                    });
-                                }
+                                    }
+                                    ytData = youtubes.data;
+                                    ytItem = {
+                                        beginTitleCard: beginTitleCard,
+                                        endTitleCard: endTitleCard,
+                                        ytId: ytData.id,
+                                        fileUrl: programItem.fileUrl,
+                                        imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
+                                        duration: ytData.duration,
+                                        name: ytData.title,
+                                        intro: ytData.description,
+                                        uploader: ytData.uploader,
+                                        uploadDate: ytData.uploaded,    // TODO conver uploaded to timestamp
+                                        isZoneLimited: ((ytData.restrictions) ? true : false),
+                                        isMobileLimited: (((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false),
+                                        isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
+                                    };
+                                    ytItem = $.extend(programItem, ytItem);
+                                    ytList[idx] = ytItem;
+                                    if (idx === (programList.length - 1)) {
+                                        // ON PURPOSE to wait api (async)
+                                        setTimeout(function () {
+                                            $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
+                                            if ($('#storyboard-list li').length > 0) {
+                                                $('.form-btn .btn-save').removeClass('disable');
+                                                $('#form-btn-save').removeAttr('disabled');
+                                            }
+                                            sumStoryboardInfo();
+                                            $('.ellipsis').ellipsis();
+                                            $('#overlay-s').fadeOut();
+                                        }, 1000);
+                                    }
+                                //});
                             }, 'json');
                         });
                     });
@@ -345,10 +379,14 @@ function buildEpcuratePublish(fm, crumb) {
                     });
                     return;
                 }
+                $('#overlay-s .overlay-middle').html('Processing...');
+                $('#overlay-s').fadeIn();
+                $('#overlay-s .overlay-content').css('margin-left', '-65px');
                 nn.api('GET', '/api/episodes/' + $('#id').val() + '/programs?anticache=' + (new Date()).getTime(), null, function (programs) {
                     $('#img-list-tmpl-item').tmpl(programs).appendTo('#img-list');
                     if ('' != episode.imageUrl) {
                         var hasMatch = false;
+                        $('#imageUrl').val(episode.imageUrl);
                         $('#imageUrlOld').val(episode.imageUrl);
                         $('#img-list li').each(function () {
                             if (episode.imageUrl === $(this).children('img').attr('src')) {
@@ -369,6 +407,7 @@ function buildEpcuratePublish(fm, crumb) {
                         timeout: 0,
                         cleartypeNoBg: true,
                         before: function () {
+                            $('body').addClass('has-change');
                             $('#imageUrl').val($('img', this).attr('src'));
                         }
                     });
@@ -376,6 +415,8 @@ function buildEpcuratePublish(fm, crumb) {
                         $(fm).trigger('submit', e);
                         return false;
                     });
+                    $('body').removeClass('has-change');
+                    $('#overlay-s').fadeOut();
                 });
             });
         });
@@ -424,6 +465,9 @@ function buildEpcurateInfo(fm, crumb) {
                         });
                         return;
                     }
+                    $('#overlay-s .overlay-middle').html('Processing...');
+                    $('#overlay-s').fadeIn();
+                    $('#overlay-s .overlay-content').css('margin-left', '-65px');
                     $('#epcurate-info-tmpl').tmpl(crumb).appendTo('#epcurate-info');
                     $('.form-btn .btn-save').addClass('disable');
                     $('#form-btn-save').attr('disabled', 'disabled');
@@ -432,6 +476,7 @@ function buildEpcurateInfo(fm, crumb) {
                         return false;
                     });
                     setFormWidth();
+                    $('#overlay-s').fadeOut();
                 });
             });
         } else {
@@ -481,6 +526,9 @@ function buildEpcurateInfo(fm, crumb) {
                         });
                         return;
                     }
+                    $('#overlay-s .overlay-middle').html('Processing...');
+                    $('#overlay-s').fadeIn();
+                    $('#overlay-s .overlay-content').css('margin-left', '-65px');
                     crumb = $.extend({}, crumb, episode);
                     $('#epcurate-info-tmpl').tmpl(crumb).appendTo('#epcurate-info');
                     $('#epcurate-nav-curation, #epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function (e) {
@@ -488,6 +536,7 @@ function buildEpcurateInfo(fm, crumb) {
                         return false;
                     });
                     setFormWidth();
+                    $('#overlay-s').fadeOut();
                 });
             });
         });
@@ -530,7 +579,7 @@ function listEpisode(id) {
                         }
                         autoHeight();
                         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-                        $('.ellipsis').ellipsis();
+                        setEpisodeWidth();
                         $('#overlay-s').fadeOut();
                     });
                 } else {
@@ -559,7 +608,7 @@ function listEpisode(id) {
                         }
                         autoHeight();
                         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-                        $('.ellipsis').ellipsis();
+                        setEpisodeWidth();
                         $('#overlay-s').fadeOut();
                     });
                 }
@@ -587,7 +636,7 @@ function listEpisode(id) {
             }
             autoHeight();
             scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-            $('.ellipsis').ellipsis();
+            setEpisodeWidth();
             $('#overlay-s').fadeOut();
         });
     } else {
@@ -629,6 +678,9 @@ function updateChannel(id) {
                     });
                     return;
                 }
+                $('#overlay-s .overlay-middle').html('Processing...');
+                $('#overlay-s').fadeIn();
+                $('#overlay-s .overlay-content').css('margin-left', '-65px');
                 // setup channel data
                 $('#func-nav .episode').attr('href', 'episode-list.html?id=' + id);
                 $('#func-nav .setting').attr('href', 'channel-setting.html?id=' + id);
@@ -687,6 +739,7 @@ function updateChannel(id) {
                 }
                 $('#tag').val(channel.tag);
                 $('#settingForm .btn-save').removeClass('disable').addClass('enable');
+                $('#overlay-s').fadeOut();
             });
         });
     } else {
@@ -808,8 +861,8 @@ function rebuildCrumbAndParam(cid, eid) {
     $('#epcurate-nav-info').attr('href', 'epcurate-info.html' + qrystr);
     $('#epcurate-nav-curation').attr('href', 'epcurate-curation.html' + qrystr);
     $('#epcurate-nav-publish').attr('href', 'epcurate-publish.html' + qrystr);
-    $('#form-btn-back').attr('href', $('#form-btn-back').attr('href') + qrystr);
-    $('#form-btn-next').attr('href', $('#form-btn-next').attr('href') + qrystr);
+    $('#form-btn-back').attr('href', $('#epcurate-nav-' + $('#form-btn-back').attr('rel')).attr('href'));
+    $('#form-btn-next').attr('href', $('#epcurate-nav-' + $('#form-btn-next').attr('rel')).attr('href'));
     if (cmsCrumb.id) { $('#id').val(cmsCrumb.id); }
     if (cmsCrumb.channelId) { $('#channelId').val(cmsCrumb.channelId); }
 

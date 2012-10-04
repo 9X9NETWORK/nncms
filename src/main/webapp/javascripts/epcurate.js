@@ -118,6 +118,22 @@ $(function () {
                 });
             } else {
                 // save to api
+                if (!$('body').hasClass('has-change')) {
+                    $('#overlay-s').fadeOut(1000, function () {
+                        // redirect
+                        $('body').removeClass('has-change');
+                        if (!src                                                                                        // from nature action
+                                || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
+                            return false;
+                        } else {
+                            if (src && '' !== $(src.target).attr('href')) {
+                                nextstep = $(src.target).attr('href');
+                            }
+                            location.href = nextstep;
+                        }
+                    });
+                    return false;
+                }
                 var params = {
                     name: $('#name').val(),
                     intro: $('#intro').val()
@@ -146,6 +162,22 @@ $(function () {
                 $('#overlay-s').fadeIn();
                 $('#overlay-s .overlay-content').css('margin-left', '-43px');
                 // save to api
+                if (!$('body').hasClass('has-change')) {
+                    $('#overlay-s').fadeOut(1000, function () {
+                        // redirect
+                        $('body').removeClass('has-change');
+                        if (!src                                                                                        // from nature action
+                                || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
+                            return false;
+                        } else {
+                            if (src && '' !== $(src.target).attr('href')) {
+                                nextstep = $(src.target).attr('href');
+                            }
+                            location.href = nextstep;
+                        }
+                    });
+                    return false;
+                }
                 var params = {
                     imageUrl: $('#imageUrl').val()
                 };

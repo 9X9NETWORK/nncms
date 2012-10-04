@@ -1,5 +1,6 @@
 $(function () {
     scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
+    setEpisodeWidth();
 
     // common unblock
     $('body').keyup(function (e) {
@@ -76,5 +77,17 @@ $(function () {
 
     $(window).resize(function () {
         scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
+        setEpisodeWidth();
     });
 });
+
+function setEpisodeWidth() {
+    var wrapWidth = $('#content-main-wrap').width(),
+        funcWidth = $('#ep-list ul li .episode-info').width(),
+        title = $('#ep-list ul li .episode h3').data('meta');
+    $('#ep-list ul li .episode').width(wrapWidth - funcWidth - 50);
+    $('#ep-list ul li .episode h3').each(function (index) {
+        $(this).html($(this).data('meta'));
+    });
+    $('#ep-list ul li .episode h3').addClass('ellipsis').ellipsis();
+}

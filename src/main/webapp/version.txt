@@ -1,0 +1,11 @@
+Revision: 243
+Author: chihwen
+Date: 下午 03:12:15, 2012年10月4日
+Message:
+同步 trunk 靜態修版版本 242
+issue 5335
+----
+Modified : /api/episode-list.html
+Modified : /api/javascripts/controller.js
+Modified : /api/javascripts/episode.js
+

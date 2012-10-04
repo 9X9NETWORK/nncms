@@ -77,7 +77,7 @@ $(function () {
     $('#storyboard-listing').sortable({
         cursor: 'move',
         revert: true,
-        change: function(event, ui) {
+        change: function (event, ui) {
             $('body').addClass('has-change');
         }
     });
@@ -174,7 +174,7 @@ $(function () {
                     $('#cur-add .notice').text('Invalid URL, please try again!').removeClass('hide').show();
                     if (idx === (matchList.length - 1)) {
                         // ON PURPOSE to wait api (async)
-                        $('#overlay-s').fadeOut(1000, function () {
+                        setTimeout(function () {
                             $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
                             if ($('#storyboard-list li').length > 0) {
                                 $('.form-btn .btn-save').removeClass('disable');
@@ -182,12 +182,16 @@ $(function () {
                             }
                             sumStoryboardInfo();
                             $('.ellipsis').ellipsis();
-                        });
+                            $('#overlay-s').fadeOut();
+                        }, 1000);
                     }
                 });
                 nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + key + '?alt=jsonc&v=2', null, function (youtubes) {
                     ytData = youtubes.data;
                     ytItem = {
+                        beginTitleCard: null,
+                        endTitleCard: null,
+                        id: 0,
                         ytId: ytData.id,
                         fileUrl: normalList[idx],
                         imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
@@ -203,7 +207,7 @@ $(function () {
                     ytList[idx] = ytItem;
                     if (idx === (matchList.length - 1)) {
                         // ON PURPOSE to wait api (async)
-                        $('#overlay-s').fadeOut(1000, function () {
+                        setTimeout(function () {
                             $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
                             if ($('#storyboard-list li').length > 0) {
                                 $('.form-btn .btn-save').removeClass('disable');
@@ -211,7 +215,8 @@ $(function () {
                             }
                             sumStoryboardInfo();
                             $('.ellipsis').ellipsis();
-                        });
+                            $('#overlay-s').fadeOut();
+                        }, 1000);
                     }
                 }, 'json');
             });
@@ -246,6 +251,7 @@ $(function () {
         $('#storyboard li').removeClass('playing').removeClass('next-playing');
         elemtli.addClass('playing');
         elemtli.next().addClass('next-playing');
+        elemtli.prev().addClass('prev-playing');
         return false;
     });
 
@@ -267,7 +273,7 @@ $(function () {
             $('#storyboard li').removeClass('playing').removeClass('next-playing');
             elemtli.addClass('playing');
             elemtli.next().addClass('next-playing');
-            if (tmplItemData.id) {
+            if (tmplItemData.id && tmplItemData.id > 0) {
                 deleteIdList.push(tmplItemData.id);
             }
             deleting.remove();
@@ -284,7 +290,7 @@ $(function () {
                     elemtli.addClass('playing');
                     elemtli.next().addClass('next-playing');
                 }
-                if (tmplItemData.id) {
+                if (tmplItemData.id && tmplItemData.id > 0) {
                     deleteIdList.push(tmplItemData.id);
                 }
                 deleting.remove();
@@ -302,9 +308,10 @@ $(function () {
     });
 
     // edit and preview titlecard (exist)
-    $('#storyboard .storyboard-list ul li .title a').click(function () {
+    $('#storyboard-listing li .title').on('click', '.begin-title, .end-title', function () {
         $('#storyboard-list li').removeClass('edit');
         $(this).parent().parent().addClass('edit');
+        $(this).addClass('edit');
         $('#epcurate-curation ul.tabs li').removeClass('on');
         $('#epcurate-curation ul.tabs li a.cur-add').parent().parent().removeClass('last');
         $('#epcurate-curation ul.tabs li a.cur-edit').parent().parent().removeClass('hide').addClass('on');
@@ -330,9 +337,10 @@ $(function () {
     });
 
     // add titlecard (none)
-    $('#storyboard .storyboard-list ul li .hover-func a.begin-title, #storyboard .storyboard-list ul li .hover-func a.end-title').click(function () {
+    $('#storyboard-listing li .hover-func').on('click', 'a.begin-title, a.end-title', function () {
         $('#storyboard-list li').removeClass('edit');
         $(this).parent().parent().addClass('edit');
+        $(this).addClass('edit');
         $('#epcurate-curation ul.tabs li').removeClass('on');
         $('#epcurate-curation ul.tabs li a.cur-add').parent().parent().removeClass('last');
         $('#epcurate-curation ul.tabs li a.cur-edit').parent().parent().removeClass('hide').addClass('on');
@@ -359,7 +367,7 @@ $(function () {
         $('#btn-pause').removeClass('hide');
         $('#video-player .video').titlecard(elemt);
         $('#play-dragger').animate({
-            left: '+=' + parseInt(width - 18, 10)  //18:drag icon width
+            left: '+=' + parseInt(width - 18, 10)   // 18:drag icon width
         }, parseInt(elemt.duration * 1000, 10), function () {
             $('#video-player .video').html(tmpl);
             $('#play-dragger').css('left', '0');
@@ -373,10 +381,15 @@ $(function () {
         });
     });
     $('#btn-pause').click(function () {
+        var index = $('#storyboard-list li.edit').index(),
+            elemt = $('#storyboard-list li:eq(' + index + ')').data('title');
+        var tmpl = $('#titlecard-tmpl').tmpl(elemt);
         $(this).addClass('hide');
         $('#btn-play').removeClass('hide');
         $('#video-player .video').titlecard('cancel');
-        $('#video-player .video .wrapper-outer, #video-player .video .wrapper-inner').show();
+        $('#video-player .video').html(tmpl);
+        $('#play-dragger').stop().css('left', '0');
+        $('#played').stop().css('width', '0');
     });
 
     // enter titlecard edit mode
@@ -389,12 +402,44 @@ $(function () {
     });
 
     // leave titlecard edit mode
-    $('#cur-edit .edit-title .btn-cancel, #cur-edit .edit-title .btn-done, #cur-edit .edit-title .btn-del').click(function () {
+    $('#cur-edit .edit-title .btn-cancel, #cur-edit .edit-title .btn-done').click(function () {
         $('#cur-edit .edit-title').addClass('disable');
         $('#cur-edit .select').attr('class', 'select disable');
         $('#cur-edit input, #cur-edit textarea').attr('disabled', 'disabled');
         $('#cur-edit .radio, #cur-edit .checker').addClass('disabled');
         return false;
+    });
+
+    // finish titlecard edit
+    $('#cur-edit .edit-title .btn-done').click(function () {
+        if ($('#storyboard-listing li.edit .hover-func a.edit').hasClass('begin-title')) {
+            $('#storyboard-listing li.edit .title').append('<a href="#" class="begin-title edit">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Preview Title</span></span></span></span></a>');
+        } else {
+            $('#storyboard-listing li.edit .title').append('<a href="#" class="end-title edit">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Preview Title</span></span></span></span></a>');
+        }
+        $('#storyboard-listing li.edit .hover-func a.edit').remove();
+        $('#epcurate-curation .tabs li').addClass('hide');
+        $('#epcurate-curation .tabs li.first').removeClass('hide').addClass('last');
+        $('#cur-edit').addClass('hide');
+        $('#cur-add').removeClass('hide');
+        $('#video-player .video').html('');
+        $('#storyboard-list li').attr('class', '');
+    });
+
+    // del titlecard
+    $('#cur-edit .edit-title .btn-del').click(function () {
+        if ($('#storyboard-listing li.edit .title a.edit').hasClass('begin-title')) {
+            $('#storyboard-listing li.edit .hover-func').append('<a href="#" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Add Title</span></span></span></span></a>');
+        } else {
+            $('#storyboard-listing li.edit .hover-func').append('<a href="#" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Add Title</span></span></span></span></a>');
+        }
+        $('#storyboard-listing li .title a.edit').remove();
+        $('#epcurate-curation .tabs li').addClass('hide');
+        $('#epcurate-curation .tabs li.first').removeClass('hide').addClass('last');
+        $('#cur-edit').addClass('hide');
+        $('#cur-add').removeClass('hide');
+        $('#video-player .video').html('');
+        $('#storyboard-list li').attr('class', '');
     });
 
     // font
@@ -505,7 +550,8 @@ $(function () {
 
     // save
     $('#epcurateForm').submit(function (e, src) {
-        var isInsertMode = ('' == $('#id').val());
+        var isInsertMode = ('' == $('#id').val()),
+            nextstep = 'epcurate-curation.html';
         // Episode Curation - Curation
         if ($(e.target).hasClass('curation') && chkCurationData(this, src)) {
             $('#overlay-s .overlay-middle').html('Saving...');
@@ -529,6 +575,9 @@ $(function () {
                 programList.push(programItem);
             });
             if (isInsertMode) {
+                nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
+                    // nothing to do ON PURPOSE to turn off error handle from YouTube to 9x9 API
+                });
                 // insert mode: insert episode --> insert programs --> update episode with rerun
                 var parameter = {
                     name: $('#name').val(),
@@ -554,12 +603,12 @@ $(function () {
                                 nn.api('PUT', '/api/episodes/' + episode.id, { rerun: true }, function (episode) {
                                     $('#overlay-s').fadeOut(1000, function () {
                                         // redirect
+                                        deleteIdList = [];
                                         $('body').removeClass('has-change');
                                         if (!src                                                                                        // from nature action
                                                 || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
                                             return false;
                                         } else {
-                                            var nextstep = 'epcurate-curation.html';
                                             if (src && '' !== $(src.target).attr('href')) {
                                                 nextstep = $(src.target).attr('href');
                                             }
@@ -574,9 +623,28 @@ $(function () {
             } else {
                 // update mode
                 // !important rule: first POST and PUT then DELETE
+                if (!$('body').hasClass('has-change')) {
+                    $('#overlay-s').fadeOut(1000, function () {
+                        // redirect
+                        $('body').removeClass('has-change');
+                        if (!src                                                                                        // from nature action
+                                || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
+                            return false;
+                        } else {
+                            if (src && '' !== $(src.target).attr('href')) {
+                                nextstep = $(src.target).attr('href');
+                            }
+                            location.href = nextstep;
+                        }
+                    });
+                    return false;
+                }
+                nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
+                    // nothing to do ON PURPOSE to turn off error handle from YouTube to 9x9 API
+                });
                 $('#storyboard-list li').each(function (i) {
                     programItem = $(this).tmplItem().data;
-                    if (programItem.id) {
+                    if (programItem.id && programItem.id > 0) {
                         // update program
                         $.extend(programItem, {
                             subSeq: i + 1
@@ -602,23 +670,19 @@ $(function () {
                     if (i === (programLength - 1)) {
                         // delete program
                         if (deleteIdList.length > 0) {
-                            $.each(deleteIdList, function (j, k) {
-                                nn.api('DELETE', '/api/programs/' + k, null, function (data) {
-                                    if (j === (deleteIdList.length - 1)) {
-                                        $('#overlay-s').fadeOut(1000, function () {
-                                            // redirect
-                                            $('body').removeClass('has-change');
-                                            if (!src                                                                                        // from nature action
-                                                    || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
-                                                return false;
-                                            } else {
-                                                var nextstep = 'epcurate-curation.html';
-                                                if (src && '' !== $(src.target).attr('href')) {
-                                                    nextstep = $(src.target).attr('href');
-                                                }
-                                                location.href = nextstep;
-                                            }
-                                        });
+                            nn.api('DELETE', '/api/episodes/' + $('#id').val() + '/programs?programs=' + deleteIdList.join(','), null, function (data) {
+                                $('#overlay-s').fadeOut(1000, function () {
+                                    // redirect
+                                    deleteIdList = [];
+                                    $('body').removeClass('has-change');
+                                    if (!src                                                                                        // from nature action
+                                            || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
+                                        return false;
+                                    } else {
+                                        if (src && '' !== $(src.target).attr('href')) {
+                                            nextstep = $(src.target).attr('href');
+                                        }
+                                        location.href = nextstep;
                                     }
                                 });
                             });
@@ -630,7 +694,6 @@ $(function () {
                                         || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
                                     return false;
                                 } else {
-                                    var nextstep = 'epcurate-curation.html';
                                     if (src && '' !== $(src.target).attr('href')) {
                                         nextstep = $(src.target).attr('href');
                                     }
@@ -789,6 +852,16 @@ function playVideoAndTitlecard(elemtli) {
                 setTimeout(function () {
                     loadVideo(elemtli.data('ytid'));
                 }, elemt.duration);
+            });
+            $('#play-dragger').animate({
+                left: '+=' + parseInt(width - 18, 10)   // 18:drag icon width
+            }, parseInt(elemt.duration * 1000, 10), function () {
+                $('#play-dragger').css('left', '0');
+            });
+            $('#played').animate({
+                width: '+=' + width
+            }, parseInt(elemt.duration * 1000, 10), function () {
+                $('#played').css('width', '0');
             });
         }
     } else {
