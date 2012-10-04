@@ -9,3 +9,7 @@ Modified : /api/episode-list.html
 Modified : /api/javascripts/controller.js
 Modified : /api/javascripts/episode.js
 
+\n====\n
+Last Changed Author: louis
+Last Changed Rev: 3640
+Last Changed Date: 2012-10-04 17:22:22 +0800 (Thu, 04 Oct 2012)
