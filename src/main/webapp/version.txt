@@ -9,3 +9,7 @@ issue 5259
 ----
 Modified : /api/javascripts/controller.js
 
+==== 9x9 ====
+Last Changed Author: louis
+Last Changed Rev: 3682
+Last Changed Date: 2012-10-09 16:53:56 +0800 (Tue, 09 Oct 2012)
