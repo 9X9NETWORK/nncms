@@ -23,6 +23,20 @@ var CMS_CONF = {
         'fold': 'Fold',
         'drop': 'Drop'
     },
+    COLOR_MAP: {
+        '#ffffff': 'c-fff',
+        '#eeeeee': 'c-eee',
+        '#bbbbbb': 'c-bbb',
+        '#777777': 'c-777',
+        '#333333': 'c-333',
+        '#000000': 'c-000',
+        '#ff0000': 'c-f00',
+        '#ff6600': 'c-f60',
+        '#ffff00': 'c-ff0',
+        '#009900': 'c-090',
+        '#0033ff': 'c-03f',
+        '#6600ff': 'c-60f'
+    },
     USER_URL: $.url(),
     USER_DATA: null
 };
@@ -832,14 +846,14 @@ function rebuildCrumbAndParam(cid, eid) {
         cmsCrumb = $.url('http://fake.url.dev.teltel.com/?' + $.cookie('cms-crumb')).param();
     }
     if ('undefined' === typeof cid) {
-        if (!cmsCrumb.channelId && CMS_CONF.USER_URL.param('cid')) {
+        if (CMS_CONF.USER_URL.param('cid')) {
             cmsCrumb.channelId = CMS_CONF.USER_URL.param('cid');
         }
     } else {
         cmsCrumb.channelId = cid;
     }
     if ('undefined' === typeof eid) {
-        if (!cmsCrumb.id && CMS_CONF.USER_URL.param('id')) {
+        if (CMS_CONF.USER_URL.param('id')) {
             cmsCrumb.id = CMS_CONF.USER_URL.param('id');
         }
     } else {

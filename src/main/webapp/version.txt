@@ -1,15 +1,11 @@
-Revision: 243
+Revision: 254
 Author: chihwen
-Date: と 03:12:15, 201210る4ら
+Date: と 09:46:43, 201210る5ら
 Message:
-˙ trunk 繰篈セ 242
-issue 5335
-----
-Modified : /api/episode-list.html
-Modified : /api/javascripts/controller.js
-Modified : /api/javascripts/episode.js
+タ cookie 癘拘把计旧璓秨 tabs 琩 ep 戈礚猭ㄌ把计盿タ絋戈
 
-\n====\n
-Last Changed Author: louis
-Last Changed Rev: 3640
-Last Changed Date: 2012-10-04 17:22:22 +0800 (Thu, 04 Oct 2012)
+璶Τ絋盿把计碞ㄌ把计 cookie
+issue 5259
+----
+Modified : /api/javascripts/controller.js
+
