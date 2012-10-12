@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="cache-control" content="no-cache" />
@@ -158,7 +159,9 @@ Add your 9x9.tv creations and activity to your facebook timeline
 <p class="select-btn"></p>
 <p class="select-txt"><a id="categoryId-select-txt" href="#">Select a category</a></p>
 <ul id="browse-category" class="select-list">
+<!-- template = #category-list-tmpl-item -->
 </ul>
+
 <script id="category-list-tmpl-item" type="text/x-jquery-tmpl">
 {{if $item.dataArrayIndex($item.data) < 3}}
 <li class="first-row" data-meta="${id}">${name}</li>
@@ -166,6 +169,7 @@ Add your 9x9.tv creations and activity to your facebook timeline
 <li data-meta="${id}">${name}</li>
 {{/if}}
 </script>
+
 <input type="hidden" name="categoryId" id="categoryId" value="" class="select-meta" />
 </div>
 </div>
@@ -178,7 +182,9 @@ Add your 9x9.tv creations and activity to your facebook timeline
 <div class="tag-list hide clear">
 <h4>Suggested Tags:</h4>
 <ul id="tag-list">
+<!-- template = #tag-list-tmpl-item -->
 </ul>
+
 <script id="tag-list-tmpl-item" type="text/x-jquery-tmpl">
 {{each tags}}
 {{if $value != ""}}
@@ -186,6 +192,7 @@ Add your 9x9.tv creations and activity to your facebook timeline
 {{/if}}
 {{/each}}
 </script>
+
 </div>
 </div>
 </div>
@@ -213,7 +220,7 @@ Add your 9x9.tv creations and activity to your facebook timeline
       <ul class="select-list">
         <li><a href="/#!about=about">About us</a></li>
         <li><a href="/#!about=help">Help</a></li>
-        <li><a href="/#!about=report">Report</a></li>
+        <li><a href="/#!about=report">Feedback</a></li>
         <li><a href="/#!about=terms">Terms & Policy</a></li>
         <li><a href="/#!about=contact">Contact us</a></li>
         <li><a href="/#!about=partners">Partners</a></li>

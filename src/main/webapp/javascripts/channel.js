@@ -1,5 +1,5 @@
 $(function () {
-    scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
+    scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
     setFormHeight();
 
     // common unblock
@@ -50,10 +50,7 @@ $(function () {
             if (e && $(e.target).attr('id')) {
                 $('body').data('leaveId', $(e.target).attr('id'));
             }
-            $.blockUI.defaults.overlayCSS.opacity = '0.9';
-            $.blockUI({
-                message: $('#unsave-prompt')
-            });
+            showUnsaveOverlay();
             return false;
         }
     });
@@ -66,10 +63,7 @@ $(function () {
         }
         if ($('body').hasClass('has-change')) {
             $('body').data('leaveUrl', 'index.html');
-            $.blockUI.defaults.overlayCSS.opacity = '0.9';
-            $.blockUI({
-                message: $('#unsave-prompt')
-            });
+            showUnsaveOverlay();
         } else {
             location.href = 'index.html';
         }
@@ -93,26 +87,23 @@ $(function () {
     // channel list delete
     $('#channel-list').on('click', '.enable a.del', function () {
         $(this).parent().parent().parent().parent().parent().parent('li').addClass('deleting').data('deleteId', $(this).attr('href'));
-        $.blockUI.defaults.overlayCSS.opacity = '0.9';
-        $.blockUI({
-            message: $('#delete-prompt')
-        });
-        $('.blockOverlay').height($(window).height() - 45);
+        showDeletePromptOverlay();
         return false;
     });
     $('#delete-prompt .btn-del').click(function () {
         $.unblockUI();
         if ($('#channel-list li.deleting').length > 0 && '' != $('#channel-list li.deleting').data('deleteId')) {
-            $('#overlay-s .overlay-middle').html('Saving...');
-            $('#overlay-s').fadeIn();
-            $('#overlay-s .overlay-content').css('margin-left', '-43px');
+            showSavingOverlay();
             nn.api('DELETE', $('#channel-list li.deleting').data('deleteId'), null, function (data) {
                 if ('OK' == data) {
                     $('#overlay-s').fadeOut(1000, function () {
-                        $('#channel-counter').html($('#channel-counter').html() - 1);
+                        var cntChannel = $('#channel-counter').html();
+                        if (cntChannel > 0) {
+                            $('#channel-counter').html(cntChannel - 1);
+                        }
                         $('#channel-list li.deleting').remove();
                         $('#content-main-wrap').height($('#content-main-wrap').height() - 103); // 103: li height
-                        scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
+                        scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
                     });
                 } else {
                     $('#overlay-s').fadeOut(0, function () {
@@ -165,8 +156,8 @@ $(function () {
     // channel form selector
     $('#settingForm').on('click', '.enable .select-btn, .enable .select-txt', function (event) {
         $('.select-list').hide();
-        $(this).parent("li").siblings().children(".on").removeClass("on");
-        $(this).parent().children('.select-btn').toggleClass("on");
+        $(this).parent('li').siblings().children('.on').removeClass('on');
+        $(this).parent().children('.select-btn').toggleClass('on');
         if ($(this).parent().children('.select-btn').hasClass('on')) {
             $(this).parent().children('.select-list').slideDown();
         } else {
@@ -177,8 +168,8 @@ $(function () {
     });
     $('#settingForm').on('click', '.select .select-list li', function () {
         $('body').addClass('has-change');
-        var selectOption = $(this).text();
-        var metadata = $(this).data('meta');
+        var selectOption = $(this).text(),
+            metadata = $(this).data('meta');
         // region (sphere) relate to category
         if ('sphere-select-list' === $(this).parent().attr('id')) {
             var srcname = $(this).parent().parent().children('.select-txt').children().text();
@@ -234,9 +225,9 @@ $(function () {
     // channel form tag
     $('#tag-list').on('click', 'li span a', function () {
         $('body').addClass('has-change');
-        var temp = [];
-        var currentTags = $('#tag').val();
-        var clickedTag = $.trim($(this).text());
+        var temp = [],
+            currentTags = $('#tag').val(),
+            clickedTag = $.trim($(this).text());
         currentTags = currentTags.split(',');
         if (!currentTags) { currentTags = []; }
         if (-1 === $.inArray(clickedTag, currentTags)) {
@@ -265,9 +256,7 @@ $(function () {
     $('#settingForm .btn-save').click(function () {
         // update mode
         if (chkData(document.settingForm) && CMS_CONF.USER_DATA.id && $(this).hasClass('enable') && CMS_CONF.USER_URL.param('id') > 0) {
-            $('#overlay-s .overlay-middle').html('Saving...');
-            $('#overlay-s').fadeIn();
-            $('#overlay-s .overlay-content').css('margin-left', '-43px');
+            showSavingOverlay();
             nn.on(400, function (jqXHR, textStatus) {
                 $('#overlay-s').fadeOut(0, function () {
                     alert(textStatus + ': ' + jqXHR.responseText);
@@ -287,9 +276,7 @@ $(function () {
     $('#settingForm .btn-create').click(function () {
         // insert mode
         if (chkData(document.settingForm) && CMS_CONF.USER_DATA.id && $(this).hasClass('enable')) {
-            $('#overlay-s .overlay-middle').html('Saving...');
-            $('#overlay-s').fadeIn();
-            $('#overlay-s .overlay-content').css('margin-left', '-43px');
+            showSavingOverlay();
             nn.on(400, function (jqXHR, textStatus) {
                 $('#overlay-s').fadeOut(0, function () {
                     alert(textStatus + ': ' + jqXHR.responseText);
@@ -314,7 +301,7 @@ $(function () {
 
     $(window).resize(function () {
         setFormHeight();
-        scrollbar("#content-main", "#content-main-wrap", "#main-wrap-slider");
+        scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
     });
 
     // Amazon S3 upload
@@ -352,12 +339,11 @@ function chkData(fm) {
 }
 
 function setFormHeight() {
-    var windowHeight = $(window).height();
-    var windowWidth  = $(window).width()
-    var titleFuncHeight = $('#title-func').height();
-    var formHeight = $('#content-main-wrap form').height();
-    var contentHeight = windowHeight - titleFuncHeight - 94 - 48 - 38 - 10;    // 94：header + studio-nav; 48：footer; 38：title-func padding
-
+    var windowHeight = $(window).height(),
+        windowWidth  = $(window).width(),
+        titleFuncHeight = $('#title-func').height(),
+        formHeight = $('#content-main-wrap form').height(),
+        contentHeight = windowHeight - titleFuncHeight - 94 - 48 - 38 - 10;    // 94:header+studio-nav 48:footer 38:title-func-padding
     if (windowWidth > 1220) {
         $('input.text').width(windowWidth - 734);
         $('textarea.textarea').width(windowWidth - 744);

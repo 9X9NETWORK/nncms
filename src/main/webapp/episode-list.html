@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="cache-control" content="no-cache" />
@@ -61,6 +62,9 @@
 <div id="content-wrap">
 
 <div id="content-nav">
+<!-- template = #episode-nav-tmpl -->
+</div>
+
 <script id="episode-nav-tmpl" type="text/x-jquery-tmpl">
 {{if contentType == CMS_CONF.YOUR_FAVORITE}}
 &nbsp;
@@ -73,12 +77,9 @@
 </div>
 {{/if}}
 </script>
-</div>
 
 <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
 
-<div id="content-main">
-<div id="title-func" class="clearfix">
 <script id="title-func-tmpl" type="text/x-jquery-tmpl">
 <h2><span id="channel-name">${name}</span> &gt; Episode list (<span id="episode-counter">${$item.cntEpisode}</span>)</h2>
 {{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}
@@ -94,6 +95,10 @@
 </div>
 {{/if}}
 </script>
+
+<div id="content-main">
+<div id="title-func" class="clearfix">
+<!-- template = #title-func-tmpl -->
 </div>
 <div id="content-main-wrap">
 <div class="constrain">
@@ -238,7 +243,7 @@
       <ul class="select-list">
         <li><a href="/#!about=about">About us</a></li>
         <li><a href="/#!about=help">Help</a></li>
-        <li><a href="/#!about=report">Report</a></li>
+        <li><a href="/#!about=report">Feedback</a></li>
         <li><a href="/#!about=terms">Terms & Policy</a></li>
         <li><a href="/#!about=contact">Contact us</a></li>
         <li><a href="/#!about=partners">Partners</a></li>

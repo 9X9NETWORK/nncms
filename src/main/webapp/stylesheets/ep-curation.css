@@ -66,7 +66,7 @@ p.auto-height {
     left: 0;
     width: 100%;
     height: 44px;
-    background-color: #000;
+    background: #000 url(../images/bg_controlbar.png) 0 bottom repeat-x;
 }
 
 #progress-bar {
@@ -138,7 +138,8 @@ p.auto-height {
     cursor: pointer;
 }
 
-#btn-play:hover, #btn-play.on {
+#btn-play:hover,
+#btn-play.disable {
     background-position: 0 -48px;
 }
 
@@ -150,7 +151,7 @@ p.auto-height {
 }
 
 #btn-pause:hover,
-#btn-pause.on {
+#btn-pause.disable {
     background-position: 0 -148px;
 }
 
@@ -198,8 +199,6 @@ p.auto-height {
     height: 25px;
     margin-right: 1px;
     padding: 3px 5px 0 0;
-    background: #000 url(../images/btn_controls.png) 0 -448px no-repeat;
-    background: #000 url(../images/bg_controlbar.png) 0 bottom repeat-x;
     font-size: 11px;
     line-height: 25px;
     text-align: right;
@@ -886,12 +885,19 @@ padding-right: 8px;
 	background-color: #000;
 	line-height: 59px;
 	text-align: center;
+    cursor: pointer;
 }
 
 #epcurate-curation #cur-edit .effect-container p.effect-demo span {
     display: block;
-    width: 95px;
-    height: 59px;
+    width: 100%;
+    height: 100%;
+}
+
+#epcurate-curation #cur-edit .effect-container p.effect-demo span em {
+    display: block;
+    width: 100%;
+    height: 100%;
     line-height: 59px;
 	color: #fff;
 	font-size: 20px;
@@ -929,6 +935,7 @@ padding-right: 8px;
 #epcurate-curation #cur-edit .background-container {
 	position: relative;
 	float: left;
+    width: 100%;
 	margin-bottom: 3px;
 }
 
@@ -983,6 +990,7 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .background-container .bg-img p.img {
+    position: relative;
 	float: left;
 	width: 95px;
 	height: 59px;
@@ -991,11 +999,16 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .background-container .bg-img p.img img {
+    width: 95px;
+    height: 59px;
 	vertical-align: middle;
 }
 
 #epcurate-curation #cur-edit .background-container .bg-img p.img img.loading {
     display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #epcurate-curation #cur-edit .background-container .bg-img .btns {
@@ -1055,14 +1068,15 @@ padding-right: 8px;
 	line-height: 28px;
 }
 
-#epcurate-curation #cur-edit .edit-title                 .btn-container .btn-edit,
-#epcurate-curation #cur-edit .edit-title.disable .btn-container .btn-del,
+#epcurate-curation #cur-edit .edit-title         .btn-container .btn-edit,
+#epcurate-curation #cur-edit .edit-title         .btn-container .btn-del,
 #epcurate-curation #cur-edit .edit-title.disable .btn-container .btn-cancel,
 #epcurate-curation #cur-edit .edit-title.disable .btn-container .btn-done {
 	display: none;
 }
 
-#epcurate-curation #cur-edit .edit-title.disable .btn-container .btn-edit {
+#epcurate-curation #cur-edit .edit-title.disable .btn-container .btn-edit,
+#epcurate-curation #cur-edit .edit-title.disable .btn-container .btn-del {
 	display: block;
 }
 
@@ -1694,9 +1708,10 @@ padding-right: 8px;
     top: 31px;
     left: 9px;
     width: 84px;
-    padding: 10px 5px 0 5px;
+    padding: 10px 5px 0 16px;
     font-weight: normal;
     line-height: 18px;
+    text-indent: -13px;
 }
 
 #storyboard .storyboard-list ul {
@@ -1809,7 +1824,7 @@ padding-right: 8px;
     margin-bottom: 3px;
     background: url(../images/thumbnail_box_sm.png) no-repeat 0 0;
     margin: -4px 0 0 -4px;
-	cursor: url(../images/Cursor-moz_grab.png), move;
+	cursor: move;
 }
 
 #storyboard .storyboard-list ul li p.img img {
@@ -1888,11 +1903,17 @@ padding-right: 8px;
     background-position: 0 -2129px;
 }
 
-#storyboard .storyboard-list ul li p.title a.begin-title:hover {
+#storyboard .storyboard-list ul li p.title a.begin-title:hover,
+#storyboard .storyboard-list ul li p.title a.begin-title.edit,
+#storyboard .storyboard-list ul li p.hover-func a.begin-title.edit {
+    display: block !important;
     background-position: 1px -2291px;
 }
 
-#storyboard .storyboard-list ul li p.title a.end-title:hover {
+#storyboard .storyboard-list ul li p.title a.end-title:hover,
+#storyboard .storyboard-list ul li p.title a.end-title.edit,
+#storyboard .storyboard-list ul li p.hover-func a.end-title.edit {
+    display: block !important;
     background-position: 1px -2346px;
 }
 
@@ -1902,7 +1923,7 @@ padding-right: 8px;
     position: absolute;
     top: 22px;
     left: 0;
-    width: 90px;
+    width: 75px;
     height: 28px;
     margin: 0;
     padding-top: 1px;
@@ -1915,7 +1936,7 @@ padding-right: 8px;
 }
 
 #storyboard .storyboard-list ul li p.title a.end-title .tip {
-    left: 25px;
+    left: 40px;
     background-position: 72px top;
 }
 
@@ -1953,16 +1974,16 @@ padding-right: 8px;
     top: 9px;
     left: 9px;
     z-index: 52;
-    width: 80px;
+    width: 74px;
     height: 45px;
-	cursor: url(../images/Cursor-moz_grab.png), move;
+	cursor: move;
 }
 
 #storyboard .storyboard-list ul li .hover-func a.video-del {
     display: block;
     position: absolute;
     top: -11px;
-    right: -6px;
+    right: -12px;
     z-index: 50;
     width: 15px;
     height: 16px;
@@ -2008,7 +2029,7 @@ padding-right: 8px;
 }
 
 #storyboard .storyboard-list ul li .hover-func a.end-title {
-    right: -14px;
+    right: -20px;
 	margin-top: 2px;
     background-position: 0 -2238px;
 }

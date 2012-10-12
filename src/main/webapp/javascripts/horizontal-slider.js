@@ -1,4 +1,4 @@
-// scrollbar("#storyboard-wrap", "#storyboard-list", "#storyboard-slider");
+// scrollbar('#storyboard-wrap', '#storyboard-list', '#storyboard-slider');
 
 function scrollbar(outer, inner, sliderwrap) {
     // change the main div to overflow-hidden as we can use the slider now
@@ -12,7 +12,8 @@ function scrollbar(outer, inner, sliderwrap) {
         var proportion = difference / $(inner).width();
 
         // set the proportional height - round it to make sure everything adds up correctly later on
-        var handleWidth = $(outer).width() - (proportion * $(outer).width());
+        //var handleWidth = $(outer).width() - (proportion * $(outer).width());
+        var handleWidth = 50;
 
         // set up the slider
         $(sliderwrap + ' .slider-h').slider({
@@ -35,13 +36,13 @@ function scrollbar(outer, inner, sliderwrap) {
         });
 
         // set the handle height and bottom margin so the middle of the handle is in line with the slider
-        $(sliderwrap + " .ui-slider-handle").css({ width: handleWidth });
+        $(sliderwrap + ' .ui-slider-handle').css({ width: handleWidth });
 
         // remember the original slider height ONCE, and always used the saved value
-        var origSliderWidth = $(sliderwrap).attr("data-orig-slider-width");
+        var origSliderWidth = $(sliderwrap).attr('data-orig-slider-width');
         if (!origSliderWidth) {
-            origSliderWidth = $(sliderwrap + " .slider-h").width();
-            $(sliderwrap).attr("data-orig-slider-width", origSliderWidth);
+            origSliderWidth = $(sliderwrap + ' .slider-h').width();
+            $(sliderwrap).attr('data-orig-slider-width', origSliderWidth);
         }
 
         // the height through which the handle can move needs to be the original height minus the handle height
@@ -50,29 +51,29 @@ function scrollbar(outer, inner, sliderwrap) {
         // so the slider needs to have both top and bottom margins equal to half the difference
         var sliderMargin = (origSliderWidth - sliderWidth) * 0.5;
 
-        $(sliderwrap + " .ui-slider").css({ width: sliderWidth });
+        $(sliderwrap + ' .ui-slider').css({ width: sliderWidth });
     } else {
         $(sliderwrap).hide();
     }
 
-    $(sliderwrap + " .ui-slider").unbind('click');
-    $(sliderwrap + " .ui-slider").click(function (event) { event.stopPropagation(); });
+    $(sliderwrap + ' .ui-slider').unbind('click');
+    $(sliderwrap + ' .ui-slider').click(function (event) { event.stopPropagation(); });
 /*
-    $(outer + ", " + sliderwrap + " .slider-wrap").unbind('click');
-    $(outer + ", " + sliderwrap + " .slider-wrap").click(function (event) {
+    $(outer + ', ' + sliderwrap + ' .slider-wrap').unbind('click');
+    $(outer + ', ' + sliderwrap + ' .slider-wrap').click(function (event) {
         // clicks on the wrap outside the slider range
         var offsetLeft = $(this).offset().left;
         // find the click point, subtract the offset, and calculate percentage of the slider clicked
         var clickValue = (event.pageX - offsetLeft) * 100 / $(this).width();
-        $(sliderwrap + " .slider-h").slider("value", 100 - clickValue);
+        $(sliderwrap + ' .slider-h').slider('value', 100 - clickValue);
     }); 
 */
-    $(outer + ", " + sliderwrap + " .slider-wrap").unbind('mousewheel');
-    $(outer + ", " + sliderwrap + " .slider-wrap").mousewheel(function (event, delta) {
+    $(outer + ', ' + sliderwrap + ' .slider-wrap').unbind('mousewheel');
+    $(outer + ', ' + sliderwrap + ' .slider-wrap').mousewheel(function (event, delta) {
         var speed = 5;
-        var sliderVal = $(sliderwrap + " .slider-h").slider("value");
+        var sliderVal = $(sliderwrap + ' .slider-h').slider('value');
         sliderVal += (delta * speed);
-        $(sliderwrap + " .slider-h").slider("value", sliderVal);
+        $(sliderwrap + ' .slider-h').slider('value', sliderVal);
         event.preventDefault();
     });
 }

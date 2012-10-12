@@ -1,6 +1,7 @@
-/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth */
-/* jslint eqeq: true, regexp: true, unparam: true, sloppy: true, todo: true, vars: true */
+/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth htmlEscape showProcessingOverlay showSystemErrorOverlay showSystemErrorOverlayAndHookError */
+/*jslint eqeq: true, regexp: true, unparam: true, sloppy: true, todo: true, vars: true */
 var CMS_CONF = {
+    // TODO setup debug mode to false in production environment
     IS_DEBUG: true,
     YOUR_FAVORITE: 11,
     PROGRAM_MAX: 50,
@@ -37,6 +38,21 @@ var CMS_CONF = {
         '#0033ff': 'c-03f',
         '#6600ff': 'c-60f'
     },
+    // NOTE: The naming is 9x9 API convention, not jquery.titlecard plugin convention
+    TITLECARD_DEFAULT: {
+        message: 'My video',
+        align: 'center',
+        effect: 'fade',
+        duration: 7,
+        size: 20,
+        color: '#ffffff',
+        style: 'normal',
+        weight: 'normal',
+        bgColor: '#000000',
+        bgImage: ''
+    },
+    FONT_RADIX_MIN: 6,
+    FONT_RADIX_MAX: 48,
     USER_URL: $.url(),
     USER_DATA: null
 };
@@ -93,15 +109,16 @@ $(function () {
                     $.removeCookie('cms-crumb');
                 } else {
                     fadeEpcurateHeaderAndFooter();
-                    var cmsCrumb = rebuildCrumbAndParam();
+                    var cmsCrumb = rebuildCrumbAndParam(),
+                        fm = document.epcurateForm;
                     if ('epcurate-info.html' === userUrlFile) {
-                        buildEpcurateInfo(document.epcurateForm, cmsCrumb);
+                        buildEpcurateInfo(fm, cmsCrumb);
                     }
                     if ('epcurate-publish.html' === userUrlFile) {
-                        buildEpcuratePublish(document.epcurateForm, cmsCrumb);
+                        buildEpcuratePublish(fm, cmsCrumb);
                     }
                     if ('epcurate-curation.html' === userUrlFile) {
-                        buildEpcurateCuration(document.epcurateForm, cmsCrumb);
+                        buildEpcurateCuration(fm, cmsCrumb);
                     }
                 }
             }
@@ -114,24 +131,14 @@ function buildEpcurateCuration(fm, crumb) {
     var eid = fm.id.value,
         cid = fm.channelId.value;
     if ('' == eid && '' == cid) {
-        $('body').addClass('has-error');
-        $('#system-error .content').html('Invalid channel ID and episode ID, please try again.');
-        $.blockUI.defaults.overlayCSS.opacity = '0.9';
-        $.blockUI({
-            message: $('#system-error')
-        });
+        showSystemErrorOverlayAndHookError('Invalid channel ID and episode ID, please try again.');
         return;
     }
     if ('' == eid) {
         // insert mode: data from cookie
-        if (!crumb.name || '' == crumb.name) {
-            $('#form-btn-leave').data('leaveUrl', $('#epcurate-nav-info').attr('href'));
-            $('body').addClass('has-error');
-            $('#system-error .content').html('No episode title. Please go back to fill in episode information.');
-            $.blockUI.defaults.overlayCSS.opacity = '0.9';
-            $.blockUI({
-                message: $('#system-error')
-            });
+        if (!crumb.name || '' == $.trim(crumb.name)) {
+            $('#form-btn-leave').data('gobackUrl', $('#epcurate-nav-info').attr('href'));
+            showSystemErrorOverlayAndHookError('No episode title. Please go back to fill in episode information.');
             return;
         }
         if (cid > 0 && !isNaN(cid) && CMS_CONF.USER_DATA.id) {
@@ -143,27 +150,15 @@ function buildEpcurateCuration(fm, crumb) {
                     });
                 }
                 if (-1 === $.inArray(parseInt(cid, 10), channelIds)) {
-                    $('body').addClass('has-error');
-                    $('#system-error .content').html('You are not authorized to edit episodes in this channel.');
-                    $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                    $.blockUI({
-                        message: $('#system-error')
-                    });
+                    showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                     return;
                 }
                 nn.api('GET', '/api/channels/' + cid, null, function (channel) {
                     if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
-                        $('body').addClass('has-error');
-                        $('#system-error .content').html('The favorites channel can not be edited.');
-                        $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                        $.blockUI({
-                            message: $('#system-error')
-                        });
+                        showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                         return;
                     }
-                    $('#overlay-s .overlay-middle').html('Processing...');
-                    $('#overlay-s').fadeIn();
-                    $('#overlay-s .overlay-content').css('margin-left', '-65px');
+                    showProcessingOverlay();
                     $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
                     $('.form-btn .btn-save').addClass('disable');
                     $('#form-btn-save').attr('disabled', 'disabled');
@@ -172,29 +167,19 @@ function buildEpcurateCuration(fm, crumb) {
                         return false;
                     });
                     setSpace();
-                    scrollbar("#storyboard-wrap", "#storyboard-list", "#storyboard-slider");
+                    scrollbar('#storyboard-wrap', '#storyboard-list', '#storyboard-slider');
                     $('#overlay-s').fadeOut();
                 });
             });
         } else {
-            $('body').addClass('has-error');
-            $('#system-error .content').html('Invalid channel ID, please try again.');
-            $.blockUI.defaults.overlayCSS.opacity = '0.9';
-            $.blockUI({
-                message: $('#system-error')
-            });
+            showSystemErrorOverlayAndHookError('Invalid channel ID, please try again.');
             return;
         }
     } else {
         // update mode: data from api
         nn.api('GET', '/api/episodes/' + $('#id').val(), null, function (episode) {
             if ('' != cid && cid != episode.channelId) {
-                $('body').addClass('has-error');
-                $('#system-error .content').html('You are not authorized to edit this episode.');
-                $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                $.blockUI({
-                    message: $('#system-error')
-                });
+                showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
                 return;
             }
             nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
@@ -205,31 +190,18 @@ function buildEpcurateCuration(fm, crumb) {
                     });
                 }
                 if (-1 === $.inArray(parseInt(episode.channelId, 10), channelIds)) {
-                    $('body').addClass('has-error');
-                    $('#system-error .content').html('You are not authorized to edit episodes in this channel.');
-                    $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                    $.blockUI({
-                        message: $('#system-error')
-                    });
+                    showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                     return;
                 }
                 nn.api('GET', '/api/channels/' + episode.channelId, null, function (channel) {
                     if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
-                        $('body').addClass('has-error');
-                        $('#system-error .content').html('The favorites channel can not be edited.');
-                        $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                        $.blockUI({
-                            message: $('#system-error')
-                        });
+                        showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                         return;
                     }
-                    $('#overlay-s .overlay-middle').html('Processing...');
-                    $('#overlay-s').fadeIn();
-                    $('#overlay-s .overlay-content').css('margin-left', '-65px');
+                    showProcessingOverlay();
                     crumb = $.extend({}, crumb, episode);
                     $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
                     // merge 9x9 api and youtube api (ytId, uploader, uploadDate, isZoneLimited, isMobileLimited, isEmbedLimited)
-                    // TODO GET /api/programs/{programId}/title_cards or GET /api/episodes/{episodeId}/title_cards
                     var normalPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
                         programItem = {},
                         programList = [],
@@ -267,8 +239,7 @@ function buildEpcurateCuration(fm, crumb) {
                                 }
                             });
                             nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.substr(-11) + '?alt=jsonc&v=2', null, function (youtubes) {
-                                //nn.api('GET', '/api/programs/' + programItem.id + '/title_cards', null, function (title_card) {
-                                    var title_card = [];
+                                nn.api('GET', '/api/programs/' + programItem.id + '/title_cards', null, function (title_card) {
                                     beginTitleCard = null;
                                     endTitleCard = null;
                                     if (title_card.length > 0) {
@@ -321,7 +292,7 @@ function buildEpcurateCuration(fm, crumb) {
                                             $('#overlay-s').fadeOut();
                                         }, 1000);
                                     }
-                                //});
+                                });
                             }, 'json');
                         });
                     });
@@ -330,7 +301,7 @@ function buildEpcurateCuration(fm, crumb) {
                         return false;
                     });
                     setSpace();
-                    scrollbar("#storyboard-wrap", "#storyboard-list", "#storyboard-slider");
+                    scrollbar('#storyboard-wrap', '#storyboard-list', '#storyboard-slider');
                 });
             });
         });
@@ -344,27 +315,17 @@ function buildEpcuratePublish(fm, crumb) {
     if ('' == eid || !crumb.id) {
         if (crumb.channelId) {
             if (crumb.name) {
-                $('#form-btn-leave').data('leaveUrl', $('#epcurate-nav-curation').attr('href'));
+                $('#form-btn-leave').data('gobackUrl', $('#epcurate-nav-curation').attr('href'));
             } else {
-                $('#form-btn-leave').data('leaveUrl', $('#epcurate-nav-info').attr('href'));
+                $('#form-btn-leave').data('gobackUrl', $('#epcurate-nav-info').attr('href'));
             }
         }
-        $('body').addClass('has-error');
-        $('#system-error .content').html('Invalid episode ID, please try again.');
-        $.blockUI.defaults.overlayCSS.opacity = '0.9';
-        $.blockUI({
-            message: $('#system-error')
-        });
+        showSystemErrorOverlayAndHookError('Invalid episode ID, please try again.');
         return;
     }
     nn.api('GET', '/api/episodes/' + $('#id').val(), null, function (episode) {
         if ('' != cid && cid != episode.channelId) {
-            $('body').addClass('has-error');
-            $('#system-error .content').html('You are not authorized to edit this episode.');
-            $.blockUI.defaults.overlayCSS.opacity = '0.9';
-            $.blockUI({
-                message: $('#system-error')
-            });
+            showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
             return;
         }
         nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
@@ -375,27 +336,15 @@ function buildEpcuratePublish(fm, crumb) {
                 });
             }
             if (-1 === $.inArray(parseInt(episode.channelId, 10), channelIds)) {
-                $('body').addClass('has-error');
-                $('#system-error .content').html('You are not authorized to edit episodes in this channel.');
-                $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                $.blockUI({
-                    message: $('#system-error')
-                });
+                showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                 return;
             }
             nn.api('GET', '/api/channels/' + episode.channelId, null, function (channel) {
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
-                    $('body').addClass('has-error');
-                    $('#system-error .content').html('The favorites channel can not be edited.');
-                    $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                    $.blockUI({
-                        message: $('#system-error')
-                    });
+                    showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                     return;
                 }
-                $('#overlay-s .overlay-middle').html('Processing...');
-                $('#overlay-s').fadeIn();
-                $('#overlay-s .overlay-content').css('margin-left', '-65px');
+                showProcessingOverlay();
                 nn.api('GET', '/api/episodes/' + $('#id').val() + '/programs?anticache=' + (new Date()).getTime(), null, function (programs) {
                     $('#img-list-tmpl-item').tmpl(programs).appendTo('#img-list');
                     if ('' != episode.imageUrl) {
@@ -421,7 +370,7 @@ function buildEpcuratePublish(fm, crumb) {
                         timeout: 0,
                         cleartypeNoBg: true,
                         before: function () {
-                            $('body').addClass('has-change');
+                            $('body').addClass('has-change');                   // NOTE: must to remove change hook after first load
                             $('#imageUrl').val($('img', this).attr('src'));
                         }
                     });
@@ -429,7 +378,7 @@ function buildEpcuratePublish(fm, crumb) {
                         $(fm).trigger('submit', e);
                         return false;
                     });
-                    $('body').removeClass('has-change');
+                    $('body').removeClass('has-change');                        // NOTE: remove change hook after first load
                     $('#overlay-s').fadeOut();
                 });
             });
@@ -442,12 +391,7 @@ function buildEpcurateInfo(fm, crumb) {
     var eid = fm.id.value,
         cid = fm.channelId.value;
     if ('' == eid && '' == cid) {
-        $('body').addClass('has-error');
-        $('#system-error .content').html('Invalid channel ID and episode ID, please try again.');
-        $.blockUI.defaults.overlayCSS.opacity = '0.9';
-        $.blockUI({
-            message: $('#system-error')
-        });
+        showSystemErrorOverlayAndHookError('Invalid channel ID and episode ID, please try again.');
         return;
     }
     if ('' == eid) {
@@ -461,27 +405,15 @@ function buildEpcurateInfo(fm, crumb) {
                     });
                 }
                 if (-1 === $.inArray(parseInt(cid, 10), channelIds)) {
-                    $('body').addClass('has-error');
-                    $('#system-error .content').html('You are not authorized to edit episodes in this channel.');
-                    $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                    $.blockUI({
-                        message: $('#system-error')
-                    });
+                    showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                     return;
                 }
                 nn.api('GET', '/api/channels/' + cid, null, function (channel) {
                     if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
-                        $('body').addClass('has-error');
-                        $('#system-error .content').html('The favorites channel can not be edited.');
-                        $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                        $.blockUI({
-                            message: $('#system-error')
-                        });
+                        showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                         return;
                     }
-                    $('#overlay-s .overlay-middle').html('Processing...');
-                    $('#overlay-s').fadeIn();
-                    $('#overlay-s .overlay-content').css('margin-left', '-65px');
+                    showProcessingOverlay();
                     $('#epcurate-info-tmpl').tmpl(crumb).appendTo('#epcurate-info');
                     $('.form-btn .btn-save').addClass('disable');
                     $('#form-btn-save').attr('disabled', 'disabled');
@@ -494,24 +426,14 @@ function buildEpcurateInfo(fm, crumb) {
                 });
             });
         } else {
-            $('body').addClass('has-error');
-            $('#system-error .content').html('Invalid channel ID, please try again.');
-            $.blockUI.defaults.overlayCSS.opacity = '0.9';
-            $.blockUI({
-                message: $('#system-error')
-            });
+            showSystemErrorOverlayAndHookError('Invalid channel ID, please try again.');
             return;
         }
     } else {
         // update mode: data from api
         nn.api('GET', '/api/episodes/' + $('#id').val(), null, function (episode) {
             if ('' != cid && cid != episode.channelId) {
-                $('body').addClass('has-error');
-                $('#system-error .content').html('You are not authorized to edit this episode.');
-                $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                $.blockUI({
-                    message: $('#system-error')
-                });
+                showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
                 return;
             }
             nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
@@ -522,27 +444,15 @@ function buildEpcurateInfo(fm, crumb) {
                     });
                 }
                 if (-1 === $.inArray(parseInt(episode.channelId, 10), channelIds)) {
-                    $('body').addClass('has-error');
-                    $('#system-error .content').html('You are not authorized to edit episodes in this channel.');
-                    $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                    $.blockUI({
-                        message: $('#system-error')
-                    });
+                    showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                     return;
                 }
                 nn.api('GET', '/api/channels/' + episode.channelId, null, function (channel) {
                     if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
-                        $('body').addClass('has-error');
-                        $('#system-error .content').html('The favorites channel can not be edited.');
-                        $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                        $.blockUI({
-                            message: $('#system-error')
-                        });
+                        showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                         return;
                     }
-                    $('#overlay-s .overlay-middle').html('Processing...');
-                    $('#overlay-s').fadeIn();
-                    $('#overlay-s .overlay-content').css('margin-left', '-65px');
+                    showProcessingOverlay();
                     crumb = $.extend({}, crumb, episode);
                     $('#epcurate-info-tmpl').tmpl(crumb).appendTo('#epcurate-info');
                     $('#epcurate-nav-curation, #epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function (e) {
@@ -567,17 +477,10 @@ function listEpisode(id) {
                 });
             }
             if (-1 === $.inArray(parseInt(id, 10), channelIds)) {
-                $('body').addClass('has-error');
-                $('#system-error .content').html('You are not authorized to edit episodes in this channel.');
-                $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                $.blockUI({
-                    message: $('#system-error')
-                });
+                showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                 return;
             }
-            $('#overlay-s .overlay-middle').html('Processing...');
-            $('#overlay-s').fadeIn();
-            $('#overlay-s .overlay-content').css('margin-left', '-65px');
+            showProcessingOverlay();
             nn.api('GET', '/api/channels/' + id, null, function (channel) {
                 $('#episode-nav-tmpl').tmpl(channel).appendTo('#content-nav');
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
@@ -630,9 +533,7 @@ function listEpisode(id) {
         });
     } else if (id == 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
         // for fake favorite channel
-        $('#overlay-s .overlay-middle').html('Processing...');
-        $('#overlay-s').fadeIn();
-        $('#overlay-s .overlay-content').css('margin-left', '-65px');
+        showProcessingOverlay();
         nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/my_favorites?anticache=' + (new Date()).getTime(), null, function (favorites) {
             var cntEpisode = favorites.length;
             var channel = {
@@ -654,12 +555,7 @@ function listEpisode(id) {
             $('#overlay-s').fadeOut();
         });
     } else {
-        $('body').addClass('has-error');
-        $('#system-error .content').html('Invalid channel ID, please try again.');
-        $.blockUI.defaults.overlayCSS.opacity = '0.9';
-        $.blockUI({
-            message: $('#system-error')
-        });
+        showSystemErrorOverlayAndHookError('Invalid channel ID, please try again.');
         return;
     }
 }   // end of listEpisode()
@@ -674,38 +570,27 @@ function updateChannel(id) {
                 });
             }
             if (-1 === $.inArray(parseInt(id, 10), channelIds)) {
-                $('body').addClass('has-error');
-                $('#system-error .content').html('You are not authorized to edit this channel.');
-                $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                $.blockUI({
-                    message: $('#system-error')
-                });
+                showSystemErrorOverlayAndHookError('You are not authorized to edit this channel.');
                 return;
             }
             nn.api('GET', '/api/channels/' + id, null, function (channel) {
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
-                    $('body').addClass('has-error');
-                    $('#system-error .content').html('The favorites channel can not be edited.');
-                    $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                    $.blockUI({
-                        message: $('#system-error')
-                    });
+                    showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                     return;
                 }
-                $('#overlay-s .overlay-middle').html('Processing...');
-                $('#overlay-s').fadeIn();
-                $('#overlay-s .overlay-content').css('margin-left', '-65px');
+                showProcessingOverlay();
                 // setup channel data
                 $('#func-nav .episode').attr('href', 'episode-list.html?id=' + id);
                 $('#func-nav .setting').attr('href', 'channel-setting.html?id=' + id);
                 $('#channel-name').text(channel.name);
-                $('#name').val(channel.name);
+                $('#name').val(htmlEscape(channel.name));
                 $('#imageUrl').val(channel.imageUrl);
                 $('#imageUrlOld').val(channel.imageUrl);
                 if ('' != $.trim(channel.imageUrl)) {
                     $('#thumbnail-imageUrl').attr('src', channel.imageUrl + '?n=' + Math.random());
                 }
-                $('#intro').val(channel.intro);
+                $('#intro').val(htmlEscape(channel.intro));
+                $('#tag').val(htmlEscape(channel.tag));
                 $('#lang').val(channel.lang);
                 if ('' != channel.lang && CMS_CONF.LANG_MAP[channel.lang]) {
                     $('#lang-select-txt').text(CMS_CONF.LANG_MAP[channel.lang]);
@@ -751,18 +636,12 @@ function updateChannel(id) {
                         }
                     });
                 }
-                $('#tag').val(channel.tag);
                 $('#settingForm .btn-save').removeClass('disable').addClass('enable');
                 $('#overlay-s').fadeOut();
             });
         });
     } else {
-        $('body').addClass('has-error');
-        $('#system-error .content').html('Invalid channel ID, please try again.');
-        $.blockUI.defaults.overlayCSS.opacity = '0.9';
-        $.blockUI({
-            message: $('#system-error')
-        });
+        showSystemErrorOverlayAndHookError('Invalid channel ID, please try again.');
         return;
     }
 }   // end of updateChannel()
@@ -773,9 +652,7 @@ function createChannel() {
 
 function listChannel() {
     if (CMS_CONF.USER_DATA.id) {
-        $('#overlay-s .overlay-middle').html('Processing...');
-        $('#overlay-s').fadeIn();
-        $('#overlay-s .overlay-content').css('margin-left', '-65px');
+        showProcessingOverlay();
         nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (channels) {
             var cntChannel = channels.length,
                 hasFavoriteChannel = false;
@@ -841,20 +718,25 @@ function fadeEpcurateHeaderAndFooter() {
 }
 
 function rebuildCrumbAndParam(cid, eid) {
-    var cmsCrumb = {};
+    var cmsCrumb = {},
+        cidFromGet = 0,
+        eidFromGet = 0;
     if ($.cookie('cms-crumb')) {
         cmsCrumb = $.url('http://fake.url.dev.teltel.com/?' + $.cookie('cms-crumb')).param();
     }
+    // ON PURPOSE by pass no check (GET or function param) for handle error by oneself
     if ('undefined' === typeof cid) {
-        if (CMS_CONF.USER_URL.param('cid')) {
-            cmsCrumb.channelId = CMS_CONF.USER_URL.param('cid');
+        cidFromGet = CMS_CONF.USER_URL.param('cid');
+        if (cidFromGet) {
+            cmsCrumb.channelId = cidFromGet;
         }
     } else {
         cmsCrumb.channelId = cid;
     }
     if ('undefined' === typeof eid) {
-        if (CMS_CONF.USER_URL.param('id')) {
-            cmsCrumb.id = CMS_CONF.USER_URL.param('id');
+        eidFromGet = CMS_CONF.USER_URL.param('id');
+        if (eidFromGet) {
+            cmsCrumb.id = eidFromGet;
         }
     } else {
         cmsCrumb.id = eid;
@@ -881,4 +763,4 @@ function rebuildCrumbAndParam(cid, eid) {
     if (cmsCrumb.channelId) { $('#channelId').val(cmsCrumb.channelId); }
 
     return cmsCrumb;
-}
+}   // end of rebuildCrumbAndParam()

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="cache-control" content="no-cache" />
@@ -26,6 +27,7 @@
 <title>9x9.tv - My Channels</title>
 </head>
 <body>
+<!-- template = #lightbox-create-channel-tmpl -->
 
 <script id="lightbox-create-channel-tmpl" type="text/x-jquery-tmpl">
 <div id="lightbox-create-channel" class="lightbox-content">
@@ -91,12 +93,17 @@
 <div id="content-main-wrap">
 <div class="constrain">
 <ul id="channel-list">
+<!-- template = #channel-list-tmpl-item -->
+</ul>
+</div>
+</div>
+</div>
 
 <script id="channel-list-tmpl-item" type="text/x-jquery-tmpl">
 <li class="clearfix">
 <div class="photo-list">
 <a href="/#!${id}" target="_blank">
-{{if moreImageUrl_1 == 'images/episode_default1.png'}}
+{{if cntEpisode == 0 && -1 !== $.inArray(moreImageUrl_1, ['images/episode_default1.png', 'http://s3.amazonaws.com/9x9ui/war/v0/images/episode-default.png'])}}
 <span>No Episodes</span>
 {{/if}}
 <img src="images/icon_playlist.png" alt="" class="watermark" />
@@ -140,11 +147,6 @@
 </li>
 </script>
 
-</ul>
-</div>
-</div>
-</div>
-
 </div>
 <!--============================== content-main start ========================-->
 
@@ -158,7 +160,7 @@
       <ul class="select-list">
         <li><a href="/#!about=about">About us</a></li>
         <li><a href="/#!about=help">Help</a></li>
-        <li><a href="/#!about=report">Report</a></li>
+        <li><a href="/#!about=report">Feedback</a></li>
         <li><a href="/#!about=terms">Terms & Policy</a></li>
         <li><a href="/#!about=contact">Contact us</a></li>
         <li><a href="/#!about=partners">Partners</a></li>

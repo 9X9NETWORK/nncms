@@ -1,15 +1,16 @@
-Revision: 254
+Revision: 298
 Author: chihwen
-Date: 下午 09:46:43, 2012年10月5日
+Date: 下午 12:12:28, 2012年10月12日
 Message:
-修正 cookie 記憶參數，導致開多個 tabs 查看 ep 資料時，無法依參數帶出正確的資料
+將字卡的刪除按鍵(trash can)移至字卡非編輯模式時, Edit title左邊
 
-只要有明確帶入參數，就依參數重建 cookie。
-issue 5259
+1. 將字卡的刪除按鍵(trash can)移至字卡非編輯模式時, Edit title左邊。
+2. 在節目 play 模式下，在播放字卡時，也呈現 progress bar 以佔滿下方播放控制器的空間。
+3. 微調 playing 標示的切換時機，在播完後方 title card 後，才切換 playing 到下一則，
+   在一進入下一則的前方 title card 就切換 playing 到下一則。
+4. 保持設計一致性，將 buildVideoInfo() 更名為 buildVideoInfoTmpl()。
+issue 5379
 ----
-Modified : /api/javascripts/controller.js
+Modified : /titlecard/javascripts/curation.js
+Modified : /titlecard/stylesheets/ep-curation.css
 
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 3682
-Last Changed Date: 2012-10-09 16:53:56 +0800 (Tue, 09 Oct 2012)
