@@ -21,7 +21,6 @@ var CMS_CONF = {
         'fade': 'Fade',
         'blind': 'Blind',
         'clip': 'Clip',
-        'fold': 'Fold',
         'drop': 'Drop'
     },
     COLOR_MAP: {

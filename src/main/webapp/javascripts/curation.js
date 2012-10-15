@@ -571,12 +571,14 @@ $(function () {
     });
     switchFontRadix($('#fontSize').val());
     $('#cur-edit').on('click', '.font-container .font-l.enable', function () {
+        $('#btn-pause').trigger('click');
         $('body').addClass('has-titlecard-change');
         $('body').addClass('has-change');
         setupFontRadix('up');
         return false;
     });
     $('#cur-edit').on('click', '.font-container .font-s.enable', function () {
+        $('#btn-pause').trigger('click');
         $('body').addClass('has-titlecard-change');
         $('body').addClass('has-change');
         setupFontRadix('down');
@@ -611,6 +613,7 @@ $(function () {
         return false;
     });
     $('#cur-edit').on('click', '.edit-title .effect-container .select-list li', function () {
+        $('#btn-pause').trigger('click');
         $('body').addClass('has-titlecard-change');
         $('body').addClass('has-change');
 
@@ -628,6 +631,7 @@ $(function () {
         return false;
     });
     $('#cur-edit').on('click', '.edit-title .duration-container .select-list li', function () {
+        $('#btn-pause').trigger('click');
         $('body').addClass('has-titlecard-change');
         $('body').addClass('has-change');
         var selectedDuration = $(this).data('meta');
@@ -651,6 +655,7 @@ $(function () {
         return false;
     });
     $('#cur-edit').on('click', '.edit-title .background-container .color-list li', function () {
+        $('#btn-pause').trigger('click');
         $('body').addClass('has-titlecard-change');
         $('body').addClass('has-change');
         var colorCode = $(this).attr('class'),
@@ -660,6 +665,7 @@ $(function () {
         return false;
     });
     $('#cur-edit').on('click', '.edit-title .font-container .color-list li', function () {
+        $('#btn-pause').trigger('click');
         $('body').addClass('has-titlecard-change');
         $('body').addClass('has-change');
         var colorCode = $(this).attr('class'),
@@ -667,6 +673,9 @@ $(function () {
         $('#titlecard-inner').attr('class', colorCode);
         $('#fontColor').val(selectedColor);
         return false;
+    });
+    $('#cur-edit').on('change', '.text-container, .font-container, .effect-container, .background-container, .duration-container', function () {
+        $('#btn-pause').trigger('click');
     });
 
     // Save
@@ -1291,7 +1300,7 @@ function resizeTitleCard() {
     var videoHeight = ($('#video-player').width() / 16) * 9,
         videoPlayerHeight = videoHeight + 44;
     $('#video-player').css('height', videoPlayerHeight + 'px');
-    $('#video-player .video').css('height', videoHeight + 'px');
+    $('#video-player .video').css('height', videoPlayerHeight + 'px');
 }
 
 function resizeFromFontRadix() {
@@ -1450,6 +1459,7 @@ function uploadImage(isDisableEdit) {
             }
         };
         var handlerFileDialogStart = function () {
+            $('#btn-pause').trigger('click');
             $('.background-container .highlight').addClass('hide');
         };
         var handlerUploadProgress = function (file, completed /* completed bytes */, total /* total bytes */) {

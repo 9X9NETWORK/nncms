@@ -229,7 +229,6 @@
 <li data-meta="fade">Fade</li>
 <li data-meta="blind">Blind</li>
 <li data-meta="clip">Clip</li>
-<li data-meta="fold">Fold</li>
 <li data-meta="drop">Drop</li>
 </ul>
 {{if '' == effect}}
@@ -278,7 +277,7 @@
 <div class="bg-img{{if bgImage == ''}} hide{{/if}}">
 <p class="img">
 {{if bgImage == ''}}
-<img id="thumbnail-backgroundImage" src="images/title_bg_default.png" alt="" class="thumbnail" />
+<img id="thumbnail-backgroundImage" src="http://9x9ui.s3.amazonaws.com/war/v0/images/titlecard-default.png" alt="" class="thumbnail" />
 {{else}}
 <img id="thumbnail-backgroundImage" src="${bgImage}" alt="" class="thumbnail" />
 {{/if}}
@@ -287,8 +286,13 @@
 <p id="uploadThumbnail">Upload</p>
 <p class="notice">Better results with 720x480 image.</p>
 <p class="notice highlight hide">Please upload jpeg, png, or gif file.</p>
+{{if bgImage == ''}}
+<input type="hidden" name="backgroundImage" id="backgroundImage" value="http://9x9ui.s3.amazonaws.com/war/v0/images/titlecard-default.png" />
+<input type="hidden" name="backgroundImageOld" id="backgroundImageOld" value="http://9x9ui.s3.amazonaws.com/war/v0/images/titlecard-default.png" />
+{{else}}
 <input type="hidden" name="backgroundImage" id="backgroundImage" value="${bgImage}" />
 <input type="hidden" name="backgroundImageOld" id="backgroundImageOld" value="${bgImage}" />
+{{/if}}
 </div>
 </div>
 

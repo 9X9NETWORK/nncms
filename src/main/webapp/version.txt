@@ -14,7 +14,3 @@ issue 5379
 Modified : /titlecard/javascripts/curation.js
 Modified : /titlecard/stylesheets/ep-curation.css
 
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 3728
-Last Changed Date: 2012-10-12 13:39:31 +0800 (Fri, 12 Oct 2012)
