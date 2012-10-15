@@ -14,3 +14,6 @@ issue 5379
 Modified : /titlecard/javascripts/curation.js
 Modified : /titlecard/stylesheets/ep-curation.css
 
+Last Changed Author: louis
+Last Changed Rev: 3740
+Last Changed Date: 2012-10-15 09:45:08 +0800 (一, 15 10月 2012)
