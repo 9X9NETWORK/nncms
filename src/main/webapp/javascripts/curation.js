@@ -13,7 +13,7 @@ $(function () {
         }
     }
     $('body').keyup(function (e) {
-        if (e.keyCode === 27) {
+        if (27 === e.keyCode) { // Esc
             $.unblockUI();
             if ($(this).hasClass('has-error')) {
                 hasErrorRedirect();
@@ -42,7 +42,8 @@ $(function () {
     }
     function confirmExit() {
         if ($('body').hasClass('has-change')) {
-            return 'Unsaved changes will be lost, are you sure you want to leave?';
+            // Unsaved changes will be lost, are you sure you want to leave?
+            return $('#unsave-prompt p.content').text();
         }
     }
     window.onbeforeunload = confirmExit;
@@ -67,6 +68,11 @@ $(function () {
     $('#unsave-titlecard-prompt .btn-leave').click(function () {
         $('body').removeClass('has-titlecard-change');
         $.unblockUI();
+        var origin = $('body').data('origin');
+        if (origin) {
+            $('body').removeData('origin');
+            $(origin.target).trigger('click');
+        }
         return false;
     });
     $('.unblock, .btn-close, .btn-no').click(function () {
@@ -85,9 +91,9 @@ $(function () {
     });
 
     // common tabs
-    $('#epcurate-curation ul.tabs li a').click(function () {
+    $('#epcurate-curation ul.tabs li a').click(function (e) {
         if ($('body').hasClass('has-titlecard-change')) {
-            showUnsaveTitleCardOverlay();
+            showUnsaveTitleCardOverlay(e);
             return false;
         }
         var showBlock = $(this).attr('href').split('#');
@@ -98,9 +104,9 @@ $(function () {
         return false;
     });
     // common tabs - Add Video
-    $('#epcurate-curation ul.tabs li a.cur-add').click(function () {
+    $('#epcurate-curation ul.tabs li a.cur-add').click(function (e) {
         if ($('body').hasClass('has-titlecard-change')) {
-            showUnsaveTitleCardOverlay();
+            showUnsaveTitleCardOverlay(e);
             return false;
         }
         removeTitleCardEditHook();
@@ -147,19 +153,21 @@ $(function () {
         });
         $.each(urlList, function (i, url) {
             url = $.trim(url);
-            if (patternLong.test(url)) {
-                matchKey = $.url(url).param('v');
-            } else if (patternShort.test(url)) {
-                matchKey = $.url(url).segment(1);
-            } else {
-                matchKey = '';
-            }
-            if ('' == matchKey || matchKey.length !== 11) {
-                matchKey = '';
-                invalidList.push(url);
-            }
-            if ('' !== matchKey) {
-                matchList.push(matchKey);
+            if ('' != url) {
+                if (patternLong.test(url)) {
+                    matchKey = $.url(url).param('v');
+                } else if (patternShort.test(url)) {
+                    matchKey = $.url(url).segment(1);
+                } else {
+                    matchKey = '';
+                }
+                if ('' == matchKey || matchKey.length !== 11) {
+                    matchKey = '';
+                    invalidList.push(url);
+                }
+                if ('' !== matchKey) {
+                    matchList.push(matchKey);
+                }
             }
         });
         if (matchList.length > 0) {
@@ -244,9 +252,9 @@ $(function () {
     });
 
     // video play
-    $('#storyboard').on('click', '.storyboard-list ul li .hover-func a.video-play', function () {
+    $('#storyboard').on('click', '.storyboard-list ul li .hover-func a.video-play', function (e) {
         if ($('body').hasClass('has-titlecard-change')) {
-            showUnsaveTitleCardOverlay();
+            showUnsaveTitleCardOverlay(e);
             return false;
         }
         removeTitleCardEditHook();
@@ -273,9 +281,9 @@ $(function () {
     // video del
     // if video have programId to keep DELETE programIds list
     var deleteIdList = [];
-    $('#storyboard-list').on('click', 'li .hover-func a.video-del', function () {
+    $('#storyboard-list').on('click', 'li .hover-func a.video-del', function (e) {
         if ($('body').hasClass('has-titlecard-change')) {
-            showUnsaveTitleCardOverlay();
+            showUnsaveTitleCardOverlay(e);
             return false;
         }
         $('body').addClass('has-change');
@@ -317,9 +325,9 @@ $(function () {
     });
 
     // Edit/Preview Title (exist) => #storyboard-list li.edit p.title a.edit
-    $('#storyboard-listing').on('click', 'li p.title .begin-title, li p.title .end-title', function () {
+    $('#storyboard-listing').on('click', 'li p.title .begin-title, li p.title .end-title', function (e) {
         if ($('body').hasClass('has-titlecard-change')) {
-            showUnsaveTitleCardOverlay();
+            showUnsaveTitleCardOverlay(e);
             return false;
         }
         cancelTitleCard();
@@ -357,9 +365,9 @@ $(function () {
     });
 
     // Add Title (none) => #storyboard-list li.edit p.hover-func a.edit
-    $('#storyboard-listing').on('click', 'li p.hover-func a.begin-title, li p.hover-func a.end-title', function () {
+    $('#storyboard-listing').on('click', 'li p.hover-func a.begin-title, li p.hover-func a.end-title', function (e) {
         if ($('body').hasClass('has-titlecard-change')) {
-            showUnsaveTitleCardOverlay();
+            showUnsaveTitleCardOverlay(e);
             return false;
         }
         cancelTitleCard();
@@ -550,7 +558,7 @@ $(function () {
     });
 
     // Text
-    $('#cur-edit').on('change', '.text-container textarea', function () {
+    $('#cur-edit').on('click change', '.text-container textarea', function () {
         $('body').addClass('has-titlecard-change');
         var text = strip_tags($.trim($(this).val()));
         $(this).val(text);
@@ -739,6 +747,7 @@ $(function () {
                             // insert titlecard
                             if (null != tmplItemData.beginTitleCard && tmplItemData.beginTitleCard.message && '' != $.trim(tmplItemData.beginTitleCard.message)) {
                                 parameter = $.extend({}, tmplItemData.beginTitleCard, {
+                                    message: $.trim(tmplItemData.beginTitleCard.message).replace(/\n/g, '{BR}'),
                                     type: 0
                                 });
                                 nn.api('POST', '/api/programs/' + program.id + '/title_cards', parameter, function (title_card) {
@@ -751,6 +760,7 @@ $(function () {
                             }
                             if (null != tmplItemData.endTitleCard && tmplItemData.endTitleCard.message && '' != $.trim(tmplItemData.endTitleCard.message)) {
                                 parameter = $.extend({}, tmplItemData.endTitleCard, {
+                                    message: $.trim(tmplItemData.endTitleCard.message).replace(/\n/g, '{BR}'),
                                     type: 1
                                 });
                                 nn.api('POST', '/api/programs/' + program.id + '/title_cards', parameter, function (title_card) {
@@ -824,6 +834,7 @@ $(function () {
                             tmplItemData = tmplItem.data;
                             if (null != tmplItemData.beginTitleCard && tmplItemData.beginTitleCard.message && '' != $.trim(tmplItemData.beginTitleCard.message)) {
                                 parameter = $.extend({}, tmplItemData.beginTitleCard, {
+                                    message: $.trim(tmplItemData.beginTitleCard.message).replace(/\n/g, '{BR}'),
                                     type: 0
                                 });
                                 nn.api('POST', '/api/programs/' + program.id + '/title_cards', parameter, function (title_card) {
@@ -836,6 +847,7 @@ $(function () {
                             }
                             if (null != tmplItemData.endTitleCard && tmplItemData.endTitleCard.message && '' != $.trim(tmplItemData.endTitleCard.message)) {
                                 parameter = $.extend({}, tmplItemData.endTitleCard, {
+                                    message: $.trim(tmplItemData.endTitleCard.message).replace(/\n/g, '{BR}'),
                                     type: 1
                                 });
                                 nn.api('POST', '/api/programs/' + program.id + '/title_cards', parameter, function (title_card) {
@@ -864,6 +876,7 @@ $(function () {
                             // insert titlecard
                             if (null != tmplItemData.beginTitleCard && tmplItemData.beginTitleCard.message && '' != $.trim(tmplItemData.beginTitleCard.message)) {
                                 parameter = $.extend({}, tmplItemData.beginTitleCard, {
+                                    message: $.trim(tmplItemData.beginTitleCard.message).replace(/\n/g, '{BR}'),
                                     type: 0
                                 });
                                 nn.api('POST', '/api/programs/' + program.id + '/title_cards', parameter, function (title_card) {
@@ -876,6 +889,7 @@ $(function () {
                             }
                             if (null != tmplItemData.endTitleCard && tmplItemData.endTitleCard.message && '' != $.trim(tmplItemData.endTitleCard.message)) {
                                 parameter = $.extend({}, tmplItemData.endTitleCard, {
+                                    message: $.trim(tmplItemData.endTitleCard.message).replace(/\n/g, '{BR}'),
                                     type: 1
                                 });
                                 nn.api('POST', '/api/programs/' + program.id + '/title_cards', parameter, function (title_card) {
@@ -948,7 +962,7 @@ $(function () {
 
 function chkCurationData(fm, src) {
     if ($('body').hasClass('has-titlecard-change')) {
-        showUnsaveTitleCardOverlay();
+        showUnsaveTitleCardOverlay(src);
         return false;
     }
     var cntProgram = $('#storyboard-list li').length;

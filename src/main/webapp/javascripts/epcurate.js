@@ -13,7 +13,7 @@ $(function () {
         }
     }
     $('body').keyup(function (e) {
-        if (e.keyCode === 27) {
+        if (27 === e.keyCode) { // Esc
             $.unblockUI();
             if ($(this).hasClass('has-error')) {
                 hasErrorRedirect();
@@ -48,7 +48,8 @@ $(function () {
     }
     function confirmExit() {
         if ($('body').hasClass('has-change')) {
-            return 'Unsaved changes will be lost, are you sure you want to leave?';
+            // Unsaved changes will be lost, are you sure you want to leave?
+            return $('#unsave-prompt p.content').text();
         }
     }
     window.onbeforeunload = confirmExit;

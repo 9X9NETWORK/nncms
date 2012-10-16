@@ -4,7 +4,7 @@ $(function () {
 
     // common unblock
     $('body').keyup(function (e) {
-        if (e.keyCode === 27) {
+        if (27 === e.keyCode) { // Esc
             $.unblockUI();
             if ($(this).hasClass('has-error')) {
                 location.replace('index.html');

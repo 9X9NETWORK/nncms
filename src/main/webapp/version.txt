@@ -1,19 +1,18 @@
-Revision: 298
+Revision: 308
 Author: chihwen
-Date: ¤U¤È 12:12:28, 2012¦~10¤ë12¤é
+Date: ¤U¤È 02:05:48, 2012¦~10¤ë16¤é
 Message:
-±N¦r¥dªº§R°£«öÁä(trash can)²¾¦Ü¦r¥d«D½s¿è¼Ò¦¡®É, Edit title¥ªÃä
+¥[¤J Title Card ­I´º¹Ï¹w¸ü¾÷¨î¡A¥H¸Ñ¨M²Ä¤@¦¸ preview ¦³­I´º¹Ïªº¦r¥d·|¸û¤£¶¶ªº°ÝÃD
 
-1. ±N¦r¥dªº§R°£«öÁä(trash can)²¾¦Ü¦r¥d«D½s¿è¼Ò¦¡®É, Edit title¥ªÃä¡C
-2. ¦b¸`¥Ø play ¼Ò¦¡¤U¡A¦b¼½©ñ¦r¥d®É¡A¤]§e²{ progress bar ¥H¦ûº¡¤U¤è¼½©ñ±±¨î¾¹ªºªÅ¶¡¡C
-3. ·L½Õ playing ¼Ð¥Üªº¤Á´«®É¾÷¡A¦b¼½§¹«á¤è title card «á¡A¤~¤Á´« playing ¨ì¤U¤@«h¡A
-   ¦b¤@¶i¤J¤U¤@«hªº«e¤è title card ´N¤Á´« playing ¨ì¤U¤@«h¡C
-4. «O«ù³]­p¤@­P©Ê¡A±N buildVideoInfo() §ó¦W¬° buildVideoInfoTmpl()¡C
+1. ¥[¤J Title Card ­I´º¹Ï¹w¸ü¾÷¨î¡A¥H¸Ñ¨M²Ä¤@¦¸ preview ¦³­I´º¹Ïªº¦r¥d·|¸û¤£¶¶ªº°ÝÃD¡C
+2. ºÉ¶q±N¤å®×±q script ¸}¥»¡A¶°¤¤¨ì html template¡A¥H³Æ¥¼¨Ó»y¨t¤Á´«¤§¥Î¡C
+3. Á×§KÅ]³N¼Æ¦r¡A©ú½Tµ¹ keyCode 27 ¤@­Óµù¸Ñ»¡©ú (Esc)¡C
 issue 5379
 ----
+Modified : /titlecard/epcurate-curation.html
+Modified : /titlecard/javascripts/channel.js
+Modified : /titlecard/javascripts/controller.js
 Modified : /titlecard/javascripts/curation.js
-Modified : /titlecard/stylesheets/ep-curation.css
+Modified : /titlecard/javascripts/epcurate.js
+Modified : /titlecard/javascripts/episode.js
 
-Last Changed Author: louis
-Last Changed Rev: 3740
-Last Changed Date: 2012-10-15 09:45:08 +0800 (ä¸€, 15 10æœˆ 2012)

@@ -1,4 +1,4 @@
-/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth htmlEscape showProcessingOverlay showSystemErrorOverlay showSystemErrorOverlayAndHookError */
+/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth htmlEscape showProcessingOverlay showSystemErrorOverlayAndHookError */
 /*jslint eqeq: true, regexp: true, unparam: true, sloppy: true, todo: true, vars: true */
 var CMS_CONF = {
     // TODO setup debug mode to false in production environment
@@ -202,7 +202,7 @@ function buildEpcurateCuration(fm, crumb) {
                     $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
                     // merge 9x9 api and youtube api (ytId, uploader, uploadDate, isZoneLimited, isMobileLimited, isEmbedLimited)
                     var normalPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
-                        programItem = {},
+                        preloadImage = [],
                         programList = [],
                         invalidList = [],
                         ytData = null,
@@ -226,6 +226,9 @@ function buildEpcurateCuration(fm, crumb) {
                                 if (idx === (programList.length - 1)) {
                                     // ON PURPOSE to wait api (async)
                                     setTimeout(function () {
+                                        if (preloadImage.length > 0) {
+                                            $('#preload-image-tmpl-item').tmpl(preloadImage).prependTo('#preload-image');
+                                        }
                                         $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
                                         if ($('#storyboard-list li').length > 0) {
                                             $('.form-btn .btn-save').removeClass('disable');
@@ -260,6 +263,26 @@ function buildEpcurateCuration(fm, crumb) {
                                             }
                                         }
                                     }
+                                    if (beginTitleCard && beginTitleCard.message && '' != $.trim(beginTitleCard.message)) {
+                                        beginTitleCard.message = $.trim(beginTitleCard.message).replace(/\{BR\}/g, '\n');
+                                        if (beginTitleCard.bgImage && '' != $.trim(beginTitleCard.bgImage)) {
+                                            preloadImage.push({
+                                                image: beginTitleCard.bgImage
+                                            });
+                                        }
+                                    } else {
+                                        beginTitleCard = null;
+                                    }
+                                    if (endTitleCard && endTitleCard.message && '' != $.trim(endTitleCard.message)) {
+                                        endTitleCard.message = $.trim(endTitleCard.message).replace(/\{BR\}/g, '\n');
+                                        if (endTitleCard.bgImage && '' != $.trim(endTitleCard.bgImage)) {
+                                            preloadImage.push({
+                                                image: endTitleCard.bgImage
+                                            });
+                                        }
+                                    } else {
+                                        endTitleCard = null;
+                                    }
                                     ytData = youtubes.data;
                                     ytItem = {
                                         beginTitleCard: beginTitleCard,
@@ -281,6 +304,9 @@ function buildEpcurateCuration(fm, crumb) {
                                     if (idx === (programList.length - 1)) {
                                         // ON PURPOSE to wait api (async)
                                         setTimeout(function () {
+                                            if (preloadImage.length > 0) {
+                                                $('#preload-image-tmpl-item').tmpl(preloadImage).prependTo('#preload-image');
+                                            }
                                             $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
                                             if ($('#storyboard-list li').length > 0) {
                                                 $('.form-btn .btn-save').removeClass('disable');
@@ -481,7 +507,7 @@ function listEpisode(id) {
             }
             showProcessingOverlay();
             nn.api('GET', '/api/channels/' + id, null, function (channel) {
-                $('#episode-nav-tmpl').tmpl(channel).appendTo('#content-nav');
+                $('#episode-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                     nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/my_favorites?anticache=' + (new Date()).getTime(), null, function (favorites) {
                         var cntEpisode = favorites.length;
@@ -539,7 +565,7 @@ function listEpisode(id) {
                 contentType: CMS_CONF.YOUR_FAVORITE,
                 name: CMS_CONF.USER_DATA.name + "'s favorite"
             };
-            $('#episode-nav-tmpl').tmpl(channel).appendTo('#content-nav');
+            $('#episode-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
             $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
             $('#content-main-wrap .constrain').html('');
             if (cntEpisode > 0) {

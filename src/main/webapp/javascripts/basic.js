@@ -56,7 +56,8 @@ function showUnsaveOverlay() {
     });
 }
 
-function showUnsaveTitleCardOverlay() {
+function showUnsaveTitleCardOverlay(e) {
+    $('body').data('origin', e);
     $.blockUI.defaults.overlayCSS.opacity = '0.9';
     $.blockUI({
         message: $('#unsave-titlecard-prompt')
