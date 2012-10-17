@@ -194,18 +194,25 @@ p.auto-height {
     cursor: pointer;
 }
 
-#play-time {
-    width: 285px;
+#video-control #play-time {
+    float: right;
+    width: auto;
     height: 25px;
     margin-right: 1px;
     padding: 3px 5px 0 0;
+    color: #999;
     font-size: 11px;
     line-height: 25px;
     text-align: right;
 }
 
-#played-length {
+#played-length,
+#play-time .played {
     color: #fff;
+}
+
+#play-time .played {
+    float: left;
 }
 
 #play-time .divider {
@@ -2139,7 +2146,4 @@ padding-right: 8px;
     #epcurate-curation #cur-edit p.desc {
         height: 130px;
     }
-	#play-time {
-		width: 543px;
-	}
 }

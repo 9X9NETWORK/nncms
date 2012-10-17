@@ -692,11 +692,13 @@ function listChannel() {
                     list.moreImageUrl_1 = 'images/episode_default1.png';
                     list.moreImageUrl_2 = 'images/episode_default2.png';
                     list.moreImageUrl_3 = 'images/episode_default2.png';
+                    if (list.imageUrl && '' !== $.trim(list.imageUrl)) {
+                        list.moreImageUrl_1 = list.imageUrl;
+                    }
                     if (list.moreImageUrl && '' !== $.trim(list.moreImageUrl)) {
                         temp = list.moreImageUrl.split('|');
-                        if (temp[0]) { list.moreImageUrl_1 = temp[0]; }
-                        if (temp[1]) { list.moreImageUrl_2 = temp[1]; }
-                        if (temp[2]) { list.moreImageUrl_3 = temp[2]; }
+                        if (temp[0]) { list.moreImageUrl_2 = temp[0]; }
+                        if (temp[1]) { list.moreImageUrl_3 = temp[1]; }
                     }
                     items.push(list);
                 });

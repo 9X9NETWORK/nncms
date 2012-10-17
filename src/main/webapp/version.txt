@@ -1,22 +1,26 @@
-Revision: 308
+Revision: 310
 Author: chihwen
-Date: ¤U¤È 02:05:48, 2012¦~10¤ë16¤é
+Date: ¤W¤È 01:07:56, 2012¦~10¤ë17¤é
 Message:
-¥[¤J Title Card ­I´º¹Ï¹w¸ü¾÷¨î¡A¥H¸Ñ¨M²Ä¤@¦¸ preview ¦³­I´º¹Ïªº¦r¥d·|¸û¤£¶¶ªº°ÝÃD
+¥[¤J Title Card ¼½©ñ­p®É¥\¯à
 
-1. ¥[¤J Title Card ­I´º¹Ï¹w¸ü¾÷¨î¡A¥H¸Ñ¨M²Ä¤@¦¸ preview ¦³­I´º¹Ïªº¦r¥d·|¸û¤£¶¶ªº°ÝÃD¡C
-2. ºÉ¶q±N¤å®×±q script ¸}¥»¡A¶°¤¤¨ì html template¡A¥H³Æ¥¼¨Ó»y¨t¤Á´«¤§¥Î¡C
-3. Á×§KÅ]³N¼Æ¦r¡A©ú½Tµ¹ keyCode 27 ¤@­Óµù¸Ñ»¡©ú (Esc)¡C
+1. ¥[¤J Title Card ¼½©ñ­p®É¥\¯à¡C
+2. ½Õ¾ã channel list 3±i episode ¤p¹Ï²Õ¦XÅÞ¿è¡A¥ª¤è³Ì¤j¹Ï§ï¬° ch thumbnail (¨ú channel.imageUrl)¡A
+   ¥k¤W¤p¹Ï¬°²Ä¤@­Ó ep thumbnail¡A¥k¤U¤p¹Ï¬°²Ä¤G­Ó ep thumbnail (¨ú channel.moreImageUrl)¡C
+3. ½Õ¾ã Add Video ®É¡A­Y¤¤¶¡¦³ªÅ¦æ¡A¥iª½±µ¥[¤J¦¨¥\¡A¦ý¤£Åã¥Ü Invalid URL, please try again¡C
+4. ²¾°£ Infomation ¤Î Publish ­¶ªº scrollbar() ©I¥s (³o¨â­¶¼È®É¥Î¤£¨ì vertical.slider.js)¡A
+   ¥H¸Ñ¨M Information ­¶­±¤¤ episode description ªº scrollbar µLªk¥Î mouse ºu½ü scroll °ÝÃD¡C
+5. ¦b³æ¯Â¶i¦æ Curation Save ®É (°±¯d¦b­ì­¶)¡A¥Ñ©ó¤U¤è Episode storyboard ¤w­«¸m¡A¤W¤è§e²{¸ê°T¡A
+   ¤]À³ÁÙ­ì¨ì³Ìªì¶i¤J Curation ªº¤¶­±¡A¥HÁ×§K playing ¤Î edit hook ³Q­«¸m²M°£«á¡A
+   ¤Þµo¤£¥¿±`ªº¼½©ñ¦æ¬° (§@ªk¡G³s°Ê click Ä²µo Add Video tab)¡C
+6. §ï¨} curation.js ¦b¨Ï¥Îª«¥ó©ÎÅÜ¼Æ«e¡A¥ý½T»{¸Óª«¥ó©ÎÅÜ¼Æ½T¹ê¥i¥Î¡A¥HÁ×§K²£¥Í«D¹w´Áªº¿ù»~¡C
+7. ¦P¨B src ¤À¤äª©¥» 309¡C
 issue 5379
 ----
 Modified : /titlecard/epcurate-curation.html
-Modified : /titlecard/javascripts/channel.js
 Modified : /titlecard/javascripts/controller.js
 Modified : /titlecard/javascripts/curation.js
 Modified : /titlecard/javascripts/epcurate.js
-Modified : /titlecard/javascripts/episode.js
+Added : /titlecard/javascripts/jquery.countdown.min.js
+Modified : /titlecard/stylesheets/ep-curation.css
 
-==== 9x9 ====
-Last Changed Author: barton
-Last Changed Rev: 3744
-Last Changed Date: 2012-10-16 18:29:22 +0800 (äºŒ, 16 10æœˆ 2012)

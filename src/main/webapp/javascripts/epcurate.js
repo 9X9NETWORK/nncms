@@ -1,5 +1,5 @@
 $(function () {
-    scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+    //scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
     setFormWidth();
 
     // common unblock
@@ -190,7 +190,7 @@ $(function () {
 
     $(window).resize(function () {
         setFormWidth();
-        scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+        //scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
     });
 
     // Amazon S3 upload
