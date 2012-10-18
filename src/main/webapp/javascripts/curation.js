@@ -109,6 +109,7 @@ $(function () {
             showUnsaveTitleCardOverlay(e);
             return false;
         }
+        cancelTitleCard();
         removeVideoPlayingHook();
         removeTitleCardEditHook();
         $('#epcurate-curation .tabs li').addClass('hide');
@@ -258,6 +259,7 @@ $(function () {
             showUnsaveTitleCardOverlay(e);
             return false;
         }
+        cancelTitleCard();
         removeVideoPlayingHook();
         removeTitleCardEditHook();
 
@@ -289,6 +291,7 @@ $(function () {
             return false;
         }
         $('body').addClass('has-change');
+        cancelTitleCard();
         removeVideoPlayingHook();
         removeTitleCardEditHook();
         var length = $('#storyboard-list li').length,
@@ -411,7 +414,7 @@ $(function () {
         } else {
             opts = $('#titlecard-outer').tmplItem().data;
         }
-        $('#video-player .video').titlecard('cancel');
+        cancelTitleCard();
         $('#video-player .video').titlecard(adaptTitleCardOption(opts));
         animateTitleCardProgress(opts);
     });
@@ -433,6 +436,7 @@ $(function () {
         buildTitleCardEditTmpl(opts, isUpdateMode, isDisableEdit);
         enableTitleCardEdit();
 
+        cancelTitleCard();
         buildTitleCardTmpl(opts);
         $('#cur-edit .edit-title .btn-cancel').data('opts', opts);
         return false;
@@ -447,6 +451,7 @@ $(function () {
         buildTitleCardEditTmpl(opts, isUpdateMode, isDisableEdit);
         disableTitleCardEdit();
 
+        cancelTitleCard();
         buildTitleCardTmpl(opts);
         $('#cur-edit .edit-title .btn-cancel').data('opts', opts);
         $('body').removeClass('has-titlecard-change');
@@ -492,6 +497,7 @@ $(function () {
         //tmplItem.update();
 
         // and save to video DOM for titlecard play button
+        cancelTitleCard();
         var opts = itemData[hook];
         buildTitleCardTmpl(opts);
         var isUpdateMode = true,
@@ -510,7 +516,6 @@ $(function () {
 
     // Delete icon - titlecard
     $('#cur-edit').on('click', '.edit-title .btn-del', function () {
-        $('#video-player .video').titlecard('cancel');
         $('#btn-pause').trigger('click');
         showDeletePromptOverlay();
         return false;
@@ -912,9 +917,32 @@ $(function () {
                         // delete program
                         if (deleteIdList.length > 0) {
                             nn.api('DELETE', '/api/episodes/' + $('#id').val() + '/programs?programs=' + deleteIdList.join(','), null, function (data) {
+                                nn.api('PUT', '/api/episodes/' + $('#id').val(), null, function (episode) {
+                                    $('#overlay-s').fadeOut(1000, function () {
+                                        // redirect
+                                        deleteIdList = [];
+                                        $('body').removeClass('has-change');
+                                        $('body').removeClass('has-titlecard-change');
+                                        if (!src                                                                                        // from nature action
+                                                || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
+                                            $('#epcurate-curation ul.tabs li a.cur-add').trigger('click');
+                                            return false;
+                                        } else {
+                                            if (src && '' !== $(src.target).attr('href')) {
+                                                nextstep = $(src.target).attr('href');
+                                            }
+                                            // ON PURPOSE to wait api (async)
+                                            setTimeout(function () {
+                                                location.href = nextstep;
+                                            }, 3000);
+                                        }
+                                    });
+                                });
+                            });
+                        } else {
+                            nn.api('PUT', '/api/episodes/' + $('#id').val(), null, function (episode) {
                                 $('#overlay-s').fadeOut(1000, function () {
                                     // redirect
-                                    deleteIdList = [];
                                     $('body').removeClass('has-change');
                                     $('body').removeClass('has-titlecard-change');
                                     if (!src                                                                                        // from nature action
@@ -931,25 +959,6 @@ $(function () {
                                         }, 3000);
                                     }
                                 });
-                            });
-                        } else {
-                            $('#overlay-s').fadeOut(1000, function () {
-                                // redirect
-                                $('body').removeClass('has-change');
-                                $('body').removeClass('has-titlecard-change');
-                                if (!src                                                                                        // from nature action
-                                        || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
-                                    $('#epcurate-curation ul.tabs li a.cur-add').trigger('click');
-                                    return false;
-                                } else {
-                                    if (src && '' !== $(src.target).attr('href')) {
-                                        nextstep = $(src.target).attr('href');
-                                    }
-                                    // ON PURPOSE to wait api (async)
-                                    setTimeout(function () {
-                                        location.href = nextstep;
-                                    }, 3000);
-                                }
                             });
                         }
                     }
@@ -1047,41 +1056,35 @@ function onYouTubePlayerStateChange(newState) {
     if (0 == newState) {
         if (playing.children('.title').children('a.end-title').length > 0) {
             opts = playing.tmplItem().data.endTitleCard;
-            $('#video-player .video').titlecard('cancel');
+            cancelTitleCard();
             $('#video-player .video').titlecard(adaptTitleCardOption(opts), function () {
-                setTimeout(function () {
-                    if (nextPlaying && nextPlaying.children('.title').children('a.begin-title').length > 0) {
-                        nextOpts = nextPlaying.tmplItem().data.beginTitleCard;
-                        $('#video-player .video').titlecard('cancel');
-                        $('#video-player .video').titlecard(adaptTitleCardOption(nextOpts), function () {
-                            setTimeout(function () {
-                                buildVideoInfoTmpl(nextPlaying);
-                                loadVideo(videoId);
-                            }, nextOpts.duration);
-                        });
-                        animateTitleCardProgressOnly(nextOpts);
-                        $('#storyboard-list li').removeClass('playing');
-                        $('.next-playing').attr('class', 'playing');
-                        $('.playing').next().addClass('next-playing');
-                    } else {
+                if (nextPlaying && nextPlaying.children('.title').children('a.begin-title').length > 0) {
+                    nextOpts = nextPlaying.tmplItem().data.beginTitleCard;
+                    cancelTitleCard();
+                    $('#video-player .video').titlecard(adaptTitleCardOption(nextOpts), function () {
                         buildVideoInfoTmpl(nextPlaying);
                         loadVideo(videoId);
-                        $('#storyboard-list li').removeClass('playing');
-                        $('.next-playing').attr('class', 'playing');
-                        $('.playing').next().addClass('next-playing');
-                    }
-                }, opts.duration);
+                    });
+                    animateTitleCardProgressOnly(nextOpts);
+                    $('#storyboard-list li').removeClass('playing');
+                    $('.next-playing').attr('class', 'playing');
+                    $('.playing').next().addClass('next-playing');
+                } else {
+                    buildVideoInfoTmpl(nextPlaying);
+                    loadVideo(videoId);
+                    $('#storyboard-list li').removeClass('playing');
+                    $('.next-playing').attr('class', 'playing');
+                    $('.playing').next().addClass('next-playing');
+                }
             });
             animateTitleCardProgressOnly(opts);
         } else {
             if (nextPlaying && nextPlaying.children('.title').children('a.begin-title').length > 0) {
                 nextOpts = nextPlaying.tmplItem().data.beginTitleCard;
-                $('#video-player .video').titlecard('cancel');
+                cancelTitleCard();
                 $('#video-player .video').titlecard(adaptTitleCardOption(nextOpts), function () {
-                    setTimeout(function () {
-                        buildVideoInfoTmpl(nextPlaying);
-                        loadVideo(videoId);
-                    }, nextOpts.duration);
+                    buildVideoInfoTmpl(nextPlaying);
+                    loadVideo(videoId);
                 });
                 animateTitleCardProgressOnly(nextOpts);
                 $('#storyboard-list li').removeClass('playing');
@@ -1140,11 +1143,9 @@ function playTitleCardAndVideo(elemtli) {
     if (elemtli.children('.title').children('a.begin-title').length > 0) {
         var opts = elemtli.tmplItem().data.beginTitleCard;
         if (opts && opts.message) {
-            $('#video-player .video').titlecard('cancel');
+            cancelTitleCard();
             $('#video-player .video').titlecard(adaptTitleCardOption(opts), function () {
-                setTimeout(function () {
-                    loadVideo(elemtli.data('ytid'));
-                }, opts.duration);
+                loadVideo(elemtli.data('ytid'));
             });
             animateTitleCardProgressOnly(opts);
         }
@@ -1358,6 +1359,7 @@ function resizeTitleCard() {
         videoPlayerHeight = videoHeight + 44;
     $('#video-player').css('height', videoPlayerHeight + 'px');
     $('#video-player .video').css('height', videoPlayerHeight + 'px');
+    $('#video-player .video .titlecard-outer').css('height', videoHeight + 'px');
 }
 
 function resizeFromFontRadix() {

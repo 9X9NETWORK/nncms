@@ -380,26 +380,30 @@
 #content-main-wrap form .fminput .fmfield p.textarea {
     float: left;
     overflow: hidden;
-    height: 92px;
+    height: 64px;
     margin-right: 10px;
-    padding-left: 4px;
+    padding-left: 3px;
     background: url(../images/input_box_left_lg.png) no-repeat 0 0;
 }
 
 #content-main-wrap form .fminput .fmfield p.textarea span {
     display: block;
-    padding-right: 4px;
+    padding-right: 3px;
     background: url(../images/input_box_right_lg.png) no-repeat right 0;
 }
 
+#content-main-wrap form .fminput .fmfield p.textarea span span {
+    height: 64px;
+    padding: 0;
+    background: url(../images/input_box_middle_lg.png) repeat-x;
+}
+
 #content-main-wrap form .fminput .fmfield p.textarea span .textarea {
-    width: 475px;
-    height: 78px;
-	margin: 1px 0 0;
-    padding: 5px;
+    height: 53px;
+    margin-top: 2px;
+    padding: 3px;
     border: none;
-    border-top: 1px solid #b5b5b5;
-	border-bottom: 1px solid #b5b5b5;
+    background-color: transparent;
     color: #777;
     font-family: Helvetica;
     font-size: 13px;

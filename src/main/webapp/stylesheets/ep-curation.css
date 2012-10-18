@@ -37,6 +37,9 @@ p.auto-height {
 #epcurate-curation #video-player {
     position: relative;
     float: left;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 #epcurate-curation #video-player .video,
@@ -66,7 +69,7 @@ p.auto-height {
     left: 0;
     width: 100%;
     height: 44px;
-    background: #000 url(../images/bg_controlbar.png) 0 bottom repeat-x;
+    background: #000 url(../images/bg_controlbar.png) repeat-x 0 19px;
 }
 
 #progress-bar {
@@ -110,9 +113,10 @@ p.auto-height {
 }
 
 #video-control ul {
+    position: relative;
     overflow: hidden;
     height: 25px;
-    padding-top: 16px;
+    padding-top: 17px;
 }
 
 #video-control ul li {
@@ -198,12 +202,18 @@ p.auto-height {
     float: right;
     width: auto;
     height: 25px;
-    margin-right: 1px;
+    margin: 0 27px 0 0;
     padding: 3px 5px 0 0;
+    border-right: 1px solid #000;
+    background: none;
     color: #999;
     font-size: 11px;
-    line-height: 25px;
+    line-height: 23px;
     text-align: right;
+}
+
+#video-control #play-time.last {
+    margin: 0;
 }
 
 #played-length,
@@ -242,6 +252,9 @@ p.auto-height {
 }
 
 #btn-expand {
+    position: absolute;
+    top: 17px;
+    right: 0;
     width: 27px;
     height: 25px;
     background: #000 url(../images/btn_controls.png) 0 -498px no-repeat;
@@ -700,20 +713,50 @@ padding-right: 8px;
     margin-bottom: 4px;
 }
 
-#epcurate-curation #cur-edit .text-container textarea {
+#epcurate-curation #cur-edit .text-container p.textarea {
+    overflow: hidden;
     width: 220px;
-    height: 50px;
-    margin-bottom: 7px;
-    padding: 5px;
-    border: 1px solid #ccc;
+    height: 64px;
+    margin: 0 0 7px 0;
+    padding-left: 3px;
+    background: url(../images/input_box_left_lg.png) no-repeat 0 0;
+}
+
+#epcurate-curation #cur-edit .text-container p.textarea span {
+    display: block;
+    padding-right: 3px;
+    background: url(../images/input_box_right_lg.png) no-repeat right 0;
+}
+
+#epcurate-curation #cur-edit .text-container p.textarea span span {
+    height: 64px;
+    padding: 0;
+    background: url(../images/input_box_middle_lg.png) repeat-x;
+}
+
+#epcurate-curation #cur-edit .text-container p.textarea span .textarea {
+    width: 212px;
+    height: 53px;
+    margin-top: 2px;
+    padding: 3px;
+    border: none;
+    background-color: transparent;
     color: #999;
     font-family: Helvetica;
     font-size: 13px;
-	resize: none; 
+	resize: none;
 }
 
-#epcurate-curation #cur-edit .edit-title.disable textarea {
-    background: url(../images/input_box_middle_lg_disable.png) repeat-x 0 -5px;
+#epcurate-curation #cur-edit .edit-title.disable p.textarea {
+    background: url(../images/input_box_left_lg_disable.png) no-repeat 0 0;
+}
+
+#epcurate-curation #cur-edit .edit-title.disable p.textarea span {
+    background: url(../images/input_box_right_lg_disable.png) no-repeat right 0;
+}
+
+#epcurate-curation #cur-edit .edit-title.disable p.textarea span span {
+    background: url(../images/input_box_middle_lg_disable.png) repeat-x;
 }
 
 #epcurate-curation #cur-edit .font-container {
@@ -907,6 +950,7 @@ padding-right: 8px;
     height: 100%;
     line-height: 59px;
 	color: #fff;
+    font-style: normal;
 	font-size: 20px;
 }
 
@@ -1715,7 +1759,7 @@ padding-right: 8px;
     top: 31px;
     left: 9px;
     width: 84px;
-    padding: 10px 5px 0 16px;
+    padding: 10px 5px 0 22px;
     font-weight: normal;
     line-height: 18px;
     text-indent: -13px;
@@ -1790,6 +1834,10 @@ padding-right: 8px;
 	border: none;
 }
 
+#storyboard .storyboard-list ul li a.warning2 .tip img {
+	left: 10px;
+}
+
 #storyboard .storyboard-list ul li a.error       .tip .tip-left,
 #storyboard .storyboard-list ul li a.warning   .tip .tip-left,
 #storyboard .storyboard-list ul li a.warning2 .tip .tip-left {
@@ -1837,6 +1885,13 @@ padding-right: 8px;
 #storyboard .storyboard-list ul li p.img img {
     display: block;
     margin: 10px 0 0 10px;
+}
+
+#storyboard .storyboard-list ul li:hover p.img img {
+    background-color: #fff;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
 }
 
 #storyboard .storyboard-list ul li p.img span.time {
@@ -1922,6 +1977,14 @@ padding-right: 8px;
 #storyboard .storyboard-list ul li p.hover-func a.end-title.edit {
     display: block !important;
     background-position: 1px -2346px;
+}
+
+#storyboard .storyboard-list ul li p.hover-func a.begin-title.edit {
+    margin-top: 0;
+}
+
+#storyboard .storyboard-list ul li p.hover-func a.end-title.edit {
+    margin-top: 0;
 }
 
 #storyboard .storyboard-list ul li p.title a.begin-title .tip,
@@ -2011,10 +2074,6 @@ padding-right: 8px;
     height: 25px;
     background: url(../images/icon_play.png) no-repeat 0 0;
     text-indent: -100000px;
-}
-
-#storyboard .storyboard-list ul li .hover-func a.video-play:hover {
-    background: url(../images/icon_play_press.png) no-repeat center;
 }
 
 #storyboard .storyboard-list ul li .hover-func a.begin-title,

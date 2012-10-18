@@ -1,5 +1,5 @@
-/* predefine global variables here: jQuery nn */
-/*jslint eqeq: true, sloppy: true, vars: true */
+/* predefine global variables here: jQuery nn window */
+/*jslint eqeq: true, regexp: true, sloppy: true, vars: true */
 /*!
  * jQuery Title Card Player plugin
  *
@@ -7,9 +7,15 @@
  * @requires    jQuery UI v1.8.23 or later
  * @requires    9x9 SDK (nn-sdk.js)
  * @author      Chih-Wen Yang <chihwen@doubleservice.com>
- * @version     1.4.0
+ * @version     1.5.0
  *
  * - Change Log:
+ *      1.5.0:  2012/10/18 - 1. Added private strip_tags() method to strip HTML tags (html/script injection, XSS).
+ *                           2. Added private destroy() method to encapsulate destroy (or cancel) feature.
+ *                           3. Added optional widescreen option [boolean], default is true to keep 16:9 aspect ratio (easter egg option).
+ *                           4. Added optional height option [integer], default is null (easter egg option).
+ *                           5. Added {BR} transfer to html br tag.
+ *                           6. Listened resize event to automaticly react with the canvas width (without reload plugin).
  *      1.4.0:  2012/10/01 - 1. Adjusted html structure (added wrapper-middle div) for effect improvement.
  *                           2. Setup all nn.log() to debug level for turn off console log by default.
  *      1.3.2:  2012/09/13 - 1. Adjusted duration distribution feature by effect kind (drop).
@@ -94,6 +100,36 @@
             callback: callback
         }, 'debug');
 
+        var strip_tags = function (input, allowed) {
+            // version: 1109.2015
+            allowed = allowed || '';
+            allowed += '';
+            allowed = (allowed.toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+            var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+                commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+            return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
+                return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+            });
+        };
+
+        var destroy = function (element, func) {
+            var callback = null;
+            if ('function' === typeof func) {
+                callback = func;
+            }
+            element
+                .clearQueue()
+                .stop()
+                .children()                                 // wrapper-outer
+                    .clearQueue()
+                    .stop()
+                    .children()                             // wrapper-middle and img
+                        .clearQueue()
+                        .stop()
+                    .end()                                  // wrapper-outer
+                    .hide('fast', callback);
+        };
+
         // param overloading check
         var playedCallback = null,
             cancelCallback = null;
@@ -110,17 +146,7 @@
                         cancelCallback = callback;
                     }
                     nn.log('cancel playing title card, release resources', 'debug');
-                    $(this)
-                        .clearQueue()
-                        .stop()
-                        .children()                                 // wrapper-outer
-                            .clearQueue()
-                            .stop()
-                            .children()                             // wrapper-middle and img
-                                .clearQueue()
-                                .stop()
-                            .end()                                  // wrapper-outer
-                            .hide('fast', cancelCallback);
+                    destroy($(this), cancelCallback);
                 } else {
                     nn.log('param error nothing to do', 'error');
                 }
@@ -156,9 +182,9 @@
 
         return this.each(function () {
             var $this = $(this),
-                width = (opts.width) ? parseInt(opts.width, 10) : $this.width(),    // easter egg option
-                height = Math.round((width / 16) * 9),
-                text = opts.text.replace(/\n/g, '<br />'),
+                width = (opts.width) ? parseInt(opts.width, 10) : $this.width(),
+                height = (opts.height) ? parseInt(opts.height, 10) : ((opts.widescreen) ? Math.round((width / 16) * 9) : $this.height()),
+                text = strip_tags($.trim(opts.text)).replace(/(\n|\{BR\})/g, '<br />'),
                 align = opts.align,
                 fontRadix = parseInt(opts.fontSize, 10),
                 fontSize = 0,
@@ -290,6 +316,32 @@
                 break;
             }
 
+            $(window).bind('resize', function () {
+                //$this.css({ width: '80%' });    // just for test
+                var wrapWidth = $this.width(),
+                    wrapHeight = (opts.widescreen) ? Math.round((wrapWidth / 16) * 9) : $this.height();
+                $this.children('.' + wrapperOuter).css({
+                    width: wrapWidth,
+                    height: wrapHeight
+                }).children('.' + wrapperMiddle).children('.' + wrapperInner).css({
+                    fontSize: Math.round(wrapWidth / fontRadix) + 'pt'
+                });
+                var selfWidth = $this.children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).width(),
+                    selfHeight = $this.children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).height(),
+                    selfLeft = 0,
+                    selfTop = 0;
+                if (wrapWidth > selfWidth) {
+                    selfLeft = (wrapWidth - selfWidth) / 2;
+                }
+                if (wrapHeight > selfHeight) {
+                    selfTop = (wrapHeight - selfHeight) / 2;
+                }
+                $this.children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).css({
+                    top: selfTop + 'px',
+                    left: selfLeft + 'px'
+                });
+            });
+
             nn.log({
                 wrapWidth: wrapWidth,
                 wrapHeight: wrapHeight,
@@ -306,11 +358,14 @@
 
     // default options
     $.fn.titlecard.defaults = {
+        widescreen: true,           // easter egg option
+        width: null,                // easter egg option
+        height: null,               // easter egg option
         text: 'My video',
         align: 'center',
         effect: 'none',
         duration: 7,
-        fontSize: 20,
+        fontSize: 20,               // NOTE: actually not font size, but font radix to scale with canvas width (canvas width / font radix = scale font size)
         fontColor: 'white',
         fontStyle: 'normal',
         fontWeight: 'normal',
