@@ -1,96 +1,52 @@
-Revision: 320
+Revision: 330
 Author: chihwen
-Date: 下午 02:04:50, 2012年10月18日
+Date: 下午 05:37:14, 2012年10月19日
 Message:
-改良 Title Card 外掛，版本更新為 v1.5.0
+在刪除 cookie 裡的 episode id 時，先確認該物件屬性確實存在才刪除
 
-1. 改良 Title Card 外掛，版本更新為 v1.5.0。
-   1. 加入私有 strip_tags() 方法，以整合 html 過濾功能 (strip_tags) 以提昇 html/script injection 及 XSS 攻擊安全性。
-   2. 加入私有 destroy() 方法，將 destroy 功能 (或說是 cancel 功能) 獨立封裝出來，以便共用。
-   3. 加入非必需的 widescreen 選項，型態為布林值，預設為 true，可以決定是否強制維持 16:9 比例，還是自動偵測外框高度。
-   4. 加入非必需的 height 選項，型態為數值，預設為 null，若有明確傳入此 option，則不自動偵測外框高度。
-   5. 除了將原來的換行符號 \n 轉換為 html br 標籤功能外，也加入把 {BR} 轉換為 html br 標籤的功能。
-   6. 加入自動偵測 resize 事件，依據 canvas 寬度變化，自動縮放字卡功能。
-2. 調整 curation.js 補上遺漏或移除重複的 titlecard cancel 呼叫。
-3. 調整 curation.js 修正 resizeTitleCard() 補上遺漏的 .titlecard-outer 高度重置功能。
-4. 同步 src 分支版本 318, 319。
-   1. Title Card Play & Pause 按鈕位置，有跑版的現象 (firefox)。
-   2. Title Card 計時區在垂直對齊上有偏下方跑版的現象，應該垂直居中 (firefox)。
-   3. Title Card 的 Text textarea 欄位，在 disable 的狀態下，textarea 下方有跑版的現象 (firefox)。
-   4. 調整 video-control 的樣式，以便讓未來客製化 video-control 時，在 UI 上可以相容 (youtube chromeless player)。
+1. 在刪除 cookie 裡的 episode id 時，先確認該物件屬性確實存在才刪除。
+2. 若沒有明確傳入 channel id 就直接刪除 cookie 記憶裡的 channel id 不自動重建。
 issue 5379
 ----
-Modified : /titlecard/epcurate-curation.html
+Modified : /titlecard/javascripts/controller.js
+
+
+Revision: 329
+Author: chihwen
+Date: 下午 05:04:25, 2012年10月19日
+Message:
+若沒有明確傳入 episode id 就直接刪除 cookie 記憶裡的 episode id 不自動重建
+issue 5379
+----
+Modified : /titlecard/javascripts/controller.js
+
+
+Revision: 328
+Author: chihwen
+Date: 下午 02:28:56, 2012年10月19日
+Message:
+加入 Title Card .playing Hook 以便識別正在播放中的 Title Card 位置
+
+1. 加入 Title Card .playing Hook 以便識別正在播放中的 Title Card 位置。
+2. 新增 addTitleCardPlayingHook() 及 removeTitleCardPlayingHook() 並將之埋入相關事件驅動位置。
+3. 重新 review 參考 loadVideo() 的呼叫時機，調整 buildVideoInfoTmpl() 的出現位置 (這兩個函式應該兩兩成對出現，比較符合程式語意)。
+4. 明確定位 Video 的 .playing 及 .next-playing 選擇器設定，以避免與 Title Card 的 .playing 衝突。
+issue 5379
+----
 Modified : /titlecard/javascripts/curation.js
-Modified : /titlecard/javascripts/jquery.titlecard.js
+
+
+Revision: 327
+Author: chihwen
+Date: 上午 11:26:23, 2012年10月19日
+Message:
+同步 src 分支版本 325, 326
+
+1. 新增隱藏 titlecard 的 css (titlecard-hide.css)。
+2. 調整 storyboard slider 的高度為 5px (將橫向捲軸高度改為和直向捲軸的寬度一樣)。
+3. 調整並對齊 titlecard icon 位置。
+issue 5379
+----
 Modified : /titlecard/stylesheets/ep-curation.css
+Added : /titlecard/stylesheets/titlecard-hide.css
 
-
-Revision: 317
-Author: chihwen
-Date: 下午 09:00:23, 2012年10月17日
-Message:
-重新 review 呼叫 cancelTitleCard() 的時機
-
-1. 重新 review 補上呼叫 cancelTitleCard() 的時機。
-   1. 在上方 Add Video, Edit tab 切換時。
-   2. 在 video 被按下 play 按鈕時。
-   3. 在 video 被按下 delete 按鈕時。
-   4. 在 Title Card 被按下 play 按鈕時。
-   5. 在 Title Card 被按下 delete 按鈕時。
-   6. 在 video 播放模式下，在自動切換前後 Title Card 及 video 時。
-2. 調整「只要是 save，一律 PUT episode 一次」的時間點，
-   必須在和原本 rerun 的時間點一樣，也就是說在所有 program 更新的最後。
-3. 移除 Title Card callback 裡的 setTimeout 設定，避免產生延遲現象 (此 setTimeout 為之前誤植，並非有特別用意)。
-issue 5379
-----
-Modified : /titlecard/javascripts/curation.js
-
-
-Revision: 316
-Author: chihwen
-Date: 下午 07:42:30, 2012年10月17日
-Message:
-只要是 save episode，一律 PUT episode 一次
-
-1. 只要是 save episode，一律 PUT episode 一次
-   就是 episode 在 save 時，不論 episode 本身的 meta data 有沒有更新，
-   只要它下面的 program、title_card 有變動，就幫我呼叫一次 PUT /api/episodes/{episodeId}，
-   即使不帶參數沒關係。
-2. 同步 src 分支版本 312~315。
-   1. storyboard warning2 的箭頭往左靠 1px。
-   2. storyboard hover 影片時中間的播放 icon 不變，影片照片加上透明度。
-   3. "+ Add videos here"  區塊中置中。
-   4. Effect 裡面的"9x9.tv"字體取消斜體。
-   5. #play-time 增加 border-right 讓視覺效果看起來與最右邊有 1px 的距離。
-   6. 調整 storyboard "Add Title icon" hover 時會往上位移的問題。
-   7. 調整播放影片時調整 progress bar 後 titlecard 會 focus 的問題。
-   8. 更換 input 背景圖，並調整相關樣式與結構。
-
-TODO：
-1. Title Card Play & Pause 按鈕位置，有跑版的現象 (firefox)。
-2. Title Card 計時區在垂直對齊上有偏下方跑版的現象，應該垂直居中 (firefox)。
-3. Title Card 的 Text textarea 欄位，在 disable 的狀態下，textarea 下方有跑版的現象 (firefox)。
-issue 5379
-----
-Modified : /titlecard/channel-add.html
-Modified : /titlecard/channel-setting.html
-Modified : /titlecard/epcurate-info.html
-Modified : /titlecard/images/input_box_left_disable.png
-Modified : /titlecard/images/input_box_left_lg.png
-Modified : /titlecard/images/input_box_left_lg_disable.png
-Modified : /titlecard/images/input_box_middle_disable.png
-Modified : /titlecard/images/input_box_middle_lg.png
-Modified : /titlecard/images/input_box_middle_lg_disable.png
-Modified : /titlecard/images/input_box_right_disable.png
-Modified : /titlecard/images/input_box_right_lg.png
-Modified : /titlecard/images/input_box_right_lg_disable.png
-Modified : /titlecard/javascripts/curation.js
-Modified : /titlecard/stylesheets/channel.css
-Modified : /titlecard/stylesheets/ep-curation.css
-Modified : /titlecard/stylesheets/epcurate.css
-
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 3780
-Last Changed Date: 2012-10-18 22:24:51 +0800 (Thu, 18 Oct 2012)

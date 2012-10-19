@@ -1935,7 +1935,7 @@ padding-right: 8px;
 
 #storyboard .storyboard-list ul li p.title {
     position: absolute;
-    top: 28px;
+    top: 29px;
     left: -11px;
     z-index: 51;
     width: 113px;
@@ -1979,12 +1979,32 @@ padding-right: 8px;
     background-position: 1px -2346px;
 }
 
+#storyboard .storyboard-list ul li p.title a.begin-title:hover,
+#storyboard .storyboard-list ul li p.title a.begin-title.edit {
+    margin-top: 1px;
+}
+
+#storyboard .storyboard-list ul li p.title a.end-title:hover,
+#storyboard .storyboard-list ul li p.title a.end-title.edit {
+    margin-top: 1px;
+}
+
 #storyboard .storyboard-list ul li p.hover-func a.begin-title.edit {
-    margin-top: 0;
+    left: -20px;
+    margin-top: 1px;
 }
 
 #storyboard .storyboard-list ul li p.hover-func a.end-title.edit {
-    margin-top: 0;
+    margin-top: 1px;
+    right: -19px;
+}
+
+#storyboard .storyboard-list ul li p.hover-func a.begin-title:hover {
+    left: -20px;
+}
+
+#storyboard .storyboard-list ul li p.hover-func a.end-title:hover {
+    right: -19px !important;
 }
 
 #storyboard .storyboard-list ul li p.title a.begin-title .tip,
@@ -2041,7 +2061,7 @@ padding-right: 8px;
 
 #storyboard .storyboard-list ul li .hover-func {
     position: absolute;
-    top: 9px;
+    top: 10px;
     left: 9px;
     z-index: 52;
     width: 74px;
@@ -2179,12 +2199,12 @@ padding-right: 8px;
 #storyboard #storyboard-slider .slider-h {
     position: relative;
     width: 100%;
-    height: 10px;
+    height: 5px;
 }
 
 .ui-slider-handle,
 .jScrollPaneDrag {
-    height: 10px;
+    height: 5px;
 }
 
 @media all and (min-height: 800px) and (min-width: 1280px) {

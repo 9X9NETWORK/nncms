@@ -756,6 +756,11 @@ function rebuildCrumbAndParam(cid, eid) {
         cidFromGet = CMS_CONF.USER_URL.param('cid');
         if (cidFromGet) {
             cmsCrumb.channelId = cidFromGet;
+        } else {
+            // make sure channel id passed by GET or function param, or else delete it
+            if (cmsCrumb.channelId) {
+                delete cmsCrumb.channelId;
+            }
         }
     } else {
         cmsCrumb.channelId = cid;
@@ -764,6 +769,11 @@ function rebuildCrumbAndParam(cid, eid) {
         eidFromGet = CMS_CONF.USER_URL.param('id');
         if (eidFromGet) {
             cmsCrumb.id = eidFromGet;
+        } else {
+            // make sure episode id passed by GET or function param, or else delete it
+            if (cmsCrumb.id) {
+                delete cmsCrumb.id;
+            }
         }
     } else {
         cmsCrumb.id = eid;
