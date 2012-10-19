@@ -50,3 +50,7 @@ issue 5379
 Modified : /titlecard/stylesheets/ep-curation.css
 Added : /titlecard/stylesheets/titlecard-hide.css
 
+==== 9x9 ====
+Last Changed Author: barton
+Last Changed Rev: 3784
+Last Changed Date: 2012-10-19 18:00:06 +0800 (五, 19 10月 2012)
