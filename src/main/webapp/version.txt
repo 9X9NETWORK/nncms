@@ -239,3 +239,7 @@ issue 5379
 ----
 Modified : /titlecard/javascripts/curation.js
 
+==== 9x9 ====
+Last Changed Author: louis
+Last Changed Rev: 3860
+Last Changed Date: 2012-10-26 11:24:54 +0800 (Fri, 26 Oct 2012)
