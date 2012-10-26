@@ -275,6 +275,7 @@ $(function () {
         $('#cur-edit .edit-title').addClass('hide');
         $('#video-control').show();
         $('#btn-play').addClass('hide');
+        $('#btn-pause').addClass('hide');
 
         // video-info-tmpl (play action)
         var elemtli = $(this).parent().parent();
@@ -285,7 +286,7 @@ $(function () {
 
     // video del
     // if video have programId to keep DELETE programIds list
-    var deleteIdList = [];
+    var videoDeleteIdList = [];
     $('#storyboard-list').on('click', 'li .hover-func a.video-del', function (e) {
         if ($('body').hasClass('has-titlecard-change')) {
             showUnsaveTitleCardOverlay(e);
@@ -307,7 +308,7 @@ $(function () {
             playTitleCardAndVideo(elemtli);
 
             if (tmplItemData.id && tmplItemData.id > 0) {
-                deleteIdList.push(tmplItemData.id);
+                videoDeleteIdList.push(tmplItemData.id);
             }
             deleting.remove();
         } else {
@@ -319,14 +320,14 @@ $(function () {
                     playTitleCardAndVideo(elemtli);
                 }
                 if (tmplItemData.id && tmplItemData.id > 0) {
-                    deleteIdList.push(tmplItemData.id);
+                    videoDeleteIdList.push(tmplItemData.id);
                 }
                 deleting.remove();
             } else {
                 showSystemErrorOverlay('There must be at least one video in this episode.');
             }
         }
-        nn.log(deleteIdList, 'debug');
+        nn.log(videoDeleteIdList, 'debug');
         sumStoryboardInfo();
         return false;
     });
@@ -341,8 +342,7 @@ $(function () {
         removeVideoPlayingHook();
         removeTitleCardPlayingHook();
         removeTitleCardEditHook();
-        $(this).parent().parent().addClass('edit');                     // parent li
-        $(this).addClass('edit');                                       // self a (begin-title or end-title)
+        addTitleCardEditHook($(this));
 
         // switch tab and content
         $('#epcurate-curation ul.tabs li').removeClass('on');
@@ -354,7 +354,8 @@ $(function () {
         $('#cur-edit .edit-title').removeClass('hide');
         $('#cur-edit .edit-title').removeClass('disable');
         $('#video-control').show();
-        $('#btn-play').removeClass('hide');
+        $('#btn-play').addClass('hide');
+        $('#btn-pause').removeClass('hide');
 
         var index = $(this).parent().parent().index(),
             hook = ($(this).hasClass('begin-title')) ? 'beginTitleCard' : 'endTitleCard',
@@ -382,8 +383,7 @@ $(function () {
         removeVideoPlayingHook();
         removeTitleCardPlayingHook();
         removeTitleCardEditHook();
-        $(this).parent().parent().addClass('edit');                     // parent li
-        $(this).addClass('edit');                                       // self a (begin-title or end-title)
+        addTitleCardEditHook($(this));
 
         // switch tab and content
         $('#epcurate-curation ul.tabs li').removeClass('on');
@@ -396,36 +396,69 @@ $(function () {
         $('#cur-edit .edit-title').removeClass('disable');
         $('#video-control').show();
         $('#btn-play').removeClass('hide');
+        $('#btn-pause').addClass('hide');
 
         var isUpdateMode = false,
             isDisableEdit = false;
-        buildTitleCardEditTmpl(CMS_CONF.TITLECARD_DEFAULT, isUpdateMode, isDisableEdit);
+        buildTitleCardEditTmpl(CMS_CONF.TITLECARD_DEFAULT_OPTION, isUpdateMode, isDisableEdit);
         enableTitleCardEdit();
 
-        buildTitleCardTmpl(CMS_CONF.TITLECARD_DEFAULT);
-        $('#cur-edit .edit-title .btn-cancel').data('opts', CMS_CONF.TITLECARD_DEFAULT);
+        buildTitleCardTmpl(CMS_CONF.TITLECARD_DEFAULT_OPTION);
+        $('#cur-edit .edit-title .btn-cancel').data('opts', CMS_CONF.TITLECARD_DEFAULT_OPTION);
         return false;
     });
 
-    // titlecard control (play and pause)
-    // TODO in playing pause mode to restart titlecard and video
+    // Play Title Card
     $('#btn-play').click(function () {
-        var opts = null,
-            isEditMode = (!$('.edit-title').hasClass('disable')) ? true : false;
-        if (isEditMode) {
-            opts = computeTitleCardEditOption();
-        } else {
-            opts = $('#titlecard-outer').tmplItem().data;
-        }
         cancelTitleCard();
-        $('#video-player .video').titlecard(adaptTitleCardOption(opts));
-        animateTitleCardProgress(opts);
+        var opts = null,
+            isVideoPlayingMode = ($('#storyboard-list li.playing').length > 0) ? true : false,
+            isTitleCardEnableEditMode = (!$('.edit-title').hasClass('disable')) ? true : false;
+        if (isVideoPlayingMode) {
+            if ($('#storyboard-list li.playing .title a.playing').hasClass('begin-title')) {
+                $('#storyboard-list li.playing .hover-func .video-play').trigger('click');
+            } else {
+                opts = $('#storyboard-list li.playing').tmplItem().data.endTitleCard;
+                wrapTitleCardCanvas();
+                $('#video-player .video .canvas').titlecard(adaptTitleCardOption(opts), function () {
+                    if ($('#storyboard-list li.next-playing').length <= 0) {
+                        $('#epcurate-curation ul.tabs li a.cur-add').trigger('click');
+                    } else {
+                        $('#storyboard-list li.next-playing .hover-func .video-play').trigger('click');
+                    }
+                });
+                animateTitleCardProgress(opts);
+            }
+        } else {
+            if (isTitleCardEnableEditMode) {
+                opts = computeTitleCardEditOption();
+            } else {
+                opts = $('#titlecard-outer').tmplItem().data;
+            }
+            wrapTitleCardCanvas();
+            $('#video-player .video .canvas').titlecard(adaptTitleCardOption(opts), function () {
+                buildTitleCardTmpl(opts);
+                $('#btn-play').removeClass('hide');
+                $('#btn-pause').addClass('hide');
+            });
+            animateTitleCardProgress(opts);
+        }
     });
-    // TODO when playing want to show titlecard progress, remember to first fetch playing dom then editing dom
-    // TODO in playing play mode to stop titlecard and video
+
+    // Stop Title Card
     $('#btn-pause').click(function () {
         cancelTitleCard();
-        var opts = computeTitleCardEditOption();
+        var opts = null,
+            isVideoPlayingMode = ($('#storyboard-list li.playing').length > 0) ? true : false;
+        if (isVideoPlayingMode) {
+            if ($('#storyboard-list li.playing .title a.playing').hasClass('begin-title')) {
+                opts = $('#storyboard-list li.playing').tmplItem().data.beginTitleCard;
+            } else {
+                opts = $('#storyboard-list li.playing').tmplItem().data.endTitleCard;
+            }
+        } else {
+            opts = computeTitleCardEditOption();
+        }
         if (opts && opts.message) {
             buildTitleCardTmpl(opts);
         }
@@ -557,7 +590,7 @@ $(function () {
             $('#video-control').hide();
 
             if (deleteId > 0) {
-                nn.api('DELETE', '/api/title_card/' + deleteId, null, function (data) {
+                nn.api('DELETE', CMS_CONF.API('/api/title_card/{titlecardId}', {titlecardId: deleteId}), null, function (data) {
                     $('#overlay-s').fadeOut(0);
                 });
             } else {
@@ -636,18 +669,16 @@ $(function () {
         $('#btn-pause').trigger('click');
         $('body').addClass('has-titlecard-change');
         $('body').addClass('has-change');
-
-        var demoElemt = $('#epcurate-curation #cur-edit .effect-container p.effect-demo'),
+        var element = $('#epcurate-curation #cur-edit .effect-container p.effect-demo'),
             effect = $(this).data('meta');
-        previewEffect(demoElemt, effect);
-
+        previewEffect(element, effect);
         $('#effect').val(effect);
         return false;
     });
     $('#cur-edit').on('click', '.effect-container p.effect-demo', function () {
-        var demoElemt = $(this),
+        var element = $(this),
             effect = $('#effect').val();
-        previewEffect(demoElemt, effect);
+        previewEffect(element, effect);
         return false;
     });
     $('#cur-edit').on('click', '.edit-title .duration-container .select-list li', function () {
@@ -715,7 +746,7 @@ $(function () {
                 programItem = {},
                 programList = [],
                 parameter = null;
-            $('#storyboard-list li').each(function (i) {
+            $('#storyboard-list li').each(function (idx) {
                 programItem = $(this).tmplItem().data;
                 totalDuration += parseInt(programItem.duration, 10);
                 if (null !== programItem.beginTitleCard) {
@@ -726,7 +757,7 @@ $(function () {
                 }
                 $.extend(programItem, {
                     channelId: $('#channelId').val(),   // api readonly
-                    subSeq: i + 1,
+                    subSeq: idx + 1,
                     contentType: 1
                 });
                 programList.push(programItem);
@@ -743,13 +774,13 @@ $(function () {
                     duration: totalDuration     // api readonly
                 };
                 // insert episode
-                nn.api('POST', '/api/channels/' + $('#channelId').val() + '/episodes', parameter, function (episode) {
+                nn.api('POST', CMS_CONF.API('/api/channels/{channelId}/episodes', {channelId: $('#channelId').val()}), parameter, function (episode) {
                     // from insert mode change to update mode
                     // rebuild cookie and hidden episode id
                     rebuildCrumbAndParam($('#channelId').val(), episode.id);
                     $.each(programList, function (idx, programItem) {
                         // insert program
-                        nn.api('POST', '/api/episodes/' + episode.id + '/programs', programItem, function (program) {
+                        nn.api('POST', CMS_CONF.API('/api/episodes/{episodeId}/programs', {episodeId: episode.id}), programItem, function (program) {
                             // update program.id to DOM
                             tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                             tmplItemData = tmplItem.data;
@@ -762,9 +793,9 @@ $(function () {
                                     message: $.trim(tmplItemData.beginTitleCard.message).replace(/\n/g, '{BR}'),
                                     type: 0
                                 });
-                                nn.api('POST', '/api/programs/' + program.id + '/title_cards', parameter, function (title_card) {
+                                nn.api('POST', CMS_CONF.API('/api/programs/{programId}/title_cards', {programId: program.id}), parameter, function (title_card) {
                                     // update title_card.id to DOM
-                                    tmplItem = $('#storyboard-list li:eq(' + i + ')').tmplItem();
+                                    tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                     tmplItemData = tmplItem.data;
                                     tmplItemData.beginTitleCard.id = title_card.id;
                                     tmplItem.update();
@@ -775,9 +806,9 @@ $(function () {
                                     message: $.trim(tmplItemData.endTitleCard.message).replace(/\n/g, '{BR}'),
                                     type: 1
                                 });
-                                nn.api('POST', '/api/programs/' + program.id + '/title_cards', parameter, function (title_card) {
+                                nn.api('POST', CMS_CONF.API('/api/programs/{programId}/title_cards', {programId: program.id}), parameter, function (title_card) {
                                     // update title_card.id to DOM
-                                    tmplItem = $('#storyboard-list li:eq(' + i + ')').tmplItem();
+                                    tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                     tmplItemData = tmplItem.data;
                                     tmplItemData.endTitleCard.id = title_card.id;
                                     tmplItem.update();
@@ -786,10 +817,11 @@ $(function () {
 
                             if (idx === (programList.length - 1)) {
                                 // update episode with rerun
-                                nn.api('PUT', '/api/episodes/' + episode.id, { rerun: true }, function (episode) {
+                                // TODO remove rerun with draft mechanism
+                                nn.api('PUT', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: episode.id}), { rerun: true }, function (episode) {
                                     $('#overlay-s').fadeOut(1000, function () {
                                         // redirect
-                                        deleteIdList = [];
+                                        videoDeleteIdList = []; // clear video delete id list
                                         $('body').removeClass('has-change');
                                         $('body').removeClass('has-titlecard-change');
                                         if (!src                                                                                        // from nature action
@@ -835,25 +867,25 @@ $(function () {
                 nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
                     // nothing to do ON PURPOSE to turn off error handle from YouTube to 9x9 API
                 });
-                $('#storyboard-list li').each(function (i) {
+                $('#storyboard-list li').each(function (idx) {
                     programItem = $(this).tmplItem().data;
                     if (programItem.id && programItem.id > 0) {
                         // update program
                         parameter = $.extend({}, programItem, {
-                            subSeq: i + 1
+                            subSeq: idx + 1
                         });
-                        nn.api('PUT', '/api/programs/' + programItem.id, parameter, function (program) {
+                        nn.api('PUT', CMS_CONF.API('/api/programs/{programId}', {programId: programItem.id}), parameter, function (program) {
                             // insert titlecard
-                            tmplItem = $('#storyboard-list li:eq(' + i + ')').tmplItem();
+                            tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                             tmplItemData = tmplItem.data;
                             if (null != tmplItemData.beginTitleCard && tmplItemData.beginTitleCard.message && '' != $.trim(tmplItemData.beginTitleCard.message)) {
                                 parameter = $.extend({}, tmplItemData.beginTitleCard, {
                                     message: $.trim(tmplItemData.beginTitleCard.message).replace(/\n/g, '{BR}'),
                                     type: 0
                                 });
-                                nn.api('POST', '/api/programs/' + program.id + '/title_cards', parameter, function (title_card) {
+                                nn.api('POST', CMS_CONF.API('/api/programs/{programId}/title_cards', {programId: program.id}), parameter, function (title_card) {
                                     // update title_card.id to DOM
-                                    tmplItem = $('#storyboard-list li:eq(' + i + ')').tmplItem();
+                                    tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                     tmplItemData = tmplItem.data;
                                     tmplItemData.beginTitleCard.id = title_card.id;
                                     tmplItem.update();
@@ -864,9 +896,9 @@ $(function () {
                                     message: $.trim(tmplItemData.endTitleCard.message).replace(/\n/g, '{BR}'),
                                     type: 1
                                 });
-                                nn.api('POST', '/api/programs/' + program.id + '/title_cards', parameter, function (title_card) {
+                                nn.api('POST', CMS_CONF.API('/api/programs/{programId}/title_cards', {programId: program.id}), parameter, function (title_card) {
                                     // update title_card.id to DOM
-                                    tmplItem = $('#storyboard-list li:eq(' + i + ')').tmplItem();
+                                    tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                     tmplItemData = tmplItem.data;
                                     tmplItemData.endTitleCard.id = title_card.id;
                                     tmplItem.update();
@@ -877,12 +909,12 @@ $(function () {
                         // insert program
                         parameter = $.extend({}, programItem, {
                             channelId: $('#channelId').val(),   // api readonly
-                            subSeq: i + 1,
+                            subSeq: idx + 1,
                             contentType: 1
                         });
-                        nn.api('POST', '/api/episodes/' + $('#id').val() + '/programs', parameter, function (program) {
+                        nn.api('POST', CMS_CONF.API('/api/episodes/{episodeId}/programs', {episodeId: $('#id').val()}), parameter, function (program) {
                             // update program.id to DOM
-                            tmplItem = $('#storyboard-list li:eq(' + i + ')').tmplItem();
+                            tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                             tmplItemData = tmplItem.data;
                             tmplItemData.id = program.id;
                             tmplItem.update();
@@ -893,9 +925,9 @@ $(function () {
                                     message: $.trim(tmplItemData.beginTitleCard.message).replace(/\n/g, '{BR}'),
                                     type: 0
                                 });
-                                nn.api('POST', '/api/programs/' + program.id + '/title_cards', parameter, function (title_card) {
+                                nn.api('POST', CMS_CONF.API('/api/programs/{programId}/title_cards', {programId: program.id}), parameter, function (title_card) {
                                     // update title_card.id to DOM
-                                    tmplItem = $('#storyboard-list li:eq(' + i + ')').tmplItem();
+                                    tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                     tmplItemData = tmplItem.data;
                                     tmplItemData.beginTitleCard.id = title_card.id;
                                     tmplItem.update();
@@ -906,9 +938,9 @@ $(function () {
                                     message: $.trim(tmplItemData.endTitleCard.message).replace(/\n/g, '{BR}'),
                                     type: 1
                                 });
-                                nn.api('POST', '/api/programs/' + program.id + '/title_cards', parameter, function (title_card) {
+                                nn.api('POST', CMS_CONF.API('/api/programs/{programId}/title_cards', {programId: program.id}), parameter, function (title_card) {
                                     // update title_card.id to DOM
-                                    tmplItem = $('#storyboard-list li:eq(' + i + ')').tmplItem();
+                                    tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                     tmplItemData = tmplItem.data;
                                     tmplItemData.endTitleCard.id = title_card.id;
                                     tmplItem.update();
@@ -916,14 +948,14 @@ $(function () {
                             }
                         });
                     }
-                    if (i === (programLength - 1)) {
+                    if (idx === (programLength - 1)) {
                         // delete program
-                        if (deleteIdList.length > 0) {
-                            nn.api('DELETE', '/api/episodes/' + $('#id').val() + '/programs?programs=' + deleteIdList.join(','), null, function (data) {
-                                nn.api('PUT', '/api/episodes/' + $('#id').val(), null, function (episode) {
+                        if (videoDeleteIdList.length > 0) {
+                            nn.api('DELETE', CMS_CONF.API('/api/episodes/{episodeId}/programs?programs=' + videoDeleteIdList.join(','), {episodeId: $('#id').val()}), null, function (data) {
+                                nn.api('PUT', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), null, function (episode) {
                                     $('#overlay-s').fadeOut(1000, function () {
                                         // redirect
-                                        deleteIdList = [];
+                                        videoDeleteIdList = []; // clear video delete id list
                                         $('body').removeClass('has-change');
                                         $('body').removeClass('has-titlecard-change');
                                         if (!src                                                                                        // from nature action
@@ -943,7 +975,7 @@ $(function () {
                                 });
                             });
                         } else {
-                            nn.api('PUT', '/api/episodes/' + $('#id').val(), null, function (episode) {
+                            nn.api('PUT', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), null, function (episode) {
                                 $('#overlay-s').fadeOut(1000, function () {
                                     // redirect
                                     $('body').removeClass('has-change');
@@ -1007,26 +1039,24 @@ function chkCurationData(fm, src) {
 }
 
 function setSpace() {
-    var epcurateNavHeight = $('#epcurate-nav').height(),
+    var windowHeight = $(window).height(),
         autoHeight = $('p.auto-height:first').height(),
-        windowHeight = $(window).height(),
+        epcurateNavHeight = $('#epcurate-nav').height(),
         curationHeight = $('#epcurate-curation').height() - (autoHeight * 2),
         storyboardHeight = $('#storyboard').height() - (autoHeight * 2),
         btnsHeight = $('#content-main .form-btn').height(),
-        extraHeight = windowHeight - curationHeight - storyboardHeight - btnsHeight - epcurateNavHeight,
+        extraHeight = windowHeight - epcurateNavHeight - curationHeight - storyboardHeight - btnsHeight,
         windowWidth = $(window).width(),
         videoWidth = $('#epcurate-curation #video-player .video').width(),
         curAddWidth = $('#epcurate-curation #cur-add').width(),
         curEditWidth = $('#epcurate-curation #cur-edit').width();
     $('p.auto-height').height(extraHeight / 4);
-    if (windowWidth > 1016) {
-        $('#epcurate-curation #cur-add').css('padding-left', (windowWidth - videoWidth - curAddWidth) / 2 + 'px');
-        $('#epcurate-curation #cur-edit').css('padding-left', (windowWidth - videoWidth - curEditWidth) / 2 + 'px');
-    }
+    $('#epcurate-curation #cur-add').css('padding-left', (windowWidth - videoWidth - curAddWidth) / 2 + 'px');
+    $('#epcurate-curation #cur-edit').css('padding-left', (windowWidth - videoWidth - curEditWidth) / 2 + 'px');
 }
 
 function onYouTubePlayerReady(playerId) {
-    // NO DECLARE VAR youTubePlayerObj ON PURPOSE to let it be global
+    // NO DECLARE var youTubePlayerObj ON PURPOSE to let it be global
     youTubePlayerObj = document.getElementById('youTubePlayer');
     youTubePlayerObj.playVideo();
     youTubePlayerObj.addEventListener('onStateChange', 'onYouTubePlayerStateChange');
@@ -1043,64 +1073,39 @@ function onYouTubePlayerStateChange(newState) {
         youTubePlayerObj.playVideo();
     }
     if (0 == newState) {
-        if (playing.children('.title').children('a.end-title').length > 0) {
-            opts = playing.tmplItem().data.endTitleCard;
-            removeTitleCardPlayingHook();
-            addTitleCardPlayingHook(playing, 'end');
-            cancelTitleCard();
-            $('#video-player .video').titlecard(adaptTitleCardOption(opts), function () {
-                if (nextPlaying && nextPlaying.children('.title').children('a.begin-title').length > 0) {
-                    nextOpts = nextPlaying.tmplItem().data.beginTitleCard;
-                    removeTitleCardPlayingHook();
-                    addTitleCardPlayingHook(nextPlaying, 'begin');
-                    cancelTitleCard();
-                    $('#video-player .video').titlecard(adaptTitleCardOption(nextOpts), function () {
-                        buildVideoInfoTmpl(nextPlaying);
-                        loadVideo(videoId);
-                    });
-                    animateTitleCardProgressOnly(nextOpts);
-                    $('#storyboard-list li').removeClass('playing');
-                    $('#storyboard-list li.next-playing').attr('class', 'playing');
-                    $('#storyboard-list li.playing').next().addClass('next-playing');
-                } else {
-                    buildVideoInfoTmpl(nextPlaying);
-                    loadVideo(videoId);
-                    $('#storyboard-list li').removeClass('playing');
-                    $('#storyboard-list li.next-playing').attr('class', 'playing');
-                    $('#storyboard-list li.playing').next().addClass('next-playing');
-                }
-            });
-            animateTitleCardProgressOnly(opts);
+        if ($('#storyboard-list li.playing').length <= 0 && $('#storyboard-list li.next-playing').length <= 0) {
+            $('#epcurate-curation ul.tabs li a.cur-add').trigger('click');
         } else {
-            if (nextPlaying && nextPlaying.children('.title').children('a.begin-title').length > 0) {
-                nextOpts = nextPlaying.tmplItem().data.beginTitleCard;
+            if (playing.children('.title').children('a.end-title').length > 0) {
+                opts = playing.tmplItem().data.endTitleCard;
                 removeTitleCardPlayingHook();
-                addTitleCardPlayingHook(nextPlaying, 'begin');
+                addTitleCardPlayingHook(playing, 'end');
                 cancelTitleCard();
-                $('#video-player .video').titlecard(adaptTitleCardOption(nextOpts), function () {
-                    buildVideoInfoTmpl(nextPlaying);
-                    loadVideo(videoId);
+                wrapTitleCardCanvas();
+                $('#video-player .video .canvas').titlecard(adaptTitleCardOption(opts), function () {
+                    if ($('#storyboard-list li.next-playing').length <= 0) {
+                        $('#epcurate-curation ul.tabs li a.cur-add').trigger('click');
+                    } else {
+                        playTitleCardAndVideo(nextPlaying);
+                    }
                 });
-                animateTitleCardProgressOnly(nextOpts);
-                $('#storyboard-list li').removeClass('playing');
-                $('#storyboard-list li.next-playing').attr('class', 'playing');
-                $('#storyboard-list li.playing').next().addClass('next-playing');
+                animateTitleCardProgress(opts);
             } else {
-                buildVideoInfoTmpl(nextPlaying);
-                loadVideo(videoId);
-                $('#storyboard-list li').removeClass('playing');
-                $('#storyboard-list li.next-playing').attr('class', 'playing');
-                $('#storyboard-list li.playing').next().addClass('next-playing');
+                if ($('#storyboard-list li.next-playing').length <= 0) {
+                    $('#epcurate-curation ul.tabs li a.cur-add').trigger('click');
+                } else {
+                    playTitleCardAndVideo(nextPlaying);
+                }
             }
         }
     }
 }
 
-function buildVideoInfoTmpl(elemtli) {
+function buildVideoInfoTmpl(element) {
     // video-info-tmpl
-    if (elemtli && elemtli.tmplItem() && elemtli.tmplItem().data && elemtli.tmplItem().data.name) {
+    if (element && element.tmplItem() && element.tmplItem().data && element.tmplItem().data.name) {
         $('#video-info').html('');
-        $('#video-info-tmpl').tmpl(elemtli.tmplItem().data, {
+        $('#video-info-tmpl').tmpl(element.tmplItem().data, {
             // TODO conver uploaded from timestamp
             uploadDateConverter: function (uploadDate) {
                 var datetemp = uploadDate.split('T');
@@ -1135,25 +1140,28 @@ function loadVideo(videoId) {
     }
 }
 
-function playTitleCardAndVideo(elemtli) {
-    if (elemtli.children('.title').children('a.begin-title').length > 0) {
-        var opts = elemtli.tmplItem().data.beginTitleCard;
+function playTitleCardAndVideo(element) {
+    if (element && element.children('.title').children('a.begin-title').length > 0) {
+        var opts = element.tmplItem().data.beginTitleCard;
         if (opts && opts.message) {
             removeTitleCardPlayingHook();
-            addTitleCardPlayingHook(elemtli, 'begin');
+            addTitleCardPlayingHook(element, 'begin');
             cancelTitleCard();
-            $('#video-player .video').titlecard(adaptTitleCardOption(opts), function () {
-                buildVideoInfoTmpl(elemtli);
-                loadVideo(elemtli.data('ytid'));
+            buildVideoInfoTmpl(element);
+            wrapTitleCardCanvas();
+            $('#video-player .video .canvas').titlecard(adaptTitleCardOption(opts), function () {
+                loadVideo(element.data('ytid'));
             });
-            animateTitleCardProgressOnly(opts);
+            animateTitleCardProgress(opts);
+            removeVideoPlayingHook();
+            addVideoPlayingHook(element);
         }
-    } else {
-        buildVideoInfoTmpl(elemtli);
-        loadVideo(elemtli.data('ytid'));
+    } else if (element) {
+        buildVideoInfoTmpl(element);
+        loadVideo(element.data('ytid'));
+        removeVideoPlayingHook();
+        addVideoPlayingHook(element);
     }
-    elemtli.addClass('playing');
-    elemtli.next().addClass('next-playing');
 }
 
 function animateTitleCardProgress(opts) {
@@ -1166,40 +1174,6 @@ function animateTitleCardProgress(opts) {
     $('#btn-play').addClass('hide');
     $('#btn-pause').removeClass('hide');
     //$('#btn-pause').data('opts', opts);
-    $('#play-time .duration').text(formatDuration(duration));
-    $('#play-dragger').animate({
-        left: '+=' + parseInt(width - 18, 10)   // 18:drag icon width
-    }, parseInt(duration * 1000, 10), function () {
-        buildTitleCardTmpl(opts);
-        $('#play-dragger').css('left', '0');
-        $('#btn-play').removeClass('hide');
-        $('#btn-pause').addClass('hide');
-    });
-    $('#played').animate({
-        width: '+=' + width
-    }, parseInt(duration * 1000, 10), function () {
-        $('#played').css('width', '0');
-        $('#play-time .played').countdown('destroy');
-        $('#play-time .played').text('00:00');
-    });
-    $('#play-time .played').countdown('destroy');
-    $('#play-time .played').countdown({
-        since: -1,
-        compact: true,
-        format: 'MS',
-        description: ''
-    });
-}
-
-function animateTitleCardProgressOnly(opts) {
-    if (!opts || !opts.duration) {
-        return;
-    }
-    var duration = opts.duration,
-        width = $('#video-player .video').width();
-    $('#video-control').show();
-    $('#btn-play').addClass('hide');
-    $('#btn-pause').addClass('hide');
     $('#play-time .duration').text(formatDuration(duration));
     $('#play-dragger').animate({
         left: '+=' + parseInt(width - 18, 10)   // 18:drag icon width
@@ -1223,17 +1197,22 @@ function animateTitleCardProgressOnly(opts) {
 }
 
 function cancelTitleCard() {
+    $('#video-player .video .canvas').titlecard('cancel');
     $('#play-time .played').countdown('destroy');
-    $('#video-player .video').titlecard('cancel');
-    $('#btn-pause').addClass('hide').removeData('opts');    // NOTE: removeData('opts')
     $('#btn-play').removeClass('hide');
+    $('#btn-pause').addClass('hide').removeData('opts');    // NOTE: removeData('opts')
     $('#play-dragger').clearQueue().stop().css('left', '0');
     $('#played').clearQueue().stop().css('width', '0');
 }
 
+function wrapTitleCardCanvas() {
+    $('#video-player .video').html('<div class="canvas"></div>');
+    $('#video-player .video .canvas').hide().css('height', $('#video-player').height() - 44).show();    // 44: $('#video-control')
+}
+
 function adaptTitleCardOption(opts) {
     if (!opts || !opts.message) {
-        opts = CMS_CONF.TITLECARD_DEFAULT;
+        opts = CMS_CONF.TITLECARD_DEFAULT_OPTION;
     }
     var option = {
         text: opts.message,
@@ -1306,16 +1285,26 @@ function buildTitleCardTmpl(opts) {
     }
 }
 
+function addVideoPlayingHook(element) {
+    element.addClass('playing');
+    element.next().addClass('next-playing');
+}
+
 function removeVideoPlayingHook() {
     $('#storyboard li').removeClass('playing').removeClass('next-playing');
 }
 
-function addTitleCardPlayingHook(elemtli, pos) {
-    elemtli.children('.title').children('a.' + pos + '-title').addClass('playing');
+function addTitleCardPlayingHook(element, pos) {
+    element.children('.title').children('a.' + pos + '-title').addClass('playing');
 }
 
 function removeTitleCardPlayingHook() {
     $('#storyboard li .title a').removeClass('playing');
+}
+
+function addTitleCardEditHook(element) {
+    element.parent().parent().addClass('edit');                     // parent li
+    element.addClass('edit');                                       // self a (begin-title or end-title)
 }
 
 function removeTitleCardEditHook() {
@@ -1364,7 +1353,7 @@ function sumStoryboardInfo() {
 
 function resizeTitleCard() {
     var videoHeight = ($('#video-player').width() / 16) * 9,
-        videoPlayerHeight = videoHeight + 44;
+        videoPlayerHeight = videoHeight + 44;   // 44: $('#video-control')
     $('#video-player').css('height', videoPlayerHeight + 'px');
     $('#video-player .video').css('height', videoPlayerHeight + 'px');
     $('#video-player .video .titlecard-outer').css('height', videoHeight + 'px');
@@ -1434,12 +1423,12 @@ function switchFontRadix(radix) {
     }
 }
 
-function switchFontAlign(flag) {
-    $('#titlecard-inner').css('text-align', flag);
+function switchFontAlign(align) {
+    $('#titlecard-inner').css('text-align', align);
 }
 
-function switchBackground(flag) {
-    if ('image' == flag) {
+function switchBackground(bg) {
+    if ('image' == bg) {
         $('#cur-edit .background-container .bg-color').addClass('hide');
         $('#cur-edit .background-container .bg-img').removeClass('hide');
         $('#titlecard-outer img').show();
@@ -1450,8 +1439,8 @@ function switchBackground(flag) {
     }
 }
 
-function cancelEffect(demoElemt) {
-    demoElemt
+function cancelEffect(element) {
+    element
         .clearQueue()
         .stop()
         .children('span')
@@ -1462,7 +1451,7 @@ function cancelEffect(demoElemt) {
                 .stop();
 }
 
-function previewEffect(demoElemt, effect) {
+function previewEffect(element, effect) {
     var duration = 5000,
         startStandbySec = 500,
         endingStandbySec = 500,
@@ -1476,7 +1465,7 @@ function previewEffect(demoElemt, effect) {
         startStandbySec = endingStandbySec = startSec = endingSec = 0;
     }
     delaySec = (duration - startStandbySec - startSec - endingSec - endingStandbySec);
-    cancelEffect(demoElemt);
+    cancelEffect(element);
 
     switch (effect) {
     case 'blind':
@@ -1491,19 +1480,19 @@ function previewEffect(demoElemt, effect) {
     case 'scale':
     case 'shake':
     case 'slide':
-        demoElemt.show(startStandbySec).children('span').hide().show(effect, {}, startSec).delay(delaySec).hide(effect, {}, endingSec, function () {
-            demoElemt.delay(endingStandbySec).show().children('span').show();
+        element.show(startStandbySec).children('span').hide().show(effect, {}, startSec).delay(delaySec).hide(effect, {}, endingSec, function () {
+            element.delay(endingStandbySec).show().children('span').show();
         });
         break;
     case 'fade':
-        demoElemt.show(startStandbySec).children('span').hide().fadeIn(startSec).delay(delaySec).fadeOut(endingSec, function () {
-            demoElemt.delay(endingStandbySec).show().children('span').show();
+        element.show(startStandbySec).children('span').hide().fadeIn(startSec).delay(delaySec).fadeOut(endingSec, function () {
+            element.delay(endingStandbySec).show().children('span').show();
         });
         break;
     default:
         // none
-        demoElemt.children('span').show(0).delay(duration).hide(0, function () {
-            demoElemt.show().children('span').show();
+        element.children('span').show(0).delay(duration).hide(0, function () {
+            element.show().children('span').show();
         });
         break;
     }
@@ -1516,7 +1505,7 @@ function uploadImage(isDisableEdit) {
         'size':   20485760,
         'acl':    'public-read'
     };
-    nn.api('GET', '/api/s3/attributes?anticache=' + (new Date()).getTime(), parameter, function (s3attr) {
+    nn.api('GET', CMS_CONF.API('/api/s3/attributes'), parameter, function (s3attr) {
         var timestamp = (new Date()).getTime();
         var handlerSwfUploadLoaded = function () {
             if (isDisableEdit) {

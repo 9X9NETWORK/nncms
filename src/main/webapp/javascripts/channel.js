@@ -87,7 +87,7 @@ $(function () {
 
     // channel list delete
     $('#channel-list').on('click', '.enable a.del', function () {
-        $(this).parent().parent().parent().parent().parent().parent('li').addClass('deleting').data('deleteId', $(this).attr('href'));
+        $(this).parent().parent().parent().parent().parent().parent('li').addClass('deleting').data('deleteId', $(this).attr('rel'));
         showDeletePromptOverlay();
         return false;
     });
@@ -95,7 +95,7 @@ $(function () {
         $.unblockUI();
         if ($('#channel-list li.deleting').length > 0 && '' != $('#channel-list li.deleting').data('deleteId')) {
             showSavingOverlay();
-            nn.api('DELETE', $('#channel-list li.deleting').data('deleteId'), null, function (data) {
+            nn.api('DELETE', CMS_CONF.API('/api/users/{userId}/channels/{channelId}', {userId: CMS_CONF.USER_DATA.id, channelId: $('#channel-list li.deleting').data('deleteId')}), null, function (data) {
                 if ('OK' == data) {
                     $('#overlay-s').fadeOut(1000, function () {
                         var cntChannel = $('#channel-counter').html();
@@ -180,7 +180,7 @@ $(function () {
                 $('#browse-category').html('');
                 var sphere = metadata;
                 if ('other' === sphere) { sphere = 'en'; }
-                nn.api('GET', '/api/categories?anticache=' + (new Date()).getTime(), { lang: sphere }, function (categories) {
+                nn.api('GET', CMS_CONF.API('/api/categories'), { lang: sphere }, function (categories) {
                     $.each(categories, function (i, list) {
                         CMS_CONF.CATEGORY_MAP[list.id] = list.name;
                     });
@@ -196,7 +196,7 @@ $(function () {
         }
         // category relate to tags
         if ('browse-category' === $(this).parent().attr('id')) {
-            nn.api('GET', '/api/tags?anticache=' + (new Date()).getTime(), { categoryId: metadata }, function (tags) {
+            nn.api('GET', CMS_CONF.API('/api/tags'), { categoryId: metadata }, function (tags) {
                 $('#tag-list').html('');
                 if (tags && tags.length > 0) {
                     $('.tag-list').removeClass('hide');
@@ -265,7 +265,7 @@ $(function () {
             });
             var qrystring = $('#settingForm').serialize(),
                 parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
-            nn.api('PUT', '/api/channels/' + CMS_CONF.USER_URL.param('id'), parameter, function (channel) {
+            nn.api('PUT', CMS_CONF.API('/api/channels/{channelId}', {channelId: CMS_CONF.USER_URL.param('id')}), parameter, function (channel) {
                 $('#overlay-s').fadeOut(1000, function () {
                     $('body').removeClass('has-change');
                     $('#imageUrlOld').val(channel.imageUrl);
@@ -286,7 +286,7 @@ $(function () {
             // note: channel-add.html hard code hidden field isPublic=true
             var qrystring = $('#settingForm').serialize(),
                 parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
-            nn.api('POST', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels', parameter, function (channel) {
+            nn.api('POST', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), parameter, function (channel) {
                 $('#overlay-s').fadeOut(1000, function () {
                     $('body').removeClass('has-change');
                     $('#imageUrlOld').val(channel.imageUrl);
@@ -361,7 +361,7 @@ function uploadImage() {
         'size':   20485760,
         'acl':    'public-read'
     };
-    nn.api('GET', '/api/s3/attributes?anticache=' + (new Date()).getTime(), parameter, function (s3attr) {
+    nn.api('GET', CMS_CONF.API('/api/s3/attributes'), parameter, function (s3attr) {
         var timestamp = (new Date()).getTime();
         var handlerFileDialogStart = function () {
             $('.upload-img .upload-notice').addClass('hide');

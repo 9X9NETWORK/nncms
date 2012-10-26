@@ -21,6 +21,7 @@
 <script src="javascripts/json2.js"></script>
 <script src="javascripts/purl.js"></script>
 <script src="javascripts/vertical.slider.js"></script>
+<script src="javascripts/config.js"></script>
 <script src="javascripts/basic.js"></script>
 <script src="javascripts/controller.js"></script>
 <script src="javascripts/channel.js"></script>
@@ -103,7 +104,7 @@
 <li class="clearfix">
 <div class="photo-list">
 <a href="/#!${id}" target="_blank">
-{{if cntEpisode == 0 && -1 !== $.inArray(moreImageUrl_1, ['images/episode_default1.png', 'http://s3.amazonaws.com/9x9ui/war/v0/images/episode-default.png'])}}
+{{if cntEpisode == 0 && -1 !== $.inArray(moreImageUrl_1, [CMS_CONF.CHANNEL_DEFAULT_IMAGE, CMS_CONF.EPISODE_DEFAULT_IMAGE])}}
 <span>No Episodes</span>
 {{/if}}
 <img src="images/icon_playlist.png" alt="" class="watermark" />
@@ -138,7 +139,7 @@
 <li><a href="epcurate-info.html?cid=${id}" class="add">Add<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Curate a new episode</span></span></span></span></a></li>
 <li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Episode list</span></span></span></span></a></li>
 <li><a href="channel-setting.html?id=${id}" class="setting">Setting<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Channel settings</span></span></span></span></a></li>
-<li><a href="/api/users/${$item.userId}/channels/${id}" class="del">Del<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Delete this channel</span></span></span></span></a></li>
+<li><a href="/api/users/${$item.userId}/channels/${id}" rel="${id}" class="del">Del<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Delete this channel</span></span></span></span></a></li>
 </ul>
 </div>
 {{/if}}

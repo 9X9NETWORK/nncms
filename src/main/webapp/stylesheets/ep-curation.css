@@ -223,6 +223,11 @@ p.auto-height {
 
 #play-time .played {
     float: left;
+    margin-right: 3px;
+}
+
+#play-time .duration {
+    margin-left: 3px;
 }
 
 #play-time .divider {
@@ -2193,7 +2198,7 @@ padding-right: 8px;
 	bottom: 10px;
 	left: 10px;
 	width: 99%;
-	height: 10px;
+	height: 5px;
 }
 
 #storyboard #storyboard-slider .slider-h {

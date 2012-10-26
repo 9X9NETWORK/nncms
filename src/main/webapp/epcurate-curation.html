@@ -28,6 +28,7 @@
 <script src="javascripts/purl.js"></script>
 <script src="javascripts/swfupload/swfupload.js"></script>
 <script src="javascripts/horizontal-slider.js"></script>
+<script src="javascripts/config.js"></script>
 <script src="javascripts/basic.js"></script>
 <script src="javascripts/controller.js"></script>
 <script src="javascripts/curation.js"></script>
@@ -79,8 +80,6 @@
 <input type="hidden" name="intro" id="intro" value="${intro}" />
 </script>
 
-<div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
-
 <div id="content-main">
 <div id="content-main-wrap" class="curation">
 <div class="constrain">
@@ -97,7 +96,7 @@
 {{html $item.message}}
 </div>
 </div>
-{{if '' != bgImage}}
+{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
 <img src="${bgImage}" style="width: 100%; height: 100%; border: none;" />
 {{/if}}
 </div>
@@ -118,7 +117,7 @@
 <ul>
 <li id="btn-play"></li>
 <li id="btn-pause" class="hide"></li>
-<li id="play-time" class="last"><span class="played">00:00</span>&nbsp;/&nbsp;<span class="duration">00:07</span></li>
+<li id="play-time" class="last"><span class="played">00:00</span>/<span class="duration">00:07</span></li>
 </ul>
 </div>
 </div>
@@ -246,10 +245,19 @@
 <div class="background-container">
 <h5>Background</h5>
 <p class="radio-list">
-<label for="bg_color" class="first"><input type="radio" name="bg" value="color" id="bg_color"{{if bgImage == ''}} checked="checked"{{/if}} />Color</label>
-<label for="bg_image"><input type="radio" name="bg" value="image" id="bg_image"{{if bgImage != ''}} checked="checked"{{/if}} />Image</label>
+{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
+<label for="bg_color" class="first"><input type="radio" name="bg" value="color" id="bg_color" />Color</label>
+<label for="bg_image"><input type="radio" name="bg" value="image" id="bg_image" checked="checked" />Image</label>
+{{else}}
+<label for="bg_color" class="first"><input type="radio" name="bg" value="color" id="bg_color" checked="checked" />Color</label>
+<label for="bg_image"><input type="radio" name="bg" value="image" id="bg_image" />Image</label>
+{{/if}}
 </p>
-<div class="bg-color{{if bgImage != ''}} hide{{/if}}">
+{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
+<div class="bg-color hide">
+{{else}}
+<div class="bg-color">
+{{/if}}
 {{if '' == bgColor}}
 <a href="#">背景顏色<span class="c-000"></span>
 {{else}}
@@ -276,24 +284,28 @@
 <input type="hidden" name="backgroundColor" id="backgroundColor" value="${bgColor}" />
 {{/if}}
 </div>
-<div class="bg-img{{if bgImage == ''}} hide{{/if}}">
-<p class="img">
-{{if bgImage == ''}}
-<img id="thumbnail-backgroundImage" src="http://9x9ui.s3.amazonaws.com/war/v0/images/titlecard-default.png" alt="" class="thumbnail" />
+{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
+<div class="bg-img">
 {{else}}
+<div class="bg-img hide">
+{{/if}}
+<p class="img">
+{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
 <img id="thumbnail-backgroundImage" src="${bgImage}" alt="" class="thumbnail" />
+{{else}}
+<img id="thumbnail-backgroundImage" src="${CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_UPLOAD}" alt="" class="thumbnail" />
 {{/if}}
 <img src="images/black_box_loading.gif" alt="" class="loading" />
 </p>
 <p id="uploadThumbnail">Upload</p>
 <p class="notice">Better results with 720x480 image.</p>
 <p class="notice highlight hide">Please upload jpeg, png, or gif file.</p>
-{{if bgImage == ''}}
-<input type="hidden" name="backgroundImage" id="backgroundImage" value="http://9x9ui.s3.amazonaws.com/war/v0/images/titlecard-default.png" />
-<input type="hidden" name="backgroundImageOld" id="backgroundImageOld" value="http://9x9ui.s3.amazonaws.com/war/v0/images/titlecard-default.png" />
-{{else}}
+{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
 <input type="hidden" name="backgroundImage" id="backgroundImage" value="${bgImage}" />
 <input type="hidden" name="backgroundImageOld" id="backgroundImageOld" value="${bgImage}" />
+{{else}}
+<input type="hidden" name="backgroundImage" id="backgroundImage" value="${CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_UPLOAD}" />
+<input type="hidden" name="backgroundImageOld" id="backgroundImageOld" value="${CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_UPLOAD}" />
 {{/if}}
 </div>
 </div>

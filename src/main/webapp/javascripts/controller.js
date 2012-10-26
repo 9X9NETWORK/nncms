@@ -1,61 +1,5 @@
 /* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth htmlEscape showProcessingOverlay showSystemErrorOverlayAndHookError */
 /*jslint eqeq: true, regexp: true, unparam: true, sloppy: true, todo: true, vars: true */
-var CMS_CONF = {
-    // TODO setup debug mode to false in production environment
-    IS_DEBUG: true,
-    YOUR_FAVORITE: 11,
-    PROGRAM_MAX: 50,
-    LANG_MAP: {
-        'en': 'English',
-        'zh': 'Chinese',
-        'other': 'Others'
-    },
-    SPHERE_MAP: {
-        'en': 'US',
-        'zh': 'Taiwan',
-        'other': 'Worldwide'
-    },
-    CATEGORY_MAP: {},
-    EFFECT_MAP: {
-        'none': 'None',
-        'fade': 'Fade',
-        'blind': 'Blind',
-        'clip': 'Clip',
-        'drop': 'Drop'
-    },
-    COLOR_MAP: {
-        '#ffffff': 'c-fff',
-        '#eeeeee': 'c-eee',
-        '#bbbbbb': 'c-bbb',
-        '#777777': 'c-777',
-        '#333333': 'c-333',
-        '#000000': 'c-000',
-        '#ff0000': 'c-f00',
-        '#ff6600': 'c-f60',
-        '#ffff00': 'c-ff0',
-        '#009900': 'c-090',
-        '#0033ff': 'c-03f',
-        '#6600ff': 'c-60f'
-    },
-    // NOTE: The naming is 9x9 API convention, not jquery.titlecard plugin convention
-    TITLECARD_DEFAULT: {
-        message: 'My video',
-        align: 'center',
-        effect: 'fade',
-        duration: 7,
-        size: 20,
-        color: '#ffffff',
-        style: 'normal',
-        weight: 'normal',
-        bgColor: '#000000',
-        bgImage: ''
-    },
-    FONT_RADIX_MIN: 6,
-    FONT_RADIX_MAX: 48,
-    USER_URL: $.url(),
-    USER_DATA: null
-};
-
 nn.initialize();
 nn.debug(CMS_CONF.IS_DEBUG);
 nn.on(400, function (jqXHR, textStatus) {
@@ -83,10 +27,11 @@ $(function () {
     if (!$.cookie('user')) {
         location.href = '../';
     } else {
-        nn.api('POST', '/api/login', { token: $.cookie('user') }, function (user) {
+        nn.api('POST', CMS_CONF.API('/api/login'), { token: $.cookie('user') }, function (user) {
             if (!user || !user.id) {
                 location.href = '../';
             } else {
+                CMS_CONF.USER_URL = $.url();
                 CMS_CONF.USER_DATA = user;
                 var userUrlFile = CMS_CONF.USER_URL.attr('file');
                 $('#selected-profile').text(CMS_CONF.USER_DATA.name);
@@ -141,7 +86,7 @@ function buildEpcurateCuration(fm, crumb) {
             return;
         }
         if (cid > 0 && !isNaN(cid) && CMS_CONF.USER_DATA.id) {
-            nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
+            nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
                 var channelIds = [];
                 if (data.length > 0) {
                     $.each(data, function (i, list) {
@@ -152,7 +97,7 @@ function buildEpcurateCuration(fm, crumb) {
                     showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                     return;
                 }
-                nn.api('GET', '/api/channels/' + cid, null, function (channel) {
+                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: cid}), null, function (channel) {
                     if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                         showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                         return;
@@ -176,12 +121,12 @@ function buildEpcurateCuration(fm, crumb) {
         }
     } else {
         // update mode: data from api
-        nn.api('GET', '/api/episodes/' + $('#id').val(), null, function (episode) {
+        nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), null, function (episode) {
             if ('' != cid && cid != episode.channelId) {
                 showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
                 return;
             }
-            nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
+            nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
                 var channelIds = [];
                 if (data.length > 0) {
                     $.each(data, function (i, list) {
@@ -192,7 +137,7 @@ function buildEpcurateCuration(fm, crumb) {
                     showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                     return;
                 }
-                nn.api('GET', '/api/channels/' + episode.channelId, null, function (channel) {
+                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: episode.channelId}), null, function (channel) {
                     if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                         showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                         return;
@@ -210,7 +155,7 @@ function buildEpcurateCuration(fm, crumb) {
                         ytList = [],
                         beginTitleCard = null,
                         endTitleCard = null;
-                    nn.api('GET', '/api/episodes/' + $('#id').val() + '/programs?anticache=' + (new Date()).getTime(), null, function (programs) {
+                    nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {episodeId: $('#id').val()}), null, function (programs) {
                         $.each(programs, function (idx, programItem) {
                             if (normalPattern.test(programItem.fileUrl)) {
                                 programList.push(programItem);
@@ -241,7 +186,7 @@ function buildEpcurateCuration(fm, crumb) {
                                 }
                             });
                             nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.substr(-11) + '?alt=jsonc&v=2', null, function (youtubes) {
-                                nn.api('GET', '/api/programs/' + programItem.id + '/title_cards', null, function (title_card) {
+                                nn.api('GET', CMS_CONF.API('/api/programs/{programId}/title_cards', {programId: programItem.id}), null, function (title_card) {
                                     beginTitleCard = null;
                                     endTitleCard = null;
                                     if (title_card.length > 0) {
@@ -348,12 +293,12 @@ function buildEpcuratePublish(fm, crumb) {
         showSystemErrorOverlayAndHookError('Invalid episode ID, please try again.');
         return;
     }
-    nn.api('GET', '/api/episodes/' + $('#id').val(), null, function (episode) {
+    nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), null, function (episode) {
         if ('' != cid && cid != episode.channelId) {
             showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
             return;
         }
-        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
             var channelIds = [];
             if (data.length > 0) {
                 $.each(data, function (i, list) {
@@ -364,13 +309,13 @@ function buildEpcuratePublish(fm, crumb) {
                 showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                 return;
             }
-            nn.api('GET', '/api/channels/' + episode.channelId, null, function (channel) {
+            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: episode.channelId}), null, function (channel) {
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                     showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                     return;
                 }
                 showProcessingOverlay();
-                nn.api('GET', '/api/episodes/' + $('#id').val() + '/programs?anticache=' + (new Date()).getTime(), null, function (programs) {
+                nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {episodeId: $('#id').val()}), null, function (programs) {
                     $('#img-list-tmpl-item').tmpl(programs).appendTo('#img-list');
                     if ('' != episode.imageUrl) {
                         var hasMatch = false;
@@ -422,7 +367,7 @@ function buildEpcurateInfo(fm, crumb) {
     if ('' == eid) {
         // insert mode: data from cookie
         if (cid > 0 && !isNaN(cid) && CMS_CONF.USER_DATA.id) {
-            nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
+            nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
                 var channelIds = [];
                 if (data.length > 0) {
                     $.each(data, function (i, list) {
@@ -433,7 +378,7 @@ function buildEpcurateInfo(fm, crumb) {
                     showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                     return;
                 }
-                nn.api('GET', '/api/channels/' + cid, null, function (channel) {
+                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: cid}), null, function (channel) {
                     if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                         showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                         return;
@@ -456,12 +401,12 @@ function buildEpcurateInfo(fm, crumb) {
         }
     } else {
         // update mode: data from api
-        nn.api('GET', '/api/episodes/' + $('#id').val(), null, function (episode) {
+        nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), null, function (episode) {
             if ('' != cid && cid != episode.channelId) {
                 showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
                 return;
             }
-            nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
+            nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
                 var channelIds = [];
                 if (data.length > 0) {
                     $.each(data, function (i, list) {
@@ -472,7 +417,7 @@ function buildEpcurateInfo(fm, crumb) {
                     showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                     return;
                 }
-                nn.api('GET', '/api/channels/' + episode.channelId, null, function (channel) {
+                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: episode.channelId}), null, function (channel) {
                     if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                         showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                         return;
@@ -494,7 +439,7 @@ function buildEpcurateInfo(fm, crumb) {
 
 function listEpisode(id) {
     if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
-        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
             var channelIds = [];
             if (data.length > 0) {
                 $.each(data, function (i, list) {
@@ -506,10 +451,10 @@ function listEpisode(id) {
                 return;
             }
             showProcessingOverlay();
-            nn.api('GET', '/api/channels/' + id, null, function (channel) {
+            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: id}), null, function (channel) {
                 $('#episode-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
-                    nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/my_favorites?anticache=' + (new Date()).getTime(), null, function (favorites) {
+                    nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {userId: CMS_CONF.USER_DATA.id}), null, function (favorites) {
                         var cntEpisode = favorites.length;
                         $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
                         $('#content-main-wrap .constrain').html('');
@@ -525,7 +470,7 @@ function listEpisode(id) {
                         $('#overlay-s').fadeOut();
                     });
                 } else {
-                    nn.api('GET', '/api/channels/' + id + '/episodes?anticache=' + (new Date()).getTime(), null, function (episodes) {
+                    nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/episodes', {channelId: id}), null, function (episodes) {
                         var cntEpisode = episodes.length;
                         $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
                         $('#content-main-wrap .constrain').html('');
@@ -559,11 +504,11 @@ function listEpisode(id) {
     } else if (id == 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
         // for fake favorite channel
         showProcessingOverlay();
-        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/my_favorites?anticache=' + (new Date()).getTime(), null, function (favorites) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {userId: CMS_CONF.USER_DATA.id}), null, function (favorites) {
             var cntEpisode = favorites.length;
             var channel = {
                 contentType: CMS_CONF.YOUR_FAVORITE,
-                name: CMS_CONF.USER_DATA.name + "'s favorite"
+                name: CMS_CONF.USER_DATA.name + "'s Favorite"
             };
             $('#episode-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
             $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
@@ -587,7 +532,7 @@ function listEpisode(id) {
 
 function updateChannel(id) {
     if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
-        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (data) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
             var channelIds = [];
             if (data.length > 0) {
                 $.each(data, function (i, list) {
@@ -598,7 +543,7 @@ function updateChannel(id) {
                 showSystemErrorOverlayAndHookError('You are not authorized to edit this channel.');
                 return;
             }
-            nn.api('GET', '/api/channels/' + id, null, function (channel) {
+            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: id}), null, function (channel) {
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                     showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                     return;
@@ -626,7 +571,7 @@ function updateChannel(id) {
                     $('.category').removeClass('disable').addClass('enable');
                     var sphere = channel.sphere;
                     if ('other' === sphere) { sphere = 'en'; }
-                    nn.api('GET', '/api/categories?anticache=' + (new Date()).getTime(), { lang: sphere }, function (categories) {
+                    nn.api('GET', CMS_CONF.API('/api/categories'), { lang: sphere }, function (categories) {
                         $.each(categories, function (i, list) {
                             CMS_CONF.CATEGORY_MAP[list.id] = list.name;
                         });
@@ -639,7 +584,7 @@ function updateChannel(id) {
                         if ('' != channel.categoryId && CMS_CONF.CATEGORY_MAP[channel.categoryId]) {
                             $('.tag-list').removeClass('hide');
                             $('#categoryId-select-txt').text(CMS_CONF.CATEGORY_MAP[channel.categoryId]);
-                            nn.api('GET', '/api/tags?anticache=' + (new Date()).getTime(), { categoryId: channel.categoryId }, function (tags) {
+                            nn.api('GET', CMS_CONF.API('/api/tags'), { categoryId: channel.categoryId }, function (tags) {
                                 $('#tag-list').html('');
                                 if (tags && tags.length > 0) {
                                     $('.tag-list').removeClass('hide');
@@ -678,29 +623,37 @@ function createChannel() {
 function listChannel() {
     if (CMS_CONF.USER_DATA.id) {
         showProcessingOverlay();
-        nn.api('GET', '/api/users/' + CMS_CONF.USER_DATA.id + '/channels?anticache=' + (new Date()).getTime(), null, function (channels) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (channels) {
             var cntChannel = channels.length,
                 hasFavoriteChannel = false;
             $('#channel-counter').html(cntChannel);
             if (cntChannel > 0) {
                 var items = [],
                     temp = [];
-                $.each(channels, function (i, list) {
-                    if (list.contentType == CMS_CONF.YOUR_FAVORITE) {
+                $.each(channels, function (i, channel) {
+                    temp = [];
+                    channel.moreImageUrl_1 = CMS_CONF.CHANNEL_DEFAULT_IMAGE;
+                    channel.moreImageUrl_2 = CMS_CONF.CHANNEL_DEFAULT_IMAGE2;
+                    channel.moreImageUrl_3 = CMS_CONF.CHANNEL_DEFAULT_IMAGE2;
+                    if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                         hasFavoriteChannel = true;
+                        if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
+                            temp = channel.moreImageUrl.split('|');
+                            if (temp[0]) { channel.moreImageUrl_1 = temp[0]; }
+                            if (temp[1]) { channel.moreImageUrl_2 = temp[1]; }
+                            if (temp[2]) { channel.moreImageUrl_3 = temp[2]; }
+                        }
+                    } else {
+                        if (channel.imageUrl && '' !== $.trim(channel.imageUrl)) {
+                            channel.moreImageUrl_1 = channel.imageUrl;
+                        }
+                        if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
+                            temp = channel.moreImageUrl.split('|');
+                            if (temp[0]) { channel.moreImageUrl_2 = temp[0]; }
+                            if (temp[1]) { channel.moreImageUrl_3 = temp[1]; }
+                        }
                     }
-                    list.moreImageUrl_1 = 'images/episode_default1.png';
-                    list.moreImageUrl_2 = 'images/episode_default2.png';
-                    list.moreImageUrl_3 = 'images/episode_default2.png';
-                    if (list.imageUrl && '' !== $.trim(list.imageUrl)) {
-                        list.moreImageUrl_1 = list.imageUrl;
-                    }
-                    if (list.moreImageUrl && '' !== $.trim(list.moreImageUrl)) {
-                        temp = list.moreImageUrl.split('|');
-                        if (temp[0]) { list.moreImageUrl_2 = temp[0]; }
-                        if (temp[1]) { list.moreImageUrl_3 = temp[1]; }
-                    }
-                    items.push(list);
+                    items.push(channel);
                 });
                 $('#channel-list-tmpl-item').tmpl(items, {
                     userId: CMS_CONF.USER_DATA.id

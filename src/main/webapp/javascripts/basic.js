@@ -230,10 +230,10 @@ $(function () {
     });
     $('#profile-logout').click(function () {
         if (!$('body').hasClass('has-change')) {
-            nn.api('DELETE', '/api/login', null, function (data) {
+            nn.api('DELETE', CMS_CONF.API('/api/login'), null, function (data) {
                 location.href = '/';
             });
-            return false;            
+            return false;
         }
     });
 

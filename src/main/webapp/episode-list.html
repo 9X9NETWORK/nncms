@@ -21,6 +21,7 @@
 <script src="javascripts/json2.js"></script>
 <script src="javascripts/purl.js"></script>
 <script src="javascripts/vertical.slider.js"></script>
+<script src="javascripts/config.js"></script>
 <script src="javascripts/basic.js"></script>
 <script src="javascripts/controller.js"></script>
 <script src="javascripts/episode.js"></script>
@@ -214,7 +215,7 @@
 <div class="btn-wrap enable">
 <ul>
 <li><a href="epcurate-curation.html?id=${id}" class="edit"><span></span>Edit</a></li>
-<li><a href="/api/episodes/${id}" class="del"><span></span>Delete</a></li>
+<li><a href="/api/episodes/${id}" rel="${id}" class="del"><span></span>Delete</a></li>
 </ul>
 </div>
 </div>

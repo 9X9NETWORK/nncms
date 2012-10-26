@@ -1,56 +1,241 @@
-Revision: 330
+Revision: 352
 Author: chihwen
-Date: ¤U¤È 05:37:14, 2012¦~10¤ë19¤é
+Date: ¤W¤È 11:19:52, 2012¦~10¤ë25¤é
 Message:
-¦b§R°£ cookie ¸Ìªº episode id ®É¡A¥ý½T»{¸Óª«¥óÄÝ©Ê½T¹ê¦s¦b¤~§R°£
+­«ºcª©¥» 350 ¤¤¡A°w¹ï curation.js¡u½Õ¾ã Title Card µe­±µ²ºc¡vªº³¡¥÷§@§ï¶i
 
-1. ¦b§R°£ cookie ¸Ìªº episode id ®É¡A¥ý½T»{¸Óª«¥óÄÝ©Ê½T¹ê¦s¦b¤~§R°£¡C
-2. ­Y¨S¦³©ú½T¶Ç¤J channel id ´Nª½±µ§R°£ cookie °O¾Ð¸Ìªº channel id ¤£¦Û°Ê­««Ø¡C
-issue 5379
-----
-Modified : /titlecard/javascripts/controller.js
-
-
-Revision: 329
-Author: chihwen
-Date: ¤U¤È 05:04:25, 2012¦~10¤ë19¤é
-Message:
-­Y¨S¦³©ú½T¶Ç¤J episode id ´Nª½±µ§R°£ cookie °O¾Ð¸Ìªº episode id ¤£¦Û°Ê­««Ø
-issue 5379
-----
-Modified : /titlecard/javascripts/controller.js
-
-
-Revision: 328
-Author: chihwen
-Date: ¤U¤È 02:28:56, 2012¦~10¤ë19¤é
-Message:
-¥[¤J Title Card .playing Hook ¥H«KÃÑ§O¥¿¦b¼½©ñ¤¤ªº Title Card ¦ì¸m
-
-1. ¥[¤J Title Card .playing Hook ¥H«KÃÑ§O¥¿¦b¼½©ñ¤¤ªº Title Card ¦ì¸m¡C
-2. ·s¼W addTitleCardPlayingHook() ¤Î removeTitleCardPlayingHook() ¨Ã±N¤§®I¤J¬ÛÃö¨Æ¥óÅX°Ê¦ì¸m¡C
-3. ­«·s review °Ñ¦Ò loadVideo() ªº©I¥s®É¾÷¡A½Õ¾ã buildVideoInfoTmpl() ªº¥X²{¦ì¸m (³o¨â­Ó¨ç¦¡À³¸Ó¨â¨â¦¨¹ï¥X²{¡A¤ñ¸û²Å¦Xµ{¦¡»y·N)¡C
-4. ©ú½T©w¦ì Video ªº .playing ¤Î .next-playing ¿ï¾Ü¾¹³]©w¡A¥HÁ×§K»P Title Card ªº .playing ½Ä¬ð¡C
+·s¼W wrapTitleCardCanvas() ±N¥]»q Title Card µ²ºcªºÅÞ¿è¶°¤¤¿W¥ß¥X¨Ó
 issue 5379
 ----
 Modified : /titlecard/javascripts/curation.js
 
 
-Revision: 327
+Revision: 350
 Author: chihwen
-Date: ¤W¤È 11:26:23, 2012¦~10¤ë19¤é
+Date: ¤W¤È 12:01:25, 2012¦~10¤ë25¤é
 Message:
-¦P¨B src ¤À¤äª©¥» 325, 326
+½Õ¾ã Title Card µe­±µ²ºc¡A¥H¦]À³ Title Card ¥~±¾¤É¯Å v1.6.0 «á¡A·|¦Û°Ê¸É¥Õ¤W¤U©Î¥ª¥k¾É­P¶]ª©°ÝÃD
 
-1. ·s¼WÁôÂÃ titlecard ªº css (titlecard-hide.css)¡C
-2. ½Õ¾ã storyboard slider ªº°ª«×¬° 5px (±N¾î¦V±²¶b°ª«×§ï¬°©Mª½¦V±²¶bªº¼e«×¤@¼Ë)¡C
-3. ½Õ¾ã¨Ã¹ï»ô titlecard icon ¦ì¸m¡C
+1. ½Õ¾ã Title Card µe­±µ²ºc¡A¥H¦]À³ Title Card ¥~±¾¤É¯Å v1.6.0 «á¡A·|¦Û°Ê¸É¥Õ¤W¤U©Î¥ª¥k¾É­P¶]ª©°ÝÃD¡C
+2. ¦P¨B trunk ¤À¤äª©¥» 349 (§ï¨} Title Card ¥~±¾¡Aª©¥»§ó·s¬° v1.6.0)¡C
 issue 5379
 ----
-Modified : /titlecard/stylesheets/ep-curation.css
-Added : /titlecard/stylesheets/titlecard-hide.css
+Modified : /titlecard/javascripts/curation.js
+Modified : /titlecard/javascripts/jquery.titlecard.js
 
-==== 9x9 ====
-Last Changed Author: barton
-Last Changed Rev: 3784
-Last Changed Date: 2012-10-19 18:00:06 +0800 (äº”, 19 10æœˆ 2012)
+
+Revision: 349
+Author: chihwen
+Date: ¤U¤È 10:49:24, 2012¦~10¤ë24¤é
+Message:
+§ï¨} Title Card ¥~±¾¡Aª©¥»§ó·s¬° v1.6.0
+
+1. ¦P®É°»´ú¼e«×¤Î°ª«×¡A¥H¼e°ª®t¶Z¡A¨M©w­n¥H¼e«×´«ºâ°ª«×¡AÁÙ¬O¥H°ª«×±Àºâ¼e«×¡C
+2. ­n¦Ò¶q¤W­z°»´ú¨ìªº¼e«×¤Î°ª«×¡A­nÅý Title Card °Ï¶ô«O«ù 16:9 ¨Ã©~¤¤§e²{¡A¥ª¥k¨âÃä©Î¤W¤U¨âÃä¦A¸É¤W¶ÂÃä¡C
+3. §ï¨}­I´ºÃC¦â»P­I´º¹Ï¤ù¤Á´«°ÝÃD¡A¥H¦]À³·í­I´º¹Ï¬°ªÅ®É API ·|¦Û°Ê¸É¤W¨t²Î¹w³]­I´º¹Ï¡A¶i¦Ó³y¦¨­I´ºÃC¦âµLªk§e²{ªº°ÝÃD¡C
+4. ½Õ¾ã®M¥Î½d¨Ò¡A¥H´ú¸Õ¤ÎÅçÃÒ¥~±¾¦U¶µ¥\¯à¡C
+issue 5085
+----
+Modified : /trunk/javascripts/jquery.titlecard.js
+Modified : /trunk/titlecard-player-jquery-plugin-demo.html
+
+
+Revision: 348
+Author: chihwen
+Date: ¤U¤È 06:30:56, 2012¦~10¤ë24¤é
+Message:
+jQuery Title Card Player ¦r¥d¼½©ñ¾¹¥~±¾¶}µo
+
+´ú¸Õ§ï¨} Title Card µ²ºcÂú«¬¡A¥H«K¾AÀ³«eºÝ playback ¦b§e²{µe­±¤W¡A¥i¯à·|¦³ Fit, Wide, Narrow ¤TºØ±¡¹Òªºª¬ªp¡C
+1. ¦P®É°»´ú¼e«×¤Î°ª«×¡A¥H¼e°ª®t¶Z¡A¨M©w­n¥H¼e«×´«ºâ°ª«×¡AÁÙ¬O¥H°ª«×±Àºâ¼e«×¡C
+2. ­n¦Ò¶q¤W­z°»´ú¨ìªº¼e«×¤Î°ª«×¡A­nÅý Title Card °Ï¶ô«O«ù 16:9 ¨Ã©~¤¤§e²{¡A¥ª¥k¨âÃä©Î¤W¤U¨âÃä¦A¸É¤W¶ÂÃä¡C
+
+§@ªk¦p¤U¡G
+1. ¦b³Ì¥~¼h¥[¤J wrapper-canvas µ²ºc¡A¨Ã­«·s review ¦æ¬°µ²ºc³]©w¡C
+   <div class="wrapper-canvas" style="display: block; width: 100%; height: 100%; background-color: #000;">
+2. wrapper-outer => ²Î¤@¥[¤J margin: 0 auto; ¼Ë¦¡¡A¥H«K¹ê²{ canvas ©~¤¤§e²{¡C
+3. ­n°ÊºA°»´ú¥~®Ø¼e°ª¡A¨Ó¨M©w¥H¼e±Àºâ°ª¡AÁÙ¬O¥H°ª±Àºâ¼e¡A¦A¥H 16:9 ¤ñ¨Ò¡A³]©w wrapper-outer ¼e°ª¡C
+   ¯S§O¯d·N narrow ª©¥»
+   wrapper-outer => float: left;
+   wrapper-outer => margin-top = (¥~®Ø°ª«× - wrapper-outer°ª«×) / 2
+4. wrapper-inner => ²Î¤@³]©w left: 1%;
+issue 5085
+----
+Modified : /trunk/titlecard-player-jquery-plugin-prototype.html
+
+
+Revision: 347
+Author: chihwen
+Date: ¤U¤È 12:44:23, 2012¦~10¤ë23¤é
+Message:
+¦P¨B fakeapi ¤À¤äª©¥» 346
+
+½Õ¾ã config.js ±N fake api ¶°¤¤¡A¨Ã¨Ì¦UÀô¹Ò¤Á´«³]©w¡C
+1. development: DS ¶}µoÀô¹Ò¡C
+2. demonstration: DS ¶}µoºÝ´ú¸ÕÀô¹Ò¡C
+3. testing: 9x9.tv ¥¿¦¡ºÝ´ú¸ÕÀô¹Ò¡C
+4. production: 9x9.tv ¥¿¦¡Àô¹Ò¡C
+issue 5379
+----
+Modified : /titlecard/javascripts/config.js
+
+
+Revision: 345
+Author: chihwen
+Date: ¤W¤È 02:18:35, 2012¦~10¤ë23¤é
+Message:
+±N³]©wÀÉ CMS_ENV ¤Á´«¬° testing ¥¿¦¡ºÝ´ú¸ÕÀô¹Ò (for 9x9 dev website)
+issue 5379
+----
+Modified : /titlecard/javascripts/config.js
+
+
+Revision: 344
+Author: chihwen
+Date: ¤W¤È 02:14:52, 2012¦~10¤ë23¤é
+Message:
+¦P¨B fakeapi ¤À¤äª©¥» 343 («Ø¥ß 9x9 fake API ¯¸¥x¡A¥H«K¼ÒÀÀ¥¿¦¡¾÷Àô¹Ò¡A¨Ã¨ú¥N src ª©«¬ºÞ±±)
+issue 5379
+----
+Modified : /titlecard/episode-list.html
+Modified : /titlecard/index.html
+Modified : /titlecard/javascripts/channel.js
+Modified : /titlecard/javascripts/config.js
+Modified : /titlecard/javascripts/episode.js
+
+
+Revision: 340
+Author: chihwen
+Date: ¤U¤È 06:05:52, 2012¦~10¤ë22¤é
+Message:
+±N CMS API URI ¶°¤¤³]©wºÞ²z¡A¨Ã¹ê§@ API URI ¥]¸Ë¨ç¦¡
+
+1. ±N CMS_CONF ³]©wÀÉ¿W¥ß¦¨ config.js ¥H«K²Î¤@ºÞ²z¤Î¦@¥Î³]©w¡C
+   ¦b¤Þ¤J¥ô¦ó«È»s¤Æªº°Ó·~ÅÞ¿è js «e¡A¥ý²Î¤@¤Þ¤J config.js ¨Ò¦p¦b basic.js ¤§«e¡C
+2. ·s¼W CMS_CONF.CMS_ENV Àô¹ÒÅÜ¼Æ¡A¥H«K¥¼¨Ó¨ÌÀô¹Ò¤Á´«³]©w¤§¥Î¡C
+   1. development: ¶}µoÀô¹Ò¡C
+   2. demonstration: ¶}µoºÝ´ú¸ÕÀô¹Ò¡C
+   3. testing: ¥¿¦¡ºÝ´ú¸ÕÀô¹Ò¡C
+   4. production: ¥¿¦¡Àô¹Ò¡C
+3. ·s¼W CMS_CONF.API_PACK ±N CMS API URI ¶°¤¤³]©wºÞ²z¡C
+4. ·s¼W CMS_CONF.API() ¹ê§@ API URI ¥]¸Ë¨ç¦¡¡A¥H«K¥¼¨Ó¨ÌÀô¹Ò¤Á´«¥¿¦¡ API »P fake API ¤§¥Î¡C
+5. ±N©Ò¦³¨Ï¥Î¨ì CMS API URI ¦r¦êªº¦a¤è¡A§ï¦ê±µ API URI ¥]¸Ë¨ç¦¡¡C
+issue 5379
+----
+Modified : /titlecard/channel-add.html
+Modified : /titlecard/channel-setting.html
+Modified : /titlecard/epcurate-curation.html
+Modified : /titlecard/epcurate-info.html
+Modified : /titlecard/epcurate-publish.html
+Modified : /titlecard/episode-list.html
+Modified : /titlecard/index.html
+Modified : /titlecard/javascripts/basic.js
+Modified : /titlecard/javascripts/channel.js
+Added : /titlecard/javascripts/config.js
+Modified : /titlecard/javascripts/controller.js
+Modified : /titlecard/javascripts/curation.js
+Modified : /titlecard/javascripts/epcurate.js
+Modified : /titlecard/javascripts/episode.js
+Modified : /titlecard/login.html
+
+
+Revision: 339
+Author: chihwen
+Date: ¤U¤È 12:49:12, 2012¦~10¤ë22¤é
+Message:
+§ï¨}­I´ºÃC¦â»P­I´º¹Ï¤ù¤Á´«°ÝÃD (¦]À³ API ·|¦Û°Ê¸É¤W¹w³]­I´º¹Ï)
+
+1. ±N CMS_CONF.TITLECARD_DEFAULT_IMAGE §ó¦W¬° CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM ¥Nªí¥Ñ¨t²Î API ¦Û°Ê¸É¤Wªº¹w³]¹Ï¡C
+   TITLECARD_DEFAULT_IMAGE_BY_SYSTEM: http://9x9ui.s3.amazonaws.com/war/v0/images/titlecard-default.png
+2. ·s¼W CMS.CONF.TITLECARD_DEFAULT_IMAGE_BY_UPLOAD ¥Nªí©ú½T¥Ñ¤W¶Ç¾÷¨î¡A©Ò§ó·s¤W¥hªº¹w³]¹Ï¤ù¡C
+   TITLECARD_DEFAULT_IMAGE_BY_UPLOAD: http://s3.amazonaws.com/9x9ui/war/v0/images/titlecard-default.png
+3. ¦]À³ API ·|¦Û°Ê¸É¤W¹w³]­I´º¹Ï¡AÂÇ¥Ñ¤W­z³]©w¡A¥i©ú½T¤ÀÂ÷¡A¬O¨t²Î¦Û°Ê¸É¤Wªº¹w³]¹Ï¡AÁÙ¬O©ú½T¤W¶Çªº¹w³]¹Ï¡A
+   ¦b epcurate-curation.html ¼ÒªO¤¤¡A½Õ¾ãª©«¬¦b¡u­I´ºÃC¦â»P­I´º¹Ï¤ù¤Á´«¡vªº§PÂ_ÅÞ¿è¡C
+   1. ­Y­I´º¹Ï¤ù¤£¬°ªÅ¡A¦Ó¥B­I´ºÃC¦â¬°ªÅ¡A¤~¥X²{­I´º¹Ï¤ù¡C
+   2. ­Y­I´º¹Ï¤ù¤£¬°ªÅ¡A¦Ó¥B­I´ºÃC¦â¤£¬°ªÅ¡A¦Ó¥B­I´º¹Ï¤ù¤£¬°¨t²Î¦Û°Ê¸É¤Wªº¹w³]¹Ï¡A¤~¥X²{­I´º¹Ï¤ù¡C
+issue 5379
+----
+Modified : /titlecard/epcurate-curation.html
+Modified : /titlecard/javascripts/controller.js
+
+
+Revision: 338
+Author: chihwen
+Date: ¤W¤È 10:10:19, 2012¦~10¤ë22¤é
+Message:
+¥Ñ©ó 9x9 nn.api ¥»¨­¤w¦³¨¾§Ö¨ú¾÷¨î¡A¬G²¾°£¥ý«e¥[¤Wªº anticache=®É¶¡ÂW°O¡A¥HÂ²¤Æµ{¦¡
+issue 5379
+----
+Modified : /titlecard/javascripts/channel.js
+Modified : /titlecard/javascripts/controller.js
+Modified : /titlecard/javascripts/curation.js
+Modified : /titlecard/javascripts/epcurate.js
+
+
+Revision: 335
+Author: chihwen
+Date: ¤U¤È 11:17:39, 2012¦~10¤ë21¤é
+Message:
+­«ºc curation.js §ó´«¦WºÙ¡B½Õ¾ã¶¶§Ç¡B¶°¤¤¾ã¨Ö¡B·s¼W¨ç¦¡¥H§ï¨}¦æ¬°¨ÃÂ²¤Æ»y·N¡B­×¥¿«D¹w´Á¿ù»~
+
+1. ­«ºc curation.js §ó´«¦WºÙ¡B½Õ¾ã¶¶§Ç¡B¶°¤¤¾ã¨Ö¡B·s¼W¨ç¦¡¥H§ï¨}¦æ¬°¨ÃÂ²¤Æ»y·N¡B­×¥¿«D¹w´Á¿ù»~¡C
+   1. ±N deleteIdList §ó¦W¬° videoDeleteIdList ¥H§ó²Å¦X»y·N¡C
+   2. ·s¼W addVideoPlayingHook() ¤Î addTitleCardEditHook() ¥HÂ²¤Æ¨Ã¼W±j¦æ¬°»y·N¡C
+   3. ±N TITLECARD_DEFAULT §ó¦W¬° TITLECARD_DEFAULT_OPTION ¥H§ó²Å¦X»y·N¡C
+   4. §ï¨} Title Card play «ö¶s¡A±N titlecard ½s¿è¼Ò¦¡©ú½T»P video ¼½©ñ¼Ò¦¡¤ÀÂ÷¡A¥HÁ×§K²£¥Í«D¹w´Á¿ù»~¡C
+   5. §Q¥Î titlecard callback ¾÷¨î¡A±N animateTitleCardProgressOnly() ¾ã¨Ö¬° animateTitleCardProgress() ¥HÂ²¤Æ¦æ¬°¡C
+   6. ±N demoElemt §ó¦W¬° element ¥H«K§ó¥[³q¥Î¡C
+   7. ±N Save ¾÷¨î¤¤ªº i ÅÜ¼Æ¡A§ó¦W¬° idx ¥H§ó²Å¦X»y·N¡C
+   8. §ï¨} setSpace() ¶¶§Ç¥H±j¤Æ»y·N¡A¨Ã­×¥¿¦b 1024 ¤U¡Atextarea ¤£·|¸m¤¤ªº°ÝÃD¡C
+   9. §ï¨} onYouTubePlayerStateChange() ±NÅÞ¿è¶°¤¤¨Ã¦@¥Î playTitleCardAndVideo() ¥HÂ²¤Æ¦æ¬°ÅÞ¿è¡C
+   10. ±N¨ç¦¡¤¤ªº elemtli °Ñ¼Æ§ó¦W¬° element ¥H«K§ó¥[³q¥Î¡C
+   11. §ï¨} cancelTitleCard() ¶¶§Ç¥H±j¤Æ»y·N¡C
+   12. §ó´« switchFontAlign() ¤Î switchBackground() ªº°Ñ¼Æ¦WºÙ¡A¥H±j¤Æ»y·N¡C
+2. ®Õ¥¿ curation.js ½Õ¾ã Save ¾÷¨î¤¤ªº isInsertMode ·s¼W¼Ò¦¡¡A­×¥¿±q DOM ¤¤¨ú±o titlecard ª«¥ó¯Á¤Þ¿ù»~°ÝÃD¡C
+   ³o­Ó­×¥¿¥i¥HÁ×§K¦b·s¼W¼Ò¦¡¤U¡A³£¥H DOM ¤¤²Ä¤@µ§ video ªº titlecard ª«¥ó¬°¥D¡A³y¦¨¸ê®Æ¿ù»~¡C
+3. ®Õ¥¿ controller.js ­×¥¿ channel list ¤¤³Ì·RÀW¹Dªº²Ä¤@±i¤j¹Ï¨ú¹ÏÅÞ¿è¡A¥Ñ©ó³Ì·RÀW¹DµLªk§ó·sÀW¹D¹Ï¤ù¡A
+   ©Ò¥Hºû«ù±q moreImageUrl ¤À³Î¨ú­È¡C³o­Ó­×¥¿¥i¥HÁ×§K³Ì·RÀW¹Dªº²Ä¤@±i¹Ï¥Ã»·³£¬O¨t²Î¹w³]¹Ï¡C
+4. ½Õ¾ã controller.js ±N¨t²Î¥Î¹w³]¹Ï¤ù¶°¤¤¨ì CMS_CONF ¤¤¡A¥H«K½Õ¾ã¤Î¦@¥Î¡C
+   1. TITLECARD_DEFAULT_IMAGE: http://9x9ui.s3.amazonaws.com/war/v0/images/titlecard-default.png
+   2. EPISODE_DEFAULT_IMAGE: http://s3.amazonaws.com/9x9ui/war/v0/images/episode-default.png
+   3. CHANNEL_DEFAULT_IMAGE: images/episode_default1.png
+   4. CHANNEL_DEFAULT_IMAGE2: images/episode_default2.png
+5. ½Õ¾ã epcurate-curation.html ²¾°£¥Î¤£¨ìªº vertical.slider ¥Îµ²ºc¡C
+6. ½Õ¾ã ep-curation.css ¾î¦V scrollbar °ª«×¡A¥HÁ×§K¦b 1024x768 ¤U¡A´X¥G§ÖÀ£¨ì video ªº¤å®×¡C
+issue 5379
+----
+Modified : /titlecard/epcurate-curation.html
+Modified : /titlecard/index.html
+Modified : /titlecard/javascripts/controller.js
+Modified : /titlecard/javascripts/curation.js
+Modified : /titlecard/stylesheets/ep-curation.css
+
+
+Revision: 333
+Author: chihwen
+Date: ¤U¤È 10:33:02, 2012¦~10¤ë19¤é
+Message:
+½Õ¾ã video info ¤Á´«®É¾÷¡A¦b¶}ÀY Title Card ¶}©l¼½©ñ®É¡A´N§e²{¸Ó¼v¤ù¸ê°T
+
+1. ½Õ¾ã video info ¤Á´«®É¾÷¡A¦b¶}ÀY Title Card ¶}©l¼½©ñ®É¡A´N§e²{¸Ó¼v¤ù¸ê°T¡C
+2. ¦P¨B src ¤À¤äª©¥» 331 (TODO¡Gª`·N¦¹ª©¥»©|¥¼¦P¨B§¹)¡C
+   ½Õ¾ã video-control ªº¼Ë¦¡¡A¥H«KÅý¥¼¨Ó«È»s¤Æ video-control ®É¡A¦b UI ¤W¥i¥H¬Û®e (youtube chromeless player)¡C
+issue 5379
+----
+Modified : /titlecard/epcurate-curation.html
+Modified : /titlecard/javascripts/curation.js
+Modified : /titlecard/stylesheets/ep-curation.css
+
+
+Revision: 332
+Author: chihwen
+Date: ¤U¤È 08:36:40, 2012¦~10¤ë19¤é
+Message:
+¦b¼v¤ù¼½©ñ¼Ò¦¡¤U¡A¥[¤J«e«á Title Card ªº¼È°±¤Î­«·s¼½©ñ¥\¯à
+
+1. ¦b¼v¤ù¼½©ñ¼Ò¦¡¤U¡A¥[¤J«e«á Title Card ªº¼È°±¤Î­«·s¼½©ñ¥\¯à¡C
+2. ¦b¼v¤ù¼½©ñ¼Ò¦¡¤U¡A­Y¥þ³¡¼½©ñ§¹²¦«á¡A´N¦Û°ÊÁÙ­ì¦^³Ìªìªº Add Video µe­±¡C
+issue 5379
+----
+Modified : /titlecard/javascripts/curation.js
+

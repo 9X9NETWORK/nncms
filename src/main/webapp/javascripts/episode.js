@@ -27,7 +27,7 @@ $(function () {
 
     // episode list delete
     $(document).on('click', '#ep-list .enable a.del', function () {
-        $(this).parent().parent().parent().parent().parent().parent('li').addClass('deleting').data('deleteId', $(this).attr('href'));
+        $(this).parent().parent().parent().parent().parent().parent('li').addClass('deleting').data('deleteId', $(this).attr('rel'));
         showDeletePromptOverlay();
         return false;
     });
@@ -35,7 +35,7 @@ $(function () {
         $.unblockUI();
         if ($('#ep-list li.deleting').length > 0 && '' != $('#ep-list li.deleting').data('deleteId')) {
             showSavingOverlay();
-            nn.api('DELETE', $('#ep-list li.deleting').data('deleteId'), null, function (data) {
+            nn.api('DELETE', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#ep-list li.deleting').data('deleteId')}), null, function (data) {
                 if ('OK' == data) {
                     $('#overlay-s').fadeOut(1000, function () {
                         var cntEpisode = $('#episode-counter').html();

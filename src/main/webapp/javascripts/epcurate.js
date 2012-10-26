@@ -126,7 +126,7 @@ $(function () {
                     name: $('#name').val(),
                     intro: $('#intro').val()
                 };
-                nn.api('PUT', '/api/episodes/' + $('#id').val(), params, function (episode) {
+                nn.api('PUT', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), params, function (episode) {
                     $('#overlay-s').fadeOut(1000, function () {
                         // redirect
                         $('body').removeClass('has-change');
@@ -167,7 +167,7 @@ $(function () {
                 var params = {
                     imageUrl: $('#imageUrl').val()
                 };
-                nn.api('PUT', '/api/episodes/' + $('#id').val(), params, function (episode) {
+                nn.api('PUT', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), params, function (episode) {
                     $('#overlay-s').fadeOut(1000, function () {
                         // redirect
                         $('body').removeClass('has-change');
@@ -233,7 +233,7 @@ function uploadImage() {
         'size':   20485760,
         'acl':    'public-read'
     };
-    nn.api('GET', '/api/s3/attributes?anticache=' + (new Date()).getTime(), parameter, function (s3attr) {
+    nn.api('GET', CMS_CONF.API('/api/s3/attributes'), parameter, function (s3attr) {
         var timestamp = (new Date()).getTime();
         var handlerFileDialogStart = function () {
             $('.img-upload-func .highlight').addClass('hide');

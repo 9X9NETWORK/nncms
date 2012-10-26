@@ -7,9 +7,12 @@
  * @requires    jQuery UI v1.8.23 or later
  * @requires    9x9 SDK (nn-sdk.js)
  * @author      Chih-Wen Yang <chihwen@doubleservice.com>
- * @version     1.5.0
+ * @version     1.6.0
  *
  * - Change Log:
+ *      1.6.0:  2012/10/24 - 1. Detect both width and height then decide calculate title card size according to width or to height.
+ *                           2. Title card size will be 16:9, so there might be black area on the left & right, or top & bottom.
+ *                           3. Improved background image and background color switch rule due to system default background image.
  *      1.5.0:  2012/10/18 - 1. Added private strip_tags() method to strip HTML tags (html/script injection, XSS).
  *                           2. Added private destroy() method to encapsulate destroy (or cancel) feature.
  *                           3. Added optional widescreen option [boolean], default is true to keep 16:9 aspect ratio (easter egg option).
@@ -120,13 +123,17 @@
             element
                 .clearQueue()
                 .stop()
-                .children()                                 // wrapper-outer
+                .children()                                 // wrapper-canvas
                     .clearQueue()
                     .stop()
-                    .children()                             // wrapper-middle and img
+                    .children()                             // wrapper-outer
                         .clearQueue()
                         .stop()
-                    .end()                                  // wrapper-outer
+                        .children()                         // wrapper-middle and img
+                            .clearQueue()
+                            .stop()
+                        .end()                              // wrapper-outer
+                    .end()                                  // wrapper-canvas
                     .hide('fast', callback);
         };
 
@@ -182,8 +189,11 @@
 
         return this.each(function () {
             var $this = $(this),
-                width = (opts.width) ? parseInt(opts.width, 10) : $this.width(),
-                height = (opts.height) ? parseInt(opts.height, 10) : ((opts.widescreen) ? Math.round((width / 16) * 9) : $this.height()),
+                width = (opts.width && opts.width <= $this.width()) ? parseInt(opts.width, 10) : $this.width(),
+                height = (opts.height && opts.height <= $this.height()) ? parseInt(opts.height, 10) : $this.height(),
+                heightTemp = 0,
+                outerFloat = 'none',
+                outerMarginTop = 0,
                 text = strip_tags($.trim(opts.text)).replace(/(\n|\{BR\})/g, '<br />'),
                 align = opts.align,
                 fontRadix = parseInt(opts.fontSize, 10),
@@ -191,10 +201,24 @@
                 fontStyle = opts.fontStyle,
                 fontWeight = opts.fontWeight,
                 wrapperId = (this.id) ? (this.id + '-') : '',
+                wrapperCanvas = wrapperId + 'wrapper-canvas',
                 wrapperOuter = wrapperId + 'wrapper-outer',
                 wrapperMiddle = wrapperId + 'wrapper-middle',
                 wrapperInner = wrapperId + 'wrapper-inner',
                 wrapperHtml = '';
+
+            if (opts.widescreen) {
+                heightTemp = Math.round((width / 16) * 9);
+                if (heightTemp > height) {
+                    width = Math.round((height / 9) * 16);
+                } else {
+                    height = heightTemp;
+                }
+            }
+            if ($this.height() > height) {
+                outerFloat = 'left';
+                outerMarginTop = (($this.height() - height) / 2) + 'px';
+            }
 
             // basic options normalize
             if (fontRadix < $.fn.titlecard.allows.fontSize.min
@@ -213,19 +237,27 @@
             }
 
             // basic html structure and css style
-            wrapperHtml = '<div class="' + wrapperOuter + '">';
+            wrapperHtml  = '<div class="' + wrapperCanvas + '"><div class="' + wrapperOuter + '">';
             wrapperHtml += '<div class="' + wrapperMiddle + '"><div class="' + wrapperInner + '"></div></div>';
-            if ('' != opts.backgroundImage) {
+            if (('' != opts.backgroundImage && '' == opts.backgroundColor)
+                    || ('' != opts.backgroundImage && '' != opts.backgroundColor && $.fn.titlecard.system.backgroundImage != opts.backgroundImage)) {
                 wrapperHtml += '<img src="' + opts.backgroundImage + '" style="width: 100%; height: 100%; border: none;" />';
             }
-            wrapperHtml += '</div>';
-            $this.show().wrapInner(wrapperHtml).children('.' + wrapperOuter).hide().css({
+            wrapperHtml += '</div></div>';
+            $this.show().wrapInner(wrapperHtml).children('.' + wrapperCanvas).hide().css({
+                display: 'block',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#000'
+            }).children('.' + wrapperOuter).hide().css({
                 display: 'block',
                 position: 'relative',
                 overflow: 'hidden',
                 zIndex: 50,
+                "float": outerFloat,
                 width: width + 'px',
                 height: height + 'px',
+                margin: outerMarginTop + ' auto',
                 backgroundColor: opts.backgroundColor
             }).children('.' + wrapperMiddle).hide().css({
                 display: 'block',
@@ -235,6 +267,7 @@
             }).children('.' + wrapperInner).hide().html(text).css({
                 display: 'block',
                 position: 'absolute',
+                left: '1%',
                 width: '98%',
                 height: 'auto',
                 textAlign: align,
@@ -245,19 +278,17 @@
             });
 
             // vertical align
-            var wrapWidth = $this.children('.' + wrapperOuter).width(),
-                wrapHeight = $this.children('.' + wrapperOuter).height(),
-                selfWidth = $this.children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).width(),
-                selfHeight = $this.children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).height(),
+            var selfWidth = $this.children().children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).width(),
+                selfHeight = $this.children().children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).height(),
                 selfLeft = 0,
                 selfTop = 0;
-            if (wrapWidth > selfWidth) {
-                selfLeft = (wrapWidth - selfWidth) / 2;
+            if (width > selfWidth) {
+                selfLeft = (width - selfWidth) / 2;
             }
-            if (wrapHeight > selfHeight) {
-                selfTop = (wrapHeight - selfHeight) / 2;
+            if (height > selfHeight) {
+                selfTop = (height - selfHeight) / 2;
             }
-            $this.children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).css({
+            $this.children().children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).css({
                 top: selfTop + 'px',
                 left: selfLeft + 'px'
             });
@@ -299,60 +330,66 @@
             case 'scale':
             case 'shake':
             case 'slide':
-                $this.children().show(startStandbySec).children('.' + wrapperMiddle).hide().show(effect, {}, startSec).delay(delaySec).hide(effect, {}, endingSec, function () {
+                $this.children().children().show(startStandbySec).children('.' + wrapperMiddle).hide().show(effect, {}, startSec).delay(delaySec).hide(effect, {}, endingSec, function () {
                     $this.children().delay(endingStandbySec).hide(0, playedCallback);
                 });
                 break;
             case 'fade':
-                $this.children().show(startStandbySec).children('.' + wrapperMiddle).hide().fadeIn(startSec).delay(delaySec).fadeOut(endingSec, function () {
+                $this.children().children().show(startStandbySec).children('.' + wrapperMiddle).hide().fadeIn(startSec).delay(delaySec).fadeOut(endingSec, function () {
                     $this.children().delay(endingStandbySec).hide(0, playedCallback);
                 });
                 break;
             default:
                 // none
-                $this.children().children().show(0).delay(duration).hide(0, function () {
+                $this.children().children().children().show(0).delay(duration).hide(0, function () {
                     $this.children().hide(0, playedCallback);
                 });
                 break;
             }
 
             $(window).bind('resize', function () {
-                //$this.css({ width: '80%' });    // just for test
-                var wrapWidth = $this.width(),
-                    wrapHeight = (opts.widescreen) ? Math.round((wrapWidth / 16) * 9) : $this.height();
-                $this.children('.' + wrapperOuter).css({
-                    width: wrapWidth,
-                    height: wrapHeight
+                var width = $this.width(),
+                    height = $this.height(),
+                    heightTemp = 0,
+                    outerFloat = 'none',
+                    outerMarginTop = 0;
+
+                if (opts.widescreen) {
+                    heightTemp = Math.round((width / 16) * 9);
+                    if (heightTemp > height) {
+                        width = Math.round((height / 9) * 16);
+                    } else {
+                        height = heightTemp;
+                    }
+                }
+                if ($this.height() > height) {
+                    outerFloat = 'left';
+                    outerMarginTop = (($this.height() - height) / 2) + 'px';
+                }
+
+                $this.children().children('.' + wrapperOuter).css({
+                    "float": outerFloat,
+                    width: width,
+                    height: height,
+                    margin: outerMarginTop + ' auto'
                 }).children('.' + wrapperMiddle).children('.' + wrapperInner).css({
-                    fontSize: Math.round(wrapWidth / fontRadix) + 'pt'
+                    fontSize: Math.round(width / fontRadix) + 'pt'
                 });
-                var selfWidth = $this.children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).width(),
-                    selfHeight = $this.children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).height(),
+                var selfWidth = $this.children().children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).width(),
+                    selfHeight = $this.children().children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).height(),
                     selfLeft = 0,
                     selfTop = 0;
-                if (wrapWidth > selfWidth) {
-                    selfLeft = (wrapWidth - selfWidth) / 2;
+                if (width > selfWidth) {
+                    selfLeft = (width - selfWidth) / 2;
                 }
-                if (wrapHeight > selfHeight) {
-                    selfTop = (wrapHeight - selfHeight) / 2;
+                if (height > selfHeight) {
+                    selfTop = (height - selfHeight) / 2;
                 }
-                $this.children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).css({
+                $this.children().children('.' + wrapperOuter).children('.' + wrapperMiddle).children('.' + wrapperInner).css({
                     top: selfTop + 'px',
                     left: selfLeft + 'px'
                 });
             });
-
-            nn.log({
-                wrapWidth: wrapWidth,
-                wrapHeight: wrapHeight,
-                selfWidth: selfWidth,
-                selfHeight: selfHeight,
-                selfTop: selfTop,
-                selfLeft: selfLeft,
-                startSec: startSec,
-                delaySec: delaySec,
-                endingSec: endingSec
-            }, 'debug');
         });
     };
 
@@ -381,5 +418,10 @@
         fontSize: { min: 6, max: 48 },
         fontStyle: ['normal', 'italic'],
         fontWeight: ['normal', 'bold', 'bolder']
+    };
+
+    // system options
+    $.fn.titlecard.system = {
+        backgroundImage: 'http://9x9ui.s3.amazonaws.com/war/v0/images/titlecard-default.png'
     };
 }(jQuery));
