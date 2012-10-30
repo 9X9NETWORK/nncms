@@ -714,6 +714,12 @@ function rebuildCrumbAndParam(cid, eid) {
             if (cmsCrumb.channelId) {
                 delete cmsCrumb.channelId;
             }
+            if (cmsCrumb.name) {
+                delete cmsCrumb.name;
+            }
+            if (cmsCrumb.intro) {
+                delete cmsCrumb.intro;
+            }
         }
     } else {
         cmsCrumb.channelId = cid;
@@ -730,6 +736,12 @@ function rebuildCrumbAndParam(cid, eid) {
         }
     } else {
         cmsCrumb.id = eid;
+        if (cmsCrumb.name) {
+            delete cmsCrumb.name;
+        }
+        if (cmsCrumb.intro) {
+            delete cmsCrumb.intro;
+        }
     }
     $.cookie('cms-crumb', $.param(cmsCrumb));
     // rebuild url param by first-time entry

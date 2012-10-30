@@ -1,3 +1,27 @@
+Revision: 377
+Author: chihwen
+Date: 下午 04:56:41, 2012年10月30日
+Message:
+修正 publish 頁，上傳 ep thumbnail，Save 後無儲存結果 (未正確觸發 has-change 所致)
+
+更新備註：
+將 Sprint 1 調整時發現的 bug，同步修正到 titlecard 分支，
+此調整僅為階段性上線之用(更新到 dev 的 /cms/ 下)，最新完整異動仍以 fakeapi 分支為準。
+
+更新項目：
+1. 修正 publish 頁，上傳 ep thumbnail，Save 後無儲存結果 (未正確觸發 has-change 所致)。
+2. 修正 Create new ep 時，title 欄位出現預設亂碼文字 (未正確清除 cookie 記憶所致)。
+3. 修正 Upload 按鈕中 Upload 文字偏上問題。
+4. 同步 API pack 設定。
+issue 5379
+----
+Modified : /titlecard/javascripts/channel.js
+Modified : /titlecard/javascripts/config.js
+Modified : /titlecard/javascripts/controller.js
+Modified : /titlecard/javascripts/curation.js
+Modified : /titlecard/javascripts/epcurate.js
+
+
 Revision: 352
 Author: chihwen
 Date: 上午 11:19:52, 2012年10月25日
@@ -239,7 +263,3 @@ issue 5379
 ----
 Modified : /titlecard/javascripts/curation.js
 
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 3860
-Last Changed Date: 2012-10-26 11:24:54 +0800 (Fri, 26 Oct 2012)

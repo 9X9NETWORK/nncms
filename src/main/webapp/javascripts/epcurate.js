@@ -201,6 +201,9 @@ $(function () {
 
 function chkPublishData(fm, src) {
     fm.imageUrl.value = $.trim(fm.imageUrl.value);
+    if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
+        $('body').addClass('has-change');
+    }
     return true;
 }
 
@@ -261,6 +264,7 @@ function uploadImage() {
                 timeout: 0,
                 cleartypeNoBg: true,
                 before: function () {
+                    $('body').addClass('has-change');
                     $('#imageUrl').val($('img', this).attr('src'));
                 }
             });
@@ -310,6 +314,7 @@ function uploadImage() {
             button_height:              '29',
             button_text:                '<span class="uploadstyle">Upload</span>',
             button_text_style:          '.uploadstyle { color: #777777; font-family: Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
+            button_text_top_padding:    1,
             button_action:              SWFUpload.BUTTON_ACTION.SELECT_FILE,
             button_cursor:              SWFUpload.CURSOR.HAND,
             button_window_mode :        SWFUpload.WINDOW_MODE.TRANSPARENT,
