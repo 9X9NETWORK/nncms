@@ -1,269 +1,316 @@
-Revision: 377
+Revision: 412
 Author: chihwen
-Date: 下午 04:56:41, 2012年10月30日
+Date: 下午 07:03:18, 2012年11月5日
 Message:
-修正 publish 頁，上傳 ep thumbnail，Save 後無儲存結果 (未正確觸發 has-change 所致)
+同步 src 分支版本 410,411
 
-更新備註：
-將 Sprint 1 調整時發現的 bug，同步修正到 titlecard 分支，
-此調整僅為階段性上線之用(更新到 dev 的 /cms/ 下)，最新完整異動仍以 fakeapi 分支為準。
-
-更新項目：
-1. 修正 publish 頁，上傳 ep thumbnail，Save 後無儲存結果 (未正確觸發 has-change 所致)。
-2. 修正 Create new ep 時，title 欄位出現預設亂碼文字 (未正確清除 cookie 記憶所致)。
-3. 修正 Upload 按鈕中 Upload 文字偏上問題。
-4. 同步 API pack 設定。
-issue 5379
+1. curation 的 storyboard end-title tooltip 箭頭位置調整。
+2. 更換 curation upload default 和 loading 圖。
+3. curation 的 edit title effect 增加背景圖。
+issue 5459
 ----
-Modified : /titlecard/javascripts/channel.js
-Modified : /titlecard/javascripts/config.js
-Modified : /titlecard/javascripts/controller.js
-Modified : /titlecard/javascripts/curation.js
-Modified : /titlecard/javascripts/epcurate.js
+Modified : /fakeapi/epcurate-curation.html
+Added : /fakeapi/images/black_box.png
+Modified : /fakeapi/images/black_box_loading.gif
+Modified : /fakeapi/stylesheets/ep-curation.css
 
 
-Revision: 352
+Revision: 407
 Author: chihwen
-Date: 上午 11:19:52, 2012年10月25日
+Date: 下午 12:51:35, 2012年11月5日
 Message:
-重構版本 350 中，針對 curation.js「調整 Title Card 畫面結構」的部份作改進
+修正 chrome 在 episode-list "Curate a new episode" 按鈕折行問題
 
-新增 wrapTitleCardCanvas() 將包裹 Title Card 結構的邏輯集中獨立出來
-issue 5379
+1. 修正 chrome 在 episode-list "Curate a new episode" 按鈕折行問題 (html 碼換行所致)。
+2. 同步 src 分支版本 406 (episode curation nav 增加 liquid 功能，解析度大於 1200 nav 寬度就放大為 242px)。
+issue 5459
 ----
-Modified : /titlecard/javascripts/curation.js
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/javascripts/epcurate.js
 
 
-Revision: 350
+Revision: 403
 Author: chihwen
-Date: 上午 12:01:25, 2012年10月25日
+Date: 上午 01:16:22, 2012年11月3日
 Message:
-調整 Title Card 畫面結構，以因應 Title Card 外掛升級 v1.6.0 後，會自動補白上下或左右導致跑版問題
+修正當 isPublic 狀態改變時需有大型 overlay 提示功能 (漏掉 Save 之外其他的功能，例如 Back to Curation 或 Curation tab 時)
 
-1. 調整 Title Card 畫面結構，以因應 Title Card 外掛升級 v1.6.0 後，會自動補白上下或左右導致跑版問題。
-2. 同步 trunk 分支版本 349 (改良 Title Card 外掛，版本更新為 v1.6.0)。
-issue 5379
+1. 修正當 isPublic 狀態改變時需有大型 overlay 提示功能 (漏掉 Save 之外其他的功能，例如 Back to Curation 或 Curation tab 時)。
+2. 將 channel list 的刪除邏輯，先比照 episode list 處理，以備未來整合 channel list sorting 機制 (channel.js)。
+3. 一致化程式碼撰寫風格 (epcurate.js)。
+4. 同步 src 分支版本 401。
+issue 5459
 ----
-Modified : /titlecard/javascripts/curation.js
-Modified : /titlecard/javascripts/jquery.titlecard.js
+Modified : /fakeapi/images/icon_move_disable.png
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/epcurate.js
 
 
-Revision: 349
+Revision: 397
 Author: chihwen
-Date: 下午 10:49:24, 2012年10月24日
+Date: 下午 04:05:30, 2012年11月2日
 Message:
-改良 Title Card 外掛，版本更新為 v1.6.0
+同步 src 分支版本 396
 
-1. 同時偵測寬度及高度，以寬高差距，決定要以寬度換算高度，還是以高度推算寬度。
-2. 要考量上述偵測到的寬度及高度，要讓 Title Card 區塊保持 16:9 並居中呈現，左右兩邊或上下兩邊再補上黑邊。
-3. 改良背景顏色與背景圖片切換問題，以因應當背景圖為空時 API 會自動補上系統預設背景圖，進而造成背景顏色無法呈現的問題。
-4. 調整套用範例，以測試及驗證外掛各項功能。
-issue 5085
+1. 調整 datepicker 和 Hour 讓他們每排都對齊。
+2. 調整 episode-list 拖拉區塊的寬度。
+issue 5459
 ----
-Modified : /trunk/javascripts/jquery.titlecard.js
-Modified : /trunk/titlecard-player-jquery-plugin-demo.html
+Modified : /fakeapi/stylesheets/epcurate.css
+Modified : /fakeapi/stylesheets/episode.css
+Modified : /fakeapi/stylesheets/jquery.datepick.css
 
 
-Revision: 348
+Revision: 395
 Author: chihwen
-Date: 下午 06:30:56, 2012年10月24日
+Date: 上午 11:24:04, 2012年11月2日
 Message:
-jQuery Title Card Player 字卡播放器外掛開發
-
-測試改良 Title Card 結構雛型，以便適應前端 playback 在呈現畫面上，可能會有 Fit, Wide, Narrow 三種情境的狀況。
-1. 同時偵測寬度及高度，以寬高差距，決定要以寬度換算高度，還是以高度推算寬度。
-2. 要考量上述偵測到的寬度及高度，要讓 Title Card 區塊保持 16:9 並居中呈現，左右兩邊或上下兩邊再補上黑邊。
-
-作法如下：
-1. 在最外層加入 wrapper-canvas 結構，並重新 review 行為結構設定。
-   <div class="wrapper-canvas" style="display: block; width: 100%; height: 100%; background-color: #000;">
-2. wrapper-outer => 統一加入 margin: 0 auto; 樣式，以便實現 canvas 居中呈現。
-3. 要動態偵測外框寬高，來決定以寬推算高，還是以高推算寬，再以 16:9 比例，設定 wrapper-outer 寬高。
-   特別留意 narrow 版本
-   wrapper-outer => float: left;
-   wrapper-outer => margin-top = (外框高度 - wrapper-outer高度) / 2
-4. wrapper-inner => 統一設定 left: 1%;
-issue 5085
+微調 fakeapi 統一 PHP 陣列撰寫風格
+issue 5370
 ----
-Modified : /trunk/titlecard-player-jquery-plugin-prototype.html
+Modified : /fakeapi/fakeapi/channels_episodes.php
+Modified : /fakeapi/fakeapi/episodes_programs.php
+Modified : /fakeapi/fakeapi/programs_title_cards.php
 
 
-Revision: 347
+Revision: 394
 Author: chihwen
-Date: 下午 12:44:23, 2012年10月23日
+Date: 上午 10:14:32, 2012年11月2日
 Message:
-同步 fakeapi 分支版本 346
+同步 src 分支版本 393
 
-調整 config.js 將 fake api 集中，並依各環境切換設定。
-1. development: DS 開發環境。
-2. demonstration: DS 開發端測試環境。
-3. testing: 9x9.tv 正式端測試環境。
-4. production: 9x9.tv 正式環境。
-issue 5379
+1. 更換 episode-list 左右分隔線的圖。
+2. 更換 episode-list 拖拉區塊 disable 的圖。
+3. episode-list enable drag 的游標改成 move，拖拉區塊也跟著變色。
+issue 5459
 ----
-Modified : /titlecard/javascripts/config.js
+Modified : /fakeapi/images/divider_vertical.png
+Modified : /fakeapi/images/icon_move_disable.png
+Modified : /fakeapi/stylesheets/episode.css
 
 
-Revision: 345
+Revision: 392
 Author: chihwen
-Date: 上午 02:18:35, 2012年10月23日
+Date: 上午 12:24:36, 2012年11月2日
 Message:
-將設定檔 CMS_ENV 切換為 testing 正式端測試環境 (for 9x9 dev website)
-issue 5379
+加入儲存完要跳轉 Episode list 及當 isPublic 狀態改變時需有大型 overlay 提示功能
+
+1. 加入儲存完要跳轉 Episode list 及當 isPublic 狀態改變時需有大型 overlay 提示功能。
+2. 從 Draft 或 Scheduled to publish 到 Published 時，加入大型 overlay publish-notice、沒有X、並跳轉 Episode list 功能。
+3. 從 Published 或 Scheduled to rerun 到 Draft 時，加入大型 overlay unpublish-notice、沒有X、並跳轉 Episode list 功能。
+4. 在切換日期時，時間基本上維持不變，除非落於 disable 段，才自動選擇第一個 enable 選項。
+5. 完成「草稿/發佈/Publish schedule」機制後，回頭 Review Episode list 呈現邏輯。
+6. 調整 fakeapi 編碼為 UTF-8 (檔首無 BOM)。
+7. 同步 src 分支版本 390,391。
+   1. channel-add、channel-setting upload default 圖改成 guide_ch_default.png。
+   2. 調整 episode curation nav 的樣式，讓 publish 頁 hover curation 不會移位。
+   3. 更換 episode-list-favorite.html default 圖。
+   4. 調整 datepicker 和時間的對應，除非選擇時間小於今日的現在時間才需要更換時間 active。
+   5. 調整 publish slider 在 basic.js 的設定。
+   6. datepicker 和時間加上背景圖。
+issue 5459
 ----
-Modified : /titlecard/javascripts/config.js
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/fakeapi/channels_episodes.php
+Modified : /fakeapi/fakeapi/episodes.php
+Added : /fakeapi/images/bg_calander.png
+Added : /fakeapi/images/guide_ch_default.png
+Modified : /fakeapi/images/loading.gif
+Modified : /fakeapi/images/thumbnail_box_empty.png
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/epcurate.js
+Modified : /fakeapi/stylesheets/epcurate.css
+Modified : /fakeapi/stylesheets/jquery.datepick.css
+Modified : /fakeapi/stylesheets/style.css
 
 
-Revision: 344
+Revision: 389
 Author: chihwen
-Date: 上午 02:14:52, 2012年10月23日
+Date: 下午 01:17:55, 2012年11月1日
 Message:
-同步 fakeapi 分支版本 343 (建立 9x9 fake API 站台，以便模擬正式機環境，並取代 src 版型管控)
-issue 5379
+加入「草稿/發佈/Publish schedule」更新 API 邏輯
+
+避免點擊時間區塊時，網址誤產生 # 的串接。
+issue 5459
 ----
-Modified : /titlecard/episode-list.html
-Modified : /titlecard/index.html
-Modified : /titlecard/javascripts/channel.js
-Modified : /titlecard/javascripts/config.js
-Modified : /titlecard/javascripts/episode.js
+Modified : /fakeapi/javascripts/epcurate.js
 
 
-Revision: 340
+Revision: 388
 Author: chihwen
-Date: 下午 06:05:52, 2012年10月22日
+Date: 下午 01:10:58, 2012年11月1日
 Message:
-將 CMS API URI 集中設定管理，並實作 API URI 包裝函式
+加入「草稿/發佈/Publish schedule」更新 API 邏輯
 
-1. 將 CMS_CONF 設定檔獨立成 config.js 以便統一管理及共用設定。
-   在引入任何客製化的商業邏輯 js 前，先統一引入 config.js 例如在 basic.js 之前。
-2. 新增 CMS_CONF.CMS_ENV 環境變數，以便未來依環境切換設定之用。
-   1. development: 開發環境。
-   2. demonstration: 開發端測試環境。
-   3. testing: 正式端測試環境。
-   4. production: 正式環境。
-3. 新增 CMS_CONF.API_PACK 將 CMS API URI 集中設定管理。
-4. 新增 CMS_CONF.API() 實作 API URI 包裝函式，以便未來依環境切換正式 API 與 fake API 之用。
-5. 將所有使用到 CMS API URI 字串的地方，改串接 API URI 包裝函式。
-issue 5379
+1. 加入「草稿/發佈/Publish schedule」更新 API 邏輯。
+2. channel-list 更換 no episodes 的預設圖，並調整預設圖呈現邏輯，若三張圖為 API 指定的系統預設圖，就以本地端的預設圖來呈現。
+3. 將 Delete 字卡 button 移至編輯字卡 Cancel 左邊。
+4. 同步 src 分支版本 355~365,367,368,370,375,376,378,381~384,386,387。
+issue 5459
 ----
-Modified : /titlecard/channel-add.html
-Modified : /titlecard/channel-setting.html
-Modified : /titlecard/epcurate-curation.html
-Modified : /titlecard/epcurate-info.html
-Modified : /titlecard/epcurate-publish.html
-Modified : /titlecard/episode-list.html
-Modified : /titlecard/index.html
-Modified : /titlecard/javascripts/basic.js
-Modified : /titlecard/javascripts/channel.js
-Added : /titlecard/javascripts/config.js
-Modified : /titlecard/javascripts/controller.js
-Modified : /titlecard/javascripts/curation.js
-Modified : /titlecard/javascripts/epcurate.js
-Modified : /titlecard/javascripts/episode.js
-Modified : /titlecard/login.html
+Modified : /fakeapi/fakeapi/episodes.php
+Modified : /fakeapi/images/bg_tip_top.png
+Added : /fakeapi/images/ep_default.png
+Modified : /fakeapi/javascripts/config.js
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/epcurate.js
+Modified : /fakeapi/stylesheets/ep-curation.css
 
 
-Revision: 339
+Revision: 385
 Author: chihwen
-Date: 下午 12:49:12, 2012年10月22日
+Date: 上午 01:08:36, 2012年11月1日
 Message:
-改良背景顏色與背景圖片切換問題 (因應 API 會自動補上預設背景圖)
+加入「草稿/發佈/Publish schedule」API 串接載入雛型
 
-1. 將 CMS_CONF.TITLECARD_DEFAULT_IMAGE 更名為 CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM 代表由系統 API 自動補上的預設圖。
-   TITLECARD_DEFAULT_IMAGE_BY_SYSTEM: http://9x9ui.s3.amazonaws.com/war/v0/images/titlecard-default.png
-2. 新增 CMS.CONF.TITLECARD_DEFAULT_IMAGE_BY_UPLOAD 代表明確由上傳機制，所更新上去的預設圖片。
-   TITLECARD_DEFAULT_IMAGE_BY_UPLOAD: http://s3.amazonaws.com/9x9ui/war/v0/images/titlecard-default.png
-3. 因應 API 會自動補上預設背景圖，藉由上述設定，可明確分離，是系統自動補上的預設圖，還是明確上傳的預設圖，
-   在 epcurate-curation.html 模板中，調整版型在「背景顏色與背景圖片切換」的判斷邏輯。
-   1. 若背景圖片不為空，而且背景顏色為空，才出現背景圖片。
-   2. 若背景圖片不為空，而且背景顏色不為空，而且背景圖片不為系統自動補上的預設圖，才出現背景圖片。
-issue 5379
+1. 加入「草稿/發佈/Publish schedule」API 串接載入雛型。
+2. 將 episode curation 第一次 save 時 update episode with rerun 機制改為 update episode with null。
+3. Episode list & Reorder episode UI Review 微調。
+4. 調整共用 basic.js formatTimestamp() 函式，加入日期及時間分隔字元參數，以便整合 schedule datepicker 日期格式。
+5. 同步 src 分支版本 355~365,367,368,370,375,376,378,381~384。
+
+TODO：
+草稿/發佈/Publish schedule 更新 API 邏輯。
+issue 5459
 ----
-Modified : /titlecard/epcurate-curation.html
-Modified : /titlecard/javascripts/controller.js
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/javascripts/epcurate.js
+Modified : /fakeapi/stylesheets/channel.css
+Modified : /fakeapi/stylesheets/epcurate.css
+Modified : /fakeapi/stylesheets/episode.css
+Modified : /fakeapi/stylesheets/jquery.datepick.css
+Modified : /fakeapi/stylesheets/style.css
 
 
-Revision: 338
+Revision: 374
 Author: chihwen
-Date: 上午 10:10:19, 2012年10月22日
+Date: 下午 01:17:35, 2012年10月30日
 Message:
-由於 9x9 nn.api 本身已有防快取機制，故移除先前加上的 anticache=時間戳記，以簡化程式
-issue 5379
+微調登入模擬程式，以便在登入處理時，在 UI 上有處理中回饋
+issue 5370
 ----
-Modified : /titlecard/javascripts/channel.js
-Modified : /titlecard/javascripts/controller.js
-Modified : /titlecard/javascripts/curation.js
-Modified : /titlecard/javascripts/epcurate.js
+Modified : /fakeapi/fakeapi/login.php
+Modified : /fakeapi/login.html
 
 
-Revision: 335
+Revision: 373
 Author: chihwen
-Date: 下午 11:17:39, 2012年10月21日
+Date: 下午 11:00:19, 2012年10月29日
 Message:
-重構 curation.js 更換名稱、調整順序、集中整併、新增函式以改良行為並簡化語意、修正非預期錯誤
-
-1. 重構 curation.js 更換名稱、調整順序、集中整併、新增函式以改良行為並簡化語意、修正非預期錯誤。
-   1. 將 deleteIdList 更名為 videoDeleteIdList 以更符合語意。
-   2. 新增 addVideoPlayingHook() 及 addTitleCardEditHook() 以簡化並增強行為語意。
-   3. 將 TITLECARD_DEFAULT 更名為 TITLECARD_DEFAULT_OPTION 以更符合語意。
-   4. 改良 Title Card play 按鈕，將 titlecard 編輯模式明確與 video 播放模式分離，以避免產生非預期錯誤。
-   5. 利用 titlecard callback 機制，將 animateTitleCardProgressOnly() 整併為 animateTitleCardProgress() 以簡化行為。
-   6. 將 demoElemt 更名為 element 以便更加通用。
-   7. 將 Save 機制中的 i 變數，更名為 idx 以更符合語意。
-   8. 改良 setSpace() 順序以強化語意，並修正在 1024 下，textarea 不會置中的問題。
-   9. 改良 onYouTubePlayerStateChange() 將邏輯集中並共用 playTitleCardAndVideo() 以簡化行為邏輯。
-   10. 將函式中的 elemtli 參數更名為 element 以便更加通用。
-   11. 改良 cancelTitleCard() 順序以強化語意。
-   12. 更換 switchFontAlign() 及 switchBackground() 的參數名稱，以強化語意。
-2. 校正 curation.js 調整 Save 機制中的 isInsertMode 新增模式，修正從 DOM 中取得 titlecard 物件索引錯誤問題。
-   這個修正可以避免在新增模式下，都以 DOM 中第一筆 video 的 titlecard 物件為主，造成資料錯誤。
-3. 校正 controller.js 修正 channel list 中最愛頻道的第一張大圖取圖邏輯，由於最愛頻道無法更新頻道圖片，
-   所以維持從 moreImageUrl 分割取值。這個修正可以避免最愛頻道的第一張圖永遠都是系統預設圖。
-4. 調整 controller.js 將系統用預設圖片集中到 CMS_CONF 中，以便調整及共用。
-   1. TITLECARD_DEFAULT_IMAGE: http://9x9ui.s3.amazonaws.com/war/v0/images/titlecard-default.png
-   2. EPISODE_DEFAULT_IMAGE: http://s3.amazonaws.com/9x9ui/war/v0/images/episode-default.png
-   3. CHANNEL_DEFAULT_IMAGE: images/episode_default1.png
-   4. CHANNEL_DEFAULT_IMAGE2: images/episode_default2.png
-5. 調整 epcurate-curation.html 移除用不到的 vertical.slider 用結構。
-6. 調整 ep-curation.css 橫向 scrollbar 高度，以避免在 1024x768 下，幾乎快壓到 video 的文案。
-issue 5379
+修正 Publish 頁漏儲存 episode name 及 episode intro 的錯誤
+issue 5459
 ----
-Modified : /titlecard/epcurate-curation.html
-Modified : /titlecard/index.html
-Modified : /titlecard/javascripts/controller.js
-Modified : /titlecard/javascripts/curation.js
-Modified : /titlecard/stylesheets/ep-curation.css
+Modified : /fakeapi/javascripts/epcurate.js
 
 
-Revision: 333
+Revision: 372
 Author: chihwen
-Date: 下午 10:33:02, 2012年10月19日
+Date: 下午 09:56:16, 2012年10月29日
 Message:
-調整 video info 切換時機，在開頭 Title Card 開始播放時，就呈現該影片資訊
+Episode curation UI flow修改 API 串接
 
-1. 調整 video info 切換時機，在開頭 Title Card 開始播放時，就呈現該影片資訊。
-2. 同步 src 分支版本 331 (TODO：注意此版本尚未同步完)。
-   調整 video-control 的樣式，以便讓未來客製化 video-control 時，在 UI 上可以相容 (youtube chromeless player)。
-issue 5379
+刪除已用不到的 epcurate-info.html 頁面。
+issue 5459
 ----
-Modified : /titlecard/epcurate-curation.html
-Modified : /titlecard/javascripts/curation.js
-Modified : /titlecard/stylesheets/ep-curation.css
+Deleted : /fakeapi/epcurate-info.html
 
 
-Revision: 332
+Revision: 371
 Author: chihwen
-Date: 下午 08:36:40, 2012年10月19日
+Date: 下午 09:54:59, 2012年10月29日
 Message:
-在影片播放模式下，加入前後 Title Card 的暫停及重新播放功能
+Episode curation UI flow修改 API 串接
 
-1. 在影片播放模式下，加入前後 Title Card 的暫停及重新播放功能。
-2. 在影片播放模式下，若全部播放完畢後，就自動還原回最初的 Add Video 畫面。
-issue 5379
+1. Episode curation UI flow修改 API 串接。
+2. 修正 publish 頁，上傳 ep thumbnail，Save 後無儲存結果 (未正確觸發 has-change 所致)。
+3. 同步 src 分支版本 355~365,367,368,370。
+
+TODO：
+1. 移除 epcurate-curation.html save rerun=true。
+2. 調整 Publish settings 中 ep title 空白 alert 位置。
+issue 5459
 ----
-Modified : /titlecard/javascripts/curation.js
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/images/bg_divider.png
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/javascripts/epcurate.js
+Modified : /fakeapi/javascripts/episode.js
+Modified : /fakeapi/stylesheets/epcurate.css
+Modified : /fakeapi/stylesheets/episode.css
+Modified : /fakeapi/stylesheets/style.css
 
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 3877
-Last Changed Date: 2012-10-30 17:53:55 +0800 (Tue, 30 Oct 2012)
+
+Revision: 369
+Author: chihwen
+Date: 下午 12:22:28, 2012年10月29日
+Message:
+同步 src 分支版本 367, 368
+
+區分 enable 與 disable 的提示排序 icon
+issue 5459
+----
+Added : /fakeapi/images/icon_move_disable.png
+Modified : /fakeapi/stylesheets/episode.css
+
+
+Revision: 366
+Author: chihwen
+Date: 下午 11:32:47, 2012年10月28日
+Message:
+Episode list & Reorder episode API 串接
+
+1. Episode list & Reorder episode API 串接。
+2. 加入排序 unsave prompt 機制 (由於刪除及 play 功能與排序不衝突，故意排除不跳排序未儲存提示)。
+3. 將 epcurate-info.html 入口改為 epcurate-curation.html。
+4. 調整 episode list scrollbar 高度運算順序 (setEpisodeWidth、autoHeight、scrollbar)。
+5. 同步 src 分支版本 355~365。
+
+TODO：
+區分 enable 與 disable 的提示排序 icon。
+issue 5459
+----
+Modified : /fakeapi/episode-list.html
+Added : /fakeapi/fakeapi/channels_episodes_sorting.php
+Added : /fakeapi/images/bg_btn_left_angle.png
+Added : /fakeapi/images/bg_btn_right_angle.png
+Added : /fakeapi/images/bg_bubble_left_arrow.png
+Added : /fakeapi/images/bg_bubble_left_l.png
+Added : /fakeapi/images/bg_bubble_left_m.png
+Added : /fakeapi/images/bg_bubble_middle_l.png
+Added : /fakeapi/images/bg_bubble_middle_m.png
+Added : /fakeapi/images/bg_bubble_right_l.png
+Added : /fakeapi/images/bg_bubble_right_m.png
+Added : /fakeapi/images/bg_calander_highlight_left.png
+Added : /fakeapi/images/bg_calander_highlight_middle.png
+Added : /fakeapi/images/bg_calander_highlight_right.png
+Added : /fakeapi/images/bg_tab_left_angle.png
+Added : /fakeapi/images/bg_tab_right_angle.png
+Added : /fakeapi/images/check_box_check.png
+Added : /fakeapi/images/divider_vertical.png
+Added : /fakeapi/images/popup_input_box_left_s.png
+Added : /fakeapi/images/popup_input_box_middle_s.png
+Added : /fakeapi/images/popup_input_box_right_s.png
+Modified : /fakeapi/index.html
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/config.js
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/episode.js
+Modified : /fakeapi/stylesheets/epcurate.css
+Modified : /fakeapi/stylesheets/episode.css
+Modified : /fakeapi/stylesheets/jquery.datepick.css
+Modified : /fakeapi/stylesheets/lightbox.css
+Modified : /fakeapi/stylesheets/style.css
+

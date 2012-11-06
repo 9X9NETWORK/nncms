@@ -5,7 +5,56 @@
 -----------------------------------------------------------------------------*/
 
 #title-func {
-    padding-bottom: 12px;
+    padding-bottom: 0;
+}
+
+#title-func h2 {
+    height: 27px;
+    line-height: 27px;
+}
+
+#title-func h2 .curate {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 0 0 0 3px;
+    background: url(../images/bg_btn_left.png) no-repeat 0 0;
+    text-decoration: none;
+}
+
+#title-func h2 .curate span {
+    display: block;
+}
+
+#title-func h2 .curate .btn-right {
+    padding: 0 3px 0 0;
+    background: url(../images/bg_btn_right.png) no-repeat right 0;
+}
+
+#title-func h2 .curate .btn-middle {
+    height: 27px;
+    padding: 3px 10px 0 10px;
+    border: none;
+    background: url(../images/bg_btn_middle.png) repeat 0 0;
+    color: #777;
+    font-family: Helvetica;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
+    text-decoration: none;
+    text-align: center;
+}
+
+#title-func h2 .curate:hover {
+    background: url(../images/bg_btn_left_press.png) no-repeat 0 0;
+}
+
+#title-func h2 .curate:hover .btn-right {
+    background: url(../images/bg_btn_right_press.png) no-repeat right 0;
+}
+
+#title-func h2 .curate:hover .btn-middle {
+    background: url(../images/bg_btn_middle_press.png) repeat 0 0;
+    color: #999;
 }
 
 /**
@@ -181,11 +230,6 @@
 
 #ep-list {
     position: relative;
-    margin-top: -5px;
-}
-
-#ep-list ul {
-    padding: 0 0 8px 0;
 }
 
 #ep-list ul.un-pub,
@@ -201,9 +245,29 @@
     margin-bottom: 12px;
 }
 
+#ep-list ul {
+    padding: 2px 0 0;
+}
+
 #ep-list ul li {
     position: relative;
-    margin-bottom: 6px;
+    overflow: hidden;
+    margin-top: -2px;
+}
+
+#episode-list.ui-sortable li:hover {
+    background: url(../images/bg_main2.png) repeat 2px 0;
+    cursor: move;
+}
+
+#episode-list.ui-sortable.ui-sortable-disabled li:hover {
+    background: none;
+    cursor: default;
+}
+
+#episode-list li.ui-sortable-helper {
+    border: 1px solid #c1c1c1;
+    background: url(../images/bg_main2.png) repeat 2px 0;
 }
 
 #ep-list ul li a.warning {
@@ -265,76 +329,54 @@
     display: block;
 }
 
-#ep-list ul li .episode,
-#ep-list ul li .curator,
-#ep-list ul li .time,
-#ep-list ul li .views {
+#episode-list li.ui-sortable-helper .container,
+#episode-list li.ui-sortable-helper .container-right,
+#episode-list li.ui-sortable-helper .container-bottom,
+#episode-list li.ui-sortable-helper .container-left {
+    background: none;
+}
+
+#ep-list ul li .container {
+    overflow: hidden;
+    background: url(../images/bg_divider.png) repeat-x 0 0;
+}
+
+#ep-list ul li .container-right,
+#ep-list ul li .container-bottom,
+#ep-list ul li .container-left {
+    overflow: hidden;
+}
+
+#ep-list ul li .container-right {
+    background: url(../images/divider_vertical.png) repeat-y right 0;
+}
+
+#ep-list ul li .container-bottom {
+    background: url(../images/bg_divider.png) repeat-x 0 bottom;
+}
+
+#ep-list ul li .container-left {
+    height: 82px;
+    padding: 2px 0 0 1px;
+    background: url(../images/divider_vertical.png) repeat-y 0 0;
+}
+
+#ep-list.favorite ul li .container {
+    height: 76px;
+    padding: 8px 0 0 1px;
+}
+
+#ep-list ul li .wrap {
+    overflow: hidden;
     float: left;
-    font-size: 13px;
-}
-
-#ep-list ul li p.episode,
-#ep-list ul li p.curator,
-#ep-list ul li p.time,
-#ep-list ul li p.views {
-    padding-bottom: 5px;
-    font-weight: bold;
-    font-size: 13px;
-}
-
-#ep-list ul li .episode-info {
-    float: right;
-	padding-bottom: 4px;
-}
-
-#ep-list ul li p.episode {
-    padding-left: 30px;
-}
-
-#ep-list ul li .curator {
-    width: 140px;
-}
-
-#ep-list ul li .time {
-    width: 155px;
-}
-
-#ep-list ul li .views {
-    width: 85px;
+    padding: 7px 0 10px;
+    background: url(../images/divider_vertical.png) repeat-y right 0;
 }
 
 #ep-list ul li .episode {
     position: relative;
     overflow: hidden;
-    width: 355px;
-    padding-left: 30px;
-}
-
-#ep-list ul li .episode h3 {
-    overflow: hidden;
-    height: 16px;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    -ms-text-overflow: ellipsis;
-    -moz-binding: url('ellipsis.xml#ellipsis');
-}
-
-@media all and (max-width: 1372px) {
-    #ep-list ul li .episode {
-        width: 355px;
-    }
-}
-
-@media all and (max-width: 1828px) and (min-width: 1373px) {
-    #ep-list ul li .episode {
-        width: 555px;
-    }
-}
-
-@media all and (min-width: 1829px) {
-    #ep-list ul li .episode {
-        width: 45%;
-    }
+    float: left;
 }
 
 #ep-list ul li .episode p.img {
@@ -343,7 +385,7 @@
     overflow: hidden;
     width: 80px;
     height: 45px;
-    margin-right: 10px;
+    margin: 0 10px 0 6px;
     padding: 10px;
     background: url(../images/thumbnail_box_sm.png) no-repeat 0 0;
     text-align: center;
@@ -381,7 +423,7 @@
     overflow: hidden;
     width: 100px;
     height: 65px;
-    margin-right: 10px;
+    margin: 0 10px 0 6px;
     text-align: center;
 }
 
@@ -421,11 +463,15 @@
 }
 
 #ep-list ul li .episode h3 {
-    margin-bottom: 13px;
-    padding-top: 3px;
-    font-weight: bold;
-    font-family: Helvetica;
-    font-size: 13px;
+    overflow: hidden;
+    height: 21px;
+    margin-bottom: 11px;
+    padding-right: 10px;
+    font: bold 13px/21px Helvetica;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
 }
 
 #ep-list ul li .episode h3 a {
@@ -450,8 +496,8 @@
 
 #ep-list ul li .episode .btns .btn-wrap ul {
     overflow: hidden;
-    height: 31px;
-    padding: 0 7px 0 5px;
+    height: 29px;
+    padding: 2px 7px 0 5px;
     border: none;
     background: url(../images/edit_box_middle.png) repeat 0 0;
 }
@@ -459,6 +505,7 @@
 #ep-list ul li .episode .btns .btn-wrap ul li {
     float: left;
     margin-right: 12px;
+    background: none;
 }
 
 #ep-list ul li .episode .btns .btn-wrap ul li a {
@@ -466,6 +513,7 @@
     height: 25px;
     margin: 3px 0 0;
     color: #777;
+    font-size: 13px;
     line-height: 28px;
     text-decoration: none;
 }
@@ -515,9 +563,24 @@
 	cursor: default;
 }
 
-#ep-list ul li .time  p,
+#ep-list ul li .scheduled-time,
+#ep-list ul li .publish-time,
+#ep-list ul li .views {
+    float: left;
+    width: 155px;
+    color: #777;
+    font: 13px Helvetica;
+}
+
+#ep-list ul li .views {
+    width: 85px;
+}
+
+#ep-list ul li .scheduled-time  p,
+#ep-list ul li .publish-time  p,
 #ep-list ul li .views p {
     margin-bottom: 10px;
+    line-height: 21px;
 }
 
 #ep-list ul li .curator p a {
@@ -528,6 +591,40 @@
 
 #ep-list ul li .curator p a:hover {
 	color: #999;
+}
+
+#ep-list ul li p.drag {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 29px;
+    height: 82px;
+    text-indent: -100000px;
+}
+
+#episode-list.ui-sortable li p.drag {
+    height: 80px;
+    background: #e9e9e9 url(../images/icon_move.png) no-repeat center center;
+}
+
+#episode-list.ui-sortable-disabled.ui-sortable li p.drag {
+    background: transparent url(../images/icon_move_disable.png) no-repeat center center;
+}
+
+#episode-list.ui-sortable li:hover p.drag,
+#episode-list.ui-sortable li p.drag:hover {
+    background-color: #fbfbfb;
+    cursor: move;
+}
+
+#episode-list.ui-sortable-disabled li:hover p.drag,
+#episode-list.ui-sortable-disabled li p.drag:hover {
+    background-color: transparent;
+    cursor: default;
+}
+
+#ep-list ul li.ui-sortable-helper p.drag {
+    background-color: #fbfbfb;
 }
 
 #ep-list p.more {

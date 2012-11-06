@@ -34,9 +34,11 @@ $(function () {
             fm.password.focus();
             return false;
         }
+        $('.btn-submit').attr('disabled', 'disabled');
         var qrystring = $(this).serialize(),
             parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
         nn.api('POST', CMS_CONF.API('/api/login'), parameter, function (user) {
+            $('.btn-submit').removeAttr('disabled');
             if (!user || !user.id) {
                 alert('Login failed, please try again.');
             } else {
@@ -58,7 +60,7 @@ $(function () {
 <p>
 <label for="password">password: <input type="password" name="password" id="password" value="" /></label>
 </p>
-<input type="submit" value="Login" />
+<input type="submit" value="Login" class="btn-submit" />
 </form>
 
 </body>

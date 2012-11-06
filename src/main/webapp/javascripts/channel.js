@@ -1,6 +1,6 @@
 $(function () {
-    scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
     setFormHeight();
+    scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
 
     // common unblock
     $('body').keyup(function (e) {
@@ -87,7 +87,7 @@ $(function () {
 
     // channel list delete
     $('#channel-list').on('click', '.enable a.del', function () {
-        $(this).parent().parent().parent().parent().parent().parent('li').addClass('deleting').data('deleteId', $(this).attr('rel'));
+        $(this).parents('li').addClass('deleting').data('deleteId', $(this).attr('rel'));
         showDeletePromptOverlay();
         return false;
     });
@@ -348,6 +348,10 @@ function setFormHeight() {
     if (windowWidth > 1220) {
         $('input.text').width(windowWidth - 734);
         $('textarea.textarea').width(windowWidth - 744);
+    }
+    if (windowWidth <= 1220) {
+        $('input.text').width(460);
+        $('textarea.textarea').width(455);
     }
     if (formHeight < contentHeight) {
         $('#content-main-wrap form').height(contentHeight - 40);

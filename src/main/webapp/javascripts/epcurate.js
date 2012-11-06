@@ -1,6 +1,6 @@
 $(function () {
-    //scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
     setFormWidth();
+    scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
 
     // common unblock
     function hasErrorRedirect() {
@@ -18,6 +18,9 @@ $(function () {
             if ($(this).hasClass('has-error')) {
                 hasErrorRedirect();
             }
+            if ($('body').hasClass('publish-notice') || $('body').hasClass('unpublish-notice')) {
+                location.href = $('body').data('noticeUrl');
+            }
             return false;
         }
     });
@@ -28,6 +31,11 @@ $(function () {
         }
         return false;
     });
+    $('#publish-notice .btn-ok, #unpublish-notice .btn-ok').click(function () {
+        $.unblockUI();
+        location.href = $('body').data('noticeUrl');
+        return false;
+    });
 
     // leave and unsave
     function goLeave(url) {
@@ -36,9 +44,6 @@ $(function () {
             if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
                 $('body').addClass('has-change');
             }
-        }
-        if ($('#name').length > 0 && '' != $('#name').val() && '' == $('#id').val()) {
-            $('body').addClass('has-change');
         }
         if ($('body').hasClass('has-change')) {
             showUnsaveOverlay();
@@ -80,69 +85,6 @@ $(function () {
     $('#epcurateForm').submit(function (e, src) {
         var isInsertMode = ('' == $('#id').val()),
             nextstep = 'epcurate-curation.html';
-        // Episode Curation - Information
-        if ($(e.target).hasClass('info') && chkInfoData(this, src)) {
-            showSavingOverlay();
-            // save
-            if (isInsertMode) {
-                // save to cookie
-                $.cookie('cms-crumb', $(this).serialize());
-                $('#overlay-s').fadeOut(1000, function () {
-                    // redirect
-                    $('body').removeClass('has-change');
-                    if (!src                                                                                        // from nature action
-                            || (src && 'form-btn-save' === $(src.target).attr('id'))                                // from btn-save
-                            || (src && 'epcurate-nav-publish' === $(src.target).attr('id'))) {                      // from insert mode and nav-publish
-                        if (src && 'epcurate-nav-publish' === $(src.target).attr('id')) {
-                            showSystemErrorOverlay('Please curate some videos first.');
-                        }
-                        return false;
-                    } else {
-                        if (src && '' !== $(src.target).attr('href')) {
-                            nextstep = $(src.target).attr('href');
-                        }
-                        location.href = nextstep;
-                    }
-                });
-            } else {
-                // save to api
-                if (!$('body').hasClass('has-change')) {
-                    $('#overlay-s').fadeOut(1000, function () {
-                        // redirect
-                        $('body').removeClass('has-change');
-                        if (!src                                                                                        // from nature action
-                                || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
-                            return false;
-                        } else {
-                            if (src && '' !== $(src.target).attr('href')) {
-                                nextstep = $(src.target).attr('href');
-                            }
-                            location.href = nextstep;
-                        }
-                    });
-                    return false;
-                }
-                var params = {
-                    name: $('#name').val(),
-                    intro: $('#intro').val()
-                };
-                nn.api('PUT', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), params, function (episode) {
-                    $('#overlay-s').fadeOut(1000, function () {
-                        // redirect
-                        $('body').removeClass('has-change');
-                        if (!src                                                                                        // from nature action
-                                || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
-                            return false;
-                        } else {
-                            if (src && '' !== $(src.target).attr('href')) {
-                                nextstep = $(src.target).attr('href');
-                            }
-                            location.href = nextstep;
-                        }
-                    });
-                });
-            }
-        }
         // Episode Curation - Publish
         if ($(e.target).hasClass('publish') && chkPublishData(this, src)) {
             if ($('#id').val() > 0) {
@@ -154,19 +96,72 @@ $(function () {
                         $('body').removeClass('has-change');
                         if (!src                                                                                        // from nature action
                                 || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
+                            // redirect to leavel url (episode list)
+                            location.href = $('#epcurate-nav-back').attr('href');
                             return false;
                         } else {
-                            if (src && '' !== $(src.target).attr('href')) {
-                                nextstep = $(src.target).attr('href');
+                            if (src && ($(src.target).attr('href') || $(src.target).parents('a').attr('href'))) {
+                                if ($(src.target).attr('href')) {
+                                    nextstep = $(src.target).attr('href');
+                                }
+                                if ($(src.target).parents('a').attr('href')) {
+                                    nextstep = $(src.target).parents('a').attr('href');
+                                }
                             }
                             location.href = nextstep;
                         }
                     });
                     return false;
                 }
+                var status_params = {},
+                    origin_status = $('#origin_status').val();
+                if ($('#status_draft').is(':checked')) {
+                    // Draft (setDraft)
+                    status_params = {
+                        isPublic: false,
+                        publishDate: "",
+                        scheduleDate: ""
+                    };
+                    $('#origin_status').val('Draft');
+                    if (-1 !== $.inArray(origin_status, ['Published', 'Scheduled to rerun'])) {
+                        $('body').addClass('unpublish-notice');
+                    }
+                } else {
+                    if ($('#status_scheduled').is(':checked') || $('#rerun_y').is(':checked')) {
+                        // Scheduled to publish or Scheduled to rerun (setSchedule)
+                        status_params = {
+                            scheduleDate: Date.parse($('#publishDate').val() + ' ' + $('#publishHour').val())
+                        };
+                        if ($('#status_scheduled').is(':checked')) {
+                            $('#origin_status').val('Scheduled to publish');
+                        } else {
+                            $('#origin_status').val('Scheduled to rerun');
+                        }
+                    }
+                    if ($('#status_published').is(':checked') && -1 !== $.inArray(origin_status, ['Draft', 'Scheduled to publish'])) {
+                        // Published from Draft or Scheduled to publish (setPublish)
+                        status_params = {
+                            isPublic: true,
+                            publishDate: "NOW",
+                            scheduleDate: ""
+                        };
+                        $('#origin_status').val('Published');
+                        $('body').addClass('publish-notice');
+                    }
+                    if ($('#status_published').is(':checked') && 'Scheduled to rerun' === origin_status && !$('#rerun_y').is(':checked')) {
+                        // Published from Scheduled to rerun (unsetSchedule)
+                        status_params = {
+                            scheduleDate: ""
+                        };
+                        $('#origin_status').val('Published');
+                    }
+                }
                 var params = {
+                    name: $('#name').val(),
+                    intro: $('#intro').val(),
                     imageUrl: $('#imageUrl').val()
                 };
+                $.extend(params, status_params);
                 nn.api('PUT', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), params, function (episode) {
                     $('#overlay-s').fadeOut(1000, function () {
                         // redirect
@@ -174,12 +169,55 @@ $(function () {
                         $('#imageUrlOld').val(episode.imageUrl);
                         if (!src                                                                                        // from nature action
                                 || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
+                            if ($('#status_published').is(':checked')) {
+                                // UI for Published
+                                $('p.radio-list').removeClass('draft');
+                                $('#schedule-publish-label').addClass('hide');
+                                $('#schedule-publish').addClass('hide');
+                                $('#schedule-rerun-label').removeClass('hide');
+                                $('#schedule-rerun').removeClass('hide');
+                            }
+                            if ($('#status_draft').is(':checked')) {
+                                // UI for Draft
+                                $('p.radio-list').addClass('draft');
+                                $('#schedule-publish-label').removeClass('hide');
+                                $('#schedule-publish').removeClass('hide');
+                                $('#schedule-rerun-label').addClass('hide');
+                                $('#schedule-rerun').addClass('hide');
+                            }
+                            if (!$('#status_scheduled').is(':checked') && !$('#rerun_y').is(':checked')) {
+                                // default schedule
+                                var tomorrow = new Date((new Date()).getTime() + (24 * 60 * 60 * 1000));
+                                $('#publishDate').val(tomorrow.getFullYear() + '/' + (tomorrow.getMonth() + 1) + '/' + tomorrow.getDate());
+                                $('#publishHour').val('20:00');
+                            }
+                            // redirect to leavel url (episode list)
+                            $('body').data('noticeUrl', $('#epcurate-nav-back').attr('href'));
+                            if ($('body').hasClass('publish-notice')) {
+                                showPublishNoticeOverlay();
+                            } else if ($('body').hasClass('unpublish-notice')) {
+                                showUnpublishNoticeOverlay();
+                            } else {
+                                location.href = $('#epcurate-nav-back').attr('href');
+                            }
                             return false;
                         } else {
-                            if (src && '' !== $(src.target).attr('href')) {
-                                nextstep = $(src.target).attr('href');
+                            if (src && ($(src.target).attr('href') || $(src.target).parents('a').attr('href'))) {
+                                if ($(src.target).attr('href')) {
+                                    nextstep = $(src.target).attr('href');
+                                }
+                                if ($(src.target).parents('a').attr('href')) {
+                                    nextstep = $(src.target).parents('a').attr('href');
+                                }
                             }
-                            location.href = nextstep;
+                            $('body').data('noticeUrl', nextstep);
+                            if ($('body').hasClass('publish-notice')) {
+                                showPublishNoticeOverlay();
+                            } else if ($('body').hasClass('unpublish-notice')) {
+                                showUnpublishNoticeOverlay();
+                            } else {
+                                location.href = nextstep;
+                            }
                         }
                     });
                 });
@@ -190,42 +228,70 @@ $(function () {
 
     $(window).resize(function () {
         setFormWidth();
-        //scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+        scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
     });
 
     // Amazon S3 upload
     if ($('#uploadThumbnail').length > 0) {
         uploadImage();
     }
+
+    // uniform
+    $('p.radio-list input').uniform();
+    $('input[name=status]').click(function () {
+        switchPublishStatus($(this).val());
+    });
+    $('input[name=rerun]').click(function () {
+        switchRerunCheckbox();
+    });
+    $('#date-time').on('click', '.time ul li.enable a', function () {
+        $('body').addClass('has-change');
+        $('#date-time .time ul li').removeClass('active');
+        $(this).parent().addClass('active');
+        $('#publishHour').val($(this).text());
+        return false;
+    });
 });
 
 function chkPublishData(fm, src) {
+    fm.name.value = $.trim(fm.name.value);
+    fm.intro.value = $.trim(fm.intro.value);
     fm.imageUrl.value = $.trim(fm.imageUrl.value);
     if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
         $('body').addClass('has-change');
     }
-    return true;
-}
-
-function chkInfoData(fm, src) {
-    fm.name.value = $.trim(fm.name.value);
-    fm.intro.value = $.trim(fm.intro.value);
-    if ('' === fm.name.value) {
-        $('.fmfield .notice').removeClass('hide');
+    if ('' === fm.name.value
+            || $('input[name=status]:checked').length <= 0
+            || ('24:00' === $('#publishHour').val() && ($('#status_scheduled').is(':checked') || $('#rerun_y').is(':checked')))) {
+        $('.form-btn .notice').removeClass('hide');
         fm.name.focus();
         return false;
     }
-    if ('' == $('#id').val() && src && 'epcurate-nav-publish' === $(src.target).attr('id')) {
-        showSystemErrorOverlay('Please curate some videos first.');
-    }
+    $('.form-btn .notice').addClass('hide');
+    $('.img-upload-func .upload-notice').addClass('hide');
     return true;
 }
 
 function setFormWidth() {
     var windowWidth = $(window).width();
-    if (windowWidth > 1220) {
+    if (windowWidth > 1024) {
         $('input.text').width(windowWidth - 600);
-        $('textarea.textarea').width(windowWidth - 610);
+        $('textarea.textarea').width(windowWidth - 605);
+    }
+    if (windowWidth <= 1024) {
+        $('input.text').width(480);
+        $('textarea.textarea').width(475);
+    }
+    if (windowWidth >= 1200) {
+        $('#epcurate-nav ul li.publish').css('left', '239px');
+        $('#epcurate-nav ul').css('width', '484px');
+        $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', '239px');
+        $('#epcurate-nav span.nav-right, #epcurate-nav span.nav-middle').css('width', '236px');
+    } else {
+        $('#epcurate-nav ul li.publish').css('left', '130px');
+        $('#epcurate-nav ul').css('width', '262px');
+        $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', '125px');
+        $('#epcurate-nav span.nav-right, #epcurate-nav span.nav-middle').css('width', '125px');
     }
 }
 
@@ -298,7 +364,7 @@ function uploadImage() {
         };
         var handlerFileQueueError = function (file, code, message) {
             if (code == -130) { // error file type
-                $('.img-upload-func .notice').removeClass('hide');
+                $('.img-upload-func .upload-notice').removeClass('hide');
             }
         };
         var settings = {
@@ -329,4 +395,116 @@ function uploadImage() {
         };
         var swfu = new SWFUpload(settings);
     });
+}
+
+function switchPublishStatus(flag) {
+    if ('scheduled' == flag) {
+        $('#date-time').removeClass('hide');
+        updateHour();
+    } else {
+        if ($('#rerun_y').length > 0 && !$('#rerun_y').is(':checked')) {
+            $('#date-time').addClass('hide');
+        }
+    }
+    if ('draft' == flag) {
+        $('#date-time').addClass('hide');
+        $('.checker').children('span').removeClass('checked');
+        $('input[name=rerun]').removeAttr('checked');
+    }
+}
+
+function switchRerunCheckbox() {
+    if (!$('#schedule-rerun-label').hasClass('hide')) {
+        if ($('input[name=rerun]').is(':checked')) {
+            $('input[name=status]').removeAttr('checked');
+            $('input[name=status]').parent('span').removeClass('checked');
+            $('#status_published').parent('span').addClass('checked');
+            $('#status_published').attr('checked', 'checked');
+            $('#date-time').removeClass('hide');
+            updateHour();
+        } else {
+            $('#date-time').addClass('hide');
+        }
+    }
+}
+
+function updateHour() {
+    var today = new Date(),
+        todayDay = parseInt(today.getDate(), 10).toString(),
+        todayMonth = parseInt(today.getMonth() + 1, 10).toString(), // January is 0!
+        todayYear = today.getFullYear(),
+        nowHour = today.getHours() + 1;
+
+    if (todayDay.length < 2) {
+        todayDay = '0' + todayDay;
+    }
+    if (todayMonth.length < 2) {
+        todayMonth = '0' + todayMonth;
+    }
+    var todayDate = todayYear + '/' + todayMonth + '/' + todayDay;
+
+    $('#date-time .datepicker').datepicker({
+        monthNames: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+        monthNamesShort: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+        dayNames: ["S", "M", "T", "W", "T", "F", "S"],
+        dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
+        minDate: 0,
+        dateFormat: "yy/mm/dd",
+        autoSize: true,
+        onSelect: function (dateText, inst) {
+            $('body').addClass('has-change');
+            var selectDay   = parseInt(inst.currentDay, 10).toString(),
+                selectMonth = parseInt(inst.currentMonth + 1, 10).toString(),
+                activeHour  = $('#date-time .time ul li.active').index();
+            if (selectDay.length < 2) {
+                selectDay = '0' + selectDay;
+            }
+            if (selectMonth.length < 2) {
+                selectMonth = '0' + selectMonth;
+            }
+            var date = inst.currentYear + '/' + selectMonth + '/' + selectDay;
+
+            if (date == todayDate) {
+                if (activeHour <= nowHour) {
+                    $('#date-time .time ul li').removeAttr('class');
+                    $('#date-time .time ul li:eq(' + nowHour + ')').addClass('active').addClass('enable');
+                    $('#date-time .time ul li:eq(' + nowHour + ')').prevAll().addClass('disable');
+                    $('#date-time .time ul li:eq(' + nowHour + ')').nextAll().addClass('enable');
+                } else {
+                    $('#date-time .time ul li').removeClass('enable').removeClass('disable');
+                    $('#date-time .time ul li:eq(' + nowHour + ')').prevAll().addClass('disable');
+                    $('#date-time .time ul li:eq(' + nowHour + ')').nextAll().addClass('enable');
+                }
+            } else {
+                $('#date-time .time ul li').removeClass('enable').removeClass('disable');
+                $('#date-time .time ul li').addClass('enable');
+            }
+            $('#publishDate').val(date);
+            $('#publishHour').val($('#date-time .time ul li.active').text());
+        }
+    });
+
+    $('#date-time .time ul li').removeAttr('class');
+    $('#date-time .time ul li:eq(' + nowHour + ')').addClass('active').addClass('enable');
+    $('#date-time .time ul li:eq(' + nowHour + ')').prevAll().addClass('disable');
+    $('#date-time .time ul li:eq(' + nowHour + ')').nextAll().addClass('enable');
+
+    if ('' == $('#publishDate').val() || '' == $('#publishHour').val()) {
+        $('#publishDate').val(todayDate);
+        $('#publishHour').val($('#date-time .time ul li.active').text());
+    } else {
+        var time = $('#publishHour').val().split(':'),
+            hour = time[0];
+        if ($('#publishDate').val() == todayDate) {
+            $('#date-time .time ul li').removeAttr('class');
+            $('#date-time .time ul li:eq(' + hour + ')').addClass('active').addClass('enable');
+            $('#date-time .time ul li:eq(' + nowHour + ')').prevAll().addClass('disable');
+            $('#date-time .time ul li:eq(' + nowHour + ')').nextAll().addClass('enable');
+            $('#date-time .time ul li:eq(' + nowHour + ')').addClass('enable');
+        } else {
+            $('#date-time .datepicker').datepicker('setDate', $('#publishDate').val());
+            $('#date-time .time ul li').removeClass('active').removeClass('disable').removeClass('enable').addClass('enable');
+            $('#date-time .time ul li:eq(' + hour + ')').addClass('active').addClass('enable');
+        }
+    }
 }

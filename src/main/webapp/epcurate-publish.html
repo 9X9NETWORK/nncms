@@ -7,6 +7,7 @@
 <meta http-equiv="expires" content="0" />
 <link rel="stylesheet" href="stylesheets/style.css" />
 <link rel="stylesheet" href="stylesheets/lightbox.css" />
+<link rel="stylesheet" href="stylesheets/uniform.css" />
 <link rel="stylesheet" href="stylesheets/jquery.datepick.css" />
 <link rel="stylesheet" href="stylesheets/epcurate.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -16,6 +17,7 @@
 <script src="javascripts/jquery.ellipsis.js"></script>
 <script src="javascripts/jquery.blockUI.js"></script>
 <script src="javascripts/jquery.toggleval.min.js"></script>
+<script src="javascripts/jquery.uniform.min.js"></script>
 <script src="javascripts/jquery.cycle.all.js"></script>
 <script src="javascripts/jquery.tmpl.min.js"></script>
 <script src="javascripts/jquery.cookie.js"></script>
@@ -52,13 +54,12 @@
 </div>
 <!--============================== header close ==============================-->
 
-<div id="epcurate-nav">
+<div id="epcurate-nav" class="publish">
 <div class="epcurate-nav-wrap">
 <h3><a href="#" id="epcurate-nav-back" class="btn-back">Back<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Leave</span></span></span></span></a><a href="javascript:void(0);">Episode Curation</a></h3>
 <ul>
-<li><a href="#" id="epcurate-nav-info">Information</a></li>
-<li><a href="#" id="epcurate-nav-curation">Curation</a></li>
-<li class="on">Publish</li>
+<li class="curation"><a href="#" id="epcurate-nav-curation"><span class="nav-right"><span class="nav-middle">Curation</span></span></a></li>
+<li class="publish on"><span class="nav-right"><span class="nav-middle">Publish</span></span></li>
 </ul>
 </div>
 </div>
@@ -79,6 +80,26 @@
 <div id="content-main-wrap">
 <div class="constrain">
 <div id="epcurate-publish">
+<p class="required"><acronym title="Required field" class="mark-required">*</acronym>Required field</p>
+<div id="epcurate-info">
+<!-- template = #epcurate-info-tmpl -->
+</div>
+
+<script id="epcurate-info-tmpl" type="text/x-jquery-tmpl">
+<div class="fminput clearfix">
+<label for="name"><acronym title="Required field" class="mark-required">*</acronym>Episode title</label>
+<div class="fmfield">
+<p class="text"><span><input type="text" name="name" id="name" maxlength="100" value="${name}" class="text" /></span></p>
+</div>
+</div>
+<div class="fminput clearfix">
+<label for="intro">Episode description</label>
+<div class="fmfield">
+<p class="textarea"><span><span><textarea name="intro" id="intro" cols="80" class="textarea">${intro}</textarea></span></span></p>
+</div>
+</div>
+</script>
+
 <div class="fminput clearfix">
 <label>Episode thumbnail</label>
 <div class="fmfield">
@@ -98,22 +119,82 @@
 <div class="img-upload-func">
 <p id="uploadThumbnail">Upload</p>
 <p class="notice">Better results with 720x480 or higher resolution image</p>
-<p class="notice highlight hide">Please upload jpeg, png, or gif files.</p>
+<p class="upload-notice highlight hide">Please upload jpeg, png, or gif files.</p>
 <input type="hidden" name="imageUrl" id="imageUrl" value="" />
 <input type="hidden" name="imageUrlOld" id="imageUrlOld" value="" />
 </div>
 </div>
 </div>
+
+<div class="fminput clearfix">
+<label><acronym title="Required field" class="mark-required">*</acronym>Publish status</label>
+<div class="fmfield">
+<p class="radio-list draft">
+<label for="status_draft"><input type="radio" name="status" value="draft" id="status_draft" checked="checked" />Draft</label>
+<span class="box-left">
+<span class="box-right">
+<span class="box-middle">
+<label for="status_published"><input type="radio" name="status" value="published" id="status_published" />Published</label>
+<label id="schedule-publish-label" for="status_scheduled" class="last hide"><input type="radio" name="status" value="scheduled" id="status_scheduled" />Scheduled to publish</label>
+<a id="schedule-publish" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_bubble_left_arrow.png" alt="" /><span class="tip-right"><span class="tip-middle">This episode will be published at the scheduled time.</span></span></span></a>
+<label id="schedule-rerun-label" for="rerun_y" class="last hide"><input type="checkbox" name="rerun" value="y" id="rerun_y" />Scheduled to rerun</label>
+<a id="schedule-rerun" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_bubble_left_arrow.png" alt="" /><span class="tip-right"><span class="tip-middle">This episode will be published again as the latest episode at the scheduled time.</span></span></span></a>
+</span>
+</span>
+</span>
+</p>
+<div id="date-time" class="hide">
+<div class="datepicker"></div>
+<div class="time">
+<h5>Hour</h5>
+<ul>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">00:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">01:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">02:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">03:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">04:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">05:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">06:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">07:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">08:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">09:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">10:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">11:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">12:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">13:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">14:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">15:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">16:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">17:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">18:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">19:00</span></span></a></li>
+<li class="enable active"><a href="#"><span class="time-right"><span class="time-middle">20:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">21:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">22:00</span></span></a></li>
+<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">23:00</span></span></a></li>
+<li class="enable" style="display: none;"><a href="#"><span class="time-right"><span class="time-middle">24:00</span></span></a></li>
+</ul>
+</div>
+<input type="hidden" name="publishDate" id="publishDate" value="" />
+<input type="hidden" name="publishHour" id="publishHour" value="" />
+<input type="hidden" name="origin_status" id="origin_status" value="Draft" />
+</div>
+</div>
+</div>
+
 </div>
 </div>
 </div>
 </div>
 
 <div class="form-btn">
+<div class="btn-wrap">
 <div class="wrap">
 <p class="back"><a href="epcurate-curation.html" id="form-btn-back" rel="curation">&lt; Back to Curation</a></p>
 <p class="btns btn-leave"><span><input type="button" id="form-btn-leave" value="Leave" /></span></p>
 <p class="btns btn-save"><span><input type="button" id="form-btn-save" value="Save" /></span></p>
+<p class="notice hide">Please fill in all required fields.</p>
+</div>
 </div>
 </div>
 
@@ -176,6 +257,28 @@
 <div class="overlay-btn">
 <p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
 <p class="btns btn-no"><span><a href="#">No</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="publish-notice" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<p class="content">This episode has been published.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unpublish-notice" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<p class="content">This episode has been saved as an unpublished draft.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
 </div>
 </div>
 </div>

@@ -32,6 +32,10 @@
     top: 0;
 }
 
+#main-wrap-slider {
+    top: 25px !important;
+}
+
 /**
 *
 * =epcurateForm
@@ -53,6 +57,17 @@
 
 #container-wrap.epcurate-shopping form {
     margin: 57px 0 53px;
+}
+
+#epcurate-publish {
+    position: relative;
+}
+
+#epcurate-publish .required {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    font-size: 13px;
 }
 
 #content-wrap form .fminput {
@@ -97,23 +112,200 @@
     font-size: 13px;
 }
 
+#content-wrap form .fminput .fmfield p.radio-list label {
+    width: auto;
+    margin: 4px 36px 0 0;
+    font-weight: normal;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list label.last {
+    margin-right: 10px;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list span.box-left {
+    float: left;
+    height: 27px;
+    padding-left: 4px;
+    background: url(../images/popup_input_box_left_s.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list span.box-right {
+    display: block;
+    height: 27px;
+    padding-right: 4px;
+    background: url(../images/popup_input_box_right_s.png) no-repeat right 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list span.box-middle {
+    display: block;
+    height: 27px;
+    padding-right: 6px;
+    background: url(../images/popup_input_box_middle_s.png) repeat-x;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft span.box-left,
+#content-wrap form .fminput .fmfield p.radio-list.draft span.box-right,
+#content-wrap form .fminput .fmfield p.radio-list.draft span.box-middle {
+    padding: 0;
+    background: none;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list .checker {
+    width: 14px;
+    height: 15px;
+    margin: 2px 5px 0 0;
+    cursor: pointer;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list .checker span {
+    display: block;
+    width: 14px;
+    height: 15px;
+    background: url(../images/check_box.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list .checker input {
+    width: 14px;
+    height: 15px;
+    cursor: pointer;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list .checker span:hover,
+#content-wrap form .fminput .fmfield p.radio-list .checker span.checked {
+    background: url(../images/check_box_check.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a {
+    float: left;
+    position: relative;
+    margin: 5px 0 0;
+    text-decoration: none;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a span {
+    display: block;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a .tip {
+    display: none;
+    position: absolute;
+    top: -38px;
+    left: 23px;
+    height: 60px;
+    padding-left: 4px;
+    background: url(../images/bg_bubble_left_l.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a .tip img {
+    position: absolute;
+    bottom: 10px;
+    left: -6px;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a .tip .tip-right {
+    padding-right: 4px;
+    background: url(../images/bg_bubble_right_l.png) no-repeat right 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a .tip .tip-middle {
+    width: 173px;
+    height: 57px;
+    padding: 3px 5px 0;
+    background: url(../images/bg_bubble_middle_l.png) repeat-x;
+    color: #777;
+    font: 13px/17px Helvetica;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft a .tip {
+    top: -23px;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft a .tip {
+    height: 45px;
+    background: url(../images/bg_bubble_left_m.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft a .tip .tip-right {
+    background: url(../images/bg_bubble_right_m.png) no-repeat right 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft a .tip .tip-middle {
+    width: 190px;
+    background: url(../images/bg_bubble_middle_m.png) repeat-x;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a:hover .tip {
+    display: block;
+}
+
 #content-wrap form .fminput .fmfield #date-time {
     clear: both;
     float: left;
-    margin: 10px 0 0 180px;;
+    width: 440px;
+    margin: 10px 0 0 180px;
 }
 
-#content-wrap form .fminput .fmfield #date-time .datepicker {
-    margin-bottom: 10px;
+#content-wrap form .fminput .fmfield #date-time .time {
+    float: left;
+    width: 210px;
+    height: 212px;
+    margin: 0;
+    background: url(../images/bg_calander.png) no-repeat 0 0;
 }
 
-#content-wrap form .fminput .fmfield #date-time .select {
-	width: 200px;
-	margin-bottom: 10px;
+#content-wrap form .fminput .fmfield #date-time .time h5 {
+    height: 33px;
+    margin-bottom: 2px;
+    font: 500 15px/30px Helvetica;
+    text-align: center;
 }
 
-#content-wrap form .fminput .fmfield #date-time p.notice {
-	color: #f00;
+#content-wrap form .fminput .fmfield #date-time .time ul {
+    overflow: hidden;
+    padding-left: 20px;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul li {
+    float: left;
+    width: 40px;
+    height: 21px;
+    line-height: 21px;
+    margin: 0 3px 4px 0;
+    text-align: center;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul li a {
+    display: block;
+    color: #777;
+    text-decoration: none;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul li.disable a {
+    color: #ddd;
+    cursor: default;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul li.active a,
+#content-wrap form .fminput .fmfield #date-time .time ul li.enable a:hover {
+    padding-left: 2px;
+    background: url(../images/bg_calander_highlight_left.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul li.active a .time-right,
+#content-wrap form .fminput .fmfield #date-time .time ul li.enable a:hover .time-right {
+    display: block;
+    padding-right: 2px;
+    background: url(../images/bg_calander_highlight_right.png) no-repeat right 0;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul li.active a .time-middle,
+#content-wrap form .fminput .fmfield #date-time .time ul li.enable a:hover .time-middle {
+    display: block;
+    height: 21px;
+    background: url(../images/bg_calander_highlight_middle.png) repeat-x;
+    color: #fff;
+    font: 13px Helvetica;
+    line-height: 21px;
 }
 
 #content-wrap form .fminput .fmfield a.switch-on {
@@ -262,7 +454,7 @@
     float: left;
     width: 183px;
     height: 82px;
-    margin-right: 20px;
+    margin: 0 20px 10px 0;
 }
 
 #content-wrap form .fminput .fmfield .img-list a.img-next,
@@ -325,12 +517,13 @@
 
 #content-wrap form .fminput .fmfield .img-upload-func {
     float: left;
+    margin-top: 3px;
 }
 
 #content-wrap form .fminput .fmfield .img-upload-func .notice {
     margin: 8px 0;
     padding: 0;
-    color: #777;
+    color: #999;
 }
 
 #content-wrap form .fminput .fmfield .img-upload-func .highlight {
@@ -520,6 +713,7 @@
     position: absolute;
     bottom: 0;
     left: 50%;
+    z-index: 100001;
     width: 96%;
 	min-width: 969px;
     height: 48px;
@@ -527,6 +721,12 @@
     padding: 0 0 0;
     background: url(../images/bg_divider.png) repeat-x 0 top;
     text-align: center;
+}
+
+#content-wrap form .form-btn .btn-wrap {
+    height: 46px;
+    margin-top: 2px;
+    background: url(../images/bg_main.png) repeat -2% 0;
 }
 
 #content-wrap form .form-btn .wrap {
@@ -565,6 +765,13 @@
 
 #content-wrap.epcurate-curation form .form-btn .wrap p.next {
 	right: 19px;
+}
+
+#content-wrap.epcurate-publish   form .form-btn .wrap p.notice {
+    top: 15px;
+	right: -53px;
+    color: #f00;
+    font-size: 13px;
 }
 
 #content-wrap form .form-btn .wrap p.back,

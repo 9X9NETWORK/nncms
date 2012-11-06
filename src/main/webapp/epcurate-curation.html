@@ -60,9 +60,8 @@
 <div class="epcurate-nav-wrap">
 <h3><a href="#" id="epcurate-nav-back" class="btn-back">Back<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Leave</span></span></span></span></a><a href="javascript:void(0);">Episode Curation</a></h3>
 <ul>
-<li><a href="#" id="epcurate-nav-info">Information</a></li>
-<li class="on">Curation</li>
-<li><a href="#" id="epcurate-nav-publish">Publish</a></li>
+<li class="curation on"><span class="nav-right"><span class="nav-middle">Curation</span></span></li>
+<li class="publish"><a href="#" id="epcurate-nav-publish"><span class="nav-right"><span class="nav-middle">Publish</span></span></a></li>
 </ul>
 </div>
 </div>
@@ -290,9 +289,9 @@
 {{/if}}
 <p class="img">
 {{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
-<img id="thumbnail-backgroundImage" src="${bgImage}" alt="" class="thumbnail" />
+<img id="thumbnail-backgroundImage" src="${bgImage}" alt="" width="95" height="59" class="thumbnail" />
 {{else}}
-<img id="thumbnail-backgroundImage" src="${CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_UPLOAD}" alt="" class="thumbnail" />
+<img id="thumbnail-backgroundImage" src="images/black_box.png" alt="" width="95" height="59" class="thumbnail" />
 {{/if}}
 <img src="images/black_box_loading.gif" alt="" class="loading" />
 </p>
@@ -418,7 +417,6 @@
 
 <div class="form-btn">
 <div class="wrap">
-<p class="back"><a href="epcurate-info.html" id="form-btn-back" rel="info">&lt; Back to Information</a></p>
 <p class="btns btn-leave"><span><input type="button" id="form-btn-leave" value="Leave" /></span></p>
 <p class="btns btn-save"><span><input type="button" id="form-btn-save" value="Save" /></span></p>
 <p class="next"><a href="epcurate-publish.html" id="form-btn-next" rel="publish">Next to Publish &gt;</a></p>
@@ -513,6 +511,19 @@
 <div class="overlay-btn">
 <p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
 <p class="btns btn-no"><span><a href="#">No</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="draft-notice" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<h4>New episode has been created as a draft!</h4>
+<p class="content">Publish this episode at the next step whenever you finish editing.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
 </div>
 </div>
 </div>

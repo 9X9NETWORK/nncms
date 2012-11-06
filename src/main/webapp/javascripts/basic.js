@@ -3,24 +3,30 @@ function autoWidth() {
         scrollbarWidth = 35;    // padding15 + slider5 + padding15
     $('#content-main').width($(window).width() - contentNavWidth - scrollbarWidth);
     $('.epcurate-curation #content-main').width($(window).width());
-    $('#epcurate-curation .tab-content .result-list ul').width($(window).width() - $('#epcurate-curation #video-player .video').width() - 60);  // padding30 + padding30
+    $('#epcurate-curation .tab-content .result-list ul').width($(window).width() - $('#epcurate-curation #video-player .video').width() - 60);  // 60: previous:30 + next:30
     //$('#epcurate-curation .tab-content .result-list a.video-next').css('left', $(window).width() - 35 + 'px');
 }
 
 function autoHeight() {
     var windowHeight = $(window).height(),
-        titleFuncHeight = $('#title-func').height() + 38,   // padding21 + padding17
-        sliderHeight = windowHeight - titleFuncHeight - 156;    // header(+studio-nav)94 + footer48 + slide-padding-bottom14
+        footerHeight = $('#footer').height(),
+        titleFuncContentHeight = $('#title-func').height(),
+        titleFuncPaddingTop = parseInt($('#title-func').css('padding-top'), 10),
+        titleFuncPaddingBottom = parseInt($('#title-func').css('padding-bottom'), 10),
+        titleFuncHeight = parseInt(titleFuncContentHeight + titleFuncPaddingTop + titleFuncPaddingBottom, 10),
+        sliderHeight = windowHeight - titleFuncHeight - 157;            // 157: (header45 + studio-nav49)94 + footer48 + space15
     $('#content-wrap, #content-main').height($(window).height() - 94);  // 94: header45(50-5) + studio-nav49(36+13);
-    $('.epcurate-info#content-wrap, .epcurate-curation#content-wrap, .epcurate-publish#content-wrap, .epcurate-shopping#content-wrap').height($(window).height() - 49);     // $('#epcurate-nav .epcurate-nav-wrap')
-    $('.epcurate-info #content-main, .epcurate-curation #content-main, .epcurate-publish #content-main, .epcurate-shopping #content-main').height($(window).height() - 49);
-    $('#content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + 131);                  // compute value: footer48 + slide-padding-bottom15
+    $('.epcurate-curation#content-wrap, .epcurate-publish#content-wrap').height($(window).height() - 49);   // $('#epcurate-nav .epcurate-nav-wrap')
+    $('.epcurate-curation #content-main, .epcurate-publish #content-main').height($(window).height() - 97); // 97: epcurate-nav49 + form-btn48  
+    $('#content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + footerHeight + titleFuncHeight + 15);  // 15: space between footer and content
+    $('.epcurate-publish #content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + 270); // 270: datepicker height + form-btn48 + space15
     $('.epcurate-curation #content-main-wrap').height($('#content-main-wrap').children('.constrain').height());
-    $('.library-list #content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + 190);    // compute value
     $('#content-main-wrap:not(.curation)').css('margin-top', titleFuncHeight + 'px');
     $('#main-wrap-slider').css('top', titleFuncHeight + 'px');
     $('#main-wrap-slider').height(sliderHeight);
     $('#main-wrap-slider').attr('data-orig-slider-height', sliderHeight);
+    $('#main-wrap-slider').height(windowHeight - 137);  // 137: epcurate-nav49 + content-main-wrap margin25 + form-btn48 + space between footer and content15
+    $('#main-wrap-slider').attr('data-orig-slider-height', windowHeight - 137);
 }
 
 function showSystemErrorOverlay(msg) {
@@ -72,17 +78,46 @@ function showDeletePromptOverlay() {
     $('.blockOverlay').height($(window).height() - 45);
 }
 
-function formatTimestamp(timestamp) {
+function showDraftNoticeOverlay(e) {
+    $('body').addClass('first-save');
+    $('body').data('origin', e);
+    $.blockUI.defaults.overlayCSS.opacity = '0.9';
+    $.blockUI({
+        message: $('#draft-notice')
+    });
+}
+
+function showPublishNoticeOverlay() {
+    $.blockUI.defaults.overlayCSS.opacity = '0.9';
+    $.blockUI({
+        message: $('#publish-notice')
+    });
+}
+
+function showUnpublishNoticeOverlay() {
+    $.blockUI.defaults.overlayCSS.opacity = '0.9';
+    $.blockUI({
+        message: $('#unpublish-notice')
+    });
+}
+
+function formatTimestamp(timestamp, dateSeparator, timeSeparator) {
+    if ('undefined' === typeof dateSeparator) {
+        dateSeparator = '-';
+    }
+    if ('undefined' === typeof timeSeparator) {
+        timeSeparator = ':';
+    }
     var a = new Date(timestamp),
         year = a.getFullYear(),
         month = a.getMonth() + 1,
         date = a.getDate(),
         hour = a.getHours(),
         min = a.getMinutes(),
-        time = year + '-'
-             + ((month >= 10) ? month : '0' + month) + '-'
+        time = year + dateSeparator
+             + ((month >= 10) ? month : '0' + month) + dateSeparator
              + ((date >= 10) ? date : '0' + date) + ' '
-             + ((hour >= 10) ? hour : '0' + hour) + ':'
+             + ((hour >= 10) ? hour : '0' + hour) + timeSeparator
              + ((min >= 10) ? min : '0' + min);
     return time;
 }

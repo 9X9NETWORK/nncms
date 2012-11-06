@@ -638,12 +638,9 @@ background: #e4e4e4;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    float: left;
-    width: 399px;
-    margin: 13px 0 0 -200px;
+    position: relative;
+    width: 262px;
+    margin: 0 auto;
 }
 
 #studio-nav .studio-nav-wrap ul li {
@@ -682,33 +679,125 @@ background: #e4e4e4;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li {
-    float: left;
-    margin: -5px -10px 0 0;
-    background: url(../images/btn_nav.png) no-repeat 0 0;
+    position: absolute;
+    top: 12px;
+}
+
+#epcurate-nav .epcurate-nav-wrap ul li.curation {
+    left: 0;
+}
+
+#epcurate-nav .epcurate-nav-wrap ul li.publish {
+    top: 11px;
+    left: 131px;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li.on,
 #epcurate-nav .epcurate-nav-wrap ul li a {
     display: block;
     position: relative;
-    width: 133px;
-    height: 30px;
-    line-height: 30px;
-    background: url(../images/btn_nav.png) no-repeat 0 0;
+    width: 128px;
+    height: 26px;
+    line-height: 26px;
+    padding-left: 3px;
+    background: url(../images/bg_tab_left.png) no-repeat 0 0;
     color: #777;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
 }
 
+#epcurate-nav .epcurate-nav-wrap ul li.on span,
+#epcurate-nav .epcurate-nav-wrap ul li a    span {
+    display: block;
+}
+
+#epcurate-nav .epcurate-nav-wrap ul li.on span.nav-right,
+#epcurate-nav .epcurate-nav-wrap ul li a    span.nav-right {
+    width: 125px;
+    padding-right: 3px;
+    background: url(../images/bg_tab_right_angle.png) no-repeat right 0;
+}
+
+#epcurate-nav .epcurate-nav-wrap ul li.on span.nav-middle,
+#epcurate-nav .epcurate-nav-wrap ul li a    span.nav-middle {
+    width: 125px;
+    background: url(../images/bg_tab_middle.png) repeat-x;
+    text-align: center;
+}
+
 #epcurate-nav .epcurate-nav-wrap ul li.on,
 #epcurate-nav .epcurate-nav-wrap ul li a:hover {
-    background-position: 0 -45px;
     color: #999;
 }
 
+#epcurate-nav .epcurate-nav-wrap ul li a {
+    height: 31px;
+    line-height: 31px;
+    padding-left: 2px;
+    background: url(../images/bg_btn_left_angle.png) no-repeat 0 0;
+}
+
+#epcurate-nav .epcurate-nav-wrap ul li a span.nav-right {
+    background: url(../images/bg_btn_right.png) no-repeat right 0;
+}
+
+#epcurate-nav .epcurate-nav-wrap ul li a span.nav-middle {
+    background: url(../images/bg_btn_middle.png) repeat-x;
+    line-height: 29px;
+}
+
 #epcurate-nav .epcurate-nav-wrap ul li a:hover {
-    height: 27px;
+    height: 26px;
+    line-height: 26px;
+    margin: 1px 0 0 -2px;
+    background: url(../images/bg_tab_left_angle.png) no-repeat 0 0;
+}
+
+#epcurate-nav .epcurate-nav-wrap ul li a:hover span.nav-right {
+    background: url(../images/bg_tab_right.png) no-repeat right 0;
+}
+
+#epcurate-nav .epcurate-nav-wrap ul li a:hover span.nav-middle {
+    background: url(../images/bg_tab_middle.png) repeat-x;
+    line-height: 26px;
+}
+
+#epcurate-nav.publish .epcurate-nav-wrap ul li.curation {
+    top: 11px;
+}
+
+#epcurate-nav.publish .epcurate-nav-wrap ul li.publish {
+    top: 12px;
+    left: 130px;
+}
+
+#epcurate-nav.publish .epcurate-nav-wrap ul li.on {
+    background: url(../images/bg_tab_left_angle.png) no-repeat 0 0;
+}
+
+#epcurate-nav.publish .epcurate-nav-wrap ul li.on span.nav-right {
+    background: url(../images/bg_tab_right.png) no-repeat right 0;
+}
+
+#epcurate-nav.publish .epcurate-nav-wrap ul li a {
+    padding-left: 3px;
+    background: url(../images/bg_btn_left.png) no-repeat 0 0;
+}
+
+#epcurate-nav.publish .epcurate-nav-wrap ul li a span.nav-right {
+    padding-right: 2px;
+    background: url(../images/bg_btn_right_angle.png) no-repeat right 0;
+}
+
+#epcurate-nav.publish .epcurate-nav-wrap ul li a:hover {
+    margin: 1px 0 0 2px;
+    background: url(../images/bg_tab_left.png) no-repeat 0 0;
+}
+
+#epcurate-nav.publish .epcurate-nav-wrap ul li a:hover span.nav-right {
+    background: url(../images/bg_tab_right_angle.png) no-repeat right 0;
 }
 
 #epcurate-nav .epcurate-nav-wrap .tip {
@@ -900,12 +989,12 @@ background: #e4e4e4;
     overflow: hidden;
     clear: both;
     padding-top: 17px;
-    background: url(../images/bg_divider.png) repeat-x 0 bottom;
 }
 
 #title-func .caption p.episode,
 #title-func .caption p.curator,
-#title-func .caption p.time,
+#title-func .caption p.scheduled-time,
+#title-func .caption p.publish-time,
 #title-func .caption p.views {
     float: left;
     padding-bottom: 5px;
@@ -913,20 +1002,12 @@ background: #e4e4e4;
     font-size: 13px;
 }
 
-#title-func .caption .episode-info {
-    float: right;
-	padding-bottom: 4px;
-}
-
 #title-func .caption  p.episode {
-    padding-left: 30px;
+    text-indent: 10px;
 }
 
-#title-func .caption .curator {
-    width: 140px;
-}
-
-#title-func .caption .time {
+#title-func .caption .scheduled-time,
+#title-func .caption .publish-time {
     width: 155px;
 }
 

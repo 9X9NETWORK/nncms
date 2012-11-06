@@ -724,3 +724,31 @@
 .overlay-l .overlay-container .overlay-wrap .overlay-btn .btns:first-child {
 	margin-right: 13px;
 }
+
+/**
+*
+* =draft-notice
+*
+**/
+
+#draft-notice {
+    width: 417px;
+    margin-left: -214px;
+}
+
+#draft-notice .overlay-wrap {
+    height: 127px;
+    padding-top: 45px;
+}
+
+#draft-notice h4 {
+    margin-bottom: 16px;
+    color: #777;
+    font: bold 13px Helvetica;
+}
+
+#draft-notice p.content {
+    padding: 0;
+    line-height: 17px;
+    text-align: center;
+}

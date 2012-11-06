@@ -82,17 +82,18 @@
 <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
 
 <script id="title-func-tmpl" type="text/x-jquery-tmpl">
-<h2><span id="channel-name">${name}</span> &gt; Episode list (<span id="episode-counter">${$item.cntEpisode}</span>)</h2>
+<h2><span id="channel-name">${name}</span> &gt; Episode list (<span id="episode-counter">${$item.cntEpisode}</span>){{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}<a href="epcurate-curation.html?cid=${id}" class="curate btns"><span class="btn-right"><span class="btn-middle">Curate a new episode</span></span></a>{{/if}}</h2>
 {{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}
-<p class="curate btns"><span><a href="epcurate-info.html?cid=${id}" id="episode-curate">Curate a new episode</a></span></p>
+<p class="order btns"><span><a href="#" rel="${id}" class="reorder">Reorder episodes</a></span></p>
 {{/if}}
 {{if $item.cntEpisode > 0}}
 <div class="caption">
 <p class="episode">Episode</p>
-<div class="episode-info">
-<p class="time">Publish time</p>
+{{if contentType != CMS_CONF.YOUR_FAVORITE}}
+<p class="scheduled-time">Scheduled time</p>
+{{/if}}
+<p class="publish-time">Publish time</p>
 <p class="views">Views</p>
-</div>
 </div>
 {{/if}}
 </script>
@@ -101,7 +102,7 @@
 <div id="title-func" class="clearfix">
 <!-- template = #title-func-tmpl -->
 </div>
-<div id="content-main-wrap">
+<div id="content-main-wrap" class="episode-list">
 <div class="constrain">
 <!-- template = #episode-favorite-first-tmpl or #episode-favorite-list-tmpl -->
 <!-- template = #episode-first-tmpl or #episode-list-tmpl -->
@@ -127,6 +128,7 @@
 
 <script id="episode-favorite-list-tmpl-item" type="text/x-jquery-tmpl">
 <li class="clearfix">
+<div class="container">
 <div class="episode">
 <p class="img">
 <a href="${playbackUrl}" target="_blank">
@@ -145,9 +147,8 @@
 </div>
 </div>
 </div>
-<div class="episode-info">
-<div class="time">
-<p>${formatTimestamp(publishDate)} pub</p>
+<div class="publish-time">
+<p>${formatTimestamp(publishDate)}</p>
 </div>
 <div class="views">
 <p>${cntView}</p>
@@ -159,7 +160,7 @@
 <script id="episode-first-tmpl" type="text/x-jquery-tmpl">
 <div id="ep-time-list">
 <h3><img src="images/text_don't-have-episode-yet.png" alt="" /></h3>
-<p class="btns"><span><a href="epcurate-info.html?cid=${id}">Curate new episode to tell a story</a></span></p>
+<p class="btns"><span><a href="epcurate-curation.html?cid=${id}">Curate new episode to tell a story</a></span></p>
 <div id="selected-episode">
 <p class="episode-pager">
 <a href="#" class="active">。</a>
@@ -170,19 +171,19 @@
 <div class="wrapper">
 <ul class="content">
 <li>
-<div class="img"><a href="epcurate-info.html?cid=${id}"><img src="images/banner_01.png" alt="" width="781" height="274" /></a></div>
+<div class="img"><a href="epcurate-curation.html?cid=${id}"><img src="images/banner_01.png" alt="" width="781" height="274" /></a></div>
 <div class="desc"><p><span><strong>Curate online videos</strong> into each single episode.</span></p></div>
 </li>
 <li>
-<div class="img"><a href="epcurate-info.html?cid=${id}"><img src="images/banner_02.png" alt="" width="781" height="274" /></a></div>
+<div class="img"><a href="epcurate-curation.html?cid=${id}"><img src="images/banner_02.png" alt="" width="781" height="274" /></a></div>
 <div class="desc"><p><span>Tell your story by <strong>arranging the video sequence.</strong></span></p></div>
 </li>
 <li>
-<div class="img"><a href="epcurate-info.html?cid=${id}"><img src="images/banner_03.png" alt="" width="781" height="274" /></a></div>
+<div class="img"><a href="epcurate-curation.html?cid=${id}"><img src="images/banner_03.png" alt="" width="781" height="274" /></a></div>
 <div class="desc"><p><span><strong>Trim the videos and add titles</strong> to make your episodes more intriguing.</span></p></div>
 </li>
 <li>
-<div class="img"><a href="epcurate-info.html?cid=${id}"><img src="images/banner_04.png" alt="" width="781" height="274" /></a></div>
+<div class="img"><a href="epcurate-curation.html?cid=${id}"><img src="images/banner_04.png" alt="" width="781" height="274" /></a></div>
 <div class="desc"><p><span><strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically.</span></p></div>
 </li>
 </ul>
@@ -200,14 +201,22 @@
 </script>
 
 <script id="episode-list-tmpl-item" type="text/x-jquery-tmpl">
-<li class="clearfix">
-<!--<a href="#" class="warning">warning.png<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Include not playable videos</span></span></span></span></a>-->
+<li class="clearfix" data-meta="${id}">
+<div class="container">
+<div class="container-right">
+<div class="container-bottom">
+<div class="container-left">
+<div class="wrap">
 <div class="episode">
 <p class="img">
+{{if null != publishDate}}
 <a href="${playbackUrl}" target="_blank">
 <img src="images/icon_playlist.png" alt="" class="watermark" />
 <img src="${imageUrl}" alt="" width="80" height="45" class="img" />
 </a>
+{{else}}
+<img src="${imageUrl}" alt="" width="80" height="45" class="img" />
+{{/if}}
 <span class="duration"><span class="time-right"><span class="time-middle">${formatDuration(duration)}</span></span></span>
 </p>
 <h3 class="ellipsis" data-meta="${name}"><a href="${playbackUrl}" target="_blank">${name}</a></h3>
@@ -220,12 +229,32 @@
 </div>
 </div>
 </div>
-<div class="episode-info">
-<div class="time">
-<p>${formatTimestamp(publishDate)} pub</p>
+<div class="scheduled-time">
+{{if null != scheduleDate}}
+<p>${formatTimestamp(scheduleDate)}</p>
+{{else}}
+&nbsp;
+{{/if}}
+</div>
+<div class="publish-time">
+{{if (false == isPublic && null == scheduleDate && null == publishDate) || (null != publishDate)}}
+{{if false == isPublic && null == scheduleDate && null == publishDate}}
+<p>Draft</p>
+{{/if}}
+{{if null != publishDate}}
+<p>${formatTimestamp(publishDate)}</p>
+{{/if}}
+{{else}}
+&nbsp;
+{{/if}}
 </div>
 <div class="views">
 <p>${cntView}</p>
+</div>
+</div>
+<p class="drag">move</p>
+</div>
+</div>
 </div>
 </div>
 </li>
@@ -288,6 +317,19 @@
 <p class="content">Are you sure you want to delete this episode?</p>
 <div class="overlay-btn">
 <p class="btns btn-del"><span><a href="#">Delete</a></span></p>
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+<div class="overlay-btn">
+<p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
 <p class="btns btn-no"><span><a href="#">No</a></span></p>
 </div>
 </div>

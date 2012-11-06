@@ -1,4 +1,4 @@
-/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth htmlEscape showProcessingOverlay showSystemErrorOverlayAndHookError */
+/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth htmlEscape showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp updateHour switchPublishStatus switchRerunCheckbox */
 /*jslint eqeq: true, regexp: true, unparam: true, sloppy: true, todo: true, vars: true */
 nn.initialize();
 nn.debug(CMS_CONF.IS_DEBUG);
@@ -48,16 +48,13 @@ $(function () {
                 if ('episode-list.html' === userUrlFile) {
                     listEpisode(CMS_CONF.USER_URL.param('id'));
                 }
-                if (-1 === $.inArray(userUrlFile, ['epcurate-info.html', 'epcurate-curation.html', 'epcurate-publish.html'])) {
+                if (-1 === $.inArray(userUrlFile, ['epcurate-curation.html', 'epcurate-publish.html'])) {
                     $.removeCookie('cms-epe');
                     $.removeCookie('cms-crumb');
                 } else {
                     fadeEpcurateHeaderAndFooter();
                     var cmsCrumb = rebuildCrumbAndParam(),
                         fm = document.epcurateForm;
-                    if ('epcurate-info.html' === userUrlFile) {
-                        buildEpcurateInfo(fm, cmsCrumb);
-                    }
                     if ('epcurate-publish.html' === userUrlFile) {
                         buildEpcuratePublish(fm, cmsCrumb);
                     }
@@ -81,9 +78,7 @@ function buildEpcurateCuration(fm, crumb) {
     if ('' == eid) {
         // insert mode: data from cookie
         if (!crumb.name || '' == $.trim(crumb.name)) {
-            $('#form-btn-leave').data('gobackUrl', $('#epcurate-nav-info').attr('href'));
-            showSystemErrorOverlayAndHookError('No episode title. Please go back to fill in episode information.');
-            return;
+            crumb.name = 'New episode';
         }
         if (cid > 0 && !isNaN(cid) && CMS_CONF.USER_DATA.id) {
             nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
@@ -104,9 +99,7 @@ function buildEpcurateCuration(fm, crumb) {
                     }
                     showProcessingOverlay();
                     $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
-                    $('.form-btn .btn-save').addClass('disable');
-                    $('#form-btn-save').attr('disabled', 'disabled');
-                    $('#epcurate-nav-info, #epcurate-nav-publish, #form-btn-save, #form-btn-back, #form-btn-next').click(function (e) {
+                    $('#epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function (e) {
                         $(fm).trigger('submit', e);
                         return false;
                     });
@@ -175,10 +168,6 @@ function buildEpcurateCuration(fm, crumb) {
                                             $('#preload-image-tmpl-item').tmpl(preloadImage).prependTo('#preload-image');
                                         }
                                         $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
-                                        if ($('#storyboard-list li').length > 0) {
-                                            $('.form-btn .btn-save').removeClass('disable');
-                                            $('#form-btn-save').removeAttr('disabled');
-                                        }
                                         sumStoryboardInfo();
                                         $('.ellipsis').ellipsis();
                                         $('#overlay-s').fadeOut();
@@ -253,10 +242,6 @@ function buildEpcurateCuration(fm, crumb) {
                                                 $('#preload-image-tmpl-item').tmpl(preloadImage).prependTo('#preload-image');
                                             }
                                             $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
-                                            if ($('#storyboard-list li').length > 0) {
-                                                $('.form-btn .btn-save').removeClass('disable');
-                                                $('#form-btn-save').removeAttr('disabled');
-                                            }
                                             sumStoryboardInfo();
                                             $('.ellipsis').ellipsis();
                                             $('#overlay-s').fadeOut();
@@ -266,7 +251,7 @@ function buildEpcurateCuration(fm, crumb) {
                             }, 'json');
                         });
                     });
-                    $('#epcurate-nav-info, #epcurate-nav-publish, #form-btn-save, #form-btn-back, #form-btn-next').click(function (e) {
+                    $('#epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function (e) {
                         $(fm).trigger('submit', e);
                         return false;
                     });
@@ -281,14 +266,12 @@ function buildEpcurateCuration(fm, crumb) {
 function buildEpcuratePublish(fm, crumb) {
     nn.log(crumb, 'debug');
     var eid = fm.id.value,
-        cid = fm.channelId.value;
+        cid = fm.channelId.value,
+        scheduleDateTime = '',
+        tomorrow = '';
     if ('' == eid || !crumb.id) {
         if (crumb.channelId) {
-            if (crumb.name) {
-                $('#form-btn-leave').data('gobackUrl', $('#epcurate-nav-curation').attr('href'));
-            } else {
-                $('#form-btn-leave').data('gobackUrl', $('#epcurate-nav-info').attr('href'));
-            }
+            $('#form-btn-leave').data('gobackUrl', $('#epcurate-nav-curation').attr('href'));
         }
         showSystemErrorOverlayAndHookError('Invalid episode ID, please try again.');
         return;
@@ -315,6 +298,48 @@ function buildEpcuratePublish(fm, crumb) {
                     return;
                 }
                 showProcessingOverlay();
+                $('#epcurate-info-tmpl').tmpl(episode).appendTo('#epcurate-info');
+                setFormWidth();
+                $.uniform.restore();
+                $('#origin_status').val('Draft');
+                $('#status_draft').attr('checked', 'checked');
+                $('p.radio-list input').uniform();
+                if (true === episode.isPublic) {
+                    $('#origin_status').val('Published');
+                    $('p.radio-list').removeClass('draft');
+                    $('#schedule-publish-label').addClass('hide');
+                    $('#schedule-publish').addClass('hide');
+                    $('#schedule-rerun-label').removeClass('hide');
+                    $('#schedule-rerun').removeClass('hide');
+                    $('#status_published').attr('checked', 'checked');
+                } else {
+                    $('p.radio-list').addClass('draft');
+                    $('#schedule-publish-label').removeClass('hide');
+                    $('#schedule-publish').removeClass('hide');
+                    $('#schedule-rerun-label').addClass('hide');
+                    $('#schedule-rerun').addClass('hide');
+                }
+                if (episode.scheduleDate) {
+                    if (true === episode.isPublic) {
+                        $('#origin_status').val('Scheduled to rerun');
+                        $('#rerun_y').attr('checked', 'checked');
+                    } else {
+                        $('#origin_status').val('Scheduled to publish');
+                        $('#status_scheduled').attr('checked', 'checked');
+                    }
+                    scheduleDateTime = formatTimestamp(episode.scheduleDate, '/', ':').split(' ');
+                    $('#publishDate').val(scheduleDateTime[0]);
+                    $('#publishHour').val(scheduleDateTime[1]);
+                } else {
+                    // default schedule
+                    tomorrow = new Date((new Date()).getTime() + (24 * 60 * 60 * 1000));
+                    $('#publishDate').val(tomorrow.getFullYear() + '/' + (tomorrow.getMonth() + 1) + '/' + tomorrow.getDate());
+                    $('#publishHour').val('20:00');
+                }
+                updateHour();
+                switchPublishStatus($('input[name=status]:checked').val());
+                switchRerunCheckbox();
+                $.uniform.update();
                 nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {episodeId: $('#id').val()}), null, function (programs) {
                     $('#img-list-tmpl-item').tmpl(programs).appendTo('#img-list');
                     if ('' != episode.imageUrl) {
@@ -344,7 +369,7 @@ function buildEpcuratePublish(fm, crumb) {
                             $('#imageUrl').val($('img', this).attr('src'));
                         }
                     });
-                    $('#epcurate-nav-info, #epcurate-nav-curation, #form-btn-save, #form-btn-back').click(function (e) {
+                    $('#epcurate-nav-curation, #form-btn-save, #form-btn-back').click(function (e) {
                         $(fm).trigger('submit', e);
                         return false;
                     });
@@ -355,87 +380,6 @@ function buildEpcuratePublish(fm, crumb) {
         });
     });
 }   // end of buildEpcuratePublish()
-
-function buildEpcurateInfo(fm, crumb) {
-    nn.log(crumb, 'debug');
-    var eid = fm.id.value,
-        cid = fm.channelId.value;
-    if ('' == eid && '' == cid) {
-        showSystemErrorOverlayAndHookError('Invalid channel ID and episode ID, please try again.');
-        return;
-    }
-    if ('' == eid) {
-        // insert mode: data from cookie
-        if (cid > 0 && !isNaN(cid) && CMS_CONF.USER_DATA.id) {
-            nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
-                var channelIds = [];
-                if (data.length > 0) {
-                    $.each(data, function (i, list) {
-                        channelIds.push(list.id);
-                    });
-                }
-                if (-1 === $.inArray(parseInt(cid, 10), channelIds)) {
-                    showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
-                    return;
-                }
-                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: cid}), null, function (channel) {
-                    if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
-                        showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
-                        return;
-                    }
-                    showProcessingOverlay();
-                    $('#epcurate-info-tmpl').tmpl(crumb).appendTo('#epcurate-info');
-                    $('.form-btn .btn-save').addClass('disable');
-                    $('#form-btn-save').attr('disabled', 'disabled');
-                    $('#epcurate-nav-curation, #epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function (e) {
-                        $(fm).trigger('submit', e);
-                        return false;
-                    });
-                    setFormWidth();
-                    $('#overlay-s').fadeOut();
-                });
-            });
-        } else {
-            showSystemErrorOverlayAndHookError('Invalid channel ID, please try again.');
-            return;
-        }
-    } else {
-        // update mode: data from api
-        nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), null, function (episode) {
-            if ('' != cid && cid != episode.channelId) {
-                showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
-                return;
-            }
-            nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
-                var channelIds = [];
-                if (data.length > 0) {
-                    $.each(data, function (i, list) {
-                        channelIds.push(list.id);
-                    });
-                }
-                if (-1 === $.inArray(parseInt(episode.channelId, 10), channelIds)) {
-                    showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
-                    return;
-                }
-                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: episode.channelId}), null, function (channel) {
-                    if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
-                        showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
-                        return;
-                    }
-                    showProcessingOverlay();
-                    crumb = $.extend({}, crumb, episode);
-                    $('#epcurate-info-tmpl').tmpl(crumb).appendTo('#epcurate-info');
-                    $('#epcurate-nav-curation, #epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function (e) {
-                        $(fm).trigger('submit', e);
-                        return false;
-                    });
-                    setFormWidth();
-                    $('#overlay-s').fadeOut();
-                });
-            });
-        });
-    }
-}   // end of buildEpcurateInfo()
 
 function listEpisode(id) {
     if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
@@ -464,9 +408,9 @@ function listEpisode(id) {
                         } else {
                             $('#episode-favorite-first-tmpl').tmpl().appendTo('#content-main-wrap .constrain');
                         }
+                        setEpisodeWidth();
                         autoHeight();
                         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-                        setEpisodeWidth();
                         $('#overlay-s').fadeOut();
                     });
                 } else {
@@ -477,6 +421,15 @@ function listEpisode(id) {
                         if (cntEpisode > 0) {
                             $('#episode-list-tmpl').tmpl().appendTo('#content-main-wrap .constrain');
                             $('#episode-list-tmpl-item').tmpl(episodes).appendTo('#episode-list');
+                            // episode list sorting
+                            $('#episode-list').sortable({
+                                cursor: 'move',
+                                revert: true,
+                                change: function (event, ui) {
+                                    $('body').addClass('has-change');
+                                }
+                            });
+                            $('#episode-list').sortable('disable');
                         } else {
                             $('#episode-first-tmpl').tmpl({ id: id }).appendTo('#content-main-wrap .constrain');
                             // episode first cycle
@@ -493,9 +446,9 @@ function listEpisode(id) {
                                 cleartypeNoBg: true
                             });
                         }
+                        setEpisodeWidth();
                         autoHeight();
                         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-                        setEpisodeWidth();
                         $('#overlay-s').fadeOut();
                     });
                 }
@@ -519,9 +472,9 @@ function listEpisode(id) {
             } else {
                 $('#episode-favorite-first-tmpl').tmpl().appendTo('#content-main-wrap .constrain');
             }
+            setEpisodeWidth();
             autoHeight();
             scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-            setEpisodeWidth();
             $('#overlay-s').fadeOut();
         });
     } else {
@@ -639,18 +592,18 @@ function listChannel() {
                         hasFavoriteChannel = true;
                         if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
                             temp = channel.moreImageUrl.split('|');
-                            if (temp[0]) { channel.moreImageUrl_1 = temp[0]; }
-                            if (temp[1]) { channel.moreImageUrl_2 = temp[1]; }
-                            if (temp[2]) { channel.moreImageUrl_3 = temp[2]; }
+                            if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_1 = temp[0]; }
+                            if (temp[1] && temp[1] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_2 = temp[1]; }
+                            if (temp[2] && temp[2] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_3 = temp[2]; }
                         }
                     } else {
-                        if (channel.imageUrl && '' !== $.trim(channel.imageUrl)) {
+                        if (channel.imageUrl && '' !== $.trim(channel.imageUrl) && channel.imageUrl !== CMS_CONF.EPISODE_DEFAULT_IMAGE) {
                             channel.moreImageUrl_1 = channel.imageUrl;
                         }
                         if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
                             temp = channel.moreImageUrl.split('|');
-                            if (temp[0]) { channel.moreImageUrl_2 = temp[0]; }
-                            if (temp[1]) { channel.moreImageUrl_3 = temp[1]; }
+                            if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_2 = temp[0]; }
+                            if (temp[1] && temp[1] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_3 = temp[1]; }
                         }
                     }
                     items.push(channel);
@@ -714,12 +667,6 @@ function rebuildCrumbAndParam(cid, eid) {
             if (cmsCrumb.channelId) {
                 delete cmsCrumb.channelId;
             }
-            if (cmsCrumb.name) {
-                delete cmsCrumb.name;
-            }
-            if (cmsCrumb.intro) {
-                delete cmsCrumb.intro;
-            }
         }
     } else {
         cmsCrumb.channelId = cid;
@@ -736,12 +683,6 @@ function rebuildCrumbAndParam(cid, eid) {
         }
     } else {
         cmsCrumb.id = eid;
-        if (cmsCrumb.name) {
-            delete cmsCrumb.name;
-        }
-        if (cmsCrumb.intro) {
-            delete cmsCrumb.intro;
-        }
     }
     $.cookie('cms-crumb', $.param(cmsCrumb));
     // rebuild url param by first-time entry
@@ -756,7 +697,6 @@ function rebuildCrumbAndParam(cid, eid) {
     if ('' != qrystr) {
         qrystr = '?' + qrystr;
     }
-    $('#epcurate-nav-info').attr('href', 'epcurate-info.html' + qrystr);
     $('#epcurate-nav-curation').attr('href', 'epcurate-curation.html' + qrystr);
     $('#epcurate-nav-publish').attr('href', 'epcurate-publish.html' + qrystr);
     $('#form-btn-back').attr('href', $('#epcurate-nav-' + $('#form-btn-back').attr('rel')).attr('href'));

@@ -422,6 +422,10 @@
     text-align: center;
 }
 
+#content-main-wrap form .fminput .fmfield .swfupload {
+    margin-top: 3px;
+}
+
 #content-main-wrap form .fminput .fmfield p.default {
 	height: 82px;
 	padding: 0;

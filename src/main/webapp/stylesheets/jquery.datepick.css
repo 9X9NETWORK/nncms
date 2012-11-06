@@ -18,11 +18,12 @@ img.datepick-trigger {
 .ui-datepicker {
     display: none;
     z-index: 100000; /*must have*/
+    float: left;
     width: 190px;
-    margin: 0;
-    padding: 0 5px 5px 5px;
-    border: 1px solid #dadada;
-    background: #fff;
+    height: 207px;
+    margin: 0 15px 0 0;
+    padding: 0 10px 5px 10px;
+    background: url(../images/bg_calander.png) no-repeat 0 0;
     color: #222;
     font: 14px Arial,Helvetica,sans-serif;
     -moz-border-radius: 4px;
@@ -146,9 +147,8 @@ table.ui-datepicker-calendar {
 }
 
 table.ui-datepicker-calendar th {
-    height: 20px;
     margin: 0;
-    padding: 2px;
+    padding: 0;
     color: #777;
     font-weight: bold;
     font-size: 13px;
@@ -156,20 +156,21 @@ table.ui-datepicker-calendar th {
 }
 
 table.ui-datepicker-calendar th span {
-    margin: 1px;
-    padding: 1px;
+    display: block;
+    width: 24px;
+    height: 25px;
+    line-height: 25px;
 }
 
 table.ui-datepicker-calendar td {
-    padding: 2px;
     border: none;
 }
 
 table.ui-datepicker-calendar td a {
     display: block;
-    width: 20px;
-    height: 21px;
-    line-height: 21px;
+    width: 24px;
+    height: 25px;
+    line-height: 25px;
     padding: 0;
     color: #777;
     font-size: 13px;
@@ -179,6 +180,13 @@ table.ui-datepicker-calendar td a {
 
 table.ui-datepicker-calendar td a.ui-state-active,
 table.ui-datepicker-calendar td a:hover {
-    background: url(../images/bg_calander_highlight.png) no-repeat 0 0;
+    background: url(../images/bg_calander_highlight.png) no-repeat 3px 2px;
 	color: #fff;
+}
+
+table.ui-datepicker-calendar td.ui-state-disabled span {
+    display: block;
+    width: 20px;
+    height: 21px;
+    color: #ddd;
 }
