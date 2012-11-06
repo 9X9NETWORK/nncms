@@ -790,6 +790,9 @@ $(function () {
                 });
                 // insert mode: insert episode --> insert programs --> update episode with null
                 parameter = {
+                    isPublic: false,
+                    publishDate: "",
+                    scheduleDate: "",
                     name: $('#name').val(),
                     intro: $('#intro').val(),
                     imageUrl: firstImageUrl,
