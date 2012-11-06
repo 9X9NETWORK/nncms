@@ -1,4 +1,5 @@
 $(function () {
+    autoHeight();
     setFormHeight();
     scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
 
@@ -301,6 +302,7 @@ $(function () {
     });
 
     $(window).resize(function () {
+        autoHeight();
         setFormHeight();
         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
     });
@@ -352,9 +354,6 @@ function setFormHeight() {
     if (windowWidth <= 1220) {
         $('input.text').width(460);
         $('textarea.textarea').width(455);
-    }
-    if (formHeight < contentHeight) {
-        $('#content-main-wrap form').height(contentHeight - 40);
     }
 }
 

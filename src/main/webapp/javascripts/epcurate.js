@@ -251,6 +251,9 @@ $(function () {
         $('#publishHour').val($(this).text());
         return false;
     });
+    $('#epcurate-info').on('click', '#name', function () {
+        $('.form-btn .notice').addClass('hide');
+    });
 });
 
 function chkPublishData(fm, src) {
@@ -264,7 +267,6 @@ function chkPublishData(fm, src) {
             || $('input[name=status]:checked').length <= 0
             || ('24:00' === $('#publishHour').val() && ($('#status_scheduled').is(':checked') || $('#rerun_y').is(':checked')))) {
         $('.form-btn .notice').removeClass('hide');
-        fm.name.focus();
         return false;
     }
     $('.form-btn .notice').addClass('hide');
@@ -282,16 +284,23 @@ function setFormWidth() {
         $('input.text').width(480);
         $('textarea.textarea').width(475);
     }
-    if (windowWidth >= 1200) {
-        $('#epcurate-nav ul li.publish').css('left', '239px');
-        $('#epcurate-nav ul').css('width', '484px');
-        $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', '239px');
-        $('#epcurate-nav span.nav-right, #epcurate-nav span.nav-middle').css('width', '236px');
-    } else {
-        $('#epcurate-nav ul li.publish').css('left', '130px');
+    if (windowWidth < 1024) {
         $('#epcurate-nav ul').css('width', '262px');
+        $('#epcurate-nav ul li.publish').css('left', '130px');
         $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', '125px');
         $('#epcurate-nav span.nav-right, #epcurate-nav span.nav-middle').css('width', '125px');
+    }
+    if (windowWidth >= 1024 && windowWidth <= 1138) {
+        $('#epcurate-nav ul').css('width', windowWidth - 762 + 'px');
+        $('#epcurate-nav ul li.publish').css('left', windowWidth - 894 + 'px');
+        $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', windowWidth - 899 + 'px');
+        $('#epcurate-nav span.nav-right, #epcurate-nav span.nav-middle').css('width', windowWidth - 899 + 'px');
+    }
+    if (windowWidth > 1138) {
+        $('#epcurate-nav ul').css('width', '484px');
+        $('#epcurate-nav ul li.publish').css('left', '244px');
+        $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', '239px');
+        $('#epcurate-nav span.nav-right, #epcurate-nav span.nav-middle').css('width', '239px');
     }
 }
 
@@ -472,6 +481,7 @@ function updateHour() {
                     $('#date-time .time ul li:eq(' + nowHour + ')').nextAll().addClass('enable');
                 } else {
                     $('#date-time .time ul li').removeClass('enable').removeClass('disable');
+                    $('#date-time .time ul li:eq(' + nowHour + ')').addClass('enable');
                     $('#date-time .time ul li:eq(' + nowHour + ')').prevAll().addClass('disable');
                     $('#date-time .time ul li:eq(' + nowHour + ')').nextAll().addClass('enable');
                 }

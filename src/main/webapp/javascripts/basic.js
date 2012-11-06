@@ -15,18 +15,21 @@ function autoHeight() {
         titleFuncPaddingBottom = parseInt($('#title-func').css('padding-bottom'), 10),
         titleFuncHeight = parseInt(titleFuncContentHeight + titleFuncPaddingTop + titleFuncPaddingBottom, 10),
         sliderHeight = windowHeight - titleFuncHeight - 157;            // 157: (header45 + studio-nav49)94 + footer48 + space15
-    $('#content-wrap, #content-main').height($(window).height() - 94);  // 94: header45(50-5) + studio-nav49(36+13);
+    $('#content-wrap').height($(window).height() - 94);                 // 94: header45(50-5) + studio-nav49(36+13);
+    $('#content-main').height($(window).height() - footerHeight - 94);  // 94: header45(50-5) + studio-nav49(36+13);
     $('.epcurate-curation#content-wrap, .epcurate-publish#content-wrap').height($(window).height() - 49);   // $('#epcurate-nav .epcurate-nav-wrap')
     $('.epcurate-curation #content-main, .epcurate-publish #content-main').height($(window).height() - 97); // 97: epcurate-nav49 + form-btn48  
-    $('#content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + footerHeight + titleFuncHeight + 15);  // 15: space between footer and content
-    $('.epcurate-publish #content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + 270); // 270: datepicker height + form-btn48 + space15
+    $('#content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + titleFuncHeight + 15);     // 15: space between footer and content
+    $('.epcurate-publish #content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + 270);    // 270: datepicker height + form-btn48 + space15
     $('.epcurate-curation #content-main-wrap').height($('#content-main-wrap').children('.constrain').height());
     $('#content-main-wrap:not(.curation)').css('margin-top', titleFuncHeight + 'px');
     $('#main-wrap-slider').css('top', titleFuncHeight + 'px');
     $('#main-wrap-slider').height(sliderHeight);
     $('#main-wrap-slider').attr('data-orig-slider-height', sliderHeight);
-    $('#main-wrap-slider').height(windowHeight - 137);  // 137: epcurate-nav49 + content-main-wrap margin25 + form-btn48 + space between footer and content15
-    $('#main-wrap-slider').attr('data-orig-slider-height', windowHeight - 137);
+    if ($('#epcurate-nav.publish').length > 0) {
+        $('#main-wrap-slider').height(windowHeight - 137);  // 137: epcurate-nav49 + content-main-wrap margin25 + form-btn48 + space between footer and content15
+        $('#main-wrap-slider').attr('data-orig-slider-height', windowHeight - 137);
+    }
 }
 
 function showSystemErrorOverlay(msg) {

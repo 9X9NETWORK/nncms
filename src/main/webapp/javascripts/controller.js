@@ -454,7 +454,7 @@ function listEpisode(id) {
                 }
             });
         });
-    } else if (id == 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
+    } else if ('' !== id && id == 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
         // for fake favorite channel
         showProcessingOverlay();
         nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {userId: CMS_CONF.USER_DATA.id}), null, function (favorites) {

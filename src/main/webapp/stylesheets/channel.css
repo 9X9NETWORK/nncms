@@ -325,8 +325,7 @@
 
 #content-main-wrap form {
     position: relative;
-    min-height: 450px;
-    padding: 0 0 40px 0;
+    padding: 0 0 56px 0;
 }
 
 #content-main-wrap form .fminput {
