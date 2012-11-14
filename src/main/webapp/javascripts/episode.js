@@ -147,7 +147,7 @@ function setEpisodeWidth() {
     $('#ep-list ul li .wrap, #title-func .caption').width(wrapWidth - 31 - 1);  // 1:border
     $('#ep-list ul li .episode, #title-func .caption  p.episode').width(wrapWidth - 31 - scheduledWidth - publishWidth - viewsWidth - 1);   // 1:border
     $('#ep-list ul li .episode h3').each(function (index) {
-        $(this).html($(this).data('meta'));
+        $(this).text($(this).data('meta'));
     });
     $('#ep-list ul li .episode h3').addClass('ellipsis').ellipsis();
 }

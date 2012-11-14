@@ -47,11 +47,7 @@ $(function () {
         $.unblockUI();
         $('#overlay-s .overlay-middle').html('Saving...');
         $('#overlay-s').fadeIn();
-        setTimeout(function () {
-            $('#overlay-s').hide();
-            $('#overlay-s .overlay-middle').html('Changes were saved successfully');
-            $('#overlay-s').fadeIn().delay(3000).fadeOut();
-        }, 3000);
+        $('#overlay-s').fadeOut(3000);
         return false;
     });
 

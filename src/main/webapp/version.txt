@@ -1,3 +1,74 @@
+Revision: 441
+Author: chihwen
+Date: 下午 01:45:49, 2012年11月9日
+Message:
+修正 ch title, ch description, ch tag 特別處理 html escape 造成的錯誤
+issue 5459
+----
+Modified : /fakeapi/javascripts/controller.js
+
+
+Revision: 439
+Author: chihwen
+Date: 下午 01:22:04, 2012年11月9日
+Message:
+在 CSS 及 JS 引入檔後方加入版本號參數，以便在佈建時避免客戶端快取到舊的檔案
+issue 5459
+----
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/index.html
+Modified : /fakeapi/login.html
+
+
+Revision: 438
+Author: chihwen
+Date: 下午 12:59:59, 2012年11月9日
+Message:
+同步 src 分支版本 427
+issue 5459
+----
+Deleted : /fakeapi/javascripts/play.js
+Modified : /fakeapi/stylesheets/playback.css
+
+
+Revision: 433
+Author: chihwen
+Date: 上午 12:03:36, 2012年11月9日
+Message:
+修正 episode list 中的 title 若含 <Kuso> 類標籤會消失的問題
+
+https://bugzilla.teltel.com/show_bug.cgi?id=11667
+issue 5459
+----
+Modified : /fakeapi/fakeapi/channels_episodes.php
+Modified : /fakeapi/javascripts/episode.js
+
+
+Revision: 428
+Author: chihwen
+Date: 下午 02:41:42, 2012年11月8日
+Message:
+同步 src 分支版本 422~427
+
+1. 讓 curation 的 episode curation nav 選單 liquid 調整成逐步變成寬 242px。
+2. YouTube Chromeless Video Player Research。
+issue 5459
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/javascripts/curation.js
+Added : /fakeapi/javascripts/jquery.corner.js
+Modified : /fakeapi/javascripts/library.js
+Added : /fakeapi/javascripts/play.js
+Modified : /fakeapi/javascripts/uploads.js
+Modified : /fakeapi/stylesheets/ep-curation.css
+Modified : /fakeapi/stylesheets/lightbox.css
+Added : /fakeapi/stylesheets/playback.css
+
+
 Revision: 417
 Author: chihwen
 Date: 下午 10:06:05, 2012年11月6日
@@ -24,7 +95,3 @@ Modified : /fakeapi/javascripts/curation.js
 Modified : /fakeapi/javascripts/epcurate.js
 Modified : /fakeapi/stylesheets/channel.css
 
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 3931
-Last Changed Date: 2012-11-06 23:44:19 +0800 (Tue, 06 Nov 2012)

@@ -1,4 +1,4 @@
-/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth htmlEscape showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp updateHour switchPublishStatus switchRerunCheckbox */
+/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp updateHour switchPublishStatus switchRerunCheckbox */
 /*jslint eqeq: true, regexp: true, unparam: true, sloppy: true, todo: true, vars: true */
 nn.initialize();
 nn.debug(CMS_CONF.IS_DEBUG);
@@ -506,14 +506,14 @@ function updateChannel(id) {
                 $('#func-nav .episode').attr('href', 'episode-list.html?id=' + id);
                 $('#func-nav .setting').attr('href', 'channel-setting.html?id=' + id);
                 $('#channel-name').text(channel.name);
-                $('#name').val(htmlEscape(channel.name));
+                $('#name').val(channel.name);
                 $('#imageUrl').val(channel.imageUrl);
                 $('#imageUrlOld').val(channel.imageUrl);
                 if ('' != $.trim(channel.imageUrl)) {
                     $('#thumbnail-imageUrl').attr('src', channel.imageUrl + '?n=' + Math.random());
                 }
-                $('#intro').val(htmlEscape(channel.intro));
-                $('#tag').val(htmlEscape(channel.tag));
+                $('#intro').val(channel.intro);
+                $('#tag').val(channel.tag);
                 $('#lang').val(channel.lang);
                 if ('' != channel.lang && CMS_CONF.LANG_MAP[channel.lang]) {
                     $('#lang-select-txt').text(CMS_CONF.LANG_MAP[channel.lang]);
