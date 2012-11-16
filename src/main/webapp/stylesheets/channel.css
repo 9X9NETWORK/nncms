@@ -212,6 +212,7 @@
 #channel-list li .func-wrap .func-btns .btn-wrap ul li {
     position: relative;
     float: left;
+    overflow: visible;
     margin: 0 8px 0 0;
 }
 

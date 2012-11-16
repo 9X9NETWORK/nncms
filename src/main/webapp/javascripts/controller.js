@@ -401,6 +401,7 @@ function listEpisode(id) {
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                     nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {userId: CMS_CONF.USER_DATA.id}), null, function (favorites) {
                         var cntEpisode = favorites.length;
+                        channel.name = CMS_CONF.USER_DATA.name + "'s Favorite";
                         $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
                         $('#content-main-wrap .constrain').html('');
                         if (cntEpisode > 0) {
@@ -597,6 +598,7 @@ function listChannel() {
                             if (temp[1] && temp[1] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_2 = temp[1]; }
                             if (temp[2] && temp[2] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_3 = temp[2]; }
                         }
+                        channel.name = CMS_CONF.USER_DATA.name + "'s Favorite";
                     } else {
                         if (channel.imageUrl && '' !== $.trim(channel.imageUrl) && channel.imageUrl !== CMS_CONF.EPISODE_DEFAULT_IMAGE) {
                             channel.moreImageUrl_1 = channel.imageUrl;
