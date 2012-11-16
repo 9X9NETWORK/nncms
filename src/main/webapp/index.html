@@ -5,26 +5,26 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=438" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=438" />
-<link rel="stylesheet" href="stylesheets/channel.css?v=438" />
+<link rel="stylesheet" href="stylesheets/style.css?v=454" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=454" />
+<link rel="stylesheet" href="stylesheets/channel.css?v=454" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=438"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=438"></script>
-<script src="javascripts/jquery.ellipsis.js?v=438"></script>
-<script src="javascripts/jquery.blockUI.js?v=438"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=438"></script>
-<script src="javascripts/jquery.charcounter.min.js?v=438"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=438"></script>
-<script src="javascripts/jquery.cookie.js?v=438"></script>
-<script src="javascripts/json2.js?v=438"></script>
-<script src="javascripts/purl.js?v=438"></script>
-<script src="javascripts/vertical.slider.js?v=438"></script>
-<script src="javascripts/config.js?v=438"></script>
-<script src="javascripts/basic.js?v=438"></script>
-<script src="javascripts/controller.js?v=438"></script>
-<script src="javascripts/channel.js?v=438"></script>
+<script src="javascripts/nn-sdk.js?v=454"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=454"></script>
+<script src="javascripts/jquery.ellipsis.js?v=454"></script>
+<script src="javascripts/jquery.blockUI.js?v=454"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=454"></script>
+<script src="javascripts/jquery.charcounter.min.js?v=454"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=454"></script>
+<script src="javascripts/jquery.cookie.js?v=454"></script>
+<script src="javascripts/json2.js?v=454"></script>
+<script src="javascripts/purl.js?v=454"></script>
+<script src="javascripts/vertical.slider.js?v=454"></script>
+<script src="javascripts/config.js?v=454"></script>
+<script src="javascripts/basic.js?v=454"></script>
+<script src="javascripts/controller.js?v=454"></script>
+<script src="javascripts/channel.js?v=454"></script>
 <title>9x9.tv - My Channels</title>
 </head>
 <body>
@@ -90,6 +90,7 @@
 <div id="content-main">
 <div id="title-func" class="clearfix">
 <h2>My Channels (<span id="channel-counter"></span>)</h2>
+<p class="order btns"><span><a href="javascript:void(0);" class="reorder">Reorder channels</a></span></p>
 </div>
 <div id="content-main-wrap">
 <div class="constrain">
@@ -101,7 +102,12 @@
 </div>
 
 <script id="channel-list-tmpl-item" type="text/x-jquery-tmpl">
-<li class="clearfix">
+<li class="clearfix" data-meta="${id}">
+<div class="container">
+<div class="container-right">
+<div class="container-bottom">
+<div class="container-left">
+<div class="wrap">
 <div class="photo-list">
 <a href="/#!${id}" target="_blank">
 {{if cntEpisode == 0 && -1 !== $.inArray(moreImageUrl_1, [CMS_CONF.CHANNEL_DEFAULT_IMAGE, CMS_CONF.EPISODE_DEFAULT_IMAGE])}}
@@ -127,10 +133,10 @@
 {{if contentType == CMS_CONF.YOUR_FAVORITE}}
 <div class="btn-wrap disable">
 <ul>
-<li><a href="#" class="add disable">Add</a></li>
+<li><a href="javascript:void(0);" class="add disable">Add</a></li>
 <li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Episode list</span></span></span></span></a></li>
-<li><a href="#" class="setting disable">Setting</a></li>
-<li><a href="#" class="del disable">Del</a></li>
+<li><a href="javascript:void(0);" class="setting disable">Setting</a></li>
+<li><a href="javascript:void(0);" class="del disable">Del</a></li>
 </ul>
 </div>
 {{else}}
@@ -143,6 +149,12 @@
 </ul>
 </div>
 {{/if}}
+</div>
+</div>
+</div>
+<p class="drag">move</p>
+</div>
+</div>
 </div>
 </div>
 </li>
@@ -183,7 +195,7 @@
 <!--============================== footer close ==============================-->
 
 <div id="overlay-s">
-<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle">Saving...</span></span></p>
+<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span></span></p>
 </div>
 
 <div id="system-error" class="lightbox-content overlay-l">

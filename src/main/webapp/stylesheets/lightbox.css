@@ -59,6 +59,7 @@
     width: 180px;
     height: 180px;
     text-indent: -100000px;
+    text-decoration: none;
     behavior: url(PIE.htc);
 }
 

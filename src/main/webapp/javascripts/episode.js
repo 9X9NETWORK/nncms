@@ -5,7 +5,7 @@ $(function () {
 
     // common unblock
     $('body').keyup(function (e) {
-        if (27 === e.keyCode) { // Esc
+        if (27 === e.which) { // Esc
             $.unblockUI();
             if ($(this).hasClass('has-error')) {
                 location.replace('index.html');
@@ -37,11 +37,11 @@ $(function () {
     $('body').removeClass('has-change');
     $(document).on('click', '#header #logo, #header a, #studio-nav a, #content-nav a, #footer a, #title-func .curate, #episode-list a.edit', function (e) {
         if ($('body').hasClass('has-change')) {
-            if (e && $(e.target).attr('href')) {
-                $('body').data('leaveUrl', $(e.target).attr('href'));
+            if (e && $(e.currentTarget).attr('href')) {
+                $('body').data('leaveUrl', $(e.currentTarget).attr('href'));
             }
-            if (e && $(e.target).attr('id')) {
-                $('body').data('leaveId', $(e.target).attr('id'));
+            if (e && $(e.currentTarget).attr('id')) {
+                $('body').data('leaveId', $(e.currentTarget).attr('id'));
             }
             showUnsaveOverlay();
             return false;
@@ -74,7 +74,9 @@ $(function () {
             episodes = [],
             $this = $(this);
         $('#episode-list > li').each(function () {
-            episodes.push($(this).data('meta'));
+            if ($(this).data('meta') > 0) {
+                episodes.push($(this).data('meta'));
+            }
         });
         if (episodes.length > 0) {
             parameter = {

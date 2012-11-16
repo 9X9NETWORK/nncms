@@ -13,7 +13,7 @@ $(function () {
         }
     }
     $('body').keyup(function (e) {
-        if (27 === e.keyCode) { // Esc
+        if (27 === e.which) { // Esc
             $.unblockUI();
             if ($(this).hasClass('has-error')) {
                 hasErrorRedirect();

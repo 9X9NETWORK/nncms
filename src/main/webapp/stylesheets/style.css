@@ -43,41 +43,61 @@ abbr, acronym {
 **/
 
 #overlay-s {
-	display: none;
+    display: none;
 	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 1000;
 	width: 100%;
 	height: 100%;
+    background: url(../images/bg_b70.png) repeat;
+}
+
+#overlay-s .wrap {
+    position: relative;
+	width: 100%;
+	height: 100%;
+    border: 1px solid #0f0;
 }
 
 #overlay-s .overlay-content {
     position: absolute;
-    top: 45px;
+    top: 50%;
     left: 50%;
-	height: 26px;
-	padding-left: 4px;
-	background: url(../images/popmessage_style1_left.png) no-repeat 0 0;
-    color: #fff;
+    width: 174px;
+	height: 84px;
+    margin: -42px 0 0 -90px;
+    padding-left: 6px;
+    background: url(../images/waiting_loading_left.png) no-repeat 0 0;
+    color: #999;
 	font-weight: bold;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 #overlay-s .overlay-content span {
 	display: block;
-	height: 26px;
-	line-height: 26px;
+	height: 84px;
+	line-height: 84px;
 }
 
 #overlay-s .overlay-content span.overlay-right {
-	padding-right: 4px;
-	background: url(../images/popmessage_style1_right.png) no-repeat right 0;
+	padding-right: 6px;
+	background: url(../images/waiting_loading_right.png) no-repeat right 0;
 }
 
 #overlay-s .overlay-content span.overlay-middle {
-	padding: 0 8px;
-	background: url(../images/popmessage_style1_middle.png) repeat-x;
+    width: 168px;
+    height: 45px;
+    line-height: 45px;
+    padding: 19px 0 20px 0;
+	background: url(../images/waiting_loading_middle.png) repeat-x;
+    text-align: center;
+}
+
+#overlay-s .overlay-content span.overlay-middle img {
+    float: left;
+    margin: 0 0 0 15px;
+    vertical-align: middle;
 }
 
 /**
@@ -577,7 +597,7 @@ background: #e4e4e4;
 }
 
 #epcurate-nav .epcurate-nav-wrap {
-    height: 49px;
+    height: 46px;
     padding: 0;
 }
 
@@ -680,7 +700,7 @@ background: #e4e4e4;
 
 #epcurate-nav .epcurate-nav-wrap ul li {
     position: absolute;
-    top: 12px;
+    top: 9px;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li.curation {
@@ -688,7 +708,7 @@ background: #e4e4e4;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li.publish {
-    top: 11px;
+    top: 8px;
     left: 131px;
 }
 
@@ -765,11 +785,11 @@ background: #e4e4e4;
 }
 
 #epcurate-nav.publish .epcurate-nav-wrap ul li.curation {
-    top: 11px;
+    top: 8px;
 }
 
 #epcurate-nav.publish .epcurate-nav-wrap ul li.publish {
-    top: 12px;
+    top: 9px;
     left: 130px;
 }
 

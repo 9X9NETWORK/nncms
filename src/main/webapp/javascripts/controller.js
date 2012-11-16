@@ -1,4 +1,4 @@
-/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp updateHour switchPublishStatus switchRerunCheckbox */
+/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp updateHour switchPublishStatus switchRerunCheckbox setFormHeight */
 /*jslint eqeq: true, regexp: true, unparam: true, sloppy: true, todo: true, vars: true */
 nn.initialize();
 nn.debug(CMS_CONF.IS_DEBUG);
@@ -224,7 +224,8 @@ function buildEpcurateCuration(fm, crumb) {
                                         ytId: ytData.id,
                                         fileUrl: programItem.fileUrl,
                                         imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
-                                        duration: ytData.duration,
+                                        //duration: ytData.duration,      // ON PURPOSE to mark this line to keep trimmed duration from 9x9 API
+                                        ytDuration: ytData.duration,    // keep original duration from YouTube
                                         name: ytData.title,
                                         intro: ytData.description,
                                         uploader: ytData.uploader,
@@ -611,6 +612,15 @@ function listChannel() {
                 $('#channel-list-tmpl-item').tmpl(items, {
                     userId: CMS_CONF.USER_DATA.id
                 }).appendTo('#channel-list');
+                // channel list sorting
+                $('#channel-list').sortable({
+                    cursor: 'move',
+                    revert: true,
+                    change: function (event, ui) {
+                        $('body').addClass('has-change');
+                    }
+                });
+                $('#channel-list').sortable('disable');
             }
             if (cntChannel <= 0 || (1 === cntChannel && hasFavoriteChannel)) {
                 if (!$.cookie('cms-cct')) {
@@ -624,6 +634,7 @@ function listChannel() {
                 }
             }
             autoHeight();
+            setFormHeight();
             scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
             $('#overlay-s').fadeOut();
         });

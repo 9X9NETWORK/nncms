@@ -21,7 +21,7 @@ p.auto-height {
 *----------------------------------------------------------------------------*/
 
 #epcurate-curation {
-    background: url(../images/bg_tab_bar2.png) repeat-x;
+    background: url(../images/bg_tab_bar2.png) repeat-x 0 -4px;
 }
 
 #epcurate-curation p.space {
@@ -44,8 +44,8 @@ p.auto-height {
 
 #epcurate-curation #video-player .video,
 #epcurate-curation #video-player .video #youTubePlayer {
-    width: 349px;
-    height: 240px;
+    width: 400px;
+    height: 269px;
     background-color: #000;
 }
 
@@ -63,7 +63,7 @@ p.auto-height {
 
 #epcurate-curation ul.tabs {
     overflow: hidden;
-    padding: 16px 0 0 349px;
+    padding: 12px 0 0 400px;
 }
 
 #epcurate-curation ul.tabs li {
@@ -255,7 +255,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-add {
     float: left;
-    width: 552px;
+    width: 550px;
     padding: 20px 0 0 30px;
 }
 
@@ -279,6 +279,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-add p.textarea span textarea {
     display: block;
+    overflow: auto;
     width: 542px;
     height: 149px;
     padding: 0 5px;
@@ -331,15 +332,14 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit {
     float: left;
-    width: 595px;
-    padding: 0 0 0 55px;
+    width: 550px;
+    padding: 0 0 0 32px;
     color: #777;
     font-size: 13px;
 }
 
-#epcurate-curation #cur-edit h3,
 #epcurate-curation #cur-edit p {
-    margin: 0 0 20px 0;
+    margin: 0 0 18px 0;
 }
 
 #epcurate-curation #cur-edit h3 {
@@ -365,31 +365,38 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .edit-time {
+    position: relative;
 	overflow: hidden;
-    padding-top: 20px;
+    width: 550px;
+    height: 279px;
 }
 
 #epcurate-curation #cur-edit .set-time {
-    float: left;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 335px;
+    height: 95px;
 }
 
 #epcurate-curation #cur-edit .set-time .time-wrap {
-    float: left;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 155px;
 }
 
 #epcurate-curation #cur-edit .set-time .start-time,
-#epcurate-curation #cur-edit .set-time .end-time {
+#epcurate-curation #cur-edit .set-time .end-time,
+#epcurate-curation #cur-edit .set-time .total-time {
     overflow: hidden;
-    width: 155px;
-    margin-bottom: 13px;
-}
-
-#epcurate-curation #cur-edit .set-time .end-time {
-    margin: 0;
+    width: 164px;
+    margin-top: 13px;
 }
 
 #epcurate-curation #cur-edit .set-time .start-time span,
-#epcurate-curation #cur-edit .set-time .end-time     span {
+#epcurate-curation #cur-edit .set-time .end-time     span,
+#epcurate-curation #cur-edit .set-time .total-time span {
     float: left;
     width: 65px;
     height: 21px;
@@ -398,8 +405,8 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .set-time p.time {
     float: left;
-    width: 27px;
-    margin: 0 3px 0 0;
+    width: 28px;
+    margin: 0 5px 0 0;
     text-align: right;
 }
 
@@ -423,23 +430,31 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .set-time .btn-wrap {
-    position: relative;
-    float: right;
-    padding-left: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 164px;
+    width: 169px;
+    height: 85px;
+}
+
+#epcurate-curation #cur-edit .set-time .btn-wrap .buttons {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    height: 31px;
 }
 
 #epcurate-curation #cur-edit .set-time .btn-wrap .notice {
+    display: none;
     position: absolute;
-    top: 0;
+    bottom: 18px;
     left: 0;
     width: 170px;
-    padding-left: 12px;
     color: #f00;
 }
 
 #epcurate-curation #cur-edit .set-time .btn-wrap .btns {
     float: left;
-    margin: 30px 0 0 0;
 }
 
 #epcurate-curation #cur-edit .set-time .btn-wrap .btns a {
@@ -451,16 +466,26 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .set-time .btn-wrap .btn-cancel {
-    margin-right: 10px;
+    margin: 0 12px 0 0;
 }
 
 #epcurate-curation #cur-edit ul {
-    /*float: right;    time-trim*/
-    float: left;
+    float: right;
+}
+
+#epcurate-curation #cur-edit ul.play-notice {
+    position: absolute;
+    right: 0;
+    bottom: 4px;
+    float: none;
 }
 
 #epcurate-curation #cur-edit ul li {
     margin-bottom: 20px;
+}
+
+#epcurate-curation #cur-edit ul.play-notice li {
+    margin: 18px 0 0;
 }
 
 #epcurate-curation #cur-edit ul li.region {
@@ -478,12 +503,8 @@ padding-right: 8px;
     background: url(../images/icon_not_playable.png) no-repeat 0 0;
 }
 
-#epcurate-curation #cur-edit .edit-title {
-	padding-top: 8px;
-}
-
 #epcurate-curation #cur-edit .edit-title h5 {
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 	color: #777;
 	font-size: 13px;
 }
@@ -495,12 +516,18 @@ padding-right: 8px;
 #epcurate-curation #cur-edit .edit-title .wrap {
 	position: relative;
 	float: left;
-    width: 287px;
-	height: 230px;
+    width: 220px;
+	height: 269px;
+    margin: -1px 58px 0 0;
+}
+
+#epcurate-curation #cur-edit .edit-title .wrap.last {
+    width: 272px;
+    margin-right: 0;
 }
 
 #epcurate-curation #cur-edit .text-container {
-    margin-bottom: 4px;
+    margin-bottom: 21px;
 }
 
 #epcurate-curation #cur-edit .text-container p.textarea {
@@ -525,6 +552,7 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .text-container p.textarea span .textarea {
+    overflow: auto;
     width: 212px;
     height: 53px;
     margin-top: 2px;
@@ -550,7 +578,11 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .font-container {
-    margin-bottom: 5px;
+    margin-bottom: 21px;
+}
+
+#epcurate-curation #cur-edit .font-container h5 {
+    margin-bottom: 8px;
 }
 
 #epcurate-curation #cur-edit .font-container p {
@@ -635,9 +667,10 @@ padding-right: 8px;
     position: relative;
 	width: 33px;
 	background-position: 0 -1363px;
+    text-decoration: none;
 }
 
-#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-color span {
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-color span.color {
     display: block;
     position: absolute;
     top: 16px;
@@ -647,7 +680,7 @@ padding-right: 8px;
     background-color: #fff;
 }
 
-#epcurate-curation #cur-edit .edit-title.disable .font-container .text-func .func-wrap ul li a.font-color span {
+#epcurate-curation #cur-edit .edit-title.disable .font-container .text-func .func-wrap ul li a.font-color span.color {
     background-color: #fff !important;
 }
 
@@ -659,6 +692,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-l {
 	background-position: 0 -1463px;
+    text-decoration: none;
 }
 
 #epcurate-curation #cur-edit .edit-title.disable .font-container .text-func .func-wrap ul li a.font-l,
@@ -669,6 +703,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-s {
 	background-position: 0 -1565px;
+    text-decoration: none;
 }
 
 #epcurate-curation #cur-edit .edit-title.disable .font-container .text-func .func-wrap ul li a.font-s,
@@ -707,8 +742,99 @@ padding-right: 8px;
 	background-position: 0 -1922px;
 }
 
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .tip {
+    display: none;
+    position: absolute;
+    top: -30px;
+    left: -7px;
+    width: 80px;
+    height: 32px;
+    color: #777;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .tip img {
+	position: absolute;
+	bottom: 1px;
+	left: 50%;
+    margin-left: -7px;
+	border: none;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .tip .tip-left {
+    display: block;
+    height: 28px;
+    padding-left: 7px;
+    background: url(../images/bg_tip_left.png) no-repeat 0 0;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .tip .tip-right {
+    display: block;
+    height: 28px;
+    padding-right: 7px;
+    background: url(../images/bg_tip_right.png) no-repeat right 0;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .tip .tip-middle {
+    display: block;
+    height: 28px;
+    background: url(../images/bg_tip_middle.png) repeat-x;
+    line-height: 28px;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-weight .tip {
+    width: 40px;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-style .tip {
+    width: 47px;
+    left: -12px;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-color .tip {
+    width: 76px;
+    left: -21px;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-l .tip,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-s .tip {
+    width: 85px;
+    left: -31px;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left .tip {
+    width: 66px;
+    left: -22px;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-center .tip {
+    width: 86px;
+    left: -31px;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-right .tip {
+    width: 72px;
+    left: -41px;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-right .tip img {
+    left: 45px;
+    margin: 0;
+}
+
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li:hover .tip {
+    display: block;
+}
+
 #epcurate-curation #cur-edit .effect-container {
     float: left;
+}
+
+#epcurate-curation #cur-edit .effect-container h5 {
+    margin-bottom: 8px;
 }
 
 #epcurate-curation #cur-edit .effect-container p {
@@ -745,6 +871,10 @@ padding-right: 8px;
 	font-size: 20px;
 }
 
+#epcurate-curation #cur-edit .effect-container .select {
+    margin-right: 0;
+}
+
 #epcurate-curation #cur-edit .duration-container {
 	float: left;
 }
@@ -765,6 +895,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .duration-container .select {
 	width: 146px;
+    margin-right: 0;
 }
 
 #epcurate-curation #cur-edit .duration-container p.notice {
@@ -778,7 +909,7 @@ padding-right: 8px;
 	position: relative;
 	float: left;
     width: 100%;
-	margin-bottom: 3px;
+	margin-bottom: 18px;
 }
 
 #epcurate-curation #cur-edit .background-container p {
@@ -1117,7 +1248,7 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .radio-list label.first {
-    margin-right: 40px;
+    margin-right: 64px;
 }
 
 #epcurate-curation #cur-edit .select {
@@ -1517,6 +1648,7 @@ padding-right: 8px;
 
 #storyboard p.episode-storyboard {
     margin-bottom: 36px;
+    padding-top: 18px;
 }
 
 #storyboard p span {
@@ -1739,6 +1871,7 @@ padding-right: 8px;
     height: 23px;
     background: url(../images/btns2.png) no-repeat 0 0;
     text-indent: -100000px;
+    text-decoration: none;
 }
 
 #storyboard .storyboard-list ul li p.title a.begin-title,
@@ -1746,6 +1879,7 @@ padding-right: 8px;
     float: left;
 	margin: 0;
     background-position: 0 -2075px;
+    text-decoration: none;
 }
 
 #storyboard .storyboard-list ul li p.title a.end-title,
@@ -1753,6 +1887,7 @@ padding-right: 8px;
     float: right;
 	margin: 0;
     background-position: 0 -2129px;
+    text-decoration: none;
 }
 
 #storyboard .storyboard-list ul li p.title a.begin-title:hover,
@@ -2006,6 +2141,9 @@ padding-right: 8px;
 		width: 608px;
 		height: 386px;
 	}
+    #epcurate-curation #cur-edit #video-info{
+        height: 386px;
+    }
     #epcurate-curation #cur-add p.textarea span textarea {
         height: 290px;
     }

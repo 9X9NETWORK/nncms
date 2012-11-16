@@ -5,33 +5,34 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=438" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=438" />
-<link rel="stylesheet" href="stylesheets/uniform.css?v=438" />
-<link rel="stylesheet" href="stylesheets/playback.css?v=438" />
-<link rel="stylesheet" href="stylesheets/epcurate.css?v=438" />
-<link rel="stylesheet" href="stylesheets/ep-curation.css?v=438" />
+<link rel="stylesheet" href="stylesheets/style.css?v=454" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=454" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=454" />
+<link rel="stylesheet" href="stylesheets/playback.css?v=454" />
+<link rel="stylesheet" href="stylesheets/epcurate.css?v=454" />
+<link rel="stylesheet" href="stylesheets/ep-curation.css?v=454" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=438"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=438"></script>
-<script src="javascripts/jquery.ellipsis.js?v=438"></script>
-<script src="javascripts/jquery.blockUI.js?v=438"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=438"></script>
-<script src="javascripts/jquery.uniform.min.js?v=438"></script>
-<script src="javascripts/jquery.swfobject.min.js?v=438"></script>
-<script src="javascripts/jquery.titlecard.js?v=438"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=438"></script>
-<script src="javascripts/jquery.cookie.js?v=438"></script>
-<script src="javascripts/jquery.countdown.min.js?v=438"></script>
-<script src="javascripts/json2.js?v=438"></script>
-<script src="javascripts/purl.js?v=438"></script>
-<script src="javascripts/swfupload/swfupload.js?v=438"></script>
-<script src="javascripts/horizontal-slider.js?v=438"></script>
-<script src="javascripts/config.js?v=438"></script>
-<script src="javascripts/basic.js?v=438"></script>
-<script src="javascripts/controller.js?v=438"></script>
-<script src="javascripts/curation.js?v=438"></script>
+<script src="javascripts/nn-sdk.js?v=454"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=454"></script>
+<script src="javascripts/jquery.ellipsis.js?v=454"></script>
+<script src="javascripts/jquery.blockUI.js?v=454"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=454"></script>
+<script src="javascripts/jquery.uniform.min.js?v=454"></script>
+<script src="javascripts/jquery.swfobject.min.js?v=454"></script>
+<script src="javascripts/jquery.titlecard.js?v=454"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=454"></script>
+<script src="javascripts/jquery.cookie.js?v=454"></script>
+<script src="javascripts/jquery.countdown.min.js?v=454"></script>
+<script src="javascripts/jquery.autotab.min.js?v=454"></script>
+<script src="javascripts/json2.js?v=454"></script>
+<script src="javascripts/purl.js?v=454"></script>
+<script src="javascripts/swfupload/swfupload.js?v=454"></script>
+<script src="javascripts/horizontal-slider.js?v=454"></script>
+<script src="javascripts/config.js?v=454"></script>
+<script src="javascripts/basic.js?v=454"></script>
+<script src="javascripts/controller.js?v=454"></script>
+<script src="javascripts/curation.js?v=454"></script>
 <title>9x9.tv - Episode Curation - Curation</title>
 </head>
 <body>
@@ -137,10 +138,40 @@
 
 <script id="video-info-tmpl" type="text/x-jquery-tmpl">
 <h3 class="ellipsis multiline"><span class="title">${name}</span></h3>
-<p><span class="duration">${formatDuration(duration)}</span> | From <a href="${fileUrl}" target="_blank">YouTube.com</a> | By <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> on <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span></p>
+<p>Original <span class="duration">${formatDuration(ytDuration)}</span> | From <a href="${fileUrl}" target="_blank">YouTube.com</a> | By <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> on <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span></p>
 <p class="desc ellipsis multiline">${intro}</p>
+<div class="set-time" data-origin-duration="${ytDuration}">
+<div class="time-wrap">
+<div class="start-time">
+<span>Start from:</span>
+<p class="time disable" data-time="${$item.startH}"><input type="text" name="startH" id="startH" maxlength="2" value="${$item.startH}" class="time time-h" disabled="disabled" /> :</p>
+<p class="time disable" data-time="${$item.startM}"><input type="text" name="startM" id="startM" maxlength="2" value="${$item.startM}" class="time time-m" disabled="disabled" /> :</p>
+<p class="time disable" data-time="${$item.startS}"><input type="text" name="startS" id="startS" maxlength="2" value="${$item.startS}" class="time time-s" disabled="disabled" /></p>
+</div>
+<div class="end-time">
+<span>To:</span>
+<p class="time disable" data-time="${$item.endH}"><input type="text" name="endH" id="endH" maxlength="2" value="${$item.endH}" class="time time-h" disabled="disabled" /> :</p>
+<p class="time disable" data-time="${$item.endM}"><input type="text" name="endM" id="endM" maxlength="2" value="${$item.endM}" class="time time-m" disabled="disabled" /> :</p>
+<p class="time disable" data-time="${$item.endS}"><input type="text" name="endS" id="endS" maxlength="2" value="${$item.endS}" class="time time-s" disabled="disabled" /></p>
+</div>
+<div class="total-time">
+<span>Duration:</span>
+<p class="time disable"><input type="text" name="totalH" id="totalH" maxlength="2" value="${$item.totalH}" class="time time-h" disabled="disabled" /> :</p>
+<p class="time disable"><input type="text" name="totalM" id="totalM" maxlength="2" value="${$item.totalM}" class="time time-m" disabled="disabled" /> :</p>
+<p class="time disable"><input type="text" name="totalS" id="totalS" maxlength="2" value="${$item.totalS}" class="time time-s" disabled="disabled" /></p>
+</div>
+</div>
+<div class="btn-wrap">
+<p class="notice">Invalid time, please try again.</p>
+<div class="buttons">
+<p class="btns btn-edit"><span><a href="#">Edit</a></span></p>
+<p class="btns btn-cancel hide"><span><a href="#">Cancel</a></span></p>
+<p class="btns btn-done hide"><span><a href="#">Done</a></span></p>
+</div>
+</div>
+</div>
 {{if isEmbedLimited || isZoneLimited || isMobileLimited}}
-<ul>
+<ul class="play-notice">
 {{if isEmbedLimited}}
 <li class="outside">Not playable outside Youtube</li>
 {{else}}
@@ -171,12 +202,12 @@
 <div class="text-func clearfix">
 <div class="func-wrap clearfix">
 <ul>
-<li class="font-weight"><input type="checkbox" name="fontWeight" value="bold" id="fontWeight"{{if weight == 'bold'}} checked="checked"{{/if}} />粗體</li>
-<li class="font-style"><input type="checkbox" name="fontStyle" value="italic" id="fontStyle"{{if style == 'italic'}} checked="checked"{{/if}} />斜體</li>
+<li class="font-weight"><input type="checkbox" name="fontWeight" value="bold" id="fontWeight"{{if weight == 'bold'}} checked="checked"{{/if}} />Bold<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Bold</span></span></span></span></li>
+<li class="font-style"><input type="checkbox" name="fontStyle" value="italic" id="fontStyle"{{if style == 'italic'}} checked="checked"{{/if}} />Italics<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Italics</span></span></span></span></li>
 {{if '' == color}}
-<li><a href="#" class="font-color">字體顏色<span class="c-fff"></span>
+<li><a href="#" class="font-color">Font color<span class="color c-fff"></span>
 {{else}}
-<li><a href="#" class="font-color">字體顏色<span{{if CMS_CONF.COLOR_MAP[color]}} class="${CMS_CONF.COLOR_MAP[color]}"{{/if}}></span>
+<li><a href="#" class="font-color">Font color<span{{if CMS_CONF.COLOR_MAP[color]}} class="color ${CMS_CONF.COLOR_MAP[color]}"{{/if}}></span>
 {{/if}}
 <ul class="color-list">
 <li class="c-fff" data-meta="#ffffff">#ffffff</li>
@@ -192,6 +223,7 @@
 <li class="c-03f" data-meta="#0033ff">#0033ff</li>
 <li class="c-60f" data-meta="#6600ff">#6600ff</li>
 </ul>
+<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Font color</span></span></span></span>
 </a>
 {{if '' == color}}
 <input type="hidden" name="fontColor" id="fontColor" value="#ffffff" />
@@ -204,11 +236,11 @@
 <input type="hidden" name="fontSize" id="fontSize" value="${size}" />
 {{/if}}
 </li>
-<li><a href="#" class="font-l">字體放大</a></li>
-<li><a href="#" class="font-s">字體縮小</a></li>
-<li class="align-left"><input type="radio" name="align" value="left" id="align_left"{{if align == 'left'}} checked="checked"{{/if}} />置左</li>
-<li class="align-center"><input type="radio" name="align" value="center" id="align_center"{{if align == '' || align == 'center'}} checked="checked"{{/if}} />置中</li>
-<li class="align-right"><input type="radio" name="align" value="right" id="align_right"{{if align == 'right'}} checked="checked"{{/if}} />置右</li>
+<li><a href="#" class="font-l">Font size +<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Font size +</span></span></span></span></a></li>
+<li><a href="#" class="font-s">Font size -<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Font size -</span></span></span></span></a></li>
+<li class="align-left"><input type="radio" name="align" value="left" id="align_left"{{if align == 'left'}} checked="checked"{{/if}} />Align left<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Align left</span></span></span></span></li>
+<li class="align-center"><input type="radio" name="align" value="center" id="align_center"{{if align == '' || align == 'center'}} checked="checked"{{/if}} />Align center<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Align center</span></span></span></span></li>
+<li class="align-right"><input type="radio" name="align" value="right" id="align_right"{{if align == 'right'}} checked="checked"{{/if}} />Align right<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Align right</span></span></span></span></li>
 </ul>
 </div>
 </div>
@@ -240,7 +272,7 @@
 </div>
 </div>
 
-<div class="wrap">
+<div class="wrap last">
 <div class="background-container">
 <h5>Background</h5>
 <p class="radio-list">
@@ -258,9 +290,9 @@
 <div class="bg-color">
 {{/if}}
 {{if '' == bgColor}}
-<a href="#">背景顏色<span class="c-000"></span>
+<a href="#">Background color<span class="c-000"></span>
 {{else}}
-<a href="#">背景顏色<span{{if CMS_CONF.COLOR_MAP[bgColor]}} class="${CMS_CONF.COLOR_MAP[bgColor]}"{{/if}}></span>
+<a href="#">Background color<span{{if CMS_CONF.COLOR_MAP[bgColor]}} class="${CMS_CONF.COLOR_MAP[bgColor]}"{{/if}}></span>
 {{/if}}
 <ul class="color-list">
 <li class="c-fff" data-meta="#ffffff">#ffffff</li>
@@ -356,7 +388,6 @@
 </div>
 
 <div id="storyboard">
-<p class="auto-height"></p>
 <p class="episode-storyboard">Episode storyboard (<em id="storyboard-length">50</em> videos left)<span>Duration <em id="storyboard-duration">00:00:00</em></span></p>
 <div id="storyboard-wrap" class="storyboard-list">
 <div id="storyboard-list">
@@ -366,7 +397,7 @@
 </ul>
 
 <script id="storyboard-listing-tmpl-item" type="text/x-jquery-tmpl">
-<li data-ytid="${ytId}">
+<li data-ytid="${ytId}" data-ytduration="${ytDuration}" data-starttime="${startTime}" data-endtime="${endTime}">
 {{if isEmbedLimited || isZoneLimited || isMobileLimited}}
 {{if isEmbedLimited}}
 <a href="#!pid=${id}&ytid=${ytId}" class="error"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Not playable outside YouTube</span></span></span></span></a>
@@ -412,6 +443,7 @@
 </div>
 </div>
 
+<p class="auto-height"></p>
 <div id="storyboard-slider"><div class="slider-h"></div></div>
 <p class="auto-height"></p>
 </div>
@@ -463,7 +495,7 @@
 <!--============================== footer close ==============================-->
 
 <div id="overlay-s">
-<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle">Saving...</span></span></p>
+<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span></span></p>
 </div>
 
 <div id="system-error" class="lightbox-content overlay-l">
@@ -492,6 +524,19 @@
 </div>
 
 <div id="unsave-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+<div class="overlay-btn">
+<p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unsave-trimtime-prompt" class="lightbox-content overlay-l">
 <div class="overlay-container">
 <div class="overlay-wrap">
 <a href="#" class="btn-close">Close</a>

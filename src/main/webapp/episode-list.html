@@ -5,26 +5,26 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=438" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=438" />
-<link rel="stylesheet" href="stylesheets/episode.css?v=438" />
+<link rel="stylesheet" href="stylesheets/style.css?v=454" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=454" />
+<link rel="stylesheet" href="stylesheets/episode.css?v=454" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=438"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=438"></script>
-<script src="javascripts/jquery.ellipsis.js?v=438"></script>
-<script src="javascripts/jquery.blockUI.js?v=438"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=438"></script>
-<script src="javascripts/jquery.cycle.all.js?v=438"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=438"></script>
-<script src="javascripts/jquery.cookie.js?v=438"></script>
-<script src="javascripts/json2.js?v=438"></script>
-<script src="javascripts/purl.js?v=438"></script>
-<script src="javascripts/vertical.slider.js?v=438"></script>
-<script src="javascripts/config.js?v=438"></script>
-<script src="javascripts/basic.js?v=438"></script>
-<script src="javascripts/controller.js?v=438"></script>
-<script src="javascripts/episode.js?v=438"></script>
+<script src="javascripts/nn-sdk.js?v=454"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=454"></script>
+<script src="javascripts/jquery.ellipsis.js?v=454"></script>
+<script src="javascripts/jquery.blockUI.js?v=454"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=454"></script>
+<script src="javascripts/jquery.cycle.all.js?v=454"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=454"></script>
+<script src="javascripts/jquery.cookie.js?v=454"></script>
+<script src="javascripts/json2.js?v=454"></script>
+<script src="javascripts/purl.js?v=454"></script>
+<script src="javascripts/vertical.slider.js?v=454"></script>
+<script src="javascripts/config.js?v=454"></script>
+<script src="javascripts/basic.js?v=454"></script>
+<script src="javascripts/controller.js?v=454"></script>
+<script src="javascripts/episode.js?v=454"></script>
 <title>9x9.tv - Episode list</title>
 </head>
 <body>
@@ -82,9 +82,9 @@
 <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
 
 <script id="title-func-tmpl" type="text/x-jquery-tmpl">
-<h2><span id="channel-name">${name}</span> &gt; Episode list (<span id="episode-counter">${$item.cntEpisode}</span>){{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}<a href="epcurate-curation.html?cid=${id}" class="curate btns"><span class="btn-right"><span class="btn-middle">Curate a new episode</span></span></a>{{/if}}</h2>
+<h2>${name} &gt; Episode list (<span id="episode-counter">${$item.cntEpisode}</span>){{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}<a href="epcurate-curation.html?cid=${id}" class="curate btns"><span class="btn-right"><span class="btn-middle">Curate a new episode</span></span></a>{{/if}}</h2>
 {{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}
-<p class="order btns"><span><a href="#" rel="${id}" class="reorder">Reorder episodes</a></span></p>
+<p class="order btns"><span><a href="javascript:void(0);" rel="${id}" class="reorder">Reorder episodes</a></span></p>
 {{/if}}
 {{if $item.cntEpisode > 0}}
 <div class="caption">
@@ -137,12 +137,12 @@
 </a>
 <span class="duration"><span class="time-right"><span class="time-middle">${formatDuration(duration)}</span></span></span>
 </p>
-<h3 class="ellipsis" data-meta="${name}"><a href="${playbackUrl}" target="_blank">${name}</a></h3>
+<h3 data-meta="${name}"><a href="${playbackUrl}" target="_blank">${name}</a></h3>
 <div class="btns">
 <div class="btn-wrap disable">
 <ul>
-<li><a href="#" class="edit disable"><span></span>Edit</a></li>
-<li><a href="#" class="del disable"><span></span>Delete</a></li>
+<li><a href="javascript:void(0);" class="edit disable"><span></span>Edit</a></li>
+<li><a href="javascript:void(0);" class="del disable"><span></span>Delete</a></li>
 </ul>
 </div>
 </div>
@@ -163,10 +163,10 @@
 <p class="btns"><span><a href="epcurate-curation.html?cid=${id}">Curate new episode to tell a story</a></span></p>
 <div id="selected-episode">
 <p class="episode-pager">
-<a href="#" class="active">。</a>
-<a href="#">。</a>
-<a href="#">。</a>
-<a href="#">。</a>
+<a href="javascript:void(0);" class="active">。</a>
+<a href="javascript:void(0);">。</a>
+<a href="javascript:void(0);">。</a>
+<a href="javascript:void(0);">。</a>
 </p>
 <div class="wrapper">
 <ul class="content">
@@ -219,12 +219,12 @@
 {{/if}}
 <span class="duration"><span class="time-right"><span class="time-middle">${formatDuration(duration)}</span></span></span>
 </p>
-<h3 class="ellipsis" data-meta="${name}"><a href="${playbackUrl}" target="_blank">${name}</a></h3>
+<h3 data-meta="${name}"><a href="${playbackUrl}" target="_blank">${name}</a></h3>
 <div class="btns">
 <div class="btn-wrap enable">
 <ul>
-<li><a href="epcurate-curation.html?id=${id}" class="edit"><span href="epcurate-curation.html?id=${id}"></span>Edit</a></li>
-<li><a href="/api/episodes/${id}" rel="${id}" class="del"><span rel="${id}"></span>Delete</a></li>
+<li><a href="epcurate-curation.html?id=${id}" class="edit"><span></span>Edit</a></li>
+<li><a href="/api/episodes/${id}" rel="${id}" class="del"><span></span>Delete</a></li>
 </ul>
 </div>
 </div>
@@ -295,7 +295,7 @@
 <!--============================== footer close ==============================-->
 
 <div id="overlay-s">
-<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle">Saving...</span></span></p>
+<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span></span></p>
 </div>
 
 <div id="system-error" class="lightbox-content overlay-l">

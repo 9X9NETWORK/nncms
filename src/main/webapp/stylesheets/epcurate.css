@@ -9,7 +9,7 @@
 }
 
 #content-wrap {
-    top: 49px !important;
+    top: 46px !important;
 }
 
 .epcurate-curation #content-main-wrap {
@@ -26,10 +26,6 @@
 
 .blockOverlay {
 	height: 100% !important;
-}
-
-#overlay-s .overlay-content {
-    top: 0;
 }
 
 #main-wrap-slider {
@@ -180,6 +176,10 @@
     position: relative;
     margin: 5px 0 0;
     text-decoration: none;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a img {
+    border: none;
 }
 
 #content-wrap form .fminput .fmfield p.radio-list a span {
@@ -423,6 +423,7 @@
 }
 
 #content-wrap form .fminput .fmfield p.textarea span .textarea {
+    overflow: auto;
     height: 53px;
     margin-top: 2px;
     padding: 3px;

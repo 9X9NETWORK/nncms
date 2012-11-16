@@ -31,7 +31,7 @@ $(function () {
 
     $('#lightbox-upload-video .btn-save, #lightbox-edit-video .btn-save').click(function () {
         $.unblockUI();
-        $('#overlay-s .overlay-middle').html('Saving...');
+        $('#overlay-s .overlay-middle').html('<img src="images/icon_load_l.gif" alt="" />Saving...');
         $('#overlay-s').fadeIn();
         setTimeout(function () {
             $('#overlay-s').hide();
@@ -71,7 +71,7 @@ $(function () {
     });
     $('#delete-prompt .btn-del').click(function () {
         $.unblockUI();
-        $('#overlay-s .overlay-middle').html('Saving...');
+        $('#overlay-s .overlay-middle').html('<img src="images/icon_load_l.gif" alt="" />Saving...');
         $('#overlay-s').fadeIn();
         $('#overlay-s').fadeOut(3000);
         return false;
