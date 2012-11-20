@@ -213,7 +213,7 @@
     padding: 3px 5px 0;
     background: url(../images/bg_bubble_middle_l.png) repeat-x;
     color: #777;
-    font: 13px/17px Helvetica;
+    font: 13px/17px Arial, Helvetica;
 }
 
 #content-wrap form .fminput .fmfield p.radio-list.draft a .tip {
@@ -256,7 +256,7 @@
 #content-wrap form .fminput .fmfield #date-time .time h5 {
     height: 33px;
     margin-bottom: 2px;
-    font: 500 15px/30px Helvetica;
+    font: 500 15px/30px Arial, Helvetica;
     text-align: center;
 }
 
@@ -304,7 +304,7 @@
     height: 21px;
     background: url(../images/bg_calander_highlight_middle.png) repeat-x;
     color: #fff;
-    font: 13px Helvetica;
+    font: 13px Arial, Helvetica;
     line-height: 21px;
 }
 
@@ -785,8 +785,8 @@
 	color: #999;
 }
 
-#content-wrap form .form-btn .wrap                   p span input,
-#content-wrap form .form-btn .glow-btns .btns span input {
+#content-wrap form .form-btn .wrap p span input,
+#content-wrap form .form-btn .btns    span input {
     padding: 0 10px;
 }
 

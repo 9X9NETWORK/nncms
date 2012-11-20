@@ -1,15 +1,15 @@
-Revision: 509
+Revision: 517
 Author: chihwen
-Date: 下午 07:04:49, 2012年11月19日
+Date: 下午 02:27:44, 2012年11月20日
 Message:
-只要在 trim time 編輯模式下，播完影片就要回到 Start time 並 pause，若再播放只能播至 To
+同步 src 分支版本 514~516
 
-1. 只要在 trim time 編輯模式下，播完影片就要回到 Start time 並 pause，若再播放只能播至 To。
-   不管 user 是否有手動將 progress bar 拉超出 Start from 或 To 時間，影片播畢都要重置。
-2. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=509)。
-3. 同步 src 分支版本 506~508。
-   1. 調整 nav 和 button 對齊中線。
-   2. 調整 font-family 解決不同平台會有不預期的粗體、斜體的問題。
+1. 同步 src 分支版本 514~516。
+   1. 調整 curation 和 publish 底下的 button 讓 button 底下出現陰影。
+   2. 重新檢視 font-family 包含簡寫，讓 Arial 在第一個。
+   3. 針對 input type=button、submit、reset 調整結構、高度讓按鈕底下出現陰影。
+   4. js 裡面的 font-family 也加入 Arial 當第一個選項。
+2. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=517)。
 issue 5513
 ----
 Modified : /fakeapi/channel-add.html
@@ -18,66 +18,12 @@ Modified : /fakeapi/epcurate-curation.html
 Modified : /fakeapi/epcurate-publish.html
 Modified : /fakeapi/episode-list.html
 Modified : /fakeapi/index.html
+Modified : /fakeapi/javascripts/channel.js
 Modified : /fakeapi/javascripts/curation.js
 Modified : /fakeapi/javascripts/epcurate.js
 Modified : /fakeapi/login.html
-Modified : /fakeapi/stylesheets/channel.css
-Modified : /fakeapi/stylesheets/ep-curation.css
 Modified : /fakeapi/stylesheets/epcurate.css
 Modified : /fakeapi/stylesheets/episode.css
-Modified : /fakeapi/stylesheets/library.css
 Modified : /fakeapi/stylesheets/lightbox.css
 Modified : /fakeapi/stylesheets/style.css
 
-
-Revision: 505
-Author: chihwen
-Date: 下午 03:56:50, 2012年11月19日
-Message:
-避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=505)
-
-1. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=505)
-2. 同步 src 分支版本 504 (調整 body font-family 順序以解決 ie tooltip 問題)。
-issue 5513
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/epcurate-publish.html
-Modified : /fakeapi/episode-list.html
-Modified : /fakeapi/index.html
-Modified : /fakeapi/login.html
-Modified : /fakeapi/stylesheets/style.css
-
-
-Revision: 502
-Author: chihwen
-Date: 下午 01:32:37, 2012年11月19日
-Message:
-修正 IE8, IE9 substr(負值) 及 AJAX GData jsonc 跨域相容性錯誤
-
-1. substr() with negative value not working in IE
-   http://stackoverflow.com/questions/6918943/substr-with-negative-value-not-working-in-ie
-2. jQuery.getJSON not working properly in IE8 with gdata json-c. Why?
-   http://stackoverflow.com/questions/6318996/jquery-getjson-not-working-properly-in-ie8-with-gdata-json-c-why
-3. 同步 src 分支版本 501 (調整 safari 連結底線問題)。
-issue 5513
-----
-Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/stylesheets/channel.css
-
-
-Revision: 496
-Author: chihwen
-Date: 下午 01:38:31, 2012年11月18日
-Message:
-調整共用的 formatDuration() 加入參數容錯處理
-issue 5513
-----
-Modified : /fakeapi/javascripts/basic.js
-
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 4042
-Last Changed Date: 2012-11-20 14:07:47 +0800 (Tue, 20 Nov 2012)

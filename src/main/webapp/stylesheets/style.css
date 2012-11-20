@@ -108,6 +108,7 @@ abbr, acronym {
 
 #content-wrap         .btns,
 .lightbox-content .btns {
+    height: 31px;
     padding: 0 0 0 3px;
     background: url(../images/bg_btn_left.png) no-repeat 0 0;
 }
@@ -115,6 +116,7 @@ abbr, acronym {
 #content-wrap         .btns span,
 .lightbox-content .btns span {
     display: block;
+    height: 31px;
     padding: 0 3px 0 0;
     background: url(../images/bg_btn_right.png) no-repeat right 0;
 }
@@ -173,9 +175,33 @@ abbr, acronym {
     background: url(../images/popup_btn_right_press.png) no-repeat right 0 !important;
 }
 
-.lightbox-content .btns:hover span a,
-.lightbox-content .btns:hover span input {
+.lightbox-content .btns:hover span a {
     background: url(../images/popup_btn_middle_press.png) repeat-x !important;
+}
+
+#content-wrap         .btns                 span input,
+#content-wrap         .btns:hover     span input,
+#content-wrap         .btns.disable span input,
+.lightbox-content .btns                 span input,
+.lightbox-content .btns:hover     span input {
+    background: none;
+}
+
+#content-wrap .btns span.btn-right {
+    background: url(../images/bg_btn_right.png) no-repeat right 0;
+}
+
+#content-wrap .btns span.btn-middle {
+    padding: 0;
+    background: url(../images/bg_btn_middle.png) repeat 0 0;
+}
+
+#content-wrap .btns:hover span.btn-right {
+    background: url(../images/bg_btn_right_press.png) no-repeat right 0;
+}
+
+#content-wrap .btns:hover span.btn-middle {
+    background: url(../images/bg_btn_middle_press.png) repeat 0 0;
 }
 
 /**
@@ -608,7 +634,7 @@ background: #e4e4e4;
     min-width: 200px;
     max-width: 200px;
     background: url(../images/icon_studio.png) no-repeat 14px 0;
-    font: bold 25px/25px Helvetica;
+    font: bold 25px/25px Arial, Helvetica;
     text-indent: 44px;
 }
 
@@ -673,7 +699,7 @@ background: #e4e4e4;
     height: 26px;
     padding: 0 10px;
     color: #777;
-    font: bold 15px/26px Helvetica;
+    font: bold 15px/26px Arial, Helvetica;
     text-decoration: none;
 }
 

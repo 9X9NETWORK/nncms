@@ -467,7 +467,7 @@
     height: 21px;
     margin-bottom: 11px;
     padding-right: 10px;
-    font: bold 13px/21px Helvetica;
+    font: bold 13px/21px Arial, Helvetica;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
@@ -569,7 +569,7 @@
     float: left;
     width: 155px;
     color: #777;
-    font: 13px Helvetica;
+    font: 13px Arial, Helvetica;
 }
 
 #ep-list ul li .views {

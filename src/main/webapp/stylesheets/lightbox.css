@@ -745,7 +745,7 @@
 #draft-notice h4 {
     margin-bottom: 16px;
     color: #777;
-    font: bold 13px Helvetica;
+    font: bold 13px Arial, Helvetica;
 }
 
 #draft-notice p.content {
