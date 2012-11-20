@@ -77,3 +77,7 @@ issue 5513
 ----
 Modified : /fakeapi/javascripts/basic.js
 
+==== 9x9 ====
+Last Changed Author: louis
+Last Changed Rev: 4042
+Last Changed Date: 2012-11-20 14:07:47 +0800 (Tue, 20 Nov 2012)
