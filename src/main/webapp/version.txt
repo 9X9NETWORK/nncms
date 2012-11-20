@@ -1,3 +1,16 @@
+Revision: 520
+Author: chihwen
+Date: 下午 04:24:30, 2012年11月20日
+Message:
+同步 src 分支版本 518~519
+
+1. 調整 curation button 底下的陰影。
+2. 調整 edit-time 高度。
+issue 5513
+----
+Modified : /fakeapi/stylesheets/ep-curation.css
+
+
 Revision: 517
 Author: chihwen
 Date: 下午 02:27:44, 2012年11月20日
@@ -27,7 +40,3 @@ Modified : /fakeapi/stylesheets/episode.css
 Modified : /fakeapi/stylesheets/lightbox.css
 Modified : /fakeapi/stylesheets/style.css
 
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 4044
-Last Changed Date: 2012-11-20 14:35:03 +0800 (Tue, 20 Nov 2012)

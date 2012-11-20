@@ -368,7 +368,7 @@ padding-right: 8px;
     position: relative;
 	overflow: hidden;
     width: 550px;
-    height: 279px;
+    height: 269px;
 }
 
 #epcurate-curation #cur-edit .set-time {
@@ -381,7 +381,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .set-time .time-wrap {
     position: absolute;
-    bottom: 0;
+    bottom: 4px;
     left: 0;
     width: 155px;
 }
@@ -439,7 +439,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .set-time .btn-wrap .buttons {
     position: absolute;
-    bottom: -4px;
+    bottom: 0;
     left: 0;
     height: 31px;
 }
@@ -1032,6 +1032,7 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .btn-container .btns a {
+    height: 31px;
 	padding: 0;
 	color: #777;
 	font-weight: normal;
