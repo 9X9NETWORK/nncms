@@ -174,7 +174,7 @@ function buildEpcurateCuration(fm, crumb) {
                                     }, 1000);
                                 }
                             });
-                            nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.substr(-11) + '?alt=jsonc&v=2', null, function (youtubes) {
+                            nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.slice(-11) + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
                                 nn.api('GET', CMS_CONF.API('/api/programs/{programId}/title_cards', {programId: programItem.id}), null, function (title_card) {
                                     beginTitleCard = null;
                                     endTitleCard = null;

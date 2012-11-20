@@ -36,7 +36,7 @@
     border: none;
     background: url(../images/input_box_middle.png) repeat-x;
     color: #999;
-    font-family: Helvetica;
+    font-family: Arial, Helvetica;
     font-size: 13px;
 	line-height: 29px;
 }
@@ -207,7 +207,7 @@
     padding-left: 3px;
     background: url(../images/bubble_left.png) no-repeat 0 0;
     color: #fff;
-    font-family: Helvetica;
+    font-family: Arial, Helvetica;
     font-size: 13px;
 }
 

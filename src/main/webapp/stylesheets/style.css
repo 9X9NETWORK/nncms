@@ -14,7 +14,7 @@
 
 body {
     overflow-y: hidden;
-    font-family: Helvetica, Arial, clean, Microsoft JhengHei, Apple LiGothic, SimHei, PMingLiU, sans-serif;
+    font-family: Arial, Helvetica, clean, Microsoft JhengHei, Apple LiGothic, SimHei, PMingLiU, sans-serif;
     font-size: 100%;
     color: #777;
 }
@@ -129,7 +129,7 @@ abbr, acronym {
     border: none;
     background: url(../images/bg_btn_middle.png) repeat 0 0;
     color: #777;
-    font-family: Helvetica;
+    font-family: Arial, Helvetica;
     font-weight: 500;
     font-size: 15px;
     text-decoration: none;
@@ -657,12 +657,6 @@ background: #e4e4e4;
     min-width: 808px;
 }
 
-#epcurate-nav .epcurate-nav-wrap ul {
-    position: relative;
-    width: 262px;
-    margin: 0 auto;
-}
-
 #studio-nav .studio-nav-wrap ul li {
     float: left;
     margin-right: 10px;
@@ -698,6 +692,12 @@ background: #e4e4e4;
     background: url(../images/bg_tab_middle.png) repeat 0 0;
 }
 
+#epcurate-nav .epcurate-nav-wrap ul {
+    position: relative;
+    width: 262px;
+    margin: 0 auto;
+}
+
 #epcurate-nav .epcurate-nav-wrap ul li {
     position: absolute;
     top: 9px;
@@ -709,13 +709,12 @@ background: #e4e4e4;
 
 #epcurate-nav .epcurate-nav-wrap ul li.publish {
     top: 8px;
-    left: 131px;
+    right: 0;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li.on,
 #epcurate-nav .epcurate-nav-wrap ul li a {
     display: block;
-    position: relative;
     width: 128px;
     height: 26px;
     line-height: 26px;
@@ -735,14 +734,12 @@ background: #e4e4e4;
 
 #epcurate-nav .epcurate-nav-wrap ul li.on span.nav-right,
 #epcurate-nav .epcurate-nav-wrap ul li a    span.nav-right {
-    width: 125px;
     padding-right: 3px;
     background: url(../images/bg_tab_right_angle.png) no-repeat right 0;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li.on span.nav-middle,
 #epcurate-nav .epcurate-nav-wrap ul li a    span.nav-middle {
-    width: 125px;
     background: url(../images/bg_tab_middle.png) repeat-x;
     text-align: center;
 }
@@ -790,7 +787,6 @@ background: #e4e4e4;
 
 #epcurate-nav.publish .epcurate-nav-wrap ul li.publish {
     top: 9px;
-    left: 130px;
 }
 
 #epcurate-nav.publish .epcurate-nav-wrap ul li.on {

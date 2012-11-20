@@ -134,6 +134,9 @@ function formatTimestamp(timestamp, dateSeparator, timeSeparator) {
 }
 
 function formatDuration(duration, autoPadding) {
+    if ('' == $.trim(duration) || isNaN(duration)) {
+        duration = 0;
+    }
     var durationMin = parseInt(duration / 60, 10),
         durationSec = parseInt(duration % 60, 10),
         durationHou = parseInt(durationMin / 60, 10);

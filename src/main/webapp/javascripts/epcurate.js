@@ -284,23 +284,18 @@ function setFormWidth() {
         $('input.text').width(480);
         $('textarea.textarea').width(475);
     }
+    // curation nav width
     if (windowWidth < 1024) {
-        $('#epcurate-nav ul').css('width', '262px');
-        $('#epcurate-nav ul li.publish').css('left', '130px');
-        $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', '125px');
-        $('#epcurate-nav span.nav-right, #epcurate-nav span.nav-middle').css('width', '125px');
+        $('#epcurate-nav ul').css('width', '256px');
+        $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', '128px');
     }
-    if (windowWidth >= 1024 && windowWidth <= 1138) {
-        $('#epcurate-nav ul').css('width', windowWidth - 762 + 'px');
-        $('#epcurate-nav ul li.publish').css('left', windowWidth - 894 + 'px');
-        $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', windowWidth - 899 + 'px');
-        $('#epcurate-nav span.nav-right, #epcurate-nav span.nav-middle').css('width', windowWidth - 899 + 'px');
+    if (windowWidth >= 1024 && windowWidth <= 1252) {
+        $('#epcurate-nav ul').css('width', (windowWidth - 768) + 'px');
+        $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', (windowWidth - 768) / 2 + 'px');
     }
-    if (windowWidth > 1138) {
+    if (windowWidth > 1252) {
         $('#epcurate-nav ul').css('width', '484px');
-        $('#epcurate-nav ul li.publish').css('left', '244px');
-        $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', '239px');
-        $('#epcurate-nav span.nav-right, #epcurate-nav span.nav-middle').css('width', '239px');
+        $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', '242px');
     }
 }
 

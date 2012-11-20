@@ -377,7 +377,7 @@
     border: none;
     background: url(../images/input_box_middle.png) repeat-x;
     color: #777;
-    font-family: Helvetica;
+    font-family: Arial, Helvetica;
     font-size: 13px;
 }
 
@@ -430,7 +430,7 @@
     border: none;
     background-color: transparent;
     color: #777;
-    font-family: Helvetica;
+    font-family: Arial, Helvetica;
     font-size: 13px;
 	resize: none;
 }
@@ -811,7 +811,7 @@
 
 #content-wrap form .form-btn .wrap a {
     color: #777;
-    font-family: Helvetica;
+    font-family: Arial, Helvetica;
     font-size: 13px;
     text-decoration: none;
 }

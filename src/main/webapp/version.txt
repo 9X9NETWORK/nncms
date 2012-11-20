@@ -1,186 +1,43 @@
-Revision: 495
+Revision: 509
 Author: chihwen
-Date: 下午 07:16:46, 2012年11月16日
+Date: 下午 07:04:49, 2012年11月19日
 Message:
-解決 user 可能於前端更改 user display name 後，進入 CMS 中，但 Favorite channel 顯示沒有隨之更改的問題
+只要在 trim time 編輯模式下，播完影片就要回到 Start time 並 pause，若再播放只能播至 To
 
-調整前端 ch list 及 episode list 程式，
-當為 favorite channel 時 (不管其為 fake 或 real)，
-都由客戶端動態組合 Favorite channel name。
-https://bugzilla.teltel.com/show_bug.cgi?id=11725
+1. 只要在 trim time 編輯模式下，播完影片就要回到 Start time 並 pause，若再播放只能播至 To。
+   不管 user 是否有手動將 progress bar 拉超出 Start from 或 To 時間，影片播畢都要重置。
+2. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=509)。
+3. 同步 src 分支版本 506~508。
+   1. 調整 nav 和 button 對齊中線。
+   2. 調整 font-family 解決不同平台會有不預期的粗體、斜體的問題。
 issue 5513
 ----
-Modified : /fakeapi/javascripts/controller.js
-
-
-Revision: 494
-Author: chihwen
-Date: 下午 07:01:53, 2012年11月16日
-Message:
-同步 src 分支版本 493
-
-將 titlecard effect 預覽 background 移到最外層不跟著效果動。
-issue 5513
-----
-Modified : /fakeapi/stylesheets/ep-curation.css
-
-
-Revision: 492
-Author: chihwen
-Date: 下午 06:33:06, 2012年11月16日
-Message:
-同步 src 分支版本 491
-
-調整 button 的 tooltip 受到 sortable li overflow 的影響而跑不出來。
-issue 5513
-----
-Modified : /fakeapi/stylesheets/channel.css
-
-
-Revision: 489
-Author: chihwen
-Date: 下午 05:39:53, 2012年11月16日
-Message:
-將 client 端運算的 total duration 在最後 update episode 時一併傳入更新
-issue 5513
-----
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/index.html
 Modified : /fakeapi/javascripts/curation.js
-
-
-Revision: 487
-Author: chihwen
-Date: 下午 03:17:33, 2012年11月16日
-Message:
-解決在 chrome 下 trim 功能相容問題 (typeof 跨瀏覽器相容 issue)
-
-1. 解決在 chrome 下 trim 功能相容問題 (typeof 跨瀏覽器相容 issue)。
-2. 同步 src 分支版本 486。
-   1. 調整 ie textarea scrollbar 問題。
-   2. 調整 safari 連結底線問題。
-issue 5513
-----
-Modified : /fakeapi/fakeapi/episodes_programs.php
-Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/javascripts/epcurate.js
+Modified : /fakeapi/login.html
 Modified : /fakeapi/stylesheets/channel.css
 Modified : /fakeapi/stylesheets/ep-curation.css
 Modified : /fakeapi/stylesheets/epcurate.css
+Modified : /fakeapi/stylesheets/episode.css
+Modified : /fakeapi/stylesheets/library.css
 Modified : /fakeapi/stylesheets/lightbox.css
-
-
-Revision: 484
-Author: chihwen
-Date: 下午 06:40:23, 2012年11月15日
-Message:
-Add Video 第一次從 YouTube 拉回資料時，要補齊 startTime 及 endTime 預設值，以備 Trim 功能取用
-
-1. Add Video 第一次從 YouTube 拉回資料時，要補齊 startTime 及 endTime 預設值，以備 Trim 功能取用。
-2. 同步 src 分支版本 483 (根據 mockup 調整區塊間距，並讓 video 區塊符合 16:9)。
-issue 5513
-----
-Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/stylesheets/ep-curation.css
-
-
-Revision: 482
-Author: chihwen
-Date: 下午 05:11:59, 2012年11月15日
-Message:
-同步 src 分支版本 481
-channel-list enable sortable 之後維持 sort 空間。
-issue 5513
-----
-Modified : /fakeapi/stylesheets/channel.css
-
-
-Revision: 480
-Author: chihwen
-Date: 下午 04:44:13, 2012年11月15日
-Message:
-同步 src 分支版本 479
-調整 tab 背景圖的位置。
-issue 5513
-----
-Modified : /fakeapi/stylesheets/ep-curation.css
-
-
-Revision: 478
-Author: chihwen
-Date: 下午 04:14:11, 2012年11月15日
-Message:
-同步 src 分支版本 476~477
-channel-add、channel-setting btn 調整位於右下角。
-issue 5513
-----
-Modified : /fakeapi/javascripts/channel.js
-
-
-Revision: 474
-Author: chihwen
-Date: 下午 01:41:48, 2012年11月15日
-Message:
-同步 src 分支版本 470~473
-title card font 編輯區塊加上 tooltip。
-issue 5513
-----
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/stylesheets/ep-curation.css
-
-
-Revision: 469
-Author: chihwen
-Date: 上午 10:53:16, 2012年11月15日
-Message:
-同步 src 分支版本 468
-issue 5513
-----
-Modified : /fakeapi/stylesheets/playback.css
-
-
-Revision: 464
-Author: chihwen
-Date: 下午 10:42:45, 2012年11月14日
-Message:
-修正 Episode Curation 自動高度計算邏輯 (D、E、F、G 四等分)
-issue 5513
-----
-Modified : /fakeapi/javascripts/curation.js
-
-
-Revision: 463
-Author: chihwen
-Date: 下午 09:41:30, 2012年11月14日
-Message:
-同步 src 分支版本 457, 460
-issue 5513
-----
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/javascripts/basic.js
-Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/stylesheets/ep-curation.css
-Modified : /fakeapi/stylesheets/epcurate.css
-Modified : /fakeapi/stylesheets/playback.css
 Modified : /fakeapi/stylesheets/style.css
 
 
-Revision: 459
+Revision: 505
 Author: chihwen
-Date: 上午 12:03:39, 2012年11月14日
+Date: 下午 03:56:50, 2012年11月19日
 Message:
-同步 src 分支版本 458
-issue 5513
-----
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/episode-list.html
-Modified : /fakeapi/javascripts/library.js
-Modified : /fakeapi/javascripts/uploads.js
+避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=505)
 
-
-Revision: 455
-Author: chihwen
-Date: 下午 03:19:05, 2012年11月13日
-Message:
-避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=454)
+1. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=505)
+2. 同步 src 分支版本 504 (調整 body font-family 順序以解決 ie tooltip 問題)。
 issue 5513
 ----
 Modified : /fakeapi/channel-add.html
@@ -190,74 +47,33 @@ Modified : /fakeapi/epcurate-publish.html
 Modified : /fakeapi/episode-list.html
 Modified : /fakeapi/index.html
 Modified : /fakeapi/login.html
+Modified : /fakeapi/stylesheets/style.css
 
 
-Revision: 454
+Revision: 502
 Author: chihwen
-Date: 下午 03:15:43, 2012年11月13日
+Date: 下午 01:32:37, 2012年11月19日
 Message:
-完成 調整頻道順序 API 串接功能
+修正 IE8, IE9 substr(負值) 及 AJAX GData jsonc 跨域相容性錯誤
 
-1. 完成 調整頻道順序 API 串接功能。
-2. 加入排序 unsave prompt 機制 (由於刪除功能與排序不衝突，故意排除不跳排序未儲存提示)。
-3. 注意 icon 與連結的結構問題，要確保在事件冒泡後抓到正確的導向行為。
-   調整 event target 偵測方式，並回頭同步 episode list (移除非必要的 meta 結構)。
-4. 注意 fake favorite channel 的 id 為 0，排序送出時，需濾除 channel id 為 0 的資料。
-   調整 排序序號 組合方式，並回頭同步 episode list。
-5. 將 channel description 的建議字數由 144 改為 70 個。
-6. 將 event 原生的 keyCode 改為 jQuery 的 event which 以解決相容性問題。
-7. 一致化 HTML 原始碼，將 DOM 裡相關 Title Card 埋入的中文說明，統一改為英文文案。
-8. 同步 src 分支版本 451, 452。
+1. substr() with negative value not working in IE
+   http://stackoverflow.com/questions/6918943/substr-with-negative-value-not-working-in-ie
+2. jQuery.getJSON not working properly in IE8 with gdata json-c. Why?
+   http://stackoverflow.com/questions/6318996/jquery-getjson-not-working-properly-in-ie8-with-gdata-json-c-why
+3. 同步 src 分支版本 501 (調整 safari 連結底線問題)。
 issue 5513
 ----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/episode-list.html
-Added : /fakeapi/fakeapi/users_channels_sorting.php
-Modified : /fakeapi/index.html
-Modified : /fakeapi/javascripts/channel.js
-Modified : /fakeapi/javascripts/config.js
 Modified : /fakeapi/javascripts/controller.js
 Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/javascripts/epcurate.js
-Modified : /fakeapi/javascripts/episode.js
 Modified : /fakeapi/stylesheets/channel.css
 
 
-Revision: 453
+Revision: 496
 Author: chihwen
-Date: 下午 08:09:53, 2012年11月12日
+Date: 下午 01:38:31, 2012年11月18日
 Message:
-完成 Trim 剪接影片 API 串接功能
-
-1. 完成 Trim 剪接影片 API 串接功能。
-2. 加入 trim time 兩層 unsave 機制設計 (比照 titlecard unsave 機制)。
-3. 由於 9x9 API 端的 duration 將作為 trimmed duration 故調整 YouTube API 多記錄一組原始 duration 以作為資料比對之用。
-4. 調整共用 formatDuration() 加入強制自動補齊 hh:mm:ss 機制。
-5. 在未客制化 player 控制器前，關閉 YouTube full screen 功能。
-6. 同步 src 分支版本 437,445~451。
+調整共用的 formatDuration() 加入參數容錯處理
 issue 5513
 ----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/epcurate-publish.html
-Modified : /fakeapi/episode-list.html
-Added : /fakeapi/images/icon_load_l.gif
-Added : /fakeapi/images/waiting_loading_left.png
-Added : /fakeapi/images/waiting_loading_middle.png
-Added : /fakeapi/images/waiting_loading_right.png
-Modified : /fakeapi/index.html
 Modified : /fakeapi/javascripts/basic.js
-Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/javascripts/curation.js
-Added : /fakeapi/javascripts/jquery.autotab.min.js
-Modified : /fakeapi/stylesheets/ep-curation.css
-Modified : /fakeapi/stylesheets/epcurate.css
-Modified : /fakeapi/stylesheets/style.css
 
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 4024
-Last Changed Date: 2012-11-17 05:45:44 +0800 (Sat, 17 Nov 2012)

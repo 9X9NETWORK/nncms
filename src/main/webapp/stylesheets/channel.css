@@ -226,6 +226,7 @@
     height: 25px;
     margin: 2px 0 0;
     background: url(../images/btns.png) no-repeat;
+    text-decoration: none;
     text-indent: -100000px;
 }
 
@@ -410,7 +411,7 @@
     border: none;
     background: url(../images/input_box_middle.png) repeat-x;
     color: #777;
-    font-family: Helvetica;
+    font-family: Arial, Helvetica;
     font-size: 13px;
     line-height: 29px;
 }
@@ -444,7 +445,7 @@
     border: none;
     background-color: transparent;
     color: #777;
-    font-family: Helvetica;
+    font-family: Arial, Helvetica;
     font-size: 13px;
 	resize: none;
 }
@@ -760,7 +761,7 @@
 
 #content-main-wrap form .form-btn .form-btn-wrap .btns span input {
     padding: 0 10px;
-    font-family: Helvetica, Arial, clean, Microsoft JhengHei, Apple LiGothic, SimHei, PMingLiU, sans-serif;
+    font-family: Arial, Helvetica, clean, Microsoft JhengHei, Apple LiGothic, SimHei, PMingLiU, sans-serif;
     font-size: 15px;
 }
 
