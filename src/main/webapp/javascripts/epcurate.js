@@ -66,14 +66,32 @@ $(function () {
         goLeave($(this).attr('href'));
         return false;
     });
-    $('#content-wrap .form-btn').on('click', '#form-btn-leave', function () {
+    $('#content-wrap').on('click', '#form-btn-leave', function () {
         goLeave($('#form-btn-leave').data('leaveUrl'));
         return false;
+    });
+    $(document).on('click', '#header #logo, #header a, #studio-nav a, #content-nav a, #footer a', function (e) {
+        if ($('body').hasClass('has-change')) {
+            if (e && $(e.currentTarget).attr('href')) {
+                $('body').data('leaveUrl', $(e.currentTarget).attr('href'));
+            }
+            if (e && $(e.currentTarget).attr('id')) {
+                $('body').data('leaveId', $(e.currentTarget).attr('id'));
+            }
+            showUnsaveOverlay();
+            return false;
+        }
     });
     $('#unsave-prompt .btn-leave').click(function () {
         $('body').removeClass('has-change');
         $.unblockUI();
-        location.href = $('#form-btn-leave').data('leaveUrl');
+        if ('' != $('body').data('leaveId') && -1 !== $.inArray($('body').data('leaveId'), ['logo', 'profile-logout', 'language-en', 'language-zh'])) {
+            $('#' + $('body').data('leaveId')).trigger('click');
+        } else if ($('body').data('leaveUrl')) {
+            location.href = $('body').data('leaveUrl');
+        } else {
+            location.href = $('#form-btn-leave').data('leaveUrl');
+        }
         return false;
     });
     $('.unblock, .btn-close, .btn-no').click(function () {
@@ -231,27 +249,21 @@ $(function () {
         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
     });
 
-    // Amazon S3 upload
-    if ($('#uploadThumbnail').length > 0) {
-        uploadImage();
-    }
-
     // uniform
-    $('p.radio-list input').uniform();
-    $('input[name=status]').click(function () {
+    $('#content-wrap').on('click', 'input[name=status]', function () {
         switchPublishStatus($(this).val());
     });
-    $('input[name=rerun]').click(function () {
+    $('#content-wrap').on('click', 'input[name=rerun]', function () {
         switchRerunCheckbox();
     });
-    $('#date-time').on('click', '.time ul li.enable a', function () {
+    $('#content-wrap').on('click', '#date-time .time ul li.enable a', function () {
         $('body').addClass('has-change');
         $('#date-time .time ul li').removeClass('active');
         $(this).parent().addClass('active');
         $('#publishHour').val($(this).text());
         return false;
     });
-    $('#epcurate-info').on('click', '#name', function () {
+    $('#content-wrap').on('click', '#epcurate-info #name', function () {
         $('.form-btn .notice').addClass('hide');
     });
 });
@@ -313,11 +325,11 @@ function uploadImage() {
         };
         var handlerUploadProgress = function (file, completed /* completed bytes */, total /* total bytes */) {
             $('#thumbnail-list .loading').show();
-             swfu.setButtonText('<span class="uploadstyle">Uploading...</span>');
+             swfu.setButtonText('<span class="uploadstyle">' + nn._(['upload', 'Uploading...']) + '</span>');
         };
         var handlerUploadSuccess = function (file, serverData, recievedResponse) {
             $('#thumbnail-list .loading').hide();
-            swfu.setButtonText('<span class="uploadstyle">Upload</span>');
+            swfu.setButtonText('<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>');
             if (!file.type) {
                 file.type = nn.getFileTypeByName(file.name);
             }
@@ -341,7 +353,7 @@ function uploadImage() {
         };
         var handlerUploadError = function (file, code, message) {
             $('#thumbnail-list .loading').hide();
-            swfu.setButtonText('<span class="uploadstyle">Upload</span>');
+            swfu.setButtonText('<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>');
             this.setButtonDisabled(false);
             if (code == -280) { // user cancel upload
                 alert(message); // show some error prompt
@@ -382,7 +394,7 @@ function uploadImage() {
             button_image_url:           'images/btn-load.png',
             button_width:               '129',
             button_height:              '29',
-            button_text:                '<span class="uploadstyle">Upload</span>',
+            button_text:                '<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>',
             button_text_style:          '.uploadstyle { color: #777777; font-family: Arial, Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
             button_text_top_padding:    1,
             button_action:              SWFUpload.BUTTON_ACTION.SELECT_FILE,
@@ -448,10 +460,7 @@ function updateHour() {
     var todayDate = todayYear + '/' + todayMonth + '/' + todayDay;
 
     $('#date-time .datepicker').datepicker({
-        monthNames: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-        monthNamesShort: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-        dayNames: ["S", "M", "T", "W", "T", "F", "S"],
-        dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
+        firstDay: 0,
         minDate: 0,
         dateFormat: "yy/mm/dd",
         autoSize: true,
@@ -488,6 +497,7 @@ function updateHour() {
             $('#publishHour').val($('#date-time .time ul li.active').text());
         }
     });
+    $.datepicker.setDefaults($.datepicker.regional[CMS_CONF.USER_DATA.lang]);
 
     $('#date-time .time ul li').removeAttr('class');
     $('#date-time .time ul li:eq(' + nowHour + ')').addClass('active').addClass('enable');

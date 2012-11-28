@@ -8,6 +8,7 @@ var CMS_CONF = {
         '/api/s3/attributes':                           '/api/s3/attributes',
         '/api/categories':                              '/api/categories',
         '/api/tags':                                    '/api/tags',
+        '/api/users/{userId}':                          '/api/users/{userId}',
         '/api/users/{userId}/channels':                 '/api/users/{userId}/channels',
         '/api/users/{userId}/channels/{channelId}':     '/api/users/{userId}/channels/{channelId}',
         '/api/users/{userId}/channels/sorting':         '/api/users/{userId}/channels/sorting',
@@ -26,6 +27,7 @@ var CMS_CONF = {
         '/api/s3/attributes':                           'fakeapi/s3_attributes.php',
         '/api/categories':                              'fakeapi/categories.php',
         '/api/tags':                                    'fakeapi/tags.php',
+        '/api/users/{userId}':                          'fakeapi/users.php?userId={userId}',
         '/api/users/{userId}/channels':                 'fakeapi/users_channels.php?userId={userId}',
         '/api/users/{userId}/channels/{channelId}':     'fakeapi/users_channels_del.php?userId={userId}&channelId={channelId}',
         '/api/users/{userId}/channels/sorting':         'fakeapi/users_channels_sorting.php?userId={userId}',
@@ -106,7 +108,9 @@ var CMS_CONF = {
     FONT_RADIX_MIN: 6,
     FONT_RADIX_MAX: 48,
     USER_URL: null,
-    USER_DATA: null
+    USER_DATA: null,
+    LANG_SUPPORT: ['en', 'zh'],
+    PAGE_ID: 'index'
 };
 
 switch (CMS_CONF.CMS_ENV) {

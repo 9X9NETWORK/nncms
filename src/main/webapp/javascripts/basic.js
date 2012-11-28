@@ -33,8 +33,8 @@ function autoHeight() {
 }
 
 function showSystemErrorOverlay(msg) {
-    if ('' == $.trim(msg)) { msg = 'Unknown error message.'; }
-    $('#system-error .content').html(msg);
+    if ('' == $.trim(msg)) { msg = 'Unknown error.'; }
+    $('#system-error .content').text(nn._(['overlay', 'system-error', msg]));
     $.blockUI.defaults.overlayCSS.opacity = '0.9';
     $.blockUI({
         message: $('#system-error')
@@ -47,41 +47,41 @@ function showSystemErrorOverlayAndHookError(msg) {
 }
 
 function showProcessingOverlay() {
-    $('#overlay-s .overlay-middle').html('<img src="images/icon_load_l.gif" alt="" />Processing...');
+    $('#overlay-s .overlay-middle').html('<img src="images/icon_load_l.gif" alt="" />' + nn._(['overlay', 'loading', 'Processing...']));
     $('#overlay-s').fadeIn();
     $('#overlay-s .overlay-content').css('margin-left', '-65px');
 }
 
 function showSavingOverlay() {
-    $('#overlay-s .overlay-middle').html('<img src="images/icon_load_l.gif" alt="" />Saving...');
+    $('#overlay-s .overlay-middle').html('<img src="images/icon_load_l.gif" alt="" />' + nn._(['overlay', 'loading', 'Saving...']));
     $('#overlay-s').fadeIn();
     $('#overlay-s .overlay-content').css('margin-left', '-43px');
 }
 
-function showUnsaveOverlay() {
+function buildUnsaveOverlay(hook) {
+    $(hook + ' .content').text(nn._(['overlay', 'prompt', 'Unsaved changes will be lost, are you sure you want to leave?']));
     $.blockUI.defaults.overlayCSS.opacity = '0.9';
     $.blockUI({
-        message: $('#unsave-prompt')
+        message: $(hook)
     });
+}
+
+function showUnsaveOverlay() {
+    buildUnsaveOverlay('#unsave-prompt');
 }
 
 function showUnsaveTrimTimeOverlay(e) {
     $('body').data('origin', e);
-    $.blockUI.defaults.overlayCSS.opacity = '0.9';
-    $.blockUI({
-        message: $('#unsave-trimtime-prompt')
-    });
+    buildUnsaveOverlay('#unsave-trimtime-prompt');
 }
 
 function showUnsaveTitleCardOverlay(e) {
     $('body').data('origin', e);
-    $.blockUI.defaults.overlayCSS.opacity = '0.9';
-    $.blockUI({
-        message: $('#unsave-titlecard-prompt')
-    });
+    buildUnsaveOverlay('#unsave-titlecard-prompt');
 }
 
-function showDeletePromptOverlay() {
+function showDeletePromptOverlay(msg) {
+    $('#delete-prompt .content').text(nn._(['overlay', 'prompt', msg]));
     $.blockUI.defaults.overlayCSS.opacity = '0.9';
     $.blockUI({
         message: $('#delete-prompt')
@@ -92,6 +92,8 @@ function showDeletePromptOverlay() {
 function showDraftNoticeOverlay(e) {
     $('body').addClass('first-save');
     $('body').data('origin', e);
+    $('#draft-notice h4').text(nn._(['overlay', 'notice', 'New episode has been created as a draft!']));
+    $('#draft-notice .content').text(nn._(['overlay', 'notice', 'Publish this episode at the next step whenever you finish editing.']));
     $.blockUI.defaults.overlayCSS.opacity = '0.9';
     $.blockUI({
         message: $('#draft-notice')
@@ -99,6 +101,7 @@ function showDraftNoticeOverlay(e) {
 }
 
 function showPublishNoticeOverlay() {
+    $('#publish-notice .content').text(nn._(['overlay', 'notice', 'This episode has been published.']));
     $.blockUI.defaults.overlayCSS.opacity = '0.9';
     $.blockUI({
         message: $('#publish-notice')
@@ -106,6 +109,7 @@ function showPublishNoticeOverlay() {
 }
 
 function showUnpublishNoticeOverlay() {
+    $('#unpublish-notice .content').text(nn._(['overlay', 'notice', 'This episode has been saved as an unpublished draft.']));
     $.blockUI.defaults.overlayCSS.opacity = '0.9';
     $.blockUI({
         message: $('#unpublish-notice')
@@ -290,6 +294,18 @@ $(function () {
         }
     });
 
+    // Change language
+    $('#language-change li a').click(function () {
+        if (!$('body').hasClass('has-change')) {
+            nn.api('PUT', CMS_CONF.API('/api/users/{userId}', {userId: CMS_CONF.USER_DATA.id}), {lang: $(this).data('meta')}, function (user) {
+                var isSetupLangKey = false;
+                setupLanguageAndRenderPage(user, isSetupLangKey);
+            });
+            $(this).parents('.select-list').slideDown();
+            return false;
+        }
+    });
+
     // common dropdown (share with header, footer, channel-add and channel-setting)
     function showDropdown(btn) {
         $('.dropdown, .select-list').hide();
@@ -378,9 +394,9 @@ $(function () {
         }
         event.stopPropagation();
     });
-    $('#footer-list li .select-list li').click(function () {
+    $('#footer-list li .select-list li a').click(function () {
         $('#footer-list li .select-btn').removeClass('on');
-        $(this).parent('.select-list').slideToggle();
+        $(this).parents('.select-list').slideToggle();
     });
 
     // Ellipsis

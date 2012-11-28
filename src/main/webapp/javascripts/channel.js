@@ -1,6 +1,6 @@
 $(function () {
-    autoHeight();
     setFormHeight();
+    autoHeight();
     scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
 
     // common unblock
@@ -35,7 +35,7 @@ $(function () {
     }
     window.onbeforeunload = confirmExit;
     $('body').removeClass('has-change');
-    $('#settingForm').change(function () {
+    $('#content-main').on('change', '#settingForm', function () {
         $('body').addClass('has-change');
     });
     $(document).on('click', '#header #logo, #header a, #studio-nav a, #content-nav a, #footer a, #channel-list a', function (e) {
@@ -56,7 +56,7 @@ $(function () {
             return false;
         }
     });
-    $('#settingForm .btn-cancel').click(function () {
+    $('#content-main').on('click', '#settingForm .btn-cancel', function () {
         if (document.settingForm) {
             var fm = document.settingForm;
             if (fm.imageUrl && fm.imageUrlOld && fm.imageUrl.value != fm.imageUrlOld.value) {
@@ -74,7 +74,7 @@ $(function () {
     $('#unsave-prompt .btn-leave').click(function () {
         $('body').removeClass('has-change');
         $.unblockUI();
-        if ('' != $('body').data('leaveId') && -1 !== $.inArray($('body').data('leaveId'), ['logo', 'profile-logout'])) {
+        if ('' != $('body').data('leaveId') && -1 !== $.inArray($('body').data('leaveId'), ['logo', 'profile-logout', 'language-en', 'language-zh'])) {
             $('#' + $('body').data('leaveId')).trigger('click');
         } else {
             location.href = $('body').data('leaveUrl');
@@ -88,7 +88,7 @@ $(function () {
 
     // channel list sorting
     $('#title-func').on('click', 'p.order a.reorder', function () {
-        $(this).text('Save order').removeClass('reorder').addClass('save');
+        $(this).text(nn._([CMS_CONF.PAGE_ID, 'title-func', 'Save order'])).removeClass('reorder').addClass('save');
         $('#channel-list').sortable('enable');
         $('body').removeClass('has-change');
         return false;
@@ -111,13 +111,13 @@ $(function () {
             showSavingOverlay();
             nn.api('PUT', CMS_CONF.API('/api/users/{userId}/channels/sorting', {userId: CMS_CONF.USER_DATA.id}), parameter, function (data) {
                 $('#overlay-s').fadeOut(1000, function () {
-                    $this.text('Reorder channels').removeClass('save').addClass('reorder');
+                    $this.text(nn._([CMS_CONF.PAGE_ID, 'title-func', 'Reorder channels'])).removeClass('save').addClass('reorder');
                     $('#channel-list').sortable('disable');
                     $('body').removeClass('has-change');
                 });
             });
         } else {
-            $this.text('Reorder channels').removeClass('save').addClass('reorder');
+            $this.text(nn._([CMS_CONF.PAGE_ID, 'title-func', 'Reorder channels'])).removeClass('save').addClass('reorder');
             $('#channel-list').sortable('disable');
             $('body').removeClass('has-change');
         }
@@ -127,7 +127,7 @@ $(function () {
     // channel list delete
     $('#channel-list').on('click', '.enable a.del', function () {
         $(this).parents('li').addClass('deleting').data('deleteId', $(this).attr('rel'));
-        showDeletePromptOverlay();
+        showDeletePromptOverlay('Are you sure you want to delete this channel? All data will be removed permanently.');
         return false;
     });
     $('#delete-prompt .btn-del').click(function () {
@@ -137,9 +137,9 @@ $(function () {
             nn.api('DELETE', CMS_CONF.API('/api/users/{userId}/channels/{channelId}', {userId: CMS_CONF.USER_DATA.id, channelId: $('#channel-list li.deleting').data('deleteId')}), null, function (data) {
                 if ('OK' == data) {
                     $('#overlay-s').fadeOut(1000, function () {
-                        var cntChannel = $('#channel-counter').html();
+                        var cntChannel = $('#channel-counter').text();
                         if (cntChannel > 0) {
-                            $('#channel-counter').html(cntChannel - 1);
+                            $('#channel-counter').text(cntChannel - 1);
                         }
                         $('#channel-list li.deleting').remove();
                         $('#content-main-wrap').height($('#content-main-wrap').height() - 105); // 105: li height
@@ -158,7 +158,7 @@ $(function () {
     });
 
     // channel form facebook
-    $('.switch-off').click(function () {
+    $('#content-main').on('click', '.switch-off', function () {
         $.blockUI.defaults.overlayCSS.opacity = '0.9';
         $.blockUI({
             message: $('#lightbox-facebook')
@@ -169,7 +169,7 @@ $(function () {
         $(this).parent().children('.select').children('.select-btn').removeClass('on');
         return false;
     });
-    $('.switch-on').click(function () {
+    $('#content-main').on('click', '.switch-on', function () {
         $(this).hide();
         $('.switch-off').show();
         $(this).parent().children('.select').addClass('disable').removeClass('enable');
@@ -179,22 +179,9 @@ $(function () {
         $(this).parent().toggleClass('on');
     });
 
-    // channel form charCounter
-    $('#name').charCounter(20, {
-        container: '#name-charcounter',
-        format: '%1',
-        delay: 0,
-        clear: false
-    });
-    $('#intro').charCounter(70, {
-        container: '#intro-charcounter',
-        format: '%1',
-        delay: 0,
-        clear: false
-    });
-
     // channel form selector
-    $('#settingForm').on('click', '.enable .select-btn, .enable .select-txt', function (event) {
+    $('#content-main').on('click', '#settingForm .enable .select-btn, #settingForm .enable .select-txt', function (event) {
+        $('.form-btn .notice').addClass('hide');
         $('.select-list').hide();
         $(this).parent('li').siblings().children('.on').removeClass('on');
         $(this).parent().children('.select-btn').toggleClass('on');
@@ -206,7 +193,7 @@ $(function () {
         event.stopPropagation();
         return false;
     });
-    $('#settingForm').on('click', '.select .select-list li', function () {
+    $('#content-main').on('click', '#settingForm .select .select-list li', function () {
         $('body').addClass('has-change');
         var selectOption = $(this).text(),
             metadata = $(this).data('meta');
@@ -223,13 +210,23 @@ $(function () {
                     $.each(categories, function (i, list) {
                         CMS_CONF.CATEGORY_MAP[list.id] = list.name;
                     });
+                    var modCatLen = categories.length % 3;
+                    if (modCatLen > 0) {
+                        modCatLen = 3 - modCatLen;
+                        for (var i = 0; i < modCatLen; i++) {
+                            categories.push({
+                                id: 0,
+                                name: ''
+                            });
+                        }
+                    }
                     $('#category-list-tmpl-item').tmpl(categories, {
                         dataArrayIndex: function (item) {
                             return $.inArray(item, categories);
                         }
                     }).appendTo('#browse-category');
                     $('.category').removeClass('disable').addClass('enable');
-                    $('#categoryId-select-txt').text('Select a category');
+                    $('#categoryId-select-txt').text(nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Select a category']));
                 });
             }
         }
@@ -263,7 +260,7 @@ $(function () {
     });
 
     // channel form tag
-    $('#tag-list').on('click', 'li span a', function () {
+    $('#content-main').on('click', '#tag-list li span a', function () {
         $('body').addClass('has-change');
         var temp = [],
             currentTags = $('#tag').val(),
@@ -293,7 +290,7 @@ $(function () {
     });
 
     // channel form button
-    $('#settingForm .btn-save').click(function () {
+    $('#content-main').on('click', '#settingForm .btn-save', function () {
         // update mode
         if (chkData(document.settingForm) && CMS_CONF.USER_DATA.id && $(this).hasClass('enable') && CMS_CONF.USER_URL.param('id') > 0) {
             showSavingOverlay();
@@ -313,7 +310,7 @@ $(function () {
         }
         return false;
     });
-    $('#settingForm .btn-create').click(function () {
+    $('#content-main').on('click', '#settingForm .btn-create', function () {
         // insert mode
         if (chkData(document.settingForm) && CMS_CONF.USER_DATA.id && $(this).hasClass('enable')) {
             showSavingOverlay();
@@ -335,20 +332,15 @@ $(function () {
         }
         return false;
     });
-    $('.fminput').click(function () {
+    $('#content-main').on('click', '.fminput', function () {
         $('.form-btn .notice').addClass('hide');
     });
 
     $(window).resize(function () {
-        autoHeight();
         setFormHeight();
+        autoHeight();
         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
     });
-
-    // Amazon S3 upload
-    if ($('#uploadThumbnail').length > 0) {
-        uploadImage();
-    }
 });
 
 function chkData(fm) {
@@ -383,24 +375,43 @@ function setFormHeight() {
     var windowHeight = $(window).height(),
         windowWidth  = $(window).width(),
         channelListWidth = $('#channel-list').width(),
+        channelNameWidth = $('#channel-name').width(),
+        crumbWidth = $('#title-func .title-crumb').width(),
+        imgsWidth = $('#channel-list li .wrap .photo-list').width(),
+        funcWidth = $('#channel-list li .wrap .func-wrap').width(),
         titleFuncHeight = $('#title-func').height(),
-        formHeight = $('#content-main-wrap form').height(),
-        contentHeight = windowHeight - titleFuncHeight - 94 - 48 - 38 - 10;    // 94:header+studio-nav 48:footer 38:title-func-padding
+        formHeight = $('#content-main-wrap form').height() + 56,                // 56: paddingbottom56
+        contentHeight = windowHeight - titleFuncHeight - 94 - 48 - 38 - 10;     // 94:header+studio-nav 48:footer 38:title-func-padding
     if (windowWidth > 1220) {
         $('input.text').width(windowWidth - 734);
-        $('textarea.textarea').width(windowWidth - 744);
+        $('textarea.textarea').width(windowWidth - 738);
     }
     if (windowWidth <= 1220) {
-        $('input.text').width(460);
-        $('textarea.textarea').width(455);
+        $('input.text').width(439);
+        $('textarea.textarea').width(435);
     }
-    if (contentHeight < 417) {  // 417: formHeight + paddingbottom56
-        $('#content-main-wrap form').height(361);
+    if (channelNameWidth > windowWidth - 350) {
+        $('#title-func h2').width(windowWidth - crumbWidth - 350);
+        $('#title-func h2').css('padding-right', parseInt(crumbWidth + 5, 10) + 'px');
+        $('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
+    }
+    if (channelNameWidth <=  windowWidth - 350) {
+        $('#title-func h2').width('auto');
+        $('#title-func h2').css('padding-right', parseInt(crumbWidth + 5, 10) + 'px');
+        $('#channel-name').text($('#channel-name').data('meta')).removeClass('ellipsis');
+    }
+    if (contentHeight < formHeight) {
+        $('#content-main-wrap form').height($('#content-main-wrap form').data('height'));
     } else {
-        $('#content-main-wrap form').height(contentHeight - 56);
+        $('#content-main-wrap form').height(contentHeight - 62);
     }
-    $('#channel-list li .wrap').width(channelListWidth - 36);
     $('#content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + titleFuncHeight + 48);
+    $('#channel-list li .wrap').width(channelListWidth - 36);
+    $('#channel-list li .wrap .info').width(channelListWidth - imgsWidth - funcWidth - 58);
+    $('#channel-list li .wrap .info h3').each(function (index) {
+        $('a', this).text($(this).data('meta'));
+    });
+    $('#channel-list li .wrap .info h3').addClass('ellipsis').ellipsis();
 }
 
 function uploadImage() {
@@ -417,11 +428,11 @@ function uploadImage() {
         };
         var handlerUploadProgress = function (file, completed /* completed bytes */, total /* total bytes */) {
             $('.upload-img .loading').show();
-             swfu.setButtonText('<span class="uploadstyle">Uploading...</span>');
+             swfu.setButtonText('<span class="uploadstyle">' + nn._(['upload', 'Uploading...']) + '</span>');
         };
         var handlerUploadSuccess = function (file, serverData, recievedResponse) {
             $('.upload-img .loading').hide();
-            swfu.setButtonText('<span class="uploadstyle">Upload</span>');
+            swfu.setButtonText('<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>');
             if (!file.type) {
                 file.type = nn.getFileTypeByName(file.name);
             }
@@ -432,7 +443,7 @@ function uploadImage() {
         };
         var handlerUploadError = function (file, code, message) {
             $('.upload-img .loading').hide();
-            swfu.setButtonText('<span class="uploadstyle">Upload</span>');
+            swfu.setButtonText('<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>');
             this.setButtonDisabled(false);
             if (code == -280) { // user cancel upload
                 alert(message); // show some error prompt
@@ -473,7 +484,7 @@ function uploadImage() {
             button_image_url:           'images/btn-load.png',
             button_width:               '129',
             button_height:              '29',
-            button_text:                '<span class="uploadstyle">Upload</span>',
+            button_text:                '<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>',
             button_text_style:          '.uploadstyle { color: #777777; font-family: Arial, Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
             button_text_top_padding:    1,
             button_action:              SWFUpload.BUTTON_ACTION.SELECT_FILE,

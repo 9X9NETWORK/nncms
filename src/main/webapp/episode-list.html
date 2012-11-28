@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html class="en">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=517" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=517" />
-<link rel="stylesheet" href="stylesheets/episode.css?v=517" />
+<link rel="stylesheet" href="stylesheets/style.css?v=548" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=548" />
+<link rel="stylesheet" href="stylesheets/episode.css?v=548" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=517"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=517"></script>
-<script src="javascripts/jquery.ellipsis.js?v=517"></script>
-<script src="javascripts/jquery.blockUI.js?v=517"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=517"></script>
-<script src="javascripts/jquery.cycle.all.js?v=517"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=517"></script>
-<script src="javascripts/jquery.cookie.js?v=517"></script>
-<script src="javascripts/json2.js?v=517"></script>
-<script src="javascripts/purl.js?v=517"></script>
-<script src="javascripts/vertical.slider.js?v=517"></script>
-<script src="javascripts/config.js?v=517"></script>
-<script src="javascripts/basic.js?v=517"></script>
-<script src="javascripts/controller.js?v=517"></script>
-<script src="javascripts/episode.js?v=517"></script>
+<script src="javascripts/nn-sdk.js?v=548"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=548"></script>
+<script src="javascripts/jquery.ellipsis.js?v=548"></script>
+<script src="javascripts/jquery.blockUI.js?v=548"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=548"></script>
+<script src="javascripts/jquery.cycle.all.js?v=548"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=548"></script>
+<script src="javascripts/jquery.cookie.js?v=548"></script>
+<script src="javascripts/json2.js?v=548"></script>
+<script src="javascripts/purl.js?v=548"></script>
+<script src="javascripts/vertical.slider.js?v=548"></script>
+<script src="javascripts/config.js?v=548"></script>
+<script src="javascripts/controller.js?v=548"></script>
+<script src="javascripts/basic.js?v=548"></script>
+<script src="javascripts/episode.js?v=548"></script>
 <title>9x9.tv - Episode list</title>
 </head>
 <body>
@@ -42,7 +42,7 @@
       <ul id="profile-dropdown" class="dropdown">
         <li><a id="profile-mypage" href="/#!curator=profileUrl">My page</a></li>
         <li><a href="./">Studio</a></li>
-        <li><a href="/#!settings">Settings</a></li>
+        <li id="profile-settings"><a href="/#!settings">Settings</a></li>
         <li><a id="profile-logout" href="/api/login">Log out</a></li>
       </ul>
     </li>
@@ -61,7 +61,6 @@
 
 <!--============================== content-main start ========================-->
 <div id="content-wrap">
-
 <div id="content-nav">
 <div id="func-nav">
 <ul>
@@ -69,35 +68,7 @@
 </ul>
 </div>
 </div>
-
-<script id="episode-nav-tmpl" type="text/x-jquery-tmpl">
-{{if contentType == CMS_CONF.YOUR_FAVORITE}}
-<li>&nbsp;</li>
-{{else}}
-<li class="active"><a href="episode-list.html?id=${id}" class="episode">Episode list</a></li>
-<li><a href="channel-setting.html?id=${id}" class="setting">Settings</a></li>
-{{/if}}
-</script>
-
 <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
-
-<script id="title-func-tmpl" type="text/x-jquery-tmpl">
-<h2>${name} &gt; Episode list (<span id="episode-counter">${$item.cntEpisode}</span>){{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}<a href="epcurate-curation.html?cid=${id}" class="curate btns"><span class="btn-right"><span class="btn-middle">Curate a new episode</span></span></a>{{/if}}</h2>
-{{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}
-<p class="order btns"><span><a href="javascript:void(0);" rel="${id}" class="reorder">Reorder episodes</a></span></p>
-{{/if}}
-{{if $item.cntEpisode > 0}}
-<div class="caption">
-<p class="episode">Episode</p>
-{{if contentType != CMS_CONF.YOUR_FAVORITE}}
-<p class="scheduled-time">Scheduled time</p>
-{{/if}}
-<p class="publish-time">Publish time</p>
-<p class="views">Views</p>
-</div>
-{{/if}}
-</script>
-
 <div id="content-main">
 <div id="title-func" class="clearfix">
 <!-- template = #title-func-tmpl -->
@@ -109,11 +80,39 @@
 </div>
 </div>
 </div>
+</div>
+<!--============================== content-main start ========================-->
+
+<script id="episode-nav-tmpl" type="text/x-jquery-tmpl">
+{{if contentType == CMS_CONF.YOUR_FAVORITE}}
+<li>&nbsp;</li>
+{{else}}
+<li class="active"><a href="episode-list.html?id=${id}" class="episode">${nn._([CMS_CONF.PAGE_ID, 'func-nav', 'Episode list'])}</a></li>
+<li><a href="channel-setting.html?id=${id}" class="setting">${nn._([CMS_CONF.PAGE_ID, 'func-nav', 'Settings'])}</a></li>
+{{/if}}
+</script>
+
+<script id="title-func-tmpl" type="text/x-jquery-tmpl">
+<h2><span id="channel-name" data-meta="${name}">${name}</span><span class="title-crumb">&gt; ${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Episode list'])} (<span id="episode-counter">${$item.cntEpisode}</span>){{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}<a href="epcurate-curation.html?cid=${id}" class="curate btns"><span class="btn-right"><span class="btn-middle">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Curate a new episode'])}</span></span></a>{{/if}}</span></h2>
+{{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}
+<p class="order btns"><span><a href="javascript:void(0);" rel="${id}" class="reorder">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Reorder episodes'])}</a></span></p>
+{{/if}}
+{{if $item.cntEpisode > 0}}
+<div class="caption">
+<p class="episode">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Episode'])}</p>
+{{if contentType != CMS_CONF.YOUR_FAVORITE}}
+<p class="scheduled-time">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Scheduled time'])}</p>
+{{/if}}
+<p class="publish-time">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Publish time'])}</p>
+<p class="views">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Views'])}</p>
+</div>
+{{/if}}
+</script>
 
 <script id="episode-favorite-first-tmpl" type="text/x-jquery-tmpl">
 <div id="ep-no">
-<h3><img src="images/text_don't-have-episode-yet.png" alt="" /></h3>
-<p class="desc">Click on <span>Favorite</span> button when watching channels to collect more episodes</p>
+<h3>{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', '<img src="images/text_don\'t-have-episode-yet.png" alt="" />'])}}</h3>
+<p class="desc">{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', 'Click on <span>Favorite</span> button when watching channels to collect more episodes'])}}</p>
 <img src="images/graphic_mockup.png" alt="" />
 </div>
 </script>
@@ -141,8 +140,8 @@
 <div class="btns">
 <div class="btn-wrap disable">
 <ul>
-<li><a href="javascript:void(0);" class="edit disable"><span></span>Edit</a></li>
-<li><a href="javascript:void(0);" class="del disable"><span></span>Delete</a></li>
+<li><a href="javascript:void(0);" class="edit disable"><span></span>${nn._([CMS_CONF.PAGE_ID, 'episode-list', 'Edit'])}</a></li>
+<li><a href="javascript:void(0);" class="del disable"><span></span>${nn._([CMS_CONF.PAGE_ID, 'episode-list', 'Delete'])}</a></li>
 </ul>
 </div>
 </div>
@@ -159,8 +158,8 @@
 
 <script id="episode-first-tmpl" type="text/x-jquery-tmpl">
 <div id="ep-time-list">
-<h3><img src="images/text_don't-have-episode-yet.png" alt="" /></h3>
-<p class="btns"><span><a href="epcurate-curation.html?cid=${id}">Curate new episode to tell a story</a></span></p>
+<h3>{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', '<img src="images/text_don\'t-have-episode-yet.png" alt="" />'])}}</h3>
+<p class="btns"><span><a href="epcurate-curation.html?cid=${id}">${nn._([CMS_CONF.PAGE_ID, 'episode-list', 'Curate new episode to tell a story'])}</a></span></p>
 <div id="selected-episode">
 <p class="episode-pager">
 <a href="javascript:void(0);" class="active">。</a>
@@ -172,19 +171,19 @@
 <ul class="content">
 <li>
 <div class="img"><a href="epcurate-curation.html?cid=${id}"><img src="images/banner_01.png" alt="" width="781" height="274" /></a></div>
-<div class="desc"><p><span><strong>Curate online videos</strong> into each single episode.</span></p></div>
+<div class="desc"><p><span>{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', '<strong>Curate online videos</strong> into each single episode.'])}}</span></p></div>
 </li>
 <li>
 <div class="img"><a href="epcurate-curation.html?cid=${id}"><img src="images/banner_02.png" alt="" width="781" height="274" /></a></div>
-<div class="desc"><p><span>Tell your story by <strong>arranging the video sequence.</strong></span></p></div>
+<div class="desc"><p><span>{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', 'Tell your story by <strong>arranging the video sequence.</strong>'])}}</span></p></div>
 </li>
 <li>
 <div class="img"><a href="epcurate-curation.html?cid=${id}"><img src="images/banner_03.png" alt="" width="781" height="274" /></a></div>
-<div class="desc"><p><span><strong>Trim the videos and add titles</strong> to make your episodes more intriguing.</span></p></div>
+<div class="desc"><p><span>{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', '<strong>Trim the videos and add titles</strong> to make your episodes more intriguing.'])}}</span></p></div>
 </li>
 <li>
 <div class="img"><a href="epcurate-curation.html?cid=${id}"><img src="images/banner_04.png" alt="" width="781" height="274" /></a></div>
-<div class="desc"><p><span><strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically.</span></p></div>
+<div class="desc"><p><span>{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', '<strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically.'])}}</span></p></div>
 </li>
 </ul>
 </div>
@@ -223,8 +222,8 @@
 <div class="btns">
 <div class="btn-wrap enable">
 <ul>
-<li><a href="epcurate-curation.html?id=${id}" class="edit"><span></span>Edit</a></li>
-<li><a href="/api/episodes/${id}" rel="${id}" class="del"><span></span>Delete</a></li>
+<li><a href="epcurate-curation.html?id=${id}" class="edit"><span></span>${nn._([CMS_CONF.PAGE_ID, 'episode-list', 'Edit'])}</a></li>
+<li><a href="/api/episodes/${id}" rel="${id}" class="del"><span></span>${nn._([CMS_CONF.PAGE_ID, 'episode-list', 'Delete'])}</a></li>
 </ul>
 </div>
 </div>
@@ -239,7 +238,7 @@
 <div class="publish-time">
 {{if (false == isPublic && null == scheduleDate && null == publishDate) || (null != publishDate)}}
 {{if false == isPublic && null == scheduleDate && null == publishDate}}
-<p>Draft</p>
+<p>${nn._([CMS_CONF.PAGE_ID, 'episode-list', 'Draft'])}</p>
 {{/if}}
 {{if null != publishDate}}
 <p>${formatTimestamp(publishDate)}</p>
@@ -260,15 +259,12 @@
 </li>
 </script>
 
-</div>
-<!--============================== content-main start ========================-->
-
 <!--============================== footer start ==============================-->
 <p id="footer-control"></p>
 <div id="footer">
   <ul id="footer-list">
     <li>
-      <p class="select-txt">About Us</p>
+      <p class="select-txt"><a href="javascript:void(0);">About Us</a></p>
       <p class="select-btn"></p>
       <ul class="select-list">
         <li><a href="/#!about=about">About us</a></li>
@@ -282,12 +278,12 @@
         <li><a href="/#!about=contest">Curation Contest</a></li>
       </ul>
     </li>
-    <li>
-      <p class="select-txt">Language</p>
+    <li id="language-change">
+      <p class="select-txt"><a href="javascript:void(0);" id="language">Language</a></p>
       <p class="select-btn"></p>
       <ul class="select-list">
-        <li>English</li>
-        <li>中文</li>
+        <li><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
       </ul>
     </li>
   </ul>

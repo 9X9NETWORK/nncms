@@ -82,7 +82,7 @@ p.auto-height {
     width: 99px;
     height: 26px;
     background: url(../images/bg_tab_middle_off.png) repeat-x;
-    color: #777;
+    color: #555;
     font-family: Arial, Helvetica;
     font-size: 15px;
     line-height: 26px;
@@ -162,7 +162,7 @@ padding-right: 8px;
     height: 29px;
     padding-left: 25px;
     background: url(../images/icon_youtube_sm.png) no-repeat 0 center;
-    color: #777;
+    color: #555;
     font-weight: bold;
     font-size: 13px;
     line-height: 29px;
@@ -216,7 +216,7 @@ padding-right: 8px;
     height: 29px;
     padding-right: 4px;
     background: url(../images/input_box_middle.png) repeat-x;
-    color: #999;
+    color: #777;
     text-decoration: none;
 }
 
@@ -261,7 +261,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-add p {
     margin-bottom: 10px;
-    color: #777;
+    color: #555;
     font-size: 13px;
 }
 
@@ -285,7 +285,7 @@ padding-right: 8px;
     padding: 0 5px;
     border: none;
     background: url(../images/input_box_middle_vertical.png) repeat-y;
-    color: #999;
+    color: #777;
     font-family: Arial, Helvetica;
     font-size: 13px;
 	resize: none;
@@ -307,7 +307,7 @@ padding-right: 8px;
     height: 19px;
     margin: 5px 10px 0 0;
     background: url(../images/check_box.png) no-repeat 0 center;
-    color: #777;
+    color: #555;
     line-height: 18px;
     text-decoration: none;
 }
@@ -315,7 +315,7 @@ padding-right: 8px;
 #epcurate-curation #cur-add .func .checkbox a {
     display: block;
     padding-left: 22px;
-    color: #777;
+    color: #555;
     text-decoration: none;
 }
 
@@ -334,7 +334,7 @@ padding-right: 8px;
     float: left;
     width: 550px;
     padding: 0 0 0 32px;
-    color: #777;
+    color: #555;
     font-size: 13px;
 }
 
@@ -360,7 +360,7 @@ padding-right: 8px;
 #epcurate-curation #cur-edit p a {
     float: none;
     margin: 0;
-    color: #777;
+    color: #555;
     font-weight: bold;
 }
 
@@ -412,7 +412,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .set-time p.time.disable input.time {
     background: none;
-    color: #777;
+    color: #555;
 }
 
 #epcurate-curation #cur-edit .set-time input.time {
@@ -505,12 +505,13 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .edit-title h5 {
 	margin-bottom: 10px;
-	color: #777;
+	color: #555;
 	font-size: 13px;
+    line-height: 100%;
 }
 
 #epcurate-curation #cur-edit .edit-title.disable h5 {
-	color: #999;
+	color: #777;
 }
 
 #epcurate-curation #cur-edit .edit-title .wrap {
@@ -527,7 +528,7 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .text-container {
-    margin-bottom: 21px;
+    margin-bottom: 24px;
 }
 
 #epcurate-curation #cur-edit .text-container p.textarea {
@@ -559,7 +560,7 @@ padding-right: 8px;
     padding: 3px;
     border: none;
     background-color: transparent;
-    color: #999;
+    color: #777;
     font-family: Arial, Helvetica;
     font-size: 13px;
 	resize: none;
@@ -578,11 +579,7 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .font-container {
-    margin-bottom: 21px;
-}
-
-#epcurate-curation #cur-edit .font-container h5 {
-    margin-bottom: 8px;
+    margin-bottom: 24px;
 }
 
 #epcurate-curation #cur-edit .font-container p {
@@ -749,7 +746,7 @@ padding-right: 8px;
     left: -7px;
     width: 80px;
     height: 32px;
-    color: #777;
+    color: #555;
     font-size: 13px;
     text-align: center;
     text-decoration: none;
@@ -789,6 +786,15 @@ padding-right: 8px;
     width: 40px;
 }
 
+.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-weight .tip {
+    width: 50px;
+}
+
+.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-weight .tip img {
+    left: 12px;
+    margin: 0;
+}
+
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-style .tip {
     width: 47px;
     left: -12px;
@@ -808,6 +814,15 @@ padding-right: 8px;
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left .tip {
     width: 66px;
     left: -22px;
+}
+
+.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left .tip {
+    width: 72px;
+}
+
+.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left .tip img {
+    left: 26px;
+    margin: 0;
 }
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-center .tip {
@@ -834,7 +849,7 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .effect-container h5 {
-    margin-bottom: 8px;
+    margin-bottom: 9px;
 }
 
 #epcurate-curation #cur-edit .effect-container p {
@@ -1034,7 +1049,7 @@ padding-right: 8px;
 #epcurate-curation #cur-edit .btn-container .btns a {
     height: 31px;
 	padding: 0;
-	color: #777;
+	color: #555;
 	font-weight: normal;
 	font-family: Arial, Helvetica;
 	font-size: 13px;
@@ -1298,7 +1313,7 @@ padding-right: 8px;
     height: 29px;
     padding-right: 4px;
     background: url(../images/input_box_middle.png) repeat-x;
-    color: #999;
+    color: #777;
     text-decoration: none;
 }
 
@@ -1357,7 +1372,7 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .edit-title.disable .select .select-txt a {
-	color: #999;
+	color: #777;
     background: url(../images/input_box_middle_disable.png) repeat-x;
 }
 
@@ -1641,7 +1656,7 @@ padding-right: 8px;
 
 #storyboard p {
     margin-bottom: 26px;
-    color: #777;
+    color: #555;
     font-weight: bold;
     font-size: 13px;
 }
@@ -1734,17 +1749,12 @@ padding-right: 8px;
     position: absolute;
     top: -30px;
     left: -7px;
-    width: 200px;
     height: 32px;
-    color: #777;
+    color: #555;
     font-size: 13px;
     text-align: center;
     text-decoration: none;
     text-indent: 0;
-}
-
-#storyboard .storyboard-list ul li a.warning2 .tip {
-    width: 310px;
 }
 
 #storyboard .storyboard-list ul li a.error       .tip img,
@@ -1752,12 +1762,8 @@ padding-right: 8px;
 #storyboard .storyboard-list ul li a.warning2 .tip img {
 	position: absolute;
 	bottom: 1px;
-	left: 11px;
-	border: none;
-}
-
-#storyboard .storyboard-list ul li a.warning2 .tip img {
 	left: 10px;
+	border: none;
 }
 
 #storyboard .storyboard-list ul li a.error       .tip .tip-left,
@@ -1783,8 +1789,10 @@ padding-right: 8px;
 #storyboard .storyboard-list ul li a.warning2 .tip .tip-middle {
     display: block;
     height: 28px;
+    padding: 0 3px;
     background: url(../images/bg_tip_middle.png) repeat-x;
     line-height: 28px;
+    white-space: nowrap;
 }
 
 #storyboard .storyboard-list ul li a.error:hover       .tip,
@@ -1853,6 +1861,10 @@ padding-right: 8px;
     padding-left: 5px;
     font-weight: normal;
     font-size: 13px;
+}
+
+#storyboard .storyboard-list ul li.invalid h4 {
+    color: #f00;
 }
 
 #storyboard .storyboard-list ul li p.title {
@@ -1943,7 +1955,7 @@ padding-right: 8px;
     margin: 0;
     padding-top: 1px;
     background: url(../images/bg_tip_top.png) no-repeat 5px top;
-    color: #777;
+    color: #555;
     font-size: 13px;
     text-align: center;
     text-decoration: none;
@@ -1979,7 +1991,7 @@ padding-right: 8px;
     height: 28px;
     margin: 0;
     background: url(../images/bg_tip_middle.png) repeat-x bottom;
-    color: #777;
+    color: #555;
     font-size: 13px;
     line-height: 30px;
 }
@@ -2056,7 +2068,7 @@ padding-right: 8px;
     margin: 0;
     padding-top: 2px;
     background: url(../images/bg_tip_top.png) no-repeat 5px top;
-    color: #777;
+    color: #555;
     font-size: 13px;
     text-align: center;
     text-decoration: none;
@@ -2092,7 +2104,7 @@ padding-right: 8px;
     height: 28px;
     margin: 0;
     background: url(../images/bg_tip_middle.png) repeat-x bottom;
-    color: #777;
+    color: #555;
     font-size: 13px;
     line-height: 30px;
 }

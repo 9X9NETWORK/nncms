@@ -1,7 +1,8 @@
 /**
  * 9x9 SDK (nn-sdk.js)
  *
- * Please refer to http://202.5.224.193/louis/9x9-sdk-usage/ for usage
+ * Please refer to http://dev.teltel.com/louis/9x9-sdk-usage/ for usage
+ * and more information.
  *
  * ChangeLog:
  *
@@ -17,12 +18,12 @@
  *     - nn.when()
  *     - disable ajax cache
  *
- * download url:
+ * download latest release:
  *
- *   http://dev.teltel.com/louis/9x9-sdk-usage/js/release/v0.0.2/nn-sdk.js
+ *   http://dev.teltel.com/louis/9x9-sdk-usage/js/release/v0.0.3/nn-sdk.js
  *
  * @author	Louis Jeng <louis.jeng@9x9.tv>
- * @version	0.0.2
+ * @version	0.0.3
  * @since	2012-09-28
  */
 
@@ -232,19 +233,32 @@ var nn = { };
 	
 	nn._ = function(orig, repl) {
 		
-		var result = '';
+		var result = '*FIX ME!*';
 		
 		if (typeof orig == 'string') {
 			
 			result = (typeof nn.langPack[orig] == 'string') ? nn.langPack[orig] : orig;
 			
-		}
+		} else if ($.isArray(orig) && orig.length > 0) {
+            
+            var digg = nn.langPack;
+            while (orig.length > 1) {
+                var piece = orig.shift();
+                if (typeof digg[piece] != 'undefined') {
+                    digg = digg[piece];
+                }
+            }
+            orig = orig.shift();
+            result = (typeof digg[orig] == 'string') ? digg[orig] : orig;
+        }
 		
 		if ($.isArray(repl)) {
 			for (var i = 0; i < repl.length; i++) {
 				result = result.replace('{' + i + '}', repl[i]);
 			}
-		}
+		} else if (typeof repl == 'string') {
+            result = result.replace('{0}', repl);
+        }
 		
 		return result;
 	};

@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html class="en">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=517" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=517" />
-<link rel="stylesheet" href="stylesheets/channel.css?v=517" />
+<link rel="stylesheet" href="stylesheets/style.css?v=548" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=548" />
+<link rel="stylesheet" href="stylesheets/channel.css?v=548" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=517"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=517"></script>
-<script src="javascripts/jquery.ellipsis.js?v=517"></script>
-<script src="javascripts/jquery.blockUI.js?v=517"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=517"></script>
-<script src="javascripts/jquery.charcounter.min.js?v=517"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=517"></script>
-<script src="javascripts/jquery.cookie.js?v=517"></script>
-<script src="javascripts/json2.js?v=517"></script>
-<script src="javascripts/purl.js?v=517"></script>
-<script src="javascripts/vertical.slider.js?v=517"></script>
-<script src="javascripts/config.js?v=517"></script>
-<script src="javascripts/basic.js?v=517"></script>
-<script src="javascripts/controller.js?v=517"></script>
-<script src="javascripts/channel.js?v=517"></script>
+<script src="javascripts/nn-sdk.js?v=548"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=548"></script>
+<script src="javascripts/jquery.ellipsis.js?v=548"></script>
+<script src="javascripts/jquery.blockUI.js?v=548"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=548"></script>
+<script src="javascripts/jquery.charcounter.min.js?v=548"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=548"></script>
+<script src="javascripts/jquery.cookie.js?v=548"></script>
+<script src="javascripts/json2.js?v=548"></script>
+<script src="javascripts/purl.js?v=548"></script>
+<script src="javascripts/vertical.slider.js?v=548"></script>
+<script src="javascripts/config.js?v=548"></script>
+<script src="javascripts/controller.js?v=548"></script>
+<script src="javascripts/basic.js?v=548"></script>
+<script src="javascripts/channel.js?v=548"></script>
 <title>9x9.tv - My Channels</title>
 </head>
 <body>
@@ -32,15 +32,15 @@
 
 <script id="lightbox-create-channel-tmpl" type="text/x-jquery-tmpl">
 <div id="lightbox-create-channel" class="lightbox-content">
-<h3><img src="images/text_collect.png" alt="" /></h3>
-<p class="desc">Studio is the management center for your 9x9.tv list-form channels!</p>
+<h3>{{html nn._(['overlay', 'channel-tutorial', '<img src="images/text_collect.png" alt="" />'])}}</h3>
+<p class="desc">${nn._(['overlay', 'channel-tutorial', 'Studio is the management center for your 9x9.tv list-form channels!'])}</p>
 <p class="create">
 <a href="channel-add.html">create
 <img src="images/icon_add.png" alt="" />
-<span>Create a<br />new channel</span>
+<span>{{html nn._(['overlay', 'channel-tutorial', 'Create a<br />new channel'])}}</span>
 </a>
 </p>
-<p class="btns unblock"><span><a href="./">Not right now, thanks!</a></span></p>
+<p class="btns unblock"><span><a href="./">${nn._(['overlay', 'channel-tutorial', 'Not right now, thanks!'])}</a></span></p>
 </div>
 </script>
 
@@ -57,7 +57,7 @@
       <ul id="profile-dropdown" class="dropdown">
         <li><a id="profile-mypage" href="/#!curator=profileUrl">My page</a></li>
         <li><a href="./">Studio</a></li>
-        <li><a href="/#!settings">Settings</a></li>
+        <li id="profile-settings"><a href="/#!settings">Settings</a></li>
         <li><a id="profile-logout" href="/api/login">Log out</a></li>
       </ul>
     </li>
@@ -76,7 +76,6 @@
 
 <!--============================== content-main start ========================-->
 <div id="content-wrap">
-
 <div id="content-nav">
 <div id="func-nav">
 <ul>
@@ -84,13 +83,10 @@
 </ul>
 </div>
 </div>
-
 <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
-
 <div id="content-main">
 <div id="title-func" class="clearfix">
-<h2>My Channels (<span id="channel-counter"></span>)</h2>
-<p class="order btns"><span><a href="javascript:void(0);" class="reorder">Reorder channels</a></span></p>
+<!-- template = #title-func-tmpl -->
 </div>
 <div id="content-main-wrap">
 <div class="constrain">
@@ -100,6 +96,13 @@
 </div>
 </div>
 </div>
+</div>
+<!--============================== content-main start ========================-->
+
+<script id="title-func-tmpl" type="text/x-jquery-tmpl">
+<h2>${nn._([CMS_CONF.PAGE_ID, 'title-func', 'My Channels'])} (<span id="channel-counter">${$item.cntChannel}</span>)</h2>
+<p class="order btns"><span><a href="javascript:void(0);" class="reorder">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Reorder channels'])}</a></span></p>
+</script>
 
 <script id="channel-list-tmpl-item" type="text/x-jquery-tmpl">
 <li class="clearfix" data-meta="${id}">
@@ -111,7 +114,7 @@
 <div class="photo-list">
 <a href="/#!${id}" target="_blank">
 {{if cntEpisode == 0 && -1 !== $.inArray(moreImageUrl_1, [CMS_CONF.CHANNEL_DEFAULT_IMAGE, CMS_CONF.EPISODE_DEFAULT_IMAGE])}}
-<span>No Episodes</span>
+<span>${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'No Episodes'])}</span>
 {{/if}}
 <img src="images/icon_playlist.png" alt="" class="watermark" />
 <img src="${moreImageUrl_1}" alt="" width="152" height="86" class="img" />
@@ -121,20 +124,20 @@
 </div>
 
 <div class="info">
-<h3><a href="episode-list.html?id=${id}">${name}</a></h3>
-<p><span>${cntEpisode}</span>Episodes</p>
-<p><span>${cntFollower}</span>Followers</p>
-<p><span>${cntView}</span>Views</p>
+<h3 data-meta="${name}"><a href="episode-list.html?id=${id}">${name}</a></h3>
+<p><span>${cntEpisode}</span>${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episodes'])}</p>
+<p><span>${cntFollower}</span>${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Followers'])}</p>
+<p><span>${cntView}</span>${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Views'])}</p>
 </div>
 
 <div class="func-wrap">
-<p class="time">Update: ${formatTimestamp(updateDate)}</p>
+<p class="time">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Update:'])} ${formatTimestamp(updateDate)}</p>
 <div class="func-btns">
 {{if contentType == CMS_CONF.YOUR_FAVORITE}}
 <div class="btn-wrap disable">
 <ul>
 <li><a href="javascript:void(0);" class="add disable">Add</a></li>
-<li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Episode list</span></span></span></span></a></li>
+<li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
 <li><a href="javascript:void(0);" class="setting disable">Setting</a></li>
 <li><a href="javascript:void(0);" class="del disable">Del</a></li>
 </ul>
@@ -142,10 +145,10 @@
 {{else}}
 <div class="btn-wrap enable">
 <ul>
-<li><a href="epcurate-curation.html?cid=${id}" class="add">Add<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Curate a new episode</span></span></span></span></a></li>
-<li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Episode list</span></span></span></span></a></li>
-<li><a href="channel-setting.html?id=${id}" class="setting">Setting<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Channel settings</span></span></span></span></a></li>
-<li><a href="/api/users/${$item.userId}/channels/${id}" rel="${id}" class="del">Del<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Delete this channel</span></span></span></span></a></li>
+<li><a href="epcurate-curation.html?cid=${id}" class="add">Add<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Curate a new episode'])}</span></span></span></span></a></li>
+<li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
+<li><a href="channel-setting.html?id=${id}" class="setting">Setting<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Channel settings'])}</span></span></span></span></a></li>
+<li><a href="/api/users/${$item.userId}/channels/${id}" rel="${id}" class="del">Del<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Delete this channel'])}</span></span></span></span></a></li>
 </ul>
 </div>
 {{/if}}
@@ -160,15 +163,12 @@
 </li>
 </script>
 
-</div>
-<!--============================== content-main start ========================-->
-
 <!--============================== footer start ==============================-->
 <p id="footer-control"></p>
 <div id="footer">
   <ul id="footer-list">
     <li>
-      <p class="select-txt">About Us</p>
+      <p class="select-txt"><a href="javascript:void(0);">About Us</a></p>
       <p class="select-btn"></p>
       <ul class="select-list">
         <li><a href="/#!about=about">About us</a></li>
@@ -182,12 +182,12 @@
         <li><a href="/#!about=contest">Curation Contest</a></li>
       </ul>
     </li>
-    <li>
-      <p class="select-txt">Language</p>
+    <li id="language-change">
+      <p class="select-txt"><a href="javascript:void(0);" id="language">Language</a></p>
       <p class="select-btn"></p>
       <ul class="select-list">
-        <li>English</li>
-        <li>中文</li>
+        <li><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
       </ul>
     </li>
   </ul>

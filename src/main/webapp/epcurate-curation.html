@@ -1,38 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html class="en">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=517" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=517" />
-<link rel="stylesheet" href="stylesheets/uniform.css?v=517" />
-<link rel="stylesheet" href="stylesheets/playback.css?v=517" />
-<link rel="stylesheet" href="stylesheets/epcurate.css?v=517" />
-<link rel="stylesheet" href="stylesheets/ep-curation.css?v=517" />
+<link rel="stylesheet" href="stylesheets/style.css?v=548" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=548" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=548" />
+<link rel="stylesheet" href="stylesheets/playback.css?v=548" />
+<link rel="stylesheet" href="stylesheets/epcurate.css?v=548" />
+<link rel="stylesheet" href="stylesheets/ep-curation.css?v=548" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=517"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=517"></script>
-<script src="javascripts/jquery.ellipsis.js?v=517"></script>
-<script src="javascripts/jquery.blockUI.js?v=517"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=517"></script>
-<script src="javascripts/jquery.uniform.min.js?v=517"></script>
-<script src="javascripts/jquery.swfobject.min.js?v=517"></script>
-<script src="javascripts/jquery.titlecard.js?v=517"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=517"></script>
-<script src="javascripts/jquery.cookie.js?v=517"></script>
-<script src="javascripts/jquery.countdown.min.js?v=517"></script>
-<script src="javascripts/jquery.autotab.min.js?v=517"></script>
-<script src="javascripts/json2.js?v=517"></script>
-<script src="javascripts/purl.js?v=517"></script>
-<script src="javascripts/swfupload/swfupload.js?v=517"></script>
-<script src="javascripts/horizontal-slider.js?v=517"></script>
-<script src="javascripts/config.js?v=517"></script>
-<script src="javascripts/basic.js?v=517"></script>
-<script src="javascripts/controller.js?v=517"></script>
-<script src="javascripts/curation.js?v=517"></script>
+<script src="javascripts/nn-sdk.js?v=548"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=548"></script>
+<script src="javascripts/jquery.ellipsis.js?v=548"></script>
+<script src="javascripts/jquery.blockUI.js?v=548"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=548"></script>
+<script src="javascripts/jquery.uniform.min.js?v=548"></script>
+<script src="javascripts/jquery.swfobject.min.js?v=548"></script>
+<script src="javascripts/jquery.titlecard.js?v=548"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=548"></script>
+<script src="javascripts/jquery.cookie.js?v=548"></script>
+<script src="javascripts/jquery.countdown.min.js?v=548"></script>
+<script src="javascripts/jquery.autotab.min.js?v=548"></script>
+<script src="javascripts/json2.js?v=548"></script>
+<script src="javascripts/purl.js?v=548"></script>
+<script src="javascripts/swfupload/swfupload.js?v=548"></script>
+<script src="javascripts/horizontal-slider.js?v=548"></script>
+<script src="javascripts/config.js?v=548"></script>
+<script src="javascripts/controller.js?v=548"></script>
+<script src="javascripts/basic.js?v=548"></script>
+<script src="javascripts/curation.js?v=548"></script>
 <title>9x9.tv - Episode Curation - Curation</title>
 </head>
 <body>
@@ -50,7 +50,7 @@
       <ul id="profile-dropdown" class="dropdown">
         <li><a id="profile-mypage" href="/#!curator=profileUrl">My page</a></li>
         <li><a href="./">Studio</a></li>
-        <li><a href="/#!settings">Settings</a></li>
+        <li id="profile-settings"><a href="/#!settings">Settings</a></li>
         <li><a id="profile-logout" href="/api/login">Log out</a></li>
       </ul>
     </li>
@@ -60,10 +60,10 @@
 
 <div id="epcurate-nav">
 <div class="epcurate-nav-wrap">
-<h3><a href="#" id="epcurate-nav-back" class="btn-back">Back<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Leave</span></span></span></span></a><a href="javascript:void(0);">Episode Curation</a></h3>
+<h3><a href="#" id="epcurate-nav-back" class="btn-back">Back<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle langkey">Leave</span></span></span></span></a><a href="javascript:void(0);" class="langkey">Episode Curation</a></h3>
 <ul>
-<li class="curation on"><span class="nav-right"><span class="nav-middle">Curation</span></span></li>
-<li class="publish"><a href="#" id="epcurate-nav-publish"><span class="nav-right"><span class="nav-middle">Publish</span></span></a></li>
+<li class="curation on"><span class="nav-right"><span class="nav-middle langkey">Curation</span></span></li>
+<li class="publish"><a href="#" id="epcurate-nav-publish"><span class="nav-right"><span class="nav-middle langkey">Publish</span></span></a></li>
 </ul>
 </div>
 </div>
@@ -74,34 +74,15 @@
 <!-- template = #epcurate-info-tmpl -->
 <input type="hidden" name="id" id="id" value="" />
 <input type="hidden" name="channelId" id="channelId" value="" />
-
-<script id="epcurate-info-tmpl" type="text/x-jquery-tmpl">
-<input type="hidden" name="name" id="name" value="${name}" />
-<input type="hidden" name="intro" id="intro" value="${intro}" />
-</script>
-
 <div id="content-main">
 <div id="content-main-wrap" class="curation">
 <div class="constrain">
+
 <div id="epcurate-curation" class="clearfix">
 <ul class="tabs">
-<li class="first last on"><span><a href="#cur-add" class="cur-add">Add Video</a></span></li>
-<li class="last hide on"><span><a href="#cur-edit" class="cur-edit">Edit</a></span></li>
+<li class="first last on"><span><a href="#cur-add" class="cur-add langkey">Add Video</a></span></li>
+<li class="last hide on"><span><a href="#cur-edit" class="cur-edit langkey">Edit</a></span></li>
 </ul>
-
-<script id="titlecard-tmpl" type="text/x-jquery-tmpl">
-<div id="titlecard-outer" class="titlecard-outer" style="display: block; position: relative; overflow: hidden; z-index: 50; width: auto; height: ${$item.outerHeight}px; background-color: ${bgColor};">
-<div class="titlecard-middle" style="display: block; position: absolute; width: 100%; height: 100%;">
-<div id="titlecard-inner" class="titlecard-inner" style="display: block; position: absolute; width: 98%; height: auto; text-align: ${align}; font-size: ${$item.fontSize}pt; color: ${color}; font-style: ${style}; font-weight: ${weight};">
-{{html $item.message}}
-</div>
-</div>
-{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
-<img src="${bgImage}" style="width: 100%; height: 100%; border: none;" />
-{{/if}}
-</div>
-</script>
-
 <div class="curation-content clearfix">
 <p class="auto-height"></p>
 <div id="video-player">
@@ -121,89 +102,142 @@
 </ul>
 </div>
 </div>
-
 <div id="cur-add" class="tab-content clearfix">
-<p>Add video by URL</p>
+<p class="langkey">Add video by URL</p>
 <p class="textarea"><span><textarea name="videourl" id="videourl" cols="80" class="textarea">Paste YouTube video URLs to add (separate with different lines)</textarea></span></p>
 <p class="notice hide">You have reached the maximum amount of 50 videos.</p>
 <div class="func">
-<p class="btns btn-add"><span><a href="#" id="btn-add-videourl">Add</a></span></p>
+<p class="btns btn-add"><span><a href="#" id="btn-add-videourl" class="langkey">Add</a></span></p>
 </div>
 </div>
-
 <div id="cur-edit" class="tab-content clearfix hide">
 <div id="video-info" class="edit-time hide">
 <!-- template = #video-info-tmpl -->
 </div>
+<div class="edit-title hide disable">
+<!-- template = #titlecard-edit-tmpl -->
+</div>
+</div>
+<p class="auto-height clear"></p>
+</div>
+</div>
+
+<div id="storyboard">
+<p class="episode-storyboard">
+<!-- template = #episode-storyboard-tmpl -->Episode storyboard (<em id="storyboard-length">50</em> videos left)<span>Duration <em id="storyboard-duration">00:00:00</em></span>
+</p>
+<div id="storyboard-wrap" class="storyboard-list">
+<div id="storyboard-list">
+<p class="notice langkey">+ Add videos here</p>
+<ul id="storyboard-listing">
+<!-- template = #storyboard-listing-tmpl-item -->
+</ul>
+</div>
+</div>
+<p class="auto-height"></p>
+<div id="storyboard-slider"><div class="slider-h"></div></div>
+<p class="auto-height"></p>
+</div>
+
+<div class="form-btn">
+<div class="wrap">
+<p class="btns btn-leave"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-leave" value="Leave" class="langkey-val" /></span></span></p>
+<p class="btns btn-save"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-save" value="Save" class="langkey-val" /></span></span></p>
+<p class="next"><a href="epcurate-publish.html" id="form-btn-next" rel="publish" class="langkey">Next to Publish &gt;</a></p>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</form>
+</div>
+<!--============================== content-main start ========================-->
+
+<script id="epcurate-info-tmpl" type="text/x-jquery-tmpl">
+<span id="epcurate-info">
+<input type="hidden" name="name" id="name" value="${name}" />
+<input type="hidden" name="intro" id="intro" value="${intro}" />
+</span>
+</script>
+
+<script id="titlecard-tmpl" type="text/x-jquery-tmpl">
+<div id="titlecard-outer" class="titlecard-outer" style="display: block; position: relative; overflow: hidden; z-index: 50; width: auto; height: ${$item.outerHeight}px; background-color: ${bgColor};">
+<div class="titlecard-middle" style="display: block; position: absolute; width: 100%; height: 100%;">
+<div id="titlecard-inner" class="titlecard-inner" style="display: block; position: absolute; width: 98%; height: auto; text-align: ${align}; font-size: ${$item.fontSize}pt; color: ${color}; font-style: ${style}; font-weight: ${weight};">
+{{html $item.message}}
+</div>
+</div>
+{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
+<img src="${bgImage}" style="width: 100%; height: 100%; border: none;" />
+{{/if}}
+</div>
+</script>
 
 <script id="video-info-tmpl" type="text/x-jquery-tmpl">
 <h3 class="ellipsis multiline"><span class="title">${name}</span></h3>
-<p>Original <span class="duration">${formatDuration(ytDuration)}</span> | From <a href="${fileUrl}" target="_blank">YouTube.com</a> | By <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> on <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span></p>
+<p>${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Original'])} <span class="duration">${formatDuration(ytDuration)}</span> | ${nn._([CMS_CONF.PAGE_ID, 'video-info', 'From'])} <a href="${fileUrl}" target="_blank">YouTube.com</a> | ${nn._([CMS_CONF.PAGE_ID, 'video-info', 'By'])} <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> ${nn._([CMS_CONF.PAGE_ID, 'video-info', 'on'])} <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span></p>
 <p class="desc ellipsis multiline">${intro}</p>
 <div class="set-time" data-origin-duration="${ytDuration}">
 <div class="time-wrap">
 <div class="start-time">
-<span>Start from:</span>
+<span>${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Start from:'])}</span>
 <p class="time disable" data-time="${$item.startH}"><input type="text" name="startH" id="startH" maxlength="2" value="${$item.startH}" class="time time-h" disabled="disabled" /> :</p>
 <p class="time disable" data-time="${$item.startM}"><input type="text" name="startM" id="startM" maxlength="2" value="${$item.startM}" class="time time-m" disabled="disabled" /> :</p>
 <p class="time disable" data-time="${$item.startS}"><input type="text" name="startS" id="startS" maxlength="2" value="${$item.startS}" class="time time-s" disabled="disabled" /></p>
 </div>
 <div class="end-time">
-<span>To:</span>
+<span>${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'To:'])}</span>
 <p class="time disable" data-time="${$item.endH}"><input type="text" name="endH" id="endH" maxlength="2" value="${$item.endH}" class="time time-h" disabled="disabled" /> :</p>
 <p class="time disable" data-time="${$item.endM}"><input type="text" name="endM" id="endM" maxlength="2" value="${$item.endM}" class="time time-m" disabled="disabled" /> :</p>
 <p class="time disable" data-time="${$item.endS}"><input type="text" name="endS" id="endS" maxlength="2" value="${$item.endS}" class="time time-s" disabled="disabled" /></p>
 </div>
 <div class="total-time">
-<span>Duration:</span>
+<span>${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Duration:'])}</span>
 <p class="time disable"><input type="text" name="totalH" id="totalH" maxlength="2" value="${$item.totalH}" class="time time-h" disabled="disabled" /> :</p>
 <p class="time disable"><input type="text" name="totalM" id="totalM" maxlength="2" value="${$item.totalM}" class="time time-m" disabled="disabled" /> :</p>
 <p class="time disable"><input type="text" name="totalS" id="totalS" maxlength="2" value="${$item.totalS}" class="time time-s" disabled="disabled" /></p>
 </div>
 </div>
 <div class="btn-wrap">
-<p class="notice">Invalid time, please try again.</p>
+<p class="notice">${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Invalid time, please try again.'])}</p>
 <div class="buttons">
-<p class="btns btn-edit"><span><a href="#">Edit</a></span></p>
-<p class="btns btn-cancel hide"><span><a href="#">Cancel</a></span></p>
-<p class="btns btn-done hide"><span><a href="#">Done</a></span></p>
+<p class="btns btn-edit"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Edit'])}</a></span></p>
+<p class="btns btn-cancel hide"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Cancel'])}</a></span></p>
+<p class="btns btn-done hide"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Done'])}</a></span></p>
 </div>
 </div>
 </div>
 {{if isEmbedLimited || isZoneLimited || isMobileLimited}}
 <ul class="play-notice">
 {{if isEmbedLimited}}
-<li class="outside">Not playable outside Youtube</li>
+<li class="outside">${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Not playable outside Youtube'])}</li>
 {{else}}
 {{if isZoneLimited}}
-<li class="region">Not playable in some regions</li>
+<li class="region">${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Not playable in some regions'])}</li>
 {{/if}}
 {{if isMobileLimited}}
-<li class="device">Not playable on mobile device</li>
+<li class="device">${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Not playable on mobile device'])}</li>
 {{/if}}
 {{/if}}
 </ul>
 {{/if}}
 </script>
 
-<div class="edit-title hide disable">
-<!-- template = #titlecard-edit-tmpl -->
-</div>
-
 <script id="titlecard-edit-tmpl" type="text/x-jquery-tmpl">
 <div class="wrap">
 <div class="text-container">
-<h5>Text</h5>
+<h5>${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Text'])}</h5>
 <p class="textarea"><span><span><textarea name="text" id="text" cols="80" class="textarea">{{if '' == message}}My video{{else}}${message}{{/if}}</textarea></span></span></p>
 </div>
 
 <div class="font-container">
-<h5>Font</h5>
+<h5>${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Font'])}</h5>
 <div class="text-func clearfix">
 <div class="func-wrap clearfix">
 <ul>
-<li class="font-weight"><input type="checkbox" name="fontWeight" value="bold" id="fontWeight"{{if weight == 'bold'}} checked="checked"{{/if}} />Bold<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Bold</span></span></span></span></li>
-<li class="font-style"><input type="checkbox" name="fontStyle" value="italic" id="fontStyle"{{if style == 'italic'}} checked="checked"{{/if}} />Italics<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Italics</span></span></span></span></li>
+<li class="font-weight"><input type="checkbox" name="fontWeight" value="bold" id="fontWeight"{{if weight == 'bold'}} checked="checked"{{/if}} />Bold<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Bold'])}</span></span></span></span></li>
+<li class="font-style"><input type="checkbox" name="fontStyle" value="italic" id="fontStyle"{{if style == 'italic'}} checked="checked"{{/if}} />Italics<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Italics'])}</span></span></span></span></li>
 {{if '' == color}}
 <li><a href="#" class="font-color">Font color<span class="color c-fff"></span>
 {{else}}
@@ -223,7 +257,7 @@
 <li class="c-03f" data-meta="#0033ff">#0033ff</li>
 <li class="c-60f" data-meta="#6600ff">#6600ff</li>
 </ul>
-<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Font color</span></span></span></span>
+<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Font color'])}</span></span></span></span>
 </a>
 {{if '' == color}}
 <input type="hidden" name="fontColor" id="fontColor" value="#ffffff" />
@@ -236,32 +270,32 @@
 <input type="hidden" name="fontSize" id="fontSize" value="${size}" />
 {{/if}}
 </li>
-<li><a href="#" class="font-l">Font size +<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Font size +</span></span></span></span></a></li>
-<li><a href="#" class="font-s">Font size -<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Font size -</span></span></span></span></a></li>
-<li class="align-left"><input type="radio" name="align" value="left" id="align_left"{{if align == 'left'}} checked="checked"{{/if}} />Align left<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Align left</span></span></span></span></li>
-<li class="align-center"><input type="radio" name="align" value="center" id="align_center"{{if align == '' || align == 'center'}} checked="checked"{{/if}} />Align center<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Align center</span></span></span></span></li>
-<li class="align-right"><input type="radio" name="align" value="right" id="align_right"{{if align == 'right'}} checked="checked"{{/if}} />Align right<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Align right</span></span></span></span></li>
+<li><a href="#" class="font-l">Font size +<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Font size +'])}</span></span></span></span></a></li>
+<li><a href="#" class="font-s">Font size -<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Font size -'])}</span></span></span></span></a></li>
+<li class="align-left"><input type="radio" name="align" value="left" id="align_left"{{if align == 'left'}} checked="checked"{{/if}} />Align left<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Align left'])}</span></span></span></span></li>
+<li class="align-center"><input type="radio" name="align" value="center" id="align_center"{{if align == '' || align == 'center'}} checked="checked"{{/if}} />Align center<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Align center'])}</span></span></span></span></li>
+<li class="align-right"><input type="radio" name="align" value="right" id="align_right"{{if align == 'right'}} checked="checked"{{/if}} />Align right<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Align right'])}</span></span></span></span></li>
 </ul>
 </div>
 </div>
 </div>
 
 <div class="effect-container">
-<h5>Effect</h5>
+<h5>${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Effect'])}</h5>
 <p class="effect-demo"><span><em>9x9.tv</em></span></p>
 <div class="select">
 <p class="select-btn"></p>
 {{if '' == effect}}
-<div class="select-txt"><a href="#">None</a></div>
+<div class="select-txt"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'None'])}</a></div>
 {{else}}
-<div class="select-txt"><a href="#">${CMS_CONF.EFFECT_MAP[effect]}</a></div>
+<div class="select-txt"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'title-card', CMS_CONF.EFFECT_MAP[effect]])}</a></div>
 {{/if}}
 <ul class="select-list">
-<li data-meta="none">None</li>
-<li data-meta="fade">Fade</li>
-<li data-meta="blind">Blind</li>
-<li data-meta="clip">Clip</li>
-<li data-meta="drop">Drop</li>
+<li data-meta="none">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'None'])}</li>
+<li data-meta="fade">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Fade'])}</li>
+<li data-meta="blind">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Blind'])}</li>
+<li data-meta="clip">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Clip'])}</li>
+<li data-meta="drop">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Drop'])}</li>
 </ul>
 {{if '' == effect}}
 <input type="hidden" name="effect" id="effect" value="none" />
@@ -274,14 +308,14 @@
 
 <div class="wrap last">
 <div class="background-container">
-<h5>Background</h5>
+<h5>${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Background'])}</h5>
 <p class="radio-list">
 {{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
-<label for="bg_color" class="first"><input type="radio" name="bg" value="color" id="bg_color" />Color</label>
-<label for="bg_image"><input type="radio" name="bg" value="image" id="bg_image" checked="checked" />Image</label>
+<label for="bg_color" class="first"><input type="radio" name="bg" value="color" id="bg_color" />${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Color'])}</label>
+<label for="bg_image"><input type="radio" name="bg" value="image" id="bg_image" checked="checked" />${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Image'])}</label>
 {{else}}
-<label for="bg_color" class="first"><input type="radio" name="bg" value="color" id="bg_color" checked="checked" />Color</label>
-<label for="bg_image"><input type="radio" name="bg" value="image" id="bg_image" />Image</label>
+<label for="bg_color" class="first"><input type="radio" name="bg" value="color" id="bg_color" checked="checked" />${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Color'])}</label>
+<label for="bg_image"><input type="radio" name="bg" value="image" id="bg_image" />${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Image'])}</label>
 {{/if}}
 </p>
 {{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
@@ -328,9 +362,9 @@
 {{/if}}
 <img src="images/black_box_loading.gif" alt="" class="loading" />
 </p>
-<p id="uploadThumbnail">Upload</p>
-<p class="notice">Better results with 720x480 image.</p>
-<p class="notice highlight hide">Please upload jpeg, png, or gif file.</p>
+<p id="uploadThumbnail">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Upload'])}</p>
+<p class="notice">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Better results with 720x480 image.'])}</p>
+<p class="notice highlight hide">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Please upload jpeg, png, or gif file.'])}</p>
 {{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
 <input type="hidden" name="backgroundImage" id="backgroundImage" value="${bgImage}" />
 <input type="hidden" name="backgroundImageOld" id="backgroundImageOld" value="${bgImage}" />
@@ -342,7 +376,7 @@
 </div>
 
 <div class="duration-container">
-<h5>Duration</h5>
+<h5>${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Duration'])}</h5>
 <div class="select">
 <p class="select-btn"></p>
 {{if '' == duration}}
@@ -368,48 +402,38 @@
 <input type="hidden" name="duration" id="duration" value="${duration}" />
 {{/if}}
 </div>
-<p class="notice hide">Invalid duration, please try again.</p>
+<p class="notice hide">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Invalid duration, please try again.'])}</p>
 </div>
 
 <div class="btn-container">
 {{if $item.isUpdateMode}}
 <p class="btn-del"><a href="#">Del</a></p>
 {{/if}}
-<p class="btns btn-cancel"><span><a href="#">Cancel</a></span></p>
-<p class="btns btn-done"><span><a href="#">Done</a></span></p>
-<p class="btns btn-edit"><span><a href="#">Edit Title</a></span></p>
+<p class="btns btn-cancel"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Cancel'])}</a></span></p>
+<p class="btns btn-done"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Done'])}</a></span></p>
+<p class="btns btn-edit"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Edit Title'])}</a></span></p>
 </div>
 </div>
 </script>
 
-</div>
-<p class="auto-height clear"></p>
-</div>
-</div>
-
-<div id="storyboard">
-<p class="episode-storyboard">Episode storyboard (<em id="storyboard-length">50</em> videos left)<span>Duration <em id="storyboard-duration">00:00:00</em></span></p>
-<div id="storyboard-wrap" class="storyboard-list">
-<div id="storyboard-list">
-<p class="notice">+ Add videos here</p>
-<ul id="storyboard-listing">
-<!-- template = #storyboard-listing-tmpl-item -->
-</ul>
+<script id="episode-storyboard-tmpl" type="text/x-jquery-tmpl">
+${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id="storyboard-length">50</em> ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'videos left'])})<span>${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Duration'])} <em id="storyboard-duration">00:00:00</em></span>
+</script>
 
 <script id="storyboard-listing-tmpl-item" type="text/x-jquery-tmpl">
 <li data-ytid="${ytId}" data-ytduration="${ytDuration}" data-starttime="${startTime}" data-endtime="${endTime}">
 {{if isEmbedLimited || isZoneLimited || isMobileLimited}}
 {{if isEmbedLimited}}
-<a href="#!pid=${id}&ytid=${ytId}" class="error"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Not playable outside YouTube</span></span></span></span></a>
+<a href="#!pid=${id}&ytid=${ytId}" class="error"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Not playable outside YouTube'])}</span></span></span></span></a>
 {{else}}
 {{if isZoneLimited && isMobileLimited}}
-<a href="#!pid=${id}&ytid=${ytId}" class="warning2"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Not playable in some regions & on mobile device</span></span></span></span></a>
+<a href="#!pid=${id}&ytid=${ytId}" class="warning2"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Not playable in some regions & on mobile device'])}</span></span></span></span></a>
 {{else}}
 {{if isZoneLimited}}
-<a href="#!pid=${id}&ytid=${ytId}" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Not playable in some regions</span></span></span></span></a>
+<a href="#!pid=${id}&ytid=${ytId}" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Not playable in some regions'])}</span></span></span></span></a>
 {{/if}}
 {{if isMobileLimited}}
-<a href="#!pid=${id}&ytid=${ytId}" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Not playable on mobile device</span></span></span></span></a>
+<a href="#!pid=${id}&ytid=${ytId}" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Not playable on mobile device'])}</span></span></span></span></a>
 {{/if}}
 {{/if}}
 {{/if}}
@@ -421,54 +445,31 @@
 <h4 class="ellipsis multiline">${name}</h4>
 <p class="title">
 {{if beginTitleCard != null}}
-<a href="#!pid=${id}&ytid=${ytId}&tid=${beginTitleCard.id}" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Edit Title</span></span></span></span></a>
+<a href="#!pid=${id}&ytid=${ytId}&tid=${beginTitleCard.id}" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Edit Title'])}</span></span></span></span></a>
 {{/if}}
 {{if endTitleCard != null}}
-<a href="#!pid=${id}&ytid=${ytId}&tid=${endTitleCard.id}" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Edit Title</span></span></span></span></a>
+<a href="#!pid=${id}&ytid=${ytId}&tid=${endTitleCard.id}" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Edit Title'])}</span></span></span></span></a>
 {{/if}}
 </p>
 <p class="hover-func">
 <a href="#!pid=${id}&ytid=${ytId}" class="video-del">Video Del</a>
 <a href="#!pid=${id}&ytid=${ytId}" class="video-play">Video Play</a>
 {{if beginTitleCard == null}}
-<a href="#!pid=${id}&ytid=${ytId}" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Add Title</span></span></span></span></a>
+<a href="#!pid=${id}&ytid=${ytId}" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Add Title'])}</span></span></span></span></a>
 {{/if}}
 {{if endTitleCard == null}}
-<a href="#!pid=${id}&ytid=${ytId}" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Add Title</span></span></span></span></a>
+<a href="#!pid=${id}&ytid=${ytId}" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Add Title'])}</span></span></span></span></a>
 {{/if}}
 </p>
 </li>
 </script>
-
-</div>
-</div>
-
-<p class="auto-height"></p>
-<div id="storyboard-slider"><div class="slider-h"></div></div>
-<p class="auto-height"></p>
-</div>
-
-<div class="form-btn">
-<div class="wrap">
-<p class="btns btn-leave"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-leave" value="Leave" /></span></span></p>
-<p class="btns btn-save"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-save" value="Save" /></span></span></p>
-<p class="next"><a href="epcurate-publish.html" id="form-btn-next" rel="publish">Next to Publish &gt;</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-</form>
-</div>
-<!--============================== content-main start ========================-->
 
 <!--============================== footer start ==============================-->
 <p id="footer-control"></p>
 <div id="footer">
   <ul id="footer-list">
     <li>
-      <p class="select-txt">About Us</p>
+      <p class="select-txt"><a href="javascript:void(0);">About Us</a></p>
       <p class="select-btn"></p>
       <ul class="select-list">
         <li><a href="/#!about=about">About us</a></li>
@@ -482,12 +483,12 @@
         <li><a href="/#!about=contest">Curation Contest</a></li>
       </ul>
     </li>
-    <li>
-      <p class="select-txt">Language</p>
+    <li id="language-change">
+      <p class="select-txt"><a href="javascript:void(0);" id="language">Language</a></p>
       <p class="select-btn"></p>
       <ul class="select-list">
-        <li>English</li>
-        <li>中文</li>
+        <li><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
       </ul>
     </li>
   </ul>

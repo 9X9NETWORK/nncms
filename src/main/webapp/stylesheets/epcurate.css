@@ -75,7 +75,7 @@
     float: left;
     width: 170px;
     padding: 0 0 0 10px;
-    color: #777;
+    color: #555;
     font-weight: bold;
     font-size: 13px;
 }
@@ -104,7 +104,7 @@
 #content-wrap form .fminput .fmfield {
     position: relative;
     margin: 0 0 3px 0;
-    color: #999;
+    color: #777;
     font-size: 13px;
 }
 
@@ -189,49 +189,33 @@
 #content-wrap form .fminput .fmfield p.radio-list a .tip {
     display: none;
     position: absolute;
-    top: -38px;
-    left: 23px;
-    height: 60px;
+    top: 23px;
+    left: -7px;
+    height: 45px;
     padding-left: 4px;
-    background: url(../images/bg_bubble_left_l.png) no-repeat 0 0;
+    background: url(../images/bg_bubble_left_m.png) no-repeat 0 0;
 }
 
 #content-wrap form .fminput .fmfield p.radio-list a .tip img {
     position: absolute;
-    bottom: 10px;
-    left: -6px;
+    top: -7px;
+    left: 8px;
 }
 
 #content-wrap form .fminput .fmfield p.radio-list a .tip .tip-right {
     padding-right: 4px;
-    background: url(../images/bg_bubble_right_l.png) no-repeat right 0;
-}
-
-#content-wrap form .fminput .fmfield p.radio-list a .tip .tip-middle {
-    width: 173px;
-    height: 57px;
-    padding: 3px 5px 0;
-    background: url(../images/bg_bubble_middle_l.png) repeat-x;
-    color: #777;
-    font: 13px/17px Arial, Helvetica;
-}
-
-#content-wrap form .fminput .fmfield p.radio-list.draft a .tip {
-    top: -23px;
-}
-
-#content-wrap form .fminput .fmfield p.radio-list.draft a .tip {
-    height: 45px;
-    background: url(../images/bg_bubble_left_m.png) no-repeat 0 0;
-}
-
-#content-wrap form .fminput .fmfield p.radio-list.draft a .tip .tip-right {
     background: url(../images/bg_bubble_right_m.png) no-repeat right 0;
 }
 
-#content-wrap form .fminput .fmfield p.radio-list.draft a .tip .tip-middle {
-    width: 190px;
+#content-wrap form .fminput .fmfield p.radio-list a .tip .tip-middle {
+    width: auto;
+    height: 57px;
+    padding: 3px 5px 0;
     background: url(../images/bg_bubble_middle_m.png) repeat-x;
+    color: #555;
+    font: 13px/17px Arial, Helvetica;
+    text-align: justify;
+    white-space: nowrap;
 }
 
 #content-wrap form .fminput .fmfield p.radio-list a:hover .tip {
@@ -276,7 +260,7 @@
 
 #content-wrap form .fminput .fmfield #date-time .time ul li a {
     display: block;
-    color: #777;
+    color: #555;
     text-decoration: none;
 }
 
@@ -315,7 +299,7 @@
     height: 25px;
 	margin-bottom: 8px;
     background: url(../images/btn_on.png) no-repeat 0 0;
-    color: #777;
+    color: #555;
     line-height: 25px;
     text-decoration: none;
     text-indent: 5px;
@@ -327,7 +311,7 @@
     height: 25px;
 	margin-bottom: 8px;
     background: url(../images/btn_off.png) no-repeat 0 0;
-    color: #777;
+    color: #555;
     line-height: 25px;
     text-decoration: none;
     text-indent: 33px;
@@ -351,7 +335,7 @@
 
 #content-wrap form .disable label,
 #content-wrap form .disable label acronym {
-    color: #bbb;
+    color: #777;
 }
 
 /* =text
@@ -376,7 +360,7 @@
     height: 29px;
     border: none;
     background: url(../images/input_box_middle.png) repeat-x;
-    color: #777;
+    color: #555;
     font-family: Arial, Helvetica;
     font-size: 13px;
 }
@@ -429,7 +413,7 @@
     padding: 3px;
     border: none;
     background-color: transparent;
-    color: #777;
+    color: #555;
     font-family: Arial, Helvetica;
     font-size: 13px;
 	resize: none;
@@ -504,16 +488,15 @@
 #content-wrap form .fminput .fmfield .img-list ul li {
     float: left;
     overflow: hidden;
-    width: 110px;
-    height: 62px;
-    padding: 10px 9px 10px 10px;
+    width: 129px;
+    height: 82px;
     background: url(../images/thumbnail_box_lg.png) no-repeat 0 0;
-    line-height: 82px;
 }
 
 #content-wrap form .fminput .fmfield .img-list ul li img {
     width: 110px;
     height: 62px;
+    margin: 10px 0 0 10px;
 }
 
 #content-wrap form .fminput .fmfield .img-upload-func {
@@ -524,7 +507,7 @@
 #content-wrap form .fminput .fmfield .img-upload-func .notice {
     margin: 8px 0;
     padding: 0;
-    color: #999;
+    color: #777;
 }
 
 #content-wrap form .fminput .fmfield .img-upload-func .highlight {
@@ -538,7 +521,7 @@
     float: left;
     height: 19px;
     background: url(../images/check_box.png) no-repeat 0 center;
-    color: #777;
+    color: #555;
     line-height: 18px;
     text-decoration: none;
 }
@@ -546,7 +529,7 @@
 #content-wrap form .fminput .fmfield .checkbox a {
     display: block;
     padding-left: 22px;
-    color: #777;
+    color: #555;
     text-decoration: none;
 }
 
@@ -572,7 +555,7 @@
     height: 19px;
     padding-left: 22px;
     background: url(../images/btn_radio_off.png) no-repeat 0 0;
-    color: #777;
+    color: #555;
     line-height: 18px;
     text-decoration: none;
 }
@@ -652,7 +635,7 @@
     height: 29px;
     padding-right: 4px;
     background: url(../images/input_box_middle.png) repeat-x;
-    color: #999;
+    color: #777;
     text-decoration: none;
 }
 
@@ -685,7 +668,7 @@
 	border-bottom: 1px solid #c9c9c9;
 	background: none;
 	background-color: #d2d2d2;
-	color: #777;
+	color: #555;
 	font-size: 13px;
 	line-height: 28px;
 	cursor: pointer;
@@ -693,7 +676,7 @@
 
 #content-wrap form .fminput .fmfield .select .select-list li:hover {
 	background-color: #e4e4e4;
-	color: #999;
+	color: #777;
 }
 
 #content-wrap form .fminput .fmfield .select .select-list li:first-child {
@@ -724,139 +707,64 @@
     text-align: center;
 }
 
-#content-wrap form .form-btn .btn-wrap {
-    height: 46px;
-    margin-top: 2px;
-    background: url(../images/bg_main.png) repeat -2% 0;
-}
-
 #content-wrap form .form-btn .wrap {
     position: relative;
-    width: 416px;
+    width: 157px;
     height: 27px;
     padding: 10px 0 0;
     margin: 0 auto;
-	text-align: center;
-}
-
-#content-wrap form .form-btn .wrap p {
-    position: absolute;
-    top: 10px;
 }
 
 #content-wrap form .form-btn .wrap p.btn-leave {
-    left: 129px;
+    float: left;
 }
 
 #content-wrap form .form-btn .wrap p.btn-save {
-    left: 215px;
-}
-
-#content-wrap form .form-btn .wrap p.back {
-	left: 4px;
-}
-
-#content-wrap form .form-btn .wrap p.next {
-	right: 14px;
-}
-
-#content-wrap.epcurate-curation form .form-btn .wrap p.back {
-	left: -11px;
-}
-
-#content-wrap.epcurate-curation form .form-btn .wrap p.next {
-	right: 19px;
-}
-
-#content-wrap.epcurate-publish   form .form-btn .wrap p.notice {
-    top: 15px;
-	right: -53px;
-    color: #f00;
-    font-size: 13px;
+    float: right;
 }
 
 #content-wrap form .form-btn .wrap p.back,
 #content-wrap form .form-btn .wrap p.next {
-	top: 12px;
+    position: absolute;
+    top: 12px;
+    width: 150px;
+}
+
+#content-wrap form .form-btn .wrap p.back {
+    right: 167px;
+    text-align: right;
+}
+
+#content-wrap form .form-btn .wrap p.next {
+	left: 167px;
+    text-align: left;
+}
+
+#content-wrap.epcurate-publish   form .form-btn .wrap p.notice {
+    position: absolute;
+    top: 15px;
+	left: 167px;
+    width: auto;
+    color: #f00;
+    font-size: 13px;
+    white-space: nowrap;
 }
 
 #content-wrap form .form-btn .wrap p.back a:hover,
 #content-wrap form .form-btn .wrap p.next a:hover {
-	color: #999;
+	color: #777;
 }
 
-#content-wrap form .form-btn .wrap p span input,
-#content-wrap form .form-btn .btns    span input {
+#content-wrap form .form-btn .btns span input {
+    width: 65px;
     padding: 0 10px;
 }
 
-#content-wrap form .form-btn .wrap .disable a,
-#content-wrap form .form-btn .wrap .disable input {
-    cursor: default;
-}
-
-#content-wrap form .form-btn .wrap .btns.disable {
-    background: url(../images/bg_btn_left_press.png) no-repeat 0 0;
-}
-
-#content-wrap form .form-btn .wrap .btns.disable span {
-    background: url(../images/bg_btn_right_press.png) no-repeat right 0;
-}
-
-#content-wrap form .form-btn .wrap .btns.disable span a,
-#content-wrap form .form-btn .wrap .btns.disable span input {
-    background: url(../images/bg_btn_middle_press.png) repeat 0 0;
-    color: #999;
-}
-
 #content-wrap form .form-btn .wrap a {
-    color: #777;
+    color: #555;
     font-family: Arial, Helvetica;
     font-size: 13px;
     text-decoration: none;
-}
-
-#content-wrap form .form-btn .glow-btns {
-	position: absolute;
-	top: 0;
-	right: 0;
-    float: right;
-}
-
-#content-wrap form .form-btn .glow-btns .btns {
-    float: left;
-	margin-top: 10px;
-}
-
-#content-wrap form .form-btn .glow-btns .glow {
-    width: 164px;
-    margin: -6px 0 0;
-    padding-left: 18px;
-    background: url(../images/bg_btn_glow_left.png) no-repeat 0 3px;
-}
-
-#content-wrap form .form-btn .glow-btns .glow span {
-    padding: 0 18px 0 0;
-    background: url(../images/bg_btn_glow_right.png) no-repeat right 3px;
-}
-
-#content-wrap form .form-btn .glow-btns .glow span input {
-    width: 146px;
-    height: 60px;
-    background: url(../images/bg_btn_glow_middle.png) repeat 0 3px;
-}
-
-#content-wrap form .form-btn .glow-btns .glow:hover {
-    background: url(../images/bg_btn_glow_left_press.png) no-repeat 0 3px;
-}
-
-#content-wrap form .form-btn .glow-btns .glow:hover span {
-    background: url(../images/bg_btn_glow_right_press.png) no-repeat right 3px;
-}
-
-#content-wrap form .form-btn .glow-btns .glow:hover span input {
-    background: url(../images/bg_btn_glow_middle_press.png) repeat 0 3px;
-    color: #999;
 }
 
 .epcurate-curation#content-wrap form .form-btn {

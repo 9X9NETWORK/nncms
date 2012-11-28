@@ -129,7 +129,7 @@ img.datepick-trigger {
     height: 30px;
     line-height: 30px;
     margin-bottom: 3px;
-    color: #777;
+    color: #555;
     font-weight: bold;
     text-align: center;
     -moz-border-radius: 4px;
@@ -149,7 +149,7 @@ table.ui-datepicker-calendar {
 table.ui-datepicker-calendar th {
     margin: 0;
     padding: 0;
-    color: #777;
+    color: #555;
     font-weight: bold;
     font-size: 13px;
     text-align: center;
@@ -172,7 +172,7 @@ table.ui-datepicker-calendar td a {
     height: 25px;
     line-height: 25px;
     padding: 0;
-    color: #777;
+    color: #555;
     font-size: 13px;
     text-align: center;
     text-decoration: none;

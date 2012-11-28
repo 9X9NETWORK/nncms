@@ -1,0 +1,326 @@
+{
+    "header": {
+        "Home":                                                                                             "Home",
+        "Guide":                                                                                            "Guide",
+        "Browse":                                                                                           "Browse",
+        "My page":                                                                                          "My page",
+        "Studio":                                                                                           "Studio",
+        "Settings":                                                                                         "Settings",
+        "Log out":                                                                                          "Log out"
+    },
+    "footer": {
+        "About Us":                                                                                         "About Us",
+        "About us":                                                                                         "About us",
+        "Help":                                                                                             "Help",
+        "Feedback":                                                                                         "Feedback",
+        "Terms & Policy":                                                                                   "Terms & Policy",
+        "Contact us":                                                                                       "Contact us",
+        "Partners":                                                                                         "Partners",
+        "Curators":                                                                                         "Curators",
+        "Press":                                                                                            "Press",
+        "Curation Contest":                                                                                 "Curation Contest",
+        "Language":                                                                                         "Language"
+    },
+    "overlay": {
+        "loading": {
+            "Saving...":                                                                                    "Saving...",
+            "Processing...":                                                                                "Processing..."
+        },
+        "system-error": {
+            "Unknown error.":                                                                               "Unknown error.",
+            "You are not authorized to edit this channel.":                                                 "You are not authorized to edit this channel.",
+            "You are not authorized to edit this episode.":                                                 "You are not authorized to edit this episode.",
+            "You are not authorized to edit episodes in this channel.":                                     "You are not authorized to edit episodes in this channel.",
+            "Invalid channel ID, please try again.":                                                        "Invalid channel ID, please try again.",
+            "Invalid episode ID, please try again.":                                                        "Invalid episode ID, please try again.",
+            "Invalid channel ID and episode ID, please try again.":                                         "Invalid channel ID and episode ID, please try again.",
+            "The favorites channel can not be edited.":                                                     "The favorites channel can not be edited.",
+            "Title text can't be empty!":                                                                   "Title text can't be empty!",
+            "There must be at least one video in this episode.":                                            "There must be at least one video in this episode.",
+            "Please curate at least one valid video.":                                                      "Please curate at least one valid video.",
+            "You have reached the maximum amount of 50 videos.":                                            "You have reached the maximum amount of 50 videos."
+        },
+        "prompt": {
+            "Are you sure you want to delete this channel? All data will be removed permanently.":          "Are you sure you want to delete this channel? All data will be removed permanently.",
+            "Are you sure you want to delete this episode?":                                                "Are you sure you want to delete this episode?",
+            "Are you sure you want to delete this title?":                                                  "Are you sure you want to delete this title?",
+            "Unsaved changes will be lost, are you sure you want to leave?":                                "Unsaved changes will be lost, are you sure you want to leave?"
+        },
+        "notice": {
+            "New episode has been created as a draft!":                                                     "New episode has been created as a draft!",
+            "Publish this episode at the next step whenever you finish editing.":                           "Publish this episode at the next step whenever you finish editing.",
+            "This episode has been published.":                                                             "This episode has been published.",
+            "This episode has been saved as an unpublished draft.":                                         "This episode has been saved as an unpublished draft."
+        },
+        "channel-tutorial": {
+            "<img src=\"images/text_collect.png\" alt=\"\" />":                                             "<img src=\"images/text_collect.png\" alt=\"\" />",
+            "Studio is the management center for your 9x9.tv list-form channels!":                          "Studio is the management center for your 9x9.tv list-form channels!",
+            "Create a<br />new channel":                                                                    "Create a<br />new channel",
+            "Not right now, thanks!":                                                                       "Not right now, thanks!"
+        },
+        "button": {
+            "OK":                                                                                           "OK",
+            "Delete":                                                                                       "Delete",
+            "No":                                                                                           "No",
+            "Leave":                                                                                        "Leave"
+        }
+    },
+    "upload": {
+        "Upload":                                                                                           "Upload",
+        "Uploading...":                                                                                     "Uploading...",
+        "Better results with 720x480 or higher resolution image":                                           "Better results with 720x480 or higher resolution image",
+        "Please upload jpeg, png, or gif files.":                                                           "Please upload jpeg, png, or gif files."
+    },
+    "lang-map": {
+        "en":                                                                                               "English",
+        "zh":                                                                                               "Chinese",
+        "other":                                                                                            "Others"
+    },
+    "sphere-map": {
+        "en":                                                                                               "US",
+        "zh":                                                                                               "Taiwan",
+        "other":                                                                                            "Worldwide"
+    },
+    "effect-map": {
+        "none":                                                                                             "None",
+        "fade":                                                                                             "Fade",
+        "blind":                                                                                            "Blind",
+        "clip":                                                                                             "Clip",
+        "drop":                                                                                             "Drop"
+    },
+    "index": {
+        "html-title": {
+            "9x9.tv - My Channels":                                                                         "9x9.tv - My Channels"
+        },
+        "studio-nav": {
+            "Studio":                                                                                       "Studio",
+            "My Channels":                                                                                  "My Channels"
+        },
+        "func-nav": {
+            "Create a new channel":                                                                         "Create a new channel"
+        },
+        "title-func": {
+            "My Channels":                                                                                  "My Channels",
+            "Reorder channels":                                                                             "Reorder channels",
+            "Save order":                                                                                   "Save order"
+        },
+        "channel-list": {
+            "Episodes":                                                                                     "Episodes",
+            "Followers":                                                                                    "Followers",
+            "Views":                                                                                        "Views",
+            "Update:":                                                                                      "Update:",
+            "Curate a new episode":                                                                         "Curate a new episode",
+            "Episode list":                                                                                 "Episode list",
+            "Channel settings":                                                                             "Channel settings",
+            "Delete this channel":                                                                          "Delete this channel",
+            "No Episodes":                                                                                  "No Episodes",
+            "'s Favorite":                                                                                  "'s Favorite"
+        }
+    },
+    "channel": {
+        "html-title": {
+            "9x9.tv - Create a new channel":                                                                "9x9.tv - Create a new channel",
+            "9x9.tv - Channel settings":                                                                    "9x9.tv - Channel settings"
+        },
+        "studio-nav": {
+            "Studio":                                                                                       "Studio",
+            "My Channels":                                                                                  "My Channels"
+        },
+        "func-nav": {
+            "Episode list":                                                                                 "Episode list",
+            "Settings":                                                                                     "Settings"
+        },
+        "title-func": {
+            "My Channels &gt; Create a new channel":                                                        "My Channels &gt; Create a new channel",
+            "Settings":                                                                                     "Settings",
+            "Required field":                                                                               "Required field"
+        },
+        "setting-form": {
+            "Title":                                                                                        "Title",
+            "Best within 20 characters":                                                                    "Best within 20 characters",
+            "Thumbnail":                                                                                    "Thumbnail",
+            "Upload":                                                                                       "Upload",
+            "Uploading...":                                                                                 "Uploading...",
+            "Better results with 720x480 or higher resolution image":                                       "Better results with 720x480 or higher resolution image",
+            "Please upload jpeg, png, or gif files.":                                                       "Please upload jpeg, png, or gif files.",
+            "Description":                                                                                  "Description",
+            "Best within 70 characters":                                                                    "Best within 70 characters",
+            "Channel language":                                                                             "Channel language",
+            "Select a language":                                                                            "Select a language",
+            "English":                                                                                      "English",
+            "Chinese":                                                                                      "Chinese",
+            "Others":                                                                                       "Others",
+            "Audience region":                                                                              "Audience region",
+            "Select a region":                                                                              "Select a region",
+            "US":                                                                                           "US",
+            "Taiwan":                                                                                       "Taiwan",
+            "Worldwide":                                                                                    "Worldwide",
+            "Category":                                                                                     "Category",
+            "Select a category":                                                                            "Select a category",
+            "Tag":                                                                                          "Tag",
+            "Separate with commas":                                                                         "Separate with commas",
+            "Suggested Tags:":                                                                              "Suggested Tags:",
+            "Please fill in all required fields.":                                                          "Please fill in all required fields.",
+            "Cancel":                                                                                       "Cancel",
+            "Create":                                                                                       "Create",
+            "Save":                                                                                         "Save"
+        }
+    },
+    "episode-list": {
+        "html-title": {
+            "9x9.tv - Episode list":                                                                        "9x9.tv - Episode list"
+        },
+        "studio-nav": {
+            "Studio":                                                                                       "Studio",
+            "My Channels":                                                                                  "My Channels"
+        },
+        "func-nav": {
+            "Episode list":                                                                                 "Episode list",
+            "Settings":                                                                                     "Settings"
+        },
+        "title-func": {
+            "Episode list":                                                                                 "Episode list",
+            "'s Favorite":                                                                                  "'s Favorite",
+            "Curate a new episode":                                                                         "Curate a new episode",
+            "Reorder episodes":                                                                             "Reorder episodes",
+            "Save order":                                                                                   "Save order",
+            "Episode":                                                                                      "Episode",
+            "Scheduled time":                                                                               "Scheduled time",
+            "Publish time":                                                                                 "Publish time",
+            "Views":                                                                                        "Views"
+        },
+        "episode-list": {
+            "<img src=\"images/text_don't-have-episode-yet.png\" alt=\"\" />":                              "<img src=\"images/text_don't-have-episode-yet.png\" alt=\"\" />",
+            "Click on <span>Favorite</span> button when watching channels to collect more episodes":        "Click on <span>Favorite</span> button when watching channels to collect more episodes",
+            "Edit":                                                                                         "Edit",
+            "Delete":                                                                                       "Delete",
+            "Draft":                                                                                        "Draft",
+            "Curate new episode to tell a story":                                                           "Curate new episode to tell a story",
+            "<strong>Curate online videos</strong> into each single episode.":                              "<strong>Curate online videos</strong> into each single episode.",
+            "Tell your story by <strong>arranging the video sequence.</strong>":                            "Tell your story by <strong>arranging the video sequence.</strong>",
+            "<strong>Trim the videos and add titles</strong> to make your episodes more intriguing.":       "<strong>Trim the videos and add titles</strong> to make your episodes more intriguing.",
+            "<strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically.":    "<strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically."
+        }
+    },
+    "epcurate-publish": {
+        "html-title": {
+            "9x9.tv - Episode Curation - Publish":                                                          "9x9.tv - Episode Curation - Publish"
+        },
+        "epcurate-nav": {
+            "Leave":                                                                                        "Leave",
+            "Episode Curation":                                                                             "Episode Curation",
+            "Curation":                                                                                     "Curation",
+            "Publish":                                                                                      "Publish"
+        },
+        "epcurate-form": {
+            "Required field":                                                                               "Required field",
+            "Episode title":                                                                                "Episode title",
+            "Episode description":                                                                          "Episode description",
+            "Episode thumbnail":                                                                            "Episode thumbnail",
+            "Upload":                                                                                       "Upload",
+            "Uploading...":                                                                                 "Uploading...",
+            "Better results with 720x480 or higher resolution image":                                       "Better results with 720x480 or higher resolution image",
+            "Please upload jpeg, png, or gif files.":                                                       "Please upload jpeg, png, or gif files.",
+            "Publish status":                                                                               "Publish status",
+            "Draft":                                                                                        "Draft",
+            "Published":                                                                                    "Published",
+            "Scheduled to publish":                                                                         "Scheduled to publish",
+            "This episode will be published at<br />the scheduled time.":                                   "This episode will be published at<br />the scheduled time.",
+            "Scheduled to rerun":                                                                           "Scheduled to rerun",
+            "This episode will be published again as<br />the latest episode at the scheduled time.":       "This episode will be published again as<br />the latest episode at the scheduled time.",
+            "Hour":                                                                                         "Hour",
+            "< Back to Curation":                                                                           "< Back to Curation",
+            "Leave":                                                                                        "Leave",
+            "Save":                                                                                         "Save",
+            "Please fill in all required fields.":                                                          "Please fill in all required fields."
+        }
+    },
+    "epcurate-curation": {
+        "html-title": {
+            "9x9.tv - Episode Curation - Curation":                                                         "9x9.tv - Episode Curation - Curation"
+        },
+        "epcurate-nav": {
+            "Leave":                                                                                        "Leave",
+            "Episode Curation":                                                                             "Episode Curation",
+            "Curation":                                                                                     "Curation",
+            "Publish":                                                                                      "Publish"
+        },
+        "epcurate-form": {
+            "Add Video":                                                                                    "Add Video",
+            "Edit":                                                                                         "Edit",
+            "Add video by URL":                                                                             "Add video by URL",
+            "Add":                                                                                          "Add",
+            "+ Add videos here":                                                                            "+ Add videos here",
+            "Leave":                                                                                        "Leave",
+            "Save":                                                                                         "Save",
+            "Next to Publish >":                                                                            "Next to Publish >"
+        },
+        "add-video": {
+            "Paste YouTube video URLs to add (separate with different lines)":                              "Paste YouTube video URLs to add (separate with different lines)",
+            "Paste YouTube video URLs to add.":                                                             "Paste YouTube video URLs to add.",
+            "You have reached the maximum amount of 50 videos.":                                            "You have reached the maximum amount of 50 videos.",
+            "Invalid URL, please try again.":                                                               "Invalid URL, please try again.",
+            "Invalid URL, please try again!":                                                               "Invalid URL, please try again!"
+        },
+        "video-info": {
+            "Original":                                                                                     "Original",
+            "From":                                                                                         "From",
+            "By":                                                                                           "By",
+            "on":                                                                                           "on",
+            "Not playable outside Youtube":                                                                 "Not playable outside Youtube",
+            "Not playable in some regions":                                                                 "Not playable in some regions",
+            "Not playable on mobile device":                                                                "Not playable on mobile device"
+        },
+        "trim-time": {
+            "Start from:":                                                                                  "Start from:",
+            "To:":                                                                                          "To:",
+            "Duration:":                                                                                    "Duration:",
+            "Invalid time, please try again.":                                                              "Invalid time, please try again.",
+            "Edit":                                                                                         "Edit",
+            "Cancel":                                                                                       "Cancel",
+            "Done":                                                                                         "Done"
+        },
+        "title-card": {
+            "Text":                                                                                         "Text",
+            "Font":                                                                                         "Font",
+            "Bold":                                                                                         "Bold",
+            "Italics":                                                                                      "Italics",
+            "Font color":                                                                                   "Font color",
+            "Font size +":                                                                                  "Font size +",
+            "Font size -":                                                                                  "Font size -",
+            "Align left":                                                                                   "Align left",
+            "Align center":                                                                                 "Align center",
+            "Align right":                                                                                  "Align right",
+            "Effect":                                                                                       "Effect",
+            "None":                                                                                         "None",
+            "Fade":                                                                                         "Fade",
+            "Blind":                                                                                        "Blind",
+            "Clip":                                                                                         "Clip",
+            "Drop":                                                                                         "Drop",
+            "Background":                                                                                   "Background",
+            "Color":                                                                                        "Color",
+            "Image":                                                                                        "Image",
+            "Upload":                                                                                       "Upload",
+            "Uploading...":                                                                                 "Uploading...",
+            "Better results with 720x480 image.":                                                           "Better results with 720x480 image.",
+            "Please upload jpeg, png, or gif files.":                                                       "Please upload jpeg, png, or gif files.",
+            "Duration":                                                                                     "Duration",
+            "Invalid duration, please try again.":                                                          "Invalid duration, please try again.",
+            "Cancel":                                                                                       "Cancel",
+            "Done":                                                                                         "Done",
+            "Edit Title":                                                                                   "Edit Title"
+        },
+        "episode-storyboard": {
+            "Episode storyboard":                                                                           "Episode storyboard",
+            "videos left":                                                                                  "videos left",
+            "Duration":                                                                                     "Duration",
+            "Not playable outside YouTube":                                                                 "Not playable outside YouTube",
+            "Not playable in some regions & on mobile device":                                              "Not playable in some regions & on mobile device",
+            "Not playable in some regions":                                                                 "Not playable in some regions",
+            "Not playable on mobile device":                                                                "Not playable on mobile device",
+            "Edit Title":                                                                                   "Edit Title",
+            "Add Title":                                                                                    "Add Title",
+            "Invalid Video":                                                                                "Invalid Video"
+        }
+    }
+}

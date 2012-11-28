@@ -16,7 +16,7 @@ body {
     overflow-y: hidden;
     font-family: Arial, Helvetica, clean, Microsoft JhengHei, Apple LiGothic, SimHei, PMingLiU, sans-serif;
     font-size: 100%;
-    color: #777;
+    color: #555;
 }
 
 /* +common
@@ -69,7 +69,7 @@ abbr, acronym {
     margin: -42px 0 0 -90px;
     padding-left: 6px;
     background: url(../images/waiting_loading_left.png) no-repeat 0 0;
-    color: #999;
+    color: #777;
 	font-weight: bold;
     font-size: 17px;
 }
@@ -130,7 +130,7 @@ abbr, acronym {
     padding: 4px 0 0 0;
     border: none;
     background: url(../images/bg_btn_middle.png) repeat 0 0;
-    color: #777;
+    color: #555;
     font-family: Arial, Helvetica;
     font-weight: 500;
     font-size: 15px;
@@ -150,7 +150,7 @@ abbr, acronym {
 #content-wrap .btns:hover span a,
 #content-wrap .btns:hover span input {
     background: url(../images/bg_btn_middle_press.png) repeat 0 0;
-    color: #999;
+    color: #777;
 }
 
 #content-wrap .btns.disable {
@@ -164,7 +164,7 @@ abbr, acronym {
 #content-wrap .btns.disable span a,
 #content-wrap .btns.disable span input {
     background: url(../images/bg_btn_middle_disable.png) repeat 0 0;
-    color: #999;
+    color: #777;
 }
 
 .lightbox-content .btns:hover {
@@ -329,7 +329,7 @@ abbr, acronym {
     width: 54px;
     height: 28px;
     padding: 0 0 0 35px;
-    color: #777;
+    color: #555;
     text-decoration: none;
 }
 
@@ -410,7 +410,7 @@ width: 80px;
 height: 26px;
 font-family: Arial, Helvetica, sans-serif;
 font-size: 13px;
-color: #999;
+color: #777;
 background: none;
 border: none;
 position: absolute;
@@ -648,13 +648,17 @@ background: #e4e4e4;
 
 #studio-nav     .studio-nav-wrap     h3 a,
 #epcurate-nav .epcurate-nav-wrap h3 a {
-    color: #777;
+    color: #555;
     text-decoration: none;
 }
 
 #epcurate-nav .epcurate-nav-wrap h3 a {
     float: left;
     margin: 5px 0 0;
+}
+
+#epcurate-nav .epcurate-nav-wrap h3 a {
+    margin: 4px 0 0;
 }
 
 #epcurate-nav .epcurate-nav-wrap h3 a.btn-back {
@@ -698,7 +702,7 @@ background: #e4e4e4;
     display: block;
     height: 26px;
     padding: 0 10px;
-    color: #777;
+    color: #555;
     font: bold 15px/26px Arial, Helvetica;
     text-decoration: none;
 }
@@ -730,7 +734,7 @@ background: #e4e4e4;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li.curation {
-    left: 0;
+    left: -3px;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li.publish {
@@ -746,7 +750,7 @@ background: #e4e4e4;
     line-height: 26px;
     padding-left: 3px;
     background: url(../images/bg_tab_left.png) no-repeat 0 0;
-    color: #777;
+    color: #555;
     font-size: 15px;
     font-weight: bold;
     text-align: center;
@@ -772,7 +776,7 @@ background: #e4e4e4;
 
 #epcurate-nav .epcurate-nav-wrap ul li.on,
 #epcurate-nav .epcurate-nav-wrap ul li a:hover {
-    color: #999;
+    color: #777;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li a {
@@ -880,7 +884,7 @@ background: #e4e4e4;
     height: 28px;
     background: url(../images/bg_tip_middle.png) repeat-x;
     line-height: 28px;
-    color: #777;
+    color: #555;
     font-weight: normal;
     font-size: 13px;
     line-height: 31px;
@@ -998,7 +1002,7 @@ background: #e4e4e4;
     height: 28px;
     background: url(../images/bg_tip_middle.png) repeat-x;
     line-height: 28px;
-    color: #777;
+    color: #555;
     font-style: normal;
     font-size: 13px;
     line-height: 31px;
@@ -1080,7 +1084,7 @@ background: #e4e4e4;
     display: block;
     height: 25px;
     padding-left: 35px;
-    color: #777;
+    color: #555;
     font-weight: bold;
     font-size: 15px;
     line-height: 25px;
@@ -1101,7 +1105,7 @@ background: #e4e4e4;
 }
 
 #func-nav ul li.btns a:hover {
-    color: #999;
+    color: #777;
 }
 
 #func-nav ul li a.episode {
@@ -1232,7 +1236,7 @@ padding: 4px 10px 0;
 
 #footer ul#footer-list li a {
     display: block;
-    color: #777;
+    color: #555;
     text-decoration: none;
 }
 

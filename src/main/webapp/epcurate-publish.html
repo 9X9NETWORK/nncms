@@ -1,34 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html class="en">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=517" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=517" />
-<link rel="stylesheet" href="stylesheets/uniform.css?v=517" />
-<link rel="stylesheet" href="stylesheets/jquery.datepick.css?v=517" />
-<link rel="stylesheet" href="stylesheets/epcurate.css?v=517" />
+<link rel="stylesheet" href="stylesheets/style.css?v=548" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=548" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=548" />
+<link rel="stylesheet" href="stylesheets/jquery.datepick.css?v=548" />
+<link rel="stylesheet" href="stylesheets/epcurate.css?v=548" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=517"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=517"></script>
-<script src="javascripts/jquery.ellipsis.js?v=517"></script>
-<script src="javascripts/jquery.blockUI.js?v=517"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=517"></script>
-<script src="javascripts/jquery.uniform.min.js?v=517"></script>
-<script src="javascripts/jquery.cycle.all.js?v=517"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=517"></script>
-<script src="javascripts/jquery.cookie.js?v=517"></script>
-<script src="javascripts/json2.js?v=517"></script>
-<script src="javascripts/purl.js?v=517"></script>
-<script src="javascripts/swfupload/swfupload.js?v=517"></script>
-<script src="javascripts/vertical.slider.js?v=517"></script>
-<script src="javascripts/config.js?v=517"></script>
-<script src="javascripts/basic.js?v=517"></script>
-<script src="javascripts/controller.js?v=517"></script>
-<script src="javascripts/epcurate.js?v=517"></script>
+<script src="javascripts/nn-sdk.js?v=548"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=548"></script>
+<script src="javascripts/jquery.ellipsis.js?v=548"></script>
+<script src="javascripts/jquery.blockUI.js?v=548"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=548"></script>
+<script src="javascripts/jquery.uniform.min.js?v=548"></script>
+<script src="javascripts/jquery.cycle.all.js?v=548"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=548"></script>
+<script src="javascripts/jquery.cookie.js?v=548"></script>
+<script src="javascripts/jquery.ui.datepicker-en.js?v=548"></script>
+<script src="javascripts/jquery.ui.datepicker-zh.js?v=548"></script>
+<script src="javascripts/json2.js?v=548"></script>
+<script src="javascripts/purl.js?v=548"></script>
+<script src="javascripts/swfupload/swfupload.js?v=548"></script>
+<script src="javascripts/vertical.slider.js?v=548"></script>
+<script src="javascripts/config.js?v=548"></script>
+<script src="javascripts/controller.js?v=548"></script>
+<script src="javascripts/basic.js?v=548"></script>
+<script src="javascripts/epcurate.js?v=548"></script>
 <title>9x9.tv - Episode Curation - Publish</title>
 </head>
 <body>
@@ -46,7 +48,7 @@
       <ul id="profile-dropdown" class="dropdown">
         <li><a id="profile-mypage" href="/#!curator=profileUrl">My page</a></li>
         <li><a href="./">Studio</a></li>
-        <li><a href="/#!settings">Settings</a></li>
+        <li id="profile-settings"><a href="/#!settings">Settings</a></li>
         <li><a id="profile-logout" href="/api/login">Log out</a></li>
       </ul>
     </li>
@@ -56,10 +58,10 @@
 
 <div id="epcurate-nav" class="publish">
 <div class="epcurate-nav-wrap">
-<h3><a href="#" id="epcurate-nav-back" class="btn-back">Back<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">Leave</span></span></span></span></a><a href="javascript:void(0);">Episode Curation</a></h3>
+<h3><a href="#" id="epcurate-nav-back" class="btn-back">Back<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle langkey">Leave</span></span></span></span></a><a href="javascript:void(0);" class="langkey">Episode Curation</a></h3>
 <ul>
-<li class="publish on"><span class="nav-right"><span class="nav-middle">Publish</span></span></li>
-<li class="curation"><a href="#" id="epcurate-nav-curation"><span class="nav-right"><span class="nav-middle">Curation</span></span></a></li>
+<li class="publish on"><span class="nav-right"><span class="nav-middle langkey">Publish</span></span></li>
+<li class="curation"><a href="#" id="epcurate-nav-curation"><span class="nav-right"><span class="nav-middle langkey">Curation</span></span></a></li>
 </ul>
 </div>
 </div>
@@ -69,39 +71,49 @@
 <form name="epcurateForm" id="epcurateForm" method="get" action="" class="clearfix publish">
 <input type="hidden" name="id" id="id" value="" />
 <input type="hidden" name="channelId" id="channelId" value="" />
-
 <div id="content-nav">
 &nbsp;
 </div>
-
 <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
-
 <div id="content-main">
 <div id="content-main-wrap">
 <div class="constrain">
-<div id="epcurate-publish">
-<p class="required"><acronym title="Required field" class="mark-required">*</acronym>Required field</p>
-<div id="epcurate-info">
-<!-- template = #epcurate-info-tmpl -->
+<!-- template = #epcurate-form-tmpl -->
 </div>
+</div>
+</div>
+<div class="form-btn">
+<div class="wrap">
+<p class="back"><a href="epcurate-curation.html" id="form-btn-back" rel="curation" class="langkey">&lt; Back to Curation</a></p>
+<p class="btns btn-leave"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-leave" value="Leave" class="langkey-val" /></span></span></p>
+<p class="btns btn-save"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-save" value="Save" class="langkey-val" /></span></span></p>
+<p class="notice hide langkey">Please fill in all required fields.</p>
+</div>
+</div>
+</form>
+</div>
+<!--============================== content-main start ========================-->
 
-<script id="epcurate-info-tmpl" type="text/x-jquery-tmpl">
+<script id="epcurate-form-tmpl" type="text/x-jquery-tmpl">
+<div id="epcurate-publish">
+<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Required field'])}</p>
+<div id="epcurate-info">
 <div class="fminput clearfix">
-<label for="name"><acronym title="Required field" class="mark-required">*</acronym>Episode title</label>
+<label for="name"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Episode title'])}</label>
 <div class="fmfield">
 <p class="text"><span><input type="text" name="name" id="name" maxlength="100" value="${name}" class="text" /></span></p>
 </div>
 </div>
 <div class="fminput clearfix">
-<label for="intro">Episode description</label>
+<label for="intro">${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Episode description'])}</label>
 <div class="fmfield">
 <p class="textarea"><span><span><textarea name="intro" id="intro" cols="80" class="textarea">${intro}</textarea></span></span></p>
 </div>
 </div>
-</script>
+</div>
 
 <div class="fminput clearfix">
-<label>Episode thumbnail</label>
+<label>${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Episode thumbnail'])}</label>
 <div class="fmfield">
 <div id="thumbnail-list" class="img-list">
 <a href="#" class="img-prev">Prev</a>
@@ -110,35 +122,30 @@
 <ul id="img-list">
 <!-- template = #img-list-tmpl-item -->
 </ul>
-
-<script id="img-list-tmpl-item" type="text/x-jquery-tmpl">
-<li><img src="${imageUrl}" alt="${name}" /></li>
-</script>
-
 </div>
 <div class="img-upload-func">
-<p id="uploadThumbnail">Upload</p>
-<p class="notice">Better results with 720x480 or higher resolution image</p>
-<p class="upload-notice highlight hide">Please upload jpeg, png, or gif files.</p>
-<input type="hidden" name="imageUrl" id="imageUrl" value="" />
-<input type="hidden" name="imageUrlOld" id="imageUrlOld" value="" />
+<p id="uploadThumbnail">${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Upload'])}</p>
+<p class="notice">${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Better results with 720x480 or higher resolution image'])}</p>
+<p class="upload-notice highlight hide">${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Please upload jpeg, png, or gif files.'])}</p>
+<input type="hidden" name="imageUrl" id="imageUrl" value="${imageUrl}" />
+<input type="hidden" name="imageUrlOld" id="imageUrlOld" value="${imageUrl}" />
 </div>
 </div>
 </div>
 
 <div class="fminput clearfix">
-<label><acronym title="Required field" class="mark-required">*</acronym>Publish status</label>
+<label><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Publish status'])}</label>
 <div class="fmfield">
 <p class="radio-list draft">
-<label for="status_draft"><input type="radio" name="status" value="draft" id="status_draft" checked="checked" />Draft</label>
+<label for="status_draft"><input type="radio" name="status" value="draft" id="status_draft" checked="checked" />${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Draft'])}</label>
 <span class="box-left">
 <span class="box-right">
 <span class="box-middle">
-<label for="status_published"><input type="radio" name="status" value="published" id="status_published" />Published</label>
-<label id="schedule-publish-label" for="status_scheduled" class="last hide"><input type="radio" name="status" value="scheduled" id="status_scheduled" />Scheduled to publish</label>
-<a id="schedule-publish" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_bubble_left_arrow.png" alt="" /><span class="tip-right"><span class="tip-middle">This episode will be published at the scheduled time.</span></span></span></a>
-<label id="schedule-rerun-label" for="rerun_y" class="last hide"><input type="checkbox" name="rerun" value="y" id="rerun_y" />Scheduled to rerun</label>
-<a id="schedule-rerun" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_bubble_left_arrow.png" alt="" /><span class="tip-right"><span class="tip-middle">This episode will be published again as the latest episode at the scheduled time.</span></span></span></a>
+<label for="status_published"><input type="radio" name="status" value="published" id="status_published" />${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Published'])}</label>
+<label id="schedule-publish-label" for="status_scheduled" class="last hide"><input type="radio" name="status" value="scheduled" id="status_scheduled" />${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Scheduled to publish'])}</label>
+<a id="schedule-publish" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-right"><span class="tip-middle">{{html nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'This episode will be published at<br />the scheduled time.'])}}</span></span></span></a>
+<label id="schedule-rerun-label" for="rerun_y" class="last hide"><input type="checkbox" name="rerun" value="y" id="rerun_y" />${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Scheduled to rerun'])}</label>
+<a id="schedule-rerun" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-right"><span class="tip-middle">{{html nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'This episode will be published again as<br />the latest episode at the scheduled time.'])}}</span></span></span></a>
 </span>
 </span>
 </span>
@@ -146,7 +153,7 @@
 <div id="date-time" class="hide">
 <div class="datepicker"></div>
 <div class="time">
-<h5>Hour</h5>
+<h5>${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Hour'])}</h5>
 <ul>
 <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">00:00</span></span></a></li>
 <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">01:00</span></span></a></li>
@@ -183,31 +190,18 @@
 </div>
 
 </div>
-</div>
-</div>
-</div>
+</script>
 
-<div class="form-btn">
-<div class="btn-wrap">
-<div class="wrap">
-<p class="back"><a href="epcurate-curation.html" id="form-btn-back" rel="curation">&lt; Back to Curation</a></p>
-<p class="btns btn-leave"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-leave" value="Leave" /></span></span></p>
-<p class="btns btn-save"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-save" value="Save" /></span></span></p>
-<p class="notice hide">Please fill in all required fields.</p>
-</div>
-</div>
-</div>
-
-</form>
-</div>
-<!--============================== content-main start ========================-->
+<script id="img-list-tmpl-item" type="text/x-jquery-tmpl">
+<li><img src="${imageUrl}" alt="${name}" /></li>
+</script>
 
 <!--============================== footer start ==============================-->
 <p id="footer-control"></p>
 <div id="footer">
   <ul id="footer-list">
     <li>
-      <p class="select-txt">About Us</p>
+      <p class="select-txt"><a href="javascript:void(0);">About Us</a></p>
       <p class="select-btn"></p>
       <ul class="select-list">
         <li><a href="/#!about=about">About us</a></li>
@@ -221,12 +215,12 @@
         <li><a href="/#!about=contest">Curation Contest</a></li>
       </ul>
     </li>
-    <li>
-      <p class="select-txt">Language</p>
+    <li id="language-change">
+      <p class="select-txt"><a href="javascript:void(0);" id="language">Language</a></p>
       <p class="select-btn"></p>
       <ul class="select-list">
-        <li>English</li>
-        <li>中文</li>
+        <li><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
       </ul>
     </li>
   </ul>

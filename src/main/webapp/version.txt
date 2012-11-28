@@ -1,29 +1,200 @@
-Revision: 520
+Revision: 563
 Author: chihwen
-Date: 下午 04:24:30, 2012年11月20日
+Date: 下午 01:44:27, 2012年11月28日
 Message:
-同步 src 分支版本 518~519
-
-1. 調整 curation button 底下的陰影。
-2. 調整 edit-time 高度。
-issue 5513
+調整簡化語系檔，直接打 > 代表前往符號，< 代表返回符號
+issue 5390
 ----
-Modified : /fakeapi/stylesheets/ep-curation.css
+Modified : /fakeapi/lang/en.json
+Modified : /fakeapi/lang/zh.json
 
 
-Revision: 517
-Author: chihwen
-Date: 下午 02:27:44, 2012年11月20日
+Revision: 561
+Author: ada
+Date: 下午 01:39:09, 2012年11月28日
 Message:
-同步 src 分支版本 514~516
+調整語系切換的 json
 
-1. 同步 src 分支版本 514~516。
-   1. 調整 curation 和 publish 底下的 button 讓 button 底下出現陰影。
-   2. 重新檢視 font-family 包含簡寫，讓 Arial 在第一個。
-   3. 針對 input type=button、submit、reset 調整結構、高度讓按鈕底下出現陰影。
-   4. js 裡面的 font-family 也加入 Arial 當第一個選項。
-2. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=517)。
-issue 5513
+調整項目：
+1. 調整語系切換的 json。
+2. 調整 channel-list tooltip 內容不要有左右 padding。
+issue 5390
+----
+Modified : /fakeapi/lang/en.json
+Modified : /fakeapi/lang/zh.json
+Modified : /fakeapi/stylesheets/channel.css
+
+
+Revision: 560
+Author: ada
+Date: 下午 12:25:45, 2012年11月28日
+Message:
+同步 src 版本號 558、559 調整
+
+調整項目：
+1. publish tooltip 改成兩行的背景圖，並可以自動伸縮。
+2. 調整 curation、publish 的 btn 和 nav 結構和樣式，讓兩個都對齊中線。
+3. 調整 publish chkdata notice 位置。
+issue 5390
+----
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/lang/zh.json
+Modified : /fakeapi/stylesheets/epcurate.css
+Modified : /fakeapi/stylesheets/style.css
+
+
+Revision: 557
+Author: chihwen
+Date: 下午 10:08:05, 2012年11月27日
+Message:
+調整語系檔，加入 > 前往及 < 返回符號
+
+1. 調整語系檔，加入 > 前往及 < 返回符號。
+2. 調整 fakeapi episodes programs 假測試資料。
+issue 5390
+----
+Modified : /fakeapi/fakeapi/episodes_programs.php
+Modified : /fakeapi/lang/en.json
+Modified : /fakeapi/lang/zh.json
+
+
+Revision: 556
+Author: ada
+Date: 下午 06:31:38, 2012年11月27日
+Message:
+調整 publish 中文版 tooltip 兩行的位置。
+issue 5390
+----
+Modified : /fakeapi/stylesheets/epcurate.css
+
+
+Revision: 554
+Author: ada
+Date: 下午 06:26:17, 2012年11月27日
+Message:
+移除測試用樣式
+issue 5390
+----
+Modified : /fakeapi/stylesheets/channel.css
+
+
+Revision: 551
+Author: ada
+Date: 下午 06:17:27, 2012年11月27日
+Message:
+ch setting、ep list title 截字調整
+
+調整項目：
+1. ch setting、ep list title 截字調整。
+2. 單行 tooltip 調整成可自動縮放。
+3. ch setting、ch add 右邊 notice 文字對齊。
+4. curation nav 中文標題和 icon 置中。
+5. publish tooltip 調整。
+issue 5390
+----
+Modified : /fakeapi/fakeapi/episodes_programs.php
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/stylesheets/channel.css
+Modified : /fakeapi/stylesheets/ep-curation.css
+Modified : /fakeapi/stylesheets/epcurate.css
+Modified : /fakeapi/stylesheets/episode.css
+Modified : /fakeapi/stylesheets/style.css
+
+
+Revision: 550
+Author: ada
+Date: 下午 02:10:39, 2012年11月27日
+Message:
+同步 src 版本號 549 調整
+
+調整項目：
+調整文字顏色，#777 改成 #555、#999 改成 #777。
+issue 5390
+----
+Modified : /fakeapi/stylesheets/channel.css
+Modified : /fakeapi/stylesheets/ep-curation.css
+Modified : /fakeapi/stylesheets/epcurate.css
+Modified : /fakeapi/stylesheets/episode.css
+Modified : /fakeapi/stylesheets/jquery.datepick.css
+Modified : /fakeapi/stylesheets/library.css
+Modified : /fakeapi/stylesheets/lightbox.css
+Modified : /fakeapi/stylesheets/playback.css
+Modified : /fakeapi/stylesheets/style.css
+
+
+Revision: 548
+Author: chihwen
+Date: 下午 01:30:45, 2012年11月27日
+Message:
+避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=548)
+issue 5390
+----
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/index.html
+Modified : /fakeapi/login.html
+
+
+Revision: 547
+Author: ada
+Date: 下午 01:15:21, 2012年11月27日
+Message:
+同步 src 版本號 546 調整
+
+調整項目：
+1. channel-list tooptip 調整中文版寬度。
+2. titlecard 編輯 tooltip 中文版寬度調整。
+3. 中文版大型 overlay 寬度調整、文字置中。
+issue 5390
+----
+Modified : /fakeapi/stylesheets/channel.css
+Modified : /fakeapi/stylesheets/ep-curation.css
+Modified : /fakeapi/stylesheets/lightbox.css
+
+
+Revision: 545
+Author: ada
+Date: 下午 12:10:07, 2012年11月27日
+Message:
+同步 src 版本號 543 調整
+
+調整項目：
+調整 ch setting 及 ep list 的 ch name 截字 js。
+issue 5390
+----
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/episode.js
+Modified : /fakeapi/stylesheets/channel.css
+Modified : /fakeapi/stylesheets/episode.css
+
+
+Revision: 544
+Author: chihwen
+Date: 下午 12:02:02, 2012年11月27日
+Message:
+補齊 ch 表單裡的 類別 下拉選單
+issue 5390
+----
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/controller.js
+
+
+Revision: 542
+Author: chihwen
+Date: 下午 07:50:46, 2012年11月26日
+Message:
+在 <html> 標籤中，加入代表當前語系的 class 以備忘有此結構
+
+1. 在 <html> 標籤中，加入代表當前語系的 class 以備忘有此結構。
+   此 class 是為了語系樣式切換所準備，未來可利用此 class 切換語系樣式。
+2. 改良 src 分支版本 540 針對 channel.js 及 episode.js 的調整。
+3. 微調重構 controller.js 語系處理。
+issue 5390
 ----
 Modified : /fakeapi/channel-add.html
 Modified : /fakeapi/channel-setting.html
@@ -32,15 +203,206 @@ Modified : /fakeapi/epcurate-publish.html
 Modified : /fakeapi/episode-list.html
 Modified : /fakeapi/index.html
 Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/episode.js
+Modified : /fakeapi/login.html
+
+
+Revision: 541
+Author: ada
+Date: 下午 04:30:56, 2012年11月26日
+Message:
+同步 src 版本號 540 調整
+
+調整項目：
+1. 增加 ch setting 及 ep list 的 ch name 截字 js。
+2. ch first 導覽 overlay 樣式調整成中、英文共同都可以的版本。
+3. invalid notice 大型 overlay 移除。
+4. 替換 graphic_mockup.png。
+5. 調整 ch list 標題截字後，連結不 work 的問題。
+6. ep list 標題截字後，連結不 work 的問題。
+issue 5390
+----
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/episode.js
+Modified : /fakeapi/stylesheets/channel.css
+Modified : /fakeapi/stylesheets/episode.css
+Modified : /fakeapi/stylesheets/lightbox.css
+
+
+Revision: 539
+Author: chihwen
+Date: 下午 11:29:30, 2012年11月25日
+Message:
+修正 unsave 按下 Leave 後的事件重建邏輯
+issue 5390
+----
 Modified : /fakeapi/javascripts/curation.js
 Modified : /fakeapi/javascripts/epcurate.js
+
+
+Revision: 538
+Author: chihwen
+Date: 下午 10:19:48, 2012年11月25日
+Message:
+將 lang, lang-val class 更名為 langkey, langkey-val 以利未來維護明確定位之用
+
+1. 將 lang, lang-val class 更名為 langkey, langkey-val 以利未來維護明確定位之用。
+2. 在 ch setting 及 ep list 麵包屑 ch name 位置加上結構，以便截字之用。
+   <span id="channel-name" data-meta="${name}">${name}</span>
+3. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=537)。
+4. 改良 footer 區語系切換後，讓選單自動縮起來 (一般切換測試、unsave 切換測試)。
+5. 微調 ch scrollbar 避免產生過長的 scrollbar。
+
+TODO：
+1. 針對 ch name 太長，在 ch setting 及 ep list 需作截字處理。
+2. 因應 YouTube 官方 API 403, 404 改採 200 回應作調整處理。
+3. ch first 導覽 overlay 中文版跑版處理。
+4. invalid notice 樣式確認。
+5. ch scrollbar 調整。
+issue 5390
+----
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/index.html
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/controller.js
 Modified : /fakeapi/login.html
+
+
+Revision: 537
+Author: chihwen
+Date: 上午 06:05:52, 2012年11月25日
+Message:
+完成 footer 區語系切換功能
+
+語系切換 Coding 注意事項：
+1. 要重新 review 所有 .tmpl( 並在操作前，重置該區塊，以避免切換語系後，產生重複資料。
+2. 要注意那些沒有在 Template 控制內，且會因應後續事件而變化的區塊，
+   最好改寫為 Template 機制，或者在切換語系後明確清除資料，以避免切換語系後，無法套用到。
+3. 要留意語系切換後，unsave 機制是否正常運作，注意 unsave 事件偵測，以及 Leave 時的事件重建。
+4. publish 及 curation 兩頁雖然不能更換語系，也應將功能準備齊全 (關閉 fadeEpcurateHeaderAndFooter() 即可測試)。
+
+TODO：
+1. Review 並調整中文版語系 UI。
+2. Invalid video 邏輯開發。
+issue 5390
+----
+Added : /fakeapi/fakeapi/users.php
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/index.html
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/config.js
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/javascripts/epcurate.js
+Modified : /fakeapi/javascripts/episode.js
+
+
+Revision: 536
+Author: chihwen
+Date: 上午 02:15:43, 2012年11月25日
+Message:
+完成 epcurate-publish、epcurate-curation 頁語系替換功能
+
+1. 完成 epcurate-publish、epcurate-curation 頁語系替換功能。
+2. 完成 Facebook 帳號移除 Settings 選單。
+
+TODO：
+1. footer 區語系切換功能。
+2. Review 並調整中文版語系 UI。
+3. Invalid video 邏輯開發。
+issue 5390
+----
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/fakeapi/channels_episodes.php
+Modified : /fakeapi/fakeapi/episodes.php
+Modified : /fakeapi/fakeapi/login.php
+Modified : /fakeapi/index.html
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/javascripts/epcurate.js
+Modified : /fakeapi/lang/en.json
+Modified : /fakeapi/lang/zh.json
+
+
+Revision: 535
+Author: chihwen
+Date: 上午 12:55:40, 2012年11月24日
+Message:
+採用 Template 機制，搭配 9x9 i18n SDK 實作多國語言功能
+
+已完成部份：
+1. 11/20 完成初步英文語系包整理。
+2. 11/21~11/22 完成中英語系包架構雛形、完成天、地、主導覽選單、overlay 等共用結構，以及 index 頁語系替換功能。
+3. 11/23 微調補強語系包架構雛形、完成 channel add、channel setting、episode list 頁語系替換功能。
+4. 同步 src 分支版本 524~533。
+   1. 新增 episode list 為 0 時的中文版圖示及樣式。
+   2. channel-list 增加標題截字功能。
+   3. storyboard 增加 invalid 樣式及 tmpl 資訊。
+   4. 大型 overlay 增加 invalid 樣式。
+   5. 增加 datepicker 多國語系架構。
+   6. publish Episode thumbnail 圖片彼此切換時，不要重疊。
+   7. channel-setting Suggested Tags 文字與標籤對齊。
+   8. 調整 channel-setting 表單和下方按鈕的距離。
+   9. 1016*629 大小時 channel-add、channel-setting 右方的 notice 文字不要斷行。
+   10. channel-add、channel-setting 下拉選單內的文字顏色改成 #555。
+   11. 因應 invalid video 規格異動，調整 invalid video 呈現方式雛形。
+5. 修正 ep list 及 ch list 標題在截字後，遺失連結的錯誤。
+6. 更新 9x9 SDK 以支援多層級語系替換功能。
+7. 加入中、英文語系包設定檔。
+   中文：/lang/zh.json
+   英文：/lang/en.json
+
+後續 TODO 事項：
+1. epcurate-publish、epcurate-curation 頁語系替換功能。
+2. footer 區語系切換功能。
+3. Review 並調整中文版語系 UI。
+4. Facebook account don't show Settings in account menu。
+5. Invalid video 邏輯開發。
+issue 5390
+----
+Added : /fakeapi/images/text_collect_zh.png
+Added : /fakeapi/javascripts/jquery.ui.datepicker-en.js
+Added : /fakeapi/javascripts/jquery.ui.datepicker-zh.js
+Added : /fakeapi/lang
+Added : /fakeapi/lang/en.json
+Added : /fakeapi/lang/zh.json
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/fakeapi/channels.php
+Modified : /fakeapi/fakeapi/channels_episodes.php
+Modified : /fakeapi/fakeapi/users_channels.php
+Modified : /fakeapi/images/graphic_mockup.png
+Modified : /fakeapi/index.html
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/config.js
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/javascripts/epcurate.js
+Modified : /fakeapi/javascripts/episode.js
+Modified : /fakeapi/javascripts/nn-sdk.js
+Modified : /fakeapi/stylesheets/channel.css
+Modified : /fakeapi/stylesheets/ep-curation.css
 Modified : /fakeapi/stylesheets/epcurate.css
 Modified : /fakeapi/stylesheets/episode.css
 Modified : /fakeapi/stylesheets/lightbox.css
-Modified : /fakeapi/stylesheets/style.css
 
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 4046
-Last Changed Date: 2012-11-20 19:42:09 +0800 (Tue, 20 Nov 2012)

@@ -4,6 +4,34 @@
         =channel-list
 -----------------------------------------------------------------------------*/
 
+#title-func h2 {
+    position: relative;
+}
+
+#title-func h2,
+#channel-name {
+    height: 27px;
+    line-height: 27px;
+}
+
+#title-func h2 .title-crumb {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 77px;
+    height: 27px;
+    line-height: 27px;
+    text-align: right;
+}
+
+.zh #title-func h2 .title-crumb {
+    width: 87px;
+}
+
+#channel-name {
+    display: block;
+}
+
 /**
 *
 * =channel-list
@@ -103,7 +131,7 @@
 	top: 40px;
 	left: 5px;
 	width: 152px;
-	color: #777;
+	color: #555;
 	font-size: 17px;
 	text-align: center;
 }
@@ -153,12 +181,12 @@
 }
 
 #channel-list li .info h3 a {
-    color: #777;
+    color: #555;
     text-decoration: none;
 }
 
 #channel-list li .info h3 a:hover {
-    color: #999;
+    color: #777;
 }
 
 #channel-list li .info p {
@@ -292,7 +320,7 @@
     top: -30px;
     left: -20px;
     height: 32px;
-    color: #777;
+    color: #555;
     font-size: 13px;
     text-align: center;
     text-decoration: none;
@@ -306,30 +334,36 @@
 	border: none;
 }
 
-#channel-list li .func-wrap .func-btns .btn-wrap ul li a.add .tip {
-    width: 160px;
-}
-
-#channel-list li .func-wrap .func-btns .btn-wrap ul li a.detail .tip {
-    width: 90px;
-}
-
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting .tip {
     left: -50px;
-    width: 120px;
+}
+
+.zh #channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting .tip {
+    left: -10px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.del .tip {
     left: -90px;
-    width: 135px;
+}
+
+.zh #channel-list li .func-wrap .func-btns .btn-wrap ul li a.del .tip {
+    left: -30px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting .tip img{
 	left: 54px;
 }
 
+.zh #channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting .tip img{
+	left: 14px;
+}
+
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.del .tip img {
     left: 94px;
+}
+
+.zh #channel-list li .func-wrap .func-btns .btn-wrap ul li a.del .tip img {
+    left: 35px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a .tip .tip-left {
@@ -351,6 +385,7 @@
     height: 28px;
     background: url(../images/bg_tip_middle.png) repeat-x;
     line-height: 28px;
+    white-space: nowrap;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a:hover .tip {
@@ -376,7 +411,7 @@
     float: left;
     width: 130px;
     padding: 0 10px 0 10px;
-    color: #777;
+    color: #555;
     font-weight: bold;
     font-size: 13px;
 }
@@ -387,7 +422,7 @@
 
 #content-main-wrap form .fminput .fmfield {
     position: relative;
-    color: #999;
+    color: #777;
     font-size: 13px;
 }
 
@@ -410,7 +445,7 @@
     height: 29px;
     border: none;
     background: url(../images/input_box_middle.png) repeat-x;
-    color: #777;
+    color: #555;
     font-family: Arial, Helvetica;
     font-size: 13px;
     line-height: 29px;
@@ -444,7 +479,7 @@
     padding: 3px;
     border: none;
     background-color: transparent;
-    color: #777;
+    color: #555;
     font-family: Arial, Helvetica;
     font-size: 13px;
 	resize: none;
@@ -557,12 +592,13 @@
     height: 29px;
     padding-right: 4px;
     background: url(../images/input_box_middle.png) repeat-x;
-    color: #999;
+    color: #555;
     text-decoration: none;
 }
 
 #content-main-wrap form .fminput .fmfield .select.disable .select-txt a {
     background: url(../images/input_box_middle_disable.png) repeat-x;
+    color: #777;
 }
 
 #content-main-wrap form .fminput .fmfield .select.category .select-list {
@@ -600,7 +636,7 @@
 	border-bottom: 1px solid #c9c9c9;
 	background: none;
 	background-color: #d2d2d2;
-	color: #777;
+	color: #555;
 	font-size: 13px;
 	line-height: 28px;
 	cursor: pointer;
@@ -608,7 +644,7 @@
 
 #content-main-wrap form .fminput .fmfield .select .select-list li:hover {
 	background-color: #e4e4e4;
-	color: #999;
+	color: #777;
 }
 
 #content-main-wrap form .fminput .fmfield .select .select-list li.first-row,
@@ -640,7 +676,7 @@
     height: 25px;
     margin: 3px 5px 0 0;
     background: url(../images/btn_on.png) no-repeat 0 0;
-    color: #777;
+    color: #555;
     line-height: 25px;
     text-decoration: none;
     text-indent: 5px;
@@ -652,7 +688,7 @@
     height: 25px;
     margin: 3px 5px 0 0;
     background: url(../images/btn_off.png) no-repeat 0 0;
-    color: #777;
+    color: #555;
     line-height: 25px;
     text-decoration: none;
     text-indent: 33px;
@@ -666,11 +702,12 @@
 #content-main-wrap form .fminput .fmfield .tag-list h4,
 #content-main-wrap form .fminput .fmfield .tag-list ul {
     float: left;
-    margin-right: 5px;
+    margin: 1px 5px 0 0;
 }
 
 #content-main-wrap form .fminput .fmfield .tag-list ul {
     width: 450px;
+    margin-top: -1px;
 }
 
 #content-main-wrap form .fminput .fmfield .tag-list ul li {
@@ -691,7 +728,7 @@
     display: block;
     height: 20px;
     background: url(../images/tag_middle_disable.png) repeat-x;
-    color: #777;
+    color: #555;
     font-size: 13px;
     line-height: 20px;
     text-decoration: none;
@@ -709,7 +746,7 @@
 
 #content-main-wrap form .fminput .fmfield .tag-list ul li:hover span a,
 #content-main-wrap form .fminput .fmfield .tag-list ul li.on    span a {
-	color: #999;
+	color: #777;
     background: url(../images/tag_middle_on.png) repeat-x;
 }
 

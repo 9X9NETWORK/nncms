@@ -1,31 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html class="en">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=517" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=517" />
-<link rel="stylesheet" href="stylesheets/channel.css?v=517" />
+<link rel="stylesheet" href="stylesheets/style.css?v=548" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=548" />
+<link rel="stylesheet" href="stylesheets/channel.css?v=548" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=517"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=517"></script>
-<script src="javascripts/jquery.ellipsis.js?v=517"></script>
-<script src="javascripts/jquery.blockUI.js?v=517"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=517"></script>
-<script src="javascripts/jquery.charcounter.min.js?v=517"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=517"></script>
-<script src="javascripts/jquery.cookie.js?v=517"></script>
-<script src="javascripts/json2.js?v=517"></script>
-<script src="javascripts/purl.js?v=517"></script>
-<script src="javascripts/swfupload/swfupload.js?v=517"></script>
-<script src="javascripts/vertical.slider.js?v=517"></script>
-<script src="javascripts/config.js?v=517"></script>
-<script src="javascripts/basic.js?v=517"></script>
-<script src="javascripts/controller.js?v=517"></script>
-<script src="javascripts/channel.js?v=517"></script>
+<script src="javascripts/nn-sdk.js?v=548"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=548"></script>
+<script src="javascripts/jquery.ellipsis.js?v=548"></script>
+<script src="javascripts/jquery.blockUI.js?v=548"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=548"></script>
+<script src="javascripts/jquery.charcounter.min.js?v=548"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=548"></script>
+<script src="javascripts/jquery.cookie.js?v=548"></script>
+<script src="javascripts/json2.js?v=548"></script>
+<script src="javascripts/purl.js?v=548"></script>
+<script src="javascripts/swfupload/swfupload.js?v=548"></script>
+<script src="javascripts/vertical.slider.js?v=548"></script>
+<script src="javascripts/config.js?v=548"></script>
+<script src="javascripts/controller.js?v=548"></script>
+<script src="javascripts/basic.js?v=548"></script>
+<script src="javascripts/channel.js?v=548"></script>
 <title>9x9.tv - Channel settings</title>
 </head>
 <body>
@@ -58,7 +58,7 @@ Add your 9x9.tv creations and activity to your facebook timeline
       <ul id="profile-dropdown" class="dropdown">
         <li><a id="profile-mypage" href="/#!curator=profileUrl">My page</a></li>
         <li><a href="./">Studio</a></li>
-        <li><a href="/#!settings">Settings</a></li>
+        <li id="profile-settings"><a href="/#!settings">Settings</a></li>
         <li><a id="profile-logout" href="/api/login">Log out</a></li>
       </ul>
     </li>
@@ -77,7 +77,6 @@ Add your 9x9.tv creations and activity to your facebook timeline
 
 <!--============================== content-main start ========================-->
 <div id="content-wrap" class="channel-setting">
-
 <div id="content-nav">
 <div id="func-nav">
 <ul>
@@ -86,82 +85,112 @@ Add your 9x9.tv creations and activity to your facebook timeline
 </ul>
 </div>
 </div>
-
 <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
-
 <div id="content-main">
-<div id="title-func" class="clearfix">
-<h2><span id="channel-name"></span> &gt; Settings</h2>
-<p class="required"><acronym title="Required field" class="mark-required">*</acronym>Required field</p>
+<!-- template = #content-main-tmpl -->
 </div>
+</div>
+<!--============================== content-main start ========================-->
 
+<script id="content-main-tmpl" type="text/x-jquery-tmpl">
+<div id="title-func" class="clearfix">
+<h2><span id="channel-name" data-meta="${name}">${name}</span><span class="title-crumb">&gt; ${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Settings'])}</span></h2>
+<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Required field'])}</p>
+</div>
 <div id="content-main-wrap">
 <div class="constrain">
-<form name="settingForm" id="settingForm" method="get" action="">
+<form name="settingForm" id="settingForm" method="get" action="" data-height="400">
 <div class="fminput clearfix">
-<label for="name"><acronym title="Required field" class="mark-required">*</acronym>Title</label>
+<label for="name"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Title'])}</label>
 <div class="fmfield">
-<p class="text"><span><input type="text" name="name" id="name" maxlength="100" value="" class="text" /></span></p>
-<span class="notice"><span id="name-charcounter">20</span>　Best within 20 characters</span>
+<p class="text"><span><input type="text" name="name" id="name" maxlength="100" value="${name}" class="text" /></span></p>
+<span class="notice"><span id="name-charcounter">20</span>　${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Best within 20 characters'])}</span>
 </div>
 </div>
 <div class="fminput clearfix">
-<label>Thumbnail</label>
+<label>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Thumbnail'])}</label>
 <div class="fmfield upload-img">
 <p class="img"><img id="thumbnail-imageUrl" src="images/guide_ch_default.png" alt="" width="110" height="62" class="thumbnail" /><img src="images/loading.gif" alt="" class="loading" /></p>
-<p id="uploadThumbnail">Upload</p>
-<p class="notice img-upload">Better results with 720x480 or higher resolution image</p>
-<p class="notice upload-notice hide">Please upload jpeg, png, or gif files.</p>
-<input type="hidden" name="imageUrl" id="imageUrl" value="" />
-<input type="hidden" name="imageUrlOld" id="imageUrlOld" value="" />
+<p id="uploadThumbnail">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Upload'])}</p>
+<p class="notice img-upload">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Better results with 720x480 or higher resolution image'])}</p>
+<p class="notice upload-notice hide">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Please upload jpeg, png, or gif files.'])}</p>
+<input type="hidden" name="imageUrl" id="imageUrl" value="${imageUrl}" />
+<input type="hidden" name="imageUrlOld" id="imageUrlOld" value="${imageUrl}" />
 </div>
 </div>
 <div class="fminput clearfix">
-<label>Description</label>
+<label>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Description'])}</label>
 <div class="fmfield">
-<p class="textarea"><span><span><textarea name="intro" id="intro" cols="80" class="textarea"></textarea></span></span></p>
-<span class="notice"><span id="intro-charcounter">70</span><br />Best within 70 characters</span>
+<p class="textarea"><span><span><textarea name="intro" id="intro" cols="80" class="textarea">${intro}</textarea></span></span></p>
+<span class="notice"><span id="intro-charcounter">70</span>　${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Best within 70 characters'])}</span>
 </div>
 </div>
 <div class="fminput clearfix">
-<label><acronym title="Required field" class="mark-required">*</acronym>Channel language</label>
+<label><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Channel language'])}</label>
 <div class="fmfield">
 <div class="select enable">
 <p class="select-btn"></p>
-<p class="select-txt"><a id="lang-select-txt" href="#">Select a language</a></p>
+<p class="select-txt"><a id="lang-select-txt" href="#">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Select a language'])}</a></p>
 <ul id="lang-select-list" class="select-list">
-<li data-meta="en">English</li>
-<li data-meta="zh">Chinese</li>
-<li data-meta="other">Others</li>
+<li data-meta="en">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'English'])}</li>
+<li data-meta="zh">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Chinese'])}</li>
+<li data-meta="other">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Others'])}</li>
 </ul>
-<input type="hidden" name="lang" id="lang" value="" class="select-meta" />
+<input type="hidden" name="lang" id="lang" value="${lang}" class="select-meta" />
 </div>
 </div>
 </div>
 <div class="fminput clearfix">
-<label><acronym title="Required field" class="mark-required">*</acronym>Audience region</label>
+<label><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Audience region'])}</label>
 <div class="fmfield">
 <div class="select enable">
 <p class="select-btn"></p>
-<p class="select-txt"><a id="sphere-select-txt" href="#">Select a region</a></p>
+<p class="select-txt"><a id="sphere-select-txt" href="#">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Select a region'])}</a></p>
 <ul id="sphere-select-list" class="select-list">
-<li data-meta="en">US</li>
-<li data-meta="zh">Taiwan</li>
-<li data-meta="other">Worldwide</li>
+<li data-meta="en">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'US'])}</li>
+<li data-meta="zh">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Taiwan'])}</li>
+<li data-meta="other">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Worldwide'])}</li>
 </ul>
-<input type="hidden" name="sphere" id="sphere" value="" class="select-meta" />
+<input type="hidden" name="sphere" id="sphere" value="${sphere}" class="select-meta" />
 </div>
 </div>
 </div>
 <div class="fminput clearfix">
-<label><acronym title="Required field" class="mark-required">*</acronym>Category</label>
+<label><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Category'])}</label>
 <div class="fmfield">
 <div class="select disable category">
 <p class="select-btn"></p>
-<p class="select-txt"><a id="categoryId-select-txt" href="#">Select a category</a></p>
+<p class="select-txt"><a id="categoryId-select-txt" href="#">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Select a category'])}</a></p>
 <ul id="browse-category" class="select-list">
 <!-- template = #category-list-tmpl-item -->
 </ul>
+<input type="hidden" name="categoryId" id="categoryId" value="${categoryId}" class="select-meta" />
+</div>
+</div>
+</div>
+<div class="fminput clearfix">
+<label>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Tag'])}</label>
+<div class="fmfield">
+<p class="text"><span><input type="text" name="tag" id="tag" maxlength="100" value="${tag}" class="text" /></span></p>
+<span class="notice">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Separate with commas'])}</span>
+<div class="tag-list hide clear">
+<h4>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Suggested Tags:'])}</h4>
+<ul id="tag-list">
+<!-- template = #tag-list-tmpl-item -->
+</ul>
+</div>
+</div>
+</div>
+<div class="form-btn">
+<div class="form-btn-wrap">
+<p class="notice hide">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Please fill in all required fields.'])}</p>
+<p class="btns btn-save disable"><span class="btn-right"><span class="btn-middle"><input type="button" value="${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Save'])}" /></span></span></p>
+</div>
+</div>
+</form>
+</div>
+</div>
+</script>
 
 <script id="category-list-tmpl-item" type="text/x-jquery-tmpl">
 {{if $item.dataArrayIndex($item.data) < 3}}
@@ -171,21 +200,6 @@ Add your 9x9.tv creations and activity to your facebook timeline
 {{/if}}
 </script>
 
-<input type="hidden" name="categoryId" id="categoryId" value="" class="select-meta" />
-</div>
-</div>
-</div>
-<div class="fminput clearfix">
-<label>Tag</label>
-<div class="fmfield">
-<p class="text"><span><input type="text" name="tag" id="tag" maxlength="100" value="" class="text" /></span></p>
-<span class="notice">Separate with commas</span>
-<div class="tag-list hide clear">
-<h4>Suggested Tags:</h4>
-<ul id="tag-list">
-<!-- template = #tag-list-tmpl-item -->
-</ul>
-
 <script id="tag-list-tmpl-item" type="text/x-jquery-tmpl">
 {{each tags}}
 {{if $value != ""}}
@@ -194,29 +208,12 @@ Add your 9x9.tv creations and activity to your facebook timeline
 {{/each}}
 </script>
 
-</div>
-</div>
-</div>
-<div class="form-btn">
-<div class="form-btn-wrap">
-<p class="notice hide">Please fill in all required fields.</p>
-<p class="btns btn-save disable"><span class="btn-right"><span class="btn-middle"><input type="button" value="Save" /></span></span></p>
-</div>
-</div>
-</form>
-</div>
-</div>
-</div>
-
-</div>
-<!--============================== content-main start ========================-->
-
 <!--============================== footer start ==============================-->
 <p id="footer-control"></p>
 <div id="footer">
   <ul id="footer-list">
     <li>
-      <p class="select-txt">About Us</p>
+      <p class="select-txt"><a href="javascript:void(0);">About Us</a></p>
       <p class="select-btn"></p>
       <ul class="select-list">
         <li><a href="/#!about=about">About us</a></li>
@@ -230,12 +227,12 @@ Add your 9x9.tv creations and activity to your facebook timeline
         <li><a href="/#!about=contest">Curation Contest</a></li>
       </ul>
     </li>
-    <li>
-      <p class="select-txt">Language</p>
+    <li id="language-change">
+      <p class="select-txt"><a href="javascript:void(0);" id="language">Language</a></p>
       <p class="select-btn"></p>
       <ul class="select-list">
-        <li>English</li>
-        <li>中文</li>
+        <li><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
       </ul>
     </li>
   </ul>

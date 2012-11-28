@@ -85,14 +85,32 @@ $(function () {
         goLeave($(this).attr('href'));
         return false;
     });
-    $('#content-wrap .form-btn').on('click', '#form-btn-leave', function () {
+    $('#content-wrap').on('click', '#form-btn-leave', function () {
         goLeave($('#form-btn-leave').data('leaveUrl'));
         return false;
+    });
+    $(document).on('click', '#header #logo, #header a, #studio-nav a, #content-nav a, #footer a', function (e) {
+        if ($('body').hasClass('has-change')) {
+            if (e && $(e.currentTarget).attr('href')) {
+                $('body').data('leaveUrl', $(e.currentTarget).attr('href'));
+            }
+            if (e && $(e.currentTarget).attr('id')) {
+                $('body').data('leaveId', $(e.currentTarget).attr('id'));
+            }
+            showUnsaveOverlay();
+            return false;
+        }
     });
     $('#unsave-prompt .btn-leave').click(function () {
         $('body').removeClass('has-change');
         $.unblockUI();
-        location.href = $('#form-btn-leave').data('leaveUrl');
+        if ('' != $('body').data('leaveId') && -1 !== $.inArray($('body').data('leaveId'), ['logo', 'profile-logout', 'language-en', 'language-zh'])) {
+            $('#' + $('body').data('leaveId')).trigger('click');
+        } else if ($('body').data('leaveUrl')) {
+            location.href = $('body').data('leaveUrl');
+        } else {
+            location.href = $('#form-btn-leave').data('leaveUrl');
+        }
         return false;
     });
     $('#unsave-trimtime-prompt .btn-leave').click(function () {
@@ -179,7 +197,6 @@ $(function () {
     });
 
     // Add Video
-    $('#cur-add textarea').toggleVal();
     $('#cur-add textarea').click(function () {
         $('#cur-add .notice').addClass('hide').hide();
     });
@@ -194,9 +211,9 @@ $(function () {
             normalList = [],
             existList = [],
             invalidList = [];
-        if ('Paste YouTube video URLs to add (separate with different lines)' === videoUrl) {
+        if (nn._([CMS_CONF.PAGE_ID, 'add-video', 'Paste YouTube video URLs to add (separate with different lines)']) === videoUrl) {
             $('#videourl').get(0).focus();
-            $('#cur-add .notice').text('Paste YouTube video URLs to add.').removeClass('hide').show();
+            $('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Paste YouTube video URLs to add.'])).removeClass('hide').show();
             return false;
         }
         $('#storyboard-list li').each(function () {
@@ -227,7 +244,7 @@ $(function () {
             });
             if ((existList.length + matchList.length) > CMS_CONF.PROGRAM_MAX) {
                 $('#videourl').val(normalList.join('\n'));
-                $('#cur-add .notice').text('You have reached the maximum amount of 50 videos.').removeClass('hide').show();
+                $('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'You have reached the maximum amount of 50 videos.'])).removeClass('hide').show();
                 return false;
             }
             $('body').addClass('has-change');
@@ -241,7 +258,7 @@ $(function () {
                     nn.log(textStatus + ': ' + jqXHR.responseText, 'warning');
                     nn.log(normalList[idx], 'debug');
                     $('#videourl').val(invalidList.join('\n'));
-                    $('#cur-add .notice').text('Invalid URL, please try again!').removeClass('hide').show();
+                    $('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Invalid URL, please try again!'])).removeClass('hide').show();
                     if (idx === (matchList.length - 1)) {
                         // ON PURPOSE to wait api (async)
                         setTimeout(function () {
@@ -253,27 +270,35 @@ $(function () {
                     }
                 });
                 nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + key + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
-                    ytData = youtubes.data;
-                    ytItem = {
-                        beginTitleCard: null,
-                        endTitleCard: null,
-                        id: 0,                          // fake program.id for rebuild identifiable url #!pid={program.id}&ytid={youtubeId}&tid={titlecardId}
-                        ytId: ytData.id,
-                        fileUrl: normalList[idx],
-                        imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
-                        duration: ytData.duration,      // keep trimmed duration from 9x9 API
-                        ytDuration: ytData.duration,    // keep original duration from YouTube
-                        startTime: 0,
-                        endTime: ytData.duration,
-                        name: ytData.title,
-                        intro: ytData.description,
-                        uploader: ytData.uploader,
-                        uploadDate: ytData.uploaded,    // TODO conver uploaded to timestamp
-                        isZoneLimited: ((ytData.restrictions) ? true : false),
-                        isMobileLimited: (((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false),
-                        isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
-                    };
-                    ytList[idx] = ytItem;
+                    if (youtubes.data) {
+                        ytData = youtubes.data;
+                        ytItem = {
+                            beginTitleCard: null,
+                            endTitleCard: null,
+                            id: 0,                          // fake program.id for rebuild identifiable url #!pid={program.id}&ytid={youtubeId}&tid={titlecardId}
+                            ytId: ytData.id,
+                            fileUrl: normalList[idx],
+                            imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
+                            duration: ytData.duration,      // keep trimmed duration from 9x9 API
+                            ytDuration: ytData.duration,    // keep original duration from YouTube
+                            startTime: 0,
+                            endTime: ytData.duration,
+                            name: ytData.title,
+                            intro: ytData.description,
+                            uploader: ytData.uploader,
+                            uploadDate: ytData.uploaded,
+                            isZoneLimited: ((ytData.restrictions) ? true : false),
+                            isMobileLimited: (((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false),
+                            isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
+                        };
+                        ytList[idx] = ytItem;
+                    } else {
+                        invalidList.push(normalList[idx]);
+                        nn.log(youtubes.error, 'warning');
+                        nn.log(normalList[idx], 'debug');
+                        $('#videourl').val(invalidList.join('\n'));
+                        $('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Invalid URL, please try again!'])).removeClass('hide').show();
+                    }
                     if (idx === (matchList.length - 1)) {
                         // ON PURPOSE to wait api (async)
                         setTimeout(function () {
@@ -283,13 +308,13 @@ $(function () {
                             $('#overlay-s').fadeOut();
                         }, 1000);
                     }
-                }, 'json');
+                }, 'jsonp');
             });
         }
         $('#videourl').val('');
         if (invalidList.length > 0) {
             $('#videourl').val(invalidList.join('\n'));
-            $('#cur-add .notice').text('Invalid URL, please try again.').removeClass('hide').show();
+            $('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Invalid URL, please try again.'])).removeClass('hide').show();
         }
         return false;
     });
@@ -694,9 +719,9 @@ $(function () {
         if (isInsertMode) {
             hook = ($('#storyboard-list li.edit p.hover-func a.edit').hasClass('begin-title')) ? 'beginTitleCard' : 'endTitleCard';
             if ($('#storyboard-listing li.edit .hover-func a.edit').hasClass('begin-title')) {
-                $('#storyboard-listing li.edit .title').append('<a href="#" class="begin-title edit">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Edit Title</span></span></span></span></a>');
+                $('#storyboard-listing li.edit .title').append('<a href="#" class="begin-title edit">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">' + nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Edit Title']) + '</span></span></span></span></a>');
             } else {
-                $('#storyboard-listing li.edit .title').append('<a href="#" class="end-title edit">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Edit Title</span></span></span></span></a>');
+                $('#storyboard-listing li.edit .title').append('<a href="#" class="end-title edit">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">' + nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Edit Title']) + '</span></span></span></span></a>');
             }
             $('#storyboard-listing li.edit .hover-func a.edit').remove();
         } else {
@@ -741,7 +766,7 @@ $(function () {
     // Title Card - Delete icon - titlecard
     $('#cur-edit').on('click', '.edit-title .btn-del', function () {
         $('#btn-pause').trigger('click');
-        showDeletePromptOverlay();
+        showDeletePromptOverlay('Are you sure you want to delete this title?');
         return false;
     });
     $('#delete-prompt .btn-del').click(function () {
@@ -757,14 +782,14 @@ $(function () {
                 }
                 itemData.beginTitleCard = null;
                 tmplItem.update();
-                $('#storyboard-listing li.edit .hover-func').append('<a href="#" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Add Title</span></span></span></span></a>');
+                $('#storyboard-listing li.edit .hover-func').append('<a href="#" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">' + nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Add Title']) + '</span></span></span></span></a>');
             } else {
                 if (itemData.endTitleCard.id && itemData.endTitleCard.id > 0) {
                     deleteId = itemData.endTitleCard.id;
                 }
                 itemData.endTitleCard = null;
                 tmplItem.update();
-                $('#storyboard-listing li.edit .hover-func').append('<a href="#" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">Add Title</span></span></span></span></a>');
+                $('#storyboard-listing li.edit .hover-func').append('<a href="#" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">' + nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Add Title']) + '</span></span></span></span></a>');
             }
             $('#storyboard-listing li .title a.edit').remove();
 
@@ -1214,7 +1239,7 @@ function chkCurationData(fm, src) {
     }
     var cntProgram = $('#storyboard-list li').length;
     if (cntProgram <= 0) {
-        showSystemErrorOverlay('Please curate some videos first.');
+        showSystemErrorOverlay('Please curate at least one valid video.');
         return false;
     }
     if (cntProgram > CMS_CONF.PROGRAM_MAX) {
@@ -1633,8 +1658,8 @@ function sumStoryboardInfo() {
     if (durationSec.toString().length < 2) {
         durationSec = '0' + durationSec;
     }
-    $('#storyboard-length').html(leftLength);
-    $('#storyboard-duration').html(durationHou + ':' + durationMin + ':' + durationSec);
+    $('#storyboard-length').text(leftLength);
+    $('#storyboard-duration').text(durationHou + ':' + durationMin + ':' + durationSec);
     $('#storyboard-list .notice').css('left', parseInt((114 * length) + 9, 10) + 'px');
 }
 
@@ -1807,11 +1832,11 @@ function uploadImage(isDisableEdit) {
         };
         var handlerUploadProgress = function (file, completed /* completed bytes */, total /* total bytes */) {
             $('.background-container p.img .loading').show();
-             swfu.setButtonText('<span class="uploadstyle">Uploading...</span>');
+             swfu.setButtonText('<span class="uploadstyle">' + nn._(['upload', 'Uploading...']) + '</span>');
         };
         var handlerUploadSuccess = function (file, serverData, recievedResponse) {
             $('.background-container p.img .loading').hide();
-            swfu.setButtonText('<span class="uploadstyle">Upload</span>');
+            swfu.setButtonText('<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>');
             if (!file.type) {
                 file.type = nn.getFileTypeByName(file.name);
             }
@@ -1824,7 +1849,7 @@ function uploadImage(isDisableEdit) {
         };
         var handlerUploadError = function (file, code, message) {
             $('.background-container p.img .loading').hide();
-            swfu.setButtonText('<span class="uploadstyle">Upload</span>');
+            swfu.setButtonText('<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>');
             this.setButtonDisabled(false);
             if (code == -280) { // user cancel upload
                 alert(message); // show some error prompt
@@ -1865,7 +1890,7 @@ function uploadImage(isDisableEdit) {
             button_image_url:           'images/btn-load.png',
             button_width:               '129',
             button_height:              '29',
-            button_text:                '<span class="uploadstyle">Upload</span>',
+            button_text:                '<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>',
             button_text_style:          '.uploadstyle { color: #777777; font-family: Arial, Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
             button_text_top_padding:    1,
             button_action:              SWFUpload.BUTTON_ACTION.SELECT_FILE,
