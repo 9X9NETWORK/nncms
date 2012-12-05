@@ -146,6 +146,7 @@ function setEpisodeWidth() {
         titleWidth = $('#title-func').width(),
         channelNameWidth = $('#channel-name').width(),
         crumbWidth = $('#title-func .title-crumb').width(),
+        curateBtnWidth = $('#title-func .title-crumb a.curate').width(),
         titleBtnWidth = $('#title-func p.order').width(),
         scheduledWidth = $('#ep-list ul li .scheduled-time').width(),
         publishWidth = $('#ep-list ul li .publish-time').width(),
@@ -157,12 +158,12 @@ function setEpisodeWidth() {
         $('a', this).text($(this).data('meta'));
     });
     $('#ep-list ul li .episode h3').addClass('ellipsis').ellipsis();
-    if (channelNameWidth > titleWidth - titleBtnWidth - crumbWidth) {
-        $('#title-func h2').width(titleWidth - titleBtnWidth - crumbWidth - 40);
+    if ($('#channel-name').data('width') + curateBtnWidth > $('#ep-list ul li .episode').width()) {
+        $('#title-func h2').width($('#ep-list ul li .episode').width() - curateBtnWidth);
         $('#title-func h2').css('padding-right', parseInt(crumbWidth + 5, 10) + 'px');
         $('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
     }
-    if (channelNameWidth <= titleWidth - titleBtnWidth - crumbWidth) {
+    if ($('#channel-name').data('width') + curateBtnWidth <= $('#ep-list ul li .episode').width()) {
         $('#title-func h2').width('auto');
         $('#title-func h2').css('padding-right', parseInt(crumbWidth + 5, 10) + 'px');
         $('#channel-name').text($('#channel-name').data('meta')).removeClass('ellipsis');

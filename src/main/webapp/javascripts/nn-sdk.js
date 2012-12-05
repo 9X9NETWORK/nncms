@@ -123,7 +123,7 @@ var nn = { };
                 nn.log('dataType = ' + localDataType);
             }
 		} else if (typeof parameter == 'object' || (typeof parameter == 'string' && 
-                                                    $.inArray(parameter, [ 'xml', 'html', 'script', 'json', 'text' ]) < 0)) {
+                                                    $.inArray(parameter, [ 'xml', 'html', 'script', 'json', 'jsonp', 'text' ]) < 0)) {
             
 			localParameter = parameter;
 			if (typeof callback == 'function') {

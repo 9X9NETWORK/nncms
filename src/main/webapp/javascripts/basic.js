@@ -298,8 +298,8 @@ $(function () {
     $('#language-change li a').click(function () {
         if (!$('body').hasClass('has-change')) {
             nn.api('PUT', CMS_CONF.API('/api/users/{userId}', {userId: CMS_CONF.USER_DATA.id}), {lang: $(this).data('meta')}, function (user) {
-                var isSetupLangKey = false;
-                setupLanguageAndRenderPage(user, isSetupLangKey);
+                var isStoreLangKey = false;
+                setupLanguageAndRenderPage(user, isStoreLangKey);
             });
             $(this).parents('.select-list').slideDown();
             return false;

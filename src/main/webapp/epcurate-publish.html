@@ -36,7 +36,7 @@
 <body>
 
 <!--============================== header start ==============================-->
-<div id="header">
+<div id="header" class="hide">
   <p id="logo"></p>
   <ul id="nav">
     <li id="home"><span><a href="/#!home">Home</a></span></li>
@@ -66,7 +66,7 @@
 </div>
 </div>
 
-<!--============================== content-main start ========================-->
+<!--============================== content-wrap start ========================-->
 <div id="content-wrap" class="epcurate-publish">
 <form name="epcurateForm" id="epcurateForm" method="get" action="" class="clearfix publish">
 <input type="hidden" name="id" id="id" value="" />
@@ -83,6 +83,7 @@
 </div>
 </div>
 <div class="form-btn">
+<div class="btn-wrap">
 <div class="wrap">
 <p class="back"><a href="epcurate-curation.html" id="form-btn-back" rel="curation" class="langkey">&lt; Back to Curation</a></p>
 <p class="btns btn-leave"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-leave" value="Leave" class="langkey-val" /></span></span></p>
@@ -90,9 +91,10 @@
 <p class="notice hide langkey">Please fill in all required fields.</p>
 </div>
 </div>
+</div>
 </form>
 </div>
-<!--============================== content-main start ========================-->
+<!--============================== content-wrap close ========================-->
 
 <script id="epcurate-form-tmpl" type="text/x-jquery-tmpl">
 <div id="epcurate-publish">
@@ -141,11 +143,15 @@
 <span class="box-left">
 <span class="box-right">
 <span class="box-middle">
-<label for="status_published"><input type="radio" name="status" value="published" id="status_published" />${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Published'])}</label>
+<span class="glow-left"><span class="glow-right"><span class="glow-middle">
+<label for="status_published"><input type="radio" name="status" value="published" id="status_published" /><span id="publish-label">${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', $item.publishLabel])}</span></label>
+</span></span></span>
+<span class="last">
 <label id="schedule-publish-label" for="status_scheduled" class="last hide"><input type="radio" name="status" value="scheduled" id="status_scheduled" />${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Scheduled to publish'])}</label>
 <a id="schedule-publish" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-right"><span class="tip-middle">{{html nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'This episode will be published at<br />the scheduled time.'])}}</span></span></span></a>
 <label id="schedule-rerun-label" for="rerun_y" class="last hide"><input type="checkbox" name="rerun" value="y" id="rerun_y" />${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Scheduled to rerun'])}</label>
-<a id="schedule-rerun" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-right"><span class="tip-middle">{{html nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'This episode will be published again as<br />the latest episode at the scheduled time.'])}}</span></span></span></a>
+<a id="schedule-rerun" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-right"><span class="tip-middle">{{html nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'This episode will be published again as the latest episode at the scheduled time.'])}}</span></span></span></a>
+</span>
 </span>
 </span>
 </span>
@@ -197,8 +203,8 @@
 </script>
 
 <!--============================== footer start ==============================-->
-<p id="footer-control"></p>
-<div id="footer">
+<p id="footer-control" class="hide"></p>
+<div id="footer" class="hide">
   <ul id="footer-list">
     <li>
       <p class="select-txt"><a href="javascript:void(0);">About Us</a></p>

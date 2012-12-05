@@ -293,7 +293,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-add p.notice {
     float: left;
-    margin: 5px 0 0;
+    margin: 0;
     color: #f00;
     font-size: 13px;
 }
@@ -1011,6 +1011,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .background-container .bg-img p.notice {
 	clear: both;
+    color: #777;
 	font-weight: normal;
 	font-family: Arial, Helvetica;
 	font-size: 13px;
@@ -1024,7 +1025,7 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .btn-container {
 	position: absolute;
-	bottom: 0;
+	bottom: -7px;
 	right: 0;
 	float: right;
 }
@@ -1654,6 +1655,12 @@ padding-right: 8px;
     background-color: #eee;
 }
 
+#storyboard .storyboard-info {
+    overflow: hidden;
+    margin-bottom: 36px;
+    padding-top: 18px;
+}
+
 #storyboard p {
     margin-bottom: 26px;
     color: #555;
@@ -1661,18 +1668,38 @@ padding-right: 8px;
     font-size: 13px;
 }
 
-#storyboard p.episode-storyboard {
-    margin-bottom: 36px;
-    padding-top: 18px;
+#storyboard .storyboard-info p.episode-storyboard,
+#storyboard .storyboard-info .channel-name,
+#storyboard .storyboard-info .episode-name {
+    float: left;
+    margin: 0 25px 0 0;
 }
 
-#storyboard p span {
+#storyboard .storyboard-info p.episode-storyboard span {
     margin-left: 25px;
     font-weight: normal;
 }
 
-#storyboard p em {
+#storyboard .storyboard-info p.episode-storyboard em {
     font-style: normal;
+}
+
+#storyboard .storyboard-info .episode-name {
+    margin-right: 0;
+}
+
+#storyboard .storyboard-info .channel-name p,
+#storyboard .storyboard-info .episode-name p {
+    float: left;
+    height: 18px;
+    line-height: 18px;
+    margin: 0;
+    font-style: normal;
+}
+
+#storyboard .storyboard-info .channel-name p.title,
+#storyboard .storyboard-info .episode-name p.title {
+    margin-right: 5px;
 }
 
 #storyboard .storyboard-list {

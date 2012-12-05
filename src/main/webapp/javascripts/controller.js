@@ -58,7 +58,10 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                     showProcessingOverlay();
                     $('#epcurate-info').remove();
                     $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
-                    $('.episode-storyboard').html($('#episode-storyboard-tmpl').tmpl());
+                    $('.storyboard-info').html($('#storyboard-info-tmpl').tmpl({
+                        chName: channel.name,
+                        epName: crumb.name
+                    }));
                     $('#epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function (e) {
                         $(fm).trigger('submit', e);
                         return false;
@@ -99,8 +102,11 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                     crumb = $.extend({}, crumb, episode);
                     $('#epcurate-info').remove();
                     $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
-                    $('.episode-storyboard').html($('#episode-storyboard-tmpl').tmpl());
-                    // merge 9x9 api and youtube api (ytId, uploader, uploadDate, isZoneLimited, isMobileLimited, isEmbedLimited)
+                    $('.storyboard-info').html($('#storyboard-info-tmpl').tmpl({
+                        chName: channel.name,
+                        epName: episode.name
+                    }));
+                    // merge 9x9 api and youtube api (ytId, ytDuration, uploader, uploadDate, isZoneLimited, isMobileLimited, isEmbedLimited)
                     var normalPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
                         preloadImage = [],
                         programList = [],
@@ -109,7 +115,10 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                         ytItem = {},
                         ytList = [],
                         beginTitleCard = null,
-                        endTitleCard = null;
+                        endTitleCard = null,
+                        isZoneLimited = null,
+                        isMobileLimited = null,
+                        isEmbedLimited = null;
                     nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {episodeId: $('#id').val()}), null, function (programs) {
                         $.each(programs, function (idx, programItem) {
                             if (normalPattern.test(programItem.fileUrl)) {
@@ -181,23 +190,47 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                     } else {
                                         endTitleCard = null;
                                     }
-                                    ytData = youtubes.data;
-                                    ytItem = {
-                                        beginTitleCard: beginTitleCard,
-                                        endTitleCard: endTitleCard,
-                                        ytId: ytData.id,
-                                        fileUrl: programItem.fileUrl,
-                                        imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
-                                        //duration: ytData.duration,      // ON PURPOSE to mark this line to keep trimmed duration from 9x9 API
-                                        ytDuration: ytData.duration,    // keep original duration from YouTube
-                                        name: ytData.title,
-                                        intro: ytData.description,
-                                        uploader: ytData.uploader,
-                                        uploadDate: ytData.uploaded,
-                                        isZoneLimited: ((ytData.restrictions) ? true : false),
-                                        isMobileLimited: (((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false),
-                                        isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
-                                    };
+                                    if (youtubes.data) {
+                                        ytData = youtubes.data;
+                                        isZoneLimited = (ytData.restrictions) ? true : false;
+                                        isMobileLimited = ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false;
+                                        isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
+                                    } else {
+                                        ytData = null;
+                                        isZoneLimited = null;
+                                        isMobileLimited = null;
+                                        isEmbedLimited = null;
+                                    }
+                                    if (ytData) {
+                                        ytItem = {
+                                            beginTitleCard: beginTitleCard,
+                                            endTitleCard: endTitleCard,
+                                            ytId: ytData.id,
+                                            fileUrl: programItem.fileUrl,
+                                            imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
+                                            //duration: ytData.duration,      // ON PURPOSE to mark this line to keep trimmed duration from 9x9 API
+                                            ytDuration: ytData.duration,    // keep original duration from YouTube
+                                            name: ytData.title,
+                                            intro: ytData.description,
+                                            uploader: ytData.uploader,
+                                            uploadDate: ytData.uploaded,
+                                            isZoneLimited: isZoneLimited,
+                                            isMobileLimited: isMobileLimited,
+                                            isEmbedLimited: isEmbedLimited
+                                        };
+                                    } else {
+                                        ytItem = {
+                                            beginTitleCard: beginTitleCard,
+                                            endTitleCard: endTitleCard,
+                                            ytId: programItem.fileUrl.slice(-11),
+                                            ytDuration: 0,                                                          // fake origin duration (invalid video)
+                                            uploader: ((youtubes.error) ? youtubes.error.message : ''),             // fake uploader (error message)
+                                            uploadDate: ((youtubes.error) ? (youtubes.error.code + 'T') : ''),      // fake uploadDate (error code)
+                                            isZoneLimited: isZoneLimited,
+                                            isMobileLimited: isMobileLimited,
+                                            isEmbedLimited: isEmbedLimited
+                                        };
+                                    }
                                     ytItem = $.extend(programItem, ytItem);
                                     ytList[idx] = ytItem;
                                     if (idx === (programList.length - 1)) {
@@ -266,7 +299,9 @@ function buildEpcuratePublish(pageId, fm, crumb) {
                 }
                 showProcessingOverlay();
                 $('#epcurateForm .constrain').html('');
-                $('#epcurate-form-tmpl').tmpl(episode).appendTo('#epcurateForm .constrain');
+                $('#epcurate-form-tmpl').tmpl(episode, {
+                    publishLabel: (true === episode.isPublic) ? 'Published' : 'Publish Now'
+                }).appendTo('#epcurateForm .constrain');
                 setFormWidth();
                 // Amazon S3 upload
                 if ($('#uploadThumbnail').length > 0) {
@@ -392,6 +427,7 @@ function listEpisode(pageId, id) {
                         var cntEpisode = episodes.length;
                         $('#title-func').html('');
                         $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
+                        $('#channel-name').data('width', $('#channel-name').width());
                         $('#content-main-wrap .constrain').html('');
                         if (cntEpisode > 0) {
                             $('#episode-list-tmpl').tmpl().appendTo('#content-main-wrap .constrain');
@@ -481,6 +517,7 @@ function updateChannel(pageId, id) {
                 showProcessingOverlay();
                 $('#content-main').html('');
                 $('#content-main-tmpl').tmpl(channel).appendTo('#content-main');
+                $('#channel-name').data('width', $('#channel-name').width());
                 // setup channel data
                 $('#func-nav .episode').attr('href', 'episode-list.html?id=' + id);
                 $('#func-nav .setting').attr('href', 'channel-setting.html?id=' + id);
@@ -744,7 +781,7 @@ function rebuildCrumbAndParam(cid, eid) {
     return cmsCrumb;
 }   // end of rebuildCrumbAndParam()
 
-function setupLanguageAndRenderPage(user, isSetupLangKey) {
+function setupLanguageAndRenderPage(user, isStoreLangKey) {
     // fetch user lang
     CMS_CONF.USER_DATA = user;
     var lang = CMS_CONF.USER_DATA.lang;
@@ -769,7 +806,7 @@ function setupLanguageAndRenderPage(user, isSetupLangKey) {
         nn.i18n(langPack);
 
         // store lang key
-        if (true === isSetupLangKey) {
+        if (true === isStoreLangKey) {
             $('title').data('langkey', $('title').text());
             $('#header a, #footer a, .overlay-l .btns a, #studio-nav a, #func-nav a, #epcurate-nav .langkey, #epcurateForm .langkey').each(function () {
                 $(this).data('langkey', $(this).text());
@@ -854,8 +891,8 @@ $(function () {
                 location.href = '../';
             } else {
                 CMS_CONF.USER_URL = $.url();
-                var isSetupLangKey = true;
-                setupLanguageAndRenderPage(user, isSetupLangKey);
+                var isStoreLangKey = true;
+                setupLanguageAndRenderPage(user, isStoreLangKey);
             }
         });
     }

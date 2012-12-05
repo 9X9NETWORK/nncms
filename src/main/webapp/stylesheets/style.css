@@ -1024,6 +1024,7 @@ background: #e4e4e4;
 }
 
 #title-func .required {
+    margin: 5px 0 0;
     font-size: 13px;
 }
 

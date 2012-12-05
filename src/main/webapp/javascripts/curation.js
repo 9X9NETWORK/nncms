@@ -177,12 +177,12 @@ $(function () {
         }
         cancelTitleCard();
         removeVideoPlayingHook();
+        removeTrimTimeEditHook();
         removeTitleCardPlayingHook();
         removeTitleCardEditHook();
         $('#epcurate-curation .tabs li').addClass('hide');
         $(this).parent().parent().removeClass('hide').addClass('last');
         $('#video-player .video').html('');
-        $('#storyboard-list li').attr('class', '');
         $('#video-control').hide();
     });
 
@@ -210,7 +210,9 @@ $(function () {
             matchList = [],
             normalList = [],
             existList = [],
-            invalidList = [];
+            invalidList = [],
+            mobileLimitedList = [],
+            embedLimitedList = [];
         if (nn._([CMS_CONF.PAGE_ID, 'add-video', 'Paste YouTube video URLs to add (separate with different lines)']) === videoUrl) {
             $('#videourl').get(0).focus();
             $('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Paste YouTube video URLs to add.'])).removeClass('hide').show();
@@ -251,7 +253,10 @@ $(function () {
             showProcessingOverlay();
             var ytData = null,
                 ytItem = {},
-                ytList = [];
+                ytList = [],
+                isZoneLimited = null,
+                isMobileLimited = null,
+                isEmbedLimited = null;
             $.each(matchList, function (idx, key) {
                 nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
                     invalidList.push(normalList[idx]);
@@ -272,6 +277,22 @@ $(function () {
                 nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + key + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
                     if (youtubes.data) {
                         ytData = youtubes.data;
+                        isZoneLimited = (ytData.restrictions) ? true : false;
+                        isMobileLimited = ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false;
+                        isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
+                    } else {
+                        ytData = null;
+                        isZoneLimited = null;
+                        isMobileLimited = null;
+                        isEmbedLimited = null;
+                    }
+                    if (true === isMobileLimited) {
+                        mobileLimitedList.push(normalList[idx]);
+                    }
+                    if (true === isEmbedLimited) {
+                        embedLimitedList.push(normalList[idx]);
+                    }
+                    if (ytData && false === isMobileLimited && false === isEmbedLimited) {
                         ytItem = {
                             beginTitleCard: null,
                             endTitleCard: null,
@@ -287,17 +308,25 @@ $(function () {
                             intro: ytData.description,
                             uploader: ytData.uploader,
                             uploadDate: ytData.uploaded,
-                            isZoneLimited: ((ytData.restrictions) ? true : false),
-                            isMobileLimited: (((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false),
-                            isEmbedLimited: ((ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false)
+                            isZoneLimited: isZoneLimited,
+                            isMobileLimited: isMobileLimited,
+                            isEmbedLimited: isEmbedLimited
                         };
                         ytList[idx] = ytItem;
                     } else {
-                        invalidList.push(normalList[idx]);
-                        nn.log(youtubes.error, 'warning');
+                        if (youtubes.error) {
+                            nn.log(youtubes.error, 'warning');
+                        }
                         nn.log(normalList[idx], 'debug');
+                        invalidList.push(normalList[idx]);
                         $('#videourl').val(invalidList.join('\n'));
-                        $('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Invalid URL, please try again!'])).removeClass('hide').show();
+                        if (true === isEmbedLimited && 0 === mobileLimitedList.length) {
+                            $('#cur-add .notice').html(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Fail to add this video, please try another one.<br />[This video is not playable outside Youtube]'])).removeClass('hide').show();
+                        } else if (true === isMobileLimited && 0 === embedLimitedList.length) {
+                            $('#cur-add .notice').html(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Fail to add this video, please try another one.<br />[This video is not playable on mobile device]'])).removeClass('hide').show();
+                        } else {
+                            $('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Invalid URL, please try again!'])).removeClass('hide').show();
+                        }
                     }
                     if (idx === (matchList.length - 1)) {
                         // ON PURPOSE to wait api (async)
@@ -373,6 +402,7 @@ $(function () {
         $('body').addClass('has-change');
         cancelTitleCard();
         //removeVideoPlayingHook();     // ON PURPOSE to keep video playing hook in order to switch video-info automatically
+        removeTrimTimeEditHook();
         removeTitleCardPlayingHook();
         removeTitleCardEditHook();
         var length = $('#storyboard-list li').length,
@@ -486,6 +516,10 @@ $(function () {
             endS = parseInt($('input[name=endS]').val(), 10),
             startTime = parseInt(startH + startM + startS, 10),
             endTime = parseInt(endH + endM + endS, 10);
+        if (0 == duration) {
+            $('#cur-edit .edit-time .btn-wrap .notice').show();
+            return false;
+        }
         if ('' === $.trim($('input[name=startH]').val())
                 || '' === $.trim($('input[name=startM]').val())
                 || '' === $.trim($('input[name=startS]').val())
@@ -549,6 +583,7 @@ $(function () {
         }
         cancelTitleCard();
         removeVideoPlayingHook();
+        removeTrimTimeEditHook();
         removeTitleCardPlayingHook();
         removeTitleCardEditHook();
         addTitleCardEditHook($(this));
@@ -594,6 +629,7 @@ $(function () {
         }
         cancelTitleCard();
         removeVideoPlayingHook();
+        removeTrimTimeEditHook();
         removeTitleCardPlayingHook();
         removeTitleCardEditHook();
         addTitleCardEditHook($(this));
@@ -794,12 +830,12 @@ $(function () {
             $('#storyboard-listing li .title a.edit').remove();
 
             // switch tab and content
+            removeTitleCardEditHook();
             $('#epcurate-curation .tabs li').addClass('hide');
             $('#epcurate-curation .tabs li.first').removeClass('hide').addClass('last').addClass('on');
             $('#cur-edit').addClass('hide');
             $('#cur-add').removeClass('hide');
             $('#video-player .video').html('');
-            $('#storyboard-list li').attr('class', '');
             $('#video-control').hide();
 
             if (deleteId > 0) {
@@ -1229,6 +1265,13 @@ $(function () {
 });
 
 function chkCurationData(fm, src) {
+    var cntProgram = $('#storyboard-list li').length,
+        duration = 0,
+        itemData = null;
+    $('#storyboard-list li').each(function (i) {
+        itemData = $(this).tmplItem().data;
+        duration += parseInt(itemData.ytDuration, 10);
+    });
     if ($('body').hasClass('has-trimtime-change')) {
         showUnsaveTrimTimeOverlay(src);
         return false;
@@ -1237,8 +1280,7 @@ function chkCurationData(fm, src) {
         showUnsaveTitleCardOverlay(src);
         return false;
     }
-    var cntProgram = $('#storyboard-list li').length;
-    if (cntProgram <= 0) {
+    if (cntProgram <= 0 || duration <= 0) {
         showSystemErrorOverlay('Please curate at least one valid video.');
         return false;
     }
@@ -1260,7 +1302,10 @@ function setSpace() {
         windowWidth = $(window).width(),
         videoWidth = $('#epcurate-curation #video-player .video').width(),
         curAddWidth = $('#epcurate-curation #cur-add').width(),
-        curEditWidth = $('#epcurate-curation #cur-edit').width();
+        curEditWidth = $('#epcurate-curation #cur-edit').width(),
+        episodeInfoWidth = $('#storyboard .storyboard-info .episode-storyboard').width(),
+        channelTitleWidth = $('#storyboard .storyboard-info .channel-name .title').width(),
+        episodeTitleWidth = $('#storyboard .storyboard-info .episode-name .title').width();
     if (extraHeight < 0) { extraHeight = 0; }
     $('p.auto-height').height(extraHeight / 4);
     $('#storyboard-slider').css('bottom', extraHeight / 4 + 'px');
@@ -1293,6 +1338,16 @@ function setSpace() {
         $('#epcurate-nav ul').css('width', '484px');
         $('#epcurate-nav ul li.on, #epcurate-nav ul li a').css('width', '242px');
     }
+    if (546 >= $('#content-wrap').height()) {
+        $('#content-wrap').height(546);
+        $('body').css('overflow', 'auto');
+    } else {
+        $('#content-wrap').height($(window).height() - 46);     // $('#epcurate-nav .epcurate-nav-wrap')
+        $('body').css('overflow', 'hidden');
+    }
+    $('#channel-name, #episode-name').width((windowWidth - episodeInfoWidth - 34 - 50 - channelTitleWidth - episodeTitleWidth - 10) / 2);
+    $('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
+    $('#episode-name').text($('#episode-name').data('meta')).addClass('ellipsis').ellipsis();
 }
 
 function loadYouTubeFlash(videoId) {

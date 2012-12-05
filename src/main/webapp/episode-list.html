@@ -59,7 +59,7 @@
 </div>
 </div>
 
-<!--============================== content-main start ========================-->
+<!--============================== content-wrap start ========================-->
 <div id="content-wrap">
 <div id="content-nav">
 <div id="func-nav">
@@ -81,7 +81,7 @@
 </div>
 </div>
 </div>
-<!--============================== content-main start ========================-->
+<!--============================== content-wrap close ========================-->
 
 <script id="episode-nav-tmpl" type="text/x-jquery-tmpl">
 {{if contentType == CMS_CONF.YOUR_FAVORITE}}
@@ -93,7 +93,7 @@
 </script>
 
 <script id="title-func-tmpl" type="text/x-jquery-tmpl">
-<h2><span id="channel-name" data-meta="${name}">${name}</span><span class="title-crumb">&gt; ${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Episode list'])} (<span id="episode-counter">${$item.cntEpisode}</span>){{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}<a href="epcurate-curation.html?cid=${id}" class="curate btns"><span class="btn-right"><span class="btn-middle">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Curate a new episode'])}</span></span></a>{{/if}}</span></h2>
+<h2><span id="channel-name" data-meta="${name}" data-width="">${name}</span><span class="title-crumb">&gt; ${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Episode list'])} (<span id="episode-counter">${$item.cntEpisode}</span>){{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}<a href="epcurate-curation.html?cid=${id}" class="curate btns"><span class="btn-right"><span class="btn-middle">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Curate a new episode'])}</span></span></a>{{/if}}</span></h2>
 {{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}
 <p class="order btns"><span><a href="javascript:void(0);" rel="${id}" class="reorder">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Reorder episodes'])}</a></span></p>
 {{/if}}

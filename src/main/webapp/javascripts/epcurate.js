@@ -194,6 +194,9 @@ $(function () {
                                 $('#schedule-publish').addClass('hide');
                                 $('#schedule-rerun-label').removeClass('hide');
                                 $('#schedule-rerun').removeClass('hide');
+                                $('#publish-label').text(nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Published']));
+                            } else {
+                                $('#publish-label').text(nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Publish Now']));
                             }
                             if ($('#status_draft').is(':checked')) {
                                 // UI for Draft

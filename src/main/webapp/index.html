@@ -30,20 +30,6 @@
 <body>
 <!-- template = #lightbox-create-channel-tmpl -->
 
-<script id="lightbox-create-channel-tmpl" type="text/x-jquery-tmpl">
-<div id="lightbox-create-channel" class="lightbox-content">
-<h3>{{html nn._(['overlay', 'channel-tutorial', '<img src="images/text_collect.png" alt="" />'])}}</h3>
-<p class="desc">${nn._(['overlay', 'channel-tutorial', 'Studio is the management center for your 9x9.tv list-form channels!'])}</p>
-<p class="create">
-<a href="channel-add.html">create
-<img src="images/icon_add.png" alt="" />
-<span>{{html nn._(['overlay', 'channel-tutorial', 'Create a<br />new channel'])}}</span>
-</a>
-</p>
-<p class="btns unblock"><span><a href="./">${nn._(['overlay', 'channel-tutorial', 'Not right now, thanks!'])}</a></span></p>
-</div>
-</script>
-
 <!--============================== header start ==============================-->
 <div id="header">
   <p id="logo"></p>
@@ -74,7 +60,7 @@
 </div>
 </div>
 
-<!--============================== content-main start ========================-->
+<!--============================== content-wrap start ========================-->
 <div id="content-wrap">
 <div id="content-nav">
 <div id="func-nav">
@@ -97,7 +83,21 @@
 </div>
 </div>
 </div>
-<!--============================== content-main start ========================-->
+<!--============================== content-wrap close ========================-->
+
+<script id="lightbox-create-channel-tmpl" type="text/x-jquery-tmpl">
+<div id="lightbox-create-channel" class="lightbox-content">
+<h3>{{html nn._(['overlay', 'channel-tutorial', '<img src="images/text_collect.png" alt="" />'])}}</h3>
+<p class="desc">${nn._(['overlay', 'channel-tutorial', 'Studio is the management center for your 9x9.tv list-form channels!'])}</p>
+<p class="create">
+<a href="channel-add.html">create
+<img src="images/icon_add.png" alt="" />
+<span>{{html nn._(['overlay', 'channel-tutorial', 'Create a<br />new channel'])}}</span>
+</a>
+</p>
+<p class="btns unblock"><span><a href="./">${nn._(['overlay', 'channel-tutorial', 'Not right now, thanks!'])}</a></span></p>
+</div>
+</script>
 
 <script id="title-func-tmpl" type="text/x-jquery-tmpl">
 <h2>${nn._([CMS_CONF.PAGE_ID, 'title-func', 'My Channels'])} (<span id="channel-counter">${$item.cntChannel}</span>)</h2>

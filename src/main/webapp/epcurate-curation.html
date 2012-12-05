@@ -38,7 +38,7 @@
 <body>
 
 <!--============================== header start ==============================-->
-<div id="header">
+<div id="header" class="hide">
   <p id="logo"></p>
   <ul id="nav">
     <li id="home"><span><a href="/#!home">Home</a></span></li>
@@ -68,7 +68,7 @@
 </div>
 </div>
 
-<!--============================== content-main start ========================-->
+<!--============================== content-wrap start ========================-->
 <div id="content-wrap" class="epcurate-curation">
 <form name="epcurateForm" id="epcurateForm" method="get" action="" class="clearfix curation">
 <!-- template = #epcurate-info-tmpl -->
@@ -123,9 +123,9 @@
 </div>
 
 <div id="storyboard">
-<p class="episode-storyboard">
-<!-- template = #episode-storyboard-tmpl -->Episode storyboard (<em id="storyboard-length">50</em> videos left)<span>Duration <em id="storyboard-duration">00:00:00</em></span>
-</p>
+<div class="storyboard-info">
+<!-- template = #storyboard-info-tmpl --><p class="episode-storyboard">Episode storyboard (<em id="storyboard-length">50</em> videos left)<span>Duration <em id="storyboard-duration">00:00:00</em></span></p>
+</div>
 <div id="storyboard-wrap" class="storyboard-list">
 <div id="storyboard-list">
 <p class="notice langkey">+ Add videos here</p>
@@ -152,7 +152,7 @@
 </div>
 </form>
 </div>
-<!--============================== content-main start ========================-->
+<!--============================== content-wrap close ========================-->
 
 <script id="epcurate-info-tmpl" type="text/x-jquery-tmpl">
 <span id="epcurate-info">
@@ -416,12 +416,16 @@
 </div>
 </script>
 
-<script id="episode-storyboard-tmpl" type="text/x-jquery-tmpl">
+<script id="storyboard-info-tmpl" type="text/x-jquery-tmpl">
+<p class="episode-storyboard">
 ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id="storyboard-length">50</em> ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'videos left'])})<span>${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Duration'])} <em id="storyboard-duration">00:00:00</em></span>
+</p>
+<div class="channel-name"><p class="title">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Channel:'])}</p><p id="channel-name" data-meta="${chName}">${chName}</p></div>
+<div class="episode-name"><p class="title">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode:'])}</p><p id="episode-name" data-meta="${epName}">${epName}</p></div>
 </script>
 
 <script id="storyboard-listing-tmpl-item" type="text/x-jquery-tmpl">
-<li data-ytid="${ytId}" data-ytduration="${ytDuration}" data-starttime="${startTime}" data-endtime="${endTime}">
+<li data-ytid="${ytId}" data-ytduration="${ytDuration}" data-starttime="${startTime}" data-endtime="${endTime}"{{if ytDuration == 0}} class="invalid"{{/if}}>
 {{if isEmbedLimited || isZoneLimited || isMobileLimited}}
 {{if isEmbedLimited}}
 <a href="#!pid=${id}&ytid=${ytId}" class="error"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Not playable outside YouTube'])}</span></span></span></span></a>
@@ -439,10 +443,18 @@ ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id=
 {{/if}}
 {{/if}}
 <p class="img">
+{{if ytDuration > 0}}
 <img src="${imageUrl}" alt="" width="80" height="45" />
+{{else}}
+<img src="images/thumbnail_box_empty.png" alt="" width="80" height="45" />
+{{/if}}
 <span class="time"><span class="time-right"><span class="time-middle">${formatDuration(duration)}</span></span></span>
 </p>
+{{if ytDuration > 0}}
 <h4 class="ellipsis multiline">${name}</h4>
+{{else}}
+<h4>[${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Invalid Video'])}]</h4>
+{{/if}}
 <p class="title">
 {{if beginTitleCard != null}}
 <a href="#!pid=${id}&ytid=${ytId}&tid=${beginTitleCard.id}" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Edit Title'])}</span></span></span></span></a>
@@ -453,7 +465,9 @@ ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id=
 </p>
 <p class="hover-func">
 <a href="#!pid=${id}&ytid=${ytId}" class="video-del">Video Del</a>
+{{if ytDuration > 0}}
 <a href="#!pid=${id}&ytid=${ytId}" class="video-play">Video Play</a>
+{{/if}}
 {{if beginTitleCard == null}}
 <a href="#!pid=${id}&ytid=${ytId}" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Add Title'])}</span></span></span></span></a>
 {{/if}}
@@ -464,9 +478,13 @@ ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id=
 </li>
 </script>
 
+<script id="preload-image-tmpl-item" type="text/x-jquery-tmpl">
+<img src="${image}" alt="" />
+</script>
+
 <!--============================== footer start ==============================-->
-<p id="footer-control"></p>
-<div id="footer">
+<p id="footer-control" class="hide"></p>
+<div id="footer" class="hide">
   <ul id="footer-list">
     <li>
       <p class="select-txt"><a href="javascript:void(0);">About Us</a></p>
@@ -579,10 +597,6 @@ ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id=
 <div id="preload-image" class="hide">
 <!-- template = #preload-image-tmpl-item -->
 </div>
-
-<script id="preload-image-tmpl-item" type="text/x-jquery-tmpl">
-<img src="${image}" alt="" />
-</script>
 
 </body>
 </html>
