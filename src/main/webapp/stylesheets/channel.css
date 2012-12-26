@@ -410,7 +410,7 @@
 #content-main-wrap form .fminput label {
     float: left;
     width: 130px;
-    padding: 0 10px 0 10px;
+    padding: 7px 10px 0 10px;
     color: #555;
     font-weight: bold;
     font-size: 13px;
@@ -489,11 +489,11 @@
     position: relative;
     float: left;
     overflow: hidden;
-    width: 129px;
+    width: 84px;
     height: 62px;
     margin-right: 10px;
     padding: 10px 0 10px 0;
-    background: url(../images/thumbnail_box_lg.png) no-repeat 0 0;
+    background: url(../images/thumbnail_box.png) no-repeat 0 0;
     text-align: center;
 }
 
@@ -508,7 +508,7 @@
 }
 
 #content-main-wrap form .fminput .fmfield p.img .thumbnail {
-    width: 110px;
+    width: 62px;
     height: 62px;
 }
 
@@ -545,6 +545,10 @@
 
 #content-main-wrap form .fminput .fmfield .select.disable {
     background: url(../images/input_box_left_disable.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .category {
+    width: 439px;
 }
 
 #content-main-wrap form .fminput .fmfield .select .select-btn {
@@ -603,19 +607,21 @@
 
 #content-main-wrap form .fminput .fmfield .select.category .select-list {
 	overflow: hidden;
-	width: 536px;
+	width: 438px;
 }
 
 #content-main-wrap form .fminput .fmfield .select.category .select-list li {
 	float: left;
+    width: 138px;
 	height: 26px;
+    padding: 0 4px;
 }
 
 #content-main-wrap form .fminput .fmfield .select .select-list {
 	display: none;
 	position: absolute;
 	top: 27px;
-	left: 2px;
+	left: 1px;
 	z-index: 60;
 	width: 178px;
 	border: 1px solid #b2b2b2;
@@ -669,19 +675,6 @@
     margin: 6px 12px 0 0;
 }
 
-#content-main-wrap form .fminput .fmfield a.switch-on {
-	display: none;
-    float: left;
-    width: 63px;
-    height: 25px;
-    margin: 3px 5px 0 0;
-    background: url(../images/btn_on.png) no-repeat 0 0;
-    color: #555;
-    line-height: 25px;
-    text-decoration: none;
-    text-indent: 5px;
-}
-
 #content-main-wrap form .fminput .fmfield a.switch-off {
     float: left;
     width: 63px;
@@ -692,6 +685,239 @@
     line-height: 25px;
     text-decoration: none;
     text-indent: 33px;
+}
+
+#content-main-wrap form .fminput .fmfield .connected {
+    padding: 7px 0 0 150px;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item {
+    height: 30px;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item img {
+    float: left;
+    border: none;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item label {
+    width: 75px;
+    padding-top: 0;
+    font-weight: normal;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item label.checked {
+    font-weight: bold;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .checker {
+    width: 14px;
+    height: 15px;
+    margin: 2px 5px 0 0;
+    cursor: pointer;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .checker span {
+    display: block;
+    width: 14px;
+    height: 15px;
+    background: url(../images/check_box.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .checker input {
+    width: 14px;
+    height: 15px;
+    cursor: pointer;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .checker span.checked {
+    background: url(../images/check_box_check.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .disabled span {
+    background: url(../images/check_box_disable.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list {
+    float: left;
+    width: 328px;
+    height: 30px;
+    margin: -7px 14px 0 0;
+    padding-left: 3px;
+    background: url(../images/multi_choose_left.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list .page-list-right {
+    height: 30px;
+    padding-right: 3px;
+    background: url(../images/multi_choose_right.png) no-repeat right 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list .page-list-middle {
+    position: relative;
+    height: 30px;
+    padding: 0 5px;
+    background: url(../images/multi_choose_middle.png) repeat-x;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list.disable .page-list-middle a {
+    cursor: default;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list.on,
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list:hover {
+    background: url(../images/multi_choose_left_on.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list.on       .page-list-right,
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list:hover .page-list-right {
+    background: url(../images/multi_choose_right_on.png) no-repeat right 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list.on       .page-list-middle,
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list:hover .page-list-middle {
+    background: url(../images/multi_choose_middle_on.png) repeat-x;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list.disable {
+    background: url(../images/multi_choose_left_disable.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list.disable .page-list-right {
+    background: url(../images/multi_choose_right_disable.png) no-repeat right 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list.disable .page-list-middle {
+    background: url(../images/multi_choose_middle_disable.png) repeat-x;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul li:hover {
+	background-color: #e4e4e4;
+	color: #777;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list .page-list-middle a.select-page {
+    display: block;
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    padding-right: 20px;
+    background: url(../images/multi_choose_plus.png) no-repeat right 8px;
+    color: #999;
+    font-size: 13px;
+    text-align: left;
+    text-decoration: none;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list.disable .page-list-middle a.select-page {
+    background: url(../images/multi_choose_plus_disable.png) no-repeat right 8px;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list.on .page-list-middle a.select-page {
+    background: url(../images/multi_choose_minus.png) no-repeat right 8px;
+    color: #555;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list .page-list-middle a.select-page span {
+    display: block;
+    overflow: hidden;
+    height: 30px;
+    color: #555;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list.enable .page-list-middle a.select-page:hover span {
+    color: #777;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul {
+    display: none;
+	position: absolute;
+	top: 28px;
+	left: -2px;
+	z-index: 60;
+	width: 329px;
+	border: 1px solid #b2b2b2;
+	border-top: none;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	border-radius:  0 0 5px 5px;
+	filter: alpha(Opacity=90);
+	opacity: 0.9;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul li {
+    position: relative;
+    float: left;
+    width: 164px;
+	height: 28px;
+	margin: 0;
+	border-top: 1px solid #f5f5f5;
+	border-bottom: 1px solid #c9c9c9;
+	background: none;
+	background-color: #d2d2d2;
+	color: #555;
+	font-size: 13px;
+	line-height: 28px;
+}
+
+#content-main #content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul li a {
+    display: block;
+    padding: 0 0 0 26px;
+    background: url(../images/check_box.png) no-repeat 4px 7px;
+    color: #555;
+    text-decoration: none;
+}
+
+#content-main #content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul li.checked a {
+    background: url(../images/check_box_check.png) no-repeat 4px center;
+    font-weight: bold;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item a#fb-reconnect {
+    position: relative;
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    text-decoration: none;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item a .tip {
+    display: none;
+    position: absolute;
+    top: -66px;
+    left: -95px;
+    z-index: 1000;
+    height: 60px;
+    padding-left: 4px;
+    background: url(../images/bg_bubble_left_l.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item a .tip img {
+    position: absolute;
+    top: 57px;
+    left: 95px;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item a .tip .tip-right {
+    display: block;
+    padding-right: 4px;
+    background: url(../images/bg_bubble_right_l.png) no-repeat right 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item a .tip .tip-middle {
+    display: block;
+    width: 233px;
+    height: 57px;
+    padding: 3px 5px 0;
+    background: url(../images/bg_bubble_middle_l.png) repeat-x;
+    color: #555;
+    font: 13px/17px Arial, Helvetica;
+    text-align: justify;
+}
+
+#content-main-wrap form .fminput .fmfield .connected .share-item a:hover .tip {
+    display: block;
 }
 
 #content-main-wrap form .fminput .fmfield .tag-list {
@@ -757,13 +983,13 @@
 #content-main-wrap form .fminput .fmfield .notice.img-upload {
     position: absolute;
     top: 33px;
-    left: 290px;
+    left: 245px;
 }
 
 #content-main-wrap form .fminput .fmfield .notice.upload-notice {
     position: absolute;
     top: 56px;
-    left: 290px;
+    left: 245px;
     color: #f00;
 }
 
@@ -798,7 +1024,7 @@
 
 #content-main-wrap form .form-btn .form-btn-wrap .btns span input {
     padding: 0 10px;
-    font-family: Arial, Helvetica, clean, Microsoft JhengHei, Apple LiGothic, SimHei, PMingLiU, sans-serif;
+    font-family: Arial, Helvetica, clean, Microsoft JhengHei, Apple LiGothic, PMingLiU, sans-serif;
     font-size: 15px;
 }
 

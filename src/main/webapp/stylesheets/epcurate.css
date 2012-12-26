@@ -115,6 +115,10 @@
     font-weight: normal;
 }
 
+#content-wrap form .fminput .fmfield p.radio-list label.checked {
+    font-weight: bold;
+}
+
 #content-wrap form .fminput .fmfield p.radio-list.draft label {
     margin-right: 0;
 }
@@ -196,6 +200,10 @@
 #content-wrap form .fminput .fmfield p.radio-list.draft span.glow-middle label {
     margin: 0;
     padding: 0;
+    font-weight: nromal;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft span.glow-middle label.checked {
     font-weight: bold;
 }
 

@@ -133,10 +133,6 @@ $(function () {
         }
         return false;
     });
-    $('.unblock, .btn-close, .btn-no').click(function () {
-        $.unblockUI();
-        return false;
-    });
 
     // storyboard sortable
     $('#storyboard-listing').sortable({
@@ -254,17 +250,20 @@ $(function () {
             var ytData = null,
                 ytItem = {},
                 ytList = [],
+                committedCnt = 0,
                 isZoneLimited = null,
                 isMobileLimited = null,
                 isEmbedLimited = null;
             $.each(matchList, function (idx, key) {
                 nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
+                    committedCnt += 1;
                     invalidList.push(normalList[idx]);
                     nn.log(textStatus + ': ' + jqXHR.responseText, 'warning');
                     nn.log(normalList[idx], 'debug');
                     $('#videourl').val(invalidList.join('\n'));
                     $('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Invalid URL, please try again!'])).removeClass('hide').show();
-                    if (idx === (matchList.length - 1)) {
+                    if (committedCnt === matchList.length) {
+                        committedCnt = -1;   // reset to avoid collision
                         // ON PURPOSE to wait api (async)
                         setTimeout(function () {
                             $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
@@ -275,6 +274,7 @@ $(function () {
                     }
                 });
                 nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + key + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
+                    committedCnt += 1;
                     if (youtubes.data) {
                         ytData = youtubes.data;
                         isZoneLimited = (ytData.restrictions) ? true : false;
@@ -320,15 +320,16 @@ $(function () {
                         nn.log(normalList[idx], 'debug');
                         invalidList.push(normalList[idx]);
                         $('#videourl').val(invalidList.join('\n'));
-                        if (true === isEmbedLimited && 0 === mobileLimitedList.length) {
+                        if (true === isEmbedLimited && 0 === mobileLimitedList.length && invalidList.length === embedLimitedList.length) {
                             $('#cur-add .notice').html(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Fail to add this video, please try another one.<br />[This video is not playable outside Youtube]'])).removeClass('hide').show();
-                        } else if (true === isMobileLimited && 0 === embedLimitedList.length) {
+                        } else if (true === isMobileLimited && 0 === embedLimitedList.length && invalidList.length === mobileLimitedList.length) {
                             $('#cur-add .notice').html(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Fail to add this video, please try another one.<br />[This video is not playable on mobile device]'])).removeClass('hide').show();
                         } else {
                             $('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Invalid URL, please try again!'])).removeClass('hide').show();
                         }
                     }
-                    if (idx === (matchList.length - 1)) {
+                    if (committedCnt === matchList.length) {
+                        committedCnt = -1;   // reset to avoid collision
                         // ON PURPOSE to wait api (async)
                         setTimeout(function () {
                             $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
@@ -945,10 +946,10 @@ $(function () {
     });
 
     // Title Card - Setting UI - background switch (color or image)
-    switchBackground($('#cur-edit .edit-title input[name=bg]:checked').val());
+    switchBackground($('#cur-edit .edit-title input[name=bg]:checked').val(), $('#cur-edit .edit-title input[name=bg]:checked').attr('name'));
     $('#cur-edit').on('click', '.edit-title input[name=bg]', function () {
         $('body').addClass('has-titlecard-change');
-        switchBackground($(this).val());
+        switchBackground($(this).val(), $(this).attr('name'));
     });
 
     // Title Card - Setting UI - color picker (font color, background color)
@@ -982,7 +983,7 @@ $(function () {
 
     // Save
     // NOTE: save titlecard always handle (insert and update) POST /api/programs/{programId}/title_cards
-    // TODO improve api async order issue
+    // NOTE: improve api async order issue
     $('#epcurateForm').submit(function (e, src) {
         // Episode Curation - Curation
         if ($(e.target).hasClass('curation') && chkCurationData(this, src)) {
@@ -1013,10 +1014,10 @@ $(function () {
                 });
                 programList.push(programItem);
             });
+            nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
+                // nothing to do ON PURPOSE to turn off error handle from YouTube to 9x9 API
+            });
             if (isInsertMode) {
-                nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
-                    // nothing to do ON PURPOSE to turn off error handle from YouTube to 9x9 API
-                });
                 // insert mode: insert episode --> insert programs --> update episode with null
                 parameter = {
                     isPublic: false,
@@ -1108,9 +1109,6 @@ $(function () {
                     });
                     return false;
                 }
-                nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
-                    // nothing to do ON PURPOSE to turn off error handle from YouTube to 9x9 API
-                });
                 $('#storyboard-list li').each(function (idx) {
                     programItem = $(this).tmplItem().data;
                     if (programItem.id && programItem.id > 0) {
@@ -1348,6 +1346,7 @@ function setSpace() {
     $('#channel-name, #episode-name').width((windowWidth - episodeInfoWidth - 34 - 50 - channelTitleWidth - episodeTitleWidth - 10) / 2);
     $('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
     $('#episode-name').text($('#episode-name').data('meta')).addClass('ellipsis').ellipsis();
+    $('#channel-name, #episode-name').width('auto');
 }
 
 function loadYouTubeFlash(videoId) {
@@ -1585,7 +1584,7 @@ function enableTitleCardEdit() {
     $('#cur-edit .edit-title').removeClass('disable');
     $('#cur-edit .select').attr('class', 'select enable');
     $('#cur-edit input, #cur-edit textarea').removeAttr('disabled');
-    $('#cur-edit .radio, #cur-edit .checker').removeClass('disabled');
+    $.uniform.update('#cur-edit input, #cur-edit textarea');
     $('#cur-edit .font-container .font-l, #cur-edit .font-container .font-s').removeClass('disabled').addClass('enable');
 }
 
@@ -1593,7 +1592,7 @@ function disableTitleCardEdit() {
     $('#cur-edit .edit-title').addClass('disable');
     $('#cur-edit .select').attr('class', 'select disable');
     $('#cur-edit input, #cur-edit textarea').attr('disabled', 'disabled');
-    $('#cur-edit .radio, #cur-edit .checker').addClass('disabled');
+    $.uniform.update('#cur-edit input, #cur-edit textarea');
     $('#cur-edit .font-container .font-l, #cur-edit .font-container .font-s').removeClass('enable').addClass('disabled');
 }
 
@@ -1605,7 +1604,7 @@ function buildTitleCardEditTmpl(opts, isUpdateMode, isDisableEdit) {
     $('#cur-edit input, #cur-edit textarea, #cur-edit select').uniform();
     switchFontRadix($('#fontSize').val());
     switchFontAlign($('#cur-edit .edit-title input[name=align]:checked').val());
-    switchBackground($('#cur-edit .edit-title input[name=bg]:checked').val());
+    switchBackground($('#cur-edit .edit-title input[name=bg]:checked').val(), $('#cur-edit .edit-title input[name=bg]:checked').attr('name'));
 }
 
 function buildTitleCardTmpl(opts) {
@@ -1794,7 +1793,7 @@ function switchFontAlign(align) {
     $('#titlecard-inner').css('text-align', align);
 }
 
-function switchBackground(bg) {
+function switchBackground(bg, name) {
     if ('image' == bg) {
         $('#cur-edit .background-container .bg-color').addClass('hide');
         $('#cur-edit .background-container .bg-img').removeClass('hide');
@@ -1804,6 +1803,8 @@ function switchBackground(bg) {
         $('#cur-edit .background-container .bg-img').addClass('hide');
         $('#titlecard-outer img').hide();
     }
+    $('input[name=' + name + ']').parents('label').removeClass('checked');
+    $('input[name=' + name + ']:checked').parents('label').addClass('checked');
 }
 
 function cancelEffect(element) {

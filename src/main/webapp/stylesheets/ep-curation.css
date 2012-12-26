@@ -1261,6 +1261,11 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .radio-list label {
     float: left;
+    font-weight: normal;
+}
+
+#epcurate-curation #cur-edit .radio-list label.checked {
+    font-weight: bold;
 }
 
 #epcurate-curation #cur-edit .radio-list label.first {
@@ -1657,6 +1662,7 @@ padding-right: 8px;
 
 #storyboard .storyboard-info {
     overflow: hidden;
+    height: 18px;
     margin-bottom: 36px;
     padding-top: 18px;
 }

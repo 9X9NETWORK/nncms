@@ -5,29 +5,30 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=548" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=548" />
-<link rel="stylesheet" href="stylesheets/episode.css?v=548" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<link rel="stylesheet" href="stylesheets/style.css?v=647" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=647" />
+<link rel="stylesheet" href="stylesheets/episode.css?v=647" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=548"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=548"></script>
-<script src="javascripts/jquery.ellipsis.js?v=548"></script>
-<script src="javascripts/jquery.blockUI.js?v=548"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=548"></script>
-<script src="javascripts/jquery.cycle.all.js?v=548"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=548"></script>
-<script src="javascripts/jquery.cookie.js?v=548"></script>
-<script src="javascripts/json2.js?v=548"></script>
-<script src="javascripts/purl.js?v=548"></script>
-<script src="javascripts/vertical.slider.js?v=548"></script>
-<script src="javascripts/config.js?v=548"></script>
-<script src="javascripts/controller.js?v=548"></script>
-<script src="javascripts/basic.js?v=548"></script>
-<script src="javascripts/episode.js?v=548"></script>
+<script src="javascripts/nn-sdk.js?v=647"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=647"></script>
+<script src="javascripts/jquery.ellipsis.js?v=647"></script>
+<script src="javascripts/jquery.blockUI.js?v=647"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=647"></script>
+<script src="javascripts/jquery.cycle.all.js?v=647"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=647"></script>
+<script src="javascripts/jquery.cookie.js?v=647"></script>
+<script src="javascripts/json2.js?v=647"></script>
+<script src="javascripts/purl.js?v=647"></script>
+<script src="javascripts/vertical.slider.js?v=647"></script>
+<script src="javascripts/config.js?v=647"></script>
+<script src="javascripts/controller.js?v=647"></script>
+<script src="javascripts/basic.js?v=647"></script>
+<script src="javascripts/episode.js?v=647"></script>
 <title>9x9.tv - Episode list</title>
 </head>
 <body>
+<div id="fb-root"></div>
 
 <!--============================== header start ==============================-->
 <div id="header">
@@ -56,6 +57,7 @@
 <ul>
 <li class="on"><span><a href="./">My Channels</a></span></li>
 </ul>
+<p class="studio-setup"><span class="btn-right"><span class="btn-middle"><a href="#"><img src="images/icon_studio_setup.png" alt="" />Studio Setup</a></span></span></p>
 </div>
 </div>
 
@@ -93,9 +95,12 @@
 </script>
 
 <script id="title-func-tmpl" type="text/x-jquery-tmpl">
-<h2><span id="channel-name" data-meta="${name}" data-width="">${name}</span><span class="title-crumb">&gt; ${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Episode list'])} (<span id="episode-counter">${$item.cntEpisode}</span>){{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}<a href="epcurate-curation.html?cid=${id}" class="curate btns"><span class="btn-right"><span class="btn-middle">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Curate a new episode'])}</span></span></a>{{/if}}</span></h2>
+<h2><span id="channel-name" data-meta="${name}" data-width="">${name}</span><span class="title-crumb">&gt; ${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Episode list'])} (<span id="episode-counter">${$item.cntEpisode}</span>)</span></h2>
 {{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}
-<p class="order btns"><span><a href="javascript:void(0);" rel="${id}" class="reorder">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Reorder episodes'])}</a></span></p>
+<ul>
+<li><p class="curate btns"><span><a href="epcurate-curation.html?cid=${id}" class="curate">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Curate a new episode'])}</a></span></p></li>
+<li class="last"><p class="order btns"><span><a href="javascript:void(0);" rel="${id}" class="reorder">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Reorder episodes'])}</a></span></p></li>
+</ul>
 {{/if}}
 {{if $item.cntEpisode > 0}}
 <div class="caption">
@@ -111,7 +116,7 @@
 
 <script id="episode-favorite-first-tmpl" type="text/x-jquery-tmpl">
 <div id="ep-no">
-<h3>{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', '<img src="images/text_don\'t-have-episode-yet.png" alt="" />'])}}</h3>
+<h3>{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', "You don't have any episodes yet"])}}</h3>
 <p class="desc">{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', 'Click on <span>Favorite</span> button when watching channels to collect more episodes'])}}</p>
 <img src="images/graphic_mockup.png" alt="" />
 </div>
@@ -158,7 +163,7 @@
 
 <script id="episode-first-tmpl" type="text/x-jquery-tmpl">
 <div id="ep-time-list">
-<h3>{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', '<img src="images/text_don\'t-have-episode-yet.png" alt="" />'])}}</h3>
+<h3>{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', "You don't have any episodes yet"])}}</h3>
 <p class="btns"><span><a href="epcurate-curation.html?cid=${id}">${nn._([CMS_CONF.PAGE_ID, 'episode-list', 'Curate new episode to tell a story'])}</a></span></p>
 <div id="selected-episode">
 <p class="episode-pager">
@@ -274,8 +279,8 @@
         <li><a href="/#!about=contact">Contact us</a></li>
         <li><a href="/#!about=partners">Partners</a></li>
         <li><a href="/#!about=curators">Curators</a></li>
-        <li><a href="/#!about=press">Press</a></li>
-        <li><a href="/#!about=contest">Curation Contest</a></li>
+        <li id="footer-press"><a href="/#!about=press">Press</a></li>
+        <li id="footer-contest"><a href="/#!about=contest">Curation Contest</a></li>
       </ul>
     </li>
     <li id="language-change">
@@ -327,6 +332,64 @@
 <div class="overlay-btn">
 <p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
 <p class="btns btn-no"><span><a href="#">No</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="fb-connect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap fb-connect">
+<a href="#" class="btn-close">Close</a>
+<h4><img src="images/text_studio_setup.png" alt="" /></h4>
+<p class="fb-connect">
+<span class="content">Connect to</span>
+<img src="images/icon_fb.png" alt="facebook" class="icon" />
+<a href="#" class="switch-on hide">ON</a>
+<a href="#" class="switch-off">OFF</a>
+</p>
+<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
+</div>
+</div>
+</div>
+
+<div id="fb-connect-failed" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap connect-fail">
+<a href="#" class="btn-close">Close</a>
+<h4><img src="images/text_studio_setup.png" alt="" /></h4>
+<h5>Can not connect to Facebook correctly!</h5>
+<p class="content">Please try again and make sure you agree on all permissions.</p>
+<div class="overlay-btn">
+<p class="btns btn-failed-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="disconnect-notice" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap disconnect-notice">
+<a href="#" class="btn-close">Close</a>
+<h4><img src="images/text_studio_setup.png" alt="" /></h4>
+<h5>Account disconnected!</h5>
+<p class="content">{If you want to enable auto sharing again, please:}</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="confirm-disconnect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap disconnect">
+<a href="#" class="btn-close">Close</a>
+<h4><img src="images/text_studio_setup.png" alt="" /></h4>
+<p class="content">Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?</p>
+<div class="overlay-btn">
+<p class="btns btn-disconnect"><span><a href="#">Disconnect</a></span></p>
+<p class="btns btn-no"><span><a href="#">{No}</a></span></p>
 </div>
 </div>
 </div>

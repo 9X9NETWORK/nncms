@@ -2,7 +2,6 @@
 [TABLE OF CONTENTS]
     +content-main
         =lightbox-create-channel
-        =lightbox-facebook
         =lightbox-upload-video
         =lightbox-play-video
         =overlay-l
@@ -115,104 +114,6 @@
 
 #lightbox-create-channel p.btns:hover span a {
 	background-image: url(../images/popup_btn_middle_press.png) !important;
-}
-
-/**
-*
-* =lightbox-facebook
-*
-**/
-
-#lightbox-facebook {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin: -108px 0 0 -213px;
-    text-align: left;
-    cursor: default;
-}
-
-#lightbox-facebook h3 {
-    height: 26px;
-    padding-left: 10px;
-    background: url(../images/bg_blue_bar.png) repeat-x;
-}
-
-#lightbox-facebook h3 img {
-    vertical-align: middle;
-}
-
-#lightbox-facebook .btn-close {
-    display: block;
-    position: absolute;
-    top: 8px;
-    right: 10px;
-    width: 9px;
-    height: 10px;
-    background: url(../images/btn_fb_close.png) no-repeat 0 0;
-    text-indent: -100000px;
-}
-
-#lightbox-facebook .btn-close:hover {
-    background: url(../images/btn_fb_close_press.png) no-repeat 0 0;
-}
-
-#lightbox-facebook .content {
-    overflow: hidden;
-    min-height: 120px;
-    padding: 15px 50px 0 15px;
-    background-color: #fff;
-    font-size: 13px;
-}
-
-#lightbox-facebook .content p {
-    overflow: hidden;
-    margin-bottom: 15px;
-	color: #555;
-}
-
-#lightbox-facebook .content p.confirm span {
-    float: left;
-    width: 14px;
-    height: 15px;
-    margin-right: 10px;
-    background: url(../images/check_box.png) no-repeat 0 0;
-}
-
-#lightbox-facebook .content p.confirm span a {
-    display: block;
-    width: 14px;
-    height: 15px;
-	color: #555;
-    text-indent: -100000px;
-}
-
-#lightbox-facebook .content p.confirm span.on a,
-#lightbox-facebook .content p.confirm span       a:hover {
-    background: url(../images/icon_check.png) no-repeat center;
-}
-
-#lightbox-facebook .button {
-    position: relative;
-    height: 54px;
-    border-top: 1px solid #ccc;
-    background-color: #efefef;
-}
-
-#lightbox-facebook .button .fb-ok {
-    display: block;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 77px;
-    height: 34px;
-    background: url(../images/btn_fb_ok.png) no-repeat 0 0;
-    text-indent: -100000px;
-}
-
-#lightbox-facebook .button .fb-ok:hover {
-    background-position: 0 -34px;
 }
 
 /**
@@ -534,6 +435,10 @@
 	text-align: left;
 }
 
+.overlay-l .overlay-container .overlay-wrap p.content span {
+    font-weight: bold;
+}
+
 .zh .overlay-l .overlay-container .overlay-wrap p.content {
     text-align: center;
 }
@@ -590,4 +495,141 @@
     padding: 0;
     line-height: 17px;
     text-align: center;
+}
+
+/**
+*
+* =draft-notice, =invalid-notice
+*
+**/
+
+.setup-notice,
+.zh .setup-notice {
+    width: 427px;
+    height: 271px;
+    margin: -136px 0 0 -219px;
+    background: url(../images/bg_popup_box_m_left.png) no-repeat 0 0;
+}
+
+.setup-notice .overlay-container {
+    height: 271px;
+    background: url(../images/bg_popup_box_m_right.png) no-repeat right 0;
+}
+
+.setup-notice .overlay-container .overlay-wrap {
+    height: 252px;
+    padding: 19px 0 0;
+    background: url(../images/bg_popup_box_m_middle.png) repeat-x;
+}
+
+.setup-notice h4 {
+    text-align: center;
+}
+
+.setup-notice h5 {
+    color: #777;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 17px;
+    text-align: center;
+}
+
+.setup-notice p.fb-connect {
+    overflow: hidden;
+    width: 185px;
+    margin: 42px auto 0;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 25px;
+    text-align: center;
+}
+
+.setup-notice p.fb-connect span {
+    float: left;
+    color: #555;
+}
+
+.setup-notice p.fb-connect img {
+    float: left;
+    margin: 6px 12px 0 16px;
+}
+
+.setup-notice p.fb-connect a.switch-on,
+.setup-notice p.fb-connect a.switch-off {
+    float: left;
+    width: 63px;
+    height: 24px;
+    margin: 2px 5px 0 0;
+    background: url(../images/setting_btn_control.png) no-repeat 0 0;
+    color: #555;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 26px;
+    text-decoration: none;
+}
+
+.setup-notice p.fb-connect a.switch-on {
+    color: #fff;
+    text-indent: -29px;
+    text-shadow: 0px 0px 10px #fff;
+}
+
+.setup-notice p.fb-connect a.switch-off {
+    background-position: 0 -24px;
+    text-indent: 29px;
+}
+
+.setup-notice .overlay-container .overlay-wrap p.content {
+    padding-left: 16px;
+    line-height: 17px;
+}
+
+.setup-notice .overlay-container .fb-connect p.content {
+    margin-top: 12px;
+}
+
+.zh .setup-notice .overlay-container .fb-connect p.content {
+    text-align: left;
+}
+
+.setup-notice .overlay-container .connect-fail h5 {
+    margin-top: 49px;
+}
+
+.setup-notice .overlay-container .connect-fail p.content {
+    margin-top: 17px;
+}
+
+.setup-notice .overlay-container .channel-connect-fail h5 {
+    margin-top: 64px;
+}
+
+.setup-notice .overlay-container .channel-connect-fail p.content {
+    margin-top: 17px;
+}
+
+.setup-notice .overlay-container .disconnect p.content {
+    margin-top: 62px;
+}
+
+.zh .setup-notice .overlay-container .disconnect p.content {
+    text-align: left;
+}
+
+.setup-notice .overlay-container .disconnect .overlay-btn .btns {
+    width: 91px;
+}
+
+.setup-notice .overlay-container .disconnect-notice h5 {
+    margin-top: 21px;
+}
+
+.setup-notice .overlay-container .disconnect-notice p.content {
+    margin-top: 17px;
+    padding-left: 31px;
+}
+
+.zh .setup-notice .overlay-container .disconnect-notice p.content {
+    padding-left: 66px;
+    text-align: left;
 }

@@ -94,15 +94,10 @@ $(function () {
         }
         return false;
     });
-    $('.unblock, .btn-close, .btn-no').click(function () {
-        $.unblockUI();
-        return false;
-    });
 
     // save
     $('#epcurateForm').submit(function (e, src) {
-        var isInsertMode = ('' == $('#id').val()),
-            nextstep = 'epcurate-curation.html';
+        var nextstep = 'episode-list.html?id=' + $('#channelId').val();
         // Episode Curation - Publish
         if ($(e.target).hasClass('publish') && chkPublishData(this, src)) {
             if ($('#id').val() > 0) {
@@ -254,7 +249,7 @@ $(function () {
 
     // uniform
     $('#content-wrap').on('click', 'input[name=status]', function () {
-        switchPublishStatus($(this).val());
+        switchPublishStatus($(this).val(), $(this).attr('name'));
     });
     $('#content-wrap').on('click', 'input[name=rerun]', function () {
         switchRerunCheckbox();
@@ -416,7 +411,7 @@ function uploadImage() {
     });
 }
 
-function switchPublishStatus(flag) {
+function switchPublishStatus(flag, name) {
     if ('scheduled' == flag) {
         $('#date-time').removeClass('hide');
         updateHour();
@@ -427,18 +422,23 @@ function switchPublishStatus(flag) {
     }
     if ('draft' == flag) {
         $('#date-time').addClass('hide');
-        $('.checker').children('span').removeClass('checked');
         $('input[name=rerun]').removeAttr('checked');
+        $('input[name=rerun]').parents('label').removeClass('checked');
+        $.uniform.update('input[name=rerun]');
     }
+    $('input[name=' + name + ']').parents('label').removeClass('checked');
+    $('input[name=' + name + ']:checked').parents('label').addClass('checked');
 }
 
 function switchRerunCheckbox() {
     if (!$('#schedule-rerun-label').hasClass('hide')) {
         if ($('input[name=rerun]').is(':checked')) {
             $('input[name=status]').removeAttr('checked');
-            $('input[name=status]').parent('span').removeClass('checked');
-            $('#status_published').parent('span').addClass('checked');
+            $('input[name=status]').parents('label').removeClass('checked');
+            $.uniform.update('input[name=status]');
             $('#status_published').attr('checked', 'checked');
+            $('#status_published').parents('label').addClass('checked');
+            $.uniform.update('#status_published');
             $('#date-time').removeClass('hide');
             updateHour();
         } else {

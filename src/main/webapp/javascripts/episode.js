@@ -57,10 +57,6 @@ $(function () {
         }
         return false;
     });
-    $('.unblock, .btn-close, .btn-no').click(function () {
-        $.unblockUI();
-        return false;
-    });
 
     // episode list sorting
     $('#title-func').on('click', 'p.order a.reorder', function () {
@@ -137,6 +133,10 @@ $(function () {
         setEpisodeWidth();
         autoHeight();
         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+        if ('none' == $('#main-wrap-slider').css('display')) {
+            $('#main-wrap-slider .slider-vertical').slider('destroy');
+            $('#content-main-wrap').css('top', '0');
+        }
     });
 });
 
@@ -146,26 +146,23 @@ function setEpisodeWidth() {
         titleWidth = $('#title-func').width(),
         channelNameWidth = $('#channel-name').width(),
         crumbWidth = $('#title-func .title-crumb').width(),
-        curateBtnWidth = $('#title-func .title-crumb a.curate').width(),
-        titleBtnWidth = $('#title-func p.order').width(),
+        titleBtnsWidth = $('#title-func ul').width(),
         scheduledWidth = $('#ep-list ul li .scheduled-time').width(),
         publishWidth = $('#ep-list ul li .publish-time').width(),
-        viewsWidth = $('#ep-list ul li .views').width(),
-        title = $('#ep-list ul li .episode h3').data('meta');
+        viewsWidth = $('#ep-list ul li .views').width();
     $('#ep-list ul li .wrap, #title-func .caption').width(wrapWidth - 31 - 1);  // 1:border
     $('#ep-list ul li .episode, #title-func .caption  p.episode').width(wrapWidth - 31 - scheduledWidth - publishWidth - viewsWidth - 1);   // 1:border
     $('#ep-list ul li .episode h3').each(function (index) {
         $('a', this).text($(this).data('meta'));
     });
     $('#ep-list ul li .episode h3').addClass('ellipsis').ellipsis();
-    if ($('#channel-name').data('width') + curateBtnWidth > $('#ep-list ul li .episode').width()) {
-        $('#title-func h2').width($('#ep-list ul li .episode').width() - curateBtnWidth);
-        $('#title-func h2').css('padding-right', parseInt(crumbWidth + 5, 10) + 'px');
+    if ($('#ep-list ul li .episode').length > 0 && $('#channel-name').data('width') + crumbWidth + 10 > contentmainWidth - titleBtnsWidth) {  // 10: title-func padding
+        $('#title-func h2').width(contentmainWidth - titleBtnsWidth - 10 - 15);  // 10: title-func padding, 15: channel name and btns space
+        $('#channel-name').width($('#title-func h2').width() - crumbWidth - 6);  // 6: channel name margin
         $('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
-    }
-    if ($('#channel-name').data('width') + curateBtnWidth <= $('#ep-list ul li .episode').width()) {
+    } else {
         $('#title-func h2').width('auto');
-        $('#title-func h2').css('padding-right', parseInt(crumbWidth + 5, 10) + 'px');
-        $('#channel-name').text($('#channel-name').data('meta')).removeClass('ellipsis');
+        $('#channel-name').width('auto');
+        $('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
     }
 }

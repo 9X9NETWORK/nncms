@@ -1,331 +1,339 @@
 {
     "header": {
-        "Home":                                                                                                         "首頁",
-        "Guide":                                                                                                        "頻道表",
-        "Browse":                                                                                                       "探索",
-        "My page":                                                                                                      "我的頁面",
-        "Studio":                                                                                                       "編輯台",
-        "Settings":                                                                                                     "設定",
-        "Log out":                                                                                                      "登出"
+        "Home":                                                                                                                 "首頁",
+        "Guide":                                                                                                                "頻道表",
+        "Browse":                                                                                                               "探索",
+        "My page":                                                                                                              "我的頁面",
+        "Studio":                                                                                                               "編輯台",
+        "Settings":                                                                                                             "設定",
+        "Log out":                                                                                                              "登出"
+    },
+    "studio-nav": {
+        "Studio":                                                                                                               "編輯台",
+        "My Channels":                                                                                                          "我的頻道",
+        "Studio Setup":                                                                                                         "<img src=\"images/icon_studio_setup.png\" alt=\"\" />編輯台設置"
     },
     "footer": {
-        "About Us":                                                                                                     "關於我們",
-        "About us":                                                                                                     "關於我們",
-        "Help":                                                                                                         "使用說明",
-        "Feedback":                                                                                                     "問題回報",
-        "Terms & Policy":                                                                                               "政策條款",
-        "Contact us":                                                                                                   "聯繫我們",
-        "Partners":                                                                                                     "合作夥伴",
-        "Curators":                                                                                                     "創建頻道",
-        "Press":                                                                                                        "活動記錄",
-        "Curation Contest":                                                                                             "頻道策展大賽",
-        "Language":                                                                                                     "語言"
+        "About Us":                                                                                                             "關於我們",
+        "About us":                                                                                                             "關於我們",
+        "Help":                                                                                                                 "使用說明",
+        "Feedback":                                                                                                             "問題回報",
+        "Terms & Policy":                                                                                                       "政策條款",
+        "Contact us":                                                                                                           "聯繫我們",
+        "Partners":                                                                                                             "合作夥伴",
+        "Curators":                                                                                                             "創建頻道",
+        "Press":                                                                                                                "活動記錄",
+        "Curation Contest":                                                                                                     "頻道策展大賽",
+        "Language":                                                                                                             "語言"
     },
     "overlay": {
         "loading": {
-            "Saving...":                                                                                                "儲存中...",
-            "Processing...":                                                                                            "處理中..."
+            "Saving...":                                                                                                        "儲存中...",
+            "Processing...":                                                                                                    "處理中..."
         },
         "system-error": {
-            "Unknown error.":                                                                                           "未知的錯誤。",
-            "You are not authorized to edit this channel.":                                                             "您沒有權限編輯此頻道。",
-            "You are not authorized to edit this episode.":                                                             "您沒有權限編輯此節目。",
-            "You are not authorized to edit episodes in this channel.":                                                 "您沒有權限編輯此頻道的節目。",
-            "Invalid channel ID, please try again.":                                                                    "頻道ID有誤，請重試。",
-            "Invalid episode ID, please try again.":                                                                    "節目ID有誤，請重試。",
-            "Invalid channel ID and episode ID, please try again.":                                                     "頻道或節目ID有誤，請重試。",
-            "The favorites channel can not be edited.":                                                                 "您無法編輯此頻道。",
-            "Title text can't be empty!":                                                                               "字卡內文不可空白。",
-            "There must be at least one video in this episode.":                                                        "請至少加入一部影片。",
-            "Please curate at least one valid video.":                                                                  "請加入至少一個有效的影片。",
-            "You have reached the maximum amount of 50 videos.":                                                        "您加入的影片已達50個上限。"
+            "Unknown error.":                                                                                                   "未知的錯誤。",
+            "You are not authorized to edit this channel.":                                                                     "您沒有權限編輯此頻道。",
+            "You are not authorized to edit this episode.":                                                                     "您沒有權限編輯此節目。",
+            "You are not authorized to edit episodes in this channel.":                                                         "您沒有權限編輯此頻道的節目。",
+            "Invalid channel ID, please try again.":                                                                            "頻道ID有誤，請重試。",
+            "Invalid episode ID, please try again.":                                                                            "節目ID有誤，請重試。",
+            "Invalid channel ID and episode ID, please try again.":                                                             "頻道或節目ID有誤，請重試。",
+            "The favorites channel can not be edited.":                                                                         "您無法編輯此頻道。",
+            "Title text can't be empty!":                                                                                       "字卡內文不可空白。",
+            "There must be at least one video in this episode.":                                                                "請至少加入一部影片。",
+            "Please curate at least one valid video.":                                                                          "請加入至少一個有效的影片。",
+            "You have reached the maximum amount of 50 videos.":                                                                "您加入的影片已達50個上限。"
         },
         "prompt": {
-            "Are you sure you want to delete this channel? All data will be removed permanently.":                      "所有資料將永久刪除，確定刪除此頻道？",
-            "Are you sure you want to delete this episode?":                                                            "確定刪除此節目？",
-            "Are you sure you want to delete this title?":                                                              "確定刪除此字卡？",
-            "Unsaved changes will be lost, are you sure you want to leave?":                                            "未儲存資料將遺失，確定離開？"
+            "Are you sure you want to delete this channel? All data will be removed permanently.":                              "所有資料將永久刪除，確定刪除此頻道？",
+            "Are you sure you want to delete this episode?":                                                                    "確定刪除此節目？",
+            "Are you sure you want to delete this title?":                                                                      "確定刪除此字卡？",
+            "Unsaved changes will be lost, are you sure you want to leave?":                                                    "未儲存資料將遺失，確定離開？"
         },
         "notice": {
-            "New episode has been created as a draft!":                                                                 "新建立節目已被存為草稿！",
-            "Publish this episode at the next step whenever you finish editing.":                                       "結束編輯後，請於下一步發佈此節目。",
-            "This episode has been published.":                                                                         "節目發佈成功！",
-            "This episode has been saved as an unpublished draft.":                                                     "節目已儲存為未發佈的草稿。"
+            "New episode has been created as a draft!":                                                                         "新建立節目已被存為草稿！",
+            "<span>Publish this episode at the next step</span> whenever you finish editing.":                                  "結束編輯後，<span>請於下一步發佈此節目</span>。",
+            "This episode has been published.":                                                                                 "節目發佈成功！",
+            "This episode has been saved as an unpublished draft.":                                                             "節目已儲存為未發佈的草稿。"
         },
         "channel-tutorial": {
-            "<img src=\"images/text_collect.png\" alt=\"\" />":                                                         "<img src=\"images/text_collect_zh.png\" alt=\"\" />",
-            "Studio is the management center for your 9x9.tv list-form channels!":                                      "編輯台是您策展9x9.tv頻道的管理中心！",
-            "Create a<br />new channel":                                                                                "創建<br />新頻道",
-            "Not right now, thanks!":                                                                                   "現在不要，謝謝！"
+            "<img src=\"images/text_collect.png\" alt=\"\" />":                                                                 "<img src=\"images/text_collect_zh.png\" alt=\"\" />",
+            "Studio is the management center for your 9x9.tv list-form channels!":                                              "編輯台是您策展9x9.tv頻道的管理中心！",
+            "Create a<br />new channel":                                                                                        "創建<br />新頻道",
+            "Not right now, thanks!":                                                                                           "現在不要，謝謝！"
+        },
+        "facebook": {
+            "<img src=\"images/text_studio_setup.png\" alt=\"\">":                                                              "<img src=\"images/text_studio_setup_zh.png\" alt=\"\" />",
+            "Connect to":                                                                                                       "連結帳號",
+            "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.":                     "連結帳號後，您可至頻道設定頁面為每個頻道設置是否自動分享至Facebook。",
+            "Can not connect to Facebook correctly!":                                                                           "無法正確連結至Facebook！",
+            "Please try again and make sure you agree on all permissions.":                                                     "請再試一次，並確保您已同意所有授權項目。",
+            "Account disconnected!":                                                                                            "帳號連結已取消！",
+            "{If you want to enable auto sharing again, please:}":                                                              "若您想要重新開啟自動分享功能，請：<br /><br />1. 連結帳號<br />2. 至頻道設定頁面，為每個頻道設定自動分享功能<br />3. 發佈新節目，9x9.tv將自動完成分享<br />",
+            "Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?":     "取消帳號連結將會同時取消所有頻道的自動分享設定，確定取消連結？"
         },
         "button": {
-            "OK":                                                                                                       "OK",
-            "Delete":                                                                                                   "刪除",
-            "No":                                                                                                       "取消",
-            "Leave":                                                                                                    "離開"
+            "OK":                                                                                                               "OK",
+            "Delete":                                                                                                           "刪除",
+            "No":                                                                                                               "取消",
+            "Leave":                                                                                                            "離開",
+            "Disconnect":                                                                                                       "取消連結",
+            "{No}":                                                                                                             "否"
         }
     },
     "upload": {
-        "Upload":                                                                                                       "上傳",
-        "Uploading...":                                                                                                 "上傳中...",
-        "Better results with 720x480 or higher resolution image":                                                       "建議圖片解析度為720x480或以上",
-        "Please upload jpeg, png, or gif files.":                                                                       "請上傳jpeg, png或gif檔"
+        "Upload":                                                                                                               "上傳",
+        "Uploading...":                                                                                                         "上傳中..."
     },
     "lang-map": {
-        "en":                                                                                                           "English",
-        "zh":                                                                                                           "中文",
-        "other":                                                                                                        "其他"
+        "en":                                                                                                                   "English",
+        "zh":                                                                                                                   "中文",
+        "other":                                                                                                                "其他"
     },
     "sphere-map": {
-        "en":                                                                                                           "美國",
-        "zh":                                                                                                           "台灣",
-        "other":                                                                                                        "全世界"
+        "en":                                                                                                                   "美國",
+        "zh":                                                                                                                   "台灣",
+        "other":                                                                                                                "全世界"
     },
     "effect-map": {
-        "none":                                                                                                         "無效果",
-        "fade":                                                                                                         "漸入",
-        "blind":                                                                                                        "翻開",
-        "clip":                                                                                                         "擦去",
-        "drop":                                                                                                         "投擲"
+        "none":                                                                                                                 "無效果",
+        "fade":                                                                                                                 "漸入",
+        "blind":                                                                                                                "翻開",
+        "clip":                                                                                                                 "擦去",
+        "drop":                                                                                                                 "投擲"
     },
     "index": {
         "html-title": {
-            "9x9.tv - My Channels":                                                                                     "9x9.tv - 我的頻道"
-        },
-        "studio-nav": {
-            "Studio":                                                                                                   "編輯台",
-            "My Channels":                                                                                              "我的頻道"
+            "9x9.tv - My Channels":                                                                                             "9x9.tv - 我的頻道"
         },
         "func-nav": {
-            "Create a new channel":                                                                                     "創建頻道"
+            "Create a new channel":                                                                                             "創建頻道"
         },
         "title-func": {
-            "My Channels":                                                                                              "我的頻道",
-            "Reorder channels":                                                                                         "排序頻道",
-            "Save order":                                                                                               "儲存排序"
+            "My Channels":                                                                                                      "我的頻道",
+            "Reorder channels":                                                                                                 "排序頻道",
+            "Save order":                                                                                                       "儲存排序"
         },
         "channel-list": {
-            "Episodes":                                                                                                 "節目",
-            "Followers":                                                                                                "粉絲",
-            "Views":                                                                                                    "觀看次數",
-            "Update:":                                                                                                  "更新:",
-            "Curate a new episode":                                                                                     "策展新節目",
-            "Episode list":                                                                                             "節目列表",
-            "Channel settings":                                                                                         "頻道設定",
-            "Delete this channel":                                                                                      "刪除頻道",
-            "No Episodes":                                                                                              "無節目",
-            "'s Favorite":                                                                                              "的最愛"
+            "Episodes":                                                                                                         "節目",
+            "Followers":                                                                                                        "粉絲",
+            "Views":                                                                                                            "觀看次數",
+            "Update:":                                                                                                          "更新:",
+            "Curate a new episode":                                                                                             "策展新節目",
+            "Episode list":                                                                                                     "節目列表",
+            "Channel settings":                                                                                                 "頻道設定",
+            "Delete this channel":                                                                                              "刪除頻道",
+            "No Episodes":                                                                                                      "無節目",
+            "'s Favorite":                                                                                                      "的最愛"
         }
     },
     "channel": {
         "html-title": {
-            "9x9.tv - Create a new channel":                                                                            "9x9.tv - 創建頻道",
-            "9x9.tv - Channel settings":                                                                                "9x9.tv - 頻道設定"
-        },
-        "studio-nav": {
-            "Studio":                                                                                                   "編輯台",
-            "My Channels":                                                                                              "我的頻道"
+            "9x9.tv - Create a new channel":                                                                                    "9x9.tv - 創建頻道",
+            "9x9.tv - Channel settings":                                                                                        "9x9.tv - 頻道設定"
         },
         "func-nav": {
-            "Episode list":                                                                                             "節目列表",
-            "Settings":                                                                                                 "頻道設定"
+            "Episode list":                                                                                                     "節目列表",
+            "Settings":                                                                                                         "頻道設定"
         },
         "title-func": {
-            "My Channels &gt; Create a new channel":                                                                    "我的頻道 &gt; 創建頻道",
-            "Settings":                                                                                                 "頻道設定",
-            "Required field":                                                                                           "必填項目"
+            "My Channels &gt; Create a new channel":                                                                            "我的頻道 &gt; 創建頻道",
+            "Settings":                                                                                                         "頻道設定",
+            "Required field":                                                                                                   "必填項目"
         },
         "setting-form": {
-            "Title":                                                                                                    "名稱",
-            "Best within 20 characters":                                                                                "建議20字以內",
-            "Thumbnail":                                                                                                "圖示",
-            "Upload":                                                                                                   "上傳",
-            "Uploading...":                                                                                             "上傳中...",
-            "Better results with 720x480 or higher resolution image":                                                   "建議圖片解析度為720x480或以上",
-            "Please upload jpeg, png, or gif files.":                                                                   "請上傳jpeg, png或gif檔",
-            "Description":                                                                                              "介紹",
-            "Best within 70 characters":                                                                                "建議70字以內",
-            "Channel language":                                                                                         "頻道語言",
-            "Select a language":                                                                                        "選擇語言",
-            "English":                                                                                                  "English",
-            "Chinese":                                                                                                  "中文",
-            "Others":                                                                                                   "其他",
-            "Audience region":                                                                                          "適合收看區域",
-            "Select a region":                                                                                          "選擇區域",
-            "US":                                                                                                       "美國",
-            "Taiwan":                                                                                                   "台灣",
-            "Worldwide":                                                                                                "全世界",
-            "Category":                                                                                                 "類別",
-            "Select a category":                                                                                        "選擇類別",
-            "Tag":                                                                                                      "標籤",
-            "Separate with commas":                                                                                     "用逗號分隔",
-            "Suggested Tags:":                                                                                          "熱門標籤:",
-            "Please fill in all required fields.":                                                                      "請輸入必填項目",
-            "Cancel":                                                                                                   "取消",
-            "Create":                                                                                                   "完成",
-            "Save":                                                                                                     "儲存"
+            "Title":                                                                                                            "名稱",
+            "Best within 20 characters":                                                                                        "建議20字以內",
+            "Thumbnail":                                                                                                        "圖示",
+            "Upload":                                                                                                           "上傳",
+            "Uploading...":                                                                                                     "上傳中...",
+            "Better results with 300x300 or higher resolution image":                                                           "建議圖片解析度為300x300或以上",
+            "Please upload jpeg, png, or gif files.":                                                                           "請上傳jpeg, png或gif檔",
+            "Description":                                                                                                      "介紹",
+            "Best within 70 characters":                                                                                        "建議70字以內",
+            "Channel language":                                                                                                 "頻道語言",
+            "Select a language":                                                                                                "選擇語言",
+            "English":                                                                                                          "English",
+            "Chinese":                                                                                                          "中文",
+            "Others":                                                                                                           "其他",
+            "Audience region":                                                                                                  "適合收看區域",
+            "Select a region":                                                                                                  "選擇區域",
+            "US":                                                                                                               "美國",
+            "Taiwan":                                                                                                           "台灣",
+            "Worldwide":                                                                                                        "全世界",
+            "Category":                                                                                                         "類別",
+            "Select a category":                                                                                                "選擇類別",
+            "Tag":                                                                                                              "標籤",
+            "Separate with commas":                                                                                             "用逗號分隔",
+            "Suggested Tags:":                                                                                                  "熱門標籤:",
+            "Auto share new published episode":                                                                                 "自動分享新發佈<br />的節目",
+            "Timeline":                                                                                                         "動態時報",
+            "Page":                                                                                                             "粉絲專頁",
+            "Select facebook pages":                                                                                            "選擇facebook粉絲專頁",
+            "If fail to auto share to Facebook, please go to Studio Setup to re-connect to Facebook and try again.":            "若無法自動分享至Facebook，請至編輯台設置再度連結Facebook帳號，並再試一次。",
+            "Please fill in all required fields.":                                                                              "請輸入必填項目",
+            "Cancel":                                                                                                           "取消",
+            "Create":                                                                                                           "完成",
+            "Save":                                                                                                             "儲存"
         }
     },
     "episode-list": {
         "html-title": {
-            "9x9.tv - Episode list":                                                                                    "9x9.tv - 節目列表"
-        },
-        "studio-nav": {
-            "Studio":                                                                                                   "編輯台",
-            "My Channels":                                                                                              "我的頻道"
+            "9x9.tv - Episode list":                                                                                            "9x9.tv - 節目列表"
         },
         "func-nav": {
-            "Episode list":                                                                                             "節目列表",
-            "Settings":                                                                                                 "頻道設定"
+            "Episode list":                                                                                                     "節目列表",
+            "Settings":                                                                                                         "頻道設定"
         },
         "title-func": {
-            "Episode list":                                                                                             "節目列表",
-            "'s Favorite":                                                                                              "的最愛",
-            "Curate a new episode":                                                                                     "策展新節目",
-            "Reorder episodes":                                                                                        "排序節目",
-            "Save order":                                                                                               "儲存排序",
-            "Episode":                                                                                                  "節目",
-            "Scheduled time":                                                                                           "排程時間",
-            "Publish time":                                                                                             "發佈時間",
-            "Views":                                                                                                    "觀看次數"
+            "Episode list":                                                                                                     "節目列表",
+            "'s Favorite":                                                                                                      "的最愛",
+            "Curate a new episode":                                                                                             "策展新節目",
+            "Reorder episodes":                                                                                                "排序節目",
+            "Save order":                                                                                                       "儲存排序",
+            "Episode":                                                                                                          "節目",
+            "Scheduled time":                                                                                                   "排程時間",
+            "Publish time":                                                                                                     "發佈時間",
+            "Views":                                                                                                            "觀看次數"
         },
         "episode-list": {
-            "<img src=\"images/text_don't-have-episode-yet.png\" alt=\"\" />":                                          "您尚無任何節目",
-            "Click on <span>Favorite</span> button when watching channels to collect more episodes":                    "觀看頻道時，點 <span>Favorite</span> 將節目收藏到我的最愛頻道。",
-            "Edit":                                                                                                     "編輯",
-            "Delete":                                                                                                   "刪除",
-            "Draft":                                                                                                    "草稿",
-            "Curate new episode to tell a story":                                                                       "策展新節目",
-            "<strong>Curate online videos</strong> into each single episode.":                                          "在一集節目中<strong>輕鬆策展多個影片</strong>。",
-            "Tell your story by <strong>arranging the video sequence.</strong>":                                        "<strong>編排影片播放順序</strong>，說一個獨一無二的故事。",
-            "<strong>Trim the videos and add titles</strong> to make your episodes more intriguing.":                   "<strong>剪輯影片與加入字卡</strong>，讓您的節目更引人入勝。",
-            "<strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically.":                "<strong>設定節目自動排程發佈</strong>，讓粉絲定時享受最新節目。"
+            "You don't have any episodes yet":                                                                                  "您尚無任何節目",
+            "Click on <span>Favorite</span> button when watching channels to collect more episodes":                            "觀看頻道時，點 <span>Favorite</span> 將節目收藏到我的最愛頻道。",
+            "Edit":                                                                                                             "編輯",
+            "Delete":                                                                                                           "刪除",
+            "Draft":                                                                                                            "草稿",
+            "Curate new episode to tell a story":                                                                               "策展新節目",
+            "<strong>Curate online videos</strong> into each single episode.":                                                  "在一集節目中<strong>輕鬆策展多個影片</strong>。",
+            "Tell your story by <strong>arranging the video sequence.</strong>":                                                "<strong>編排影片播放順序</strong>，說一個獨一無二的故事。",
+            "<strong>Trim the videos and add titles</strong> to make your episodes more intriguing.":                           "<strong>剪輯影片與加入字卡</strong>，讓您的節目更引人入勝。",
+            "<strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically.":                        "<strong>設定節目自動排程發佈</strong>，讓粉絲定時享受最新節目。"
         }
     },
     "epcurate-publish": {
         "html-title": {
-            "9x9.tv - Episode Curation - Publish":                                                                      "9x9.tv - 節目策展 - 發佈設定"
+            "9x9.tv - Episode Curation - Publish":                                                                              "9x9.tv - 節目策展 - 發佈設定"
         },
         "epcurate-nav": {
-            "Leave":                                                                                                    "離開",
-            "Episode Curation":                                                                                         "節目策展",
-            "Curation":                                                                                                 "策展編輯",
-            "Publish":                                                                                                  "發佈設定"
+            "Leave":                                                                                                            "離開",
+            "Episode Curation":                                                                                                 "節目策展",
+            "Curation":                                                                                                         "策展編輯",
+            "Publish":                                                                                                          "發佈設定"
         },
         "epcurate-form": {
-            "Required field":                                                                                           "必填項目",
-            "Episode title":                                                                                            "節目名稱",
-            "Episode description":                                                                                      "節目介紹",
-            "Episode thumbnail":                                                                                        "節目縮圖",
-            "Upload":                                                                                                   "上傳",
-            "Uploading...":                                                                                             "上傳中...",
-            "Better results with 720x480 or higher resolution image":                                                   "建議圖片解析度為720x480或以上",
-            "Please upload jpeg, png, or gif files.":                                                                   "請上傳jpeg, png或gif檔",
-            "Publish status":                                                                                           "發佈狀態",
-            "Draft":                                                                                                    "草稿",
-            "Publish Now":                                                                                              "立即發佈",
-            "Published":                                                                                                "發佈",
-            "Scheduled to publish":                                                                                     "排程發佈",
-            "This episode will be published at<br />the scheduled time.":                                               "此節目將於排程時間<br />自動發佈",
-            "Scheduled to rerun":                                                                                       "排程重播",
-            "This episode will be published again as the latest episode at the scheduled time.":                        "此節目將於排程時間自動<br />再度發佈為最新節目",
-            "Hour":                                                                                                     "時間",
-            "< Back to Curation":                                                                                       "< 回策展編輯",
-            "Leave":                                                                                                    "離開",
-            "Save":                                                                                                     "儲存",
-            "Please fill in all required fields.":                                                                      "請輸入必填項目"
+            "Required field":                                                                                                   "必填項目",
+            "Episode title":                                                                                                    "節目名稱",
+            "Episode description":                                                                                              "節目介紹",
+            "Episode thumbnail":                                                                                                "節目縮圖",
+            "Upload":                                                                                                           "上傳",
+            "Uploading...":                                                                                                     "上傳中...",
+            "Better results with 720x405 or higher resolution image":                                                           "建議圖片解析度為720x405或以上",
+            "Please upload jpeg, png, or gif files.":                                                                           "請上傳jpeg, png或gif檔",
+            "Publish status":                                                                                                   "發佈狀態",
+            "Draft":                                                                                                            "草稿",
+            "Publish Now":                                                                                                      "立即發佈",
+            "Published":                                                                                                        "發佈",
+            "Scheduled to publish":                                                                                             "排程發佈",
+            "This episode will be published at<br />the scheduled time.":                                                       "此節目將於排程時間<br />自動發佈",
+            "Scheduled to rerun":                                                                                               "排程重播",
+            "This episode will be published again as the latest episode at the scheduled time.":                                "此節目將於排程時間自動<br />再度發佈為最新節目",
+            "Hour":                                                                                                             "時間",
+            "< Back to Curation":                                                                                               "< 回策展編輯",
+            "Leave":                                                                                                            "離開",
+            "Save":                                                                                                             "儲存",
+            "Please fill in all required fields.":                                                                              "請輸入必填項目"
         }
     },
     "epcurate-curation": {
         "html-title": {
-            "9x9.tv - Episode Curation - Curation":                                                                     "9x9.tv - 節目策展 - 策展編輯"
+            "9x9.tv - Episode Curation - Curation":                                                                             "9x9.tv - 節目策展 - 策展編輯"
         },
         "epcurate-nav": {
-            "Leave":                                                                                                    "離開",
-            "Episode Curation":                                                                                         "節目策展",
-            "Curation":                                                                                                 "策展編輯",
-            "Publish":                                                                                                  "發佈設定"
+            "Leave":                                                                                                            "離開",
+            "Episode Curation":                                                                                                 "節目策展",
+            "Curation":                                                                                                         "策展編輯",
+            "Publish":                                                                                                          "發佈設定"
         },
         "epcurate-form": {
-            "Add Video":                                                                                                "匯入影片",
-            "Edit":                                                                                                     "編輯",
-            "Add video by URL":                                                                                         "匯入影片連結",
-            "Add":                                                                                                      "匯入",
-            "+ Add videos here":                                                                                        "+ 在此加入<br />影片",
-            "Leave":                                                                                                    "離開",
-            "Save":                                                                                                     "儲存",
-            "Next to Publish >":                                                                                        "前往發佈設定 >"
+            "Add Video":                                                                                                        "匯入影片",
+            "Edit":                                                                                                             "編輯",
+            "Add video by URL":                                                                                                 "匯入影片連結",
+            "Add":                                                                                                              "匯入",
+            "+ Add videos here":                                                                                                "+ 在此加入<br />影片",
+            "Leave":                                                                                                            "離開",
+            "Save":                                                                                                             "儲存",
+            "Next to Publish >":                                                                                                "前往發佈設定 >"
         },
         "add-video": {
-            "Paste YouTube video URLs to add (separate with different lines)":                                          "輸入YouTube影片連結 (用換行區隔不同連結)",
-            "Paste YouTube video URLs to add.":                                                                         "請先輸入YouTube影片連結",
-            "You have reached the maximum amount of 50 videos.":                                                        "您加入的影片已達50個上限。",
-            "Invalid URL, please try again.":                                                                           "連結有誤，請重新嘗試。",
-            "Invalid URL, please try again!":                                                                           "連結有誤，請重新嘗試！",
-            "Fail to add this video, please try another one.<br />[This video is not playable outside Youtube]":        "無法加入此影片，請嘗試其他影片。<br />[此影片無法在YouTube以外的網站播放]",
-            "Fail to add this video, please try another one.<br />[This video is not playable on mobile device]":       "無法加入此影片，請嘗試其他影片。<br />[此影片無法於行動裝置播放]"
+            "Paste YouTube video URLs to add (separate with different lines)":                                                  "輸入YouTube影片連結 (用換行區隔不同連結)",
+            "Paste YouTube video URLs to add.":                                                                                 "請先輸入YouTube影片連結",
+            "You have reached the maximum amount of 50 videos.":                                                                "您加入的影片已達50個上限。",
+            "Invalid URL, please try again.":                                                                                   "連結有誤，請重新嘗試。",
+            "Invalid URL, please try again!":                                                                                   "連結有誤，請重新嘗試！",
+            "Fail to add this video, please try another one.<br />[This video is not playable outside Youtube]":                "無法加入此影片，請嘗試其他影片。<br />[此影片無法在YouTube以外的網站播放]",
+            "Fail to add this video, please try another one.<br />[This video is not playable on mobile device]":               "無法加入此影片，請嘗試其他影片。<br />[此影片無法於行動裝置播放]"
         },
         "video-info": {
-            "Original":                                                                                                 "原長度",
-            "From":                                                                                                     "From",
-            "By":                                                                                                       "By",
-            "on":                                                                                                       "on",
-            "Not playable outside Youtube":                                                                             "無法於YouTube以外的網站播放",
-            "Not playable in some regions":                                                                             "無法於特定區域播放",
-            "Not playable on mobile device":                                                                            "無法於行動裝置播放"
+            "Original":                                                                                                         "原長度",
+            "From":                                                                                                             "From",
+            "By":                                                                                                               "By",
+            "on":                                                                                                               "on",
+            "Not playable outside Youtube":                                                                                     "無法於YouTube以外的網站播放",
+            "Not playable in some regions":                                                                                     "無法於特定區域播放",
+            "Not playable on mobile device":                                                                                    "無法於行動裝置播放"
         },
         "trim-time": {
-            "Start from:":                                                                                              "開始時間:",
-            "To:":                                                                                                      "結束時間:",
-            "Duration:":                                                                                                "剪輯長度:",
-            "Invalid time, please try again.":                                                                          "時間設定有誤，請重試。",
-            "Edit":                                                                                                     "編輯",
-            "Cancel":                                                                                                   "取消",
-            "Done":                                                                                                     "完成"
+            "Start from:":                                                                                                      "開始時間:",
+            "To:":                                                                                                              "結束時間:",
+            "Duration:":                                                                                                        "剪輯長度:",
+            "Invalid time, please try again.":                                                                                  "時間設定有誤，請重試。",
+            "Edit":                                                                                                             "編輯",
+            "Cancel":                                                                                                           "取消",
+            "Done":                                                                                                             "完成"
         },
         "title-card": {
-            "Text":                                                                                                     "字卡內文",
-            "Font":                                                                                                     "文字屬性",
-            "Bold":                                                                                                     "粗體",
-            "Italics":                                                                                                  "斜體",
-            "Font color":                                                                                               "文字顏色",
-            "Font size +":                                                                                              "放大字型",
-            "Font size -":                                                                                              "縮小字型",
-            "Align left":                                                                                               "文字置左",
-            "Align center":                                                                                             "文字置中",
-            "Align right":                                                                                              "文字置右",
-            "Effect":                                                                                                   "效果",
-            "None":                                                                                                     "無效果",
-            "Fade":                                                                                                     "漸入",
-            "Blind":                                                                                                    "翻開",
-            "Clip":                                                                                                     "擦去",
-            "Drop":                                                                                                     "投擲",
-            "Background":                                                                                               "字卡背景",
-            "Color":                                                                                                    "顏色",
-            "Image":                                                                                                    "圖片",
-            "Upload":                                                                                                   "上傳",
-            "Uploading...":                                                                                             "上傳中...",
-            "Better results with 720x480 image.":                                                                       "建議圖片解析度為720x480或以上",
-            "Please upload jpeg, png, or gif files.":                                                                   "請上傳jpeg, png或gif檔",
-            "Duration":                                                                                                 "字卡長度",
-            "Invalid duration, please try again.":                                                                      "長度設定有誤，請重試。",
-            "Cancel":                                                                                                   "取消",
-            "Done":                                                                                                     "完成",
-            "Edit Title":                                                                                               "編輯字卡"
+            "Text":                                                                                                             "字卡內文",
+            "Font":                                                                                                             "文字屬性",
+            "Bold":                                                                                                             "粗體",
+            "Italics":                                                                                                          "斜體",
+            "Font color":                                                                                                       "文字顏色",
+            "Font size +":                                                                                                      "放大字型",
+            "Font size -":                                                                                                      "縮小字型",
+            "Align left":                                                                                                       "文字置左",
+            "Align center":                                                                                                     "文字置中",
+            "Align right":                                                                                                      "文字置右",
+            "Effect":                                                                                                           "效果",
+            "None":                                                                                                             "無效果",
+            "Fade":                                                                                                             "漸入",
+            "Blind":                                                                                                            "翻開",
+            "Clip":                                                                                                             "擦去",
+            "Drop":                                                                                                             "投擲",
+            "Background":                                                                                                       "字卡背景",
+            "Color":                                                                                                            "顏色",
+            "Image":                                                                                                            "圖片",
+            "Upload":                                                                                                           "上傳",
+            "Uploading...":                                                                                                     "上傳中...",
+            "Better results with 720x405 image.":                                                                               "建議圖片解析度為720x405或以上",
+            "Please upload jpeg, png, or gif files.":                                                                           "請上傳jpeg, png或gif檔",
+            "Duration":                                                                                                         "字卡長度",
+            "Invalid duration, please try again.":                                                                              "長度設定有誤，請重試。",
+            "Cancel":                                                                                                           "取消",
+            "Done":                                                                                                             "完成",
+            "Edit Title":                                                                                                       "編輯字卡"
         },
         "episode-storyboard": {
-            "Episode storyboard":                                                                                       "節目腳本",
-            "videos left":                                                                                              "個影片可加入",
-            "Duration":                                                                                                 "節目總長度",
-            "Channel:":                                                                                                 "頻道:",
-            "Episode:":                                                                                                 "節目:",
-            "Not playable outside YouTube":                                                                             "無法於YouTube以外的網站播放",
-            "Not playable in some regions & on mobile device":                                                          "無法於特定區域及行動裝置播放",
-            "Not playable in some regions":                                                                             "無法於特定區域播放",
-            "Not playable on mobile device":                                                                            "無法於行動裝置播放",
-            "Edit Title":                                                                                               "編輯字卡",
-            "Add Title":                                                                                                "新增字卡",
-            "Invalid Video":                                                                                            "影片已失效"
+            "Episode storyboard":                                                                                               "節目腳本",
+            "videos left":                                                                                                      "個影片可加入",
+            "Duration":                                                                                                         "節目總長度",
+            "Channel:":                                                                                                         "頻道:",
+            "Episode:":                                                                                                         "節目:",
+            "Not playable outside YouTube":                                                                                     "無法於YouTube以外的網站播放",
+            "Not playable in some regions & on mobile device":                                                                  "無法於特定區域及行動裝置播放",
+            "Not playable in some regions":                                                                                     "無法於特定區域播放",
+            "Not playable on mobile device":                                                                                    "無法於行動裝置播放",
+            "Edit Title":                                                                                                       "編輯字卡",
+            "Add Title":                                                                                                        "新增字卡",
+            "Invalid Video":                                                                                                    "影片已失效"
         }
     }
 }

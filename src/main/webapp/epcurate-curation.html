@@ -5,34 +5,34 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=548" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=548" />
-<link rel="stylesheet" href="stylesheets/uniform.css?v=548" />
-<link rel="stylesheet" href="stylesheets/playback.css?v=548" />
-<link rel="stylesheet" href="stylesheets/epcurate.css?v=548" />
-<link rel="stylesheet" href="stylesheets/ep-curation.css?v=548" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<link rel="stylesheet" href="stylesheets/style.css?v=647" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=647" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=647" />
+<link rel="stylesheet" href="stylesheets/playback.css?v=647" />
+<link rel="stylesheet" href="stylesheets/epcurate.css?v=647" />
+<link rel="stylesheet" href="stylesheets/ep-curation.css?v=647" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=548"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=548"></script>
-<script src="javascripts/jquery.ellipsis.js?v=548"></script>
-<script src="javascripts/jquery.blockUI.js?v=548"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=548"></script>
-<script src="javascripts/jquery.uniform.min.js?v=548"></script>
-<script src="javascripts/jquery.swfobject.min.js?v=548"></script>
-<script src="javascripts/jquery.titlecard.js?v=548"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=548"></script>
-<script src="javascripts/jquery.cookie.js?v=548"></script>
-<script src="javascripts/jquery.countdown.min.js?v=548"></script>
-<script src="javascripts/jquery.autotab.min.js?v=548"></script>
-<script src="javascripts/json2.js?v=548"></script>
-<script src="javascripts/purl.js?v=548"></script>
-<script src="javascripts/swfupload/swfupload.js?v=548"></script>
-<script src="javascripts/horizontal-slider.js?v=548"></script>
-<script src="javascripts/config.js?v=548"></script>
-<script src="javascripts/controller.js?v=548"></script>
-<script src="javascripts/basic.js?v=548"></script>
-<script src="javascripts/curation.js?v=548"></script>
+<script src="javascripts/nn-sdk.js?v=647"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=647"></script>
+<script src="javascripts/jquery.ellipsis.js?v=647"></script>
+<script src="javascripts/jquery.blockUI.js?v=647"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=647"></script>
+<script src="javascripts/jquery.uniform.min.js?v=647"></script>
+<script src="javascripts/jquery.swfobject.min.js?v=647"></script>
+<script src="javascripts/jquery.titlecard.js?v=647"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=647"></script>
+<script src="javascripts/jquery.cookie.js?v=647"></script>
+<script src="javascripts/jquery.countdown.min.js?v=647"></script>
+<script src="javascripts/jquery.autotab.min.js?v=647"></script>
+<script src="javascripts/json2.js?v=647"></script>
+<script src="javascripts/purl.js?v=647"></script>
+<script src="javascripts/swfupload/swfupload.js?v=647"></script>
+<script src="javascripts/horizontal-slider.js?v=647"></script>
+<script src="javascripts/config.js?v=647"></script>
+<script src="javascripts/controller.js?v=647"></script>
+<script src="javascripts/basic.js?v=647"></script>
+<script src="javascripts/curation.js?v=647"></script>
 <title>9x9.tv - Episode Curation - Curation</title>
 </head>
 <body>
@@ -124,7 +124,7 @@
 
 <div id="storyboard">
 <div class="storyboard-info">
-<!-- template = #storyboard-info-tmpl --><p class="episode-storyboard">Episode storyboard (<em id="storyboard-length">50</em> videos left)<span>Duration <em id="storyboard-duration">00:00:00</em></span></p>
+<!-- template = #storyboard-info-tmpl -->
 </div>
 <div id="storyboard-wrap" class="storyboard-list">
 <div id="storyboard-list">
@@ -363,7 +363,7 @@
 <img src="images/black_box_loading.gif" alt="" class="loading" />
 </p>
 <p id="uploadThumbnail">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Upload'])}</p>
-<p class="notice">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Better results with 720x480 image.'])}</p>
+<p class="notice">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Better results with 720x405 image.'])}</p>
 <p class="notice highlight hide">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Please upload jpeg, png, or gif file.'])}</p>
 {{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
 <input type="hidden" name="backgroundImage" id="backgroundImage" value="${bgImage}" />
@@ -497,8 +497,8 @@ ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id=
         <li><a href="/#!about=contact">Contact us</a></li>
         <li><a href="/#!about=partners">Partners</a></li>
         <li><a href="/#!about=curators">Curators</a></li>
-        <li><a href="/#!about=press">Press</a></li>
-        <li><a href="/#!about=contest">Curation Contest</a></li>
+        <li id="footer-press"><a href="/#!about=press">Press</a></li>
+        <li id="footer-contest"><a href="/#!about=contest">Curation Contest</a></li>
       </ul>
     </li>
     <li id="language-change">
@@ -586,7 +586,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id=
 <div class="overlay-wrap">
 <a href="#" class="btn-close">Close</a>
 <h4>New episode has been created as a draft!</h4>
-<p class="content">Publish this episode at the next step whenever you finish editing.</p>
+<p class="content"><span>Publish this episode at the next step</span> whenever you finish editing.</p>
 <div class="overlay-btn">
 <p class="btns btn-ok"><span><a href="#">OK</a></span></p>
 </div>

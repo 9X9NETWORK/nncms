@@ -93,7 +93,7 @@ function showDraftNoticeOverlay(e) {
     $('body').addClass('first-save');
     $('body').data('origin', e);
     $('#draft-notice h4').text(nn._(['overlay', 'notice', 'New episode has been created as a draft!']));
-    $('#draft-notice .content').text(nn._(['overlay', 'notice', 'Publish this episode at the next step whenever you finish editing.']));
+    $('#draft-notice .content').html(nn._(['overlay', 'notice', '<span>Publish this episode at the next step</span> whenever you finish editing.']));
     $.blockUI.defaults.overlayCSS.opacity = '0.9';
     $.blockUI({
         message: $('#draft-notice')
@@ -274,11 +274,143 @@ function htmlEscape(string, skipAmp) {
     return data;
 }
 
+function checkCriticalPerm(callback, authResponse) {
+    var parameter = {
+        access_token: authResponse.accessToken
+    };
+    // ON PURPOSE to wait facebook sync
+    setTimeout(function () {
+        // FB.api('/me/permissions', { anticache: (new Date()).getTime() }, function (response) {
+        nn.api('GET', 'https://graph.facebook.com/me/permissions', parameter, function (response) {
+            var permList = null,
+                hasCriticalPerm = false;
+            if (response.data && response.data[0]) {
+                permList = response.data[0];
+                if (permList['manage_pages'] && permList['publish_stream']) {
+                    hasCriticalPerm = true;
+                }
+            }
+            // callback is handleRevokedPerm
+            if ('function' === typeof callback) {
+                callback(hasCriticalPerm, authResponse);
+            }
+        }, 'jsonp');
+    }, 1000);
+}
+
 $(function () {
     autoWidth();
     autoHeight();
 
-    // Header link
+    // checkbox checked highlight (but radio customize by page)
+    $(document).on('click', 'input[type=checkbox]', function () {
+        $(this).parents('label').toggleClass('checked');
+    });
+
+    // studio setup (callback of checkCriticalPerm)
+    function handleRevokedPerm(hasCriticalPerm, authResponse) {
+        if (hasCriticalPerm) {
+            $.unblockUI();
+            showProcessingOverlay();
+            var parameter = {
+                userId: authResponse.userID,
+                accessToken: authResponse.accessToken
+            };
+            nn.api('POST', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {userId: CMS_CONF.USER_DATA.id}), parameter, function (result) {
+                if ('OK' === result) {
+                    nn.api('GET', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {userId: CMS_CONF.USER_DATA.id}), null, function (facebook) {
+                        $('#overlay-s').fadeOut('slow', function () {
+                            // ready for disconnect facebook
+                            CMS_CONF.FB_PAGES_MAP = buildFacebookPagesMap(facebook);
+                            CMS_CONF.USER_SNS_AUTH = facebook;
+                            $('.setup-notice p.fb-connect a.switch-on').removeClass('hide');
+                            $('.setup-notice p.fb-connect a.switch-off').addClass('hide');
+                            // show studio setup (connect switch) again
+                            $.blockUI({
+                                message: $('#fb-connect')
+                            });
+                            // sync channel setting
+                            if ($('#settingForm').length > 0) {
+                                var isAutoCheckedTimeline = true;
+                                renderAutoShareUI(facebook, isAutoCheckedTimeline);
+                            }
+                        });
+                    });
+                }
+            });
+        } else {
+            // connected but has not critical permission!!
+            $.blockUI({
+                message: $('#fb-connect-failed')
+            });
+        }
+    }
+    $('#studio-nav .studio-setup').click(function () {
+        // studio setup
+        // ON PURPOSE to skip unsave check
+        $.blockUI({
+            message: $('#fb-connect')
+        });
+        return false;
+    });
+    $('#fb-connect .switch-off').click(function () {
+        // connect facebook
+        FB.login(function (response) {
+            if (response.authResponse) {
+                // connected but not sure have critical permission
+                checkCriticalPerm(handleRevokedPerm, response.authResponse);
+            } else {
+                // cancel login nothing happens (maybe unknown or not_authorized)
+                nn.log(response, 'debug');
+            }
+        }, {scope: CMS_CONF.FB_REQ_PERMS.join(',')});
+
+        return false;
+    });
+    $('#fb-connect-failed .btn-failed-ok').click(function () {
+        // continue to show studio setup
+        $.blockUI({
+            message: $('#fb-connect')
+        });
+        return false;
+    });
+    $('#fb-connect .switch-on').click(function () {
+        // disconnect facebook
+        $.blockUI({
+            message: $('#confirm-disconnect')
+        });
+        return false;
+    });
+    $('#confirm-disconnect .btn-disconnect').click(function () {
+        $.unblockUI();
+        showProcessingOverlay();
+        nn.api('DELETE', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {userId: CMS_CONF.USER_DATA.id}), null, function (facebook) {
+            $('#overlay-s').fadeOut('slow', function () {
+                if ('OK' === facebook) {
+                    CMS_CONF.FB_PAGES_MAP = null;
+                    CMS_CONF.USER_SNS_AUTH = null;
+                    $('.setup-notice p.fb-connect a.switch-on').addClass('hide');
+                    $('.setup-notice p.fb-connect a.switch-off').removeClass('hide');
+                    $.blockUI({
+                        message: $('#disconnect-notice')
+                    });
+                    // sync channel setting
+                    if ($('#settingForm').length > 0) {
+                        renderConnectFacebookUI();
+                    }
+                }
+            });
+        });
+        return false;
+    });
+
+    // common unblock
+    $('.unblock, .btn-close, .btn-no, .setup-notice .btn-ok').click(function () {
+        $.unblockUI();
+        return false;
+    });
+
+    // header link
     $('#logo').click(function () {
         if (!$('body').hasClass('has-change')) {
             location.href = '/';
@@ -294,9 +426,9 @@ $(function () {
         }
     });
 
-    // Change language
+    // change language
     $('#language-change li a').click(function () {
-        if (!$('body').hasClass('has-change')) {
+        if (null !== CMS_CONF.USER_DATA && !$('body').hasClass('has-change')) {
             nn.api('PUT', CMS_CONF.API('/api/users/{userId}', {userId: CMS_CONF.USER_DATA.id}), {lang: $(this).data('meta')}, function (user) {
                 var isStoreLangKey = false;
                 setupLanguageAndRenderPage(user, isStoreLangKey);
@@ -308,6 +440,8 @@ $(function () {
 
     // common dropdown (share with header, footer, channel-add and channel-setting)
     function showDropdown(btn) {
+        $('#fb-page-list').hide();
+        $('.page-list').removeClass('on');
         $('.dropdown, .select-list').hide();
         $('.dropdown')
             .parents('li:not(' + btn + ')').removeClass('on')
@@ -333,8 +467,12 @@ $(function () {
         $('.select-list').hide();
         $('.select-list').parents().removeClass('on').children('.on').removeClass('on');
     });
+    $('body').click(function () {
+        $('#fb-page-list').hide();
+        $('.page-list').removeClass('on');
+    });
 
-    // Header Profile Dropdown
+    // header profile dropdown
     $('#btn-profile, #selected-profile').click(function (event) {
         showDropdown('#btn-profile');
         $('#footer p.select-btn').removeClass('on');
@@ -345,32 +483,7 @@ $(function () {
         $('#profile-dropdown').hide();
     });
 
-    // Header Search
-    function setInput(hint, input) {
-        field = input + ' .textfield';
-        $(field).focus(function () {
-            var txt = $(this).val();
-            if (txt == hint) {
-                $(this).val('');
-            }
-        }).blur(function () {
-            txt = $(this).val();
-            if (txt == '') {
-                $(this).val(hint);
-            }
-        });
-    }
-    setInput('Search', '#search');
-    function inputHilite() {
-        $('.textfield').focus(function () {
-            $(this).parent().addClass('on');
-        }).blur(function () {
-            $(this).parent().removeClass('on');
-        });
-    }
-    inputHilite();
-
-    // Footer Control
+    // footer control
     $('#footer-control').click(function () {
         if ($(this).hasClass('on')) {
             $(this).removeClass('on');
@@ -381,8 +494,10 @@ $(function () {
         }
     });
 
-    // Footer Dropdown
+    // footer dropdown
     $('#footer-list li .select-btn, #footer-list li .select-txt').click(function (event) {
+        $('#fb-page-list').hide();
+        $('.page-list').removeClass('on');
         $('.select-list, .dropdown').hide();
         $('#nav li, #btn-profile').removeClass('on');
         $(this).parent('li').siblings().children('.on').removeClass('on');
@@ -399,7 +514,7 @@ $(function () {
         $(this).parents('.select-list').slideToggle();
     });
 
-    // Ellipsis
+    // ellipsis
     function setEllipsis() {
         $('.ellipsis').ellipsis();
     }

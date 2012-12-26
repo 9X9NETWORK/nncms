@@ -5,45 +5,33 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=548" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=548" />
-<link rel="stylesheet" href="stylesheets/channel.css?v=548" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<link rel="stylesheet" href="stylesheets/style.css?v=647" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=647" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=647" />
+<link rel="stylesheet" href="stylesheets/channel.css?v=647" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=548"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=548"></script>
-<script src="javascripts/jquery.ellipsis.js?v=548"></script>
-<script src="javascripts/jquery.blockUI.js?v=548"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=548"></script>
-<script src="javascripts/jquery.charcounter.min.js?v=548"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=548"></script>
-<script src="javascripts/jquery.cookie.js?v=548"></script>
-<script src="javascripts/json2.js?v=548"></script>
-<script src="javascripts/purl.js?v=548"></script>
-<script src="javascripts/swfupload/swfupload.js?v=548"></script>
-<script src="javascripts/vertical.slider.js?v=548"></script>
-<script src="javascripts/config.js?v=548"></script>
-<script src="javascripts/controller.js?v=548"></script>
-<script src="javascripts/basic.js?v=548"></script>
-<script src="javascripts/channel.js?v=548"></script>
+<script src="javascripts/nn-sdk.js?v=647"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=647"></script>
+<script src="javascripts/jquery.ellipsis.js?v=647"></script>
+<script src="javascripts/jquery.blockUI.js?v=647"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=647"></script>
+<script src="javascripts/jquery.charcounter.min.js?v=647"></script>
+<script src="javascripts/jquery.uniform.min.js?v=647"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=647"></script>
+<script src="javascripts/jquery.cookie.js?v=647"></script>
+<script src="javascripts/json2.js?v=647"></script>
+<script src="javascripts/purl.js?v=647"></script>
+<script src="javascripts/swfupload/swfupload.js?v=647"></script>
+<script src="javascripts/vertical.slider.js?v=647"></script>
+<script src="javascripts/config.js?v=647"></script>
+<script src="javascripts/controller.js?v=647"></script>
+<script src="javascripts/basic.js?v=647"></script>
+<script src="javascripts/channel.js?v=647"></script>
 <title>9x9.tv - Create a new channel</title>
 </head>
 <body>
-
-<div id="lightbox-facebook" class="lightbox-content">
-<h3><img src="images/text_fb.png" alt="Facebook" title="Facebook" /></h3>
-<a href="#" class="btn-close">Close</a>
-<div class="content">
-<p class="desc"><strong>Add 9x9.tv to your facebook</strong> timeline</p>
-<p class="confirm">
-<span class="checkbox"><a href="#">check</a></span>
-Add your 9x9.tv creations and activity to your facebook timeline
-</p>
-</div>
-<div class="button">
-<p><a href="#" class="fb-ok">OK</a></p>
-</div>
-</div>
+<div id="fb-root"></div>
 
 <!--============================== header start ==============================-->
 <div id="header">
@@ -72,6 +60,7 @@ Add your 9x9.tv creations and activity to your facebook timeline
 <ul>
 <li class="on"><span><a href="./">My Channels</a></span></li>
 </ul>
+<p class="studio-setup"><span class="btn-right"><span class="btn-middle"><a href="#"><img src="images/icon_studio_setup.png" alt="" />Studio Setup</a></span></span></p>
 </div>
 </div>
 
@@ -100,15 +89,15 @@ Add your 9x9.tv creations and activity to your facebook timeline
 <label for="name"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Title'])}</label>
 <div class="fmfield">
 <p class="text"><span><input type="text" name="name" id="name" maxlength="100" value="" class="text" /></span></p>
-<span class="notice"><span id="name-charcounter">20</span>　${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Best within 20 characters'])}</span>
+<span class="notice"><span id="name-charcounter">20</span><br />${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Best within 20 characters'])}</span>
 </div>
 </div>
 <div class="fminput clearfix">
 <label>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Thumbnail'])}</label>
 <div class="fmfield upload-img">
-<p class="img"><img id="thumbnail-imageUrl" src="images/guide_ch_default.png" alt="" width="110" height="62" class="thumbnail" /><img src="images/loading.gif" alt="" class="loading" /></p>
+<p class="img"><img id="thumbnail-imageUrl" src="images/ch_default.png" alt="" width="62" height="62" class="thumbnail" /><img src="images/loading.gif" alt="" class="loading" /></p>
 <p id="uploadThumbnail">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Upload'])}</p>
-<p class="notice img-upload">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Better results with 720x480 or higher resolution image'])}</p>
+<p class="notice img-upload">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Better results with 300x300 or higher resolution image'])}</p>
 <p class="notice upload-notice hide">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Please upload jpeg, png, or gif files.'])}</p>
 <input type="hidden" name="imageUrl" id="imageUrl" value="" />
 <input type="hidden" name="imageUrlOld" id="imageUrlOld" value="" />
@@ -118,7 +107,7 @@ Add your 9x9.tv creations and activity to your facebook timeline
 <label>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Description'])}</label>
 <div class="fmfield">
 <p class="textarea"><span><span><textarea name="intro" id="intro" cols="80" class="textarea"></textarea></span></span></p>
-<span class="notice"><span id="intro-charcounter">70</span>　${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Best within 70 characters'])}</span>
+<span class="notice"><span id="intro-charcounter">70</span><br />${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Best within 70 characters'])}</span>
 </div>
 </div>
 <div class="fminput clearfix">
@@ -177,6 +166,35 @@ Add your 9x9.tv creations and activity to your facebook timeline
 </div>
 </div>
 </div>
+<div class="fminput clearfix">
+<label>{{html nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Auto share new published episode'])}}</label>
+<div class="fmfield">
+<div class="connect-switch">
+<img src="images/icon_fb.png" alt="facebook" class="icon" />
+<a href="#" class="switch-off">OFF</a>
+</div>
+<div class="connected hide">
+<div class="share-item">
+<img src="images/icon_fb.png" alt="facebook" />
+<label id="fbTimeline-label" for="fbTimeline"><input type="checkbox" name="fbTimeline" id="fbTimeline" value="y" />${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Timeline'])}</label>
+</div>
+<div class="share-item">
+<img src="images/icon_fb.png" alt="facebook" />
+<label id="fbPage-label" for="fbPage"><input type="checkbox" name="fbPage" id="fbPage" value="y" />${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Page'])}</label>
+<div class="page-list disable">
+<div class="page-list-right">
+<div class="page-list-middle">
+<input type="hidden" name="pageId" id="pageId" value="" />
+<a href="#" class="select-page"><span id="page-selected">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Select facebook pages'])}</span></a>
+<!-- template = #fb-page-list-tmpl -->
+</div>
+</div>
+</div>
+<a id="fb-reconnect" href="javascript:void(0);"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'If fail to auto share to Facebook, please go to Studio Setup to re-connect to Facebook and try again.'])}</span></span></span></a>
+</div>
+</div>
+</div>
+</div>
 <div class="form-btn">
 <div class="form-btn-wrap">
 <p class="notice hide">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Please fill in all required fields.'])}</p>
@@ -205,6 +223,20 @@ Add your 9x9.tv creations and activity to your facebook timeline
 {{/each}}
 </script>
 
+<script id="fb-page-list-tmpl" type="text/x-jquery-tmpl">
+<ul id="fb-page-list" data-list="${cntPage}">
+<!-- template = #fb-page-list-tmpl-item -->
+</ul>
+</script>
+
+<script id="fb-page-list-tmpl-item" type="text/x-jquery-tmpl">
+{{if name != ""}}
+<li><a href="#" data-id="${id}" data-meta="${name}">${name}</a></li>
+{{else}}
+<li></li>
+{{/if}}
+</script>
+
 <!--============================== footer start ==============================-->
 <p id="footer-control"></p>
 <div id="footer">
@@ -220,8 +252,8 @@ Add your 9x9.tv creations and activity to your facebook timeline
         <li><a href="/#!about=contact">Contact us</a></li>
         <li><a href="/#!about=partners">Partners</a></li>
         <li><a href="/#!about=curators">Curators</a></li>
-        <li><a href="/#!about=press">Press</a></li>
-        <li><a href="/#!about=contest">Curation Contest</a></li>
+        <li id="footer-press"><a href="/#!about=press">Press</a></li>
+        <li id="footer-contest"><a href="/#!about=contest">Curation Contest</a></li>
       </ul>
     </li>
     <li id="language-change">
@@ -260,6 +292,77 @@ Add your 9x9.tv creations and activity to your facebook timeline
 <div class="overlay-btn">
 <p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
 <p class="btns btn-no"><span><a href="#">No</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="fb-connect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap fb-connect">
+<a href="#" class="btn-close">Close</a>
+<h4><img src="images/text_studio_setup.png" alt="" /></h4>
+<p class="fb-connect">
+<span class="content">Connect to</span>
+<img src="images/icon_fb.png" alt="facebook" class="icon" />
+<a href="#" class="switch-on hide">ON</a>
+<a href="#" class="switch-off">OFF</a>
+</p>
+<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
+</div>
+</div>
+</div>
+
+<div id="fb-connect-failed" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap connect-fail">
+<a href="#" class="btn-close">Close</a>
+<h4><img src="images/text_studio_setup.png" alt="" /></h4>
+<h5>Can not connect to Facebook correctly!</h5>
+<p class="content">Please try again and make sure you agree on all permissions.</p>
+<div class="overlay-btn">
+<p class="btns btn-failed-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="disconnect-notice" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap disconnect-notice">
+<a href="#" class="btn-close">Close</a>
+<h4><img src="images/text_studio_setup.png" alt="" /></h4>
+<h5>Account disconnected!</h5>
+<p class="content">{If you want to enable auto sharing again, please:}</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="confirm-disconnect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap disconnect">
+<a href="#" class="btn-close">Close</a>
+<h4><img src="images/text_studio_setup.png" alt="" /></h4>
+<p class="content">Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?</p>
+<div class="overlay-btn">
+<p class="btns btn-disconnect"><span><a href="#">Disconnect</a></span></p>
+<p class="btns btn-no"><span><a href="#">{No}</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="fb-connect-failed2" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap channel-connect-fail">
+<a href="#" class="btn-close">Close</a>
+<h5>Can not connect to Facebook correctly!</h5>
+<p class="content">Please try again and make sure you agree on all permissions.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
 </div>
 </div>
 </div>

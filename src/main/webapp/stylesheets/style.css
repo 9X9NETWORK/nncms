@@ -14,7 +14,7 @@
 
 body {
     overflow-y: hidden;
-    font-family: Arial, Helvetica, clean, Microsoft JhengHei, Apple LiGothic, SimHei, PMingLiU, sans-serif;
+    font-family: Arial, Helvetica, clean, Microsoft JhengHei, Apple LiGothic, PMingLiU, sans-serif;
     font-size: 100%;
     color: #555;
 }
@@ -630,17 +630,14 @@ background: #e4e4e4;
 #studio-nav     .studio-nav-wrap     h3,
 #epcurate-nav .epcurate-nav-wrap h3 {
     float: left;
-    width: auto;
-    min-width: 200px;
-    max-width: 200px;
+    width: 200px;
     background: url(../images/icon_studio.png) no-repeat 14px 0;
     font: bold 25px/25px Arial, Helvetica;
     text-indent: 44px;
 }
 
 #epcurate-nav .epcurate-nav-wrap h3 {
-    min-width: 369px;
-    max-width: 369px;
+    width: 369px;
     padding: 8px 0 0 11px;
     background: url(../images/icon_episode.png) no-repeat 59px 13px;
     text-indent: 42px;
@@ -684,7 +681,6 @@ background: #e4e4e4;
 
 #studio-nav .studio-nav-wrap ul {
     float: left;
-    min-width: 808px;
 }
 
 #studio-nav .studio-nav-wrap ul li {
@@ -720,6 +716,59 @@ background: #e4e4e4;
 #studio-nav .studio-nav-wrap ul li:hover span a,
 #studio-nav .studio-nav-wrap ul li.on    span a {
     background: url(../images/bg_tab_middle.png) repeat 0 0;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup {
+    float: right;
+    width: 162px;
+    height: 31px;
+    margin: -3px 35px 0 0;
+    padding-left: 3px;
+    background: url(../images/bg_btn_left.png) no-repeat 0 0;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup .btn-right {
+    display: block;
+    height: 31px;
+    padding-right: 3px;
+    background: url(../images/bg_btn_right.png) no-repeat right 0;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup .btn-middle {
+    display: block;
+    height: 31px;
+    padding: 0 5px;
+    background: url(../images/bg_btn_middle.png) repeat-x;
+    text-align: center;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup:hover {
+    background: url(../images/bg_btn_left_press.png) no-repeat 0 0;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup:hover .btn-right {
+    background: url(../images/bg_btn_right_press.png) no-repeat right 0;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup:hover .btn-middle {
+    background: url(../images/bg_btn_middle_press.png) repeat-x;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup .btn-middle a {
+    display: block;
+    height: 31px;
+    line-height: 31px;
+    color: #777;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup .btn-middle a img {
+    margin-right: 5px;
+    border: none;
+    vertical-align: -3px;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul {
@@ -943,7 +992,7 @@ background: #e4e4e4;
 
 #title-func {
     position: relative;
-    z-index: 50;
+    z-index: 56;
     padding: 21px 0 17px;
     background: url(../images/bg_main.png) repeat -210px 0;
 }

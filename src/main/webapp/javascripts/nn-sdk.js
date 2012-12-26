@@ -18,13 +18,14 @@
  *     - nn.when()
  *     - disable ajax cache
  *
+ *   + 2012-11-28 v0.0.4 by Louis
+ *     - support multi-level language pack
+ *
  * download latest release:
  *
- *   http://dev.teltel.com/louis/9x9-sdk-usage/js/release/v0.0.3/nn-sdk.js
+ *   http://dev.teltel.com/louis/9x9-sdk-usage/js/release/latest/nn-sdk.js
  *
  * @author	Louis Jeng <louis.jeng@9x9.tv>
- * @version	0.0.3
- * @since	2012-09-28
  */
 
 var nn = { };

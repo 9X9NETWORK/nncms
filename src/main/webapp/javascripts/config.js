@@ -4,42 +4,46 @@ var CMS_CONF = {
     CMS_ENV: 'production',
     IS_DEBUG: true,
     API_PACK: {
-        '/api/login':                                   '/api/login',
-        '/api/s3/attributes':                           '/api/s3/attributes',
-        '/api/categories':                              '/api/categories',
-        '/api/tags':                                    '/api/tags',
-        '/api/users/{userId}':                          '/api/users/{userId}',
-        '/api/users/{userId}/channels':                 '/api/users/{userId}/channels',
-        '/api/users/{userId}/channels/{channelId}':     '/api/users/{userId}/channels/{channelId}',
-        '/api/users/{userId}/channels/sorting':         '/api/users/{userId}/channels/sorting',
-        '/api/users/{userId}/my_favorites':             '/api/users/{userId}/my_favorites',
-        '/api/channels/{channelId}':                    '/api/channels/{channelId}',
-        '/api/channels/{channelId}/episodes':           '/api/channels/{channelId}/episodes',
-        '/api/channels/{channelId}/episodes/sorting':   '/api/channels/{channelId}/episodes/sorting',
-        '/api/episodes/{episodeId}':                    '/api/episodes/{episodeId}',
-        '/api/episodes/{episodeId}/programs':           '/api/episodes/{episodeId}/programs',
-        '/api/programs/{programId}':                    '/api/programs/{programId}',
-        '/api/programs/{programId}/title_cards':        '/api/programs/{programId}/title_cards',
-        '/api/title_card/{titlecardId}':                '/api/title_card/{titlecardId}'
+        '/api/login':                                       '/api/login',
+        '/api/s3/attributes':                               '/api/s3/attributes',
+        '/api/categories':                                  '/api/categories',
+        '/api/tags':                                        '/api/tags',
+        '/api/users/{userId}':                              '/api/users/{userId}',
+        '/api/users/{userId}/my_favorites':                 '/api/users/{userId}/my_favorites',
+        '/api/users/{userId}/channels':                     '/api/users/{userId}/channels',
+        '/api/users/{userId}/channels/{channelId}':         '/api/users/{userId}/channels/{channelId}',
+        '/api/users/{userId}/channels/sorting':             '/api/users/{userId}/channels/sorting',
+        '/api/users/{userId}/sns_auth/facebook':            '/api/users/{userId}/sns_auth/facebook',
+        '/api/channels/{channelId}':                        '/api/channels/{channelId}',
+        '/api/channels/{channelId}/autosharing/facebook':   '/api/channels/{channelId}/autosharing/facebook',
+        '/api/channels/{channelId}/episodes':               '/api/channels/{channelId}/episodes',
+        '/api/channels/{channelId}/episodes/sorting':       '/api/channels/{channelId}/episodes/sorting',
+        '/api/episodes/{episodeId}':                        '/api/episodes/{episodeId}',
+        '/api/episodes/{episodeId}/programs':               '/api/episodes/{episodeId}/programs',
+        '/api/programs/{programId}':                        '/api/programs/{programId}',
+        '/api/programs/{programId}/title_cards':            '/api/programs/{programId}/title_cards',
+        '/api/title_card/{titlecardId}':                    '/api/title_card/{titlecardId}'
     },
     FAKE_PACK: {
-        '/api/login':                                   'fakeapi/login.php',
-        '/api/s3/attributes':                           'fakeapi/s3_attributes.php',
-        '/api/categories':                              'fakeapi/categories.php',
-        '/api/tags':                                    'fakeapi/tags.php',
-        '/api/users/{userId}':                          'fakeapi/users.php?userId={userId}',
-        '/api/users/{userId}/channels':                 'fakeapi/users_channels.php?userId={userId}',
-        '/api/users/{userId}/channels/{channelId}':     'fakeapi/users_channels_del.php?userId={userId}&channelId={channelId}',
-        '/api/users/{userId}/channels/sorting':         'fakeapi/users_channels_sorting.php?userId={userId}',
-        '/api/users/{userId}/my_favorites':             'fakeapi/users_my_favorites.php?userId={userId}',
-        '/api/channels/{channelId}':                    'fakeapi/channels.php?channelId={channelId}',
-        '/api/channels/{channelId}/episodes':           'fakeapi/channels_episodes.php?channelId={channelId}',
-        '/api/channels/{channelId}/episodes/sorting':   'fakeapi/channels_episodes_sorting.php?channelId={channelId}',
-        '/api/episodes/{episodeId}':                    'fakeapi/episodes.php?episodeId={episodeId}',
-        '/api/episodes/{episodeId}/programs':           'fakeapi/episodes_programs.php?episodeId={episodeId}',
-        '/api/programs/{programId}':                    'fakeapi/programs.php?programId={programId}',
-        '/api/programs/{programId}/title_cards':        'fakeapi/programs_title_cards.php?programId={programId}',
-        '/api/title_card/{titlecardId}':                'fakeapi/title_card_del.php?titlecardId={titlecardId}'
+        '/api/login':                                       'fakeapi/login.php',
+        '/api/s3/attributes':                               'fakeapi/s3_attributes.php',
+        '/api/categories':                                  'fakeapi/categories.php',
+        '/api/tags':                                        'fakeapi/tags.php',
+        '/api/users/{userId}':                              'fakeapi/users.php?userId={userId}',
+        '/api/users/{userId}/my_favorites':                 'fakeapi/users_my_favorites.php?userId={userId}',
+        '/api/users/{userId}/channels':                     'fakeapi/users_channels.php?userId={userId}',
+        '/api/users/{userId}/channels/{channelId}':         'fakeapi/users_channels_del.php?userId={userId}&channelId={channelId}',
+        '/api/users/{userId}/channels/sorting':             'fakeapi/users_channels_sorting.php?userId={userId}',
+        '/api/users/{userId}/sns_auth/facebook':            'fakeapi/users_sns_auth_facebook.php?userId={userId}',
+        '/api/channels/{channelId}':                        'fakeapi/channels.php?channelId={channelId}',
+        '/api/channels/{channelId}/autosharing/facebook':   'fakeapi/channels_autosharing_facebook.php?channelId={channelId}',
+        '/api/channels/{channelId}/episodes':               'fakeapi/channels_episodes.php?channelId={channelId}',
+        '/api/channels/{channelId}/episodes/sorting':       'fakeapi/channels_episodes_sorting.php?channelId={channelId}',
+        '/api/episodes/{episodeId}':                        'fakeapi/episodes.php?episodeId={episodeId}',
+        '/api/episodes/{episodeId}/programs':               'fakeapi/episodes_programs.php?episodeId={episodeId}',
+        '/api/programs/{programId}':                        'fakeapi/programs.php?programId={programId}',
+        '/api/programs/{programId}/title_cards':            'fakeapi/programs_title_cards.php?programId={programId}',
+        '/api/title_card/{titlecardId}':                    'fakeapi/title_card_del.php?titlecardId={titlecardId}'
     },
     API: function (uri, repl) {
         var api = '';
@@ -110,17 +114,54 @@ var CMS_CONF = {
     USER_URL: null,
     USER_DATA: null,
     LANG_SUPPORT: ['en', 'zh'],
-    PAGE_ID: 'index'
+    LC_MAP: {
+        'en': 'en_US',
+        'zh': 'zh_TW'
+    },
+    PAGE_ID: 'index',
+    FB_APP_ID: '110847978946712',
+    FB_REQ_PERMS: [
+        'email',
+        'friends_actions.video',
+        'friends_birthday',
+        'friends_education_history',
+        'friends_groups',
+        'friends_hometown',
+        'friends_interests',
+        'friends_likes',
+        'friends_location',
+        'friends_relationship_details',
+        'friends_subscriptions',
+        'manage_friendlists',
+        'manage_pages',
+        'publish_actions',
+        'publish_stream',
+        'read_stream',
+        'user_actions.video',
+        'user_birthday',
+        'user_education_history',
+        'user_groups',
+        'user_hometown',
+        'user_interests',
+        'user_likes',
+        'user_location',
+        'user_relationship_details',
+        'user_subscriptions'
+    ],
+    FB_PAGES_MAP: null,
+    USER_SNS_AUTH: null
 };
 
 switch (CMS_CONF.CMS_ENV) {
 case 'development':
     CMS_CONF.IS_DEBUG = true;
     CMS_CONF.API_PACK = CMS_CONF.FAKE_PACK;
+    CMS_CONF.FB_APP_ID = '367878243223232';
     break;
 case 'demonstration':
     CMS_CONF.IS_DEBUG = true;
     CMS_CONF.API_PACK = CMS_CONF.FAKE_PACK;
+    CMS_CONF.FB_APP_ID = '367878243223232';
     break;
 case 'testing':
     CMS_CONF.IS_DEBUG = true;
