@@ -1,23 +1,28 @@
+==== 9x9 ====
+Last Changed Author: barton
+Last Changed Rev: 4203
+Last Changed Date: 2013-01-02 02:45:47 +0000 (Wed, 02 Jan 2013)
+
 Revision: 680
 Author: chihwen
-Date: ¤U¤È 10:34:39, 2012¦~12¤ë28¤é
+Date: ï¿½Uï¿½ï¿½ 10:34:39, 2012ï¿½~12ï¿½ï¿½28ï¿½ï¿½
 Message:
-­×¥¿§¹¦¨ facebook connect «á¡Aauto share ¯»µ·±M­¶¥D®Ö¿ï¶s¡A¨S¦³¥¿½T²¾°£ disabled ª¬ºAªº¿ù»~
+ï¿½×¥ï¿½ï¿½ï¿½ï¿½ï¿½ facebook connect ï¿½ï¿½Aauto share ï¿½ï¿½ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½Dï¿½Ö¿ï¿½sï¿½Aï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½ disabled ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½~
 
-1. ­×¥¿§¹¦¨ facebook connect «á¡Aauto share ¯»µ·±M­¶¥D®Ö¿ï¶s¡A¨S¦³¥¿½T²¾°£ disabled ª¬ºAªº¿ù»~¡C
-2. ½Õ¾ã checkRestartConnect() °»´úÃöÁä±ÂÅv¨ç¦¡¤¤¡A°w¹ï pages ¦^À³¬°¦r¦ê®æ¦¡ªº§PÂ_¡C
+1. ï¿½×¥ï¿½ï¿½ï¿½ï¿½ï¿½ facebook connect ï¿½ï¿½Aauto share ï¿½ï¿½ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½Dï¿½Ö¿ï¿½sï¿½Aï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½ disabled ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½~ï¿½C
+2. ï¿½Õ¾ï¿½ checkRestartConnect() ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ç¦¡ï¿½ï¿½ï¿½Aï¿½wï¿½ï¿½ pages ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½rï¿½ï¿½æ¦¡ï¿½ï¿½ï¿½Pï¿½_ï¿½C
 issue 5698
 ----
 Modified : /fakeapi/javascripts/controller.js
 
 Revision: 676
 Author: chihwen
-Date: ¤U¤È 11:38:48, 2012¦~12¤ë26¤é
+Date: ï¿½Uï¿½ï¿½ 11:38:48, 2012ï¿½~12ï¿½ï¿½26ï¿½ï¿½
 Message:
-­«ºc Facebook Connect ¬ÛÃö¸}¥»³]­p
+ï¿½ï¿½ï¿½c Facebook Connect ï¿½ï¿½ï¿½ï¿½ï¿½}ï¿½ï¿½ï¿½]ï¿½p
 
-1. ¦bª«¥ó¨ú¥Î«e¡A¼W¥[ª«¥óÄÝ©ÊÀË¬d¡A¥H½T«O¸ê®Æ¥¿½T¡C
-2. °w¹ï³]­pµù¸Ñ»¡©ú¡A¥H«K¥¼¨ÓºûÅ@¤§¥Î¡C
+1. ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½Î«eï¿½Aï¿½Wï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ý©ï¿½ï¿½Ë¬dï¿½Aï¿½Hï¿½Tï¿½Oï¿½ï¿½Æ¥ï¿½ï¿½Tï¿½C
+2. ï¿½wï¿½ï¿½]ï¿½pï¿½ï¿½Ñ»ï¿½ï¿½ï¿½Aï¿½Hï¿½Kï¿½ï¿½ï¿½Óºï¿½ï¿½@ï¿½ï¿½ï¿½Î¡C
 issue 5698
 ----
 Modified : /fakeapi/javascripts/basic.js
@@ -26,12 +31,12 @@ Modified : /fakeapi/javascripts/controller.js
 
 Revision: 674
 Author: chihwen
-Date: ¤U¤È 01:24:26, 2012¦~12¤ë26¤é
+Date: ï¿½Uï¿½ï¿½ 01:24:26, 2012ï¿½~12ï¿½ï¿½26ï¿½ï¿½
 Message:
-¦P¨B src ¤À¤äª©¥» 673
+ï¿½Pï¿½B src ï¿½ï¿½ï¿½äª©ï¿½ï¿½ 673
 
-1. titlecard tooltip §ï¬°¼e«×¦Û°Ê©µ®iªº§e²{¤è¦¡¡C
-2. ¼W¥[ mac ¨t²Îªº js §PÂ_¡A¤è«K css °w¹ï mac °µ½Õ¾ã¡C
+1. titlecard tooltip ï¿½ï¬°ï¿½eï¿½×¦Û°Ê©ï¿½ï¿½iï¿½ï¿½ï¿½eï¿½{ï¿½è¦¡ï¿½C
+2. ï¿½Wï¿½[ mac ï¿½tï¿½Îªï¿½ js ï¿½Pï¿½_ï¿½Aï¿½ï¿½K css ï¿½wï¿½ï¿½ mac ï¿½ï¿½ï¿½Õ¾ï¿½C
 issue 5698
 ----
 Modified : /fakeapi/javascripts/basic.js
@@ -41,12 +46,12 @@ Modified : /fakeapi/stylesheets/episode.css
 
 Revision: 672
 Author: chihwen
-Date: ¤U¤È 07:20:58, 2012¦~12¤ë25¤é
+Date: ï¿½Uï¿½ï¿½ 07:20:58, 2012ï¿½~12ï¿½ï¿½25ï¿½ï¿½
 Message:
-½Õ¾ãÀW¹Dªí³æ­¶¡A¦bÅÜ°Ê°Ï°ì¤ÎÃþ§O«á¡A°ÊºA½Õ¾ã scrollbar
+ï¿½Õ¾ï¿½ï¿½Wï¿½Dï¿½ï¿½æ­¶ï¿½Aï¿½bï¿½Ü°Ê°Ï°ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½Aï¿½ÊºAï¿½Õ¾ï¿½ scrollbar
 
-1. ½Õ¾ãÀW¹Dªí³æ­¶¡A¦bÅÜ°Ê°Ï°ì¤ÎÃþ§O«á¡A°ÊºA½Õ¾ã scrollbar¡C
-2. ¦P¨B src ¤À¤äª©¥» 671¡C
+1. ï¿½Õ¾ï¿½ï¿½Wï¿½Dï¿½ï¿½æ­¶ï¿½Aï¿½bï¿½Ü°Ê°Ï°ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½Aï¿½ÊºAï¿½Õ¾ï¿½ scrollbarï¿½C
+2. ï¿½Pï¿½B src ï¿½ï¿½ï¿½äª©ï¿½ï¿½ 671ï¿½C
 issue 5698
 ----
 Modified : /fakeapi/fakeapi/channels.php
@@ -59,16 +64,16 @@ Modified : /fakeapi/javascripts/controller.js
 
 Revision: 670
 Author: chihwen
-Date: ¤U¤È 02:36:54, 2012¦~12¤ë25¤é
+Date: ï¿½Uï¿½ï¿½ 02:36:54, 2012ï¿½~12ï¿½ï¿½25ï¿½ï¿½
 Message:
-½Õ¾ã restart connection ¬ÛÃö»y¨t¤å®×
+ï¿½Õ¾ï¿½ restart connection ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½tï¿½ï¿½ï¿½
 
-1. ½Õ¾ã restart connection ¬ÛÃö»y¨t¤å®×¡C
-2. §ï¨} channel.js ¤Î controller.js Á×§K ch add ¤Î ch setting ¹w³]´N²£¥Í scrollbar¡A¨ÃÁ×§KµL scrollbar ªºª¬ªp¤U¡AÁÙ¥i¥Hºu°Êµe­±¡C
-3. §ï¨} epcurate.js Á×§KµL scrollbar ªºª¬ªp¤U¡AÁÙ¥i¥Hºu°Êµe­±¡C
-4. ½Õ¾ã¥k¤W¨¤ studio-setup µ²ºc¡A²¾°£ fb-connect class¡AÁ×§K¦³«]­­¥Î³~¤§·N¡A¥Ñ¸}¥»°ÊºA§PÂ_§e²{¤°»ò overlay¡C
-5. Á×§K«È¤áºÝ§Ö¨ú¡A§ó·s CSS ¤Î JS ¤Þ¤JÀÉªºª©¥»¸¹ (?v=670)
-6. ¦P¨B src ¤À¤äª©¥» 669¡C
+1. ï¿½Õ¾ï¿½ restart connection ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½tï¿½ï¿½×¡C
+2. ï¿½ï¿½} channel.js ï¿½ï¿½ controller.js ï¿½×§K ch add ï¿½ï¿½ ch setting ï¿½wï¿½]ï¿½Nï¿½ï¿½ï¿½ï¿½ scrollbarï¿½Aï¿½ï¿½ï¿½×§Kï¿½L scrollbar ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Uï¿½Aï¿½Ù¥iï¿½Hï¿½uï¿½Êµeï¿½ï¿½ï¿½C
+3. ï¿½ï¿½} epcurate.js ï¿½×§Kï¿½L scrollbar ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Uï¿½Aï¿½Ù¥iï¿½Hï¿½uï¿½Êµeï¿½ï¿½ï¿½C
+4. ï¿½Õ¾ï¿½kï¿½Wï¿½ï¿½ studio-setup ï¿½ï¿½ï¿½cï¿½Aï¿½ï¿½ï¿½ï¿½ fb-connect classï¿½Aï¿½×§Kï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½Î³~ï¿½ï¿½ï¿½Nï¿½Aï¿½Ñ¸}ï¿½ï¿½ï¿½ÊºAï¿½Pï¿½_ï¿½eï¿½{ï¿½ï¿½ï¿½ï¿½ overlayï¿½C
+5. ï¿½×§Kï¿½È¤ï¿½Ý§Ö¨ï¿½Aï¿½ï¿½s CSS ï¿½ï¿½ JS ï¿½Þ¤Jï¿½Éªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (?v=670)
+6. ï¿½Pï¿½B src ï¿½ï¿½ï¿½äª©ï¿½ï¿½ 669ï¿½C
 issue 5698
 ----
 Modified : /fakeapi/channel-add.html
@@ -89,28 +94,28 @@ Modified : /fakeapi/stylesheets/style.css
 
 Revision: 668
 Author: chihwen
-Date: ¤W¤È 12:49:41, 2012¦~12¤ë25¤é
+Date: ï¿½Wï¿½ï¿½ 12:49:41, 2012ï¿½~12ï¿½ï¿½25ï¿½ï¿½
 Message:
-§¹¦¨ Facebook Restart Connection °»´ú¥\¯à
+ï¿½ï¿½ï¿½ï¿½ Facebook Restart Connection ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½
 
-1. §¹¦¨ Facebook Restart Connection °»´ú¥\¯à¡C
-   1. ½Õ¾ã initFacebookJavaScriptSdk() ¥H«K¾ã¦XÃöÁä±ÂÅvÀË¬d¡A±Ä callback ¾÷¨î¹ê²{ÅÞ¿è¶¶§ÇºÞ±±¡C
-   2. ¥[¤J checkRestartConnect() ¥H«K°»´úÃöÁä±ÂÅv¡C
-2. §¹¦¨ Studio Setup reconnect ³qª¾¤Î³sµ²¥\¯à¡C
-3. §¹¦¨ÀW¹D­¶ auto share reconnect ¤¶­±¤Á´«¤Î³sµ²¥\¯à¡C
-4. §¹¦¨ Reconnect ¬ÛÃö»y¨t³]©w¤Î¤Á´«¥\¯à¡C
-5. ½Õ¾ã config.js ¥[¤J CMS_CONF.FB_RESTART_CONNECT ¥Î¨Ó°O¿ý¬O§_±Ä¨ú reconnect ¬yµ{¡C
-6. ½Õ¾ãÀW¹D­¶ renderAutoShareUI() ÅÞ¿è¡A¦b reconnect ¤§«á¤¹³\­««Ø­ì¨Ó¤w®Ö¿ïªº¸ê®Æ¡C
-7. §ï¨} checkCriticalPerm() ¦Ò¶q°Ñ¼Æ­«­n©Ê¡A±N callback °Ñ¼Æ±q²Ä¤@¶¶¦ì²¾¨ì³Ì«á¡A¦P®É¤]·t¥Ü¤§«á­n¦^©I¤§·N¡C
-   §ï¨} checkCriticalPerm() ±N°}¦C¦¡¦s¨úÄÝ©Ê¡A§ï¬°ª«¥ó¦¡¦s¨úÄÝ©Ê¡A¥H¥[§Ö¸ÑªR®Ä¯à¡C
-8. ·í¬° Restart connection ª¬ºA®É¡A­Y Save °e¥Xªí³æ¡A«h¹ï fb connect »P auto sharing ¬Ò¤£¶i¦æ¥ô¦ó²§°Ê¡C
-9. ½Õ¾ã channel list ¦Cªí Followers §ì¨úÄæ¦ì¡A¥Ñ cntFollower §ï¬° cntSubscribe¡C
-10. ¦P¨B src ¤À¤äª©¥» 661~667¡C
+1. ï¿½ï¿½ï¿½ï¿½ Facebook Restart Connection ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½C
+   1. ï¿½Õ¾ï¿½ initFacebookJavaScriptSdk() ï¿½Hï¿½Kï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Ë¬dï¿½Aï¿½ï¿½ callback ï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½Þ¿è¶¶ï¿½ÇºÞ±ï¿½ï¿½C
+   2. ï¿½[ï¿½J checkRestartConnect() ï¿½Hï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½C
+2. ï¿½ï¿½ï¿½ï¿½ Studio Setup reconnect ï¿½qï¿½ï¿½ï¿½Î³sï¿½ï¿½ï¿½\ï¿½ï¿½C
+3. ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Dï¿½ï¿½ auto share reconnect ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î³sï¿½ï¿½ï¿½\ï¿½ï¿½C
+4. ï¿½ï¿½ï¿½ï¿½ Reconnect ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½tï¿½]ï¿½wï¿½Î¤ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½C
+5. ï¿½Õ¾ï¿½ config.js ï¿½[ï¿½J CMS_CONF.FB_RESTART_CONNECT ï¿½Î¨Ó°Oï¿½ï¿½Oï¿½_ï¿½Ä¨ï¿½ reconnect ï¿½yï¿½{ï¿½C
+6. ï¿½Õ¾ï¿½ï¿½Wï¿½Dï¿½ï¿½ renderAutoShareUI() ï¿½Þ¿ï¿½Aï¿½b reconnect ï¿½ï¿½ï¿½á¤¹ï¿½\ï¿½ï¿½ï¿½Ø­ï¿½Ó¤wï¿½Ö¿ïªºï¿½ï¿½Æ¡C
+7. ï¿½ï¿½} checkCriticalPerm() ï¿½Ò¶qï¿½Ñ¼Æ­ï¿½ï¿½nï¿½Ê¡Aï¿½N callback ï¿½Ñ¼Æ±qï¿½Ä¤@ï¿½ï¿½ï¿½ì²¾ï¿½ï¿½Ì«ï¿½Aï¿½Pï¿½É¤]ï¿½tï¿½Ü¤ï¿½ï¿½ï¿½nï¿½^ï¿½Iï¿½ï¿½ï¿½Nï¿½C
+   ï¿½ï¿½} checkCriticalPerm() ï¿½Nï¿½}ï¿½Cï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Ý©Ê¡Aï¿½ï¬°ï¿½ï¿½ï¿½ó¦¡¦sï¿½ï¿½ï¿½Ý©Ê¡Aï¿½Hï¿½[ï¿½Ö¸ÑªRï¿½Ä¯ï¿½C
+8. ï¿½? Restart connection ï¿½ï¿½ï¿½Aï¿½É¡Aï¿½Y Save ï¿½eï¿½Xï¿½ï¿½ï¿½Aï¿½hï¿½ï¿½ fb connect ï¿½P auto sharing ï¿½Ò¤ï¿½ï¿½iï¿½ï¿½ï¿½ï¿½ó²§°Ê¡C
+9. ï¿½Õ¾ï¿½ channel list ï¿½Cï¿½ï¿½ Followers ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ cntFollower ï¿½ï¬° cntSubscribeï¿½C
+10. ï¿½Pï¿½B src ï¿½ï¿½ï¿½äª©ï¿½ï¿½ 661~667ï¿½C
 
-TODO¡G
-1. Studio Setup reconnect ¤¤¤åª©¤å®×¹ï»ô°ÝÃD¡C
-2. Studio Setup reconnect ³qª¾µo¥ú®ÄªG½Õ¾ã¡C
-3. ch add, ch setting scrollbar ½Õ¾ã¡C
+TODOï¿½G
+1. Studio Setup reconnect ï¿½ï¿½ï¿½åª©ï¿½ï¿½×¹ï¿½ï¿½ï¿½ï¿½ï¿½Dï¿½C
+2. Studio Setup reconnect ï¿½qï¿½ï¿½ï¿½oï¿½ï¿½ÄªGï¿½Õ¾ï¿½C
+3. ch add, ch setting scrollbar ï¿½Õ¾ï¿½C
 issue 5698
 ----
 Modified : /fakeapi/channel-add.html
