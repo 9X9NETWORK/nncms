@@ -160,9 +160,8 @@ $(function () {
 
     // channel form selector
     $('#content-main').on('click', '#settingForm .enable .select-btn, #settingForm .enable .select-txt', function (event) {
+        hideFbPageList();
         $('.form-btn .notice').addClass('hide');
-        $('#fb-page-list').hide();
-        $('.page-list').removeClass('on');
         $('.select-list').hide();
         $(this).parent('li').siblings().children('.on').removeClass('on');
         $(this).parent().children('.select-btn').toggleClass('on');
@@ -210,7 +209,7 @@ $(function () {
                     }).appendTo('#browse-category');
                     autoHeight();
                     setFormHeight();
-                    scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+                    scrollToBottom();
                     $('.category').removeClass('disable').addClass('enable');
                     $('#categoryId-select-txt').text(nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Select a category']));
                 });
@@ -238,7 +237,7 @@ $(function () {
                 }
                 autoHeight();
                 setFormHeight();
-                scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+                scrollToBottom();
             });
         }
         $(this).parent().parent().children('.select-meta').val(metadata);
@@ -302,6 +301,11 @@ $(function () {
                             if ($('#settingForm').length > 0) {
                                 var isAutoCheckedTimeline = true;
                                 renderAutoShareUI(facebook, isAutoCheckedTimeline);
+                                setTimeout(function () {
+                                    autoHeight();
+                                    setFormHeight();
+                                    scrollToBottom();
+                                }, 1000);
                             }
                         });
                     });
@@ -351,20 +355,14 @@ $(function () {
             list = $('#fb-page-list').data('list');
         $(this).next('ul').slideToggle();
         $(this).parents('.page-list').toggleClass('on');
-        if ($('.connected .share-item .page-list').hasClass('on') && $('#main-wrap-slider .ui-slider-handle').length > 0 && false == $('#fb-page-list').hasClass('expand')) {
-            $('#fb-page-list').addClass('expand');  // NOTE: only for first expand form height
+        if ($('.connected .share-item .page-list').hasClass('on') && $('#main-wrap-slider .ui-slider-handle').length > 0) {
             $('#content-main-wrap form').height(formHeight + parseInt(Math.round(list / 2) * 30, 10));
             $('#content-main-wrap').height($('#content-main-wrap .constrain').height() - 45 + parseInt(Math.round(list / 2) * 30, 10));
-            scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-            $('#content-main-wrap').css('top', '-' + parseInt($('#content-main-wrap').height() - $('#content-main').height(), 10) + 'px');
-            $('#main-wrap-slider .ui-slider-handle').css('bottom', '0');
+            scrollToBottom();
         } else {
-            $('#fb-page-list').removeClass('expand');
             $('#content-main-wrap form').height('auto');
             $('#content-main-wrap').height($('#content-main-wrap .constrain').height() + 75);
-            scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-            $('#content-main-wrap').css('top', '-' + parseInt($('#content-main-wrap').height() - $('#content-main').height(), 10) + 'px');
-            $('#main-wrap-slider .ui-slider-handle').css('bottom', '0');
+            scrollToBottom();
         }
         ellipsisPage();
         return false;

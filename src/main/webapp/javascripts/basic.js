@@ -32,6 +32,22 @@ function autoHeight() {
     }
 }
 
+function scrollToBottom() {
+    scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+    $('#content-main-wrap').css('top', '-' + parseInt($('#content-main-wrap').height() - $('#content-main').height(), 10) + 'px');
+    $('#main-wrap-slider .ui-slider-handle').css('bottom', '0');
+}
+
+function hideFbPageList() {
+    if ($('#settingForm').length > 0) {
+        $('#fb-page-list').hide();
+        $('.page-list').removeClass('on');
+        if ('none' != $('#main-wrap-slider').css('display')) {
+            $('#content-main-wrap form').height('auto');
+        }
+    }
+}
+
 function showSystemErrorOverlay(msg) {
     if ('' == $.trim(msg)) { msg = 'Unknown error.'; }
     $('#system-error .content').text(nn._(['overlay', 'system-error', msg]));
@@ -340,6 +356,11 @@ $(function () {
                             if ($('#settingForm').length > 0) {
                                 var isAutoCheckedTimeline = true;
                                 renderAutoShareUI(facebook, isAutoCheckedTimeline);
+                                setTimeout(function () {
+                                    autoHeight();
+                                    setFormHeight();
+                                    scrollToBottom();
+                                }, 1000);
                             }
                         });
                     });
@@ -451,8 +472,7 @@ $(function () {
 
     // common dropdown (share with header, footer, channel-add and channel-setting)
     function showDropdown(btn) {
-        $('#fb-page-list').hide();
-        $('.page-list').removeClass('on');
+        hideFbPageList();
         $('.dropdown, .select-list').hide();
         $('.dropdown')
             .parents('li:not(' + btn + ')').removeClass('on')
@@ -473,14 +493,9 @@ $(function () {
     $('body').click(function () {
         $('.dropdown').hide();
         $('.dropdown').parents('li').removeClass('on').children('.on').removeClass('on');
-    });
-    $('body').click(function () {
         $('.select-list').hide();
         $('.select-list').parents().removeClass('on').children('.on').removeClass('on');
-    });
-    $('body').click(function () {
-        $('#fb-page-list').hide();
-        $('.page-list').removeClass('on');
+        hideFbPageList();
     });
 
     // header profile dropdown
@@ -507,8 +522,7 @@ $(function () {
 
     // footer dropdown
     $('#footer-list li .select-btn, #footer-list li .select-txt').click(function (event) {
-        $('#fb-page-list').hide();
-        $('.page-list').removeClass('on');
+        hideFbPageList();
         $('.select-list, .dropdown').hide();
         $('#nav li, #btn-profile').removeClass('on');
         $(this).parent('li').siblings().children('.on').removeClass('on');

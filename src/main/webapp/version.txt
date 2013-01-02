@@ -1,138 +1,28 @@
-==== 9x9 ====
-Last Changed Author: barton
-Last Changed Rev: 4203
-Last Changed Date: 2013-01-02 02:45:47 +0000 (Wed, 02 Jan 2013)
-
-Revision: 680
+Revision: 682
 Author: chihwen
-Date: ï¿½Uï¿½ï¿½ 10:34:39, 2012ï¿½~12ï¿½ï¿½28ï¿½ï¿½
+Date: ¤U¤È 01:55:28, 2013¦~1¤ë2¤é
 Message:
-ï¿½×¥ï¿½ï¿½ï¿½ï¿½ï¿½ facebook connect ï¿½ï¿½Aauto share ï¿½ï¿½ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½Dï¿½Ö¿ï¿½sï¿½Aï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½ disabled ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½~
+±NÁôÂÃ fb page list ¤U©Ô¿ï³æªº¾Þ§@¶°¤¤ºûÅ@¡AÁ×§KÅÞ¿è¤À´²¨ì¦UÄ²µoÂI
 
-1. ï¿½×¥ï¿½ï¿½ï¿½ï¿½ï¿½ facebook connect ï¿½ï¿½Aauto share ï¿½ï¿½ï¿½ï¿½ï¿½Mï¿½ï¿½ï¿½Dï¿½Ö¿ï¿½sï¿½Aï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½ disabled ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½~ï¿½C
-2. ï¿½Õ¾ï¿½ checkRestartConnect() ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ç¦¡ï¿½ï¿½ï¿½Aï¿½wï¿½ï¿½ pages ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½rï¿½ï¿½æ¦¡ï¿½ï¿½ï¿½Pï¿½_ï¿½C
+1. ±NÁôÂÃ fb page list ¤U©Ô¿ï³æªº¾Þ§@¶°¤¤ºûÅ@¡AÁ×§KÅÞ¿è¤À´²¨ì¦UÄ²µoÂI¡C
+2. ·í¦³ scrollbar ¥X²{®É¡A¤~±NÀW¹Dªí³æ­¶¤U¤èªº¥D¥\¯à«ö¶s¡A¦Û°Ê auto height ¨ìªí³æªº¥¿¤U¤è¡C
 issue 5698
 ----
-Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/channel.js
 
-Revision: 676
+Revision: 681
 Author: chihwen
-Date: ï¿½Uï¿½ï¿½ 11:38:48, 2012ï¿½~12ï¿½ï¿½26ï¿½ï¿½
+Date: ¤U¤È 01:09:56, 2013¦~1¤ë2¤é
 Message:
-ï¿½ï¿½ï¿½c Facebook Connect ï¿½ï¿½ï¿½ï¿½ï¿½}ï¿½ï¿½ï¿½]ï¿½p
+§ï¨}ÀW¹Dªí³æ­¶ auto share »P¤U©Ô scrollbar ³s°Ê­«·s­pºâ°ÝÃD
 
-1. ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½Î«eï¿½Aï¿½Wï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ý©ï¿½ï¿½Ë¬dï¿½Aï¿½Hï¿½Tï¿½Oï¿½ï¿½Æ¥ï¿½ï¿½Tï¿½C
-2. ï¿½wï¿½ï¿½]ï¿½pï¿½ï¿½Ñ»ï¿½ï¿½ï¿½Aï¿½Hï¿½Kï¿½ï¿½ï¿½Óºï¿½ï¿½@ï¿½ï¿½ï¿½Î¡C
+1. ·s¼W scrollToBottom() ¶°¤¤¦Û°Ê scroll ¨ìªí³æ³Ì¤U¤èªº¾Þ§@ÅÞ¿è¡C
+2. §Q¥Î setTimeout §ïµ½«D¦P¨B DOM ²£¥Í¤Î scrollbar ­«·s­pºâ°ÝÃD¡C
+3. §ïµ½ auto share ¤U©Ô¡A¦h¤À´²ÂIÁY¦X¨Æ¥óªº³B²z¡C
 issue 5698
 ----
 Modified : /fakeapi/javascripts/basic.js
 Modified : /fakeapi/javascripts/channel.js
 Modified : /fakeapi/javascripts/controller.js
-
-Revision: 674
-Author: chihwen
-Date: ï¿½Uï¿½ï¿½ 01:24:26, 2012ï¿½~12ï¿½ï¿½26ï¿½ï¿½
-Message:
-ï¿½Pï¿½B src ï¿½ï¿½ï¿½äª©ï¿½ï¿½ 673
-
-1. titlecard tooltip ï¿½ï¬°ï¿½eï¿½×¦Û°Ê©ï¿½ï¿½iï¿½ï¿½ï¿½eï¿½{ï¿½è¦¡ï¿½C
-2. ï¿½Wï¿½[ mac ï¿½tï¿½Îªï¿½ js ï¿½Pï¿½_ï¿½Aï¿½ï¿½K css ï¿½wï¿½ï¿½ mac ï¿½ï¿½ï¿½Õ¾ï¿½C
-issue 5698
-----
-Modified : /fakeapi/javascripts/basic.js
-Modified : /fakeapi/stylesheets/channel.css
-Modified : /fakeapi/stylesheets/ep-curation.css
-Modified : /fakeapi/stylesheets/episode.css
-
-Revision: 672
-Author: chihwen
-Date: ï¿½Uï¿½ï¿½ 07:20:58, 2012ï¿½~12ï¿½ï¿½25ï¿½ï¿½
-Message:
-ï¿½Õ¾ï¿½ï¿½Wï¿½Dï¿½ï¿½æ­¶ï¿½Aï¿½bï¿½Ü°Ê°Ï°ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½Aï¿½ÊºAï¿½Õ¾ï¿½ scrollbar
-
-1. ï¿½Õ¾ï¿½ï¿½Wï¿½Dï¿½ï¿½æ­¶ï¿½Aï¿½bï¿½Ü°Ê°Ï°ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½Aï¿½ÊºAï¿½Õ¾ï¿½ scrollbarï¿½C
-2. ï¿½Pï¿½B src ï¿½ï¿½ï¿½äª©ï¿½ï¿½ 671ï¿½C
-issue 5698
-----
-Modified : /fakeapi/fakeapi/channels.php
-Modified : /fakeapi/fakeapi/users_channels.php
-Modified : /fakeapi/images/bg_tip_left_error.png
-Modified : /fakeapi/images/bg_tip_middle_error.png
-Modified : /fakeapi/images/bg_tip_right_error.png
-Modified : /fakeapi/javascripts/channel.js
-Modified : /fakeapi/javascripts/controller.js
-
-Revision: 670
-Author: chihwen
-Date: ï¿½Uï¿½ï¿½ 02:36:54, 2012ï¿½~12ï¿½ï¿½25ï¿½ï¿½
-Message:
-ï¿½Õ¾ï¿½ restart connection ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½tï¿½ï¿½ï¿½
-
-1. ï¿½Õ¾ï¿½ restart connection ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½tï¿½ï¿½×¡C
-2. ï¿½ï¿½} channel.js ï¿½ï¿½ controller.js ï¿½×§K ch add ï¿½ï¿½ ch setting ï¿½wï¿½]ï¿½Nï¿½ï¿½ï¿½ï¿½ scrollbarï¿½Aï¿½ï¿½ï¿½×§Kï¿½L scrollbar ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Uï¿½Aï¿½Ù¥iï¿½Hï¿½uï¿½Êµeï¿½ï¿½ï¿½C
-3. ï¿½ï¿½} epcurate.js ï¿½×§Kï¿½L scrollbar ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Uï¿½Aï¿½Ù¥iï¿½Hï¿½uï¿½Êµeï¿½ï¿½ï¿½C
-4. ï¿½Õ¾ï¿½kï¿½Wï¿½ï¿½ studio-setup ï¿½ï¿½ï¿½cï¿½Aï¿½ï¿½ï¿½ï¿½ fb-connect classï¿½Aï¿½×§Kï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½Î³~ï¿½ï¿½ï¿½Nï¿½Aï¿½Ñ¸}ï¿½ï¿½ï¿½ÊºAï¿½Pï¿½_ï¿½eï¿½{ï¿½ï¿½ï¿½ï¿½ overlayï¿½C
-5. ï¿½×§Kï¿½È¤ï¿½Ý§Ö¨ï¿½Aï¿½ï¿½s CSS ï¿½ï¿½ JS ï¿½Þ¤Jï¿½Éªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (?v=670)
-6. ï¿½Pï¿½B src ï¿½ï¿½ï¿½äª©ï¿½ï¿½ 669ï¿½C
-issue 5698
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/epcurate-publish.html
-Modified : /fakeapi/episode-list.html
-Modified : /fakeapi/index.html
-Modified : /fakeapi/javascripts/channel.js
-Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/javascripts/epcurate.js
-Modified : /fakeapi/lang/en.json
-Modified : /fakeapi/lang/zh.json
-Modified : /fakeapi/login.html
-Modified : /fakeapi/stylesheets/channel.css
-Modified : /fakeapi/stylesheets/lightbox.css
-Modified : /fakeapi/stylesheets/style.css
-
-Revision: 668
-Author: chihwen
-Date: ï¿½Wï¿½ï¿½ 12:49:41, 2012ï¿½~12ï¿½ï¿½25ï¿½ï¿½
-Message:
-ï¿½ï¿½ï¿½ï¿½ Facebook Restart Connection ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½
-
-1. ï¿½ï¿½ï¿½ï¿½ Facebook Restart Connection ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½C
-   1. ï¿½Õ¾ï¿½ initFacebookJavaScriptSdk() ï¿½Hï¿½Kï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Ë¬dï¿½Aï¿½ï¿½ callback ï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½Þ¿è¶¶ï¿½ÇºÞ±ï¿½ï¿½C
-   2. ï¿½[ï¿½J checkRestartConnect() ï¿½Hï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½C
-2. ï¿½ï¿½ï¿½ï¿½ Studio Setup reconnect ï¿½qï¿½ï¿½ï¿½Î³sï¿½ï¿½ï¿½\ï¿½ï¿½C
-3. ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Dï¿½ï¿½ auto share reconnect ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î³sï¿½ï¿½ï¿½\ï¿½ï¿½C
-4. ï¿½ï¿½ï¿½ï¿½ Reconnect ï¿½ï¿½ï¿½ï¿½ï¿½yï¿½tï¿½]ï¿½wï¿½Î¤ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½C
-5. ï¿½Õ¾ï¿½ config.js ï¿½[ï¿½J CMS_CONF.FB_RESTART_CONNECT ï¿½Î¨Ó°Oï¿½ï¿½Oï¿½_ï¿½Ä¨ï¿½ reconnect ï¿½yï¿½{ï¿½C
-6. ï¿½Õ¾ï¿½ï¿½Wï¿½Dï¿½ï¿½ renderAutoShareUI() ï¿½Þ¿ï¿½Aï¿½b reconnect ï¿½ï¿½ï¿½á¤¹ï¿½\ï¿½ï¿½ï¿½Ø­ï¿½Ó¤wï¿½Ö¿ïªºï¿½ï¿½Æ¡C
-7. ï¿½ï¿½} checkCriticalPerm() ï¿½Ò¶qï¿½Ñ¼Æ­ï¿½ï¿½nï¿½Ê¡Aï¿½N callback ï¿½Ñ¼Æ±qï¿½Ä¤@ï¿½ï¿½ï¿½ì²¾ï¿½ï¿½Ì«ï¿½Aï¿½Pï¿½É¤]ï¿½tï¿½Ü¤ï¿½ï¿½ï¿½nï¿½^ï¿½Iï¿½ï¿½ï¿½Nï¿½C
-   ï¿½ï¿½} checkCriticalPerm() ï¿½Nï¿½}ï¿½Cï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Ý©Ê¡Aï¿½ï¬°ï¿½ï¿½ï¿½ó¦¡¦sï¿½ï¿½ï¿½Ý©Ê¡Aï¿½Hï¿½[ï¿½Ö¸ÑªRï¿½Ä¯ï¿½C
-8. ï¿½? Restart connection ï¿½ï¿½ï¿½Aï¿½É¡Aï¿½Y Save ï¿½eï¿½Xï¿½ï¿½ï¿½Aï¿½hï¿½ï¿½ fb connect ï¿½P auto sharing ï¿½Ò¤ï¿½ï¿½iï¿½ï¿½ï¿½ï¿½ó²§°Ê¡C
-9. ï¿½Õ¾ï¿½ channel list ï¿½Cï¿½ï¿½ Followers ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ cntFollower ï¿½ï¬° cntSubscribeï¿½C
-10. ï¿½Pï¿½B src ï¿½ï¿½ï¿½äª©ï¿½ï¿½ 661~667ï¿½C
-
-TODOï¿½G
-1. Studio Setup reconnect ï¿½ï¿½ï¿½åª©ï¿½ï¿½×¹ï¿½ï¿½ï¿½ï¿½ï¿½Dï¿½C
-2. Studio Setup reconnect ï¿½qï¿½ï¿½ï¿½oï¿½ï¿½ÄªGï¿½Õ¾ï¿½C
-3. ch add, ch setting scrollbar ï¿½Õ¾ï¿½C
-issue 5698
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/episode-list.html
-Added : /fakeapi/images/bg_tip_left_error.png
-Added : /fakeapi/images/bg_tip_middle_error.png
-Added : /fakeapi/images/bg_tip_right_error.png
-Added : /fakeapi/images/icon_notification.png
-Modified : /fakeapi/index.html
-Modified : /fakeapi/javascripts/basic.js
-Modified : /fakeapi/javascripts/channel.js
-Modified : /fakeapi/javascripts/config.js
-Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/lang/en.json
-Modified : /fakeapi/lang/zh.json
-Modified : /fakeapi/stylesheets/channel.css
-Modified : /fakeapi/stylesheets/lightbox.css
-Modified : /fakeapi/stylesheets/style.css
 

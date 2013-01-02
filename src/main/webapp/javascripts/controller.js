@@ -851,7 +851,7 @@ function updateChannel(pageId, id) {
                 autoHeight();
                 setFormHeight();
                 // ON PURPOSE to wait api (async)
-                $('#overlay-s').fadeOut(3000, function () {
+                $('#overlay-s').fadeOut(5000, function () {
                     autoHeight();
                     setFormHeight();
                     scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
@@ -888,10 +888,10 @@ function createChannel(pageId) {
         $('.connected input').uniform();
     }
     initFacebookJavaScriptSdk();
-    autoHeight();
-    setFormHeight();
     // ON PURPOSE to wait api (async)
-    $('#overlay-s').fadeOut(1000, function () {
+    $('#overlay-s').fadeOut(3000, function () {
+        autoHeight();
+        setFormHeight();
         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
         $('#settingForm .btn-cancel, #settingForm .btn-create').removeClass('disable').addClass('enable');
     });
