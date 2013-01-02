@@ -534,7 +534,8 @@
     text-align: center;
 }
 
-.setup-notice p.fb-connect {
+.setup-notice p.fb-connect,
+.setup-notice .reconnect-func {
     overflow: hidden;
     width: 185px;
     margin: 42px auto 0;
@@ -544,14 +545,30 @@
     text-align: center;
 }
 
-.setup-notice p.fb-connect span {
+.setup-notice .reconnect-func {
+    width: 263px;
+}
+
+.setup-notice p.fb-connect span,
+.setup-notice .reconnect-func span {
     float: left;
     color: #555;
 }
 
-.setup-notice p.fb-connect img {
+.setup-notice p.fb-connect img,
+.setup-notice .reconnect-func img {
     float: left;
     margin: 6px 12px 0 16px;
+}
+
+.setup-notice .reconnect-func .btn-reconnect {
+    float: left;
+}
+
+.setup-notice .reconnect-func .btn-reconnect a {
+    height: 31px;
+    padding: 0 10px;
+    line-height: 28px;
 }
 
 .setup-notice p.fb-connect a.switch-on,
@@ -584,8 +601,17 @@
     line-height: 17px;
 }
 
-.setup-notice .overlay-container .fb-connect p.content {
+.setup-notice .overlay-container .fb-connect p.content,
+.setup-notice .overlay-container .restart-connect p.content {
     margin-top: 12px;
+}
+
+.setup-notice .overlay-container .restart-connect p.content {
+    text-align: justify;
+}
+
+.setup-notice .overlay-container .restart-connect p.notice {
+    color: #f00;
 }
 
 .zh .setup-notice .overlay-container .fb-connect p.content {
@@ -606,13 +632,15 @@
 
 .setup-notice .overlay-container .channel-connect-fail p.content {
     margin-top: 17px;
+    text-align: center;
 }
 
 .setup-notice .overlay-container .disconnect p.content {
     margin-top: 62px;
 }
 
-.zh .setup-notice .overlay-container .disconnect p.content {
+.zh .setup-notice .overlay-container .disconnect p.content,
+.zh .setup-notice .overlay-container .restart-connect p.content {
     text-align: left;
 }
 

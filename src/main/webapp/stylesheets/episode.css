@@ -45,6 +45,10 @@
     padding: 4px 5px 0 !important;
 }
 
+body.mac #title-func ul li p span a {
+    font-weight: 300;
+}
+
 /**
 *
 * =ep-time-list

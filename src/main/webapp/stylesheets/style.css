@@ -719,10 +719,59 @@ background: #e4e4e4;
 }
 
 #studio-nav .studio-nav-wrap .studio-setup {
+    position: relative;
     float: right;
+    width: 165px;
+    margin: -3px 35px 0 0;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup .reconnect-notice {
+    position: absolute;
+    top: 26px;
+    left: -15px;
+    width: 195px;
+    height: 62px;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup .reconnect-notice img {
+    position: absolute;
+    top: -29px;
+    right: 8px;
+    z-index: 11;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup .reconnect-notice .notice-left {
+    display: none;
+    position: relative;
+    z-index: 5;
+    height: 62px;
+    padding-left: 24px;
+    background: url(../images/bg_tip_left_error.png) no-repeat 0 bottom;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup .reconnect-notice .notice-right {
+    display: block;
+    height: 62px;
+    padding-right: 24px;
+    background: url(../images/bg_tip_right_error.png) no-repeat right bottom;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup .reconnect-notice .notice-middle {
+    display: block;
+    height: 58px;
+    padding: 4px 0 0;
+    background: url(../images/bg_tip_middle_error.png) repeat-x 0 bottom;
+    color: #fff;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 17px;
+}
+
+#studio-nav .studio-nav-wrap .studio-setup .btn-left {
+    position: relative;
+    z-index: 10;
     width: 162px;
     height: 31px;
-    margin: -3px 35px 0 0;
     padding-left: 3px;
     background: url(../images/bg_btn_left.png) no-repeat 0 0;
 }
@@ -742,16 +791,16 @@ background: #e4e4e4;
     text-align: center;
 }
 
-#studio-nav .studio-nav-wrap .studio-setup:hover {
-    background: url(../images/bg_btn_left_press.png) no-repeat 0 0;
+#studio-nav .studio-nav-wrap .studio-setup .btn-left:hover {
+    background: url(../images/popup_btn_left_press.png) no-repeat 0 0;
 }
 
-#studio-nav .studio-nav-wrap .studio-setup:hover .btn-right {
-    background: url(../images/bg_btn_right_press.png) no-repeat right 0;
+#studio-nav .studio-nav-wrap .studio-setup .btn-left:hover .btn-right {
+    background: url(../images/popup_btn_right_press.png) no-repeat right 0;
 }
 
-#studio-nav .studio-nav-wrap .studio-setup:hover .btn-middle {
-    background: url(../images/bg_btn_middle_press.png) repeat-x;
+#studio-nav .studio-nav-wrap .studio-setup .btn-left:hover .btn-middle {
+    background: url(../images/popup_btn_middle_press.png) repeat-x;
 }
 
 #studio-nav .studio-nav-wrap .studio-setup .btn-middle a {

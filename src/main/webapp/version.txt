@@ -1,419 +1,75 @@
-Revision: 656
+Revision: 680
 Author: chihwen
-Date: 下午 09:45:40, 2012年12月22日
+Date: 下午 10:34:39, 2012年12月28日
 Message:
-修正從 FB 移除「管理你的粉絲專頁」權限後，頻道頁 auto share 顯示 Timeline 核選狀態不正確的錯誤
+修正完成 facebook connect 後，auto share 粉絲專頁主核選鈕，沒有正確移除 disabled 狀態的錯誤
 
-1. 修正從 FB 移除「管理你的粉絲專頁」權限後，頻道頁 auto share 顯示 Timeline 核選狀態不正確的錯誤。
-2. 修正 Studio Setup 與頻道頁 auto share 狀態及介面交互同步後，disabled狀態未正確重置的錯誤。
-3. 同步 src 分支版本 654~655。
-   1. 更新 episode list first 四張 banner。
-   2. 調整 episode list first 從有 scrollbar 切換到沒有 scroll 時，slider 還是有效的問題。
+1. 修正完成 facebook connect 後，auto share 粉絲專頁主核選鈕，沒有正確移除 disabled 狀態的錯誤。
+2. 調整 checkRestartConnect() 偵測關鍵授權函式中，針對 pages 回應為字串格式的判斷。
 issue 5698
 ----
-Modified : /fakeapi/images/banner_01.png
-Modified : /fakeapi/images/banner_02.png
-Modified : /fakeapi/images/banner_03.png
-Modified : /fakeapi/images/banner_04.png
+Modified : /fakeapi/javascripts/controller.js
+
+Revision: 676
+Author: chihwen
+Date: 下午 11:38:48, 2012年12月26日
+Message:
+重構 Facebook Connect 相關腳本設計
+
+1. 在物件取用前，增加物件屬性檢查，以確保資料正確。
+2. 針對設計註解說明，以便未來維護之用。
+issue 5698
+----
 Modified : /fakeapi/javascripts/basic.js
 Modified : /fakeapi/javascripts/channel.js
 Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/javascripts/episode.js
 
-Revision: 653
+Revision: 674
 Author: chihwen
-Date: 上午 09:05:51, 2012年12月22日
+Date: 下午 01:24:26, 2012年12月26日
 Message:
-同步 src 分支版本 652 (episode list 的 channel name 寬度算法預留 1px 避免破版)
+同步 src 分支版本 673
+
+1. titlecard tooltip 改為寬度自動延展的呈現方式。
+2. 增加 mac 系統的 js 判斷，方便 css 針對 mac 做調整。
 issue 5698
 ----
-Modified : /fakeapi/javascripts/episode.js
-
-Revision: 651
-Author: chihwen
-Date: 上午 10:51:12, 2012年12月21日
-Message:
-同步 src 分支版本 650 (按鈕 studio setup 加寬，episode list channel 旁的按鈕也一併加寬)
-issue 5698
-----
-Modified : /fakeapi/stylesheets/episode.css
-Modified : /fakeapi/stylesheets/style.css
-
-Revision: 648
-Author: chihwen
-Date: 上午 12:55:13, 2012年12月21日
-Message:
-因應 facebook.pages 有可能為字串型態，增加取值判斷
-
-1. 當 user access_token 失效時，facebook.pages 就會用來記錄失效的原因字串，
-   因此要加入必要的取值判斷，將字串型態列入例外處理。
-2. 9x9 autosharing API 所記錄的資料，有可能因為 user access_token 已失效，
-   而無法透過 9x9 sns_auth API 取回 facebook.pages (page access_token)，
-   若 client 無法取得 page accessToken 則無法組合出 auto sharing 表單的送出參數，
-   所以這邊也要確保呈現的 UI 資料，與實際的 pageId hidden 資料一致才行。
-issue 5698
-----
-Modified : /fakeapi/javascripts/controller.js
-
-Revision: 647
-Author: chihwen
-Date: 下午 11:12:09, 2012年12月20日
-Message:
-避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=647)
-
-1. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=647)。
-2. 同步 src 分支版本 646 (調整 episode list 在 ie 會跑版的問題)。
-issue 5638
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/epcurate-publish.html
-Modified : /fakeapi/episode-list.html
-Modified : /fakeapi/index.html
-Modified : /fakeapi/javascripts/episode.js
-Modified : /fakeapi/login.html
-Modified : /fakeapi/stylesheets/episode.css
-Modified : /fakeapi/stylesheets/lightbox.css
-Modified : /fakeapi/stylesheets/style.css
-
-Revision: 645
-Author: chihwen
-Date: 上午 01:11:00, 2012年12月20日
-Message:
-修正 publish 頁在 save 後，可能預設導向 curation 頁的問題
-
-1. 修正 publish 頁在 save 後，可能預設導向 curation 頁的問題。
-   https://bugzilla.teltel.com/show_bug.cgi?id=11769
-2. curation 頁在截完字後 ep name 往 ch name 靠。
-3. 頻道頁 category 下拉選單，在 resize 後重新計算補白 li 個數。
-4. 同步 src 分支版本 644。
-   1. 調整 channel add、channel setting category 下拉 liquid。
-   2. 調整 channel add、channel setting Thumbnail default 圖片及 wording。
-   3. 調整 channel add、channel setting 右側文字斷行。
-   4. 調整 studio setup、episode list title-func 按鈕寬度，改成三個都一樣寬。
-   5. radio、checkbox check之後文字變粗。
-   6. 同步 fakeapi 「Auto share new published episode」下拉 js。
-   7. Curation create new episode 完成後的 message 加粗「Publish this episode at the next step」。
-   8. 調整 curation、publish 上傳圖片 wording。
-   9. episode-list-first、episode-list-favorite-first 的標題由圖改為文字。
-issue 5638
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/episode-list.html
-Added : /fakeapi/images/ch_default.png
-Modified : /fakeapi/images/loading.gif
-Added : /fakeapi/images/thumbnail_box.png
 Modified : /fakeapi/javascripts/basic.js
-Modified : /fakeapi/javascripts/channel.js
-Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/javascripts/epcurate.js
-Modified : /fakeapi/javascripts/episode.js
-Modified : /fakeapi/lang/en.json
-Modified : /fakeapi/lang/zh.json
 Modified : /fakeapi/stylesheets/channel.css
 Modified : /fakeapi/stylesheets/ep-curation.css
-Modified : /fakeapi/stylesheets/epcurate.css
 Modified : /fakeapi/stylesheets/episode.css
-Modified : /fakeapi/stylesheets/lightbox.css
-Modified : /fakeapi/stylesheets/style.css
 
-Revision: 643
+Revision: 672
 Author: chihwen
-Date: 下午 05:40:38, 2012年12月19日
+Date: 下午 07:20:58, 2012年12月25日
 Message:
-完成頻道頁 auto share 表單送出與 9x9 API 串接
+調整頻道表單頁，在變動區域及類別後，動態調整 scrollbar
 
-1. 完成頻道頁 auto share 表單送出與 9x9 API 串接。
-2. 當 user 有核選 Page 卻沒有核選其下多選 UI 時，就視為沒有勾選，儲存後顯示為 unchecked。
-3. 調整 fakeapi 假資料結構，當採 PUT 方法更新資料時，自動重建一個假的資料 id 回應給 client 應用。
-issue 5638
+1. 調整頻道表單頁，在變動區域及類別後，動態調整 scrollbar。
+2. 同步 src 分支版本 671。
+issue 5698
 ----
 Modified : /fakeapi/fakeapi/channels.php
-Modified : /fakeapi/fakeapi/episodes.php
-Modified : /fakeapi/fakeapi/programs.php
-Modified : /fakeapi/javascripts/channel.js
-
-Revision: 642
-Author: chihwen
-Date: 下午 02:39:57, 2012年12月19日
-Message:
-將所有 uniform 的狀態更新，改用 $.uniform.update 來操作，而不直接變更 uniform 產生出來的樣式
-
-1. 在使用 update 前，要確保 uniform 已初始化。
-2. 應用模式為在動態變更表單組件狀態後 (checked, disabled, selected) 立即更新該組件。
-issue 5638
-----
-Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/javascripts/epcurate.js
-
-Revision: 641
-Author: chihwen
-Date: 下午 11:32:34, 2012年12月18日
-Message:
-完成頻道頁 auto share 介面呈現
-
-1. 完成頻道頁 auto share 介面呈現。
-2. 完善同步 Studio setup 與頻道頁 auto share 狀態及介面。
-3. 完善頻道頁 auto share 加入 connect facebook 事件處理。
-4. 同步 src 分支版本 640。
-5. 微調 fakeapi 假資料，以便介面測試。
-6. 調整 config.js 加入 CMS_CONF.FB_PAGES_MAP 以便儲存 userId 及其 accessToken 對應資料。
-
-TODO：
-頻道頁 auto share 表單送出與 9x9 API 串接。
-issue 5638
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/fakeapi/channels_autosharing_facebook.php
-Modified : /fakeapi/fakeapi/users_sns_auth_facebook.php
-Added : /fakeapi/images/setting_btn_control.png
-Modified : /fakeapi/javascripts/basic.js
-Modified : /fakeapi/javascripts/channel.js
-Modified : /fakeapi/javascripts/config.js
-Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/stylesheets/channel.css
-Modified : /fakeapi/stylesheets/lightbox.css
-Modified : /fakeapi/stylesheets/style.css
-
-Revision: 639
-Author: chihwen
-Date: 下午 08:20:36, 2012年12月17日
-Message:
-同步 Studio setup 與頻道頁 auto share 狀態及介面
-
-1. 同步 Studio setup 與頻道頁 auto share 狀態及介面 (尚未完工)。
-2. 頻道頁 auto share 加入 connect facebook 事件處理 (尚未完工)。
-3. 同步 src 分支版本 635~638。
-4. 校正 fakeapi/users_sns_auth_facebook.php 裡的 pages 資料結構。
-5. 調整 basic.js 將 checkCriticalPerm() 提昇為共用函式，以便頻道頁裡的 auto share 機制取用。
-6. 調整 basic.js 改用 on 註冊 checkbox 及 radio click highlight 事件，以便整合 template 機制。
-issue 5638
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/fakeapi/users_sns_auth_facebook.php
-Modified : /fakeapi/images/btn_on.png
-Modified : /fakeapi/javascripts/basic.js
-Modified : /fakeapi/javascripts/channel.js
-Modified : /fakeapi/stylesheets/channel.css
-Modified : /fakeapi/stylesheets/lightbox.css
-
-Revision: 634
-Author: chihwen
-Date: 上午 12:16:09, 2012年12月15日
-Message:
-完成頻道頁 FB auto share 套版雛形
-
-1. 完成頻道頁 FB auto share 套版雛形。
-2. 更新上傳圖片大小語系檔，將頻道頁改為 300x300 其他改為 720x405，並移除用不到的語系。
-3. 改良 controller.js 將 render page 邏輯改用 switch 語句以增進語意。
-4. 同步 src 分支版本 629, 630, 632, 633。
-issue 5638
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/epcurate-publish.html
-Modified : /fakeapi/javascripts/basic.js
-Modified : /fakeapi/javascripts/channel.js
-Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/lang/en.json
-Modified : /fakeapi/lang/zh.json
-Modified : /fakeapi/stylesheets/channel.css
-Modified : /fakeapi/stylesheets/style.css
-
-Revision: 631
-Author: chihwen
-Date: 上午 11:38:58, 2012年12月14日
-Message:
-完成 Studio Setup 邏輯串接
-
-1. 完成 Studio Setup 邏輯串接。
-2. 加入 FB Connect 通用結構 <div id="fb-root"></div>。
-3. 調整 FB Connect 通用 overlay 結構。
-4. 修正 fakeapi/users_sns_auth_facebook.php JSON 結構，並加入處理耗時模擬。
-5. 調整 footer 語系切換檢查，避免資料未 ready 就驅動語系切換邏輯。
-6. 調整 config.js 加入 CMS_CONF.USER_SNS_AUTH 用來快取 9x9 API 所記錄的 FB Connect 資料。
-7. 避開 IE8 無法操作 document title 的問題，以免天、地共用區塊無法切換語系。
-8. 調整中文語系檔，將「粉絲頁」改為「粉絲專頁」。
-9. 同步 src 分支版本 629, 630 樣式 (TODO：注意尚未全部同步完)。
-10. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=631)。
-issue 5638
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/epcurate-publish.html
-Modified : /fakeapi/episode-list.html
-Modified : /fakeapi/fakeapi/users_sns_auth_facebook.php
-Modified : /fakeapi/index.html
-Modified : /fakeapi/javascripts/basic.js
-Modified : /fakeapi/javascripts/config.js
-Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/lang/zh.json
-Modified : /fakeapi/login.html
-Modified : /fakeapi/stylesheets/channel.css
-Modified : /fakeapi/stylesheets/lightbox.css
-Modified : /fakeapi/stylesheets/style.css
-
-Revision: 627
-Author: chihwen
-Date: 上午 01:01:40, 2012年12月13日
-Message:
-完成 FB Share 套版雛形
-
-1. 完成 FB Share 套版雛形。
-2. 完成 FB Share 多國語系架構。
-3. 修正 Episode list crumb 截字處理，在 episode 資料為空的情境下會跑版的問題。
-4. 將 jQuery UI 由 v1.9.2 降級回 v1.8.24，
-   以避免預設在不夠高產生 scrollbar 的情境下，進行 scroll 會產生 js 錯誤。
-
-TODO：
-1. 套用並整合 Facebook JavaScript SDK 函式庫。
-2. 串接 9x9 FB 相關 API。
-issue 5638
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/epcurate-publish.html
-Modified : /fakeapi/episode-list.html
-Added : /fakeapi/images/bg_popup_box_m_left.png
-Added : /fakeapi/images/bg_popup_box_m_middle.png
-Added : /fakeapi/images/bg_popup_box_m_right.png
-Added : /fakeapi/images/check_box_disable.png
-Added : /fakeapi/images/icon_studio_setup.png
-Added : /fakeapi/images/icon_trimtime_left.png
-Added : /fakeapi/images/icon_trimtime_right.png
-Added : /fakeapi/images/multi_choose_left.png
-Added : /fakeapi/images/multi_choose_left_disable.png
-Added : /fakeapi/images/multi_choose_left_on.png
-Added : /fakeapi/images/multi_choose_middle.png
-Added : /fakeapi/images/multi_choose_middle_disable.png
-Added : /fakeapi/images/multi_choose_middle_on.png
-Added : /fakeapi/images/multi_choose_minus.png
-Added : /fakeapi/images/multi_choose_plus.png
-Added : /fakeapi/images/multi_choose_plus_disable.png
-Added : /fakeapi/images/multi_choose_right.png
-Added : /fakeapi/images/multi_choose_right_disable.png
-Added : /fakeapi/images/multi_choose_right_on.png
-Added : /fakeapi/images/text_studio_setup.png
-Added : /fakeapi/images/text_studio_setup_zh.png
-Modified : /fakeapi/index.html
-Modified : /fakeapi/javascripts/basic.js
-Modified : /fakeapi/javascripts/channel.js
-Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/javascripts/epcurate.js
-Modified : /fakeapi/javascripts/episode.js
-Modified : /fakeapi/lang/en.json
-Modified : /fakeapi/lang/zh.json
-Modified : /fakeapi/stylesheets/channel.css
-Modified : /fakeapi/stylesheets/lightbox.css
-Modified : /fakeapi/stylesheets/style.css
-
-Revision: 623
-Author: chihwen
-Date: 下午 03:25:41, 2012年12月11日
-Message:
-調整 config.js 加入 FB Share 機制相關設定
-
-1. 調整 config.js 加入 FB Share 機制相關設定。
-   1. 加入 FB Share fakeapi 設定及假 API 資料。
-      1. /fakeapi/users_sns_auth_facebook.php
-      2. /fakeapi/channels_autosharing_facebook.php
-   2. 加入 CMS_CONF.LC_MAP 以便依語系切換 FB JS SDK 函式庫。
-      1. //connect.facebook.net/en_US/all.js
-      2. //connect.facebook.net/zh_TW/all.js
-   3. 加入 FB應用程式ID CMS_CONF.FB_APP_ID 以及 FB請求權限清單 CMS_CONF.FB_REQ_PERMS 以便進行 FB Connect 之用。
-   4. 依程式環境設定不同的 FB應用程式ID，一組local開發或DS Demo用，一組9x9測試或正式用。
-2. 加入 FB 初始跨域用 channelUrl: channel.html 並依語系切換引入連結。
-   1. /lang/fb/en/channel.html for 英文版。
-   2. /lang/fb/zh/channel.html for 中文版。
-3. 改良 controller.js 以及 curation.js 中操作 YouTube API 非同步順序相依問題。
-   1. 原先是計數是否符合最後一個索引值，這樣當網路有明顯延遲現象時，就有可能漏失部份資料。
-   2. 目前改以計數已完成回傳commit的數量是否符合所傳遞資料的總數，這樣會比原先的判斷可靠，
-      這樣做的優點是確保資料正確，缺點是會受網路延遲，而影響頁面呈現的時間。
-   3. 上述作法屬於多筆非同步並聯後的同步操作，用在資料呈現上比較適合，例如 YouTube 的影音請求呈現，
-      因為此情境user比較願意等待結果，且期望呈現結果正確，但卻不適合用在資料儲存或流程切換上，
-      因為此情境比較適合非同步操作，丟了就走，複雜的處理就交由Server自行搞定就好，別讓user估等下一步。
-   4. 而非同步的同步操作，比較理想可採 jQuery Deferred 裡的 when 並聯或 pipe 串聯來組合操作，
-      不過此段變動幅度過大且較複雜，等待時機正確(非採不可或研究有成時)再作調整。
-4. 改良 controller.js 以集中 CMS_CONF.PAGE_ID 的產生邏輯。
-5. 更新 fakeapi 裡的破圖網址。
-6. 同步更新 9x9 JS SDK 函式庫。
-issue 5638
-----
-Modified : /fakeapi/fakeapi/channels.php
-Added : /fakeapi/fakeapi/channels_autosharing_facebook.php
-Modified : /fakeapi/fakeapi/channels_episodes.php
-Modified : /fakeapi/fakeapi/episodes.php
 Modified : /fakeapi/fakeapi/users_channels.php
-Added : /fakeapi/fakeapi/users_sns_auth_facebook.php
-Modified : /fakeapi/javascripts/config.js
+Modified : /fakeapi/images/bg_tip_left_error.png
+Modified : /fakeapi/images/bg_tip_middle_error.png
+Modified : /fakeapi/images/bg_tip_right_error.png
+Modified : /fakeapi/javascripts/channel.js
 Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/javascripts/nn-sdk.js
-Added : /fakeapi/lang/fb
-Added : /fakeapi/lang/fb/en
-Added : /fakeapi/lang/fb/en/channel.html
-Added : /fakeapi/lang/fb/zh
-Added : /fakeapi/lang/fb/zh/channel.html
 
-版本: 621
-作者: ada
-日期: 2012年12月7日 下午 05:50:10
-訊息:
-調整 footer 下拉 js 控制的順序
-
-調整項目：
-調整 footer 下拉 js 控制的順序。
-
-issue 5636
-
-----
-異動 : /fakeapi/javascripts/controller.js
-
-版本: 620
-作者: ada
-日期: 2012年12月7日 下午 05:38:38
-訊息:
-channel setting、channel add 下拉對齊左測、右側填滿
-
-調整項目：
-1. channel setting、channel add 下拉對齊左測、右側填滿。
-2. footer 的about us的select在英文版時,不需要出現"Press"與"Curation Contest"。
-
-issue 5636
-
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/epcurate-publish.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/stylesheets/channel.css
-
-Revision: 614
+Revision: 670
 Author: chihwen
-Date: 下午 12:16:54, 2012年12月5日
+Date: 下午 02:36:54, 2012年12月25日
 Message:
-微調 YouTube API 的錯誤回應 notice 判斷
+調整 restart connection 相關語系文案
 
-1. 微調 YouTube API 的錯誤回應 notice 判斷。
-2. 針對 controller.js 進行程式碼清理，以便通過 JSLint 程式碼品質管控工具的檢查 (http://www.jslint.com/)。
-3. 升級 jQuery Core 由 v1.8.2 更新為 v1.8.3。
-4. 升級 jQuery UI 由 v1.8.24 更新為 v1.9.2。
-5. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=613)。
-issue 5594
+1. 調整 restart connection 相關語系文案。
+2. 改良 channel.js 及 controller.js 避免 ch add 及 ch setting 預設就產生 scrollbar，並避免無 scrollbar 的狀況下，還可以滾動畫面。
+3. 改良 epcurate.js 避免無 scrollbar 的狀況下，還可以滾動畫面。
+4. 調整右上角 studio-setup 結構，移除 fb-connect class，避免有侷限用途之意，由腳本動態判斷呈現什麼 overlay。
+5. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=670)
+6. 同步 src 分支版本 669。
+issue 5698
 ----
 Modified : /fakeapi/channel-add.html
 Modified : /fakeapi/channel-setting.html
@@ -421,24 +77,57 @@ Modified : /fakeapi/epcurate-curation.html
 Modified : /fakeapi/epcurate-publish.html
 Modified : /fakeapi/episode-list.html
 Modified : /fakeapi/index.html
+Modified : /fakeapi/javascripts/channel.js
 Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/javascripts/epcurate.js
+Modified : /fakeapi/lang/en.json
+Modified : /fakeapi/lang/zh.json
 Modified : /fakeapi/login.html
+Modified : /fakeapi/stylesheets/channel.css
+Modified : /fakeapi/stylesheets/lightbox.css
+Modified : /fakeapi/stylesheets/style.css
 
-Revision: 613
-Author: ada
-Date: 上午 11:05:53, 2012年12月5日
+Revision: 668
+Author: chihwen
+Date: 上午 12:49:41, 2012年12月25日
 Message:
-調整 curation storyboard-info 一開始會佔住超出範圍高度的問題
+完成 Facebook Restart Connection 偵測功能
 
-調整項目：
-調整 curation storyboard-info 一開始會佔住超出範圍高度的問題。
-issue 5594
+1. 完成 Facebook Restart Connection 偵測功能。
+   1. 調整 initFacebookJavaScriptSdk() 以便整合關鍵授權檢查，採 callback 機制實現邏輯順序管控。
+   2. 加入 checkRestartConnect() 以便偵測關鍵授權。
+2. 完成 Studio Setup reconnect 通知及連結功能。
+3. 完成頻道頁 auto share reconnect 介面切換及連結功能。
+4. 完成 Reconnect 相關語系設定及切換功能。
+5. 調整 config.js 加入 CMS_CONF.FB_RESTART_CONNECT 用來記錄是否採取 reconnect 流程。
+6. 調整頻道頁 renderAutoShareUI() 邏輯，在 reconnect 之後允許重建原來已核選的資料。
+7. 改良 checkCriticalPerm() 考量參數重要性，將 callback 參數從第一順位移到最後，同時也暗示之後要回呼之意。
+   改良 checkCriticalPerm() 將陣列式存取屬性，改為物件式存取屬性，以加快解析效能。
+8. 當為 Restart connection 狀態時，若 Save 送出表單，則對 fb connect 與 auto sharing 皆不進行任何異動。
+9. 調整 channel list 列表 Followers 抓取欄位，由 cntFollower 改為 cntSubscribe。
+10. 同步 src 分支版本 661~667。
+
+TODO：
+1. Studio Setup reconnect 中文版文案對齊問題。
+2. Studio Setup reconnect 通知發光效果調整。
+3. ch add, ch setting scrollbar 調整。
+issue 5698
 ----
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/stylesheets/ep-curation.css
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/episode-list.html
+Added : /fakeapi/images/bg_tip_left_error.png
+Added : /fakeapi/images/bg_tip_middle_error.png
+Added : /fakeapi/images/bg_tip_right_error.png
+Added : /fakeapi/images/icon_notification.png
+Modified : /fakeapi/index.html
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/config.js
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/lang/en.json
+Modified : /fakeapi/lang/zh.json
+Modified : /fakeapi/stylesheets/channel.css
+Modified : /fakeapi/stylesheets/lightbox.css
+Modified : /fakeapi/stylesheets/style.css
 
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 4185
-Last Changed Date: 2012-12-26 14:29:58 +0800 (Wed, 26 Dec 2012)

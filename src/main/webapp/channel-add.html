@@ -5,29 +5,29 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=647" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=647" />
-<link rel="stylesheet" href="stylesheets/uniform.css?v=647" />
-<link rel="stylesheet" href="stylesheets/channel.css?v=647" />
+<link rel="stylesheet" href="stylesheets/style.css?v=670" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=670" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=670" />
+<link rel="stylesheet" href="stylesheets/channel.css?v=670" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=647"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=647"></script>
-<script src="javascripts/jquery.ellipsis.js?v=647"></script>
-<script src="javascripts/jquery.blockUI.js?v=647"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=647"></script>
-<script src="javascripts/jquery.charcounter.min.js?v=647"></script>
-<script src="javascripts/jquery.uniform.min.js?v=647"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=647"></script>
-<script src="javascripts/jquery.cookie.js?v=647"></script>
-<script src="javascripts/json2.js?v=647"></script>
-<script src="javascripts/purl.js?v=647"></script>
-<script src="javascripts/swfupload/swfupload.js?v=647"></script>
-<script src="javascripts/vertical.slider.js?v=647"></script>
-<script src="javascripts/config.js?v=647"></script>
-<script src="javascripts/controller.js?v=647"></script>
-<script src="javascripts/basic.js?v=647"></script>
-<script src="javascripts/channel.js?v=647"></script>
+<script src="javascripts/nn-sdk.js?v=670"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=670"></script>
+<script src="javascripts/jquery.ellipsis.js?v=670"></script>
+<script src="javascripts/jquery.blockUI.js?v=670"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=670"></script>
+<script src="javascripts/jquery.charcounter.min.js?v=670"></script>
+<script src="javascripts/jquery.uniform.min.js?v=670"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=670"></script>
+<script src="javascripts/jquery.cookie.js?v=670"></script>
+<script src="javascripts/json2.js?v=670"></script>
+<script src="javascripts/purl.js?v=670"></script>
+<script src="javascripts/swfupload/swfupload.js?v=670"></script>
+<script src="javascripts/vertical.slider.js?v=670"></script>
+<script src="javascripts/config.js?v=670"></script>
+<script src="javascripts/controller.js?v=670"></script>
+<script src="javascripts/basic.js?v=670"></script>
+<script src="javascripts/channel.js?v=670"></script>
 <title>9x9.tv - Create a new channel</title>
 </head>
 <body>
@@ -60,7 +60,13 @@
 <ul>
 <li class="on"><span><a href="./">My Channels</a></span></li>
 </ul>
-<p class="studio-setup"><span class="btn-right"><span class="btn-middle"><a href="#"><img src="images/icon_studio_setup.png" alt="" />Studio Setup</a></span></span></p>
+<div class="studio-setup">
+<p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="#"><img src="images/icon_studio_setup.png" alt="" />Studio Setup</a></span></span></p>
+<div class="reconnect-notice hide">
+<img src="images/icon_notification.png" alt="" />
+<p class="notice-left"><span class="notice-right"><span class="notice-middle langkey">Connection is inactive, click to restart it.</span></span></p>
+</div>
+</div>
 </div>
 </div>
 
@@ -193,6 +199,11 @@
 <a id="fb-reconnect" href="javascript:void(0);"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'If fail to auto share to Facebook, please go to Studio Setup to re-connect to Facebook and try again.'])}</span></span></span></a>
 </div>
 </div>
+<div class="reconnected hide">
+<img src="images/icon_fb.png" alt="facebook" />
+<p class="btns btn-reconnected"><span class="btn-right"><span class="btn-middle"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Restart connection'])}</a></span></span></p>
+<p class="reconnect-notice clear">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.'])}</p>
+</div>
 </div>
 </div>
 <div class="form-btn">
@@ -309,6 +320,22 @@
 <a href="#" class="switch-off">OFF</a>
 </p>
 <p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
+</div>
+</div>
+</div>
+
+<div id="restart-connect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap restart-connect">
+<a href="#" class="btn-close">Close</a>
+<h4><img src="images/text_studio_setup.png" alt="" /></h4>
+<div class="reconnect-func">
+<span class="content">Connect to</span>
+<img src="images/icon_fb.png" alt="facebook" class="icon" />
+<p class="btns btn-reconnect"><span class="btn-right"><a href="#">Restart connection</a></span></p>
+</div>
+<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
+<p class="content notice">Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.</p>
 </div>
 </div>
 </div>

@@ -245,6 +245,10 @@ $(function () {
     $(window).resize(function () {
         setFormWidth();
         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+        if ('none' == $('#main-wrap-slider').css('display')) {
+            $('#main-wrap-slider .slider-vertical').slider('destroy');
+            $('#content-main-wrap').css('top', '0');
+        }
     });
 
     // uniform

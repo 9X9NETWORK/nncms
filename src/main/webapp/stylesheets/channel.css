@@ -14,6 +14,10 @@
     line-height: 27px;
 }
 
+body.mac #title-func h2 {
+    font-weight: 300;
+}
+
 #title-func h2 .title-crumb {
     position: absolute;
     top: 0;
@@ -30,6 +34,10 @@
 
 #channel-name {
     display: block;
+}
+
+#title-func .btns {
+    width: 162px;
 }
 
 /**
@@ -443,6 +451,7 @@
 #content-main-wrap form .fminput .fmfield p.text span .text {
     width: 485px;
     height: 29px;
+    padding-left: 4px;
     border: none;
     background: url(../images/input_box_middle.png) repeat-x;
     color: #555;
@@ -918,6 +927,18 @@
 
 #content-main-wrap form .fminput .fmfield .connected .share-item a:hover .tip {
     display: block;
+}
+
+#content-main-wrap form .fminput .fmfield .reconnected img {
+    float: left;
+    margin: 5px 11px 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .reconnected .reconnect-notice {
+    width: 526px;
+    margin-left: 150px;
+    color: #f00;
+    line-height: 17px;
 }
 
 #content-main-wrap form .fminput .fmfield .tag-list {

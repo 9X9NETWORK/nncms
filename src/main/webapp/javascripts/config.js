@@ -148,6 +148,7 @@ var CMS_CONF = {
         'user_relationship_details',
         'user_subscriptions'
     ],
+    FB_RESTART_CONNECT: false,
     FB_PAGES_MAP: null,
     USER_SNS_AUTH: null
 };

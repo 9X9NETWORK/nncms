@@ -1,6 +1,11 @@
 $(function () {
-    setFormHeight();
-    autoHeight();
+    if ($('#settingForm').length > 0) {
+        autoHeight();
+        setFormHeight();
+    } else {
+        setFormHeight();
+        autoHeight();
+    }
     scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
 
     // common unblock
@@ -203,7 +208,9 @@ $(function () {
                             return $.inArray(item, categories);
                         }
                     }).appendTo('#browse-category');
+                    autoHeight();
                     setFormHeight();
+                    scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
                     $('.category').removeClass('disable').addClass('enable');
                     $('#categoryId-select-txt').text(nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Select a category']));
                 });
@@ -229,6 +236,9 @@ $(function () {
                 } else {
                     $('.tag-list').addClass('hide');
                 }
+                autoHeight();
+                setFormHeight();
+                scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
             });
         }
         $(this).parent().parent().children('.select-meta').val(metadata);
@@ -270,7 +280,7 @@ $(function () {
 
     // channel form facebook auto share (callback of checkCriticalPerm)
     function handleAutoSharePerm(hasCriticalPerm, authResponse) {
-        if (hasCriticalPerm) {
+        if (hasCriticalPerm && authResponse && authResponse.userID && authResponse.accessToken) {
             $.unblockUI();
             showProcessingOverlay();
             var parameter = {
@@ -281,16 +291,18 @@ $(function () {
                 if ('OK' === result) {
                     nn.api('GET', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {userId: CMS_CONF.USER_DATA.id}), null, function (facebook) {
                         $('#overlay-s').fadeOut('slow', function () {
+                            // sync setup studio
+                            CMS_CONF.FB_RESTART_CONNECT = false;
+                            $('#studio-nav .reconnect-notice').addClass('hide');
+                            CMS_CONF.FB_PAGES_MAP = buildFacebookPagesMap(facebook);
+                            CMS_CONF.USER_SNS_AUTH = facebook;
+                            $('.setup-notice p.fb-connect a.switch-on').removeClass('hide');
+                            $('.setup-notice p.fb-connect a.switch-off').addClass('hide');
                             // sync channel setting
                             if ($('#settingForm').length > 0) {
                                 var isAutoCheckedTimeline = true;
                                 renderAutoShareUI(facebook, isAutoCheckedTimeline);
                             }
-                            // sync setup studio
-                            CMS_CONF.FB_PAGES_MAP = buildFacebookPagesMap(facebook);
-                            CMS_CONF.USER_SNS_AUTH = facebook;
-                            $('.setup-notice p.fb-connect a.switch-on').removeClass('hide');
-                            $('.setup-notice p.fb-connect a.switch-off').addClass('hide');
                         });
                     });
                 }
@@ -302,12 +314,12 @@ $(function () {
             });
         }
     }
-    $('#content-main').on('click', '#content-main-wrap .switch-off', function () {
+    $('#content-main').on('click', '#content-main-wrap .switch-off, #content-main-wrap .btn-reconnected', function () {
         // connect facebook
         FB.login(function (response) {
             if (response.authResponse) {
                 // connected but not sure have critical permission
-                checkCriticalPerm(handleAutoSharePerm, response.authResponse);
+                checkCriticalPerm(response.authResponse, handleAutoSharePerm);
             } else {
                 // cancel login nothing happens (maybe unknown or not_authorized)
                 nn.log(response, 'debug');
@@ -390,7 +402,7 @@ $(function () {
             var qrystring = $('#settingForm').serialize(),
                 parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
             nn.api('PUT', CMS_CONF.API('/api/channels/{channelId}', {channelId: CMS_CONF.USER_URL.param('id')}), parameter, function (channel) {
-                if ($('.connect-switch.hide').length > 0) {
+                if ($('.connect-switch.hide').length > 0 && $('.reconnected.hide').length > 0) {
                     var userIds = [],
                         accessTokens = [];
                     if ($('#fbPage').is(':checked') && '' !== $.trim($('#pageId').val())) {
@@ -445,7 +457,7 @@ $(function () {
             var qrystring = $('#settingForm').serialize(),
                 parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
             nn.api('POST', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), parameter, function (channel) {
-                if ($('.connect-switch.hide').length > 0) {
+                if ($('.connect-switch.hide').length > 0 && $('.reconnected.hide').length > 0) {
                     var userIds = [],
                         accessTokens = [];
                     if ($('#fbPage').is(':checked') && '' !== $.trim($('#pageId').val())) {
@@ -495,10 +507,19 @@ $(function () {
     });
 
     $(window).resize(function () {
-        setFormHeight();
         ellipsisPage();
-        autoHeight();
+        if ($('#settingForm').length > 0) {
+            autoHeight();
+            setFormHeight();
+        } else {
+            setFormHeight();
+            autoHeight();
+        }
         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+        if ('none' == $('#main-wrap-slider').css('display')) {
+            $('#main-wrap-slider .slider-vertical').slider('destroy');
+            $('#content-main-wrap').css('top', '0');
+        }
     });
 });
 

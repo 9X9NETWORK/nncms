@@ -744,7 +744,7 @@ padding-right: 8px;
     position: absolute;
     top: -30px;
     left: -7px;
-    width: 80px;
+    float: left;
     height: 32px;
     color: #555;
     font-size: 13px;
@@ -762,82 +762,53 @@ padding-right: 8px;
 }
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .tip .tip-left {
-    display: block;
+    float: left;
     height: 28px;
     padding-left: 7px;
     background: url(../images/bg_tip_left.png) no-repeat 0 0;
 }
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .tip .tip-right {
-    display: block;
+    float: left;
     height: 28px;
     padding-right: 7px;
     background: url(../images/bg_tip_right.png) no-repeat right 0;
 }
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li .tip .tip-middle {
-    display: block;
+    float: left;
     height: 28px;
     background: url(../images/bg_tip_middle.png) repeat-x;
     line-height: 28px;
-}
-
-#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-weight .tip {
-    width: 40px;
-}
-
-.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-weight .tip {
-    width: 50px;
-}
-
-.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-weight .tip img {
-    left: 12px;
-    margin: 0;
+    white-space: nowrap;
 }
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-style .tip {
-    width: 47px;
     left: -12px;
 }
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-color .tip {
-    width: 76px;
     left: -21px;
 }
 
-#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-l .tip,
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-l .tip {
+    left: -29px;
+}
+
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-s .tip {
-    width: 85px;
-    left: -31px;
+    left: -27px;
 }
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left .tip {
-    width: 66px;
-    left: -22px;
-}
-
-.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left .tip {
-    width: 72px;
-}
-
-.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left .tip img {
-    left: 26px;
-    margin: 0;
+    left: -21px;
 }
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-center .tip {
-    width: 86px;
     left: -31px;
 }
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-right .tip {
-    width: 72px;
-    left: -41px;
-}
-
-#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-right .tip img {
-    left: 45px;
-    margin: 0;
+    left: -25px;
 }
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li:hover .tip {

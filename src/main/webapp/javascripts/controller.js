@@ -26,6 +26,7 @@ nn.on(500, function (jqXHR, textStatus) {
 function renderConnectFacebookUI() {
     $('#settingForm .connect-switch').removeClass('hide');
     $('#settingForm .connected').addClass('hide');
+    $('#settingForm .reconnected').addClass('hide');
     $('#fbTimeline').removeAttr('checked');
     $('#fbTimeline-label').removeClass('checked');
     $.uniform.update('#fbTimeline');
@@ -41,7 +42,13 @@ function renderConnectFacebookUI() {
 
 function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
     $('#settingForm .connect-switch').addClass('hide');
-    $('#settingForm .connected').removeClass('hide');
+    if (true === CMS_CONF.FB_RESTART_CONNECT) {
+        $('#settingForm .connected').addClass('hide');
+        $('#settingForm .reconnected').removeClass('hide');
+    } else {
+        $('#settingForm .connected').removeClass('hide');
+        $('#settingForm .reconnected').addClass('hide');
+    }
     if (true === isAutoCheckedTimeline) {
         $('#fbTimeline').attr('checked', 'checked');
         $('#fbTimeline-label').addClass('checked');
@@ -52,6 +59,8 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
         $('#fbPage').attr('disabled', 'disabled');
         $.uniform.update('#fbPage');
     } else {
+        $('#fbPage').removeAttr('disabled');
+        $.uniform.update('#fbPage');
         var pages = facebook.pages,
             rowNum = 2,
             modPageLen = pages.length % rowNum,
@@ -71,9 +80,7 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
         ellipsisPage();
     }
     // checked default fadebook page
-    if (false === isAutoCheckedTimeline
-            && 'channel-setting.html' == CMS_CONF.USER_URL.attr('file')
-            && CMS_CONF.USER_URL.param('id') > 0) {
+    if ('channel-setting.html' == CMS_CONF.USER_URL.attr('file') && CMS_CONF.USER_URL.param('id') > 0) {
         nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/facebook', {channelId: CMS_CONF.USER_URL.param('id')}), null, function (autoshares) {
             if (autoshares && autoshares.length > 0) {
                 var isCheckedTimeline = false,
@@ -92,6 +99,10 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
                     $('#fbTimeline').attr('checked', 'checked');
                     $('#fbTimeline-label').addClass('checked');
                     $.uniform.update('#fbTimeline');
+                } else {
+                    $('#fbTimeline').removeAttr('checked');
+                    $('#fbTimeline-label').removeClass('checked');
+                    $.uniform.update('#fbTimeline');
                 }
                 if (tempIds.length > 0 && $('#fb-page-list li:has(a)').length > 0) {
                     $('#fb-page-list li:has(a)').each(function (i) {
@@ -103,7 +114,6 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
                         }
                     });
                     if (pageNames.length > 0) {
-                        $('#fbPage').removeAttr('disabled');
                         $('#fbPage').attr('checked', 'checked');
                         $('#fbPage-label').addClass('checked');
                         $.uniform.update('#fbPage');
@@ -129,6 +139,51 @@ function buildFacebookPagesMap(facebook) {
     }
     return fb_pages_map;
 }   // end of buildFacebookPagesMap()
+
+function checkRestartConnect(facebook, callback) {
+    var isRestartConnect = false;
+    if (facebook && facebook.userId && facebook.accessToken) {
+        if (facebook.pages && 'string' === typeof facebook.pages) {
+            // ON PURPOSE to keep deep nesting if/else level because async facebook API call
+            // lose manage_pages permission or
+            // user change facebook password or
+            // facebook has changed the session for security reasons
+            // to show restart connect UI
+            isRestartConnect = true;
+            if ('function' === typeof callback) {
+                callback(facebook, isRestartConnect);
+            }
+        } else {
+            var parameter = {
+                access_token: facebook.accessToken
+            };
+            // FB.api('/{facebook.userId}/permissions', { anticache: (new Date()).getTime() }, function (response) {
+            // ON PURPOSE to pass {facebook.userId} to compose request uri (but not hard code "me"), because not sure user had login facebook
+            nn.api('GET', 'https://graph.facebook.com/' + facebook.userId + '/permissions', parameter, function (response) {
+                var permList = null,
+                    hasCriticalPerm = false;
+                if (response.data && response.data[0]) {
+                    permList = response.data[0];
+                    if (permList.manage_pages && permList.publish_stream) {
+                        hasCriticalPerm = true;
+                    }
+                }
+                // if false === hasCriticalPerm lose critical permissions (manage_pages & publish_stream) to show restart connect UI
+                isRestartConnect = (true === hasCriticalPerm) ? false : true;
+                if ('function' === typeof callback) {
+                    callback(facebook, isRestartConnect);
+                }
+            }, 'jsonp');
+        }
+    } else {
+        // ON PURPOSE to keep deep nesting if/else level because async facebook API call
+        // not yet connect facebook
+        isRestartConnect = false;
+        if ('function' === typeof callback) {
+            callback(facebook, isRestartConnect);
+        }
+    }
+}   // end of checkRestartConnect()
 
 function addFbAsyncInitEvent(func) {
     var oldFbAsyncInit = window.fbAsyncInit;
@@ -158,36 +213,46 @@ function initFacebookJavaScriptSdk() {
         addFbAsyncInitEvent(function () {
             // init the FB JS SDK
             FB.init({
-                appId      : CMS_CONF.FB_APP_ID,                                                            // App ID from the App Dashboard
-                channelUrl : '//' + CMS_CONF.USER_URL.attr('host') + '/lang/fb/' + lang + '/channel.html',  // Channel File for x-domain communication
-                status     : true,                                                                          // check the login status upon init?
-                cookie     : true,                                                                          // set sessions cookies to allow your server to access the session?
-                xfbml      : true                                                                           // parse XFBML tags on this page?
+                appId: CMS_CONF.FB_APP_ID,                                                                  // App ID from the App Dashboard
+                channelUrl: '//' + CMS_CONF.USER_URL.attr('host') + '/lang/fb/' + lang + '/channel.html',   // Channel File for x-domain communication
+                status: true,                                                                               // check the login status upon init?
+                cookie: true,                                                                               // set sessions cookies to allow your server to access the session?
+                xfbml: true                                                                                 // parse XFBML tags on this page?
             });
         });
 
         nn.api('GET', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {userId: CMS_CONF.USER_DATA.id}), null, function (facebook) {
             if (!facebook || !facebook.userId) {
                 // ready for connect facebook
+                CMS_CONF.FB_RESTART_CONNECT = false;
+                $('#studio-nav .reconnect-notice').addClass('hide');
                 CMS_CONF.FB_PAGES_MAP = null;
                 CMS_CONF.USER_SNS_AUTH = null;
                 $('.setup-notice p.fb-connect a.switch-on').addClass('hide');
                 $('.setup-notice p.fb-connect a.switch-off').removeClass('hide');
+                // sync channel setting
+                if ($('#settingForm').length > 0) {
+                    renderConnectFacebookUI();
+                }
             } else {
                 // ready for disconnect facebook
-                CMS_CONF.FB_PAGES_MAP = buildFacebookPagesMap(facebook);
-                CMS_CONF.USER_SNS_AUTH = facebook;
-                $('.setup-notice p.fb-connect a.switch-on').removeClass('hide');
-                $('.setup-notice p.fb-connect a.switch-off').addClass('hide');
-            }
-            // sync channel setting
-            if ($('#settingForm').length > 0) {
-                if (!facebook || !facebook.userId) {
-                    renderConnectFacebookUI();
-                } else {
-                    var isAutoCheckedTimeline = ('channel-add.html' == CMS_CONF.USER_URL.attr('file')) ? true : false;
-                    renderAutoShareUI(facebook, isAutoCheckedTimeline);
-                }
+                // ON PURPOSE to use callback design pattern to maintain async order issue (make sure have critical permissions)
+                checkRestartConnect(facebook, function (facebook, isRestartConnect) {
+                    CMS_CONF.FB_RESTART_CONNECT = isRestartConnect;
+                    if (true === isRestartConnect) {
+                        $('#studio-nav .reconnect-notice').removeClass('hide');
+                        $('#studio-nav .reconnect-notice .notice-left').stop(true).delay(2000).slideDown(100).delay(10000).fadeOut(1500);
+                    }
+                    CMS_CONF.FB_PAGES_MAP = buildFacebookPagesMap(facebook);
+                    CMS_CONF.USER_SNS_AUTH = facebook;
+                    $('.setup-notice p.fb-connect a.switch-on').removeClass('hide');
+                    $('.setup-notice p.fb-connect a.switch-off').addClass('hide');
+                    // sync channel setting
+                    if ($('#settingForm').length > 0) {
+                        var isAutoCheckedTimeline = ('channel-add.html' == CMS_CONF.USER_URL.attr('file')) ? true : false;
+                        renderAutoShareUI(facebook, isAutoCheckedTimeline);
+                    }
+                });
             }
         });
     } else {
@@ -753,7 +818,6 @@ function updateChannel(pageId, id) {
                                 return $.inArray(item, categories);
                             }
                         }).appendTo('#browse-category');
-                        setFormHeight();
                         if ('' != channel.categoryId && CMS_CONF.CATEGORY_MAP[channel.categoryId]) {
                             $('.tag-list').removeClass('hide');
                             $('#categoryId-select-txt').text(CMS_CONF.CATEGORY_MAP[channel.categoryId]);
@@ -775,15 +839,22 @@ function updateChannel(pageId, id) {
                                 } else {
                                     $('.tag-list').addClass('hide');
                                 }
+                                autoHeight();
+                                setFormHeight();
                             });
+                        } else {
+                            autoHeight();
+                            setFormHeight();
                         }
                     });
                 }
-                setFormHeight();
                 autoHeight();
-                scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+                setFormHeight();
                 // ON PURPOSE to wait api (async)
-                $('#overlay-s').fadeOut(1000, function () {
+                $('#overlay-s').fadeOut(3000, function () {
+                    autoHeight();
+                    setFormHeight();
+                    scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
                     $('#settingForm .btn-save').removeClass('disable').addClass('enable');
                 });
             });
@@ -817,11 +888,11 @@ function createChannel(pageId) {
         $('.connected input').uniform();
     }
     initFacebookJavaScriptSdk();
-    setFormHeight();
     autoHeight();
-    scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+    setFormHeight();
     // ON PURPOSE to wait api (async)
     $('#overlay-s').fadeOut(1000, function () {
+        scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
         $('#settingForm .btn-cancel, #settingForm .btn-create').removeClass('disable').addClass('enable');
     });
 }   // end of createChannel()
@@ -1009,7 +1080,7 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
                 // avoid IE8 bug
                 $('title').data('langkey', $('title').text());
             }
-            $('#header a, #footer a, .overlay-l .btns a, #studio-nav a, #func-nav a, #epcurate-nav .langkey, #epcurateForm .langkey').each(function () {
+            $('#header a, #footer a, .overlay-l .btns a, #studio-nav a, #studio-nav .langkey, #func-nav a, #epcurate-nav .langkey, #epcurateForm .langkey').each(function () {
                 $(this).data('langkey', $(this).text());
             });
             $('.overlay-l h4, .overlay-l h5, .overlay-l .content').each(function () {
@@ -1036,10 +1107,12 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
                 break;
             case 'channel-add.html':
                 CMS_CONF.PAGE_ID = 'channel';
+                // because auto share template parse order issue, initFacebookJavaScriptSdk() be bundled to createChannel()
                 createChannel(CMS_CONF.PAGE_ID);
                 break;
             case 'channel-setting.html':
                 CMS_CONF.PAGE_ID = 'channel';
+                // because auto share template parse order issue, initFacebookJavaScriptSdk() be bundled to updateChannel()
                 updateChannel(CMS_CONF.PAGE_ID, CMS_CONF.USER_URL.param('id'));
                 break;
             case 'episode-list.html':
@@ -1077,7 +1150,7 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
         $('#header a').each(function () {
             $(this).text(nn._(['header', $(this).data('langkey')]));
         });
-        $('#studio-nav a').each(function () {
+        $('#studio-nav a, #studio-nav .langkey').each(function () {
             $(this).html(nn._(['studio-nav', $(this).data('langkey')]));
         });
         $('#footer a').each(function () {

@@ -274,31 +274,36 @@ function htmlEscape(string, skipAmp) {
     return data;
 }
 
-function checkCriticalPerm(callback, authResponse) {
-    var parameter = {
-        access_token: authResponse.accessToken
-    };
-    // ON PURPOSE to wait facebook sync
-    setTimeout(function () {
-        // FB.api('/me/permissions', { anticache: (new Date()).getTime() }, function (response) {
-        nn.api('GET', 'https://graph.facebook.com/me/permissions', parameter, function (response) {
-            var permList = null,
-                hasCriticalPerm = false;
-            if (response.data && response.data[0]) {
-                permList = response.data[0];
-                if (permList['manage_pages'] && permList['publish_stream']) {
-                    hasCriticalPerm = true;
+function checkCriticalPerm(authResponse, callback) {
+    if (authResponse && authResponse.accessToken) {
+        var parameter = {
+            access_token: authResponse.accessToken
+        };
+        // ON PURPOSE to wait facebook sync
+        setTimeout(function () {
+            // FB.api('/me/permissions', { anticache: (new Date()).getTime() }, function (response) {
+            nn.api('GET', 'https://graph.facebook.com/me/permissions', parameter, function (response) {
+                var permList = null,
+                    hasCriticalPerm = false;
+                if (response.data && response.data[0]) {
+                    permList = response.data[0];
+                    if (permList.manage_pages && permList.publish_stream) {
+                        hasCriticalPerm = true;
+                    }
                 }
-            }
-            // callback is handleRevokedPerm
-            if ('function' === typeof callback) {
-                callback(hasCriticalPerm, authResponse);
-            }
-        }, 'jsonp');
-    }, 1000);
+                // callback is handleRevokedPerm or handleAutoSharePerm
+                if ('function' === typeof callback) {
+                    callback(hasCriticalPerm, authResponse);
+                }
+            }, 'jsonp');
+        }, 1000);
+    }
 }
 
 $(function () {
+    if (navigator.userAgent.indexOf('Mac') > 0) {
+        $('body').addClass('mac');
+    }
     autoWidth();
     autoHeight();
 
@@ -309,7 +314,7 @@ $(function () {
 
     // studio setup (callback of checkCriticalPerm)
     function handleRevokedPerm(hasCriticalPerm, authResponse) {
-        if (hasCriticalPerm) {
+        if (hasCriticalPerm && authResponse && authResponse.userID && authResponse.accessToken) {
             $.unblockUI();
             showProcessingOverlay();
             var parameter = {
@@ -321,6 +326,8 @@ $(function () {
                     nn.api('GET', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {userId: CMS_CONF.USER_DATA.id}), null, function (facebook) {
                         $('#overlay-s').fadeOut('slow', function () {
                             // ready for disconnect facebook
+                            CMS_CONF.FB_RESTART_CONNECT = false;
+                            $('#studio-nav .reconnect-notice').addClass('hide');
                             CMS_CONF.FB_PAGES_MAP = buildFacebookPagesMap(facebook);
                             CMS_CONF.USER_SNS_AUTH = facebook;
                             $('.setup-notice p.fb-connect a.switch-on').removeClass('hide');
@@ -348,17 +355,18 @@ $(function () {
     $('#studio-nav .studio-setup').click(function () {
         // studio setup
         // ON PURPOSE to skip unsave check
+        var hook = (true === CMS_CONF.FB_RESTART_CONNECT) ? '#restart-connect' : '#fb-connect';
         $.blockUI({
-            message: $('#fb-connect')
+            message: $(hook)
         });
         return false;
     });
-    $('#fb-connect .switch-off').click(function () {
+    $('#fb-connect .switch-off, #restart-connect .btn-reconnect').click(function () {
         // connect facebook
         FB.login(function (response) {
             if (response.authResponse) {
                 // connected but not sure have critical permission
-                checkCriticalPerm(handleRevokedPerm, response.authResponse);
+                checkCriticalPerm(response.authResponse, handleRevokedPerm);
             } else {
                 // cancel login nothing happens (maybe unknown or not_authorized)
                 nn.log(response, 'debug');
@@ -369,8 +377,9 @@ $(function () {
     });
     $('#fb-connect-failed .btn-failed-ok').click(function () {
         // continue to show studio setup
+        var hook = (true === CMS_CONF.FB_RESTART_CONNECT) ? '#restart-connect' : '#fb-connect';
         $.blockUI({
-            message: $('#fb-connect')
+            message: $(hook)
         });
         return false;
     });
@@ -387,6 +396,8 @@ $(function () {
         nn.api('DELETE', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {userId: CMS_CONF.USER_DATA.id}), null, function (facebook) {
             $('#overlay-s').fadeOut('slow', function () {
                 if ('OK' === facebook) {
+                    CMS_CONF.FB_RESTART_CONNECT = false;
+                    $('#studio-nav .reconnect-notice').addClass('hide');
                     CMS_CONF.FB_PAGES_MAP = null;
                     CMS_CONF.USER_SNS_AUTH = null;
                     $('.setup-notice p.fb-connect a.switch-on').addClass('hide');
