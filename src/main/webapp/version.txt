@@ -1,11 +1,11 @@
 Revision: 682
 Author: chihwen
-Date: ¤U¤È 01:55:28, 2013¦~1¤ë2¤é
+Date: ï¿½Uï¿½ï¿½ 01:55:28, 2013ï¿½~1ï¿½ï¿½2ï¿½ï¿½
 Message:
-±NÁôÂÃ fb page list ¤U©Ô¿ï³æªº¾Þ§@¶°¤¤ºûÅ@¡AÁ×§KÅÞ¿è¤À´²¨ì¦UÄ²µoÂI
+ï¿½Nï¿½ï¿½ï¿½ï¿½ fb page list ï¿½Uï¿½Ô¿ï¿½æªºï¿½Þ§@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½Aï¿½×§Kï¿½Þ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UÄ²ï¿½oï¿½I
 
-1. ±NÁôÂÃ fb page list ¤U©Ô¿ï³æªº¾Þ§@¶°¤¤ºûÅ@¡AÁ×§KÅÞ¿è¤À´²¨ì¦UÄ²µoÂI¡C
-2. ·í¦³ scrollbar ¥X²{®É¡A¤~±NÀW¹Dªí³æ­¶¤U¤èªº¥D¥\¯à«ö¶s¡A¦Û°Ê auto height ¨ìªí³æªº¥¿¤U¤è¡C
+1. ï¿½Nï¿½ï¿½ï¿½ï¿½ fb page list ï¿½Uï¿½Ô¿ï¿½æªºï¿½Þ§@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½Aï¿½×§Kï¿½Þ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UÄ²ï¿½oï¿½Iï¿½C
+2. ï¿½? scrollbar ï¿½Xï¿½{ï¿½É¡Aï¿½~ï¿½Nï¿½Wï¿½Dï¿½ï¿½æ­¶ï¿½Uï¿½èªºï¿½Dï¿½\ï¿½ï¿½ï¿½ï¿½sï¿½Aï¿½Û°ï¿½ auto height ï¿½ï¿½ï¿½æªºï¿½ï¿½ï¿½Uï¿½ï¿½C
 issue 5698
 ----
 Modified : /fakeapi/javascripts/basic.js
@@ -13,16 +13,21 @@ Modified : /fakeapi/javascripts/channel.js
 
 Revision: 681
 Author: chihwen
-Date: ¤U¤È 01:09:56, 2013¦~1¤ë2¤é
+Date: ï¿½Uï¿½ï¿½ 01:09:56, 2013ï¿½~1ï¿½ï¿½2ï¿½ï¿½
 Message:
-§ï¨}ÀW¹Dªí³æ­¶ auto share »P¤U©Ô scrollbar ³s°Ê­«·s­pºâ°ÝÃD
+ï¿½ï¿½}ï¿½Wï¿½Dï¿½ï¿½æ­¶ auto share ï¿½Pï¿½Uï¿½ï¿½ scrollbar ï¿½sï¿½Ê­ï¿½ï¿½sï¿½pï¿½ï¿½ï¿½ï¿½D
 
-1. ·s¼W scrollToBottom() ¶°¤¤¦Û°Ê scroll ¨ìªí³æ³Ì¤U¤èªº¾Þ§@ÅÞ¿è¡C
-2. §Q¥Î setTimeout §ïµ½«D¦P¨B DOM ²£¥Í¤Î scrollbar ­«·s­pºâ°ÝÃD¡C
-3. §ïµ½ auto share ¤U©Ô¡A¦h¤À´²ÂIÁY¦X¨Æ¥óªº³B²z¡C
+1. ï¿½sï¿½W scrollToBottom() ï¿½ï¿½ï¿½ï¿½ï¿½Û°ï¿½ scroll ï¿½ï¿½ï¿½ï¿½Ì¤Uï¿½èªºï¿½Þ§@ï¿½Þ¿ï¿½C
+2. ï¿½Qï¿½ï¿½ setTimeout ï¿½ïµ½ï¿½Dï¿½Pï¿½B DOM ï¿½ï¿½ï¿½Í¤ï¿½ scrollbar ï¿½ï¿½ï¿½sï¿½pï¿½ï¿½ï¿½ï¿½Dï¿½C
+3. ï¿½ïµ½ auto share ï¿½Uï¿½Ô¡Aï¿½hï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½Yï¿½Xï¿½Æ¥óªº³Bï¿½zï¿½C
 issue 5698
 ----
 Modified : /fakeapi/javascripts/basic.js
 Modified : /fakeapi/javascripts/channel.js
 Modified : /fakeapi/javascripts/controller.js
+
+==== 9x9 ====
+Last Changed Author: barton
+Last Changed Rev: 4205
+Last Changed Date: 2013-01-02 09:23:30 +0000 (Wed, 02 Jan 2013)
 
