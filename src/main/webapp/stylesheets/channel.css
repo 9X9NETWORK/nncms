@@ -632,7 +632,7 @@ body.mac #title-func h2 {
 	top: 27px;
 	left: 1px;
 	z-index: 60;
-	width: 178px;
+	width: 180px;
 	border: 1px solid #b2b2b2;
 	border-bottom: none;
 	-moz-border-radius: 0 0 5px 5px;
@@ -643,7 +643,7 @@ body.mac #title-func h2 {
 }
 
 #content-main-wrap form .fminput .fmfield .select .select-list li {
-	width: 160px;
+	width: 162px;
 	height: 28px;
 	margin: 0;
 	padding: 0 9px;
@@ -895,7 +895,7 @@ body.mac #title-func h2 {
     display: none;
     position: absolute;
     top: -66px;
-    left: -95px;
+    left: -94px;
     z-index: 1000;
     height: 60px;
     padding-left: 4px;

@@ -373,7 +373,7 @@ $(function () {
             });
         }
     }
-    $('#studio-nav .studio-setup').click(function () {
+    $('#studio-nav .studio-setup .btn-left').click(function () {
         // studio setup
         // ON PURPOSE to skip unsave check
         var hook = (true === CMS_CONF.FB_RESTART_CONNECT) ? '#restart-connect' : '#fb-connect';

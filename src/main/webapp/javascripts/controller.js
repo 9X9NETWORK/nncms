@@ -1,4 +1,4 @@
-/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp switchPublishStatus switchRerunCheckbox setFormHeight uploadImage FB ellipsisPage */
+/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setVideoMeasure setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp switchPublishStatus switchRerunCheckbox setFormHeight setTaglistWidth uploadImage FB ellipsisPage */
 /*jslint eqeq: true, nomen: true, plusplus: true, regexp: true, unparam: true, sloppy: true, vars: true */
 nn.initialize();
 nn.debug(CMS_CONF.IS_DEBUG);
@@ -303,6 +303,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                         $(fm).trigger('submit', e);
                         return false;
                     });
+                    setVideoMeasure();
                     setSpace();
                     scrollbar('#storyboard-wrap', '#storyboard-list', '#storyboard-slider');
                     $('#overlay-s').fadeOut();
@@ -497,6 +498,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                         $(fm).trigger('submit', e);
                         return false;
                     });
+                    setVideoMeasure();
                     setSpace();
                     scrollbar('#storyboard-wrap', '#storyboard-list', '#storyboard-slider');
                 });
@@ -800,7 +802,7 @@ function updateChannel(pageId, id) {
                         $.each(categories, function (i, list) {
                             CMS_CONF.CATEGORY_MAP[list.id] = list.name;
                         });
-                        var rowNum = ($(window).width() >= 1358) ? 4 : 3,
+                        var rowNum = ($(window).width() > 1356) ? 4 : 3,
                             modCatLen = categories.length % rowNum,
                             i = 0;
                         if (modCatLen > 0) {
@@ -841,6 +843,7 @@ function updateChannel(pageId, id) {
                                 }
                                 autoHeight();
                                 setFormHeight();
+                                setTaglistWidth();
                             });
                         } else {
                             autoHeight();
@@ -854,6 +857,7 @@ function updateChannel(pageId, id) {
                 $('#overlay-s').fadeOut(5000, function () {
                     autoHeight();
                     setFormHeight();
+                    setTaglistWidth();
                     scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
                     $('#settingForm .btn-save').removeClass('disable').addClass('enable');
                 });
@@ -892,6 +896,7 @@ function createChannel(pageId) {
     $('#overlay-s').fadeOut(3000, function () {
         autoHeight();
         setFormHeight();
+        setTaglistWidth();
         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
         $('#settingForm .btn-cancel, #settingForm .btn-create').removeClass('disable').addClass('enable');
     });

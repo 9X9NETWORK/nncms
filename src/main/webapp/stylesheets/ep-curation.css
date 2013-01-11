@@ -42,11 +42,15 @@ p.auto-height {
     -ms-user-select: none;
 }
 
-#epcurate-curation #video-player .video,
-#epcurate-curation #video-player .video #youTubePlayer {
+#epcurate-curation #video-player .video {
     width: 400px;
     height: 269px;
     background-color: #000;
+}
+
+#epcurate-curation #video-player .video #youTubePlayer {
+    width: 100%;
+    height: 100%;
 }
 
 #epcurate-curation #video-player .video #titlecard-outer {
@@ -809,6 +813,22 @@ padding-right: 8px;
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-right .tip {
     left: -25px;
+}
+
+.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.font-style .tip {
+    left: -9px;
+}
+
+.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-color .tip {
+    left: -18px;
+}
+
+.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-l .tip,
+.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-s .tip,
+.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-left .tip,
+.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-center .tip,
+.zh #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.align-right .tip {
+    left: -22px;
 }
 
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li:hover .tip {
@@ -1996,6 +2016,7 @@ padding-right: 8px;
     margin: 0;
     background: url(../images/bg_tip_middle.png) repeat-x bottom;
     color: #555;
+    font-weight: normal;
     font-size: 13px;
     line-height: 30px;
 }
@@ -2132,8 +2153,7 @@ padding-right: 8px;
 #storyboard #storyboard-slider {
 	position: absolute;
 	bottom: 10px;
-	left: 10px;
-	width: 99%;
+	left: 15px;
 	height: 5px;
 }
 
@@ -2152,8 +2172,7 @@ padding-right: 8px;
     #epcurate-curation ul.tabs {
         padding-left: 608px;
     }
-	#epcurate-curation #video-player .video,
-    #epcurate-curation #video-player .video #youTubePlayer {
+	#epcurate-curation #video-player .video {
 		width: 608px;
 		height: 386px;
 	}

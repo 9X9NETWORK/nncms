@@ -428,6 +428,7 @@
 #content-wrap form .fminput .fmfield p.text span .text {
     width: 437px;
     height: 29px;
+    padding-left: 2px;
     border: none;
     background: url(../images/input_box_middle.png) repeat-x;
     color: #555;
@@ -802,7 +803,7 @@
 #content-wrap form .form-btn .wrap p.back,
 #content-wrap form .form-btn .wrap p.next {
     position: absolute;
-    top: 12px;
+    top: 15px;
     width: 150px;
 }
 

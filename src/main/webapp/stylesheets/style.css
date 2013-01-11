@@ -53,6 +53,10 @@ abbr, acronym {
     background: url(../images/bg_b70.png) repeat;
 }
 
+#overlay-s.mask {
+    background: #ccc;
+}
+
 #overlay-s .wrap {
     position: relative;
 	width: 100%;
@@ -730,7 +734,6 @@ background: #e4e4e4;
     top: 26px;
     left: -15px;
     width: 195px;
-    height: 62px;
 }
 
 #studio-nav .studio-nav-wrap .studio-setup .reconnect-notice img {

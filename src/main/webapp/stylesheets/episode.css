@@ -59,29 +59,8 @@ body.mac #title-func ul li p span a {
 #ep-no {
     position: relative;
     width: 781px;
-	margin-top: 4px;
+	margin: 4px auto 0;
     text-align: center;
-}
-
-@media all and (max-width: 1372px) {
-    #ep-time-list,
-    #ep-no {
-        margin-left: 0;
-    }
-}
-
-@media all and (max-width: 1828px) and (min-width: 1373px) {
-    #ep-time-list,
-    #ep-no {
-        margin-left: 15%;
-    }
-}
-
-@media all and (min-width: 1829px) {
-    #ep-time-list,
-    #ep-no {
-        margin-left: 15%;
-    }
 }
 
 #ep-time-list h3,
@@ -241,6 +220,7 @@ body.mac #title-func ul li p span a {
 
 #ep-list ul {
     padding: 2px 0 0;
+    background: url(../images/bg_divider.png) repeat-x 0 bottom;
 }
 
 #ep-list ul li {

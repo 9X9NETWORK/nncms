@@ -1,33 +1,132 @@
-Revision: 682
+Revision: 707
 Author: chihwen
-Date: ï¿½Uï¿½ï¿½ 01:55:28, 2013ï¿½~1ï¿½ï¿½2ï¿½ï¿½
+Date: ¤U¤È 06:14:52, 2013¦~1¤ë10¤é
 Message:
-ï¿½Nï¿½ï¿½ï¿½ï¿½ fb page list ï¿½Uï¿½Ô¿ï¿½æªºï¿½Þ§@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½Aï¿½×§Kï¿½Þ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UÄ²ï¿½oï¿½I
+¦P¨B src ¤À¤äª©¥» 705
 
-1. ï¿½Nï¿½ï¿½ï¿½ï¿½ fb page list ï¿½Uï¿½Ô¿ï¿½æªºï¿½Þ§@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½Aï¿½×§Kï¿½Þ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UÄ²ï¿½oï¿½Iï¿½C
-2. ï¿½? scrollbar ï¿½Xï¿½{ï¿½É¡Aï¿½~ï¿½Nï¿½Wï¿½Dï¿½ï¿½æ­¶ï¿½Uï¿½èªºï¿½Dï¿½\ï¿½ï¿½ï¿½ï¿½sï¿½Aï¿½Û°ï¿½ auto height ï¿½ï¿½ï¿½æªºï¿½ï¿½ï¿½Uï¿½ï¿½C
-issue 5698
+¶i¤J­¶­±®É¼W¥[ 3 ¬íªº processing ªº overlay¡AÁ×§K¬Ý¨ìÁÙ¨S­pºâ¦nªºª©«¬¡C
+ª`·N src ¤À¤äª©¥» 705 ªº basic.js ²§°Ê¡A¨è·N¤£¥Î¦P¨B¨ì api
+issue 5760
 ----
-Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/stylesheets/style.css
+
+Revision: 704
+Author: chihwen
+Date: ¤U¤È 04:59:14, 2013¦~1¤ë10¤é
+Message:
+¦b©ÔÃþ§O°ÊºA²£¥Í¼öªù¼ÐÅÒ®É¡A¤]­n¶i¦æ tags ªº liquid ¹Bºâ
+issue 5760
+----
 Modified : /fakeapi/javascripts/channel.js
 
-Revision: 681
+Revision: 701
 Author: chihwen
-Date: ï¿½Uï¿½ï¿½ 01:09:56, 2013ï¿½~1ï¿½ï¿½2ï¿½ï¿½
+Date: ¤U¤È 01:08:37, 2013¦~1¤ë10¤é
 Message:
-ï¿½ï¿½}ï¿½Wï¿½Dï¿½ï¿½æ­¶ auto share ï¿½Pï¿½Uï¿½ï¿½ scrollbar ï¿½sï¿½Ê­ï¿½ï¿½sï¿½pï¿½ï¿½ï¿½ï¿½D
+¦P¨B src ¤À¤äª©¥» 695~700
 
-1. ï¿½sï¿½W scrollToBottom() ï¿½ï¿½ï¿½ï¿½ï¿½Û°ï¿½ scroll ï¿½ï¿½ï¿½ï¿½Ì¤Uï¿½èªºï¿½Þ§@ï¿½Þ¿ï¿½C
-2. ï¿½Qï¿½ï¿½ setTimeout ï¿½ïµ½ï¿½Dï¿½Pï¿½B DOM ï¿½ï¿½ï¿½Í¤ï¿½ scrollbar ï¿½ï¿½ï¿½sï¿½pï¿½ï¿½ï¿½ï¿½Dï¿½C
-3. ï¿½ïµ½ auto share ï¿½Uï¿½Ô¡Aï¿½hï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½Yï¿½Xï¿½Æ¥óªº³Bï¿½zï¿½C
-issue 5698
+1. ¦P¨B src ¤À¤äª©¥» 695~700¡C
+   1. storyboard edit title ªº tooltip font weight §ï¬° normal¡C
+   2. ½Õ¾ã curation slider ªº§@¥Î½d³ò¡C
+   3. tab ¹ï»ô video ªº¥k°¼¡C
+   4. ¼½©ñ®É¼v¤ù¤]¸òµÛ video ªº½d³ò liquid¡C
+   5. ¼W¥[¼v¤ù°Ï¶ô³Ì¤p­Èªº§PÂ_¡AÅý¼v¤ù°Ï¶ô³Ì¤p«O«ù 400 ªº¼e¡C
+   6. titlecard °ÊºA½Õ¾ã¦¨¼e¡B°ª 100%¡C
+   7. ½Õ¾ã½s¿è titlecar font ¥\¯àªº tooptip ¤£©~¤¤ªº°ÝÃD¡C
+   8. channel add¡Bchannel setting ªº tag list ¼W¥[ liquid ¥\¯à¡Aliquid ¥H¤W¤è input ¬°¨Ì¾Ú¡C
+   9. ½Õ¾ã channel add¡Bchannel setting category Äæ¦ìªº liquid¡C
+   10. ½Õ¾ã fb page list ³Ì¤p¼e«×ªº³]©w¡C
+   11. ´À´« fb page list ªº­I´º¹Ï¡C
+2. Á×§K«È¤áºÝ§Ö¨ú¡A§ó·s CSS ¤Î JS ¤Þ¤JÀÉªºª©¥»¸¹ (?v=701)¡C
+issue 5760
 ----
-Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/images/multi_choose_left_disable.png
+Modified : /fakeapi/images/multi_choose_middle_disable.png
+Modified : /fakeapi/images/multi_choose_right_disable.png
+Modified : /fakeapi/index.html
 Modified : /fakeapi/javascripts/channel.js
 Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/login.html
+Modified : /fakeapi/stylesheets/ep-curation.css
 
-==== 9x9 ====
-Last Changed Author: barton
-Last Changed Rev: 4205
-Last Changed Date: 2013-01-02 09:23:30 +0000 (Wed, 02 Jan 2013)
+Revision: 694
+Author: chihwen
+Date: ¤W¤È 10:16:46, 2013¦~1¤ë8¤é
+Message:
+Á×§K¦b¨S¦³««ª½scrollbarªºª¬ºA¤U¡AÂIÀ»¯»µ·±M­¶¤U©Ô¿ï³æ«á¡A¥Dªí³æ«ö¶s·|©¹¤W²¾°Êªº°ÝÃD
+issue 5760
+----
+Modified : /fakeapi/javascripts/channel.js
 
+Revision: 693
+Author: chihwen
+Date: ¤U¤È 06:46:36, 2013¦~1¤ë7¤é
+Message:
+¦P¨B src ¤À¤äª©¥» 692
+
+1. channel add¡Bchannel setting ¥k°¼´£¥Ü¤å¦r§ï¦^¤@¦æ¡C
+2. ½Õ¾ã¤U©Ô¿ï³æ¤º®eªº¼e«×¡C
+3. fb connect tooltip ¹ï·Ç ? icon ªº¤¤¤ß¡C
+4. curation ªº video ¼W¥[ liquid ®ÄªG¡C
+5. storyboard ªº slider ¶Z¥ª¥k¦U 15px¡C
+5. ½Õ¾ã curation¡Bpublish ©³¤U«ö¶s®Çªº next¡Bback ««ª½¸m¤¤¡C
+6. episode-list-favorite ³Ì«á¤@«h¤]­n¦³¤À¹j½uªº­I´º¹Ï¡C
+7. episode-list ¨â­Ó first ­¶­±¡Abanner ³£¥H¥kÃä°Ï¶ô¬°¥D°µ©~¤¤³]©w¡C
+issue 5760
+----
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/stylesheets/channel.css
+Modified : /fakeapi/stylesheets/ep-curation.css
+Modified : /fakeapi/stylesheets/epcurate.css
+Modified : /fakeapi/stylesheets/episode.css
+
+Revision: 688
+Author: chihwen
+Date: ¤W¤È 10:18:03, 2013¦~1¤ë3¤é
+Message:
+Á×§K Studio Setup reconnect tooltip ÁY¦X«á¡A¤´µM¦û¥Î®i¶}ªºªÅ¶¡¡A¼vÅT¨ä¤U¥\¯à«ö¶sªºÂIÀ»
+
+§ï¥H½Õ¾ã¼Ë¦¡ªº§@ªk¡A¸Ñ¨M¦¹°ÝÃD¡A±Nª©¥» 686 ¸Ìªº controller.js ½Õ¦^­ìª©¥»¡C
+issue 5698
+----
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/stylesheets/style.css
+
+Revision: 686
+Author: chihwen
+Date: ¤U¤È 07:05:17, 2013¦~1¤ë2¤é
+Message:
+Á×§K Studio Setup reconnect tooltip ÁY¦X«á¡A¤´µM¦û¥Î®i¶}ªºªÅ¶¡¡A¼vÅT¨ä¤U¥\¯à«ö¶sªºÂIÀ»
+
+TODO¡G¦¹¬°¼È®É¸Ñ¨M¤è¦¡¡A«Ý ada ½T»{¬O§_½Õ¾ã style ¸Ñ¨M
+issue 5698
+----
+Modified : /fakeapi/javascripts/controller.js
+
+Revision: 685
+Author: chihwen
+Date: ¤U¤È 06:43:04, 2013¦~1¤ë2¤é
+Message:
+¦P¨B src ¤À¤äª©¥» 683, 684
+
+1. §ó´« fb reconnect ¬ÛÃö­I´º¹Ï¡C
+2. ½Õ¾ã channel add ªº input¡Bselect¡Btextarea ªº liquid¡C
+3. fb reconnect ©³¤Uªº notice ¤å¦r¼W¥[ liquid ¥\¯à¡C
+4. studio setup §@¥Î½d³ò¥u¦b«ö¶s¤£§@¥Î¦b slideDown ªº notice °Ï¶ô¡C
+issue 5698
+----
+Modified : /fakeapi/images/bg_tip_left_error.png
+Modified : /fakeapi/images/bg_tip_middle_error.png
+Modified : /fakeapi/images/bg_tip_right_error.png
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/channel.js
