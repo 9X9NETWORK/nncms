@@ -20,3 +20,7 @@ Message:
 issue 5760
 ----
 Modified : /fakeapi/javascripts/controller.js
+==== 9x9 ====
+Last Changed Author: louis
+Last Changed Rev: 4236
+Last Changed Date: 2013-01-16 18:22:22 +0800 (Wed, 16 Jan 2013)
