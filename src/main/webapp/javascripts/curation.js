@@ -1337,9 +1337,15 @@ function setVideoMeasure() {
             $('#epcurate-curation ul.tabs').css('padding-left', '400px');
         }
         if (heightBase <= 386 && heightBase >= 269) {
-            $('#epcurate-curation #video-player .video').height(parseInt(heightBase / 9) * 9 + 44);
-            $('#epcurate-curation #video-player .video').width(parseInt(heightBase / 9) * 16);
-            $('#epcurate-curation ul.tabs').css('padding-left', $('#epcurate-curation #video-player .video').width() + 'px');
+            if (heightTemp > heightBase) {
+                $('#epcurate-curation #video-player .video').height(269);
+                $('#epcurate-curation #video-player .video').width(400);
+                $('#epcurate-curation ul.tabs').css('padding-left', '400px');
+            } else {
+                $('#epcurate-curation #video-player .video').height(parseInt(heightBase / 9) * 9 + 44);
+                $('#epcurate-curation #video-player .video').width(parseInt(heightBase / 9) * 16);
+                $('#epcurate-curation ul.tabs').css('padding-left', $('#epcurate-curation #video-player .video').width() + 'px');
+            }
         }
         if (heightBase > 386) {
             $('#epcurate-curation #video-player .video').height(386);

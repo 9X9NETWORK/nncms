@@ -1,136 +1,22 @@
-Revision: 707
+Revision: 715
 Author: chihwen
-Date: 下午 06:14:52, 2013年1月10日
+Date: 下午 03:53:42, 2013年1月16日
 Message:
-同步 src 分支版本 705
+同步 src 分支版本 714
 
-進入頁面時增加 3 秒的 processing 的 overlay，避免看到還沒計算好的版型。
-注意 src 分支版本 705 的 basic.js 異動，刻意不用同步到 api
+1. 調整 video 區塊在特定區塊下會太大的問題。
+2. processing 的 overlay 背景改成透明。
+3. storyboard 的 add title tooltip font-weight 改為一般。
 issue 5760
 ----
-Modified : /fakeapi/stylesheets/style.css
-
-Revision: 704
-Author: chihwen
-Date: 下午 04:59:14, 2013年1月10日
-Message:
-在拉類別動態產生熱門標籤時，也要進行 tags 的 liquid 運算
-issue 5760
-----
-Modified : /fakeapi/javascripts/channel.js
-
-Revision: 701
-Author: chihwen
-Date: 下午 01:08:37, 2013年1月10日
-Message:
-同步 src 分支版本 695~700
-
-1. 同步 src 分支版本 695~700。
-   1. storyboard edit title 的 tooltip font weight 改為 normal。
-   2. 調整 curation slider 的作用範圍。
-   3. tab 對齊 video 的右側。
-   4. 播放時影片也跟著 video 的範圍 liquid。
-   5. 增加影片區塊最小值的判斷，讓影片區塊最小保持 400 的寬。
-   6. titlecard 動態調整成寬、高 100%。
-   7. 調整編輯 titlecar font 功能的 tooptip 不居中的問題。
-   8. channel add、channel setting 的 tag list 增加 liquid 功能，liquid 以上方 input 為依據。
-   9. 調整 channel add、channel setting category 欄位的 liquid。
-   10. 調整 fb page list 最小寬度的設定。
-   11. 替換 fb page list 的背景圖。
-2. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=701)。
-issue 5760
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/epcurate-publish.html
-Modified : /fakeapi/episode-list.html
-Modified : /fakeapi/images/multi_choose_left_disable.png
-Modified : /fakeapi/images/multi_choose_middle_disable.png
-Modified : /fakeapi/images/multi_choose_right_disable.png
-Modified : /fakeapi/index.html
-Modified : /fakeapi/javascripts/channel.js
-Modified : /fakeapi/javascripts/controller.js
 Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/login.html
 Modified : /fakeapi/stylesheets/ep-curation.css
 
-Revision: 694
+Revision: 713
 Author: chihwen
-Date: 上午 10:16:46, 2013年1月8日
+Date: 下午 07:57:07, 2013年1月15日
 Message:
-避免在沒有垂直scrollbar的狀態下，點擊粉絲專頁下拉選單後，主表單按鈕會往上移動的問題
+校正 FB.init channelUrl 參數組合邏輯
 issue 5760
 ----
-Modified : /fakeapi/javascripts/channel.js
-
-Revision: 693
-Author: chihwen
-Date: 下午 06:46:36, 2013年1月7日
-Message:
-同步 src 分支版本 692
-
-1. channel add、channel setting 右側提示文字改回一行。
-2. 調整下拉選單內容的寬度。
-3. fb connect tooltip 對準 ? icon 的中心。
-4. curation 的 video 增加 liquid 效果。
-5. storyboard 的 slider 距左右各 15px。
-5. 調整 curation、publish 底下按鈕旁的 next、back 垂直置中。
-6. episode-list-favorite 最後一則也要有分隔線的背景圖。
-7. episode-list 兩個 first 頁面，banner 都以右邊區塊為主做居中設定。
-issue 5760
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/javascripts/channel.js
 Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/stylesheets/channel.css
-Modified : /fakeapi/stylesheets/ep-curation.css
-Modified : /fakeapi/stylesheets/epcurate.css
-Modified : /fakeapi/stylesheets/episode.css
-
-Revision: 688
-Author: chihwen
-Date: 上午 10:18:03, 2013年1月3日
-Message:
-避免 Studio Setup reconnect tooltip 縮合後，仍然佔用展開的空間，影響其下功能按鈕的點擊
-
-改以調整樣式的作法，解決此問題，將版本 686 裡的 controller.js 調回原版本。
-issue 5698
-----
-Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/stylesheets/style.css
-
-Revision: 686
-Author: chihwen
-Date: 下午 07:05:17, 2013年1月2日
-Message:
-避免 Studio Setup reconnect tooltip 縮合後，仍然佔用展開的空間，影響其下功能按鈕的點擊
-
-TODO：此為暫時解決方式，待 ada 確認是否調整 style 解決
-issue 5698
-----
-Modified : /fakeapi/javascripts/controller.js
-
-Revision: 685
-Author: chihwen
-Date: 下午 06:43:04, 2013年1月2日
-Message:
-同步 src 分支版本 683, 684
-
-1. 更換 fb reconnect 相關背景圖。
-2. 調整 channel add 的 input、select、textarea 的 liquid。
-3. fb reconnect 底下的 notice 文字增加 liquid 功能。
-4. studio setup 作用範圍只在按鈕不作用在 slideDown 的 notice 區塊。
-issue 5698
-----
-Modified : /fakeapi/images/bg_tip_left_error.png
-Modified : /fakeapi/images/bg_tip_middle_error.png
-Modified : /fakeapi/images/bg_tip_right_error.png
-Modified : /fakeapi/javascripts/basic.js
-Modified : /fakeapi/javascripts/channel.js
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 4216
-Last Changed Date: 2013-01-11 11:16:00 +0800 (Fri, 11 Jan 2013)

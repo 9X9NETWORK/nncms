@@ -211,10 +211,12 @@ function initFacebookJavaScriptSdk() {
         }(document, /*debug*/ CMS_CONF.IS_DEBUG));
 
         addFbAsyncInitEvent(function () {
+            var url = CMS_CONF.USER_URL.attr('source');
+            url = url.substr(0, url.lastIndexOf('/'));
             // init the FB JS SDK
             FB.init({
                 appId: CMS_CONF.FB_APP_ID,                                                                  // App ID from the App Dashboard
-                channelUrl: '//' + CMS_CONF.USER_URL.attr('host') + '/lang/fb/' + lang + '/channel.html',   // Channel File for x-domain communication
+                channelUrl: url + '/lang/fb/' + lang + '/channel.html',                                     // Channel File for x-domain communication
                 status: true,                                                                               // check the login status upon init?
                 cookie: true,                                                                               // set sessions cookies to allow your server to access the session?
                 xfbml: true                                                                                 // parse XFBML tags on this page?
