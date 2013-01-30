@@ -148,3 +148,7 @@ Message:
 issue 5760
 ----
 Modified : /fakeapi/javascripts/curation.js
+==== 9x9 ====
+Last Changed Author: louis
+Last Changed Rev: 4272
+Last Changed Date: 2013-01-30 14:48:00 +0800 (Wed, 30 Jan 2013)
