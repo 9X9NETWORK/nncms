@@ -65,7 +65,7 @@
             "Not right now, thanks!":                                                                                                           "Not right now, thanks!"
         },
         "facebook": {
-            "<img src=\"images/text_studio_setup.png\" alt=\"\">":                                                                              "<img src=\"images/text_studio_setup.png\" alt=\"\" />",
+            "{images/text_studio_setup.png}":                                                                                                   "<img src=\"images/text_studio_setup.png\" alt=\"\" />",
             "Connect to":                                                                                                                       "Connect to",
             "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.":                                     "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.",
             "Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.":  "Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.",

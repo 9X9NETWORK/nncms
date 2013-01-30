@@ -1,26 +1,150 @@
-Revision: 715
+Revision: 748
 Author: chihwen
-Date: 下午 03:53:42, 2013年1月16日
+Date: 上午 10:17:25, 2013年1月29日
 Message:
-同步 src 分支版本 714
+同步 src 版本 747
 
-1. 調整 video 區塊在特定區塊下會太大的問題。
-2. processing 的 overlay 背景改成透明。
-3. storyboard 的 add title tooltip font-weight 改為一般。
+curation storyboard 增加影片的效果改成大於 8 個才執行。
 issue 5760
 ----
 Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/stylesheets/ep-curation.css
 
-Revision: 713
+Revision: 745
 Author: chihwen
-Date: 下午 07:57:07, 2013年1月15日
+Date: 下午 06:52:25, 2013年1月28日
 Message:
-校正 FB.init channelUrl 參數組合邏輯
+同步 src 版本 740~744
+
+1. curation 新增影片 storyboard 先 scroll 再 append 上去。
+2. 調整 animatestoryboard 的位置，讓 scroll 和 add 的動作能更明顯。
+3. 增加 storyboard 新增的效果。
 issue 5760
 ----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 739
+Author: chihwen
+Date: 下午 04:47:49, 2013年1月28日
+Message:
+同步 src 版本 737, 738
+
+curation 增加影片時加上 storyboard、slider 的動畫效果。
+issue 5760
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 736
+Author: chihwen
+Date: 下午 01:08:13, 2013年1月28日
+Message:
+同步 src 版本 734, 735
+
+1. 增加判斷讓 index 不會有 processing 的 overlay (注意此項僅實作在 src 版本)。
+2. processing 的 overlay 消失前先把 mask 底下的內容隱藏 (注意此項僅實作在 src 版本)。
+3. curation 增加影片時 slider 會跟著往右移。
+4. 調整 curation 增加影片 slider 移位的算法。
+5. processing mask 下內容的隱藏改由 class 控制。
+issue 5760
+----
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/stylesheets/style.css
+
+Revision: 733
+Author: chihwen
+Date: 上午 10:45:39, 2013年1月28日
+Message:
+同步 src 版本 732
+
+storyboard info 設行高 18px。
+(以解決中文版語系的排版相容問題，節目資訊呈現的行高，與頻道名稱、節目名稱不一致)
+issue 5760
+----
+Modified : /fakeapi/stylesheets/ep-curation.css
+
+Revision: 730
+Author: chihwen
+Date: 下午 01:46:48, 2013年1月24日
+Message:
+同步 src 版本 729
+
+1. channel-add、channel-setting 的下拉選單補空白上去填空間的選項不需要 hover 效果。
+2. 調整 overlay-s 的位置，margin 都由 css 控制，js 上的設定都移除。
+3. storyboard 原本預防 tooltip 而加寬的空間移除，調整最後兩個 tooltip 的位置。
+4. storyboard 的標題行高改為 18px，其他空間也相對調整高度。
+issue 5760
+----
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/channel.js
 Modified : /fakeapi/javascripts/controller.js
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 4236
-Last Changed Date: 2013-01-16 18:22:22 +0800 (Wed, 16 Jan 2013)
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/stylesheets/channel.css
+Modified : /fakeapi/stylesheets/ep-curation.css
+
+Revision: 728
+Author: chihwen
+Date: 下午 06:17:11, 2013年1月23日
+Message:
+同步 src 版本 727
+
+1. 調整 curation 的 tooltip 在 safari 下會出現底線的問題。
+2. episode-list 增加 webkit 設定，讓時間在 chrome 底下能正確呈現 12px 以下的字。
+issue 5760
+----
+Modified : /fakeapi/stylesheets/ep-curation.css
+Modified : /fakeapi/stylesheets/episode.css
+
+Revision: 726
+Author: chihwen
+Date: 上午 11:16:24, 2013年1月23日
+Message:
+避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=726)
+issue 5760
+----
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/epcurate-publish.html
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/index.html
+Modified : /fakeapi/login.html
+
+Revision: 725
+Author: chihwen
+Date: 上午 10:53:19, 2013年1月23日
+Message:
+修正 IE 無法解析切換「編輯台設置」的 title 語系問題
+
+1. 修正 IE 無法解析切換「編輯台設置」的 title 語系問題。
+   將該語系的 key 由 html 改為一般字串，避免不同瀏覽器在儲存 key 後的解析不一致，造成語系切換失效。
+2. 同步 src 版本 724 (storyboard time font-size 增加 webkit 設定避免 chrome 強制放大字體到 12px)。
+issue 5760
+----
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/index.html
+Modified : /fakeapi/lang/en.json
+Modified : /fakeapi/lang/zh.json
+Modified : /fakeapi/stylesheets/ep-curation.css
+
+Revision: 721
+Author: chihwen
+Date: 下午 05:22:27, 2013年1月17日
+Message:
+同步 src 分支版本 720
+
+避免 curation 中文標題會因高度不足而造成標題只有 ... 的狀況，增加標題的行高設定。
+issue 5760
+----
+Modified : /fakeapi/stylesheets/ep-curation.css
+
+Revision: 718
+Author: chihwen
+Date: 下午 12:59:47, 2013年1月17日
+Message:
+修正 Google Chrome flash 會產生殘影的問題
+
+移除 wmode: 'transparent' 設定
+issue 5760
+----
+Modified : /fakeapi/javascripts/curation.js

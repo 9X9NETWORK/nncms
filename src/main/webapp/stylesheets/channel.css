@@ -662,6 +662,12 @@ body.mac #title-func h2 {
 	color: #777;
 }
 
+#content-main-wrap form .fminput .fmfield .select .select-list li.none:hover {
+	background-color: #d2d2d2;
+	color: #555;
+    cursor: default;
+}
+
 #content-main-wrap form .fminput .fmfield .select .select-list li.first-row,
 #content-main-wrap form .fminput .fmfield .select .select-list li:first-child {
 	border-top: none;

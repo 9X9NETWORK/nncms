@@ -822,6 +822,7 @@ function updateChannel(pageId, id) {
                                 return $.inArray(item, categories);
                             }
                         }).appendTo('#browse-category');
+                        $('#browse-category li[data-meta=0]').addClass('none');
                         if ('' != channel.categoryId && CMS_CONF.CATEGORY_MAP[channel.categoryId]) {
                             $('.tag-list').removeClass('hide');
                             $('#categoryId-select-txt').text(CMS_CONF.CATEGORY_MAP[channel.categoryId]);

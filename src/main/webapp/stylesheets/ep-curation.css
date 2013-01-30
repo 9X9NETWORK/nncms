@@ -349,6 +349,7 @@ padding-right: 8px;
 #epcurate-curation #cur-edit h3 {
     overflow: hidden;
     height: 20px;
+    line-height: 100%;
 }
 
 #epcurate-curation #cur-edit h3 span {
@@ -1656,6 +1657,7 @@ padding-right: 8px;
     height: 18px;
     margin-bottom: 36px;
     padding-top: 18px;
+    line-height: 18px;
 }
 
 #storyboard p {
@@ -1701,7 +1703,7 @@ padding-right: 8px;
 
 #storyboard .storyboard-list {
     position: relative;
-    height: 95px;
+    height: 99px;
 }
 
 #storyboard .storyboard-list #storyboard-list {
@@ -1709,8 +1711,8 @@ padding-right: 8px;
     top: 0;
     left: 0;
     overflow: hidden;
-    width: 5908px;
-    height: 122px;
+    width: 5700px;
+    height: 126px;
     min-width: 1024px;
     margin: -31px 0 0 -9px;
 }
@@ -1730,9 +1732,9 @@ padding-right: 8px;
     position: absolute;
     top: 31px;
     left: 9px;
-    width: 5908px;
+    width: 5700px;
     min-width: 1024px;
-    height: 92px;
+    height: 96px;
     padding-left: 2px;
     background: url(../images/icon-frame.png) repeat-x;
 }
@@ -1741,7 +1743,7 @@ padding-right: 8px;
     position: relative;
     float: left;
     width: 94px;
-    height: 92px;
+    height: 96px;
     margin: 0 20px 0 0;
 }
 
@@ -1755,6 +1757,7 @@ padding-right: 8px;
     z-index: 40;
     width: 19px;
     height: 18px;
+    text-decoration: none;
 }
 
 #storyboard .storyboard-list ul li a.warning,
@@ -1819,6 +1822,70 @@ padding-right: 8px;
     white-space: nowrap;
 }
 
+#storyboard .storyboard-list ul li.last2 a.warning2 .tip {
+    left: -87px;
+}
+
+#storyboard .storyboard-list ul li.last a.warning .tip {
+    left: -89px;
+}
+
+#storyboard .storyboard-list ul li.last a.warning2 .tip {
+    left: -200px;
+}
+
+#storyboard .storyboard-list ul li.last a.error .tip {
+    left: -92px;
+}
+
+.zh #storyboard .storyboard-list ul li.last2 a.warning2 .tip {
+    left: -7px;
+}
+
+.zh #storyboard .storyboard-list ul li.last a.warning .tip {
+    left: -36px;
+}
+
+.zh #storyboard .storyboard-list ul li.last a.warning2 .tip {
+    left: -102px;
+}
+
+.zh #storyboard .storyboard-list ul li.last a.error .tip {
+    left: -99px;
+}
+
+#storyboard .storyboard-list ul li.last2 a.warning2 .tip img {
+    left: 90px;
+}
+
+#storyboard .storyboard-list ul li.last a.warning .tip img {
+    left: 92px;
+}
+
+#storyboard .storyboard-list ul li.last a.warning2 .tip img {
+    left: 203px;
+}
+
+#storyboard .storyboard-list ul li.last a.error .tip img {
+    left: 95px;
+}
+
+.zh #storyboard .storyboard-list ul li.last2 a.warning2 .tip img {
+    left: 10px;
+}
+
+.zh #storyboard .storyboard-list ul li.last a.warning .tip img {
+    left: 39px;
+}
+
+.zh #storyboard .storyboard-list ul li.last a.warning2 .tip img {
+    left: 105px;
+}
+
+.zh #storyboard .storyboard-list ul li.last a.error .tip img {
+    left: 102px;
+}
+
 #storyboard .storyboard-list ul li a.error:hover       .tip,
 #storyboard .storyboard-list ul li a.warning:hover   .tip,
 #storyboard .storyboard-list ul li a.warning2:hover .tip {
@@ -1858,6 +1925,7 @@ padding-right: 8px;
     margin: 0;
     padding: 0 0 0 2px;
     background: url(../images/time_box_left.png) no-repeat 0 0;
+    -webkit-text-size-adjust: none;
 }
 
 #storyboard .storyboard-list ul li p.img span.time .time-right {
@@ -1881,10 +1949,11 @@ padding-right: 8px;
 
 #storyboard .storyboard-list ul li h4 {
     width: 95px;
-    height: 32px;
+    height: 36px;
     padding-left: 5px;
     font-weight: normal;
     font-size: 13px;
+    line-height: 18px;
 }
 
 #storyboard .storyboard-list ul li.invalid h4 {

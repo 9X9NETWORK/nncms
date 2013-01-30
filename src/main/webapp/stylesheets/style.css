@@ -1013,6 +1013,10 @@ background: #e4e4e4;
     background: url(../images/bg_main.png) repeat;
 }
 
+#content-wrap.hidden {
+    visibility: hidden;
+}
+
 #content-nav {
     float: left;
     width: 200px;

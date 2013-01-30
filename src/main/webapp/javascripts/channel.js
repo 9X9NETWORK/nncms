@@ -208,6 +208,7 @@ $(function () {
                             return $.inArray(item, categories);
                         }
                     }).appendTo('#browse-category');
+                    $('#browse-category li[data-meta=0]').addClass('none');
                     autoHeight();
                     setFormHeight();
                     scrollToBottom();
@@ -588,7 +589,7 @@ function setFormHeight() {
     if (modCatLen > 0) {
         modCatLen = rowNum - modCatLen;
         for (var i = 0; i < modCatLen; i++) {
-            $('<li data-meta="0"></li>').appendTo('#browse-category');
+            $('<li data-meta="0" class="none"></li>').appendTo('#browse-category');
         }
     }
     if (1220 > windowWidth) {

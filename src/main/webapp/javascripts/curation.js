@@ -142,6 +142,11 @@ $(function () {
         tolerance: 'pointer',
         change: function (event, ui) {
             $('body').addClass('has-change');
+        },
+        update: function (event, ui) {
+            $('#storyboard-listing li').removeClass('last last2');
+            $('#storyboard-listing li').eq(48).addClass('last2');
+            $('#storyboard-listing li').eq(49).addClass('last');
         }
     });
 
@@ -266,8 +271,9 @@ $(function () {
                     if (committedCnt === matchList.length) {
                         committedCnt = -1;   // reset to avoid collision
                         // ON PURPOSE to wait api (async)
+                        animateStoryboard(ytList.length);
                         setTimeout(function () {
-                            $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
+                            $('#storyboard-listing-tmpl-item').tmpl(ytList).hide().appendTo('#storyboard-listing').fadeIn(2000);
                             sumStoryboardInfo();
                             $('.ellipsis').ellipsis();
                             $('#overlay-s').fadeOut();
@@ -332,8 +338,9 @@ $(function () {
                     if (committedCnt === matchList.length) {
                         committedCnt = -1;   // reset to avoid collision
                         // ON PURPOSE to wait api (async)
+                        animateStoryboard(ytList.length);
                         setTimeout(function () {
-                            $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
+                            $('#storyboard-listing-tmpl-item').tmpl(ytList).hide().appendTo('#storyboard-listing').fadeIn(2000);
                             sumStoryboardInfo();
                             $('.ellipsis').ellipsis();
                             $('#overlay-s').fadeOut();
@@ -1429,7 +1436,7 @@ function loadYouTubeFlash(videoId) {
             quality: 'high',
             menu: false,
             bgcolor: '#000000',
-            wmode: 'transparent',
+            //wmode: 'transparent',
             flashvars: false
         });
         $('#video-player #video-control').hide();
@@ -1742,6 +1749,17 @@ function removeTotalChangeHook() {
     $('body').removeClass('has-titlecard-change');
 }
 
+function animateStoryboard(add) {
+    var list = $('#storyboard-listing li').length,
+        distance = (list + add) * 2,
+        windowWidth = $(window).width(),
+        storyboardMove = distance / 100 * (5700 - windowWidth + 17);
+    if ((list + add) > 8) {
+        $('.ui-slider-handle').animate({'left': '+' + distance + '%'}, 'slow');
+        $('#storyboard-list').animate({'left': '-' + storyboardMove + 'px'}, 'slow');
+    }
+}
+
 function sumStoryboardInfo() {
     var length = $('#storyboard-list li').length,
         leftLength = CMS_CONF.PROGRAM_MAX - length,
@@ -1778,6 +1796,9 @@ function sumStoryboardInfo() {
     $('#storyboard-length').text(leftLength);
     $('#storyboard-duration').text(durationHou + ':' + durationMin + ':' + durationSec);
     $('#storyboard-list .notice').css('left', parseInt((114 * length) + 9, 10) + 'px');
+    $('#storyboard-listing li').removeClass('last last2');
+    $('#storyboard-listing li').eq(48).addClass('last2');
+    $('#storyboard-listing li').eq(49).addClass('last');
 }
 
 function resizeTitleCard() {

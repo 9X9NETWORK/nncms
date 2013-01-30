@@ -411,6 +411,7 @@ body.mac #title-func ul li p span a {
     height: 14px;
     padding: 0 0 0 2px;
     background: url(../images/time_box_left.png) no-repeat 0 0;
+    -webkit-text-size-adjust: none;
 }
 
 #ep-list ul li .episode p.img       span .time-right,

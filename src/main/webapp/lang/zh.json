@@ -65,7 +65,7 @@
             "Not right now, thanks!":                                                                                                           "現在不要，謝謝！"
         },
         "facebook": {
-            "<img src=\"images/text_studio_setup.png\" alt=\"\">":                                                                              "<img src=\"images/text_studio_setup_zh.png\" alt=\"\" />",
+            "{images/text_studio_setup.png}":                                                                                                   "<img src=\"images/text_studio_setup_zh.png\" alt=\"\" />",
             "Connect to":                                                                                                                       "連結帳號",
             "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.":                                     "連結帳號後，您可至頻道設定頁面為每個頻道設置是否自動分享至Facebook。",
             "Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.":  "自動分享功能已經停用！您的連結帳號授權已失效，請點擊重啟連結狀態。",
