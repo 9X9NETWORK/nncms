@@ -5,26 +5,26 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=726" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=726" />
-<link rel="stylesheet" href="stylesheets/episode.css?v=726" />
+<link rel="stylesheet" href="stylesheets/style.css?v=784" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=784" />
+<link rel="stylesheet" href="stylesheets/episode.css?v=784" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=726"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=726"></script>
-<script src="javascripts/jquery.ellipsis.js?v=726"></script>
-<script src="javascripts/jquery.blockUI.js?v=726"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=726"></script>
-<script src="javascripts/jquery.cycle.all.js?v=726"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=726"></script>
-<script src="javascripts/jquery.cookie.js?v=726"></script>
-<script src="javascripts/json2.js?v=726"></script>
-<script src="javascripts/purl.js?v=726"></script>
-<script src="javascripts/vertical.slider.js?v=726"></script>
-<script src="javascripts/config.js?v=726"></script>
-<script src="javascripts/controller.js?v=726"></script>
-<script src="javascripts/basic.js?v=726"></script>
-<script src="javascripts/episode.js?v=726"></script>
+<script src="javascripts/nn-sdk.js?v=784"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=784"></script>
+<script src="javascripts/jquery.ellipsis.js?v=784"></script>
+<script src="javascripts/jquery.blockUI.js?v=784"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=784"></script>
+<script src="javascripts/jquery.cycle.all.js?v=784"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=784"></script>
+<script src="javascripts/jquery.cookie.js?v=784"></script>
+<script src="javascripts/json2.js?v=784"></script>
+<script src="javascripts/purl.js?v=784"></script>
+<script src="javascripts/vertical.slider.js?v=784"></script>
+<script src="javascripts/config.js?v=784"></script>
+<script src="javascripts/controller.js?v=784"></script>
+<script src="javascripts/basic.js?v=784"></script>
+<script src="javascripts/episode.js?v=784"></script>
 <title>9x9.tv - Episode list</title>
 </head>
 <body>
@@ -110,6 +110,7 @@
 {{/if}}
 {{if $item.cntEpisode > 0}}
 <div class="caption">
+<p class="number">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'No.'])}</p>
 <p class="episode">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Episode'])}</p>
 {{if contentType != CMS_CONF.YOUR_FAVORITE}}
 <p class="scheduled-time">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Scheduled time'])}</p>
@@ -210,13 +211,56 @@
 </div>
 </script>
 
+<script id="episode-list-tmpl-folder-up" type="text/x-jquery-tmpl">
+{{if pageID > 0}}
+<li class="clearfix list_collapse_top on isFolder isFolderUpDown" data-meta="up_paging_${pageID}" id="folder_up_${pageID}">
+  <div class="right">
+    <div class="middle">
+      <span class="icon-expand-left"></span>
+      <span class="list-number">${pageStart}-${pageEnd}</span>
+      <span class="icon-expand-right"></span>
+    </div>
+  </div>
+</li>
+{{/if}}
+</script>
+
+<script id="episode-list-tmpl-folder-down" type="text/x-jquery-tmpl">
+{{if pageID > 0}}
+<li class="clearfix list_collapse_bottom on isFolder isFolderUpDown dataPaging_${pageID} itemFolder_${pageID}" data-meta="down_paging_${pageID}">
+  <div class="right">
+    <div class="middle">
+      <span class="icon-expand-left"></span>
+      <span class="list-number">${pageStart}-${pageEnd}</span>
+      <span class="icon-expand-right"></span>
+    </div>
+  </div>
+</li>
+{{/if}}
+</script>
+
+<script id="episode-list-tmpl-folder" type="text/x-jquery-tmpl">
+{{if pageID > 0}}
+<li class="clearfix list_expand isFolder isFolderOri" data-meta="paging_${pageID}" id="folder_${pageID}" style="position: relative; left: 0px; top: 0px;">
+  <div class="right">
+    <div class="middle">
+      <span class="icon-expand-left on"></span>
+      <span class="list-number">${pageStart}-${pageEnd}</span>
+      <span class="icon-expand-right on"></span>
+    </div>
+  </div>
+</li>
+{{/if}}
+</script>
+
 <script id="episode-list-tmpl-item" type="text/x-jquery-tmpl">
-<li class="clearfix" data-meta="${id}">
+<li class="clearfix isItem" data-meta="${id}">
 <div class="container">
 <div class="container-right">
 <div class="container-bottom">
 <div class="container-left">
 <div class="wrap">
+<div class="number">${seq}</div>
 <div class="episode">
 <p class="img">
 {{if null != publishDate}}
@@ -262,7 +306,7 @@
 <p>${cntView}</p>
 </div>
 </div>
-<p class="drag">move</p>
+<p class="drag"><span>move</span></p>
 </div>
 </div>
 </div>

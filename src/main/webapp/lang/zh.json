@@ -50,7 +50,9 @@
             "Are you sure you want to delete this channel? All data will be removed permanently.":                                              "所有資料將永久刪除，確定刪除此頻道？",
             "Are you sure you want to delete this episode?":                                                                                    "確定刪除此節目？",
             "Are you sure you want to delete this title?":                                                                                      "確定刪除此字卡？",
-            "Unsaved changes will be lost, are you sure you want to leave?":                                                                    "未儲存資料將遺失，確定離開？"
+            "Are you sure you want to delete this POI with interactive event?":                                                                 "確定刪除此互動時間與事件？",
+            "Unsaved changes will be lost, are you sure you want to leave?":                                                                    "未儲存資料將遺失，確定離開？",
+            "Unsaved changes will be lost, are you sure you want to cancel editing?":                                                           "未儲存資料將遺失，確定結束編輯？"
         },
         "notice": {
             "New episode has been created as a draft!":                                                                                         "新建立節目已被存為草稿！",
@@ -80,9 +82,11 @@
             "Delete":                                                                                                                           "刪除",
             "No":                                                                                                                               "取消",
             "Leave":                                                                                                                            "離開",
+            "Yes":                                                                                                                              "確定",
             "Disconnect":                                                                                                                       "取消連結",
             "{No}":                                                                                                                             "否",
-            "Restart connection":                                                                                                               "重啟連結"
+            "Restart connection":                                                                                                               "重啟連結",
+            "{Close}":                                                                                                                          "<img src=\"images/icon_zoom.png\" alt=\"\" />關閉"
         }
     },
     "upload": {
@@ -167,7 +171,7 @@
             "Worldwide":                                                                                                                        "全世界",
             "Category":                                                                                                                         "類別",
             "Select a category":                                                                                                                "選擇類別",
-            "Tag":                                                                                                                              "標籤",
+            "Tags":                                                                                                                             "標籤",
             "Separate with commas":                                                                                                             "用逗號分隔",
             "Suggested Tags:":                                                                                                                  "熱門標籤:",
             "Auto share new published episode":                                                                                                 "自動分享新發佈<br />的節目",
@@ -195,8 +199,9 @@
             "Episode list":                                                                                                                     "節目列表",
             "'s Favorite":                                                                                                                      "的最愛",
             "Curate a new episode":                                                                                                             "策展新節目",
-            "Reorder episodes":                                                                                                                "排序節目",
+            "Reorder episodes":                                                                                                                 "排序節目",
             "Save order":                                                                                                                       "儲存排序",
+            "No.":                                                                                                                              "No.",
             "Episode":                                                                                                                          "節目",
             "Scheduled time":                                                                                                                   "排程時間",
             "Publish time":                                                                                                                     "發佈時間",
@@ -262,6 +267,7 @@
         "epcurate-form": {
             "Add Video":                                                                                                                        "匯入影片",
             "Edit":                                                                                                                             "編輯",
+            "POI & interactive event":                                                                                                          "互動時間點與事件",
             "Add video by URL":                                                                                                                 "匯入影片連結",
             "Add":                                                                                                                              "匯入",
             "+ Add videos here":                                                                                                                "+ 在此加入<br />影片",
@@ -276,7 +282,8 @@
             "Invalid URL, please try again.":                                                                                                   "連結有誤，請重新嘗試。",
             "Invalid URL, please try again!":                                                                                                   "連結有誤，請重新嘗試！",
             "Fail to add this video, please try another one.<br />[This video is not playable outside Youtube]":                                "無法加入此影片，請嘗試其他影片。<br />[此影片無法在YouTube以外的網站播放]",
-            "Fail to add this video, please try another one.<br />[This video is not playable on mobile device]":                               "無法加入此影片，請嘗試其他影片。<br />[此影片無法於行動裝置播放]"
+            "Fail to add this video, please try another one.<br />[This video is not playable on mobile device]":                               "無法加入此影片，請嘗試其他影片。<br />[此影片無法於行動裝置播放]",
+            "Fail to add this video, please try another one.<br />[This is a private video]":                                                   "無法加入此影片，請嘗試其他影片。<br />[此影片為私人影片]"
         },
         "video-info": {
             "Original":                                                                                                                         "原長度",
@@ -288,13 +295,52 @@
             "Not playable on mobile device":                                                                                                    "無法於行動裝置播放"
         },
         "trim-time": {
-            "Start from:":                                                                                                                      "開始時間:",
-            "To:":                                                                                                                              "結束時間:",
-            "Duration:":                                                                                                                        "剪輯長度:",
+            "Playback time":                                                                                                                    "播放時間",
+            "Start from:":                                                                                                                      "開始自:",
+            "To:":                                                                                                                              "結束至:",
+            "Duration:":                                                                                                                        "播放長度:",
             "Invalid time, please try again.":                                                                                                  "時間設定有誤，請重試。",
             "Edit":                                                                                                                             "編輯",
             "Cancel":                                                                                                                           "取消",
             "Done":                                                                                                                             "完成"
+        },
+        "poi-event": {
+            "Add POI & interactive event":                                                                                                      "新增互動時間點與事件",
+            "+ Add":                                                                                                                            "+ 新增",
+            "Edit POI & interactive event":                                                                                                     "編輯互動時間點與事件",
+            "Add an interactive event and call to action message at a point of interaction.":                                                   "在一段特定的影片播放時間內，新增一個互動事件及其號召互動的訊息。",
+            "Edit":                                                                                                                             "編輯",
+            "Create POI":                                                                                                                       "定義互動時間點",
+            "Add interactive event":                                                                                                            "設定互動事件",
+            "Required field":                                                                                                                   "必填項目",
+            "Name":                                                                                                                             "名稱",
+            "Duration":                                                                                                                         "互動時間",
+            "Start from:":                                                                                                                      "開始自:",
+            "To:":                                                                                                                              "結束至:",
+            "Reset":                                                                                                                            "重設",
+            "Invalid time, please try again.":                                                                                                  "時間設定有誤，請重試。",
+            "Tags":                                                                                                                             "標籤",
+            "Separate with commas":                                                                                                             "用逗號分隔",
+            "Cancel":                                                                                                                           "取消",
+            "Next":                                                                                                                             "下一步",
+            "Please fill in all required fields.":                                                                                              "請輸入必填項目",
+            "Start time or end time is not in the video playback time:":                                                                        "開始或結束時間不在影片實際播放的區間內:",
+            "Duration overlaps another POI's duration:":                                                                                        "設定時間與另一個互動時間點重疊:",
+            "Zoom in":                                                                                                                          "放大檢視",
+            "Type":                                                                                                                             "類型",
+            "Hyper channel":                                                                                                                    "超連結頻道",
+            "User can go to watch another 9x9.tv channel or episode.":                                                                          "使用者可前往觀賞另一個9x9.tv頻道或節目。",
+            "Display text":                                                                                                                     "互動訊息顯示文字",
+            "Hyper to related channel to watch more!":                                                                                          "更多精彩內容，歡迎點擊觀看相關頻道！",
+            "Button text":                                                                                                                      "按鈕文字",
+            "Watch now":                                                                                                                        "前往觀看",
+            "Hyper channel URL":                                                                                                                "超連結頻道網址",
+            "Input 9x9 channel or episode URL":                                                                                                 "輸入9x9頻道或節目網址",
+            "Invalid 9x9 URL, please try again.":                                                                                               "9x9網址設定有誤，請重試。",
+            "Add":                                                                                                                              "新增",
+            "POI":                                                                                                                              "互動時間點",
+            "Interactive event":                                                                                                                "互動事件",
+            "Save":                                                                                                                             "儲存"
         },
         "title-card": {
             "Text":                                                                                                                             "字卡內文",
@@ -338,7 +384,9 @@
             "Not playable on mobile device":                                                                                                    "無法於行動裝置播放",
             "Edit Title":                                                                                                                       "編輯字卡",
             "Add Title":                                                                                                                        "新增字卡",
-            "Invalid Video":                                                                                                                    "影片已失效"
+            "Invalid video":                                                                                                                    "失效的影片",
+            "Non-embeddable video":                                                                                                             "外站禁播的影片",
+            "Private video":                                                                                                                    "私人的影片"
         }
     }
 }

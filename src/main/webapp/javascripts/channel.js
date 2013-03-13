@@ -137,7 +137,7 @@ $(function () {
         if ($('#channel-list li.deleting').length > 0 && '' != $('#channel-list li.deleting').data('deleteId')) {
             showSavingOverlay();
             nn.api('DELETE', CMS_CONF.API('/api/users/{userId}/channels/{channelId}', {userId: CMS_CONF.USER_DATA.id, channelId: $('#channel-list li.deleting').data('deleteId')}), null, function (data) {
-                if ('OK' == data) {
+                if ('OK' === data) {
                     $('#overlay-s').fadeOut(1000, function () {
                         var cntChannel = $('#channel-counter').text();
                         if (cntChannel > 0) {
@@ -355,18 +355,30 @@ $(function () {
         $('.select-list').hide();
         $('.select-list').parents().removeClass('on').children('.on').removeClass('on');
         var formHeight = $('#content-main-wrap form').height(),
-            list = $('#fb-page-list').data('list');
+            formRealHeight = 0,
+            list = $('#fb-page-list').data('list'),
+            buttonSpace = 70,
+            footerSpace = 65,
+            expandHeight = parseInt(Math.round(list / 2) * 30, 10);
+        $('#settingForm > .fminput').each(function () {
+            formRealHeight += $(this).outerHeight();
+        });
         $(this).next('ul').slideToggle();
         $(this).parents('.page-list').toggleClass('on');
         if ($('.connected .share-item .page-list').hasClass('on') && $('#main-wrap-slider .ui-slider-handle').length > 0) {
-            $('#content-main-wrap form').height(formHeight + parseInt(Math.round(list / 2) * 30, 10));
-            $('#content-main-wrap').height($('#content-main-wrap .constrain').height() - 45 + parseInt(Math.round(list / 2) * 30, 10));
+            $('#content-main-wrap form').height(formHeight + expandHeight);
+            $('#content-main-wrap').height(formHeight + expandHeight + buttonSpace + footerSpace);
             scrollToBottom();
         } else {
             if ('none' != $('#main-wrap-slider').css('display')) {
                 $('#content-main-wrap form').height('auto');
+                $('#content-main-wrap').height(formRealHeight + 80 + buttonSpace + footerSpace);
+                $('#main-wrap-slider .slider-vertical').slider('destroy');
+                $('#content-main-wrap').css('top', '0');
+            } else {
+                $('#content-main-wrap form').height(formHeight + expandHeight);
+                $('#content-main-wrap').height(formHeight + expandHeight + buttonSpace + footerSpace);
             }
-            $('#content-main-wrap').height($('#content-main-wrap .constrain').height() + 75);
             scrollToBottom();
         }
         ellipsisPage();
@@ -560,7 +572,21 @@ function chkData(fm) {
     return true;
 }
 
+function truncateFormTitle() {
+    var crumbWidth = $('#title-func .title-crumb').width();
+    if ($('#channel-name').data('width') + crumbWidth > $('input.text').width() + 140) {
+        $('#title-func h2').width($('input.text').width() + 140 - crumbWidth);
+        $('#title-func h2').css('padding-right', parseInt(crumbWidth + 5, 10) + 'px');
+        $('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
+    } else {
+        $('#title-func h2').width('auto');
+        $('#title-func h2').css('padding-right', parseInt(crumbWidth + 5, 10) + 'px');
+        $('#channel-name').text($('#channel-name').data('meta')).removeClass('ellipsis');
+    }
+}
+
 function setFormHeight() {
+    $('#content-main-wrap, #content-main-wrap form').height('auto');
     var rowNum = ($(window).width() > 1356) ? 4 : 3,
         realCateCnt = $('#browse-category').data('realCateCnt'),
         modCatLen = realCateCnt % rowNum,
@@ -568,7 +594,6 @@ function setFormHeight() {
         windowWidth = $(window).width(),
         channelListWidth = $('#channel-list').width(),
         channelNameWidth = $('#channel-name').width(),
-        crumbWidth = $('#title-func .title-crumb').width(),
         imgsWidth = $('#channel-list li .wrap .photo-list').width(),
         funcWidth = $('#channel-list li .wrap .func-wrap').width(),
         titleFuncHeight = $('#title-func').height(),
@@ -607,15 +632,7 @@ function setFormHeight() {
         $('#browse-category li').width(150);
         $('#browse-category li').eq(3).addClass('first-row');
     }
-    if ($('#channel-name').data('width') + crumbWidth > $('input.text').width() + 140) {
-        $('#title-func h2').width($('input.text').width() + 140 - crumbWidth);
-        $('#title-func h2').css('padding-right', parseInt(crumbWidth + 5, 10) + 'px');
-        $('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
-    } else {
-        $('#title-func h2').width('auto');
-        $('#title-func h2').css('padding-right', parseInt(crumbWidth + 5, 10) + 'px');
-        $('#channel-name').text($('#channel-name').data('meta')).removeClass('ellipsis');
-    }
+    truncateFormTitle();
     if (contentHeight <= formHeight) {
         $('#content-main-wrap form').height('auto');
     } else {
@@ -643,13 +660,13 @@ function ellipsisPage() {
         $('ul#fb-page-list').width(windowWidth - 838);
         $('ul#fb-page-list li').width((windowWidth - 838) / 2);
         $('#fb-page-list li a').each(function (index) {
-            $(this).text($(this).data('meta'));
+            $(this).children('span').text($(this).data('meta'));
         }).addClass('ellipsis').ellipsis();
     } else {
         $('ul#fb-page-list').width(329);
         $('ul#fb-page-list li').width(164.5);
         $('#fb-page-list li a').each(function (index) {
-            $(this).text($(this).data('meta'));
+            $(this).children('span').text($(this).data('meta'));
         }).addClass('ellipsis').ellipsis();
     }
 }

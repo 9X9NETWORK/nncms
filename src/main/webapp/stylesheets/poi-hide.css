@@ -1,0 +1,12 @@
+/*-----------------------------------------------------------------------------
+[TABLE OF CONTENTS]
+    +content-main
+-----------------------------------------------------------------------------*/
+
+#epcurate-curation ul.tabs li.poi {
+    display: none !important;
+}
+
+#epcurate-curation ul.tabs li.edit-video.on span {
+    background: url(../images/bg_tab_on.png) no-repeat right -108px !important;
+}

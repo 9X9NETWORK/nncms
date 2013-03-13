@@ -28,7 +28,7 @@ div.radio span {
     display: block;
     height: 17px;
     width: 19px;
-    background: url(../images/btn_radio_off.png) no-repeat 0 0;
+    background: url(../images/btn_radio.png) no-repeat 0 0;
 }
 
 div.radio span input {
@@ -38,16 +38,16 @@ div.radio span input {
 
 div.radio.focus span, 
 div.radio:hover span,
-div.radio span.checked {
-    background: url(../images/btn_radio_on.png) no-repeat 0 0;
+div.radio       span.checked {
+    background-position: 0 -36px;
 }
 
 div.radio.disabled span {
-    background: url(../images/btn_radio_off_disable.png) no-repeat 0 0;
+    background-position: 0 -18px;
 }
 
 div.radio.disabled span.checked {
-    background: url(../images/btn_radio_on_disable.png) no-repeat 0 0;
+    background-position: 0 -54px;
 }
 
 /**

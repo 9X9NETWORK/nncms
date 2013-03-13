@@ -22,7 +22,9 @@ var CMS_CONF = {
         '/api/episodes/{episodeId}/programs':               '/api/episodes/{episodeId}/programs',
         '/api/programs/{programId}':                        '/api/programs/{programId}',
         '/api/programs/{programId}/title_cards':            '/api/programs/{programId}/title_cards',
-        '/api/title_card/{titlecardId}':                    '/api/title_card/{titlecardId}'
+        '/api/programs/{programId}/pois':                   '/api/programs/{programId}/pois',
+        '/api/title_card/{titlecardId}':                    '/api/title_card/{titlecardId}',
+        '/api/pois/{poiId}':                                '/api/pois/{poiId}'
     },
     FAKE_PACK: {
         '/api/login':                                       'fakeapi/login.php',
@@ -43,7 +45,9 @@ var CMS_CONF = {
         '/api/episodes/{episodeId}/programs':               'fakeapi/episodes_programs.php?episodeId={episodeId}',
         '/api/programs/{programId}':                        'fakeapi/programs.php?programId={programId}',
         '/api/programs/{programId}/title_cards':            'fakeapi/programs_title_cards.php?programId={programId}',
-        '/api/title_card/{titlecardId}':                    'fakeapi/title_card_del.php?titlecardId={titlecardId}'
+        '/api/programs/{programId}/pois':                   'fakeapi/programs_pois.php?programId={programId}',
+        '/api/title_card/{titlecardId}':                    'fakeapi/title_card_del.php?titlecardId={titlecardId}',
+        '/api/pois/{poiId}':                                'fakeapi/pois.php?poiId={poiId}'
     },
     API: function (uri, repl) {
         var api = '';
@@ -150,7 +154,10 @@ var CMS_CONF = {
     ],
     FB_RESTART_CONNECT: false,
     FB_PAGES_MAP: null,
-    USER_SNS_AUTH: null
+    USER_SNS_AUTH: null,
+    EPISODES_PAGING: [],
+    EPISODES_PAGING_INFO: [],
+    SLIDER_MAX: 100
 };
 
 switch (CMS_CONF.CMS_ENV) {

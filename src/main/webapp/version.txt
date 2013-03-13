@@ -1,104 +1,566 @@
-Revision: 748
+Revision: 895
 Author: chihwen
-Date: �W�� 10:17:25, 2013�~1��29��
+Date: 上午 10:31:38, 2013年3月13日
 Message:
-�P�B src ���� 747
-
-curation storyboard �W�[�v�����ĪG�令�j�� 8 �Ӥ~����C
-issue 5760
-----
-Modified : /fakeapi/javascripts/curation.js
-
-Revision: 745
-Author: chihwen
-Date: �U�� 06:52:25, 2013�~1��28��
-Message:
-�P�B src ���� 740~744
-
-1. curation �s�W�v�� storyboard �� scroll �A append �W�h�C
-2. �վ� animatestoryboard ����m�A�� scroll �M add ���ʧ@������C
-3. �W�[ storyboard �s�W���ĪG�C
-issue 5760
-----
-Modified : /fakeapi/javascripts/curation.js
-
-Revision: 739
-Author: chihwen
-Date: �U�� 04:47:49, 2013�~1��28��
-Message:
-�P�B src ���� 737, 738
-
-curation �W�[�v���ɥ[�W storyboard�Bslider ���ʵe�ĪG�C
-issue 5760
-----
-Modified : /fakeapi/javascripts/curation.js
-
-Revision: 736
-Author: chihwen
-Date: �U�� 01:08:13, 2013�~1��28��
-Message:
-�P�B src ���� 734, 735
-
-1. �W�[�P�_�� index ���|�� processing �� overlay (�`�N�����ȹ�@�b src ����)�C
-2. processing �� overlay �����e���� mask ���U�����e���� (�`�N�����ȹ�@�b src ����)�C
-3. curation �W�[�v���� slider �|��۩��k���C
-4. �վ� curation �W�[�v�� slider ���쪺��k�C
-5. processing mask �U���e�����ç�� class ����C
-issue 5760
-----
-Modified : /fakeapi/javascripts/curation.js
-Modified : /fakeapi/stylesheets/style.css
-
-Revision: 733
-Author: chihwen
-Date: �W�� 10:45:39, 2013�~1��28��
-Message:
-�P�B src ���� 732
-
-storyboard info �]�氪 18px�C
-(�H�ѨM���媩�y�t���ƪ��ۮe���D�A�`�ظ�T�e�{���氪�A�P�W�D�W�١B�`�ئW�٤��@�P)
-issue 5760
+同步 src 版本 894 修版調整 (調整 poi 標題在 chrome 底下會破版的問題)
+issue 5869
 ----
 Modified : /fakeapi/stylesheets/ep-curation.css
 
-Revision: 730
+Revision: 888
 Author: chihwen
-Date: �U�� 01:46:48, 2013�~1��24��
+Date: 下午 05:07:08, 2013年3月12日
 Message:
-�P�B src ���� 729
+同步 src 版本 887 修版調整 (因應客戶分階段上線，隱藏 POI 介面)
 
-1. channel-add�Bchannel-setting ���U�Կ��ɪťդW�h��Ŷ����ﶵ���ݭn hover �ĪG�C
-2. �վ� overlay-s ����m�Amargin ���� css ����Ajs �W���]�w�������C
-3. storyboard �쥻�w�� tooltip �ӥ[�e���Ŷ������A�վ�̫��� tooltip ����m�C
-4. storyboard �����D�氪�אּ 18px�A��L�Ŷ��]�۹�վ㰪�סC
-issue 5760
+先將 POI 介面隱藏起來，dev 站上的 /dev 及 /teltel 目錄下檔案不作更動，
+只單獨把 POI 隱藏版 + Invalid video 2 + Episode list 分頁功能，上線到 /cms 目錄下。
+
+最後要將 dev 站下的 /cms 目錄，版本管控回 api 分支。
+現階段 api 分支與 fakeapi 分支，除了原先 config.js 中的 CMS_ENV 設定不同外，
+還差在 epcurate-curation.html 有無引入 poi-hide.css
+issue 5859
 ----
+Added : /fakeapi/stylesheets/poi-hide.css
+
+Revision: 882
+Author: chihwen
+Date: 下午 03:28:28, 2013年3月11日
+Message:
+從 teltel 開發版本 845~848,850,853,854,860,861,870~873,877,878 轉入 fakeapi 分支
+
+將 ep list 分頁功能，整併回 fakeapi 分支。
+issue 5927
+----
+Modified : /fakeapi/episode-list.html
+Modified : /fakeapi/fakeapi/channels.php
+Modified : /fakeapi/fakeapi/channels_episodes.php
+Modified : /fakeapi/fakeapi/users_channels.php
+Modified : /fakeapi/images/bg_divider.png
+Added : /fakeapi/images/bg_list_collapse_bottom.png
+Added : /fakeapi/images/bg_list_collapse_top.png
+Added : /fakeapi/images/bg_list_expand.png
+Modified : /fakeapi/images/divider_vertical.png
+Added : /fakeapi/images/icon_expand_collapse.png
+Modified : /fakeapi/javascripts/config.js
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/episode.js
+Modified : /fakeapi/javascripts/vertical.slider.js
+Modified : /fakeapi/lang/en.json
+Modified : /fakeapi/lang/zh.json
+Modified : /fakeapi/stylesheets/episode.css
+
+Revision: 879
+Author: chihwen
+Date: 上午 11:24:38, 2013年3月11日
+Message:
+解決頻道輸入頁有非常多 Facebook 粉絲頁時 scrollbar 未正確運作問題
+issue 5869
+----
+Modified : /fakeapi/fakeapi/channels_autosharing_facebook.php
+Modified : /fakeapi/fakeapi/users_sns_auth_facebook.php
 Modified : /fakeapi/javascripts/basic.js
 Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/stylesheets/channel.css
+
+Revision: 874
+Author: chihwen
+Date: 下午 12:52:49, 2013年3月8日
+Message:
+若為外站禁播的影片，則影音左上角不出現三角警示
+issue 5969
+----
+Modified : /fakeapi/epcurate-curation.html
+
+Revision: 867
+Author: chihwen
+Date: 下午 10:24:26, 2013年3月6日
+Message:
+完成 Invalid video 加入及呈現邏輯調整
+
+1. 無效影音的圖片上，不呈現播放時間資訊。
+2. 在計算總播放時間時，不含無效影音。
+3. 無效影音呈現標題文案變動，區分
+   1. Non-embeddable video 外站禁播的影片
+   2. Private video 私人的影片
+   3. Invalid video 失效的影片
+4. 加入影音時，識別私人影片，並出現專屬警示文案。
+5. 無效影音不能新增前後字卡，但可以編輯、刪除 字卡。
+6. 開放限制手機播放影音為一般影音。
+7. 新增私人影音判斷邏輯。
+8. 在呈現時，外站禁播影音，也列入無效影音。
+9. 新增及修改無效影音相關語系。
+10. 將所有影音左上角三角警示都改為紅色。
+issue 5969
+----
+Modified : /fakeapi/epcurate-curation.html
 Modified : /fakeapi/javascripts/controller.js
 Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/lang/en.json
+Modified : /fakeapi/lang/zh.json
+Modified : /fakeapi/stylesheets/ep-curation.css
+
+Revision: 864
+Author: chihwen
+Date: 下午 01:23:26, 2013年3月6日
+Message:
+在編輯模式 save POI 時，也同時 save event 確保資料完整儲存
+
+避免進入 POI 後，先切到 event 改資料，再轉回 POI save 時，遺漏 event 的儲存。
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 863
+Author: chihwen
+Date: 下午 01:09:19, 2013年3月6日
+Message:
+調整影片資訊上的 HH:MM:SS 若 HH 為 00 則只呈現 MM:SS
+issue 5869
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 862
+Author: chihwen
+Date: 下午 12:46:51, 2013年3月6日
+Message:
+若沒有 trim 過影片，在影片資訊上，就只呈現原時間長度 Original hh:mm:ss
+
+1. 若沒有 trim 過影片，在影片資訊上，就只呈現原時間長度 Original hh:mm:ss。
+   若有 trim 過，則呈現 hh:mm:ss - hh:mm:ss (Original hh:mm:ss)。
+2. 在點擊 poi 主頁籤後，再明確呼叫截字外掛一次，以確保截字運算正常。
+3. 當新增的 poi 到 poi list 進行 startTime 時間比對時，明確轉型為數值，以確保比對運算正常。
+issue 5869
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 857
+Author: chihwen
+Date: 下午 09:30:56, 2013年3月5日
+Message:
+補強 curation 下方主功能區 poi save 邏輯
+
+在 poi 新增後的回呼函式中，明確取得該處理資料的 template 物件，
+再明確操作此物件，避免因為回呼時間差，造成 DOM 資料回寫錯誤問題。
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 856
+Author: chihwen
+Date: 下午 09:10:15, 2013年3月5日
+Message:
+完成 curation 下方主功能區 poi save 邏輯
+
+注意在 poi 新增模式下，若還沒產生 programId，
+則不能直接將 poi save 進 API，要先 save 到 DOM 最後再統一進 api。
+1. 針對還沒有 episode id 及 program id 的暫存性 poi 進行新增處理。
+2. 針對還沒有 program id 的暫存性 poi 進行新增處理。
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 855
+Author: chihwen
+Date: 下午 08:08:51, 2013年3月5日
+Message:
+完成 poi save 與 event save 運算及組版邏輯
+
+1. 完成 poi save 與 event save 運算及組版邏輯。
+   1. 當 save poi 時：
+      1. 若為更新模式，而且 poi id 為數值，則直接即時更新 api 並將資料同步回 DOM。
+      2. 若為更新模式，但 poi id 為暫存性資料，則暫時不呼叫 api 僅將資料同步回 DOM。
+      3. 若為新增模式，則直接跳到 event 頁。
+   2. 當 save event 時：
+      1. 若為更新模式，而且 poi id 為數值，則直接即時更新 api 並將資料同步回 DOM。
+      2. 若為更新模式，但 poi id 為暫存性資料，則暫時不呼叫 api 僅將資料同步回 DOM。
+      3. 若為新增模式，而且 program id 為數值，則直接即時新增 api 並取回 poi id 再將資料同步回 DOM，這邊要重新依 startTime 排序。
+      4. 若為新增模式，而且 program id 還不存在，則暫時不呼叫 api 但產生暫存性 poi id 再將資料同步回 DOM，這邊要重新依 startTime 排序。
+2. 所有 poi 資料的重建，都從源頭 DOM 中取出 (#storyboard-list li.playing) 這樣可以避免資料沒有完全同步的狀況。
+3. 將 video-info 與 poi-event-info 組版邏輯明確分離，以符合函式權責及用途。
+   這點異勳也可避免相關組版資料，沒有明確套用的問題。
+4. 讓 #poi-event-info 的最前面 2 行，維持固定的高度，超過就截字，避免影響其後 poi-list 的運算。
+issue 5869
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 841
+Author: chihwen
+Date: 下午 11:35:33, 2013年3月4日
+Message:
+補強 poi start time 定格影片邏輯
+
+1. 在完成 poi 資料檢查 chkPoiData() 後，若正確無誤，就馬上重新定格影片。
+2. 調整 POI save 流程，若資料檢查無誤，若是編輯模式則跳出處理中 overlay，
+   若為新增模式，則直接觸發 event-edit tab link click。
+3. 因應第 2 點由程式直接觸發 click，微調 tab link active 處理邏輯。
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 840
+Author: chihwen
+Date: 下午 10:33:35, 2013年3月4日
+Message:
+完成進入編輯模式時，則改以 poi start time 定格影片位置
+
+1. 若是新增，則以 video 或 trimmed start time 定格影片。
+2. 若是修改，則以 poi start time 定格影片。
+issue 5869
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 839
+Author: chihwen
+Date: 下午 10:05:28, 2013年3月4日
+Message:
+補強 poi 刪除邏輯
+
+1. 確保若刪到完全沒有，要將.poi-list區塊完全清空。
+2. 在重建分頁前確保先把前後頁介面移除，避免分頁數不足以觸發 cycle 的 before 及 after 回呼事件。
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 838
+Author: chihwen
+Date: 下午 07:28:36, 2013年3月4日
+Message:
+完成 poi 刪除邏輯 (含暫存性的 poi 刪除邏輯)
+
+1. 完成 poi 刪除邏輯 (含暫存性的 poi 刪除邏輯)。
+   1. 比照字卡刪除方式，採即時刪除 poi DELETE /api/pois/{poiId}。
+   2. 刪除POI或其event都是整組POI+event一起刪掉。
+      >這點由 api 搞定，目前 poi 與 event 是綁在一起的。
+   3. 刪除完之後回到poi-list列表(重建buildPoiEventInfoTmpl)。
+      >由於重建的關係，會回到第一頁。
+   4. 刪除要將資料同步回#storyboard-listing li.playing的DOM。
+      >順序是先動DOM，再利用DOM上的資料重建buildPoiEventInfoTmpl。
+   5. 若刪到完全沒有，要將.poi-list區塊完全清空。
+      >這點會由 template 判斷邏輯自行處理。
+   6. 刪除要考量到暫存性 poi 的因應處理 (例如還沒有 program id 的狀況下)。
+2. 補強 poi 編輯修改邏輯，將暫存性的 poi 編輯邏輯考量進來 (還沒有 program id 的狀況下)。
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 835
+Author: chihwen
+Date: 下午 12:52:02, 2013年3月4日
+Message:
+同步 src 版本 831,833,834 修版調整
+
+1. poi event edit 標題截字。
+2. channel add fb page 下拉選單 css sprites 調整。
+3. poi event edit 標題截字，中文版本調整。
+issue 5869
+----
+Modified : /fakeapi/channel-add.html
+Modified : /fakeapi/channel-setting.html
+Modified : /fakeapi/javascripts/channel.js
 Modified : /fakeapi/stylesheets/channel.css
 Modified : /fakeapi/stylesheets/ep-curation.css
 
-Revision: 728
+Revision: 830
 Author: chihwen
-Date: �U�� 06:17:11, 2013�~1��23��
+Date: 下午 12:14:12, 2013年3月4日
 Message:
-�P�B src ���� 727
+同步 src 版本 829 修版調整
 
-1. �վ� curation �� tooltip �b safari �U�|�X�{���u�����D�C
-2. episode-list �W�[ webkit �]�w�A���ɶ��b chrome ���U�ॿ�T�e�{ 12px �H�U���r�C
-issue 5760
+1. 更換圖片。
+2. 進行第二波 css sprites 調整。
+3. poi event invalid url notice 樣式調整。
+issue 5869
 ----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/episode-list.html
+Added : /fakeapi/images/bg_checkbox.png
+Added : /fakeapi/images/bg_input_lg.png
+Modified : /fakeapi/images/bg_tab_bar2.png
+Added : /fakeapi/images/bg_tag.png
+Added : /fakeapi/images/bg_tip.png
+Modified : /fakeapi/images/btn_back.png
+Modified : /fakeapi/images/btn_close.png
+Added : /fakeapi/images/btn_close_l.png
+Added : /fakeapi/images/btn_radio.png
+Modified : /fakeapi/images/icon_move.png
+Modified : /fakeapi/images/icon_play.png
+Modified : /fakeapi/index.html
+Modified : /fakeapi/stylesheets/channel.css
 Modified : /fakeapi/stylesheets/ep-curation.css
+Modified : /fakeapi/stylesheets/epcurate.css
 Modified : /fakeapi/stylesheets/episode.css
+Modified : /fakeapi/stylesheets/lightbox.css
+Modified : /fakeapi/stylesheets/style.css
+Modified : /fakeapi/stylesheets/uniform.css
 
-Revision: 726
+Revision: 825
 Author: chihwen
-Date: �W�� 11:16:24, 2013�~1��23��
+Date: 下午 11:06:51, 2013年3月3日
 Message:
-�קK�Ȥ�ݧ֨��A��s CSS �� JS �ޤJ�ɪ������� (?v=726)
-issue 5760
+修補版本 823,824 調整所造成的遺漏或錯誤 (補強 event 編輯介面表單檢查邏輯)
+
+1. 在 poi 或 event 表單成功送出後，確保再 reset 一次 notice。
+2. 改良 chkPoiEventData() 除了 callback 模式外，也要兼顧函式 return 返回邏輯。
+3. 在 CMS_CONF.USER_URL 取用前，先做測試，以便可以與靜態 src 共用。
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 824
+Author: chihwen
+Date: 下午 10:34:40, 2013年3月3日
+Message:
+修補版本 823 調整所造成的遺漏或錯誤 (補強 event 編輯介面表單檢查邏輯)
+
+1. 將 chkPoiEventData() 檢查後的串接邏輯改為 callback 模式，以解決非同步檢查問題。
+2. 調整 poi 事件行為腳本順序，以符合結構及調用順序。
+3. 調整 poi 相關 fakeapi 以便模擬 9x9 channel or episode URL 檢查邏輯。
+4. 補上 Invalid 9x9 URL, please try again. 遺漏的預設 hide class 設定。
+issue 5869
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/fakeapi/pois.php
+Modified : /fakeapi/fakeapi/programs_pois.php
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 823
+Author: chihwen
+Date: 下午 09:02:41, 2013年3月3日
+Message:
+完成 event 編輯介面表單檢查邏輯 (9x9 channel or episode URL)
+
+1. 完成 event 編輯介面表單檢查邏輯 (9x9 channel or episode URL)。
+2. 補強 poi 編輯完成切換邏輯。
+3. 補上遺漏的語系設定 Invalid 9x9 URL, please try again. 9x9網址設定有誤，請重試。
+4. 補上修版遺漏的 Invalid 9x9 URL, please try again. 提示 (TODO 待阿達 review)。
+issue 5869
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/lang/en.json
+Modified : /fakeapi/lang/zh.json
+
+Revision: 822
+Author: chihwen
+Date: 上午 11:32:34, 2013年3月3日
+Message:
+完成 unsave 偵測提示 以及 取消編輯 邏輯
+
+當 poi 相關表單產生異動時，埋入 has-poi-change hook，
+並在各離開入口，偵測是否有此 hook，若有則出現 unsave 提示。
+issue 5869
+----
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 821
+Author: chihwen
+Date: 下午 11:42:36, 2013年3月2日
+Message:
+完成 poi 編輯介面表單檢查及錯誤提示邏輯
+
+1. 完成 poi 編輯介面表單檢查及錯誤提示邏輯 (invalid, playback, overlap)。
+2. 為了明確識別 poi 或 event tab link，分頁給予該頁籤 li 標籤 .poi-edit 及 .event-edit 類別名。
+3. 校正欄位 label for 屬性，對應正確的欄位 id。
+4. 將欄位 tags 更名為 poiTag 以便明確識別。
+issue 5869
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 817
+Author: chihwen
+Date: 下午 10:17:38, 2013年3月1日
+Message:
+修正 event 編輯頁中的 channel url toggleVal 效果套用邏輯
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 816
+Author: chihwen
+Date: 下午 09:27:33, 2013年3月1日
+Message:
+從 teltel 開發版本 798,814 轉入 fakeapi 分支
+
+1. 為 episode-list 加入 386 筆測試資料。
+2. 處理先前因為資料太多造成 scroll 中間會有一段資料會被跳過的問題。
+issue 5869
+----
+Modified : /fakeapi/fakeapi/channels_episodes.php
+Modified : /fakeapi/javascripts/vertical.slider.js
+
+Revision: 815
+Author: chihwen
+Date: 下午 09:02:21, 2013年3月1日
+Message:
+完成 poi 及 event 範本套用雛型
+
+1. 完成 poi 及 event 範本套用雛型。
+   1. 加入 buildPoiEventEditTmpl() 作為重構 poi 及 event 編輯範本主函式。
+   2. 在執行 poi-list 清單上的新增或編輯按鈕時，就重建 poi 及 event 編輯範本。
+   3. 將 poi 及 event 編輯介面，抽換成 template 範本。
+   4. 讓 poi 及 event 編輯介面範本，可同時適用新增及編輯模式。
+2. 完成 unsave overlay 呼叫雛型。
+3. 完成 delete overlay 呼叫雛型。
+4. 完成 poi 相關多國語系設定。
+5. 調整 poi 相關 fakeapi 資料，以便模擬測試之用。
+6. 在 basic.js 共用函式中，新增 poi 相關 overlay 函式 (showUnsavePoiOverlay, showDeletePoiPromptOverlay)。
+7. 修正版本 809 中的第 2 點 (2. 在點擊下方影音列表的 play icon 時，若原來上方只有 Edit 主頁籤時，才進行相關頁籤切換隱現邏輯。)
+   改為若 poi 主頁籤有被隱藏的話，就進行相關頁籤切換隱現邏輯。
+8. 調整 poi-list 分頁 cycle 套用，加入 before callback 負責在執行前，先把前後頁介面隱藏，
+   再由 after callback 重建介面，以避免當在最前及最後頁時，after callback 來不及處理就被按到了。
+issue 5869
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/fakeapi/pois.php
+Modified : /fakeapi/fakeapi/programs_pois.php
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 813
+Author: chihwen
+Date: 下午 01:37:49, 2013年3月1日
+Message:
+完成進入 poi 新增或編輯介面時，就要暫停 video 並 hook poi edit mode 邏輯
+
+1. 一進入就暫停 video 到 trimmed start time (TODO：進入編輯模式時, 則改以 poi start time 為準)，
+   而此時 video 還保有播放控制器 (利用 from-poi-edit-mode 監控)。
+2. 一進入 poi 編輯介面後，注意此時 video 若播完，要自動返回 video 開頭 (利用 enter-poi-edit-mode 監控)。
+3. 在完成 trim time 編輯後，強制再重建一次影片資訊 Edit 及 POI 主頁籤，以便更新 trimmed 過的影片長度資訊。
+
+from-poi-edit-mode 建立時機：
+1. Enter POI tab from POI list (Add or Edit button)。
+2. Enter POI or event tab from POI | Interactive event tab。
+3. 在 poi 編輯介面 video 播完，自動返回 video 開頭前。
+from-poi-edit-mode 移除時機：
+1. onYouTubePlayerStateChange() 暫停 video 到 trimmed start time 後。
+
+enter-poi-edit-mode 建立時機：
+1. Enter POI tab from POI list (Add or Edit button)。
+2. Enter POI or event tab from POI | Interactive event tab。
+enter-poi-edit-mode 移除時機：
+1. unblockPoiUI() 解除 poi 相關遮罩時。
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 809
+Author: chihwen
+Date: 上午 12:15:02, 2013年3月1日
+Message:
+完成 video 延續及切換邏輯調整
+
+1. 當影音還尚未載入，或者為 chromeless 介面時，
+   在點擊 Edit 或 POI 主頁籤時，才主動載入影音，否則影音維持原狀態不變。
+2. 在點擊下方影音列表的 play icon 時，若原來上方只有 Edit 主頁籤時，才進行相關頁籤切換隱現邏輯。
+3. 當使用 chromeless 介面播放影音時，在最上層的 html 標籤中，塞入 youtube-chromeless class 屬性，
+   以便程式識別，若不是 chromeless 介面的話，就移除此 class 屬性。
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 805
+Author: chihwen
+Date: 下午 10:41:41, 2013年2月28日
+Message:
+完成 poi-list 列表介面
+
+1. 完成 poi-list 列表介面。
+2. 有 poi-list 資料，才出現編輯清單，否則編輯介面全部都不出現，只有新增介面。
+3. 只要 poi-list 區塊存在，則 resize 時，就要重建單頁個數及分頁數，並回到第一頁。
+4. 調整 buildVideoInfoTmpl() 在建立影音資訊時，也同步建立 POI 主頁籤。
+5. 新增 buildPoiEventInfoTmpl() 以便將建立 poi-list 的邏輯獨立出來，以便 resize 時可以單獨呼叫。
+6. 新增 getPoiItemSize() 以便將 poi-list 單頁個數計算邏輯獨立出來。
+7. 微調 controller.js 將回傳的 poi 資料，由 poi 更名為 pois 以符合其清單之意。
+8. 調整 POI 主頁籤結構，在最外層新增 div#poi-event-info 結構，以便範本資料可以集中掛載在此結構中。
+[div id="cur-poi" class="tab-content clearfix hide"]
+[div id="poi-event-info"]
+原頁籤結構內容
+[/div]
+[/div]
+9. 調整 poi-list ul 結構，新增 id="poi-list-page" 屬性，以便腳本及 template 識別掛載位置。
+[ul id="poi-list-page" data-item="${$item.itemSize}"]
+issue 5869
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 801
+Author: chihwen
+Date: 下午 02:09:14, 2013年2月28日
+Message:
+因應 api 回應設計，將 poi 暫存名稱，從 poi 更名為 poiList，初始值由 null 改為 [] 空陣列
+issue 5869
+----
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 799
+Author: chihwen
+Date: 下午 12:21:16, 2013年2月28日
+Message:
+完成 poi 相關語系歸檔
+
+1. 完成 poi 相關語系歸檔。
+2. 完成 controller.js poi 既有 poi 資料載入暫存及匯入影音 poi 初始設計。
+issue 5869
+----
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/lang/en.json
+Modified : /fakeapi/lang/zh.json
+
+Revision: 796
+Author: chihwen
+Date: 下午 02:29:37, 2013年2月27日
+Message:
+新增 POI 相關 fakeapi 模擬實作 fakeapi/programs_pois.php 以及 fakeapi/pois.php
+
+1. 新增 POI 相關 fakeapi 模擬實作 fakeapi/programs_pois.php 以及 fakeapi/pois.php。
+2. 配合 9x9 API 回傳格式統一更新，將 OK 由 plan text 的格式改為 json 的格式。
+3. 更新圖檔 bg_tab_bar2.png。
+issue 5869
+----
+Modified : /fakeapi/fakeapi/channels_autosharing_facebook.php
+Modified : /fakeapi/fakeapi/channels_episodes_sorting.php
+Modified : /fakeapi/fakeapi/episodes.php
+Modified : /fakeapi/fakeapi/episodes_programs.php
+Modified : /fakeapi/fakeapi/login.php
+Added : /fakeapi/fakeapi/pois.php
+Added : /fakeapi/fakeapi/programs_pois.php
+Modified : /fakeapi/fakeapi/title_card_del.php
+Modified : /fakeapi/fakeapi/users_channels_del.php
+Modified : /fakeapi/fakeapi/users_channels_sorting.php
+Modified : /fakeapi/fakeapi/users_sns_auth_facebook.php
+Modified : /fakeapi/images/bg_tab_bar2.png
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/config.js
+Modified : /fakeapi/javascripts/episode.js
+
+Revision: 787
+Author: chihwen
+Date: 下午 12:18:14, 2013年2月26日
+Message:
+調整垂直 scrollbar 套件，每一進程跳動由 5 改為 2
+
+以避免數量多時(386筆)，一次跳動太大(從1直接跳到20)
+issue 5869
+----
+Modified : /fakeapi/javascripts/vertical.slider.js
+
+Revision: 785
+Author: chihwen
+Date: 上午 11:02:09, 2013年2月26日
+Message:
+避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=784)
+issue 5869
 ----
 Modified : /fakeapi/channel-add.html
 Modified : /fakeapi/channel-setting.html
@@ -108,47 +570,149 @@ Modified : /fakeapi/episode-list.html
 Modified : /fakeapi/index.html
 Modified : /fakeapi/login.html
 
-Revision: 725
+Revision: 784
 Author: chihwen
-Date: �W�� 10:53:19, 2013�~1��23��
+Date: 上午 12:00:53, 2013年2月26日
 Message:
-�ץ� IE �L�k�ѪR�����u�s��x�]�m�v�� title �y�t���D
+因應按鈕文字放大，調整 Edit Title 編輯字卡按鈕寬度
+issue 5869
+----
+Modified : /fakeapi/stylesheets/ep-curation.css
 
-1. �ץ� IE �L�k�ѪR�����u�s��x�]�m�v�� title �y�t���D�C
-   �N�ӻy�t�� key �� html �אּ�@��r��A�קK���P�s�����b�x�s key �᪺�ѪR���@�P�A�y���y�t�������ġC
-2. �P�B src ���� 724 (storyboard time font-size �W�[ webkit �]�w�קK chrome �j���j�r��� 12px)�C
-issue 5760
+Revision: 783
+Author: chihwen
+Date: 下午 11:49:59, 2013年2月25日
+Message:
+移除影音 liquid 最大限制
+
+1. 重構 setVideoMeasure() 以便移除影音 liquid 最大限制。
+2. 調整樣式移除上方 tab 選單、影音播放區、影音資訊區、字卡編輯區等 media query 判斷。
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/stylesheets/ep-curation.css
+
+Revision: 782
+Author: chihwen
+Date: 下午 10:02:11, 2013年2月25日
+Message:
+修正錯誤的 js 宣告
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 781
+Author: chihwen
+Date: 下午 05:17:32, 2013年2月25日
+Message:
+針對初步 POI 靜態修版整合進行重構
+
+1. 將 unblock POI UI 邏輯集中為 unblockPoiUI() 函式。
+2. 將 remove POI tab 邏輯集中為 removePoiTab() 函式。
+3. 在所有字卡編輯入口，套用上述 removePoiTab() 移除 POI 相關 tab。
+4. 將所有 POI 事件，改用 on 重新委派在 #cur-poi 或 #cur-poi-edit 區塊上，以便整合 template 機制。
+5. 重構 setVideoMeasure() 以及 setSpace() 以解決影音 4 個 p.auto-height 最小高度 18px 問題。
+6. 重構 loadYouTubeFlash() 以便集中整合 chromeless 影音邏輯。
+7. 針對待擴充或改寫之處，先標示為 TODO。
+8. 統一程式碼撰寫風格。
+
+TODO：
+1. 移除影音 liquid 最大限制。
+2. tmplate design。
+3. countPoiItem(): window dom ready and resize event review。
+4. POI cycle, toggleVal, autotab dynamic rebuid。
+5. loadYouTubeFlash 延續及切換。
+6. POI 事件行為 js。
+7. POI 表單檢查 js。
+8. 整合 多國語系 以及 unsave 機制。
+issue 5869
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/javascripts/epcurate.js
+
+Revision: 780
+Author: chihwen
+Date: 下午 02:51:40, 2013年2月22日
+Message:
+補上版本 779 漏更新的 css 檔
+
+同步 src 版本 777
+issue 5869
+----
+Modified : /fakeapi/stylesheets/ep-curation.css
+
+Revision: 779
+Author: chihwen
+Date: 下午 12:20:09, 2013年2月22日
+Message:
+完成初步 POI 靜態修版整合
+
+同步 src 版本 755~769,774,775,777,778
+issue 5869
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/epcurate-publish.html
+Added : /fakeapi/images/bg_header_input.png
+Modified : /fakeapi/images/bg_input.png
+Added : /fakeapi/images/bg_message_s.png
+Added : /fakeapi/images/bg_nav.png
+Added : /fakeapi/images/bg_nav_disable.png
+Added : /fakeapi/images/bg_nav_on.png
+Added : /fakeapi/images/bg_processing.png
+Added : /fakeapi/images/bg_tab.png
+Added : /fakeapi/images/bg_tab_disable.png
+Added : /fakeapi/images/bg_tab_on.png
+Added : /fakeapi/images/bg_trim.png
+Added : /fakeapi/images/btn_gray.png
+Added : /fakeapi/images/btn_switch.png
+Modified : /fakeapi/images/btns.png
+Added : /fakeapi/images/icon_edit.png
+Added : /fakeapi/images/icon_narrow.png
+Added : /fakeapi/images/icon_zoom.png
+Added : /fakeapi/images/line02.png
+Added : /fakeapi/images/poi.jpg
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/javascripts/epcurate.js
+Modified : /fakeapi/lang/en.json
+Modified : /fakeapi/lang/zh.json
+Modified : /fakeapi/stylesheets/channel.css
+Modified : /fakeapi/stylesheets/ep-curation.css
+Modified : /fakeapi/stylesheets/epcurate.css
+Modified : /fakeapi/stylesheets/lightbox.css
+Modified : /fakeapi/stylesheets/style.css
+
+Revision: 776
+Author: chihwen
+Date: 下午 09:11:06, 2013年2月19日
+Message:
+修改頻道頁及 trim-time 語系文案
+
+1. 將 channel 頻道頁 Tag 欄位更名為 Tags。
+2. 修改 trim-time 相關中文文案。
+issue 5869
 ----
 Modified : /fakeapi/channel-add.html
 Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/episode-list.html
-Modified : /fakeapi/index.html
 Modified : /fakeapi/lang/en.json
 Modified : /fakeapi/lang/zh.json
-Modified : /fakeapi/stylesheets/ep-curation.css
 
-Revision: 721
+Revision: 753
 Author: chihwen
-Date: �U�� 05:22:27, 2013�~1��17��
+Date: 下午 10:31:34, 2013年2月1日
 Message:
-�P�B src ���䪩�� 720
+修正 channel setting 頁 scrollbar 無法呈現問題
 
-�קK curation ������D�|�]���פ����ӳy�����D�u�� ... �����p�A�W�[���D���氪�]�w�C
-issue 5760
+因為 Tags 及 Facebook Auto Share 非同步組版的關係，加上頻道表單高度重覆運算及呼叫順序問題所致。
+1. 將頻道表單頁標題截字邏輯獨立出來 truncateFormTitle() 以便獨立執行。
+2. 在運算頻道表單高度時，一律先將高度回復為 auto 避免因為重覆運算及呼叫順序問題影響運算邏輯。
+3. 在進行 Facebook Auto Share 非同步組版後，重新計算頻道表單高度。
+4. 因應上述調整，移除 channel setting 頁，非必要的頻道表單高度運算邏輯。
+5. 因應第 1 點調整，在 channel setting 頁載入時，獨立運算頻道表單頁標題截字邏輯，避免與高度運算邏輯綁在一起。
+issue 5869
 ----
-Modified : /fakeapi/stylesheets/ep-curation.css
-
-Revision: 718
-Author: chihwen
-Date: �U�� 12:59:47, 2013�~1��17��
-Message:
-�ץ� Google Chrome flash �|���ʹݼv�����D
-
-���� wmode: 'transparent' �]�w
-issue 5760
-----
-Modified : /fakeapi/javascripts/curation.js
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 4272
-Last Changed Date: 2013-01-30 14:48:00 +0800 (Wed, 30 Jan 2013)
+Modified : /fakeapi/fakeapi/channels_autosharing_facebook.php
+Modified : /fakeapi/fakeapi/users_sns_auth_facebook.php
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/controller.js

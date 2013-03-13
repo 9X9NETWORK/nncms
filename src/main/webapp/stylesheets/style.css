@@ -72,7 +72,7 @@ abbr, acronym {
 	height: 84px;
     margin: -42px 0 0 -90px;
     padding-left: 6px;
-    background: url(../images/waiting_loading_left.png) no-repeat 0 0;
+    background: url(../images/bg_processing.png) no-repeat 0 0;
     color: #777;
 	font-weight: bold;
     font-size: 17px;
@@ -86,7 +86,7 @@ abbr, acronym {
 
 #overlay-s .overlay-content span.overlay-right {
 	padding-right: 6px;
-	background: url(../images/waiting_loading_right.png) no-repeat right 0;
+	background: url(../images/bg_processing.png) no-repeat right -84px;
 }
 
 #overlay-s .overlay-content span.overlay-middle {
@@ -94,7 +94,7 @@ abbr, acronym {
     height: 45px;
     line-height: 45px;
     padding: 19px 0 20px 0;
-	background: url(../images/waiting_loading_middle.png) repeat-x;
+	background: url(../images/bg_processing.png) repeat-x 0 -168px;
     text-align: center;
 }
 
@@ -112,17 +112,17 @@ abbr, acronym {
 
 #content-wrap         .btns,
 .lightbox-content .btns {
-    height: 31px;
+    height: 32px;
     padding: 0 0 0 3px;
-    background: url(../images/bg_btn_left.png) no-repeat 0 0;
+    background: url(../images/btn_gray.png) no-repeat 0 0;
 }
 
 #content-wrap         .btns span,
 .lightbox-content .btns span {
     display: block;
-    height: 31px;
+    height: 32px;
     padding: 0 3px 0 0;
-    background: url(../images/bg_btn_right.png) no-repeat right 0;
+    background: url(../images/btn_gray.png) no-repeat right -32px;
 }
 
 #content-wrap         .btns span a,
@@ -131,9 +131,9 @@ abbr, acronym {
 .lightbox-content .btns span input {
     display: block;
     height: 27px;
-    padding: 4px 0 0 0;
+    padding: 5px 0 0 0;
     border: none;
-    background: url(../images/bg_btn_middle.png) repeat 0 0;
+    background: url(../images/btn_gray.png) repeat-x 0 -64px;
     color: #555;
     font-family: Arial, Helvetica;
     font-weight: 500;
@@ -144,16 +144,16 @@ abbr, acronym {
 }
 
 #content-wrap .btns:hover {
-    background: url(../images/bg_btn_left_press.png) no-repeat 0 0;
+    background-position: 0 -96px;
 }
 
 #content-wrap .btns:hover span {
-    background: url(../images/bg_btn_right_press.png) no-repeat right 0;
+    background-position: right -128px;
 }
 
 #content-wrap .btns:hover span a,
 #content-wrap .btns:hover span input {
-    background: url(../images/bg_btn_middle_press.png) repeat 0 0;
+    background-position: 0 -160px;
     color: #777;
 }
 
@@ -190,22 +190,21 @@ abbr, acronym {
 .lightbox-content .btns:hover     span input {
     background: none;
 }
-
+/*
 #content-wrap .btns span.btn-right {
     background: url(../images/bg_btn_right.png) no-repeat right 0;
 }
-
+*/
 #content-wrap .btns span.btn-middle {
-    padding: 0;
-    background: url(../images/bg_btn_middle.png) repeat 0 0;
+    background: url(../images/btn_gray.png) repeat-x 0 -64px;
 }
 
 #content-wrap .btns:hover span.btn-right {
-    background: url(../images/bg_btn_right_press.png) no-repeat right 0;
+    background: url(../images/btn_gray.png) no-repeat right -128px;
 }
 
 #content-wrap .btns:hover span.btn-middle {
-    background: url(../images/bg_btn_middle_press.png) repeat 0 0;
+    background: url(../images/btn_gray.png) repeat-x 0 -160px;
 }
 
 /**
@@ -377,7 +376,7 @@ background-position: -100px -250px;
 margin: 0 0 0 5px;
 width: 120px;
 height: 28px;
-background: url(../images/bg_input.png) no-repeat;
+background: url(../images/bg_header_input.png) no-repeat;
 position: relative;
 }
 
@@ -451,7 +450,7 @@ background-position: 0 -451px;
 margin: 0 0 0 5px;
 width: 120px;
 height: 28px;
-background: url(../images/bg_input.png) 0 -50px;
+background: url(../images/bg_header_input.png) 0 -50px;
 position: relative;
 }
 #nav li#signin:hover {
@@ -513,11 +512,11 @@ height:24px;
 position:absolute;
 top:3px;
 right:-7px;
-background: url(../images/btn_popup_close.png) no-repeat;
+background: url(../images/btn_close_l.png) no-repeat 0 0;
 cursor: pointer;
 }
 #btn-signin-close:hover {
-background: url(../images/btn_popup_close_press.png) no-repeat;
+background-position: 0 -24px;
 }
 #signin-panel_signin {
 width:249px;
@@ -627,6 +626,7 @@ background: #e4e4e4;
 }
 
 #epcurate-nav .epcurate-nav-wrap {
+    position: relative;
     height: 46px;
     padding: 0;
 }
@@ -638,6 +638,12 @@ background: #e4e4e4;
     background: url(../images/icon_studio.png) no-repeat 14px 0;
     font: bold 25px/25px Arial, Helvetica;
     text-indent: 44px;
+}
+
+#epcurate-nav .epcurate-nav-wrap h3 {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #epcurate-nav .epcurate-nav-wrap h3 {
@@ -680,7 +686,7 @@ background: #e4e4e4;
 }
 
 #epcurate-nav .epcurate-nav-wrap h3 a.btn-back:hover {
-    background: url(../images/btn_back_on.png) no-repeat 0 0;
+    background-position: 0 -36px;
 }
 
 #studio-nav .studio-nav-wrap ul {
@@ -774,23 +780,23 @@ background: #e4e4e4;
     position: relative;
     z-index: 10;
     width: 162px;
-    height: 31px;
+    height: 32px;
     padding-left: 3px;
-    background: url(../images/bg_btn_left.png) no-repeat 0 0;
+    background: url(../images/btn_gray.png) no-repeat 0 0;
 }
 
 #studio-nav .studio-nav-wrap .studio-setup .btn-right {
     display: block;
-    height: 31px;
+    height: 32px;
     padding-right: 3px;
-    background: url(../images/bg_btn_right.png) no-repeat right 0;
+    background: url(../images/btn_gray.png) no-repeat right -32px;
 }
 
 #studio-nav .studio-nav-wrap .studio-setup .btn-middle {
     display: block;
-    height: 31px;
+    height: 32px;
     padding: 0 5px;
-    background: url(../images/bg_btn_middle.png) repeat-x;
+    background: url(../images/btn_gray.png) repeat-x 0 -64px;
     text-align: center;
 }
 
@@ -825,32 +831,31 @@ background: #e4e4e4;
 
 #epcurate-nav .epcurate-nav-wrap ul {
     position: relative;
-    width: 262px;
+    overflow: hidden;
+    width: 256px;
     margin: 0 auto;
+    padding: 9px 0 0;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li {
-    position: absolute;
-    top: 9px;
+    float: left;
+    width: 128px;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li.curation {
-    left: -3px;
+    margin-left: 3px;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li.publish {
-    top: 8px;
-    right: 0;
+    margin-left: -3px;
 }
 
-#epcurate-nav .epcurate-nav-wrap ul li.on,
 #epcurate-nav .epcurate-nav-wrap ul li a {
     display: block;
-    width: 128px;
     height: 26px;
     line-height: 26px;
     padding-left: 3px;
-    background: url(../images/bg_tab_left.png) no-repeat 0 0;
+    background: url(../images/bg_nav.png) no-repeat 0 0;
     color: #555;
     font-size: 15px;
     font-weight: bold;
@@ -858,93 +863,52 @@ background: #e4e4e4;
     text-decoration: none;
 }
 
-#epcurate-nav .epcurate-nav-wrap ul li.on span,
-#epcurate-nav .epcurate-nav-wrap ul li a    span {
+#epcurate-nav .epcurate-nav-wrap ul li a span {
     display: block;
+    background: url(../images/bg_nav.png) no-repeat 0 0;
 }
 
-#epcurate-nav .epcurate-nav-wrap ul li.on span.nav-right,
-#epcurate-nav .epcurate-nav-wrap ul li a    span.nav-right {
-    padding-right: 3px;
-    background: url(../images/bg_tab_right_angle.png) no-repeat right 0;
+#epcurate-nav .epcurate-nav-wrap ul li       a:hover,
+#epcurate-nav .epcurate-nav-wrap ul li       a:hover span,
+#epcurate-nav .epcurate-nav-wrap ul li.on a,
+#epcurate-nav .epcurate-nav-wrap ul li.on a span {
+    background: url(../images/bg_nav_on.png) no-repeat 0 0;
 }
 
-#epcurate-nav .epcurate-nav-wrap ul li.on span.nav-middle,
-#epcurate-nav .epcurate-nav-wrap ul li a    span.nav-middle {
-    background: url(../images/bg_tab_middle.png) repeat-x;
-    text-align: center;
+#epcurate-nav .epcurate-nav-wrap ul li.mask a,
+#epcurate-nav .epcurate-nav-wrap ul li.mask a span {
+    background: url(../images/bg_nav_disable.png) no-repeat 0 0;
 }
 
-#epcurate-nav .epcurate-nav-wrap ul li.on,
-#epcurate-nav .epcurate-nav-wrap ul li a:hover {
-    color: #777;
-}
-
-#epcurate-nav .epcurate-nav-wrap ul li a {
-    height: 31px;
-    line-height: 31px;
-    padding-left: 2px;
-    background: url(../images/bg_btn_left_angle.png) no-repeat 0 0;
+#epcurate-nav .epcurate-nav-wrap ul li.on a,
+#epcurate-nav .epcurate-nav-wrap ul li.on a span {
+    cursor: default;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li a span.nav-right {
-    background: url(../images/bg_btn_right.png) no-repeat right 0;
+    padding-right: 3px;
+    background-position: right -27px;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li a span.nav-middle {
-    background: url(../images/bg_btn_middle.png) repeat-x;
-    line-height: 29px;
+    background-repeat: repeat-x;
+    background-position: 0 -54px;
 }
 
-#epcurate-nav .epcurate-nav-wrap ul li a:hover {
-    height: 26px;
-    line-height: 26px;
-    margin: 1px 0 0 -2px;
-    background: url(../images/bg_tab_left_angle.png) no-repeat 0 0;
+#epcurate-nav .epcurate-nav-wrap ul li.publish a {
+    background-position: 0 -81px;
 }
 
-#epcurate-nav .epcurate-nav-wrap ul li a:hover span.nav-right {
-    background: url(../images/bg_tab_right.png) no-repeat right 0;
+#epcurate-nav .epcurate-nav-wrap ul li.publish a span.nav-right {
+    background-position: right -108px;
 }
 
-#epcurate-nav .epcurate-nav-wrap ul li a:hover span.nav-middle {
-    background: url(../images/bg_tab_middle.png) repeat-x;
-    line-height: 26px;
+#epcurate-nav .epcurate-nav-wrap ul li.publish a span.nav-middle {
+    background-position: 0 -54px;
 }
 
-#epcurate-nav.publish .epcurate-nav-wrap ul li.curation {
-    top: 8px;
-}
-
-#epcurate-nav.publish .epcurate-nav-wrap ul li.publish {
-    top: 9px;
-}
-
-#epcurate-nav.publish .epcurate-nav-wrap ul li.on {
-    background: url(../images/bg_tab_left_angle.png) no-repeat 0 0;
-}
-
-#epcurate-nav.publish .epcurate-nav-wrap ul li.on span.nav-right {
-    background: url(../images/bg_tab_right.png) no-repeat right 0;
-}
-
-#epcurate-nav.publish .epcurate-nav-wrap ul li a {
-    padding-left: 3px;
-    background: url(../images/bg_btn_left.png) no-repeat 0 0;
-}
-
-#epcurate-nav.publish .epcurate-nav-wrap ul li a span.nav-right {
-    padding-right: 2px;
-    background: url(../images/bg_btn_right_angle.png) no-repeat right 0;
-}
-
-#epcurate-nav.publish .epcurate-nav-wrap ul li a:hover {
-    margin: 1px 0 0 2px;
-    background: url(../images/bg_tab_left.png) no-repeat 0 0;
-}
-
-#epcurate-nav.publish .epcurate-nav-wrap ul li a:hover span.nav-right {
-    background: url(../images/bg_tab_right_angle.png) no-repeat right 0;
+#epcurate-nav .epcurate-nav-wrap ul li.mask a span.nav-middle {
+    color: #777;
 }
 
 #epcurate-nav .epcurate-nav-wrap .tip {
@@ -970,20 +934,20 @@ background: #e4e4e4;
     display: block;
     height: 28px;
     padding-left: 7px;
-    background: url(../images/bg_tip_left.png) no-repeat 0 0;
+    background: url(../images/bg_tip.png) no-repeat 0 0;
 }
 
 #epcurate-nav .epcurate-nav-wrap .tip-right {
     display: block;
     height: 28px;
     padding-right: 7px;
-    background: url(../images/bg_tip_right.png) no-repeat right 0;
+    background: url(../images/bg_tip.png) no-repeat right -28px;
 }
 
 #epcurate-nav .epcurate-nav-wrap .tip .tip-middle {
     display: block;
     height: 28px;
-    background: url(../images/bg_tip_middle.png) repeat-x;
+    background: url(../images/bg_tip.png) repeat-x 0 -56px;
     line-height: 28px;
     color: #555;
     font-weight: normal;
@@ -1092,20 +1056,20 @@ background: #e4e4e4;
     display: block;
     height: 28px;
     padding-left: 7px;
-    background: url(../images/bg_tip_left.png) no-repeat 0 0;
+    background: url(../images/bg_tip.png) no-repeat 0 0;
 }
 
 #title-func h2 a.reload .tip-right {
     display: block;
     height: 28px;
     padding-right: 7px;
-    background: url(../images/bg_tip_right.png) no-repeat right 0;
+    background: url(../images/bg_tip.png) no-repeat right -28px;
 }
 
 #title-func h2 a.reload .tip .tip-middle {
     display: block;
     height: 28px;
-    background: url(../images/bg_tip_middle.png) repeat-x;
+    background: url(../images/bg_tip.png) repeat-x 0 -56px;
     line-height: 28px;
     color: #555;
     font-style: normal;
@@ -1335,7 +1299,7 @@ padding: 4px 10px 0;
 	height: 28px;
 	margin: 0 0 0 5px;
 	padding: 0 0 0 8px;
-	background: url(../images/bg_input.png) 0 -50px no-repeat;
+	background: url(../images/bg_header_input.png) 0 -50px no-repeat;
 	font-size: 13px;
 	line-height: 28px;
 }

@@ -1,4 +1,4 @@
-/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setVideoMeasure setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp switchPublishStatus switchRerunCheckbox setFormHeight setTaglistWidth uploadImage FB ellipsisPage */
+/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setVideoMeasure setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp switchPublishStatus switchRerunCheckbox truncateFormTitle setFormHeight setTaglistWidth uploadImage FB ellipsisPage */
 /*jslint eqeq: true, nomen: true, plusplus: true, regexp: true, unparam: true, sloppy: true, vars: true */
 nn.initialize();
 nn.debug(CMS_CONF.IS_DEBUG);
@@ -122,8 +122,17 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
                         $('#page-selected').text(pageNames.join(', '));
                     }
                 }
+                autoHeight();
+                setFormHeight();
+                setTaglistWidth();
+                scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
             }
         });
+    } else {
+        autoHeight();
+        setFormHeight();
+        setTaglistWidth();
+        scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
     }
 }   // end of renderAutoShareUI()
 
@@ -357,6 +366,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                         ytList = [],
                         beginTitleCard = null,
                         endTitleCard = null,
+                        isPrivateVideo = null,
                         isZoneLimited = null,
                         isMobileLimited = null,
                         isEmbedLimited = null;
@@ -392,106 +402,114 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                             });
                             nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.slice(-11) + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
                                 nn.api('GET', CMS_CONF.API('/api/programs/{programId}/title_cards', {programId: programItem.id}), null, function (title_card) {
-                                    committedCnt += 1;
-                                    beginTitleCard = null;
-                                    endTitleCard = null;
-                                    if (title_card.length > 0) {
-                                        if (title_card[1]) {
-                                            if (1 == title_card[1].type) {
-                                                beginTitleCard = title_card[0];
-                                                endTitleCard = title_card[1];
-                                            } else {
-                                                beginTitleCard = title_card[1];
-                                                endTitleCard = title_card[0];
-                                            }
-                                        } else {
-                                            if (title_card[0]) {
-                                                if (0 == title_card[0].type) {
+                                    nn.api('GET', CMS_CONF.API('/api/programs/{programId}/pois', {programId: programItem.id}), null, function (pois) {
+                                        committedCnt += 1;
+                                        beginTitleCard = null;
+                                        endTitleCard = null;
+                                        if (title_card.length > 0) {
+                                            if (title_card[1]) {
+                                                if (1 == title_card[1].type) {
                                                     beginTitleCard = title_card[0];
+                                                    endTitleCard = title_card[1];
                                                 } else {
+                                                    beginTitleCard = title_card[1];
                                                     endTitleCard = title_card[0];
+                                                }
+                                            } else {
+                                                if (title_card[0]) {
+                                                    if (0 == title_card[0].type) {
+                                                        beginTitleCard = title_card[0];
+                                                    } else {
+                                                        endTitleCard = title_card[0];
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                                    if (beginTitleCard && beginTitleCard.message && '' != $.trim(beginTitleCard.message)) {
-                                        beginTitleCard.message = $.trim(beginTitleCard.message).replace(/\{BR\}/g, '\n');
-                                        if (beginTitleCard.bgImage && '' != $.trim(beginTitleCard.bgImage)) {
-                                            preloadImage.push({
-                                                image: beginTitleCard.bgImage
-                                            });
-                                        }
-                                    } else {
-                                        beginTitleCard = null;
-                                    }
-                                    if (endTitleCard && endTitleCard.message && '' != $.trim(endTitleCard.message)) {
-                                        endTitleCard.message = $.trim(endTitleCard.message).replace(/\{BR\}/g, '\n');
-                                        if (endTitleCard.bgImage && '' != $.trim(endTitleCard.bgImage)) {
-                                            preloadImage.push({
-                                                image: endTitleCard.bgImage
-                                            });
-                                        }
-                                    } else {
-                                        endTitleCard = null;
-                                    }
-                                    if (youtubes.data) {
-                                        ytData = youtubes.data;
-                                        isZoneLimited = (ytData.restrictions) ? true : false;
-                                        isMobileLimited = ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false;
-                                        isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
-                                    } else {
-                                        ytData = null;
-                                        isZoneLimited = null;
-                                        isMobileLimited = null;
-                                        isEmbedLimited = null;
-                                    }
-                                    if (ytData) {
-                                        ytItem = {
-                                            beginTitleCard: beginTitleCard,
-                                            endTitleCard: endTitleCard,
-                                            ytId: ytData.id,
-                                            fileUrl: programItem.fileUrl,
-                                            imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
-                                            //duration: ytData.duration,      // ON PURPOSE to mark this line to keep trimmed duration from 9x9 API
-                                            ytDuration: ytData.duration,    // keep original duration from YouTube
-                                            name: ytData.title,
-                                            intro: ytData.description,
-                                            uploader: ytData.uploader,
-                                            uploadDate: ytData.uploaded,
-                                            isZoneLimited: isZoneLimited,
-                                            isMobileLimited: isMobileLimited,
-                                            isEmbedLimited: isEmbedLimited
-                                        };
-                                    } else {
-                                        ytItem = {
-                                            beginTitleCard: beginTitleCard,
-                                            endTitleCard: endTitleCard,
-                                            ytId: programItem.fileUrl.slice(-11),
-                                            ytDuration: 0,                                                          // fake origin duration (invalid video)
-                                            uploader: ((youtubes.error) ? youtubes.error.message : 'Invalid'),      // fake uploader (error message)
-                                            uploadDate: ((youtubes.error) ? (youtubes.error.code + 'T') : '403T'),  // fake uploadDate (error code)
-                                            isZoneLimited: isZoneLimited,
-                                            isMobileLimited: isMobileLimited,
-                                            isEmbedLimited: isEmbedLimited
-                                        };
-                                    }
-                                    ytItem = $.extend(programItem, ytItem);
-                                    ytList[idx] = ytItem;
-                                    if (committedCnt === programList.length) {
-                                        committedCnt = -1;   // reset to avoid collision
-                                        // ON PURPOSE to wait api (async)
-                                        setTimeout(function () {
-                                            if (preloadImage.length > 0) {
-                                                $('#preload-image').html('');
-                                                $('#preload-image-tmpl-item').tmpl(preloadImage).prependTo('#preload-image');
+                                        if (beginTitleCard && beginTitleCard.message && '' != $.trim(beginTitleCard.message)) {
+                                            beginTitleCard.message = $.trim(beginTitleCard.message).replace(/\{BR\}/g, '\n');
+                                            if (beginTitleCard.bgImage && '' != $.trim(beginTitleCard.bgImage)) {
+                                                preloadImage.push({
+                                                    image: beginTitleCard.bgImage
+                                                });
                                             }
-                                            $('#storyboard-listing').html('');
-                                            $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
-                                            sumStoryboardInfo();
-                                            $('.ellipsis').ellipsis();
-                                            $('#overlay-s').fadeOut();
-                                        }, 1000);
-                                    }
+                                        } else {
+                                            beginTitleCard = null;
+                                        }
+                                        if (endTitleCard && endTitleCard.message && '' != $.trim(endTitleCard.message)) {
+                                            endTitleCard.message = $.trim(endTitleCard.message).replace(/\{BR\}/g, '\n');
+                                            if (endTitleCard.bgImage && '' != $.trim(endTitleCard.bgImage)) {
+                                                preloadImage.push({
+                                                    image: endTitleCard.bgImage
+                                                });
+                                            }
+                                        } else {
+                                            endTitleCard = null;
+                                        }
+                                        if (youtubes.data) {
+                                            ytData = youtubes.data;
+                                            isPrivateVideo = false;
+                                            isZoneLimited = (ytData.restrictions) ? true : false;
+                                            isMobileLimited = ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false;
+                                            isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
+                                        } else {
+                                            ytData = null;
+                                            isPrivateVideo = (youtubes.error && youtubes.error.code && 403 == youtubes.error.code) ? true : false;
+                                            isZoneLimited = null;
+                                            isMobileLimited = null;
+                                            isEmbedLimited = null;
+                                        }
+                                        if (ytData && false === isEmbedLimited) {
+                                            ytItem = {
+                                                poiList: pois,
+                                                beginTitleCard: beginTitleCard,
+                                                endTitleCard: endTitleCard,
+                                                ytId: ytData.id,
+                                                fileUrl: programItem.fileUrl,
+                                                imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
+                                                //duration: ytData.duration,      // ON PURPOSE to mark this line to keep trimmed duration from 9x9 API
+                                                ytDuration: ytData.duration,    // keep original duration from YouTube
+                                                name: ytData.title,
+                                                intro: ytData.description,
+                                                uploader: ytData.uploader,
+                                                uploadDate: ytData.uploaded,
+                                                isPrivateVideo: isPrivateVideo,
+                                                isZoneLimited: isZoneLimited,
+                                                isMobileLimited: isMobileLimited,
+                                                isEmbedLimited: isEmbedLimited
+                                            };
+                                        } else {
+                                            ytItem = {
+                                                poiList: pois,
+                                                beginTitleCard: beginTitleCard,
+                                                endTitleCard: endTitleCard,
+                                                ytId: programItem.fileUrl.slice(-11),
+                                                ytDuration: 0,                                                                      // fake origin duration (invalid video)
+                                                uploader: ((youtubes.error) ? youtubes.error.message : 'Non-embeddable'),           // fake uploader (error message)
+                                                uploadDate: ((youtubes.error) ? (youtubes.error.code + 'T') : 'Non-embeddableT'),   // fake uploadDate (error code)
+                                                isPrivateVideo: isPrivateVideo,
+                                                isZoneLimited: isZoneLimited,
+                                                isMobileLimited: isMobileLimited,
+                                                isEmbedLimited: isEmbedLimited
+                                            };
+                                        }
+                                        ytItem = $.extend(programItem, ytItem);
+                                        ytList[idx] = ytItem;
+                                        if (committedCnt === programList.length) {
+                                            committedCnt = -1;   // reset to avoid collision
+                                            // ON PURPOSE to wait api (async)
+                                            setTimeout(function () {
+                                                if (preloadImage.length > 0) {
+                                                    $('#preload-image').html('');
+                                                    $('#preload-image-tmpl-item').tmpl(preloadImage).prependTo('#preload-image');
+                                                }
+                                                $('#storyboard-listing').html('');
+                                                $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
+                                                sumStoryboardInfo();
+                                                $('.ellipsis').ellipsis();
+                                                $('#overlay-s').fadeOut();
+                                            }, 1000);
+                                        }
+                                    });
                                 });
                             }, 'jsonp');
                         });
@@ -676,13 +694,75 @@ function listEpisode(pageId, id) {
                         $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
                         $('#channel-name').data('width', $('#channel-name').width());
                         $('#content-main-wrap .constrain').html('');
+                        CMS_CONF.EPISODES_PAGING = [];
+                        CMS_CONF.EPISODES_PAGING_INFO = [];
+                        var tmpCntEpisode = cntEpisode,
+                            tmpEpisodes = [],
+                            i = 0;
                         if (cntEpisode > 0) {
+                            // pagging
+                            var cntPage = 0;
+                            var iPageSize = 30;
+                            if (cntEpisode > iPageSize) {
+                                cntPage = parseInt((cntEpisode / iPageSize), 10);
+                                var cntPageFirstEpisodes = cntEpisode % iPageSize;
+                                if (cntPage > 1 && cntPageFirstEpisodes == 0) {
+                                    cntPage -= 1;
+                                    cntPageFirstEpisodes = 30;
+                                }
+                                tmpEpisodes = [];
+                                for (i = 0; i < cntPageFirstEpisodes; i++) {
+                                    //episodes[i].seq = tmpCntEpisode - episodes[i].seq;
+                                    episodes[i].seq = tmpCntEpisode - i;
+                                    tmpEpisodes.push(episodes[i]);
+                                }
+                                CMS_CONF.EPISODES_PAGING.push(tmpEpisodes);
+                                CMS_CONF.EPISODES_PAGING_INFO.push({
+                                    'pageID': 0,
+                                    'pageStart': tmpCntEpisode,
+                                    'pageEnd': (tmpCntEpisode - cntPageFirstEpisodes + 1)
+                                });
+                                for (i = 0; i < cntPage; i++) {
+                                    tmpEpisodes = [];
+                                    var tmpStart = 0,
+                                        tmpEnd = 0,
+                                        ii = 0;
+                                    tmpStart = i * iPageSize + cntPageFirstEpisodes;
+                                    tmpEnd = tmpStart + iPageSize;
+                                    for (ii = tmpStart; ii < tmpEnd; ii++) {
+                                        // serial DESC
+                                        //episodes[ii].seq =  tmpCntEpisode - episodes[ii].seq;
+                                        episodes[ii].seq = cntEpisode - ii;
+                                        tmpEpisodes.push(episodes[ii]);
+                                    }
+                                    CMS_CONF.EPISODES_PAGING.push(tmpEpisodes);
+                                    CMS_CONF.EPISODES_PAGING_INFO.push({
+                                        'pageID': (i + 1),
+                                        'pageStart': (tmpCntEpisode - tmpStart),
+                                        'pageEnd': (tmpCntEpisode - tmpEnd + 1)
+                                    });
+                                }
+                            } else {
+                                tmpEpisodes = [];
+                                for (i = 0; i < cntEpisode; i++) {
+                                    //episodes[i].seq =  tmpCntEpisode - episodes[i].seq;
+                                    // the number srilal is DESC
+                                    episodes[i].seq =  cntEpisode - i;
+                                    tmpEpisodes.push(episodes[i]);
+                                }
+                                CMS_CONF.EPISODES_PAGING.push(tmpEpisodes);
+                            }
+
                             $('#episode-list-tmpl').tmpl().appendTo('#content-main-wrap .constrain');
-                            $('#episode-list-tmpl-item').tmpl(episodes).appendTo('#episode-list');
+                            //$('#episode-list-tmpl-item').tmpl(episodes).appendTo('#episode-list');
+                            $('#episode-list-tmpl-item').tmpl(CMS_CONF.EPISODES_PAGING[0]).appendTo('#episode-list');
+                            // folder list
+                            $('#episode-list-tmpl-folder').tmpl(CMS_CONF.EPISODES_PAGING_INFO).appendTo('#episode-list');
                             // episode list sorting
                             $('#episode-list').sortable({
                                 cursor: 'move',
                                 revert: true,
+                                cancel: '.isFolder',
                                 change: function (event, ui) {
                                     $('body').addClass('has-change');
                                 }
@@ -844,18 +924,11 @@ function updateChannel(pageId, id) {
                                 } else {
                                     $('.tag-list').addClass('hide');
                                 }
-                                autoHeight();
-                                setFormHeight();
-                                setTaglistWidth();
                             });
-                        } else {
-                            autoHeight();
-                            setFormHeight();
                         }
                     });
                 }
-                autoHeight();
-                setFormHeight();
+                truncateFormTitle();
                 // ON PURPOSE to wait api (async)
                 $('#overlay-s').fadeOut(5000, function () {
                     autoHeight();
@@ -1088,7 +1161,7 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
                 // avoid IE8 bug
                 $('title').data('langkey', $('title').text());
             }
-            $('#header a, #footer a, .overlay-l .btns a, #studio-nav a, #studio-nav .langkey, #func-nav a, #epcurate-nav .langkey, #epcurateForm .langkey').each(function () {
+            $('#header a, #footer a, .lightbox-content .btns a, #studio-nav a, #studio-nav .langkey, #func-nav a, #epcurate-nav .langkey, #epcurateForm .langkey').each(function () {
                 $(this).data('langkey', $(this).text());
             });
             $('.overlay-l h4, .overlay-l h5, .overlay-l .content').each(function () {
@@ -1167,8 +1240,8 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
         $('.overlay-l h4, .overlay-l h5, .overlay-l .content').each(function () {
             $(this).html(nn._(['overlay', 'facebook', $(this).data('langkey')]));
         });
-        $('.overlay-l .btns a').each(function () {
-            $(this).text(nn._(['overlay', 'button', $(this).data('langkey')]));
+        $('.lightbox-content .btns a').each(function () {
+            $(this).html(nn._(['overlay', 'button', $(this).data('langkey')]));
         });
         $('#func-nav a').each(function () {
             $(this).text(nn._([CMS_CONF.PAGE_ID, 'func-nav', $(this).data('langkey')]));

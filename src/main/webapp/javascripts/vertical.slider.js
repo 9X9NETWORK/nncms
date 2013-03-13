@@ -11,6 +11,15 @@ function scrollbar(outer, inner, sliderwrap) {
         $(sliderwrap).show();
         var proportion = difference / $(inner).height();
 
+        // this value can fix epislode over 200 scroll problem
+        var iRange = parseInt($(inner).height() / $(outer).height()) * 8;
+        if (iRange < 100) {
+            // before default slider max / value
+            iRange = 100;
+        }
+        // episode list has this global var and need it to paging
+        CMS_CONF.SLIDER_MAX = iRange;
+
         // set the proportional height - round it to make sure everything adds up correctly later on
         var handleHeight = Math.round((1 - proportion) * $(outer).height());
         handleHeight -= handleHeight % 2;
@@ -19,17 +28,17 @@ function scrollbar(outer, inner, sliderwrap) {
         $(sliderwrap + ' .slider-vertical').slider({
             orientation: 'vertical',
             min: 0,
-            max: 100,
-            value: 100,
+            max: iRange,
+            value: iRange,
             slide: function (event, ui) {
                 // scroll content when slide is dragged
-                var topValue = -((100 - ui.value) * difference / 100);
+                var topValue = -((iRange - ui.value) * difference / iRange);
                 // move the top up (negative value) by the percentage the slider has been moved times the difference in height
                 $(inner).css({ top: topValue });
             },
             change: function (event, ui) {
                 // scroll content when the slider is changed by a click outside the handle or by the mousewheel
-                var topValue = -((100 - ui.value) * difference / 100);
+                var topValue = -((iRange - ui.value) * difference / iRange);
                 // move the top up (negative value) by the percentage the slider has been moved times the difference in height
                 $(inner).css({ top: topValue });
             }
@@ -74,7 +83,7 @@ function scrollbar(outer, inner, sliderwrap) {
 */
     $(outer + ', ' + sliderwrap + ' .slider-wrap').unbind('mousewheel');
     $(outer + ', ' + sliderwrap + ' .slider-wrap').mousewheel(function (event, delta) {
-        var speed = 5;
+        var speed = 2;
         var sliderVal = $(sliderwrap + ' .slider-vertical').slider('value');
         sliderVal += (delta * speed);
         $(sliderwrap + ' .slider-vertical').slider('value', sliderVal);

@@ -5,29 +5,29 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=726" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=726" />
-<link rel="stylesheet" href="stylesheets/uniform.css?v=726" />
-<link rel="stylesheet" href="stylesheets/channel.css?v=726" />
+<link rel="stylesheet" href="stylesheets/style.css?v=784" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=784" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=784" />
+<link rel="stylesheet" href="stylesheets/channel.css?v=784" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=726"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=726"></script>
-<script src="javascripts/jquery.ellipsis.js?v=726"></script>
-<script src="javascripts/jquery.blockUI.js?v=726"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=726"></script>
-<script src="javascripts/jquery.charcounter.min.js?v=726"></script>
-<script src="javascripts/jquery.uniform.min.js?v=726"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=726"></script>
-<script src="javascripts/jquery.cookie.js?v=726"></script>
-<script src="javascripts/json2.js?v=726"></script>
-<script src="javascripts/purl.js?v=726"></script>
-<script src="javascripts/swfupload/swfupload.js?v=726"></script>
-<script src="javascripts/vertical.slider.js?v=726"></script>
-<script src="javascripts/config.js?v=726"></script>
-<script src="javascripts/controller.js?v=726"></script>
-<script src="javascripts/basic.js?v=726"></script>
-<script src="javascripts/channel.js?v=726"></script>
+<script src="javascripts/nn-sdk.js?v=784"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=784"></script>
+<script src="javascripts/jquery.ellipsis.js?v=784"></script>
+<script src="javascripts/jquery.blockUI.js?v=784"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=784"></script>
+<script src="javascripts/jquery.charcounter.min.js?v=784"></script>
+<script src="javascripts/jquery.uniform.min.js?v=784"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=784"></script>
+<script src="javascripts/jquery.cookie.js?v=784"></script>
+<script src="javascripts/json2.js?v=784"></script>
+<script src="javascripts/purl.js?v=784"></script>
+<script src="javascripts/swfupload/swfupload.js?v=784"></script>
+<script src="javascripts/vertical.slider.js?v=784"></script>
+<script src="javascripts/config.js?v=784"></script>
+<script src="javascripts/controller.js?v=784"></script>
+<script src="javascripts/basic.js?v=784"></script>
+<script src="javascripts/channel.js?v=784"></script>
 <title>9x9.tv - Create a new channel</title>
 </head>
 <body>
@@ -160,7 +160,7 @@
 </div>
 </div>
 <div class="fminput clearfix">
-<label>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Tag'])}</label>
+<label>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Tags'])}</label>
 <div class="fmfield">
 <p class="text"><span><input type="text" name="tag" id="tag" maxlength="100" value="" class="text" /></span></p>
 <span class="notice">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Separate with commas'])}</span>
@@ -242,7 +242,7 @@
 
 <script id="fb-page-list-tmpl-item" type="text/x-jquery-tmpl">
 {{if name != ""}}
-<li><a href="#" data-id="${id}" data-meta="${name}">${name}</a></li>
+<li><a href="#" data-id="${id}" data-meta="${name}"><span>${name}</span></a></li>
 {{else}}
 <li></li>
 {{/if}}

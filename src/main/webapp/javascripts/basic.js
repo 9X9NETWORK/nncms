@@ -40,10 +40,20 @@ function scrollToBottom() {
 
 function hideFbPageList() {
     if ($('#settingForm').length > 0) {
+        var hasHideFbPageList = false;
         $('#fb-page-list').hide();
-        $('.page-list').removeClass('on');
+        if ($('.page-list').hasClass('on')) {
+            $('.page-list').removeClass('on');
+            hasHideFbPageList = true;
+        }
         if ('none' != $('#main-wrap-slider').css('display')) {
             $('#content-main-wrap form').height('auto');
+            $('#content-main-wrap').height($('#content-main-wrap form').height() + 70 + 65);
+            $('#main-wrap-slider .slider-vertical').slider('destroy');
+            if (hasHideFbPageList) {
+                $('#content-main-wrap').css('top', '0');
+            }
+            scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
         }
     }
 }
@@ -94,6 +104,14 @@ function showUnsaveTitleCardOverlay(e) {
     buildUnsaveOverlay('#unsave-titlecard-prompt');
 }
 
+function showUnsavePoiOverlay(e) {
+    $('body').data('origin', e);
+    $('#unsave-poi-prompt .content').text(nn._(['overlay', 'prompt', 'Unsaved changes will be lost, are you sure you want to cancel editing?']));
+    $.blockUI({
+        message: $('#unsave-poi-prompt')
+    });
+}
+
 function showDeletePromptOverlay(msg) {
     $('#delete-prompt .content').text(nn._(['overlay', 'prompt', msg]));
     $.blockUI.defaults.overlayCSS.opacity = '0.9';
@@ -101,6 +119,13 @@ function showDeletePromptOverlay(msg) {
         message: $('#delete-prompt')
     });
     $('.blockOverlay').height($(window).height() - 45);
+}
+
+function showDeletePoiPromptOverlay(msg) {
+    $('#del-poi-notice .content').text(nn._(['overlay', 'prompt', msg]));
+    $.blockUI({
+        message: $('#del-poi-notice')
+    });
 }
 
 function showDraftNoticeOverlay(e) {
