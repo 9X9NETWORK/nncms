@@ -32,19 +32,31 @@ $(function () {
             return false;
         }
         var folderID = 0;
+        var tmpCnt = 0;
         folderID = parseInt($(this).data("meta").toString().replace("up_paging_", "").replace("down_paging_", ""));
         if (folderID > 0) {
-            $(".itemFolder_" + folderID).remove();
             $('body').append("<div style='display:none' id='tmpEPL'></div>");
             $('#episode-list-tmpl-folder').tmpl(CMS_CONF.EPISODES_PAGING_INFO[folderID]).appendTo('#tmpEPL');
             var tmpOut = $('#tmpEPL').html();
             $('#tmpEPL').remove();
-            $('#folder_up_' + folderID).replaceWith(tmpOut);
-            if ($(this).data("meta").toString().indexOf("down_paging_") == 0) {
-                setPageScroll("down");
-            } else {
-                setPageScroll("");
-            }
+            $(".folder_up_" + folderID).remove(); // remove open folder button
+            $('#folder_up_' + folderID).replaceWith(tmpOut); // replae open folder up to close floder
+            var iPageSize = 30;
+            $('.itemFolder_' + folderID).slideUp("slow", function () {
+                var tmpStr = "";
+                if ($(this).data("meta").toString().indexOf("down_paging_") == 0) {
+                    tmpStr = "down";
+                } else {
+                    tmpStr = "up";
+                }
+                $(".itemFolder_" + folderID).remove(); // episode in folder remove
+                setTimeout(function () { // give some break for script
+                    tmpCnt++;
+                    if (tmpCnt === iPageSize) { // slidr up / down will call this func by page size times , so only last call this function
+                        setPageScroll(tmpStr);
+                    }
+                }, 200);
+            });
         }
     });
 
@@ -70,6 +82,9 @@ $(function () {
             $('#folder_' + folderID).replaceWith(tmpOut);
             // paging scroll
             setPageScroll("");
+            setEpisodeWidth();
+            $('.itemFolder_' + folderID).hide();
+            $('.itemFolder_' + folderID).slideDown("slow");
         }
     });
 
@@ -244,15 +259,16 @@ function setEpisodeWidth() {
     $('#ep-list ul li .episode h3').each(function (index) {
         $('a', this).text($(this).data('meta'));
     });
-    $('#ep-list ul li .episode h3').addClass('ellipsis').ellipsis();
+    // ON PURPOSE to mark ellipsis feature temporarily for performance issue
+    //$('#ep-list ul li .episode h3').addClass('ellipsis').ellipsis();
     if ($('#ep-list ul li .episode').length > 0 && $('#channel-name').data('width') + crumbWidth + 10 > contentmainWidth - titleBtnsWidth) {  // 10: title-func padding
         $('#title-func h2').width(contentmainWidth - titleBtnsWidth - 10 - 15);  // 10: title-func padding, 15: channel name and btns space
         $('#channel-name').width($('#title-func h2').width() - crumbWidth - 6);  // 6: channel name margin
-        $('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
+        //$('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
     } else {
         $('#title-func h2').width('auto');
         $('#channel-name').width('auto');
-        $('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
+        //$('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
     }
 }
 
@@ -264,7 +280,6 @@ function setPageScroll(isDown) {
         sliderValue = 100;
     }
     var iPos = eplHeightBefore * (sliderValue / CMS_CONF.SLIDER_MAX);
-    setEpisodeWidth();
     autoHeight();   // after this run the height will be update
     var eplHeightAfter = $('#content-main-wrap').height();
     scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');

@@ -1908,6 +1908,12 @@ function chkPoiEventData(fm, callback) {
             callback(false);
             return false;
         }
+        nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
+            nn.log(textStatus + ': ' + jqXHR.responseText, 'warning');
+            $('#event-edit .invalid-url-notice').removeClass('hide');
+            callback(false);
+            return false;
+        });
         if ('' == eid || 11 == eid.length) {
             nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: cid}), null, function (channel) {
                 if (channel.id && cid == channel.id) {

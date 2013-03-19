@@ -21,6 +21,9 @@
  *   + 2012-11-28 v0.0.4 by Louis
  *     - support multi-level language pack
  *
+ *   + 2013-01-30 v0.0.5 by Louis
+ *     - CORS cross domain support
+ *
  * download latest release:
  *
  *   http://dev.teltel.com/louis/9x9-sdk-usage/js/release/latest/nn-sdk.js
@@ -108,7 +111,7 @@ var nn = { };
 		nn.log('nn.api: ' + method + ' "' + resourceURI + '"');
 		nn.log(parameter, 'debug');
 		
-		if ($.inArray(method, ['PUT', 'GET', 'POST', 'DELETE']) == -1) {
+		if ($.inArray(method, ['PUT', 'GET', 'POST', 'DELETE', 'HEAD', 'OPTIONS']) == -1) {
 			nn.log('nn.api: not supported method', 'warning');
 			return;
 		}
@@ -150,6 +153,9 @@ var nn = { };
 			'data':       localParameter,
             'dataType':   localDataType,
 			'statusCode': nn.apiHooks,
+            'xhrFields': {
+                'withCredentials': true
+            },
 			'success': function(data, textStatus, jqXHR) {
 				nn.log('nn.api: HTTP ' + jqXHR.status + ' ' + jqXHR.statusText);
 				nn.log('nn.api: textStatus = ' + textStatus, 'debug');
@@ -173,6 +179,7 @@ var nn = { };
         
         var _dfd = $.Deferred();
         var count = promises.length;
+        var countCommited = 0;
         
         if (!$.isArray(promises)) {
             nn.log('nn.when(): parameter error', 'error');
@@ -188,6 +195,7 @@ var nn = { };
             promise.done(function() {
                 
                 nn.log('nn.when(): promise ' + i + ' commited');
+                countCommited++;
                 
             }).fail(function() {
                 
@@ -199,10 +207,11 @@ var nn = { };
                 count = count - 1;
                 nn.log(count + ' promises left');
                 if (count == 0) {
+                    console.log('promises commited = ' + countCommited);
                     if (resolved) {
-                        _dfd.resolve();
+                        _dfd.resolve(countCommited);
                     } else {
-                        _dfd.reject();
+                        _dfd.reject(countCommited);
                     }
                 }
             });

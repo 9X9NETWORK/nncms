@@ -633,7 +633,7 @@
 
 #content-wrap form .fminput .fmfield .radio li.on a,
 #content-wrap form .fminput .fmfield .radio li    a:hover {
-    background-position: 0 -36px;
+    background-position: 0 -38px;
 }
 
 #content-wrap form .disable .fmfield .radio li a,
@@ -644,7 +644,7 @@
 
 #content-wrap form .disable .fmfield .radio li.on a,
 #content-wrap form .disable .fmfield .radio li.on a:hover {
-    background-position: 0 -54px;
+    background-position: 0 -56px;
 }
 
 /* =select

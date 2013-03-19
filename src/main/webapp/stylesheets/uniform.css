@@ -39,7 +39,7 @@ div.radio span input {
 div.radio.focus span, 
 div.radio:hover span,
 div.radio       span.checked {
-    background-position: 0 -36px;
+    background-position: 0 -38px;
 }
 
 div.radio.disabled span {
@@ -47,7 +47,7 @@ div.radio.disabled span {
 }
 
 div.radio.disabled span.checked {
-    background-position: 0 -54px;
+    background-position: 0 -56px;
 }
 
 /**
