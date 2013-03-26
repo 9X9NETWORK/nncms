@@ -1,69 +1,25 @@
-Revision: 914
+Revision: 928
 Author: chihwen
-Date: 下午 07:30:33, 2013年3月18日
+Date: 上午 11:58:20, 2013年3月25日
 Message:
-從 teltel 開發版本 909~911 轉入 fakeapi 分支
+從 teltel 開發版本 922,923,926,927 轉入 fakeapi 分支
 
-1. 增加 episode list Slider up / down 效果
-2. 調整並一致化撰寫風格。
-3. 移除非必要的註解及程式碼。
-4. 針對暫時移除 ep list 截字功能作補充說明。
+1. 調整 channel list 圖片呈現及邏輯。
+2. 調整我的最愛頻道呈現。
 issue 5927
 ----
-Modified : /fakeapi/javascripts/episode.js
-
-Revision: 913
-Author: chihwen
-Date: 下午 07:22:59, 2013年3月18日
-Message:
-避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=912)
-issue 5869
-----
-Modified : /fakeapi/channel-add.html
-Modified : /fakeapi/channel-setting.html
-Modified : /fakeapi/epcurate-curation.html
-Modified : /fakeapi/epcurate-publish.html
-Modified : /fakeapi/episode-list.html
+Added : /fakeapi/images/favorite_ch.png
 Modified : /fakeapi/index.html
-Modified : /fakeapi/login.html
-
-Revision: 912
-Author: chihwen
-Date: 下午 07:19:18, 2013年3月18日
-Message:
-針對 9x9 channel or episode URL 格式檢查，增加不正常請求的例外處理
-
-檢查 9x9 channel or episode URL 格式時，
-若遭遇不正常的請求，例如 400, 401, 403, 404 等，
-在 UI 上回應恰當的錯誤訊息給使用者知道。
-issue 5869
-----
-Modified : /fakeapi/javascripts/curation.js
-
-Revision: 908
-Author: chihwen
-Date: 上午 11:36:52, 2013年3月14日
-Message:
-同步更新 9x9 JS SDK 函式庫 2013-01-30 v0.0.5
-
-1. 支援 HEAD, OPTIONS 等請求方法。
-2. AJAX 請求增加 xhrFields 設定以支援跨域請求 CORS cross domain support。
-3. AJAX 非同步平行請求，增加 countCommited 計數並回傳已成功提交的請求數。
-issue 5869
-----
-Modified : /fakeapi/javascripts/nn-sdk.js
-
-Revision: 902
-Author: chihwen
-Date: 下午 06:59:26, 2013年3月13日
-Message:
-同步 src 版本 901 修版調整 (調整 radio 背景圖的位置)
-issue 5869
-----
-Modified : /fakeapi/stylesheets/epcurate.css
-Modified : /fakeapi/stylesheets/lightbox.css
-Modified : /fakeapi/stylesheets/uniform.css
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 4361
-Last Changed Date: 2013-03-19 14:34:25 +0800 (Tue, 19 Mar 2013)
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/stylesheets/channel.css
+Added : /fakeapi/thumbnail/ch1.jpg
+Added : /fakeapi/thumbnail/ch10.jpg
+Added : /fakeapi/thumbnail/ch11.png
+Added : /fakeapi/thumbnail/ch2.png
+Added : /fakeapi/thumbnail/ch3.jpg
+Added : /fakeapi/thumbnail/ch4.jpg
+Added : /fakeapi/thumbnail/ch5.png
+Added : /fakeapi/thumbnail/ch6.png
+Added : /fakeapi/thumbnail/ch7.png
+Added : /fakeapi/thumbnail/ch8.png
+Added : /fakeapi/thumbnail/ch9.png

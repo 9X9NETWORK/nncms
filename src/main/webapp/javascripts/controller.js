@@ -996,21 +996,22 @@ function listChannel(pageId) {
                     channel.moreImageUrl_3 = CMS_CONF.CHANNEL_DEFAULT_IMAGE2;
                     if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                         hasFavoriteChannel = true;
+                        channel.moreImageUrl_1 = 'images/favorite_ch.png';
                         if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
                             temp = channel.moreImageUrl.split('|');
-                            if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_1 = temp[0]; }
-                            if (temp[1] && temp[1] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_2 = temp[1]; }
-                            if (temp[2] && temp[2] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_3 = temp[2]; }
+                            if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_2 = temp[0]; }
                         }
                         channel.name = CMS_CONF.USER_DATA.name + nn._([pageId, 'channel-list', "'s Favorite"]);
                     } else {
                         if (channel.imageUrl && '' !== $.trim(channel.imageUrl) && channel.imageUrl !== CMS_CONF.EPISODE_DEFAULT_IMAGE) {
                             channel.moreImageUrl_1 = channel.imageUrl;
                         }
+                        if (CMS_CONF.CHANNEL_DEFAULT_IMAGE === channel.moreImageUrl_1) {
+                            channel.moreImageUrl_1 = 'images/ch_default.png';
+                        }
                         if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
                             temp = channel.moreImageUrl.split('|');
                             if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_2 = temp[0]; }
-                            if (temp[1] && temp[1] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_3 = temp[1]; }
                         }
                     }
                     items.push(channel);
