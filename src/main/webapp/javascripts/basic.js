@@ -475,7 +475,7 @@ $(function () {
     $('#profile-logout').click(function () {
         if (!$('body').hasClass('has-change')) {
             nn.api('DELETE', CMS_CONF.API('/api/login'), null, function (data) {
-                location.href = '/';
+                location.href = './';
             });
             return false;
         }
@@ -483,14 +483,29 @@ $(function () {
 
     // change language
     $('#language-change li a').click(function () {
-        if (null !== CMS_CONF.USER_DATA && !$('body').hasClass('has-change')) {
-            nn.api('PUT', CMS_CONF.API('/api/users/{userId}', {userId: CMS_CONF.USER_DATA.id}), {lang: $(this).data('meta')}, function (user) {
-                var isStoreLangKey = false;
-                setupLanguageAndRenderPage(user, isStoreLangKey);
-            });
+    	//alert($(this).data('page') + "**" + $(this).data('meta') + "***" +$.cookie('signLang'));
+    	
+    	if("signin" === $(this).data('page')){
+    		var sign_lang = $(this).data('meta');
+		    if (-1 === $.inArray(sign_lang, CMS_CONF.LANG_SUPPORT)) {
+		        sign_lang = 'en';
+		    }
+    		$.cookie('signLang', sign_lang, { expires: 30 });
+    		setupLanguagePage();
             $(this).parents('.select-list').slideDown();
             return false;
-        }
+    	}
+    	else
+    	{
+	        if (null !== CMS_CONF.USER_DATA && !$('body').hasClass('has-change')) {
+	            nn.api('PUT', CMS_CONF.API('/api/users/{userId}', {userId: CMS_CONF.USER_DATA.id}), {lang: $(this).data('meta')}, function (user) {
+	                var isStoreLangKey = false;
+	                setupLanguageAndRenderPage(user, isStoreLangKey);
+	            });
+	            $(this).parents('.select-list').slideDown();
+	            return false;
+	        }
+       }
     });
 
     // common dropdown (share with header, footer, channel-add and channel-setting)

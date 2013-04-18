@@ -4,14 +4,14 @@
         "Guide":                                                                                                                                "Guide",
         "Browse":                                                                                                                               "Browse",
         "My page":                                                                                                                              "My page",
-        "Studio":                                                                                                                               "Studio",
+        "Studio":                                                                                                                               "CMS",
         "Settings":                                                                                                                             "Settings",
         "Log out":                                                                                                                              "Log out"
     },
     "studio-nav": {
-        "Studio":                                                                                                                               "Studio",
+        "Studio":                                                                                                                               "<span class=\"cms-icon\">CMS</span><p class=\"sub-title\">Content Management System</p>",
         "My Channels":                                                                                                                          "My Channels",
-        "Studio Setup":                                                                                                                         "<img src=\"images/icon_studio_setup.png\" alt=\"\" />Studio Setup",
+        "Studio Setup":                                                                                                                         "<img src=\"images/icon_studio_setup.png\" alt=\"\" />CMS Setup",
         "Connection is inactive, click to restart it.":                                                                                         "Connection is inactive, click to restart it."
     },
     "footer": {
@@ -109,6 +109,20 @@
         "blind":                                                                                                                                "Blind",
         "clip":                                                                                                                                 "Clip",
         "drop":                                                                                                                                 "Drop"
+    },
+    "signin": {
+        "login-holder": {
+            "Sign In with your E-mail and password": "Sign In with your E-mail and password",
+            "Sign In": "Sign In"
+        },
+		"errMsg": {
+			"Error : USER_INVALID" : "Invalid E-mail, please retry."
+		}
+        
+        
+        
+        
+        
     },
     "index": {
         "html-title": {

@@ -1182,7 +1182,25 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
         if (-1 === $.inArray(userUrlFile, ['epcurate-curation.html', 'epcurate-publish.html'])) {
             $.removeCookie('cms-epe');
             $.removeCookie('cms-crumb');
+            
             switch (userUrlFile) {
+            case 'signin.html':
+            	// v3.3 login page
+            	//alert(CMS_CONF.PAGE_ID);
+                initFacebookJavaScriptSdk();
+                //$('body').addClass('has-change');
+                //$("#content-main").append("<p onclick=\"$.blockUI({ message: $('#fb-connect') });\" >aaaa</p>")
+                /*
+           $.blockUI({ 
+                message: $('#fb-connect-failed2')
+            });
+                */
+                //$.blockUI({ message: $('#unsave-prompt') });
+                 
+                
+                //$('#unsave-prompt p.content').text()
+                //listChannel(CMS_CONF.PAGE_ID);
+                break;
             case 'index.html':
                 initFacebookJavaScriptSdk();
                 listChannel(CMS_CONF.PAGE_ID);
@@ -1260,18 +1278,96 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
     }, 'json');
 }   // end of setupLanguageAndRenderPage()
 
+
+function setupLanguagePage() {
+    // fetch user lang
+    var lang = $.cookie('signLang');
+
+	//initFacebookJavaScriptSdk();
+
+    if (-1 === $.inArray(lang, CMS_CONF.LANG_SUPPORT)) {
+        lang = 'en';
+    }
+    if ('en' === lang) {
+    	$('#language').text( $('#language-en').text( ));
+        $('#language-en, #language-zh').removeClass('on');
+    } else {
+    	$('#language').text( $('#language-zh').text( ));
+        $('#language-en, #language-zh').removeClass('on');
+    }
+    $('#language-'.lang).addClass('on');
+
+    $('html').removeClass(CMS_CONF.LANG_SUPPORT.join(' ')).addClass(lang);
+
+    nn.api('GET', 'lang/' + lang + '.json', null, function (langPack) {
+        // setup lang pack
+        CMS_CONF.LANG_MAP = langPack['lang-map'];
+        CMS_CONF.SPHERE_MAP = langPack['sphere-map'];
+        CMS_CONF.EFFECT_MAP = langPack['effect-map'];
+        nn.i18n(langPack);
+
+        $('#header a').each(function () {
+       		if( $(this).data("oriLang") === undefined ){
+        		$(this).data("oriLang", $(this).text());
+        	}
+        	//alert($(this).data("oriLang"));
+        	$(this).text(nn._(['header', $(this).data("oriLang")]));
+        });
+ 		
+
+        $('#login-layer .langkey, #signup-layer .langkey, #forgot-password-layer .langkey').each(function () {
+        	if( $(this).data("oriLang") === undefined ){
+        		$(this).data("oriLang", $(this).text());
+        	}
+        	$(this).text(nn._(['signin', 'login-holder', $(this).data("oriLang")]));
+        });
+		var tmpStr = "";
+		$('#login-layer .flangkey, #signup-layer .flangkey, #forgot-password-layer .flangkey').each(function () {
+			// value="E-mail" defvalue="E-mail"
+        	if( $(this).data("oriLang") === undefined ){
+        		$(this).data("oriLang", $(this).attr("defvalue"));
+        	}
+        	tmpStr = nn._(['signin', 'login-holder', $(this).data("oriLang")]) ;
+        	$(this).attr("defvalue",tmpStr);
+        	$(this).attr("value",tmpStr);
+        	//$(this).text(nn._(['signin', 'login-holder', $(this).data("oriLang")]));
+        });
+
+
+    }, 'json');
+}   // end of setupLanguageAndRenderPage()
+
 $(function () {
+	var tmpUrl = $.url() ;
     if (!$.cookie('user')) {
-        location.href = '../';
+    	if( "signin.html" != tmpUrl.attr('file') ){
+	        location.href = 'signin.html';
+    	}
+    	setupLanguagePage();
     } else {
         nn.api('POST', CMS_CONF.API('/api/login'), { token: $.cookie('user') }, function (user) {
             if (!user || !user.id) {
-                location.href = '../';
+		    	if( "signin.html" != tmpUrl.attr('file') ){
+			        location.href = 'signin.html';
+		    	}
             } else {
                 CMS_CONF.USER_URL = $.url();
                 var isStoreLangKey = true;
                 setupLanguageAndRenderPage(user, isStoreLangKey);
             }
         });
+        /*
+	    nn.api('GET', CMS_CONF.API('/api/login'), function (user) {
+	        if (!user || !user.id) {
+		    	if( "signin.html" != tmpUrl.attr('file') ){
+			        location.href = 'signin.html';
+		    	}
+	        } else {
+	            CMS_CONF.USER_URL = $.url();
+	            var isStoreLangKey = true;
+	            setupLanguageAndRenderPage(user, isStoreLangKey);
+	        }
+	    });
+		*/
     }
 });

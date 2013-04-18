@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html class="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<link rel="stylesheet" href="stylesheets/style.css?v=912" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=912" />
+<link rel="stylesheet" href="stylesheets/channel.css?v=912" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+<script src="javascripts/nn-sdk.js?v=912"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=912"></script>
+<script src="javascripts/jquery.ellipsis.js?v=912"></script>
+<script src="javascripts/jquery.blockUI.js?v=912"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=912"></script>
+<script src="javascripts/jquery.charcounter.min.js?v=912"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=912"></script>
+<script src="javascripts/jquery.cookie.js?v=912"></script>
+<script src="javascripts/json2.js?v=912"></script>
+<script src="javascripts/purl.js?v=912"></script>
+<script src="javascripts/vertical.slider.js?v=912"></script>
+<script src="javascripts/config.js?v=912"></script>
+<script src="javascripts/controller.js?v=912"></script>
+<script src="javascripts/basic.js?v=912"></script>
+<script src="javascripts/signin.js?v=912"></script>
+<script src="http://9x9ui-j.s3-website-ap-northeast-1.amazonaws.com/all.js" charset="utf-8" type="text/javascript"></script>
+<script> 
+	
+
+    //si_email
+     
+  //$(window).unload( function () { alert("Bye now!"); } );
+  
+   // alert('aa');
+	/*
+	var loc = location.href;
+	
+	var a = loc.split("#!")[1];
+	
+	var b = parseInt(a);
+	
+	if( isNaN( b ) )
+	{
+			
+		//alert("aab");	
+	}
+	else
+	{
+		location.href = "/view?ch=" + b ;
+	//alert( b );
+	}
+*/
+	
+</script>
+
+
+
+
+<title>9x9.tv - SignIn</title>
+</head>
+<body>
+<div id="fb-root"></div>
+<!-- template = #lightbox-create-channel-tmpl -->
+
+<!--============================== header start ==============================-->
+<div id="header">
+  <p id="logo"></p>
+  <ul id="nav">
+    <li id="home"><span><a href="../" target="_blank">9x9.tv Official Web</a></span></li>
+    <li id="tv"><span><a href="../tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
+    <li id="profile">
+      <p id="btn-profile"></p>
+      <p id="selected-profile">Guest</p>
+      <ul id="profile-dropdown" class="dropdown">
+        
+      </ul>
+    </li>
+  </ul>
+</div>
+<!--============================== header close ==============================-->
+
+
+<!--============================== content-wrap start ========================-->
+
+
+<!-- Login Layer Begin -->
+<div id="login-layer">
+    <div id="login-holder">
+    <h1 class="langkey">Collect and Curate!</h1>
+    <h3 class="langkey">CMS is the management center for your 9x9.tv list-form channels!</h3>
+    <h2 class="langkey">Sign In</h2>
+    <div class="btn-fb">
+        <p class="btn-fb-left"></p>
+        <p class="btn-fb-middle langkey">Sign in with Facebook</p>
+        <p class="btn-fb-right"></p>
+    </div>    
+    <p class="langkey">Sign In with your E-mail and password</p>
+	<br/>
+	<div class="input-white">
+        <p class="left"></p> 
+        <img src="images/icon_email.png" class="icon-set">
+        <input id="si_email" value="E-mail" defvalue="E-mail" class="center flangkey" type="text">
+        <p class="right"></p>
+    </div>
+    <div class="input-white">
+        <p class="left"></p>
+        <img src="images/icon_password.png" class="icon-set">
+        <input id="si_passwordfak" value="Password" defvalue="Password" class="center flangkey" type="text">
+        <input id="si_password" value="" defvalue="Password" class="center" style="display: none" type="password">
+        <p class="right"></p>
+    </div>
+    <div class="btn-holder">
+        <span id="btn-forgot-password" class="langkey">Forgot password?</span> 
+        <div class="btn-gray">
+            <p class="left"></p>
+            <p class="center"><a href="#" id="btn_sign_in" onclick="return false;" class="langkey">Sign In</a></p>
+            <p class="right"></p>
+        </div>
+	</div>
+    <br/>
+    <p class="msg-error" class="langkey">Email and password do not match, please try again.<br/><br/></p>
+    <p ><b class="langkey">Need an account?</b> <span id="sign-up" class="langkey">Sign up Now!</span></p>
+    </div>
+</div>
+<!-- Login Layer End -->
+
+
+<!-- Sign Up Begin -->
+<div id="signup-layer">
+  <div id="signup-holder">
+    <p class="l"></p>
+    <div class="m">
+      <p id="btn-signup-close"></p>
+      <div id="signin-panel-signup"> 
+      	<h2  class="langkey">Sign Up</h2>
+        
+        <div class="left">
+            <div class="input-gray">
+              <p class="left"></p>
+              <p class="center"> <img src="images/icon_email.png" class="icon-set">
+                <input id="su_email" value="E-mail" defvalue="E-mail" class="textfield flangkey" type="text">
+              </p>
+              <p class="right"></p>
+            </div>
+            <br/>
+            <div class="input-gray">
+              <p class="left"></p>
+              <p class="center"> <img src="images/icon_password.png" class="icon-set">
+		        <input id="su_passwordfak" value="Password" defvalue="Password" class="textfield flangkey" type="text">
+                <input id="su_password"    value="" defvalue="Password" class="textfield" style="display: none" type="password">
+              </p>
+              <p class="right"></p>
+            </div>
+            <br/>
+            <div class="input-gray">
+              <p class="left"></p>
+              <p class="center"> <img src="images/icon_password.png" class="icon-set">
+		        <input id="su_password_refak" value="Repeat Password" defvalue="Repeat Password" class="textfield flangkey" type="text">
+                <input id="su_password_re"    value="" defvalue="Password" class="textfield" style="display: none" type="password">
+              </p>
+              <p class="right"></p>
+            </div>
+            <br/>
+            <p class="note">
+            	<span id="signup-checkbox"></span>
+                <span id="signup-agree" class="langkey">I have read and accepted the User Agreement and Privacy Policy</span>
+            </p>
+            <br/>
+            <div id="signup-cancel" class="btn-white">
+              <p class="left"></p>
+              <p class="center langkey">Cancel</p>
+              <p class="right"></p>
+            </div>
+		</div>
+		
+        <div class="right">
+            <div class="input-gray">
+              <p class="left"></p>
+              <p class="center"> <img src="images/icon_user.png" class="icon-set">
+              	<input id="su_user" value="User Name" defvalue="User Name" class="textfield flangkey" type="text">
+              </p>
+              <p class="right"></p>
+            </div>
+            <br/>
+            <p class="note langkey">Create a unique user name in 9x9 which composed of 6-16 English letters ,numbers or low line.</p>
+            <br/>
+            <p class="msg-error" class="langkey">
+            	This email has been used.<br/>
+            	Two passwords don't match, please retype.
+            </p>
+			<div id="signup-create" class="btn-white">
+              <p class="left"></p>
+              <p class="center"><a id="signup-create" href="javascript: void(0)" class="langkey">Create My Account</a></p>
+              <p class="right"></p>
+            </div>
+
+        </div>
+
+      </div>
+    </div>
+    <p class="r"></p>
+  </div>
+</div>
+<!-- Sign Up End -->
+
+
+<!-- Forgot Password Begin-->
+<div id="forgot-password-layer">
+  <div id="forgot-password-holder">
+    <div class="l"></div>
+    <div class="m">
+      <p id="btn-forgot-password-close"></p>
+      <h2 class="langkey">Forgot Password</h2>
+      <div id="forgot-password-form">
+        <div class="input-gray">
+          <p class="left"></p>
+          <p class="center"> <img src="images/icon_email.png" class="icon-set">
+            <input id="fg_email" value="E-mail" defvalue="E-mail" class="textfield flangkey" type="text">
+          </p>
+          <p class="right"></p>
+         </div>
+          <p class="msg note langkey">Enter your email address and we`ll send you instructions.</p>
+          <p class="msg-error langkey">The email you entered doesn`t have an associated user account. Please try again.</p>
+          <div id="btn-reset-password" class="btn-white">
+            <p class="left"></p>
+            <p class="center langkey">Reset</p>
+            <p class="right"></p>
+          </div>
+          <p class="back-to-sign langkey">Back to Sign In</p>
+        </div>
+        <div id="forgot-password-msg">
+       	   <p class="msg"><span class="langkey">Success!</span><br /><br />
+           <span class="langkey">You should receive an email shortly.</span><br />
+          <span class="langkey">If you still need assistance, please</span>
+           <a href="mailto:info@9x9.tv" class="langkey">contact us.</a></p>
+        </div>
+    </div>
+    <div class="r"></div>
+  </div>
+</div>
+<!-- Forgot Password End-->
+
+
+
+<!--============================== content-wrap close ========================-->
+
+<script id="lightbox-create-channel-tmpl" type="text/x-jquery-tmpl">
+<div id="lightbox-create-channel" class="lightbox-content">
+<h3>{{html nn._(['overlay', 'channel-tutorial', '<img src="images/text_collect.png" alt="" />'])}}</h3>
+<p class="desc">${nn._(['overlay', 'channel-tutorial', 'Studio is the management center for your 9x9.tv list-form channels!'])}</p>
+<p class="create">
+<a href="channel-add.html">create
+<img src="images/icon_add.png" alt="" />
+<span>{{html nn._(['overlay', 'channel-tutorial', 'Create a<br />new channel'])}}</span>
+</a>
+</p>
+<p class="btns unblock"><span><a href="./">${nn._(['overlay', 'channel-tutorial', 'Not right now, thanks!'])}</a></span></p>
+</div>
+</script>
+
+<script id="title-func-tmpl" type="text/x-jquery-tmpl">
+<h2>${nn._([CMS_CONF.PAGE_ID, 'title-func', 'My Channels'])} (<span id="channel-counter">${$item.cntChannel}</span>)</h2>
+<p class="order btns"><span><a href="javascript:void(0);" class="reorder">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Reorder channels'])}</a></span></p>
+</script>
+
+<script id="channel-list-tmpl-item" type="text/x-jquery-tmpl">
+<li class="clearfix" data-meta="${id}">
+<div class="container">
+<div class="container-right">
+<div class="container-bottom">
+<div class="container-left">
+<div class="wrap">
+<div class="photo-list">
+<a href="/#!${id}" target="_blank">
+<img src="images/icon_playlist.png" alt="" class="watermark" />
+<img src="${moreImageUrl_1}" alt="" width="32" height="32" class="ch" />
+<img src="${moreImageUrl_2}" alt="" width="192" height="108" class="ep" />
+</a>
+</div>
+
+<div class="info">
+<h3 data-meta="${name}"><a href="episode-list.html?id=${id}">${name}</a></h3>
+<p><span>${cntEpisode}</span>${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episodes'])}</p>
+<p><span>${cntSubscribe}</span>${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Followers'])}</p>
+<p><span>${cntView}</span>${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Views'])}</p>
+</div>
+
+<div class="func-wrap">
+<p class="time">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Update:'])} ${formatTimestamp(updateDate)}</p>
+<div class="func-btns">
+{{if contentType == CMS_CONF.YOUR_FAVORITE}}
+<div class="btn-wrap disable">
+<ul>
+<li><a href="javascript:void(0);" class="add disable">Add</a></li>
+<li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
+<li><a href="javascript:void(0);" class="setting disable">Setting</a></li>
+<li><a href="javascript:void(0);" class="del disable">Del</a></li>
+</ul>
+</div>
+{{else}}
+<div class="btn-wrap enable">
+<ul>
+<li><a href="epcurate-curation.html?cid=${id}" class="add">Add<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Curate a new episode'])}</span></span></span></span></a></li>
+<li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
+<li><a href="channel-setting.html?id=${id}" class="setting">Setting<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Channel settings'])}</span></span></span></span></a></li>
+<li><a href="/api/users/${$item.userId}/channels/${id}" rel="${id}" class="del">Del<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Delete this channel'])}</span></span></span></span></a></li>
+</ul>
+</div>
+{{/if}}
+</div>
+</div>
+</div>
+<p class="drag"><span>move</span></p>
+</div>
+</div>
+</div>
+</div>
+</li>
+</script>
+
+<!--============================== footer start ==============================-->
+<p id="footer-control"></p>
+<div id="footer">
+  <span>© 2013 9x9.tv. All rights reserved.</span>
+  <ul id="footer-list">
+    <li id="language-change">
+	  <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
+      <p class="select-btn"></p>
+      <ul class="select-list">
+        <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en" data-page="signin">English</a></li>
+        <li           ><a href="javascript:void(0);" id="language-zh" data-meta="zh" data-page="signin">中文</a></li>
+      </ul>
+
+
+    </li>
+  </ul>
+</div>
+<!--============================== footer close ==============================-->
+
+<div id="overlay-s">
+<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span></span></p>
+</div>
+
+<div id="system-error" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">You are not authorized to edit this channel.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="delete-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Are you sure you want to delete this channel? All data will be removed permanently.</p>
+<div class="overlay-btn">
+<p class="btns btn-del"><span><a href="#">Delete</a></span></p>
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+<div class="overlay-btn">
+<p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="fb-connect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap fb-connect">
+<a href="#" class="btn-close">Close</a>
+<h4>{images/text_studio_setup.png}</h4>
+<p class="fb-connect">
+<span class="content">Connect to</span>
+<img src="images/icon_fb.png" alt="facebook" class="icon" />
+<a href="#" class="switch-on hide">ON</a>
+<a href="#" class="switch-off">OFF</a>
+</p>
+<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
+</div>
+</div>
+</div>
+
+<div id="restart-connect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap restart-connect">
+<a href="#" class="btn-close">Close</a>
+<h4>{images/text_studio_setup.png}</h4>
+<div class="reconnect-func">
+<span class="content">Connect to</span>
+<img src="images/icon_fb.png" alt="facebook" class="icon" />
+<p class="btns btn-reconnect"><span class="btn-right"><a href="#">Restart connection</a></span></p>
+</div>
+<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
+<p class="content notice">Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.</p>
+</div>
+</div>
+</div>
+
+<div id="fb-connect-failed" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap connect-fail">
+<a href="#" class="btn-close">Close</a>
+<h4>{images/text_studio_setup.png}</h4>
+<h5>Can not connect to Facebook correctly!</h5>
+<p class="content">Please try again and make sure you agree on all permissions.</p>
+<div class="overlay-btn">
+<p class="btns btn-failed-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="disconnect-notice" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap disconnect-notice">
+<a href="#" class="btn-close">Close</a>
+<h4>{images/text_studio_setup.png}</h4>
+<h5>Account disconnected!</h5>
+<p class="content">{If you want to enable auto sharing again, please:}</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="confirm-disconnect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap disconnect">
+<a href="#" class="btn-close">Close</a>
+<h4>{images/text_studio_setup.png}</h4>
+<p class="content">Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?</p>
+<div class="overlay-btn">
+<p class="btns btn-disconnect"><span><a href="#">Disconnect</a></span></p>
+<p class="btns btn-no"><span><a href="#">{No}</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

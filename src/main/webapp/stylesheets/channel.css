@@ -135,6 +135,7 @@ body.mac #title-func h2 {
     background-position: 0 -17px;
 }
 
+
 /* =photo-list
 **************************************/
 
@@ -164,6 +165,7 @@ body.mac #title-func h2 {
     float: left;
     margin: 0 5px 6px 0;
     border: none;
+
 }
 
 #channel-list li .photo-list img.ch {
@@ -178,16 +180,14 @@ body.mac #title-func h2 {
     float: left;
     margin: 0 5px 6px 0;
     border: none;
+}
+#channel-list li .photo-list:hover img.ep {
+    background-color: #fff;
     opacity: 0.7;
     filter: alpha(opacity=70);
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
 }
-#channel-list li .photo-list:hover img.ep {
-    background-color: #fff;
-    opacity: 1;
-    filter: alpha(opacity=100);
-    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-}
+
 
 #channel-list li .photo-list a img.watermark {
     position: absolute;
@@ -200,6 +200,7 @@ body.mac #title-func h2 {
 #channel-list li .photo-list a:hover span {
 	display: none;
 }
+
 
 /* =info
 **************************************/
@@ -691,12 +692,12 @@ body.mac #title-func h2 {
 
 #content-main-wrap form .fminput .fmfield .select .select-list li:hover {
 	background-color: #e4e4e4;
-	color: #777;
+	color: #999;
 }
 
 #content-main-wrap form .fminput .fmfield .select .select-list li.none:hover {
 	background-color: #d2d2d2;
-	color: #555;
+	color: #999;
     cursor: default;
 }
 
@@ -859,6 +860,9 @@ body.mac #title-func h2 {
 #content-main-wrap form .fminput .fmfield .connected .share-item .page-list.disable .page-list-middle a.select-page {
     background: url(../images/multi_choose_plus_disable.png) no-repeat right 8px;
 }
+#content-main-wrap form .fminput .fmfield .connected .share-item .page-list.disable .page-list-middle a.select-page span {
+	color:#999;
+}
 
 #content-main-wrap form .fminput .fmfield .connected .share-item .page-list.on .page-list-middle a.select-page {
     background: url(../images/multi_choose_minus.png) no-repeat right 8px;
@@ -873,7 +877,7 @@ body.mac #title-func h2 {
 }
 
 #content-main-wrap form .fminput .fmfield .connected .share-item .page-list.enable .page-list-middle a.select-page:hover span {
-    color: #777;
+    color: #999;
 }
 
 #content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul {
@@ -912,6 +916,9 @@ body.mac #title-func h2 {
     padding: 6.5px 0;
     color: #555;
     text-decoration: none;
+}
+#content-main #content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul li a:hover {
+	color: #999;
 }
 
 #content-main #content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul li a span {
@@ -1038,7 +1045,7 @@ body.mac #title-func h2 {
 
 #content-main-wrap form .fminput .fmfield .tag-list ul li:hover span a,
 #content-main-wrap form .fminput .fmfield .tag-list ul li.on    span a {
-	color: #777;
+	color: #999;
     background: url(../images/bg_tag.png) repeat-x 0 -100px;
 }
 
@@ -1095,5 +1102,5 @@ body.mac #title-func h2 {
 }
 
 #content-main-wrap form .form-btn .form-btn-wrap .btn-cancel {
-    margin-right: 10px;
+    margin-right: 15px;
 }

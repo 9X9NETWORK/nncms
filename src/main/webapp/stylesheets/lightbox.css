@@ -115,6 +115,9 @@
 #lightbox-create-channel p.btns:hover span a {
 	background-image: url(../images/popup_btn_middle_press.png) !important;
 }
+#lightbox-create-channel p.btns:hover span a:hover {
+	color: #999;
+}
 
 /**
 *

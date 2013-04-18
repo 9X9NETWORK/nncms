@@ -4,14 +4,18 @@
         "Guide":                                                                                                                                "頻道表",
         "Browse":                                                                                                                               "探索",
         "My page":                                                                                                                              "我的頁面",
-        "Studio":                                                                                                                               "編輯台",
+        "Studio":                                                                                                                               "後台管理系統",
         "Settings":                                                                                                                             "設定",
-        "Log out":                                                                                                                              "登出"
+        "Log out":                                                                                                                              "登出",
+        
+        "9x9.tv Official Web" : "9x9.tv官方網站",
+        "Watch 9x9.tv on the Web" : "9x9.tv應用程式"
+        
     },
     "studio-nav": {
-        "Studio":                                                                                                                               "編輯台",
+        "Studio":                                                                                                                               "<span class=\"cms-icon\">後台管理系統</span>",
         "My Channels":                                                                                                                          "我的頻道",
-        "Studio Setup":                                                                                                                         "<img src=\"images/icon_studio_setup.png\" alt=\"\" />編輯台設置",
+        "Studio Setup":                                                                                                                         "<img src=\"images/icon_studio_setup.png\" alt=\"\" />管理系統設置",
         "Connection is inactive, click to restart it.":                                                                                         "連結授權已失效，請點此重啟連結。"
     },
     "footer": {
@@ -110,7 +114,63 @@
         "clip":                                                                                                                                 "擦去",
         "drop":                                                                                                                                 "投擲"
     },
-    "index": {
+    "signin": {
+        "login-holder": {
+            "Collect and Curate!"	:	"蒐集影片 策展頻道！",
+			"CMS is the management center for your 9x9.tv list-form channels!"	:	"後台管理系統是您策展9x9.tv頻道的管理中心！",
+			"Sign In"	:	"登入",
+			"Sign in with Facebook"	:	"使用Facebook登入",
+			"Sign In with your E-mail and password"	:	"輸入信箱與密碼登入",
+			"E-mail"	:	"信箱",
+			"Password"	:	"密碼",
+			"Forgot password?"	:	"忘記密碼",
+			"Need an account?"	:	"還沒有帳號嗎? ", 
+			"Sign up Now!":"馬上註冊!",
+			"Sign Up"	:	"註冊",
+			"Repeat Password"	:	"再次輸入密碼",
+			"This email has been used."	:	"此信箱已被使用",
+			"Two passwords don't match, please retype."	:	"輸入密碼不一致，請重新輸入",
+			"I have read and accepted the User Agreement and Privacy Policy"	:	"我已讀完並同意遵守隱私權政策與使用條款",
+			"User Name"	:	"用戶名稱",
+			"Create a unique user name in 9x9 which composed of 6-16 English letters ,numbers or low line."	:	"用戶名稱請輸入6-16個字元，只能使用中英文、數字和底線",
+			"Only letters, numbers or low line are allowed."	:	"用戶名稱只能使用中英文、數字或底線",
+			"Please input 6-16 characters in username."	:	"請在用戶名稱輸入6-16範圍的字元",
+			"Cancel"	:	"取消",
+			"Create My Account"	:	"送出",
+			
+			"Forgot Password":"忘記密碼",
+			"Enter your email address and we`ll send you instructions.":"系統將會發送信件到您信箱，並導引您完成密碼設定。",
+			"Reset":"送出",
+			"Back to Sign In":"回到登入頁",
+			"Success!":"完成!",
+			"You should receive an email shortly.":"請收信前完成密碼重新設定。!",
+			"If you still need assistance, please":"如果你還需要協助，請!",
+			"contact us.":"連絡我們"
+			
+			
+			  
+		},
+		"errMsg": {
+			"Email format error!" : "電子郵件格式錯誤!",
+			"Please input password!" : "請輸入密碼!",
+			"Email and password do not match, please try again." : "信箱或密碼錯誤，請再次輸入!",
+			"Please fill your data!" : "請確實填入資料!",
+			"Please click agree !" : "你必需同意使用條款!",
+			"Passwrod not match!" : "密碼輸入必需相同!",
+			"Passwrod Enter 8-16 English letters ,numbers or low line!" : "密碼長度限制在6-16個字元內，組成字元沒有限制!",
+			"Invalid E-mail, please retry." : "無此帳號，請重新輸入",
+			"This email has been used." : "此信箱已被使用",
+			"Please input 6-16 characters in password." : "密碼長度限制為 6-16 個字元",
+			"USER_INVALID" : "無此帳號，請重新輸入",
+			"Please accept the agreements below." : "請接受以下的隱私權政策與使用條款。",
+			"The two passwords you entered do not match." : "輸入密碼不一致，請重新輸入。",
+			"Please input 6 to 16 characters in username." : "用戶名稱限制長度為6-16個字元",
+			"Only letters, numbers or low line are allowed." : "用戶名稱請輸入中英文、數字或底線。"
+			
+		
+		}
+    },
+     "index": {
         "html-title": {
             "9x9.tv - My Channels":                                                                                                             "9x9.tv - 我的頻道"
         },

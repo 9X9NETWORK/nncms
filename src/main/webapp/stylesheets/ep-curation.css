@@ -440,7 +440,7 @@ p.auto-height {
 
 #epcurate-curation #cur-edit p a:hover,
 #epcurate-curation #cur-poi   p a:hover {
-    color: #777;
+    color: #999;
 }
 
 #epcurate-curation #cur-edit .edit-time {
@@ -1122,6 +1122,9 @@ p.auto-height {
 	font-size: 15px;
 	line-height: 28px;
 }
+#epcurate-curation #cur-edit .btn-container .btns a:hover {
+    color: #999;
+}
 
 #epcurate-curation #cur-edit .edit-title                 .btn-container .btn-edit,
 #epcurate-curation #cur-edit .edit-title.disable .btn-container .btn-del,
@@ -1427,6 +1430,7 @@ p.auto-height {
 
 #epcurate-curation #cur-edit .select .select-list li:hover {
 	background: #e4e4e4;
+    color: #999
 }
 
 #epcurate-curation #cur-edit .edit-title.disable .select {
@@ -1620,7 +1624,7 @@ p.auto-height {
 }
 
 #epcurate-curation #cur-poi .poi-list ul li .edit:hover {
-    color: #777;
+    color: #999;
 }
 
 #epcurate-curation #cur-poi .poi-list ul li .edit:hover span {
@@ -1703,7 +1707,7 @@ p.auto-height {
 }
 
 #epcurate-curation #cur-poi-edit .content ul li a:hover {
-    color: #777;
+    color: #999;
 }
 
 #epcurate-curation #cur-poi-edit .content ul li.active a {
