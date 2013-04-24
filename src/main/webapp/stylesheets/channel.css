@@ -183,8 +183,8 @@ body.mac #title-func h2 {
 }
 #channel-list li .photo-list:hover img.ep {
     background-color: #fff;
-    opacity: 0.7;
-    filter: alpha(opacity=70);
+    opacity: 0.5;
+    filter: alpha(opacity=50);
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
 }
 

@@ -15,6 +15,7 @@
     "studio-nav": {
         "Studio":                                                                                                                               "<span class=\"cms-icon\">後台管理系統</span>",
         "My Channels":                                                                                                                          "我的頻道",
+        "My Portal":                                                                                                                          "我的入口",
         "Studio Setup":                                                                                                                         "<img src=\"images/icon_studio_setup.png\" alt=\"\" />管理系統設置",
         "Connection is inactive, click to restart it.":                                                                                         "連結授權已失效，請點此重啟連結。"
     },
@@ -169,6 +170,40 @@
 			
 		
 		}
+    },
+     "portal-set": {
+        "html-title": {
+            "9x9.tv - My Channels":                                                                                                             "9x9.tv - 我的頻道"
+        },
+	    "func-nav": {
+	        "Portal": "入口",
+	        "Channel Store": "頻道商店",
+            "My Portal": "我的入口",
+	        "Brand": "品牌"
+	    },
+	    "sets-list": {
+	        "Channels": "頻道",
+	        "Add Channels": "增加頻道",
+	        "Edit": "編輯"
+	    },
+        "title-func": {
+            "My Portal": "我的入口",
+            "Portal": "我的入口",
+            "Reorder channels":                                                                                                                 "排序頻道",
+            "Save order":                                                                                                                       "儲存排序"
+        },
+        "channel-list": {
+            "Episodes":                                                                                                                         "節目",
+            "Followers":                                                                                                                        "粉絲",
+            "Views":                                                                                                                            "觀看次數",
+            "Update:":                                                                                                                          "更新:",
+            "Curate a new episode":                                                                                                             "策展新節目",
+            "Episode list":                                                                                                                     "節目列表",
+            "Channel settings":                                                                                                                 "頻道設定",
+            "Delete this channel":                                                                                                              "刪除頻道",
+            "No Episodes":                                                                                                                      "無節目",
+            "'s Favorite":                                                                                                                      "的最愛"
+        }
     },
      "index": {
         "html-title": {
