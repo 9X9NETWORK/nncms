@@ -1,29 +1,246 @@
-Revision: 928
-Author: chihwen
-Date: 上午 11:58:20, 2013年3月25日
-Message:
-從 teltel 開發版本 922,923,926,927 轉入 fakeapi 分支
+版本: 968
+作者: chihwen
+日期: 2013年5月1日 下午 08:38:14
+訊息:
+CMS v4.0 開工前先整併 v3.3
 
-1. 調整 channel list 圖片呈現及邏輯。
-2. 調整我的最愛頻道呈現。
+比照 teltel_ui 分支將登出結構中的 href 屬性指向 signin.html
 issue 5927
+
 ----
-Added : /fakeapi/images/favorite_ch.png
-Modified : /fakeapi/index.html
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/epcurate-publish.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/controller.js
+
+版本: 964
+作者: chihwen
+日期: 2013年5月1日 下午 04:55:35
+訊息:
+CMS v4.0 開工前先整併 v3.3
+
+1. 調整天、地、overlay文案、結構及樣式、共用圖檔及樣式。
+   注意右上角 v3.3 時為 CMS Setup，v4.0 時為 CMS Settings。
+2. 新增正式的 signi.html 登入頁。
+3. 盡量以相對連結路徑，取代絕對連結路徑，例如 / 改為 ../。
+4. 登出後導向 signin.html。
+5. 調整 footer 語系切換以便 signin.html 使用。
+6. 調整 controller.js 移除已用不到的程式、增加語系切換高亮效果、增加 signin.html 登入檢查邏輯。
+7. 調整相關語系文案。
+issue 5927
+
+----
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/epcurate-publish.html
+異動 : /fakeapi/episode-list.html
+已加入 : /fakeapi/images/bg_load.png
+已加入 : /fakeapi/images/btn-add.png
+已加入 : /fakeapi/images/btn-minus.png
+已加入 : /fakeapi/images/btn_fb_ok_left.png
+已加入 : /fakeapi/images/btn_fb_ok_middle.png
+已加入 : /fakeapi/images/btn_fb_ok_right.png
+已加入 : /fakeapi/images/btn_g_c.png
+已加入 : /fakeapi/images/btn_g_c_on.png
+已加入 : /fakeapi/images/btn_g_l.png
+已加入 : /fakeapi/images/btn_g_l_on.png
+已加入 : /fakeapi/images/btn_g_r.png
+已加入 : /fakeapi/images/btn_g_r_on.png
+已加入 : /fakeapi/images/btn_gray_top.png
+已加入 : /fakeapi/images/btn_remove.png
+已加入 : /fakeapi/images/btn_top.png
+已加入 : /fakeapi/images/btn_white.png
+異動 : /fakeapi/images/btns.png
+已加入 : /fakeapi/images/gradient-white.png
+已加入 : /fakeapi/images/icon_checkbox.png
+已加入 : /fakeapi/images/icon_nav.png
+已加入 : /fakeapi/images/input_box_left_g.png
+已加入 : /fakeapi/images/input_box_middle_g.png
+已加入 : /fakeapi/images/input_box_right_g.png
+已加入 : /fakeapi/images/input_gray.png
+已加入 : /fakeapi/images/input_white.png
+已加入 : /fakeapi/images/overlay_bg_c.png
+已加入 : /fakeapi/images/overlay_bg_l.png
+已加入 : /fakeapi/images/overlay_bg_l_c.png
+已加入 : /fakeapi/images/overlay_bg_l_l.png
+已加入 : /fakeapi/images/overlay_bg_l_r.png
+已加入 : /fakeapi/images/overlay_bg_m_c.png
+已加入 : /fakeapi/images/overlay_bg_m_l.png
+已加入 : /fakeapi/images/overlay_bg_m_r.png
+已加入 : /fakeapi/images/overlay_bg_r.png
+異動 : /fakeapi/images/text_studio_setup.png
+已加入 : /fakeapi/images/text_studio_setup_bak.png
+已加入 : /fakeapi/images/textfield_w_c.png
+已加入 : /fakeapi/images/textfield_w_l.png
+已加入 : /fakeapi/images/textfield_w_r.png
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/javascripts/config.js
+異動 : /fakeapi/javascripts/controller.js
+已加入 : /fakeapi/javascripts/signin.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+已加入 : /fakeapi/signin.html
+異動 : /fakeapi/stylesheets/channel.css
+異動 : /fakeapi/stylesheets/ellipsis.xml
+異動 : /fakeapi/stylesheets/ep-curation.css
+異動 : /fakeapi/stylesheets/epcurate.css
+異動 : /fakeapi/stylesheets/episode.css
+異動 : /fakeapi/stylesheets/library.css
+異動 : /fakeapi/stylesheets/lightbox.css
+已加入 : /fakeapi/stylesheets/portal.css
+異動 : /fakeapi/stylesheets/style.css
+已加入 : /fakeapi/thumbnail/brand_default.png
+已加入 : /fakeapi/thumbnail/brand_loading.gif
+已加入 : /fakeapi/thumbnail/ch_default.png
+已加入 : /fakeapi/thumbnail/ep_default.png
+已加入 : /fakeapi/thumbnail/favorite_ch.png
+
+Revision: 958
+Author: chihwen
+Date: 下午 02:48:35, 2013年4月26日
+Message:
+完成 Episode curation storyboard 加上 video number 邏輯
+
+1. 同步 src 版本 956 (epcurate-curation.html, ep-curation.css)。
+2. 在 curation.js 中加入 rebuildVideoNumber() 重建影音編號函式。
+3. 在影音列表模板解析完成後，動態重建影音編號 controller.js。
+4. 移動影音順序時，不能更動影音編號。
+5. 當加入影音時，影音編號按照順序往下編，但不能更動已存在的影音編號位置。
+6. 完成影音 save 後，重新從頭編排影音編號。
+
+備註：
+注意 DELETE 方法的參數一定得用 Query String 模式傳送
+例如 '/api/episodes/{episodeId}/programs?programs=' + videoDeleteIdList.join(',')
+若改用後面的物件參數帶 DELETE 參數，在 Firefox 下參數會送不出去
+目前這會造成無法依環境切換 API 位址，除非改寫 CMS_CONF.API() 函式邏輯
+
+$.ajax with DELETE loses parameters
+http://stackoverflow.com/questions/2269094/ajax-with-delete-loses-parameters
+
+$.ajax ignoring data param for DELETE requests
+http://stackoverflow.com/questions/4018982/ajax-ignoring-data-param-for-delete-requests
+issue 6330
+----
+Modified : /fakeapi/epcurate-curation.html
 Modified : /fakeapi/javascripts/controller.js
-Modified : /fakeapi/stylesheets/channel.css
-Added : /fakeapi/thumbnail/ch1.jpg
-Added : /fakeapi/thumbnail/ch10.jpg
-Added : /fakeapi/thumbnail/ch11.png
-Added : /fakeapi/thumbnail/ch2.png
-Added : /fakeapi/thumbnail/ch3.jpg
-Added : /fakeapi/thumbnail/ch4.jpg
-Added : /fakeapi/thumbnail/ch5.png
-Added : /fakeapi/thumbnail/ch6.png
-Added : /fakeapi/thumbnail/ch7.png
-Added : /fakeapi/thumbnail/ch8.png
-Added : /fakeapi/thumbnail/ch9.png
-==== 9x9 ====
-Last Changed Author: louis
-Last Changed Rev: 4414
-Last Changed Date: 2013-03-26 10:00:34 +0800 (Tue, 26 Mar 2013)
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/stylesheets/ep-curation.css
+
+Revision: 951
+Author: chihwen
+Date: 下午 02:10:04, 2013年4月23日
+Message:
+改良 curation 及 publish 頁 save 及頁面切換流程等待秒數問題
+
+1. 移除全新 episode 新增流程下，換頁前的停留秒數
+之前是為了等待非同步的 API 回應
+不過首次新增 episode 及其 program 後，會跳出 showDraftNoticeOverlay
+再讓 user 去關閉 draft notice overlay 後進行 firstSaveRedirect
+這樣的操作流程已經足以保留足夠的 API 回應時間
+
+2. 仍繼續保留修改流程下，換頁前的停留秒數，以便等待非同步的 API 回應
+目前是採丟了就走的更新模式，計算 loop 到最後一個 program 請求時，就進行 episode 更新，更新完就換頁
+並沒有明確等 program 請求 commit 回來才進行 episode 更新，因為這樣作會讓 user 等更久
+目前的更新模式，有確保所有 program 請求都有送出，但沒有確保所有 program 都有回來
+所以在最後換頁前，折衷再等待一秒，以確保 program 下的 poi 及 titlecard 可以順利被更新
+注意只有當有換頁動作時，才多等待這一秒，若無換頁動作，則直接回應 UI。
+
+PS：若條件允許，應首先考量改進 API 允許一次新增多筆 programs (及其下 pois, titlecards) 讓 50+n次請求，整合成 1 次請求。
+issue 5869
+----
+Modified : /fakeapi/javascripts/curation.js
+
+Revision: 949
+Author: chihwen
+Date: 下午 07:42:11, 2013年4月18日
+Message:
+隱藏舊的 POI 介面及 API 呼叫，因為 dev 站上的 API 端已經移除舊的 POI API 了
+
+為了可以順利測試 curation 及 publish 頁 save 及頁面切換流程等待秒數的改善
+隱藏舊的 POI 介面及 API 呼叫，因為 dev 站上的 API 端已經移除舊的 POI API 了
+GET /api/programs/{programId}/pois 已會產生 404 錯誤
+issue 5869
+----
+Modified : /fakeapi/epcurate-curation.html
+Modified : /fakeapi/javascripts/controller.js
+
+Revision: 948
+Author: chihwen
+Date: 下午 05:54:48, 2013年4月18日
+Message:
+改良 curation 及 publish 頁 save 及頁面切換流程等待秒數問題
+issue 5869
+----
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/javascripts/epcurate.js
+
+Revision: 940
+Author: chihwen
+Date: 下午 10:43:34, 2013年4月10日
+Message:
+因應 9x9 API 異動，調整 CORS 非同源 API 串接
+
+1. 調整 config.js 將 development 環境下的 BASE 及 API 對應表轉為本機，當有必要測試 CORS 時再手動切換出去。
+2. 將 login.html (建cookie) 及 basic.js (刪cookie) 等暫時性作法移除，改由 API 端解決 Cookie 讀取問題。
+3. 調整 fakeapi/login.php 登入 API，增加 GET 請求，以便模擬取得登入狀態行為，
+   直接由 API 端檢查是否有 user cookie 若無則回傳 null，若有 user cookie 則回傳 user 物件。
+4. 調整 controller.js 不再確認 local user cookie 是否存在，改成直接 GET login API 以確認登入狀態。
+5. 另外 9x9 端已認同先前對 nn-sdk.js 的調整，直接在 nn-sdk 中將 dataType 預設為 json。
+issue 6249
+----
+Modified : /fakeapi/fakeapi/login.php
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/config.js
+Modified : /fakeapi/javascripts/controller.js
+Modified : /fakeapi/login.html
+
+Revision: 939
+Author: chihwen
+Date: 下午 01:50:46, 2013年4月10日
+Message:
+記錄 9x9 CORS 非同源 API 串接測試，以便未來程式比對之用
+
+1. 調整 config.js 新增 API_BASE 設定，並讓 API 網址組合指向此 BASE 設定。
+   要留意各環境下的組合方式，避免存取到不正確的資源。
+2. 調整 login.html (建cookie) 及 basic.js (刪cookie) 是為了暫時性的 cookie 讀取解決之用。
+   注意此作法只是取巧，以便銜接之前的登入檢查邏輯之用。
+   比較好的解決應由 API 端解決此問題。
+3. 調整 nn-sdk.js 是為了當進行 CORS 非同源的 AJAX 請求時，jQuery 自動解析 JSON 格式之用。
+   這也是暫時性的解決方式，應由 9x9 決定如何因應。
+issue 6249
+----
+Modified : /fakeapi/javascripts/basic.js
+Modified : /fakeapi/javascripts/config.js
+Modified : /fakeapi/javascripts/nn-sdk.js
+Modified : /fakeapi/login.html
+
+Revision: 933
+Author: chihwen
+Date: 下午 12:52:38, 2013年4月9日
+Message:
+將 上傳按鈕 的文字顏色 預設改為 #555555 hover 改為 #999999
+
+注意 上傳元件 SWFUpload 目前不支援動態更動 hover 的文字顏色，目前有設定但沒作用
+
+底下這篇文章，有提到幾個作法，但實作後都沒作用
+http://stackoverflow.com/questions/8479722/swfupload-change-color-on-hover
+
+若確實要實現這個問題，可以透過更改
+http://dev.teltel.com:8080/cms/images/btn-load.png
+直接將文字呈現在按鈕上，例如底下這張這樣
+http://dev.teltel.com/louis/9x9-sdk-usage/img/btn-upload.png
+此圖由上而下，代表 normal, hover, click, disabled
+不過若這樣作的話，就要依語系準備不同的圖片，英文一組，中文一組
+同時為了呈現出 Uploading... 以及 上傳中... 的效果
+也要再另外準備一組圖，以便使用 setButtonImageURL 動態更新上傳按鈕底圖
+issue 5869
+----
+Modified : /fakeapi/javascripts/channel.js
+Modified : /fakeapi/javascripts/curation.js
+Modified : /fakeapi/javascripts/epcurate.js
