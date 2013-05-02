@@ -33,10 +33,7 @@ $(function () {
                     nextstep = $(src.target).parents('a').attr('href');
                 }
             }
-            // ON PURPOSE to wait api (async)
-            setTimeout(function () {
                 location.href = nextstep;
-            }, 3000);
         }
     }
     $('body').keyup(function (e) {
@@ -316,6 +313,7 @@ $(function () {
                 ytItem = {},
                 ytList = [],
                 committedCnt = 0,
+                videoNumberBase = $('#storyboard-list li').length,
                 isPrivateVideo = null,
                 isZoneLimited = null,
                 isMobileLimited = null,
@@ -330,14 +328,12 @@ $(function () {
                     $('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Invalid URL, please try again!'])).removeClass('hide').show();
                     if (committedCnt === matchList.length) {
                         committedCnt = -1;   // reset to avoid collision
-                        // ON PURPOSE to wait api (async)
                         animateStoryboard(ytList.length);
-                        setTimeout(function () {
                             $('#storyboard-listing-tmpl-item').tmpl(ytList).hide().appendTo('#storyboard-listing').fadeIn(2000);
                             sumStoryboardInfo();
+                        rebuildVideoNumber(videoNumberBase);
                             $('.ellipsis').ellipsis();
                             $('#overlay-s').fadeOut();
-                        }, 1000);
                     }
                 });
                 nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + key + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
@@ -401,14 +397,12 @@ $(function () {
                     }
                     if (committedCnt === matchList.length) {
                         committedCnt = -1;   // reset to avoid collision
-                        // ON PURPOSE to wait api (async)
                         animateStoryboard(ytList.length);
-                        setTimeout(function () {
                             $('#storyboard-listing-tmpl-item').tmpl(ytList).hide().appendTo('#storyboard-listing').fadeIn(2000);
                             sumStoryboardInfo();
+                        rebuildVideoNumber(videoNumberBase);
                             $('.ellipsis').ellipsis();
                             $('#overlay-s').fadeOut();
-                        }, 1000);
                     }
                 }, 'jsonp');
             });
@@ -1437,7 +1431,7 @@ $(function () {
                             tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                             tmplItemData = tmplItem.data;
                             tmplItemData.id = program.id;
-                            tmplItem.update();
+                            //tmplItem.update();
 
                             // insert poi
                             if (tmplItemData.poiList && tmplItemData.poiList.length > 0) {
@@ -1450,7 +1444,7 @@ $(function () {
                                             tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                             tmplItemData = tmplItem.data;
                                             tmplItemData.poiList[key] = poi;
-                                            tmplItem.update();
+                                            //tmplItem.update();
                                         });
                                     }
                                 });
@@ -1467,7 +1461,7 @@ $(function () {
                                     tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                     tmplItemData = tmplItem.data;
                                     tmplItemData.beginTitleCard.id = title_card.id;
-                                    tmplItem.update();
+                                    //tmplItem.update();
                                 });
                             }
                             if (null != tmplItemData.endTitleCard && tmplItemData.endTitleCard.message && '' != $.trim(tmplItemData.endTitleCard.message)) {
@@ -1480,17 +1474,18 @@ $(function () {
                                     tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                     tmplItemData = tmplItem.data;
                                     tmplItemData.endTitleCard.id = title_card.id;
-                                    tmplItem.update();
+                                    //tmplItem.update();
                                 });
                             }
 
                             if (idx === (programList.length - 1)) {
                                 // update episode with total duration
                                 nn.api('PUT', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: episode.id}), {duration: totalDuration}, function (episode) {
-                                    $('#overlay-s').fadeOut(1000, function () {
+                                    $('#overlay-s').fadeOut('fast', function () {
                                         // redirect
                                         videoDeleteIdList = []; // clear video delete id list
                                         removeTotalChangeHook();
+                                        rebuildVideoNumber();
                                         showDraftNoticeOverlay(src);
                                     });
                                 });
@@ -1502,7 +1497,7 @@ $(function () {
                 // update mode
                 // !important rule: first POST and PUT then DELETE
                 if (!$('body').hasClass('has-change')) {
-                    $('#overlay-s').fadeOut(1000, function () {
+                    $('#overlay-s').fadeOut('fast', function () {
                         // redirect
                         removeTotalChangeHook();
                         if (!src                                                                                        // from nature action
@@ -1544,7 +1539,7 @@ $(function () {
                                     tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                     tmplItemData = tmplItem.data;
                                     tmplItemData.beginTitleCard.id = title_card.id;
-                                    tmplItem.update();
+                                    //tmplItem.update();
                                 });
                             }
                             if (null != tmplItemData.endTitleCard && tmplItemData.endTitleCard.message && '' != $.trim(tmplItemData.endTitleCard.message)) {
@@ -1557,7 +1552,7 @@ $(function () {
                                     tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                     tmplItemData = tmplItem.data;
                                     tmplItemData.endTitleCard.id = title_card.id;
-                                    tmplItem.update();
+                                    //tmplItem.update();
                                 });
                             }
                         });
@@ -1573,7 +1568,7 @@ $(function () {
                             tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                             tmplItemData = tmplItem.data;
                             tmplItemData.id = program.id;
-                            tmplItem.update();
+                            //tmplItem.update();
 
                             // insert poi
                             if (tmplItemData.poiList && tmplItemData.poiList.length > 0) {
@@ -1586,7 +1581,7 @@ $(function () {
                                             tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                             tmplItemData = tmplItem.data;
                                             tmplItemData.poiList[key] = poi;
-                                            tmplItem.update();
+                                            //tmplItem.update();
                                         });
                                     }
                                 });
@@ -1603,7 +1598,7 @@ $(function () {
                                     tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                     tmplItemData = tmplItem.data;
                                     tmplItemData.beginTitleCard.id = title_card.id;
-                                    tmplItem.update();
+                                    //tmplItem.update();
                                 });
                             }
                             if (null != tmplItemData.endTitleCard && tmplItemData.endTitleCard.message && '' != $.trim(tmplItemData.endTitleCard.message)) {
@@ -1616,7 +1611,7 @@ $(function () {
                                     tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                                     tmplItemData = tmplItem.data;
                                     tmplItemData.endTitleCard.id = title_card.id;
-                                    tmplItem.update();
+                                    //tmplItem.update();
                                 });
                             }
                         });
@@ -1626,10 +1621,11 @@ $(function () {
                         if (videoDeleteIdList.length > 0) {
                             nn.api('DELETE', CMS_CONF.API('/api/episodes/{episodeId}/programs?programs=' + videoDeleteIdList.join(','), {episodeId: $('#id').val()}), null, function (data) {
                                 nn.api('PUT', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), {duration: totalDuration}, function (episode) {
-                                    $('#overlay-s').fadeOut(1000, function () {
+                                    $('#overlay-s').fadeOut('fast', function () {
                                         // redirect
                                         videoDeleteIdList = []; // clear video delete id list
                                         removeTotalChangeHook();
+                                        rebuildVideoNumber();
                                         if (!src                                                                                        // from nature action
                                                 || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
                                             $('#epcurate-curation ul.tabs li a.cur-add').trigger('click');
@@ -1646,16 +1642,17 @@ $(function () {
                                             // ON PURPOSE to wait api (async)
                                             setTimeout(function () {
                                                 location.href = nextstep;
-                                            }, 3000);
+                                            }, 1000);
                                         }
                                     });
                                 });
                             });
                         } else {
                             nn.api('PUT', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), {duration: totalDuration}, function (episode) {
-                                $('#overlay-s').fadeOut(1000, function () {
+                                $('#overlay-s').fadeOut('fast', function () {
                                     // redirect
                                     removeTotalChangeHook();
+                                    rebuildVideoNumber();
                                     if (!src                                                                                        // from nature action
                                             || (src && 'form-btn-save' === $(src.target).attr('id'))) {                             // from btn-save
                                         $('#epcurate-curation ul.tabs li a.cur-add').trigger('click');
@@ -1672,7 +1669,7 @@ $(function () {
                                         // ON PURPOSE to wait api (async)
                                         setTimeout(function () {
                                             location.href = nextstep;
-                                        }, 3000);
+                                        }, 1000);
                                     }
                                 });
                             });
@@ -2617,6 +2614,15 @@ function sumStoryboardInfo() {
     $('#storyboard-listing li').eq(49).addClass('last');
 }
 
+function rebuildVideoNumber(base) {
+    base = ('undefined' === typeof base) ? 0 : base;
+    $('#storyboard-list li').each(function (i) {
+        if ((i + 1) > base) {
+            $(this).children('p.order').text(i + 1);
+        }
+    });
+}
+
 function resizeTitleCard() {
     var videoHeight = ($('#video-player').width() / 16) * 9,
         videoPlayerHeight = videoHeight + 44;   // 44: $('#video-control')
@@ -2868,7 +2874,7 @@ function uploadImage(isDisableEdit) {
             button_width:               '129',
             button_height:              '29',
             button_text:                '<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>',
-            button_text_style:          '.uploadstyle { color: #777777; font-family: Arial, Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
+            button_text_style:          '.uploadstyle { color: #555555; font-family: Arial, Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
             button_text_top_padding:    1,
             button_action:              SWFUpload.BUTTON_ACTION.SELECT_FILE,
             button_cursor:              SWFUpload.CURSOR.HAND,

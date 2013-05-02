@@ -742,7 +742,7 @@ function uploadImage() {
             button_width:               '129',
             button_height:              '29',
             button_text:                '<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>',
-            button_text_style:          '.uploadstyle { color: #777777; font-family: Arial, Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
+            button_text_style:          '.uploadstyle { color: #555555; font-family: Arial, Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
             button_text_top_padding:    1,
             button_action:              SWFUpload.BUTTON_ACTION.SELECT_FILE,
             button_cursor:              SWFUpload.CURSOR.HAND,

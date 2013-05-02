@@ -1,23 +1,23 @@
-/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document setTimeout sumStoryboardInfo setFormWidth setVideoMeasure setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp switchPublishStatus switchRerunCheckbox truncateFormTitle setFormHeight setTaglistWidth uploadImage FB ellipsisPage */
+/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document sumStoryboardInfo rebuildVideoNumber setFormWidth setVideoMeasure setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp switchPublishStatus switchRerunCheckbox truncateFormTitle setFormHeight setTaglistWidth uploadImage FB ellipsisPage */
 /*jslint eqeq: true, nomen: true, plusplus: true, regexp: true, unparam: true, sloppy: true, vars: true */
 nn.initialize();
 nn.debug(CMS_CONF.IS_DEBUG);
-nn.on(400, function(jqXHR, textStatus) {
+nn.on(400, function (jqXHR, textStatus) {
 	if (CMS_CONF.IS_DEBUG) {
 		alert(textStatus + ': ' + jqXHR.responseText);
 	}
 	location.replace('index.html');
 });
-nn.on(401, function(jqXHR, textStatus) {
+nn.on(401, function (jqXHR, textStatus) {
 	location.href = '../';
 });
-nn.on(403, function(jqXHR, textStatus) {
+nn.on(403, function (jqXHR, textStatus) {
 	location.replace('index.html');
 });
-nn.on(404, function(jqXHR, textStatus) {
+nn.on(404, function (jqXHR, textStatus) {
 	// nothing to do
 });
-nn.on(500, function(jqXHR, textStatus) {
+nn.on(500, function (jqXHR, textStatus) {
 	if (CMS_CONF.IS_DEBUG) {
 		alert(textStatus + ': ' + jqXHR.responseText);
 	}
@@ -38,7 +38,7 @@ function renderConnectFacebookUI() {
 	$('#page-selected').text(nn._(['channel', 'setting-form', 'Select facebook pages']));
 	$('.page-list').addClass('disable').removeClass('enable on');
 	$('#pageId').val('');
-}// end of renderConnectFacebookUI()
+}   // end of renderConnectFacebookUI()
 
 function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
 	$('#settingForm .connect-switch').addClass('hide');
@@ -61,31 +61,34 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
 	} else {
 		$('#fbPage').removeAttr('disabled');
 		$.uniform.update('#fbPage');
-		var pages = facebook.pages, rowNum = 2, modPageLen = pages.length % rowNum, i = 0;
+        var pages = facebook.pages,
+            rowNum = 2,
+            modPageLen = pages.length % rowNum,
+            i = 0;
 		if (modPageLen > 0) {
 			modPageLen = rowNum - modPageLen;
-			for ( i = 0; i < modPageLen; i++) {
+            for (i = 0; i < modPageLen; i++) {
 				pages.push({
-					id : 0,
-					name : ''
+                    id: 0,
+                    name: ''
 				});
 			}
 		}
 		$('#fb-page-list').remove();
-		$('#fb-page-list-tmpl').tmpl({
-			cntPage : pages.length
-		}).appendTo('div.page-list-middle');
+        $('#fb-page-list-tmpl').tmpl({cntPage: pages.length}).appendTo('div.page-list-middle');
 		$('#fb-page-list-tmpl-item').tmpl(pages).appendTo('#fb-page-list');
 		ellipsisPage();
 	}
 	// checked default fadebook page
 	if ('channel-setting.html' == CMS_CONF.USER_URL.attr('file') && CMS_CONF.USER_URL.param('id') > 0) {
-		nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/facebook', {
-			channelId : CMS_CONF.USER_URL.param('id')
-		}), null, function(autoshares) {
+        nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/facebook', {channelId: CMS_CONF.USER_URL.param('id')}), null, function (autoshares) {
 			if (autoshares && autoshares.length > 0) {
-				var isCheckedTimeline = false, tempIds = [], pageIds = [], pageNames = [], pageItem = null;
-				$.each(autoshares, function(i, autoshare) {
+                var isCheckedTimeline = false,
+                    tempIds = [],
+                    pageIds = [],
+                    pageNames = [],
+                    pageItem = null;
+                $.each(autoshares, function (i, autoshare) {
 					if (autoshare.userId === facebook.userId) {
 						isCheckedTimeline = true;
 					} else {
@@ -102,7 +105,7 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
 					$.uniform.update('#fbTimeline');
 				}
 				if (tempIds.length > 0 && $('#fb-page-list li:has(a)').length > 0) {
-					$('#fb-page-list li:has(a)').each(function(i) {
+                    $('#fb-page-list li:has(a)').each(function (i) {
 						pageItem = $(this).children('a');
 						if (-1 !== $.inArray($.trim(pageItem.data('id')), tempIds)) {
 							pageIds.push(pageItem.data('id'));
@@ -131,20 +134,20 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
 		setTaglistWidth();
 		scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
 	}
-}// end of renderAutoShareUI()
+}   // end of renderAutoShareUI()
 
 function buildFacebookPagesMap(facebook) {
 	var fb_pages_map = {};
 	if (facebook && facebook.userId) {
 		fb_pages_map[facebook.userId] = facebook.accessToken;
 		if (facebook.pages && 'string' !== typeof facebook.pages && facebook.pages.length > 0) {
-			$.each(facebook.pages, function(i, page) {
+            $.each(facebook.pages, function (i, page) {
 				fb_pages_map[page.id] = page.access_token;
 			});
 		}
 	}
 	return fb_pages_map;
-}// end of buildFacebookPagesMap()
+}   // end of buildFacebookPagesMap()
 
 function checkRestartConnect(facebook, callback) {
 	var isRestartConnect = false;
@@ -161,12 +164,13 @@ function checkRestartConnect(facebook, callback) {
 			}
 		} else {
 			var parameter = {
-				access_token : facebook.accessToken
+                access_token: facebook.accessToken
 			};
 			// FB.api('/{facebook.userId}/permissions', { anticache: (new Date()).getTime() }, function (response) {
 			// ON PURPOSE to pass {facebook.userId} to compose request uri (but not hard code "me"), because not sure user had login facebook
-			nn.api('GET', 'https://graph.facebook.com/' + facebook.userId + '/permissions', parameter, function(response) {
-				var permList = null, hasCriticalPerm = false;
+            nn.api('GET', 'https://graph.facebook.com/' + facebook.userId + '/permissions', parameter, function (response) {
+                var permList = null,
+                    hasCriticalPerm = false;
 				if (response.data && response.data[0]) {
 					permList = response.data[0];
 					if (permList.manage_pages && permList.publish_stream) {
@@ -188,49 +192,47 @@ function checkRestartConnect(facebook, callback) {
 			callback(facebook, isRestartConnect);
 		}
 	}
-}// end of checkRestartConnect()
+}   // end of checkRestartConnect()
 
 function addFbAsyncInitEvent(func) {
 	var oldFbAsyncInit = window.fbAsyncInit;
-	window.fbAsyncInit = function() {
+    window.fbAsyncInit = function () {
 		if ('function' === typeof oldFbAsyncInit) {
 			oldFbAsyncInit();
 		}
 		func();
 	};
-}// end of addFbAsyncInitEvent()
+}   // end of addFbAsyncInitEvent()
 
 function initFacebookJavaScriptSdk() {
 	if (null !== CMS_CONF.USER_URL && null !== CMS_CONF.USER_DATA) {
-		var lang = CMS_CONF.USER_DATA.lang; ( function(d, debug) {
-				var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-				if (d.getElementById(id)) {
-					return;
-				}
+        var lang = CMS_CONF.USER_DATA.lang;
+        (function (d, debug) {
+            var js,
+                id = 'facebook-jssdk',
+                ref = d.getElementsByTagName('script')[0];
+            if (d.getElementById(id)) { return; }
 				js = d.createElement('script');
 				js.id = id;
 				js.async = true;
-				js.src = '//connect.facebook.net/' + CMS_CONF.LC_MAP[lang] + '/all' + ( debug ? '/debug' : '') + '.js';
+            js.src = '//connect.facebook.net/' + CMS_CONF.LC_MAP[lang] + '/all' + (debug ? '/debug' : '') + '.js';
 				ref.parentNode.insertBefore(js, ref);
-			}(document, /*debug*/
-			CMS_CONF.IS_DEBUG));
+        }(document, /*debug*/ CMS_CONF.IS_DEBUG));
 
-		addFbAsyncInitEvent(function() {
+        addFbAsyncInitEvent(function () {
 			var url = CMS_CONF.USER_URL.attr('source');
 			url = url.substr(0, url.lastIndexOf('/'));
 			// init the FB JS SDK
 			FB.init({
-				appId : CMS_CONF.FB_APP_ID, // App ID from the App Dashboard
-				channelUrl : url + '/lang/fb/' + lang + '/channel.html', // Channel File for x-domain communication
-				status : true, // check the login status upon init?
-				cookie : true, // set sessions cookies to allow your server to access the session?
-				xfbml : true // parse XFBML tags on this page?
+                appId: CMS_CONF.FB_APP_ID,                                                                  // App ID from the App Dashboard
+                channelUrl: url + '/lang/fb/' + lang + '/channel.html',                                     // Channel File for x-domain communication
+                status: true,                                                                               // check the login status upon init?
+                cookie: true,                                                                               // set sessions cookies to allow your server to access the session?
+                xfbml: true                                                                                 // parse XFBML tags on this page?
 			});
 		});
 
-		nn.api('GET', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {
-			userId : CMS_CONF.USER_DATA.id
-		}), null, function(facebook) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {userId: CMS_CONF.USER_DATA.id}), null, function (facebook) {
 			if (!facebook || !facebook.userId) {
 				// ready for connect facebook
 				CMS_CONF.FB_RESTART_CONNECT = false;
@@ -246,7 +248,7 @@ function initFacebookJavaScriptSdk() {
 			} else {
 				// ready for disconnect facebook
 				// ON PURPOSE to use callback design pattern to maintain async order issue (make sure have critical permissions)
-				checkRestartConnect(facebook, function(facebook, isRestartConnect) {
+                checkRestartConnect(facebook, function (facebook, isRestartConnect) {
 					CMS_CONF.FB_RESTART_CONNECT = isRestartConnect;
 					if (true === isRestartConnect) {
 						$('#studio-nav .reconnect-notice').removeClass('hide');
@@ -267,11 +269,12 @@ function initFacebookJavaScriptSdk() {
 	} else {
 		nn.log('Can not init Facebook JavaScript SDK!', 'error');
 	}
-}// end of initFacebookJavaScriptSdk()
+}   // end of initFacebookJavaScriptSdk()
 
 function buildEpcurateCuration(pageId, fm, crumb) {
 	nn.log(crumb, 'debug');
-	var eid = fm.id.value, cid = fm.channelId.value;
+    var eid = fm.id.value,
+        cid = fm.channelId.value;
 	$('#cur-add textarea').val(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Paste YouTube video URLs to add (separate with different lines)']));
 	$('#cur-add textarea').toggleVal();
 	if ('' == eid && '' == cid) {
@@ -284,12 +287,10 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 			crumb.name = 'New episode';
 		}
 		if (cid > 0 && !isNaN(cid) && CMS_CONF.USER_DATA.id) {
-			nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
-				userId : CMS_CONF.USER_DATA.id
-			}), null, function(data) {
+            nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
 				var channelIds = [];
 				if (data.length > 0) {
-					$.each(data, function(i, list) {
+                    $.each(data, function (i, list) {
 						channelIds.push(list.id);
 					});
 				}
@@ -297,9 +298,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 					showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
 					return;
 				}
-				nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
-					channelId : cid
-				}), null, function(channel) {
+                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: cid}), null, function (channel) {
 					if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
 						showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
 						return;
@@ -308,10 +307,10 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 					$('#epcurate-info').remove();
 					$('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
 					$('.storyboard-info').html($('#storyboard-info-tmpl').tmpl({
-						chName : channel.name,
-						epName : crumb.name
+                        chName: channel.name,
+                        epName: crumb.name
 					}));
-					$('#epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function(e) {
+                    $('#epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function (e) {
 						$(fm).trigger('submit', e);
 						return false;
 					});
@@ -327,19 +326,15 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 		}
 	} else {
 		// update mode: data from api
-		nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {
-			episodeId : $('#id').val()
-		}), null, function(episode) {
+        nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), null, function (episode) {
 			if ('' != cid && cid != episode.channelId) {
 				showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
 				return;
 			}
-			nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
-				userId : CMS_CONF.USER_DATA.id
-			}), null, function(data) {
+            nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
 				var channelIds = [];
 				if (data.length > 0) {
-					$.each(data, function(i, list) {
+                    $.each(data, function (i, list) {
 						channelIds.push(list.id);
 					});
 				}
@@ -347,9 +342,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 					showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
 					return;
 				}
-				nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
-					channelId : episode.channelId
-				}), null, function(channel) {
+                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: episode.channelId}), null, function (channel) {
 					if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
 						showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
 						return;
@@ -359,21 +352,32 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 					$('#epcurate-info').remove();
 					$('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
 					$('.storyboard-info').html($('#storyboard-info-tmpl').tmpl({
-						chName : channel.name,
-						epName : episode.name
+                        chName: channel.name,
+                        epName: episode.name
 					}));
 					// merge 9x9 api and youtube api (ytId, ytDuration, uploader, uploadDate, isZoneLimited, isMobileLimited, isEmbedLimited)
-					var normalPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/, preloadImage = [], programList = [], invalidList = [], committedCnt = 0, ytData = null, ytItem = {}, ytList = [], beginTitleCard = null, endTitleCard = null, isPrivateVideo = null, isZoneLimited = null, isMobileLimited = null, isEmbedLimited = null;
-					nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {
-						episodeId : $('#id').val()
-					}), null, function(programs) {
-						$.each(programs, function(idx, programItem) {
+                    var normalPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
+                        preloadImage = [],
+                        programList = [],
+                        invalidList = [],
+                        committedCnt = 0,
+                        ytData = null,
+                        ytItem = {},
+                        ytList = [],
+                        beginTitleCard = null,
+                        endTitleCard = null,
+                        isPrivateVideo = null,
+                        isZoneLimited = null,
+                        isMobileLimited = null,
+                        isEmbedLimited = null;
+                    nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {episodeId: $('#id').val()}), null, function (programs) {
+                        $.each(programs, function (idx, programItem) {
 							if (normalPattern.test(programItem.fileUrl)) {
 								programList.push(programItem);
 							}
 						});
-						$.each(programList, function(idx, programItem) {
-							nn.on([400, 401, 403, 404], function(jqXHR, textStatus) {
+                        $.each(programList, function (idx, programItem) {
+                            nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
 								committedCnt += 1;
 								invalidList.push(programItem.fileUrl);
 								nn.log(textStatus + ': ' + jqXHR.responseText, 'warning');
@@ -381,10 +385,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 								$('#videourl').val(invalidList.join('\n'));
 								$('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Invalid URL, please try again!'])).removeClass('hide').show();
 								if (committedCnt === programList.length) {
-									committedCnt = -1;
-									// reset to avoid collision
-									// ON PURPOSE to wait api (async)
-									setTimeout(function() {
+                                    committedCnt = -1;   // reset to avoid collision
 										if (preloadImage.length > 0) {
 											$('#preload-image').html('');
 											$('#preload-image-tmpl-item').tmpl(preloadImage).prependTo('#preload-image');
@@ -392,18 +393,15 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 										$('#storyboard-listing').html('');
 										$('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
 										sumStoryboardInfo();
+                                    rebuildVideoNumber();
 										$('.ellipsis').ellipsis();
 										$('#overlay-s').fadeOut();
-									}, 1000);
 								}
 							});
-							nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.slice(-11) + '?alt=jsonc&v=2&callback=?', null, function(youtubes) {
-								nn.api('GET', CMS_CONF.API('/api/programs/{programId}/title_cards', {
-									programId : programItem.id
-								}), null, function(title_card) {
-									nn.api('GET', CMS_CONF.API('/api/programs/{programId}/pois', {
-										programId : programItem.id
-									}), null, function(pois) {
+                            nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.slice(-11) + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
+                                nn.api('GET', CMS_CONF.API('/api/programs/{programId}/title_cards', {programId: programItem.id}), null, function (title_card) {
+                                    //nn.api('GET', CMS_CONF.API('/api/programs/{programId}/pois', {programId: programItem.id}), null, function (pois) {
+                                        pois = null;
 										committedCnt += 1;
 										beginTitleCard = null;
 										endTitleCard = null;
@@ -430,7 +428,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 											beginTitleCard.message = $.trim(beginTitleCard.message).replace(/\{BR\}/g, '\n');
 											if (beginTitleCard.bgImage && '' != $.trim(beginTitleCard.bgImage)) {
 												preloadImage.push({
-													image : beginTitleCard.bgImage
+                                                    image: beginTitleCard.bgImage
 												});
 											}
 										} else {
@@ -440,7 +438,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 											endTitleCard.message = $.trim(endTitleCard.message).replace(/\{BR\}/g, '\n');
 											if (endTitleCard.bgImage && '' != $.trim(endTitleCard.bgImage)) {
 												preloadImage.push({
-													image : endTitleCard.bgImage
+                                                    image: endTitleCard.bgImage
 												});
 											}
 										} else {
@@ -461,45 +459,42 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 										}
 										if (ytData && false === isEmbedLimited) {
 											ytItem = {
-												poiList : pois,
-												beginTitleCard : beginTitleCard,
-												endTitleCard : endTitleCard,
-												ytId : ytData.id,
-												fileUrl : programItem.fileUrl,
-												imageUrl : 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
+                                                poiList: pois,
+                                                beginTitleCard: beginTitleCard,
+                                                endTitleCard: endTitleCard,
+                                                ytId: ytData.id,
+                                                fileUrl: programItem.fileUrl,
+                                                imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
 												//duration: ytData.duration,      // ON PURPOSE to mark this line to keep trimmed duration from 9x9 API
-												ytDuration : ytData.duration, // keep original duration from YouTube
-												name : ytData.title,
-												intro : ytData.description,
-												uploader : ytData.uploader,
-												uploadDate : ytData.uploaded,
-												isPrivateVideo : isPrivateVideo,
-												isZoneLimited : isZoneLimited,
-												isMobileLimited : isMobileLimited,
-												isEmbedLimited : isEmbedLimited
+                                                ytDuration: ytData.duration,    // keep original duration from YouTube
+                                                name: ytData.title,
+                                                intro: ytData.description,
+                                                uploader: ytData.uploader,
+                                                uploadDate: ytData.uploaded,
+                                                isPrivateVideo: isPrivateVideo,
+                                                isZoneLimited: isZoneLimited,
+                                                isMobileLimited: isMobileLimited,
+                                                isEmbedLimited: isEmbedLimited
 											};
 										} else {
 											ytItem = {
-												poiList : pois,
-												beginTitleCard : beginTitleCard,
-												endTitleCard : endTitleCard,
-												ytId : programItem.fileUrl.slice(-11),
-												ytDuration : 0, // fake origin duration (invalid video)
-												uploader : ((youtubes.error) ? youtubes.error.message : 'Non-embeddable'), // fake uploader (error message)
-												uploadDate : ((youtubes.error) ? (youtubes.error.code + 'T') : 'Non-embeddableT'), // fake uploadDate (error code)
-												isPrivateVideo : isPrivateVideo,
-												isZoneLimited : isZoneLimited,
-												isMobileLimited : isMobileLimited,
-												isEmbedLimited : isEmbedLimited
+                                                poiList: pois,
+                                                beginTitleCard: beginTitleCard,
+                                                endTitleCard: endTitleCard,
+                                                ytId: programItem.fileUrl.slice(-11),
+                                                ytDuration: 0,                                                                      // fake origin duration (invalid video)
+                                                uploader: ((youtubes.error) ? youtubes.error.message : 'Non-embeddable'),           // fake uploader (error message)
+                                                uploadDate: ((youtubes.error) ? (youtubes.error.code + 'T') : 'Non-embeddableT'),   // fake uploadDate (error code)
+                                                isPrivateVideo: isPrivateVideo,
+                                                isZoneLimited: isZoneLimited,
+                                                isMobileLimited: isMobileLimited,
+                                                isEmbedLimited: isEmbedLimited
 											};
 										}
 										ytItem = $.extend(programItem, ytItem);
 										ytList[idx] = ytItem;
 										if (committedCnt === programList.length) {
-											committedCnt = -1;
-											// reset to avoid collision
-											// ON PURPOSE to wait api (async)
-											setTimeout(function() {
+                                            committedCnt = -1;   // reset to avoid collision
 												if (preloadImage.length > 0) {
 													$('#preload-image').html('');
 													$('#preload-image-tmpl-item').tmpl(preloadImage).prependTo('#preload-image');
@@ -507,16 +502,16 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 												$('#storyboard-listing').html('');
 												$('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
 												sumStoryboardInfo();
+                                            rebuildVideoNumber();
 												$('.ellipsis').ellipsis();
 												$('#overlay-s').fadeOut();
-											}, 1000);
 										}
-									});
+                                    //});
 								});
 							}, 'jsonp');
 						});
 					});
-					$('#epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function(e) {
+                    $('#epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function (e) {
 						$(fm).trigger('submit', e);
 						return false;
 					});
@@ -527,11 +522,14 @@ function buildEpcurateCuration(pageId, fm, crumb) {
 			});
 		});
 	}
-}// end of buildEpcurateCuration()
+}   // end of buildEpcurateCuration()
 
 function buildEpcuratePublish(pageId, fm, crumb) {
 	nn.log(crumb, 'debug');
-	var eid = fm.id.value, cid = fm.channelId.value, scheduleDateTime = '', tomorrow = '';
+    var eid = fm.id.value,
+        cid = fm.channelId.value,
+        scheduleDateTime = '',
+        tomorrow = '';
 	if ('' == eid || !crumb.id) {
 		if (crumb.channelId) {
 			$('#form-btn-leave').data('gobackUrl', $('#epcurate-nav-curation').attr('href'));
@@ -539,20 +537,16 @@ function buildEpcuratePublish(pageId, fm, crumb) {
 		showSystemErrorOverlayAndHookError('Invalid episode ID, please try again.');
 		return;
 	}
-	nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {
-		episodeId : $('#id').val()
-	}), null, function(episode) {
+    nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), null, function (episode) {
 		if ('' != cid && cid != episode.channelId) {
 			showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
 			return;
 		}
 		$('#channelId').val(episode.channelId);
-		nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
-			userId : CMS_CONF.USER_DATA.id
-		}), null, function(data) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
 			var channelIds = [];
 			if (data.length > 0) {
-				$.each(data, function(i, list) {
+                $.each(data, function (i, list) {
 					channelIds.push(list.id);
 				});
 			}
@@ -560,9 +554,7 @@ function buildEpcuratePublish(pageId, fm, crumb) {
 				showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
 				return;
 			}
-			nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
-				channelId : episode.channelId
-			}), null, function(channel) {
+            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: episode.channelId}), null, function (channel) {
 				if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
 					showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
 					return;
@@ -570,7 +562,7 @@ function buildEpcuratePublish(pageId, fm, crumb) {
 				showProcessingOverlay();
 				$('#epcurateForm .constrain').html('');
 				$('#epcurate-form-tmpl').tmpl(episode, {
-					publishLabel : (true === episode.isPublic) ? 'Published' : 'Publish Now'
+                    publishLabel: (true === episode.isPublic) ? 'Published' : 'Publish Now'
 				}).appendTo('#epcurateForm .constrain');
 				setFormWidth();
 				if ($('#uploadThumbnail').length > 0) {
@@ -614,16 +606,14 @@ function buildEpcuratePublish(pageId, fm, crumb) {
 				switchPublishStatus($('input[name=status]:checked').val(), $('input[name=status]:checked').attr('name'));
 				switchRerunCheckbox();
 				$.uniform.update();
-				nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {
-					episodeId : $('#id').val()
-				}), null, function(programs) {
+                nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {episodeId: $('#id').val()}), null, function (programs) {
 					$('#img-list').html('');
 					$('#img-list-tmpl-item').tmpl(programs).appendTo('#img-list');
 					if ('' != episode.imageUrl) {
 						var hasMatch = false;
 						$('#imageUrl').val(episode.imageUrl);
 						$('#imageUrlOld').val(episode.imageUrl);
-						$('#img-list li').each(function() {
+                        $('#img-list li').each(function () {
 							if (episode.imageUrl === $(this).children('img').attr('src')) {
 								hasMatch = true;
 								$(this).clone().prependTo('#img-list');
@@ -635,39 +625,35 @@ function buildEpcuratePublish(pageId, fm, crumb) {
 						}
 					}
 					$('#thumbnail-list ul').cycle({
-						fx : 'scrollHorz',
-						prev : '#thumbnail-list .img-prev',
-						next : '#thumbnail-list .img-next',
-						speed : 1000,
-						timeout : 0,
-						cleartypeNoBg : true,
-						before : function() {
-							$('body').addClass('has-change');
-							// NOTE: must to remove change hook after first load
+                        fx: 'scrollHorz',
+                        prev: '#thumbnail-list .img-prev',
+                        next: '#thumbnail-list .img-next',
+                        speed: 1000,
+                        timeout: 0,
+                        cleartypeNoBg: true,
+                        before: function () {
+                            $('body').addClass('has-change');                   // NOTE: must to remove change hook after first load
 							$('#imageUrl').val($('img', this).attr('src'));
 						}
 					});
-					$('#epcurate-nav-curation, #form-btn-save, #form-btn-back').click(function(e) {
+                    $('#epcurate-nav-curation, #form-btn-save, #form-btn-back').click(function (e) {
 						$(fm).trigger('submit', e);
 						return false;
 					});
-					$('body').removeClass('has-change');
-					// NOTE: remove change hook after first load
+                    $('body').removeClass('has-change');                        // NOTE: remove change hook after first load
 					$('#overlay-s').fadeOut();
 				});
 			});
 		});
 	});
-}// end of buildEpcuratePublish()
+}   // end of buildEpcuratePublish()
 
 function listEpisode(pageId, id) {
 	if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
-		nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
-			userId : CMS_CONF.USER_DATA.id
-		}), null, function(data) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
 			var channelIds = [];
 			if (data.length > 0) {
-				$.each(data, function(i, list) {
+                $.each(data, function (i, list) {
 					channelIds.push(list.id);
 				});
 			}
@@ -676,21 +662,15 @@ function listEpisode(pageId, id) {
 				return;
 			}
 			showProcessingOverlay();
-			nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
-				channelId : id
-			}), null, function(channel) {
+            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: id}), null, function (channel) {
 				$('#func-nav ul').html('');
 				$('#episode-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
 				if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
-					nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {
-						userId : CMS_CONF.USER_DATA.id
-					}), null, function(favorites) {
+                    nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {userId: CMS_CONF.USER_DATA.id}), null, function (favorites) {
 						var cntEpisode = favorites.length;
 						channel.name = CMS_CONF.USER_DATA.name + nn._([pageId, 'title-func', "'s Favorite"]);
 						$('#title-func').html('');
-						$('#title-func-tmpl').tmpl(channel, {
-							cntEpisode : cntEpisode
-						}).appendTo('#title-func');
+                        $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
 						$('#channel-name').data('width', $('#channel-name').width());
 						$('#content-main-wrap .constrain').html('');
 						if (cntEpisode > 0) {
@@ -705,19 +685,17 @@ function listEpisode(pageId, id) {
 						$('#overlay-s').fadeOut();
 					});
 				} else {
-					nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/episodes', {
-						channelId : id
-					}), null, function(episodes) {
+                    nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/episodes', {channelId: id}), null, function (episodes) {
 						var cntEpisode = episodes.length;
 						$('#title-func').html('');
-						$('#title-func-tmpl').tmpl(channel, {
-							cntEpisode : cntEpisode
-						}).appendTo('#title-func');
+                        $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
 						$('#channel-name').data('width', $('#channel-name').width());
 						$('#content-main-wrap .constrain').html('');
 						CMS_CONF.EPISODES_PAGING = [];
 						CMS_CONF.EPISODES_PAGING_INFO = [];
-						var tmpCntEpisode = cntEpisode, tmpEpisodes = [], i = 0;
+                        var tmpCntEpisode = cntEpisode,
+                            tmpEpisodes = [],
+                            i = 0;
 						if (cntEpisode > 0) {
 							// pagging
 							var cntPage = 0;
@@ -730,23 +708,25 @@ function listEpisode(pageId, id) {
 									cntPageFirstEpisodes = 30;
 								}
 								tmpEpisodes = [];
-								for ( i = 0; i < cntPageFirstEpisodes; i++) {
+                                for (i = 0; i < cntPageFirstEpisodes; i++) {
 									//episodes[i].seq = tmpCntEpisode - episodes[i].seq;
 									episodes[i].seq = tmpCntEpisode - i;
 									tmpEpisodes.push(episodes[i]);
 								}
 								CMS_CONF.EPISODES_PAGING.push(tmpEpisodes);
 								CMS_CONF.EPISODES_PAGING_INFO.push({
-									'pageID' : 0,
-									'pageStart' : tmpCntEpisode,
-									'pageEnd' : (tmpCntEpisode - cntPageFirstEpisodes + 1)
+                                    'pageID': 0,
+                                    'pageStart': tmpCntEpisode,
+                                    'pageEnd': (tmpCntEpisode - cntPageFirstEpisodes + 1)
 								});
-								for ( i = 0; i < cntPage; i++) {
+                                for (i = 0; i < cntPage; i++) {
 									tmpEpisodes = [];
-									var tmpStart = 0, tmpEnd = 0, ii = 0;
+                                    var tmpStart = 0,
+                                        tmpEnd = 0,
+                                        ii = 0;
 									tmpStart = i * iPageSize + cntPageFirstEpisodes;
 									tmpEnd = tmpStart + iPageSize;
-									for ( ii = tmpStart; ii < tmpEnd; ii++) {
+                                    for (ii = tmpStart; ii < tmpEnd; ii++) {
 										// serial DESC
 										//episodes[ii].seq =  tmpCntEpisode - episodes[ii].seq;
 										episodes[ii].seq = cntEpisode - ii;
@@ -754,14 +734,14 @@ function listEpisode(pageId, id) {
 									}
 									CMS_CONF.EPISODES_PAGING.push(tmpEpisodes);
 									CMS_CONF.EPISODES_PAGING_INFO.push({
-										'pageID' : (i + 1),
-										'pageStart' : (tmpCntEpisode - tmpStart),
-										'pageEnd' : (tmpCntEpisode - tmpEnd + 1)
+                                        'pageID': (i + 1),
+                                        'pageStart': (tmpCntEpisode - tmpStart),
+                                        'pageEnd': (tmpCntEpisode - tmpEnd + 1)
 									});
 								}
 							} else {
 								tmpEpisodes = [];
-								for ( i = 0; i < cntEpisode; i++) {
+                                for (i = 0; i < cntEpisode; i++) {
 									//episodes[i].seq =  tmpCntEpisode - episodes[i].seq;
 									// the number srilal is DESC
 									episodes[i].seq = cntEpisode - i;
@@ -777,30 +757,28 @@ function listEpisode(pageId, id) {
 							$('#episode-list-tmpl-folder').tmpl(CMS_CONF.EPISODES_PAGING_INFO).appendTo('#episode-list');
 							// episode list sorting
 							$('#episode-list').sortable({
-								cursor : 'move',
-								revert : true,
-								cancel : '.isFolder',
-								change : function(event, ui) {
+                                cursor: 'move',
+                                revert: true,
+                                cancel: '.isFolder',
+                                change: function (event, ui) {
 									$('body').addClass('has-change');
 								}
 							});
 							$('#episode-list').sortable('disable');
 						} else {
-							$('#episode-first-tmpl').tmpl({
-								id : id
-							}).appendTo('#content-main-wrap .constrain');
+                            $('#episode-first-tmpl').tmpl({ id: id }).appendTo('#content-main-wrap .constrain');
 							// episode first cycle
 							$('#selected-episode p.episode-pager').html('');
 							$('#selected-episode .wrapper ul.content').cycle({
-								pager : '.episode-pager',
-								activePagerClass : 'active',
-								updateActivePagerLink : null,
-								fx : 'scrollHorz',
-								speed : 1000,
-								timeout : 6000,
-								pagerEvent : 'mouseover',
-								pause : 1,
-								cleartypeNoBg : true
+                                pager: '.episode-pager',
+                                activePagerClass: 'active',
+                                updateActivePagerLink: null,
+                                fx: 'scrollHorz',
+                                speed: 1000,
+                                timeout: 6000,
+                                pagerEvent: 'mouseover',
+                                pause: 1,
+                                cleartypeNoBg: true
 							});
 						}
 						setEpisodeWidth();
@@ -814,20 +792,16 @@ function listEpisode(pageId, id) {
 	} else if ('' !== id && id == 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
 		// for fake favorite channel
 		showProcessingOverlay();
-		nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {
-			userId : CMS_CONF.USER_DATA.id
-		}), null, function(favorites) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {userId: CMS_CONF.USER_DATA.id}), null, function (favorites) {
 			var cntEpisode = favorites.length;
 			var channel = {
-				contentType : CMS_CONF.YOUR_FAVORITE,
-				name : CMS_CONF.USER_DATA.name + nn._([pageId, 'title-func', "'s Favorite"])
+                contentType: CMS_CONF.YOUR_FAVORITE,
+                name: CMS_CONF.USER_DATA.name + nn._([pageId, 'title-func', "'s Favorite"])
 			};
 			$('#func-nav ul').html('');
 			$('#episode-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
 			$('#title-func').html('');
-			$('#title-func-tmpl').tmpl(channel, {
-				cntEpisode : cntEpisode
-			}).appendTo('#title-func');
+            $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
 			$('#channel-name').data('width', $('#channel-name').width());
 			$('#content-main-wrap .constrain').html('');
 			if (cntEpisode > 0) {
@@ -845,16 +819,14 @@ function listEpisode(pageId, id) {
 		showSystemErrorOverlayAndHookError('Invalid channel ID, please try again.');
 		return;
 	}
-}// end of listEpisode()
+}   // end of listEpisode()
 
 function updateChannel(pageId, id) {
 	if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
-		nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
-			userId : CMS_CONF.USER_DATA.id
-		}), null, function(data) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
 			var channelIds = [];
 			if (data.length > 0) {
-				$.each(data, function(i, list) {
+                $.each(data, function (i, list) {
 					channelIds.push(list.id);
 				});
 			}
@@ -862,9 +834,7 @@ function updateChannel(pageId, id) {
 				showSystemErrorOverlayAndHookError('You are not authorized to edit this channel.');
 				return;
 			}
-			nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
-				channelId : id
-			}), null, function(channel) {
+            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: id}), null, function (channel) {
 				if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
 					showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
 					return;
@@ -873,16 +843,16 @@ function updateChannel(pageId, id) {
 				$('#content-main').html('');
 				$('#content-main-tmpl').tmpl(channel).appendTo('#content-main');
 				$('#name').charCounter(20, {
-					container : '#name-charcounter',
-					format : '%1',
-					delay : 0,
-					clear : false
+                    container: '#name-charcounter',
+                    format: '%1',
+                    delay: 0,
+                    clear: false
 				});
 				$('#intro').charCounter(70, {
-					container : '#intro-charcounter',
-					format : '%1',
-					delay : 0,
-					clear : false
+                    container: '#intro-charcounter',
+                    format: '%1',
+                    delay: 0,
+                    clear: false
 				});
 				if ($('#uploadThumbnail').length > 0) {
 					uploadImage();
@@ -905,29 +875,27 @@ function updateChannel(pageId, id) {
 					$('#sphere-select-txt').text(CMS_CONF.SPHERE_MAP[channel.sphere]);
 					$('.category').removeClass('disable').addClass('enable');
 					var sphere = channel.sphere;
-					if ('other' === sphere) {
-						sphere = 'en';
-					}
-					nn.api('GET', CMS_CONF.API('/api/categories'), {
-						lang : sphere
-					}, function(categories) {
+                    if ('other' === sphere) { sphere = 'en'; }
+                    nn.api('GET', CMS_CONF.API('/api/categories'), { lang: sphere }, function (categories) {
 						$('#browse-category').data('realCateCnt', categories.length);
-						$.each(categories, function(i, list) {
+                        $.each(categories, function (i, list) {
 							CMS_CONF.CATEGORY_MAP[list.id] = list.name;
 						});
-						var rowNum = ($(window).width() > 1356) ? 4 : 3, modCatLen = categories.length % rowNum, i = 0;
+                        var rowNum = ($(window).width() > 1356) ? 4 : 3,
+                            modCatLen = categories.length % rowNum,
+                            i = 0;
 						if (modCatLen > 0) {
 							modCatLen = rowNum - modCatLen;
-							for ( i = 0; i < modCatLen; i++) {
+                            for (i = 0; i < modCatLen; i++) {
 								categories.push({
-									id : 0,
-									name : ''
+                                    id: 0,
+                                    name: ''
 								});
 							}
 						}
 						$('#browse-category').html('');
 						$('#category-list-tmpl-item').tmpl(categories, {
-							dataArrayIndex : function(item) {
+                            dataArrayIndex: function (item) {
 								return $.inArray(item, categories);
 							}
 						}).appendTo('#browse-category');
@@ -935,22 +903,16 @@ function updateChannel(pageId, id) {
 						if ('' != channel.categoryId && CMS_CONF.CATEGORY_MAP[channel.categoryId]) {
 							$('.tag-list').removeClass('hide');
 							$('#categoryId-select-txt').text(CMS_CONF.CATEGORY_MAP[channel.categoryId]);
-							nn.api('GET', CMS_CONF.API('/api/tags'), {
-								categoryId : channel.categoryId
-							}, function(tags) {
+                            nn.api('GET', CMS_CONF.API('/api/tags'), { categoryId: channel.categoryId }, function (tags) {
 								$('#tag-list').html('');
 								if (tags && tags.length > 0) {
 									$('.tag-list').removeClass('hide');
 									var currentTags = $('#tag').val();
 									currentTags = currentTags.split(',');
-									if (!currentTags) {
-										currentTags = [];
-									}
-									$('#tag-list-tmpl-item').tmpl({
-										tags : tags
-									}).appendTo('#tag-list');
+                                    if (!currentTags) { currentTags = []; }
+                                    $('#tag-list-tmpl-item').tmpl({ tags: tags }).appendTo('#tag-list');
 									if (currentTags.length > 0) {
-										$('#tag-list li span a').each(function() {
+                                        $('#tag-list li span a').each(function () {
 											if (-1 !== $.inArray($(this).text(), currentTags)) {
 												$(this).parent().parent().addClass('on');
 											}
@@ -965,7 +927,7 @@ function updateChannel(pageId, id) {
 				}
 				truncateFormTitle();
 				// ON PURPOSE to wait api (async)
-				$('#overlay-s').fadeOut(5000, function() {
+                $('#overlay-s').fadeOut(5000, function () {
 					autoHeight();
 					setFormHeight();
 					setTaglistWidth();
@@ -978,23 +940,23 @@ function updateChannel(pageId, id) {
 		showSystemErrorOverlayAndHookError('Invalid channel ID, please try again.');
 		return;
 	}
-}// end of updateChannel()
+}   // end of updateChannel()
 
 function createChannel(pageId) {
 	showProcessingOverlay();
 	$('#content-main').html('');
 	$('#content-main-tmpl').tmpl().appendTo('#content-main');
 	$('#name').charCounter(20, {
-		container : '#name-charcounter',
-		format : '%1',
-		delay : 0,
-		clear : false
+        container: '#name-charcounter',
+        format: '%1',
+        delay: 0,
+        clear: false
 	});
 	$('#intro').charCounter(70, {
-		container : '#intro-charcounter',
-		format : '%1',
-		delay : 0,
-		clear : false
+        container: '#intro-charcounter',
+        format: '%1',
+        delay: 0,
+        clear: false
 	});
 	if ($('#uploadThumbnail').length > 0) {
 		uploadImage();
@@ -1004,29 +966,27 @@ function createChannel(pageId) {
 	}
 	initFacebookJavaScriptSdk();
 	// ON PURPOSE to wait api (async)
-	$('#overlay-s').fadeOut(3000, function() {
+    $('#overlay-s').fadeOut(3000, function () {
 		autoHeight();
 		setFormHeight();
 		setTaglistWidth();
 		scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
 		$('#settingForm .btn-cancel, #settingForm .btn-create').removeClass('disable').addClass('enable');
 	});
-}// end of createChannel()
+}   // end of createChannel()
 
 function listChannel(pageId) {
 	if (CMS_CONF.USER_DATA.id) {
 		showProcessingOverlay();
-		nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
-			userId : CMS_CONF.USER_DATA.id
-		}), null, function(channels) {
-			var cntChannel = channels.length, hasFavoriteChannel = false;
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (channels) {
+            var cntChannel = channels.length,
+                hasFavoriteChannel = false;
 			$('#title-func').html('');
-			$('#title-func-tmpl').tmpl(null, {
-				cntChannel : cntChannel
-			}).appendTo('#title-func');
+            $('#title-func-tmpl').tmpl(null, { cntChannel: cntChannel }).appendTo('#title-func');
 			if (cntChannel > 0) {
-				var items = [], temp = [];
-				$.each(channels, function(i, channel) {
+                var items = [],
+                    temp = [];
+                $.each(channels, function (i, channel) {
 					temp = [];
 					channel.moreImageUrl_1 = CMS_CONF.CHANNEL_DEFAULT_IMAGE;
 					channel.moreImageUrl_2 = CMS_CONF.CHANNEL_DEFAULT_IMAGE2;
@@ -1036,9 +996,7 @@ function listChannel(pageId) {
 						channel.moreImageUrl_1 = 'images/favorite_ch.png';
 						if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
 							temp = channel.moreImageUrl.split('|');
-							if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) {
-								channel.moreImageUrl_2 = temp[0];
-							}
+                            if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_2 = temp[0]; }
 						}
 						channel.name = CMS_CONF.USER_DATA.name + nn._([pageId, 'channel-list', "'s Favorite"]);
 					} else {
@@ -1050,22 +1008,20 @@ function listChannel(pageId) {
 						}
 						if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
 							temp = channel.moreImageUrl.split('|');
-							if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) {
-								channel.moreImageUrl_2 = temp[0];
-							}
+                            if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_2 = temp[0]; }
 						}
 					}
 					items.push(channel);
 				});
 				$('#channel-list').html('');
 				$('#channel-list-tmpl-item').tmpl(items, {
-					userId : CMS_CONF.USER_DATA.id
+                    userId: CMS_CONF.USER_DATA.id
 				}).appendTo('#channel-list');
 				// channel list sorting
 				$('#channel-list').sortable({
-					cursor : 'move',
-					revert : true,
-					change : function(event, ui) {
+                    cursor: 'move',
+                    revert: true,
+                    change: function (event, ui) {
 						$('body').addClass('has-change');
 					}
 				});
@@ -1079,7 +1035,7 @@ function listChannel(pageId) {
 					$('.blockOverlay').height($(window).height() - 45);
 					$.blockUI.defaults.overlayCSS.opacity = '0.9';
 					$.blockUI({
-						message : $('#lightbox-create-channel')
+                        message: $('#lightbox-create-channel')
 					});
 				}
 			}
@@ -1091,7 +1047,7 @@ function listChannel(pageId) {
 	} else {
 		location.href = '../';
 	}
-}// end of listChannel()
+}   // end of listChannel()
 
 function fadeEpcurateHeaderAndFooter() {
 	var cmsEpe = $.cookie('cms-epe');
@@ -1109,10 +1065,12 @@ function fadeEpcurateHeaderAndFooter() {
 		$('#epcurate-nav-back').attr('href', cmsEpe);
 		$('#form-btn-leave').data('leaveUrl', cmsEpe);
 	}
-}// end of fadeEpcurateHeaderAndFooter()
+}   // end of fadeEpcurateHeaderAndFooter()
 
 function rebuildCrumbAndParam(cid, eid) {
-	var cmsCrumb = {}, cidFromGet = 0, eidFromGet = 0;
+    var cmsCrumb = {},
+        cidFromGet = 0,
+        eidFromGet = 0;
 	if ($.cookie('cms-crumb')) {
 		cmsCrumb = $.url('http://fake.url.dev.teltel.com/?' + $.cookie('cms-crumb')).param();
 	}
@@ -1160,15 +1118,11 @@ function rebuildCrumbAndParam(cid, eid) {
 	$('#epcurate-nav-publish').attr('href', 'epcurate-publish.html' + qrystr);
 	$('#form-btn-back').attr('href', $('#epcurate-nav-' + $('#form-btn-back').attr('rel')).attr('href'));
 	$('#form-btn-next').attr('href', $('#epcurate-nav-' + $('#form-btn-next').attr('rel')).attr('href'));
-	if (cmsCrumb.id) {
-		$('#id').val(cmsCrumb.id);
-	}
-	if (cmsCrumb.channelId) {
-		$('#channelId').val(cmsCrumb.channelId);
-	}
+    if (cmsCrumb.id) { $('#id').val(cmsCrumb.id); }
+    if (cmsCrumb.channelId) { $('#channelId').val(cmsCrumb.channelId); }
 
 	return cmsCrumb;
-}// end of rebuildCrumbAndParam()
+}   // end of rebuildCrumbAndParam()
 
 function setupLanguageAndRenderPage(user, isStoreLangKey) {
 	// fetch user lang
@@ -1185,13 +1139,14 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
 	}
 	$('html').removeClass(CMS_CONF.LANG_SUPPORT.join(' ')).addClass(lang);
 
-	nn.api('GET', 'lang/' + lang + '.json', null, function(langPack) {
+    nn.api('GET', 'lang/' + lang + '.json', null, function (langPack) {
 		// setup user profile
 		$('#selected-profile').text(CMS_CONF.USER_DATA.name);
 		$('#profile-mypage').attr('href', '/#!curator=' + CMS_CONF.USER_DATA.profileUrl);
 		if (true == CMS_CONF.USER_DATA.fbUser) {
 			$('#profile-settings').remove();
 		}
+
 		// setup lang pack
 		CMS_CONF.LANG_MAP = langPack['lang-map'];
 		CMS_CONF.SPHERE_MAP = langPack['sphere-map'];
@@ -1204,16 +1159,17 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
 				// avoid IE8 bug
 				$('title').data('langkey', $('title').text());
 			}
-			$('#header a, #footer a, .lightbox-content .btns a, #studio-nav a, #studio-nav .langkey, #func-nav a, #epcurate-nav .langkey, #epcurateForm .langkey').each(function() {
+            $('#header a, #footer a, .lightbox-content .btns a, #studio-nav a, #studio-nav .langkey, #func-nav a, #epcurate-nav .langkey, #epcurateForm .langkey').each(function () {
 				$(this).data('langkey', $(this).text());
 			});
-			$('.overlay-l h4, .overlay-l h5, .overlay-l .content').each(function() {
+            $('.overlay-l h4, .overlay-l h5, .overlay-l .content').each(function () {
 				$(this).data('langkey', $(this).html());
 			});
-			$('#epcurateForm .langkey-val').each(function() {
+            $('#epcurateForm .langkey-val').each(function () {
 				$(this).data('langkey', $(this).val());
 			});
 		}
+
 		// render page
 		var userUrlFile = CMS_CONF.USER_URL.attr('file');
 		if ('' === userUrlFile) {
@@ -1276,7 +1232,8 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
 		} else {
 
 			fadeEpcurateHeaderAndFooter();
-			var cmsCrumb = rebuildCrumbAndParam(), fm = document.epcurateForm;
+            var cmsCrumb = rebuildCrumbAndParam(),
+                fm = document.epcurateForm;
 			switch (userUrlFile) {
 				case 'epcurate-publish.html':
 					buildEpcuratePublish(CMS_CONF.PAGE_ID, fm, cmsCrumb);
@@ -1297,36 +1254,36 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
 			// avoid IE8 bug
 			$('title').text(nn._([CMS_CONF.PAGE_ID, 'html-title', $('title').data('langkey')]));
 		}
-		$('#header a').each(function() {
+        $('#header a').each(function () {
 			$(this).text(nn._(['header', $(this).data('langkey')]));
 		});
-		$('#studio-nav a, #studio-nav .langkey').each(function() {
+        $('#studio-nav a, #studio-nav .langkey').each(function () {
 			$(this).html(nn._(['studio-nav', $(this).data('langkey')]));
 		});
-		$('#footer a').each(function() {
+        $('#footer a').each(function () {
 			$(this).text(nn._(['footer', $(this).data('langkey')]));
 		});
-		$('.overlay-l h4, .overlay-l h5, .overlay-l .content').each(function() {
+        $('.overlay-l h4, .overlay-l h5, .overlay-l .content').each(function () {
 			$(this).html(nn._(['overlay', 'facebook', $(this).data('langkey')]));
 		});
-		$('.lightbox-content .btns a').each(function() {
+        $('.lightbox-content .btns a').each(function () {
 			$(this).html(nn._(['overlay', 'button', $(this).data('langkey')]));
 		});
-		$('#func-nav a').each(function() {
+        $('#func-nav a').each(function () {
 			$(this).text(nn._([CMS_CONF.PAGE_ID, 'func-nav', $(this).data('langkey')]));
 		});
-		$('#epcurate-nav .langkey').each(function() {
+        $('#epcurate-nav .langkey').each(function () {
 			$(this).text(nn._([CMS_CONF.PAGE_ID, 'epcurate-nav', $(this).data('langkey')]));
 		});
-		$('#epcurateForm .langkey').each(function() {
+        $('#epcurateForm .langkey').each(function () {
 			$(this).html(nn._([CMS_CONF.PAGE_ID, 'epcurate-form', $(this).data('langkey')]));
 		});
-		$('#epcurateForm .langkey-val').each(function() {
+        $('#epcurateForm .langkey-val').each(function () {
 			$(this).val(nn._([CMS_CONF.PAGE_ID, 'epcurate-form', $(this).data('langkey')]));
 		});
 		$('#language').text(langPack['lang-map'][CMS_CONF.USER_DATA.lang]);
 	}, 'json');
-}// end of setupLanguageAndRenderPage()
+}   // end of setupLanguageAndRenderPage()
 
 function setupLanguagePage() {
 	// fetch user lang
@@ -1348,14 +1305,14 @@ function setupLanguagePage() {
 
 	$('html').removeClass(CMS_CONF.LANG_SUPPORT.join(' ')).addClass(lang);
 
-	nn.api('GET', 'lang/' + lang + '.json', null, function(langPack) {
+    nn.api('GET', 'lang/' + lang + '.json', null, function (langPack) {
 		// setup lang pack
 		CMS_CONF.LANG_MAP = langPack['lang-map'];
 		CMS_CONF.SPHERE_MAP = langPack['sphere-map'];
 		CMS_CONF.EFFECT_MAP = langPack['effect-map'];
 		nn.i18n(langPack);
 
-		$('#header a').each(function() {
+        $('#header a').each(function () {
 			if ($(this).data("oriLang") === undefined) {
 				$(this).data("oriLang", $(this).text());
 			}
@@ -1363,14 +1320,14 @@ function setupLanguagePage() {
 			$(this).text(nn._(['header', $(this).data("oriLang")]));
 		});
 
-		$('#login-layer .langkey, #signup-layer .langkey, #forgot-password-layer .langkey').each(function() {
+        $('#login-layer .langkey, #signup-layer .langkey, #forgot-password-layer .langkey').each(function () {
 			if ($(this).data("oriLang") === undefined) {
 				$(this).data("oriLang", $(this).text());
 			}
 			$(this).text(nn._(['signin', 'login-holder', $(this).data("oriLang")]));
 		});
 		var tmpStr = "";
-		$('#login-layer .flangkey, #signup-layer .flangkey, #forgot-password-layer .flangkey').each(function() {
+        $('#login-layer .flangkey, #signup-layer .flangkey, #forgot-password-layer .flangkey').each(function () {
 			// value="E-mail" defvalue="E-mail"
 			if ($(this).data("oriLang") === undefined) {
 				$(this).data("oriLang", $(this).attr("defvalue"));
@@ -1382,29 +1339,20 @@ function setupLanguagePage() {
 		});
 
 	}, 'json');
-}// end of setupLanguageAndRenderPage()
+}   // end of setupLanguageAndRenderPage()
 
-$(function() {
+$(function () {
+    nn.api('GET', CMS_CONF.API('/api/login'), function (user) {
 	var tmpUrl = $.url();
-	if (!$.cookie('user')) {
-		if ("signin.html" != tmpUrl.attr('file')) {
-			location.href = 'signin.html';
-		}
-		setupLanguagePage();
-	} else {
-		nn.api('POST', CMS_CONF.API('/api/login'), {
-			token : $.cookie('user')
-		}, function(user) {
 			if (!user || !user.id) {
 				if ("signin.html" != tmpUrl.attr('file')) {
 					location.href = 'signin.html';
 				}
+            setupLanguagePage();
 			} else {
 				CMS_CONF.USER_URL = $.url();
 				var isStoreLangKey = true;
 				setupLanguageAndRenderPage(user, isStoreLangKey);
 			}
 		});
-		
-	}
 }); 

@@ -3,6 +3,7 @@ var CMS_CONF = {
     // for 9x9.tv: testing, production
     CMS_ENV: 'production',
     IS_DEBUG: true,
+    API_BASE: '',
     API_PACK: {
         '/api/login':                                       '/api/login',
         '/api/s3/attributes':                               '/api/s3/attributes',
@@ -59,7 +60,7 @@ var CMS_CONF = {
                 api = api.replace('{' + k + '}', v);
             });
         }
-        return api;
+        return CMS_CONF.API_BASE + api;
     },
     YOUR_FAVORITE: 11,
     PROGRAM_MAX: 50,
@@ -163,18 +164,22 @@ var CMS_CONF = {
 switch (CMS_CONF.CMS_ENV) {
 case 'development':
     CMS_CONF.IS_DEBUG = true;
+    CMS_CONF.API_BASE = '';
     CMS_CONF.API_PACK = CMS_CONF.FAKE_PACK;
     CMS_CONF.FB_APP_ID = '367878243223232';
     break;
 case 'demonstration':
     CMS_CONF.IS_DEBUG = true;
+    CMS_CONF.API_BASE = '';
     CMS_CONF.API_PACK = CMS_CONF.FAKE_PACK;
     CMS_CONF.FB_APP_ID = '367878243223232';
     break;
 case 'testing':
+    CMS_CONF.API_BASE = 'http://dev.teltel.com:8080';
     CMS_CONF.IS_DEBUG = true;
     break;
 case 'production':
+    CMS_CONF.API_BASE = '';
     CMS_CONF.IS_DEBUG = false;
     break;
 }

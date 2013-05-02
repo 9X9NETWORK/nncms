@@ -107,7 +107,7 @@ $(function () {
                 showSavingOverlay();
                 // save to api
                 if (!$('body').hasClass('has-change')) {
-                    $('#overlay-s').fadeOut(1000, function () {
+                    $('#overlay-s').fadeOut('fast', function () {
                         // redirect
                         $('body').removeClass('has-change');
                         if (!src                                                                                        // from nature action
@@ -179,7 +179,7 @@ $(function () {
                 };
                 $.extend(params, status_params);
                 nn.api('PUT', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), params, function (episode) {
-                    $('#overlay-s').fadeOut(1000, function () {
+                    $('#overlay-s').fadeOut('fast', function () {
                         // redirect
                         $('body').removeClass('has-change');
                         $('#imageUrlOld').val(episode.imageUrl);
@@ -400,7 +400,7 @@ function uploadImage() {
             button_width:               '129',
             button_height:              '29',
             button_text:                '<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>',
-            button_text_style:          '.uploadstyle { color: #777777; font-family: Arial, Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
+            button_text_style:          '.uploadstyle { color: #555555; font-family: Arial, Helvetica; font-size: 15px; text-align: center; } .uploadstyle:hover { color: #999999; }',
             button_text_top_padding:    1,
             button_action:              SWFUpload.BUTTON_ACTION.SELECT_FILE,
             button_cursor:              SWFUpload.CURSOR.HAND,

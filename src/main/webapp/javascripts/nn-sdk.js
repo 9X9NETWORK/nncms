@@ -118,7 +118,7 @@ var nn = { };
 		
 		var localParameter = null;
 		var localCallback = null;
-        var localDataType = null;
+        var localDataType = 'json';
         
 		if (typeof parameter == 'function') {
 			localCallback = parameter;

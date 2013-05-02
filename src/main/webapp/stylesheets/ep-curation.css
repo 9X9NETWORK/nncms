@@ -2467,6 +2467,17 @@ p.auto-height {
     display: block;
 }
 
+#storyboard .storyboard-list ul li p.order {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    width: 94px;
+    margin: 0;
+    color: #999;
+    font: bold 17px Microsoft JhengHei;
+    text-align: center;
+}
+
 #storyboard .storyboard-list ul li p.img {
     position: relative;
     overflow: hidden;
