@@ -4,15 +4,6 @@ $(function() {
 
     var loc = location.href;
 
-    // login go to ccs home
-    nn.api('POST', CMS_CONF.API('/api/login'), {
-        token : $.cookie('user')
-    }, function(user) {
-        if (user || user.id) {
-            location.href = 'index.html';
-        }
-    });
-
     $(document).on('click', '#sign-up', function() {
         $(".msg-error").hide();
         $("#signup-layer").fadeIn(400);

@@ -185,7 +185,7 @@ body.mac #title-func h2 {
     background-color: #fff;
     opacity: 0.5;
     filter: alpha(opacity=50);
-    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 
 
@@ -224,7 +224,7 @@ body.mac #title-func h2 {
 }
 
 #channel-list li .info h3 a:hover {
-    color: #777;
+    color: #999;
 }
 
 #channel-list li .info p {
@@ -461,7 +461,7 @@ body.mac #title-func h2 {
 
 #content-main-wrap form .fminput .fmfield {
     position: relative;
-    color: #777;
+    color: #555;
     font-size: 13px;
 }
 
@@ -644,7 +644,7 @@ body.mac #title-func h2 {
 
 #content-main-wrap form .fminput .fmfield .select.disable .select-txt a {
     background-position: 0 -150px;
-    color: #777;
+    color: #999;
 }
 
 #content-main-wrap form .fminput .fmfield .select.category .select-list {
@@ -841,7 +841,7 @@ body.mac #title-func h2 {
 
 #content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul li:hover {
 	background-color: #e4e4e4;
-	color: #777;
+	color: #999;
 }
 
 #content-main-wrap form .fminput .fmfield .connected .share-item .page-list .page-list-middle a.select-page {

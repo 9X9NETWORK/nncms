@@ -1,4 +1,4 @@
-/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document sumStoryboardInfo rebuildVideoNumber setFormWidth setVideoMeasure setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp switchPublishStatus switchRerunCheckbox truncateFormTitle setFormHeight setTaglistWidth uploadImage FB ellipsisPage */
+/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document sumStoryboardInfo rebuildVideoNumber setFormWidth setVideoMeasure setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp switchPublishStatus switchRerunCheckbox truncateFormTitle setFormHeight setTaglistWidth uploadImage FB ellipsisPage portals */
 /*jslint eqeq: true, nomen: true, plusplus: true, regexp: true, unparam: true, sloppy: true, vars: true */
 nn.initialize();
 nn.debug(CMS_CONF.IS_DEBUG);
@@ -401,7 +401,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                             nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.slice(-11) + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
                                 nn.api('GET', CMS_CONF.API('/api/programs/{programId}/title_cards', {programId: programItem.id}), null, function (title_card) {
                                     //nn.api('GET', CMS_CONF.API('/api/programs/{programId}/pois', {programId: programItem.id}), null, function (pois) {
-                                        pois = null;
+                                        var pois = null;
 										committedCnt += 1;
 										beginTitleCard = null;
 										endTitleCard = null;
@@ -1075,7 +1075,7 @@ function rebuildCrumbAndParam(cid, eid) {
 		cmsCrumb = $.url('http://fake.url.dev.teltel.com/?' + $.cookie('cms-crumb')).param();
 	}
 	// ON PURPOSE by pass no check (GET or function param) for handle error by oneself
-	if ('undefined' === typeof cid) {
+    if (undefined === cid) {
 		cidFromGet = CMS_CONF.USER_URL.param('cid');
 		if (cidFromGet) {
 			cmsCrumb.channelId = cidFromGet;
@@ -1088,7 +1088,7 @@ function rebuildCrumbAndParam(cid, eid) {
 	} else {
 		cmsCrumb.channelId = cid;
 	}
-	if ('undefined' === typeof eid) {
+    if (undefined === eid) {
 		eidFromGet = CMS_CONF.USER_URL.param('id');
 		if (eidFromGet) {
 			cmsCrumb.id = eidFromGet;
@@ -1132,20 +1132,11 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
 		lang = 'en';
 		CMS_CONF.USER_DATA.lang = lang;
 	}
-	if ('en' === lang) {
-		$('#footer-press, #footer-contest').hide();
-	} else {
-		$('#footer-press, #footer-contest').show();
-	}
 	$('html').removeClass(CMS_CONF.LANG_SUPPORT.join(' ')).addClass(lang);
 
     nn.api('GET', 'lang/' + lang + '.json', null, function (langPack) {
 		// setup user profile
 		$('#selected-profile').text(CMS_CONF.USER_DATA.name);
-		$('#profile-mypage').attr('href', '/#!curator=' + CMS_CONF.USER_DATA.profileUrl);
-		if (true == CMS_CONF.USER_DATA.fbUser) {
-			$('#profile-settings').remove();
-		}
 
 		// setup lang pack
 		CMS_CONF.LANG_MAP = langPack['lang-map'];
@@ -1182,30 +1173,10 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
 
 			switch (userUrlFile) {
 				case 'signin.html':
-					// v3.3 login page
-					//alert(CMS_CONF.PAGE_ID);
-					initFacebookJavaScriptSdk();
-					//$('body').addClass('has-change');
-					//$("#content-main").append("<p onclick=\"$.blockUI({ message: $('#fb-connect') });\" >aaaa</p>")
-					/*
-					$.blockUI({
-					message: $('#fb-connect-failed2')
-					});
-					*/
-					//$.blockUI({ message: $('#unsave-prompt') });
-
-					//$('#unsave-prompt p.content').text()
-					//listChannel(CMS_CONF.PAGE_ID);
 					break;
 				case 'portal-set.html':
-					//initFacebookJavaScriptSdk();
-					//listChannel(CMS_CONF.PAGE_ID);
-					//alert('tta');
-					//$('#overlay-s').fade();
 					showProcessingOverlay();
 					portals();
-					//$('#content-wrap').removeClass('hidden');
-					
 					break;
 				case 'index.html':
 					initFacebookJavaScriptSdk();
@@ -1230,7 +1201,6 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
 					break;
 			}
 		} else {
-
 			fadeEpcurateHeaderAndFooter();
             var cmsCrumb = rebuildCrumbAndParam(),
                 fm = document.epcurateForm;
@@ -1282,27 +1252,20 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
 			$(this).val(nn._([CMS_CONF.PAGE_ID, 'epcurate-form', $(this).data('langkey')]));
 		});
 		$('#language').text(langPack['lang-map'][CMS_CONF.USER_DATA.lang]);
+        $('#language-en, #language-zh').parent('li').removeClass('on');
+        $('#language-' + lang).parent('li').addClass('on');
 	}, 'json');
 }   // end of setupLanguageAndRenderPage()
 
 function setupLanguagePage() {
 	// fetch user lang
 	var lang = $.cookie('signLang');
-
-	//initFacebookJavaScriptSdk();
-
 	if (-1 === $.inArray(lang, CMS_CONF.LANG_SUPPORT)) {
 		lang = 'en';
 	}
-	if ('en' === lang) {
-		$('#language').text($('#language-en').text());
-		$('#language-en, #language-zh').removeClass('on');
-	} else {
-		$('#language').text($('#language-zh').text());
-		$('#language-en, #language-zh').removeClass('on');
-	}
-	$('#language-'.lang).addClass('on');
-
+    $('#language').text($('#language-' + lang).text());
+    $('#language-en, #language-zh').parent('li').removeClass('on');
+    $('#language-' + lang).parent('li').addClass('on');
 	$('html').removeClass(CMS_CONF.LANG_SUPPORT.join(' ')).addClass(lang);
 
     nn.api('GET', 'lang/' + lang + '.json', null, function (langPack) {
@@ -1312,47 +1275,54 @@ function setupLanguagePage() {
 		CMS_CONF.EFFECT_MAP = langPack['effect-map'];
 		nn.i18n(langPack);
 
+        if (!$.browser.msie) {
+            if ($('title').data('langkey') === undefined) {
+                $('title').data('langkey', $('title').text());
+            }
+            $('title').text(nn._(['signin', 'html-title', $('title').data('langkey')]));
+        }
         $('#header a').each(function () {
-			if ($(this).data("oriLang") === undefined) {
-				$(this).data("oriLang", $(this).text());
+            if ($(this).data('langkey') === undefined) {
+                $(this).data('langkey', $(this).text());
 			}
-			//alert($(this).data("oriLang"));
-			$(this).text(nn._(['header', $(this).data("oriLang")]));
+            $(this).text(nn._(['header', $(this).data('langkey')]));
 		});
 
         $('#login-layer .langkey, #signup-layer .langkey, #forgot-password-layer .langkey').each(function () {
-			if ($(this).data("oriLang") === undefined) {
-				$(this).data("oriLang", $(this).text());
+            if ($(this).data('langkey') === undefined) {
+                $(this).data('langkey', $(this).text());
 			}
-			$(this).text(nn._(['signin', 'login-holder', $(this).data("oriLang")]));
+            $(this).text(nn._(['signin', 'login-holder', $(this).data('langkey')]));
 		});
-		var tmpStr = "";
+        var tmpStr = '';
         $('#login-layer .flangkey, #signup-layer .flangkey, #forgot-password-layer .flangkey').each(function () {
-			// value="E-mail" defvalue="E-mail"
-			if ($(this).data("oriLang") === undefined) {
-				$(this).data("oriLang", $(this).attr("defvalue"));
+            if ($(this).data('langkey') === undefined) {
+                $(this).data('langkey', $(this).attr('defvalue'));
 			}
-			tmpStr = nn._(['signin', 'login-holder', $(this).data("oriLang")]);
-			$(this).attr("defvalue", tmpStr);
-			$(this).attr("value", tmpStr);
-			//$(this).text(nn._(['signin', 'login-holder', $(this).data("oriLang")]));
+            tmpStr = nn._(['signin', 'login-holder', $(this).data('langkey')]);
+            $(this).attr('defvalue', tmpStr);
+            $(this).attr('value', tmpStr);
 		});
-
 	}, 'json');
-}   // end of setupLanguageAndRenderPage()
+}   // end of setupLanguagePage()
 
 $(function () {
     nn.api('GET', CMS_CONF.API('/api/login'), function (user) {
 	var tmpUrl = $.url();
 			if (!user || !user.id) {
-				if ("signin.html" != tmpUrl.attr('file')) {
+            if ('signin.html' != tmpUrl.attr('file')) {
 					location.href = 'signin.html';
-				}
+            } else {
             setupLanguagePage();
+            }
+        } else {
+            if ('signin.html' == tmpUrl.attr('file')) {
+                location.href = 'index.html';
 			} else {
 				CMS_CONF.USER_URL = $.url();
 				var isStoreLangKey = true;
 				setupLanguageAndRenderPage(user, isStoreLangKey);
 			}
+        }
 		});
 }); 

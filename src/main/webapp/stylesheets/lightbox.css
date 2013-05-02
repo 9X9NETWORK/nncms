@@ -211,7 +211,7 @@
 .lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield {
     position: relative;
     overflow: auto;
-    color: #777;
+    color: #555;
     font-size: 13px;
 }
 
@@ -530,7 +530,7 @@
 }
 
 .setup-notice h5 {
-    color: #777;
+    color: #555;
     font-weight: bold;
     font-size: 15px;
     line-height: 17px;

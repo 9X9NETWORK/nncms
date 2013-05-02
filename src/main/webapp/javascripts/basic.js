@@ -468,14 +468,14 @@ $(function () {
     // header link
     $('#logo').click(function () {
         if (!$('body').hasClass('has-change')) {
-            location.href = '/';
+            location.href = '../';
             return false;
         }
     });
     $('#profile-logout').click(function () {
         if (!$('body').hasClass('has-change')) {
             nn.api('DELETE', CMS_CONF.API('/api/login'), null, function (data) {
-                location.href = './';
+                location.href = 'signin.html';
             });
             return false;
         }
@@ -483,9 +483,7 @@ $(function () {
 
     // change language
     $('#language-change li a').click(function () {
-    	//alert($(this).data('page') + "**" + $(this).data('meta') + "***" +$.cookie('signLang'));
-    	
-    	if("signin" === $(this).data('page')){
+        if ('signin' === $(this).data('page')) {
     		var sign_lang = $(this).data('meta');
 		    if (-1 === $.inArray(sign_lang, CMS_CONF.LANG_SUPPORT)) {
 		        sign_lang = 'en';
@@ -494,9 +492,7 @@ $(function () {
     		setupLanguagePage();
             $(this).parents('.select-list').slideDown();
             return false;
-    	}
-    	else
-    	{
+        } else {
 	        if (null !== CMS_CONF.USER_DATA && !$('body').hasClass('has-change')) {
 	            nn.api('PUT', CMS_CONF.API('/api/users/{userId}', {userId: CMS_CONF.USER_DATA.id}), {lang: $(this).data('meta')}, function (user) {
 	                var isStoreLangKey = false;

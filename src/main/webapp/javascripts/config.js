@@ -1,7 +1,7 @@
 var CMS_CONF = {
     // for DS.com: development, demonstration
     // for 9x9.tv: testing, production
-    CMS_ENV: 'production',
+    CMS_ENV: 'development',
     IS_DEBUG: true,
     API_BASE: '',
     API_PACK: {

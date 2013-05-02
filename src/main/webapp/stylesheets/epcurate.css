@@ -104,7 +104,7 @@
 #content-wrap form .fminput .fmfield {
     position: relative;
     margin: 0 0 3px 0;
-    color: #777;
+    color: #555;
     font-size: 13px;
 }
 
@@ -405,7 +405,7 @@
 
 #content-wrap form .disable label,
 #content-wrap form .disable label acronym {
-    color: #777;
+    color: #999;
 }
 
 /* =text
@@ -578,7 +578,7 @@
 #content-wrap form .fminput .fmfield .img-upload-func .notice {
     margin: 8px 0;
     padding: 0;
-    color: #777;
+    color: #555;
 }
 
 #content-wrap form .fminput .fmfield .img-upload-func .highlight {
@@ -705,7 +705,7 @@
     height: 30px;
     padding-right: 4px;
     background: url(../images/bg_input.png) repeat-x 0 -60px;
-    color: #777;
+    color: #555;
     text-decoration: none;
 }
 
@@ -746,7 +746,7 @@
 
 #content-wrap form .fminput .fmfield .select .select-list li:hover {
 	background-color: #e4e4e4;
-	color: #777;
+	color: #999;
 }
 
 #content-wrap form .fminput .fmfield .select .select-list li:first-child {
@@ -828,7 +828,7 @@
 
 #content-wrap form .form-btn .wrap p.back a:hover,
 #content-wrap form .form-btn .wrap p.next a:hover {
-	color: #777;
+	color: #999;
 }
 
 #content-wrap form .form-btn .btns span input {

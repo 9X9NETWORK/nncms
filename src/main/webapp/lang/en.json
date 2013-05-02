@@ -1,31 +1,17 @@
 {
     "header": {
-        "Home":                                                                                                                                 "Home",
-        "Guide":                                                                                                                                "Guide",
-        "Browse":                                                                                                                               "Browse",
-        "My page":                                                                                                                              "My page",
-        "Studio":                                                                                                                               "CMS",
-        "Settings":                                                                                                                             "Settings",
-        "Log out":                                                                                                                              "Log out"
+        "Log out":                                                                                                                              "Log out",
+        "9x9.tv Official Web":                                                                                                                  "9x9.tv Official Web",
+        "Watch 9x9.tv on the Web":                                                                                                              "Watch 9x9.tv on the Web"
     },
     "studio-nav": {
-        "Studio":                                                                                                                               "<span class=\"cms-icon\">CMS</span><p class=\"sub-title\">Content Management System</p>",
+        "CMS":                                                                                                                                  "<span class=\"cms-icon\">CMS</span><p class=\"sub-title\">Content Management System</p>",
         "My Channels":                                                                                                                          "My Channels",
         "My Portal":                                                                                                                          "My Portal",
-        "Studio Setup":                                                                                                                         "<img src=\"images/icon_studio_setup.png\" alt=\"\" />CMS Setup",
+        "CMS Setup":                                                                                                                            "<img src=\"images/icon_studio_setup.png\" alt=\"\" />CMS Setup",
         "Connection is inactive, click to restart it.":                                                                                         "Connection is inactive, click to restart it."
     },
     "footer": {
-        "About Us":                                                                                                                             "About Us",
-        "About us":                                                                                                                             "About us",
-        "Help":                                                                                                                                 "Help",
-        "Feedback":                                                                                                                             "Feedback",
-        "Terms & Policy":                                                                                                                       "Terms & Policy",
-        "Contact us":                                                                                                                           "Contact us",
-        "Partners":                                                                                                                             "Partners",
-        "Curators":                                                                                                                             "Curators",
-        "Press":                                                                                                                                "Press",
-        "Curation Contest":                                                                                                                     "Curation Contest",
         "Language":                                                                                                                             "Language"
     },
     "overlay": {
@@ -62,13 +48,13 @@
             "This episode has been saved as an unpublished draft.":                                                                             "This episode has been saved as an unpublished draft."
         },
         "channel-tutorial": {
-            "<img src=\"images/text_collect.png\" alt=\"\" />":                                                                                 "<img src=\"images/text_collect.png\" alt=\"\" />",
-            "Studio is the management center for your 9x9.tv list-form channels!":                                                              "Studio is the management center for your 9x9.tv list-form channels!",
+            "Collect and Curate!":                                                                                                              "Collect and Curate!",
+            "CMS is the management center for your 9x9.tv list-form channels!":                                                                 "CMS is the management center for your 9x9.tv list-form channels!",
             "Create a<br />new channel":                                                                                                        "Create a<br />new channel",
             "Not right now, thanks!":                                                                                                           "Not right now, thanks!"
         },
         "facebook": {
-            "{images/text_studio_setup.png}":                                                                                                   "<img src=\"images/text_studio_setup.png\" alt=\"\" />",
+            "CMS Setup":                                                                                                                        "CMS Setup",
             "Connect to":                                                                                                                       "Connect to",
             "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.":                                     "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.",
             "Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.":  "Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.",
@@ -112,26 +98,66 @@
         "drop":                                                                                                                                 "Drop"
     },
     "signin": {
+        "html-title": {
+            "9x9.tv - SignIn":                                                                                                                  "9x9.tv - SignIn"
+        },
         "login-holder": {
+            "Collect and Curate!":                                                                                                              "Collect and Curate!",
+            "CMS is the management center for your 9x9.tv list-form channels!":                                                                 "CMS is the management center for your 9x9.tv list-form channels!",
+            "Sign In":                                                                                                                          "Sign In",
+            "Sign in with Facebook":                                                                                                            "Sign in with Facebook",
             "Sign In with your E-mail and password": "Sign In with your E-mail and password",
-            "Sign In": "Sign In"
+            "E-mail":                                                                                                                           "E-mail",
+            "Password":                                                                                                                         "Password",
+            "Forgot password?":                                                                                                                 "Forgot password?",
+            "Need an account?":                                                                                                                 "Need an account?", 
+            "Sign up Now!":                                                                                                                     "Sign up Now!",
+            "Sign Up":                                                                                                                          "Sign Up",
+            "Repeat Password":                                                                                                                  "Repeat Password",
+            "This email has been used.":                                                                                                        "This email has been used.",
+            "Two passwords don't match, please retype.":                                                                                        "Two passwords don't match, please retype.",
+            "I have read and accepted the User Agreement and Privacy Policy":                                                                   "I have read and accepted the User Agreement and Privacy Policy",
+            "User Name":                                                                                                                        "User Name",
+            "Create a unique user name in 9x9 which composed of 6-16 English letters ,numbers or low line.":                                    "Create a unique user name in 9x9 which composed of 6-16 English letters ,numbers or low line.",
+            "Only letters, numbers or low line are allowed.":                                                                                   "Only letters, numbers or low line are allowed.",
+            "Please input 6-16 characters in username.":                                                                                        "Please input 6-16 characters in username.",
+            "Cancel":                                                                                                                           "Cancel",
+            "Create My Account":                                                                                                                "Create My Account",
+            "Forgot Password":                                                                                                                  "Forgot Password",
+            "Enter your email address and we`ll send you instructions.":                                                                        "Enter your email address and we`ll send you instructions.",
+            "Reset":                                                                                                                            "Reset",
+            "Back to Sign In":                                                                                                                  "Back to Sign In",
+            "Success!":                                                                                                                         "Success!",
+            "You should receive an email shortly.":                                                                                             "You should receive an email shortly.",
+            "If you still need assistance, please":                                                                                             "If you still need assistance, please",
+            "contact us.":                                                                                                                      "contact us."
         },
 		"errMsg": {
-			"Error : USER_INVALID" : "Invalid E-mail, please retry."
+            "Email format error!":                                                                                                              "Email format error!",
+            "Please input password!":                                                                                                           "Please input password!",
+            "Email and password do not match, please try again.":                                                                               "Email and password do not match, please try again.",
+            "Please fill your data!":                                                                                                           "Please fill your data!",
+            "Please click agree!":                                                                                                              "Please click agree!",
+            "Passwrod not match!":                                                                                                              "Passwrod not match!",
+            "Passwrod Enter 8-16 English letters ,numbers or low line!":                                                                        "Passwrod Enter 8-16 English letters ,numbers or low line!",
+            "Invalid E-mail, please retry.":                                                                                                    "Invalid E-mail, please retry.",
+            "This email has been used.":                                                                                                        "This email has been used.",
+            "Please input 6-16 characters in password.":                                                                                        "Please input 6-16 characters in password.",
+            "USER_INVALID":                                                                                                                     "Invalid E-mail, please retry.",
+            "Please accept the agreements below.":                                                                                              "Please accept the agreements below.",
+            "The two passwords you entered do not match.":                                                                                      "The two passwords you entered do not match.",
+            "Please input 6 to 16 characters in username.":                                                                                     "Please input 6 to 16 characters in username.",
+            "Only letters, numbers or low line are allowed.":                                                                                   " letters, numbers or low line are allowed."
 		}
-        
-        
-        
-        
-        
     },
      "portal-set": {
         "html-title": {
-            "9x9.tv - My Channels":                                                                                                             "9x9.tv - 我的頻道"
+            "9x9.tv - My Portal":                                                                                                               "9x9.tv - My Portal"
         },
 	    "func-nav": {
 	        "Portal": "Portal",
 	        "Channel Store": "Channel Store",
+            "My Portal":                                                                                                                        "My Portal",
 	        "Brand": "Brand"
 	    },
 	    "sets-list": {
@@ -141,20 +167,21 @@
 	    },
         "title-func": {
             "My Portal": "My Portal",
-            "Reorder channels":                                                                                                                 "排序頻道",
-            "Save order":                                                                                                                       "儲存排序"
+            "Portal":                                                                                                                           "Portal",
+            "Reorder channels":                                                                                                                 "Reorder channels",
+            "Save order":                                                                                                                       "Save order"
         },
         "channel-list": {
-            "Episodes":                                                                                                                         "節目",
-            "Followers":                                                                                                                        "粉絲",
-            "Views":                                                                                                                            "觀看次數",
-            "Update:":                                                                                                                          "更新:",
-            "Curate a new episode":                                                                                                             "策展新節目",
-            "Episode list":                                                                                                                     "節目列表",
-            "Channel settings":                                                                                                                 "頻道設定",
-            "Delete this channel":                                                                                                              "刪除頻道",
-            "No Episodes":                                                                                                                      "無節目",
-            "'s Favorite":                                                                                                                      "的最愛"
+            "Episodes":                                                                                                                         "Episodes",
+            "Followers":                                                                                                                        "Followers",
+            "Views":                                                                                                                            "Views",
+            "Update:":                                                                                                                          "Update:",
+            "Curate a new episode":                                                                                                             "Curate a new episode",
+            "Episode list":                                                                                                                     "Episode list",
+            "Channel settings":                                                                                                                 "Channel settings",
+            "Delete this channel":                                                                                                              "Delete this channel",
+            "No Episodes":                                                                                                                      "No Episodes",
+            "'s Favorite":                                                                                                                      "'s Favorite"
         }
     },    
     "index": {
@@ -225,7 +252,7 @@
             "Timeline":                                                                                                                         "Timeline",
             "Page":                                                                                                                             "Page",
             "Select facebook pages":                                                                                                            "Select facebook pages",
-            "If fail to auto share to Facebook, please go to Studio Setup to re-connect to Facebook and try again.":                            "If fail to auto share to Facebook, please go to Studio Setup to re-connect to Facebook and try again.",
+            "If fail to auto share to Facebook, please go to CMS Setup to re-connect to Facebook and try again.":                               "If fail to auto share to Facebook, please go to CMS Setup to re-connect to Facebook and try again.",
             "Restart connection":                                                                                                               "Restart connection",
             "Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.":  "Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.",
             "Please fill in all required fields.":                                                                                              "Please fill in all required fields.",

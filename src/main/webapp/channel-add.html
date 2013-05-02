@@ -35,7 +35,7 @@
 
 <!--============================== header start ==============================-->
 <div id="header">
-  <p id="logo"></p>
+  <a href="../" target="_blank" id="logo"></a>
   <ul id="nav">
     <li id="home"><span><a href="../" target="_blank">9x9.tv Official Web</a></span></li>
     <li id="tv"><span><a href="../tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
@@ -43,7 +43,7 @@
       <p id="btn-profile"></p>
       <p id="selected-profile">Guest</p>
       <ul id="profile-dropdown" class="dropdown">
-        <li><a id="profile-logout" href="/api/login">Log out</a></li>
+        <li><a id="profile-logout" href="signin.html">Log out</a></li>
       </ul>
     </li>
   </ul>
@@ -52,12 +52,12 @@
 
 <div id="studio-nav">
 <div class="studio-nav-wrap">
-<h3><a href="./">Studio</a></h3>
+<h3><a href="./">CMS</a></h3>
 <ul>
 <li class="on"><span><a href="./">My Channels</a></span></li>
 </ul>
 <div class="studio-setup">
-<p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="#"><img src="images/icon_studio_setup.png" alt="" />Studio Setup</a></span></span></p>
+<p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="#"><img src="images/icon_studio_setup.png" alt="" />CMS Setup</a></span></span></p>
 <div class="reconnect-notice hide">
 <img src="images/icon_notification.png" alt="" />
 <p class="notice-left"><span class="notice-right"><span class="notice-middle langkey">Connection is inactive, click to restart it.</span></span></p>
@@ -192,7 +192,7 @@
 </div>
 </div>
 </div>
-<a id="fb-reconnect" href="javascript:void(0);"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'If fail to auto share to Facebook, please go to Studio Setup to re-connect to Facebook and try again.'])}</span></span></span></a>
+<a id="fb-reconnect" href="javascript:void(0);"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'If fail to auto share to Facebook, please go to CMS Setup to re-connect to Facebook and try again.'])}</span></span></span></a>
 </div>
 </div>
 <div class="reconnected hide">
@@ -250,10 +250,10 @@
   <span>© 2013 9x9.tv. All rights reserved.</span>
   <ul id="footer-list">
     <li id="language-change">
-      <p class="select-txt"><a href="javascript:void(0);" id="language">Language</a></p>
+      <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
       <p class="select-btn"></p>
       <ul class="select-list">
-        <li><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+        <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
         <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
       </ul>
     </li>
@@ -294,7 +294,7 @@
 <div class="overlay-container">
 <div class="overlay-wrap fb-connect">
 <a href="#" class="btn-close">Close</a>
-<h4>{images/text_studio_setup.png}</h4>
+<h4 class="cms-setup">CMS Setup</h4>
 <p class="fb-connect">
 <span class="content">Connect to</span>
 <img src="images/icon_fb.png" alt="facebook" class="icon" />
@@ -310,7 +310,7 @@
 <div class="overlay-container">
 <div class="overlay-wrap restart-connect">
 <a href="#" class="btn-close">Close</a>
-<h4>{images/text_studio_setup.png}</h4>
+<h4 class="cms-setup">CMS Setup</h4>
 <div class="reconnect-func">
 <span class="content">Connect to</span>
 <img src="images/icon_fb.png" alt="facebook" class="icon" />
@@ -326,7 +326,7 @@
 <div class="overlay-container">
 <div class="overlay-wrap connect-fail">
 <a href="#" class="btn-close">Close</a>
-<h4>{images/text_studio_setup.png}</h4>
+<h4 class="cms-setup">CMS Setup</h4>
 <h5>Can not connect to Facebook correctly!</h5>
 <p class="content">Please try again and make sure you agree on all permissions.</p>
 <div class="overlay-btn">
@@ -340,7 +340,7 @@
 <div class="overlay-container">
 <div class="overlay-wrap disconnect-notice">
 <a href="#" class="btn-close">Close</a>
-<h4>{images/text_studio_setup.png}</h4>
+<h4 class="cms-setup">CMS Setup</h4>
 <h5>Account disconnected!</h5>
 <p class="content">{If you want to enable auto sharing again, please:}</p>
 <div class="overlay-btn">
@@ -354,7 +354,7 @@
 <div class="overlay-container">
 <div class="overlay-wrap disconnect">
 <a href="#" class="btn-close">Close</a>
-<h4>{images/text_studio_setup.png}</h4>
+<h4 class="cms-setup">CMS Setup</h4>
 <p class="content">Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?</p>
 <div class="overlay-btn">
 <p class="btns btn-disconnect"><span><a href="#">Disconnect</a></span></p>

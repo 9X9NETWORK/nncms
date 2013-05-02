@@ -1,35 +1,17 @@
 {
     "header": {
-        "Home":                                                                                                                                 "首頁",
-        "Guide":                                                                                                                                "頻道表",
-        "Browse":                                                                                                                               "探索",
-        "My page":                                                                                                                              "我的頁面",
-        "Studio":                                                                                                                               "後台管理系統",
-        "Settings":                                                                                                                             "設定",
         "Log out":                                                                                                                              "登出",
-        
-        "9x9.tv Official Web" : "9x9.tv官方網站",
-        "Watch 9x9.tv on the Web" : "9x9.tv應用程式"
-        
+        "9x9.tv Official Web":                                                                                                                  "9x9.tv官方網站",
+        "Watch 9x9.tv on the Web":                                                                                                              "9x9.tv應用程式"
     },
     "studio-nav": {
-        "Studio":                                                                                                                               "<span class=\"cms-icon\">後台管理系統</span>",
+        "CMS":                                                                                                                                  "<span class=\"cms-icon\">後台管理系統</span>",
         "My Channels":                                                                                                                          "我的頻道",
         "My Portal":                                                                                                                          "我的入口",
-        "Studio Setup":                                                                                                                         "<img src=\"images/icon_studio_setup.png\" alt=\"\" />管理系統設置",
+        "CMS Setup":                                                                                                                            "<img src=\"images/icon_studio_setup.png\" alt=\"\" />管理系統設置",
         "Connection is inactive, click to restart it.":                                                                                         "連結授權已失效，請點此重啟連結。"
     },
     "footer": {
-        "About Us":                                                                                                                             "關於我們",
-        "About us":                                                                                                                             "關於我們",
-        "Help":                                                                                                                                 "使用說明",
-        "Feedback":                                                                                                                             "問題回報",
-        "Terms & Policy":                                                                                                                       "政策條款",
-        "Contact us":                                                                                                                           "聯繫我們",
-        "Partners":                                                                                                                             "合作夥伴",
-        "Curators":                                                                                                                             "創建頻道",
-        "Press":                                                                                                                                "活動記錄",
-        "Curation Contest":                                                                                                                     "頻道策展大賽",
         "Language":                                                                                                                             "語言"
     },
     "overlay": {
@@ -46,7 +28,7 @@
             "Invalid episode ID, please try again.":                                                                                            "節目ID有誤，請重試。",
             "Invalid channel ID and episode ID, please try again.":                                                                             "頻道或節目ID有誤，請重試。",
             "The favorites channel can not be edited.":                                                                                         "您無法編輯此頻道。",
-            "Title text can't be empty!":                                                                                                       "字卡內文不可空白。",
+            "Title text can't be empty!":                                                                                                       "字卡內文不可空白！",
             "There must be at least one video in this episode.":                                                                                "請至少加入一部影片。",
             "Please curate at least one valid video.":                                                                                          "請加入至少一個有效的影片。",
             "You have reached the maximum amount of 50 videos.":                                                                                "您加入的影片已達50個上限。"
@@ -66,13 +48,13 @@
             "This episode has been saved as an unpublished draft.":                                                                             "節目已儲存為未發佈的草稿。"
         },
         "channel-tutorial": {
-            "<img src=\"images/text_collect.png\" alt=\"\" />":                                                                                 "<img src=\"images/text_collect_zh.png\" alt=\"\" />",
-            "Studio is the management center for your 9x9.tv list-form channels!":                                                              "編輯台是您策展9x9.tv頻道的管理中心！",
+            "Collect and Curate!":                                                                                                              "蒐集影片 策展頻道！",
+            "CMS is the management center for your 9x9.tv list-form channels!":                                                                 "後台管理系統是您策展9x9.tv頻道的管理中心！",
             "Create a<br />new channel":                                                                                                        "創建<br />新頻道",
             "Not right now, thanks!":                                                                                                           "現在不要，謝謝！"
         },
         "facebook": {
-            "{images/text_studio_setup.png}":                                                                                                   "<img src=\"images/text_studio_setup_zh.png\" alt=\"\" />",
+            "CMS Setup":                                                                                                                        "管理系統設置",
             "Connect to":                                                                                                                       "連結帳號",
             "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.":                                     "連結帳號後，您可至頻道設定頁面為每個頻道設置是否自動分享至Facebook。",
             "Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.":  "自動分享功能已經停用！您的連結帳號授權已失效，請點擊重啟連結狀態。",
@@ -116,64 +98,61 @@
         "drop":                                                                                                                                 "投擲"
     },
     "signin": {
+        "html-title": {
+            "9x9.tv - SignIn":                                                                                                                  "9x9.tv - 登入"
+        },
         "login-holder": {
-            "Collect and Curate!"	:	"蒐集影片 策展頻道！",
-			"CMS is the management center for your 9x9.tv list-form channels!"	:	"後台管理系統是您策展9x9.tv頻道的管理中心！",
-			"Sign In"	:	"登入",
-			"Sign in with Facebook"	:	"使用Facebook登入",
-			"Sign In with your E-mail and password"	:	"輸入信箱與密碼登入",
-			"E-mail"	:	"信箱",
-			"Password"	:	"密碼",
-			"Forgot password?"	:	"忘記密碼",
-			"Need an account?"	:	"還沒有帳號嗎? ", 
-			"Sign up Now!":"馬上註冊!",
-			"Sign Up"	:	"註冊",
-			"Repeat Password"	:	"再次輸入密碼",
-			"This email has been used."	:	"此信箱已被使用",
-			"Two passwords don't match, please retype."	:	"輸入密碼不一致，請重新輸入",
-			"I have read and accepted the User Agreement and Privacy Policy"	:	"我已讀完並同意遵守隱私權政策與使用條款",
-			"User Name"	:	"用戶名稱",
-			"Create a unique user name in 9x9 which composed of 6-16 English letters ,numbers or low line."	:	"用戶名稱請輸入6-16個字元，只能使用中英文、數字和底線",
-			"Only letters, numbers or low line are allowed."	:	"用戶名稱只能使用中英文、數字或底線",
-			"Please input 6-16 characters in username."	:	"請在用戶名稱輸入6-16範圍的字元",
-			"Cancel"	:	"取消",
-			"Create My Account"	:	"送出",
-			
-			"Forgot Password":"忘記密碼",
-			"Enter your email address and we`ll send you instructions.":"系統將會發送信件到您信箱，並導引您完成密碼設定。",
-			"Reset":"送出",
-			"Back to Sign In":"回到登入頁",
-			"Success!":"完成!",
-			"You should receive an email shortly.":"請收信前完成密碼重新設定。!",
-			"If you still need assistance, please":"如果你還需要協助，請!",
-			"contact us.":"連絡我們"
-			
-			
-			  
+            "Collect and Curate!":                                                                                                              "蒐集影片 策展頻道！",
+            "CMS is the management center for your 9x9.tv list-form channels!":                                                                 "後台管理系統是您策展9x9.tv頻道的管理中心！",
+            "Sign In":                                                                                                                          "登入",
+            "Sign in with Facebook":                                                                                                            "使用Facebook登入",
+            "Sign In with your E-mail and password":                                                                                            "輸入信箱與密碼登入",
+            "E-mail":                                                                                                                           "信箱",
+            "Password":                                                                                                                         "密碼",
+            "Forgot password?":                                                                                                                 "忘記密碼？",
+            "Need an account?":                                                                                                                 "還沒有帳號嗎？", 
+            "Sign up Now!":                                                                                                                     "馬上註冊！",
+            "Sign Up":                                                                                                                          "註冊",
+            "Repeat Password":                                                                                                                  "再次輸入密碼",
+            "This email has been used.":                                                                                                        "此信箱已被使用。",
+            "Two passwords don't match, please retype.":                                                                                        "輸入密碼不一致，請重新輸入。",
+            "I have read and accepted the User Agreement and Privacy Policy":                                                                   "我已讀完並同意遵守隱私權政策與使用條款",
+            "User Name":                                                                                                                        "用戶名稱",
+            "Create a unique user name in 9x9 which composed of 6-16 English letters ,numbers or low line.":                                    "用戶名稱請輸入6-16個字元，只能使用中英文、數字和底線。",
+            "Only letters, numbers or low line are allowed.":                                                                                   "用戶名稱只能使用中英文、數字或底線。",
+            "Please input 6-16 characters in username.":                                                                                        "請在用戶名稱輸入6-16範圍的字元。",
+            "Cancel":                                                                                                                           "取消",
+            "Create My Account":                                                                                                                "送出",
+            "Forgot Password":                                                                                                                  "忘記密碼",
+            "Enter your email address and we`ll send you instructions.":                                                                        "系統將會發送信件到您信箱，並導引您完成密碼設定。",
+            "Reset":                                                                                                                            "送出",
+            "Back to Sign In":                                                                                                                  "回到登入頁",
+            "Success!":                                                                                                                         "完成！",
+            "You should receive an email shortly.":                                                                                             "請收信完成密碼重新設定。",
+            "If you still need assistance, please":                                                                                             "如果你還需要協助，請",
+            "contact us.":                                                                                                                      "連絡我們。"
 		},
 		"errMsg": {
-			"Email format error!" : "電子郵件格式錯誤!",
-			"Please input password!" : "請輸入密碼!",
-			"Email and password do not match, please try again." : "信箱或密碼錯誤，請再次輸入!",
-			"Please fill your data!" : "請確實填入資料!",
-			"Please click agree !" : "你必需同意使用條款!",
-			"Passwrod not match!" : "密碼輸入必需相同!",
-			"Passwrod Enter 8-16 English letters ,numbers or low line!" : "密碼長度限制在6-16個字元內，組成字元沒有限制!",
-			"Invalid E-mail, please retry." : "無此帳號，請重新輸入",
-			"This email has been used." : "此信箱已被使用",
-			"Please input 6-16 characters in password." : "密碼長度限制為 6-16 個字元",
-			"USER_INVALID" : "無此帳號，請重新輸入",
-			"Please accept the agreements below." : "請接受以下的隱私權政策與使用條款。",
-			"The two passwords you entered do not match." : "輸入密碼不一致，請重新輸入。",
-			"Please input 6 to 16 characters in username." : "用戶名稱限制長度為6-16個字元",
-			"Only letters, numbers or low line are allowed." : "用戶名稱請輸入中英文、數字或底線。"
-			
-		
+            "Email format error!":                                                                                                              "電子郵件格式錯誤！",
+            "Please input password!":                                                                                                           "請輸入密碼！",
+            "Email and password do not match, please try again.":                                                                               "信箱或密碼錯誤，請再次輸入。",
+            "Please fill your data!":                                                                                                           "請確實填入資料！",
+            "Please click agree!":                                                                                                              "你必需同意使用條款！",
+            "Passwrod not match!":                                                                                                              "密碼輸入必需相同！",
+            "Passwrod Enter 8-16 English letters ,numbers or low line!":                                                                        "密碼長度限制在6-16個字元內，組成字元沒有限制！",
+            "Invalid E-mail, please retry.":                                                                                                    "無此帳號，請重新輸入。",
+            "This email has been used.":                                                                                                        "此信箱已被使用。",
+            "Please input 6-16 characters in password.":                                                                                        "密碼長度限制為 6-16 個字元。",
+            "USER_INVALID":                                                                                                                     "無此帳號，請重新輸入。",
+            "Please accept the agreements below.":                                                                                              "請接受以下的隱私權政策與使用條款。",
+            "The two passwords you entered do not match.":                                                                                      "輸入密碼不一致，請重新輸入。",
+            "Please input 6 to 16 characters in username.":                                                                                     "用戶名稱限制長度為6-16個字元。",
+            "Only letters, numbers or low line are allowed.":                                                                                   "用戶名稱請輸入中英文、數字或底線。"
 		}
     },
      "portal-set": {
         "html-title": {
-            "9x9.tv - My Channels":                                                                                                             "9x9.tv - 我的頻道"
+            "9x9.tv - My Portal":                                                                                                               "9x9.tv - 我的入口"
         },
 	    "func-nav": {
 	        "Portal": "入口",
@@ -251,7 +230,7 @@
             "Upload":                                                                                                                           "上傳",
             "Uploading...":                                                                                                                     "上傳中...",
             "Better results with 300x300 or higher resolution image":                                                                           "建議圖片解析度為300x300或以上",
-            "Please upload jpeg, png, or gif files.":                                                                                           "請上傳jpeg, png或gif檔",
+            "Please upload jpeg, png, or gif files.":                                                                                           "請上傳jpeg, png或gif檔。",
             "Description":                                                                                                                      "介紹",
             "Best within 70 characters":                                                                                                        "建議70字以內",
             "Channel language":                                                                                                                 "頻道語言",
@@ -273,10 +252,10 @@
             "Timeline":                                                                                                                         "動態時報",
             "Page":                                                                                                                             "粉絲專頁",
             "Select facebook pages":                                                                                                            "選擇facebook粉絲專頁",
-            "If fail to auto share to Facebook, please go to Studio Setup to re-connect to Facebook and try again.":                            "若無法自動分享至Facebook，請至編輯台設置再度連結Facebook帳號，並再試一次。",
+            "If fail to auto share to Facebook, please go to CMS Setup to re-connect to Facebook and try again.":                               "若無法自動分享至Facebook，請至後台管理系統設置再度連結Facebook帳號，並再試一次。",
             "Restart connection":                                                                                                               "重啟連結",
             "Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.":  "自動分享功能已經停用！您的連結帳號授權已失效，請點擊重啟連結狀態。",
-            "Please fill in all required fields.":                                                                                              "請輸入必填項目",
+            "Please fill in all required fields.":                                                                                              "請輸入必填項目。",
             "Cancel":                                                                                                                           "取消",
             "Create":                                                                                                                           "完成",
             "Save":                                                                                                                             "儲存"
@@ -333,20 +312,20 @@
             "Upload":                                                                                                                           "上傳",
             "Uploading...":                                                                                                                     "上傳中...",
             "Better results with 720x405 or higher resolution image":                                                                           "建議圖片解析度為720x405或以上",
-            "Please upload jpeg, png, or gif files.":                                                                                           "請上傳jpeg, png或gif檔",
+            "Please upload jpeg, png, or gif files.":                                                                                           "請上傳jpeg, png或gif檔。",
             "Publish status":                                                                                                                   "發佈狀態",
             "Draft":                                                                                                                            "草稿",
             "Publish Now":                                                                                                                      "立即發佈",
             "Published":                                                                                                                        "發佈",
             "Scheduled to publish":                                                                                                             "排程發佈",
-            "This episode will be published at<br />the scheduled time.":                                                                       "此節目將於排程時間<br />自動發佈",
+            "This episode will be published at<br />the scheduled time.":                                                                       "此節目將於排程時間<br />自動發佈。",
             "Scheduled to rerun":                                                                                                               "排程重播",
-            "This episode will be published again as the latest episode at the scheduled time.":                                                "此節目將於排程時間自動<br />再度發佈為最新節目",
+            "This episode will be published again as the latest episode at the scheduled time.":                                                "此節目將於排程時間自動<br />再度發佈為最新節目。",
             "Hour":                                                                                                                             "時間",
             "< Back to Curation":                                                                                                               "< 回策展編輯",
             "Leave":                                                                                                                            "離開",
             "Save":                                                                                                                             "儲存",
-            "Please fill in all required fields.":                                                                                              "請輸入必填項目"
+            "Please fill in all required fields.":                                                                                              "請輸入必填項目。"
         }
     },
     "epcurate-curation": {
@@ -372,7 +351,7 @@
         },
         "add-video": {
             "Paste YouTube video URLs to add (separate with different lines)":                                                                  "輸入YouTube影片連結 (用換行區隔不同連結)",
-            "Paste YouTube video URLs to add.":                                                                                                 "請先輸入YouTube影片連結",
+            "Paste YouTube video URLs to add.":                                                                                                 "請先輸入YouTube影片連結。",
             "You have reached the maximum amount of 50 videos.":                                                                                "您加入的影片已達50個上限。",
             "Invalid URL, please try again.":                                                                                                   "連結有誤，請重新嘗試。",
             "Invalid URL, please try again!":                                                                                                   "連結有誤，請重新嘗試！",
@@ -418,7 +397,7 @@
             "Separate with commas":                                                                                                             "用逗號分隔",
             "Cancel":                                                                                                                           "取消",
             "Next":                                                                                                                             "下一步",
-            "Please fill in all required fields.":                                                                                              "請輸入必填項目",
+            "Please fill in all required fields.":                                                                                              "請輸入必填項目。",
             "Start time or end time is not in the video playback time:":                                                                        "開始或結束時間不在影片實際播放的區間內:",
             "Duration overlaps another POI's duration:":                                                                                        "設定時間與另一個互動時間點重疊:",
             "Zoom in":                                                                                                                          "放大檢視",
@@ -459,8 +438,8 @@
             "Image":                                                                                                                            "圖片",
             "Upload":                                                                                                                           "上傳",
             "Uploading...":                                                                                                                     "上傳中...",
-            "Better results with 720x405 image.":                                                                                               "建議圖片解析度為720x405或以上",
-            "Please upload jpeg, png, or gif files.":                                                                                           "請上傳jpeg, png或gif檔",
+            "Better results with 720x405 image.":                                                                                               "建議圖片解析度為720x405或以上。",
+            "Please upload jpeg, png, or gif files.":                                                                                           "請上傳jpeg, png或gif檔。",
             "Duration":                                                                                                                         "字卡長度",
             "Invalid duration, please try again.":                                                                                              "長度設定有誤，請重試。",
             "Cancel":                                                                                                                           "取消",
