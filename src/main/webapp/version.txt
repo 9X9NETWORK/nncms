@@ -1,3 +1,19 @@
+版本: 976
+作者: chihwen
+日期: 2013年5月2日 下午 05:55:14
+訊息:
+避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=968)
+issue 6330
+----
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/epcurate-publish.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/index.html
+異動 : /fakeapi/login.html
+異動 : /fakeapi/signin.html
+
 版本: 968
 作者: chihwen
 日期: 2013年5月1日 下午 08:38:14
@@ -6,7 +22,6 @@ CMS v4.0 開工前先整併 v3.3
 
 比照 teltel_ui 分支將登出結構中的 href 屬性指向 signin.html
 issue 5927
-
 ----
 異動 : /fakeapi/channel-add.html
 異動 : /fakeapi/channel-setting.html
@@ -31,7 +46,6 @@ CMS v4.0 開工前先整併 v3.3
 6. 調整 controller.js 移除已用不到的程式、增加語系切換高亮效果、增加 signin.html 登入檢查邏輯。
 7. 調整相關語系文案。
 issue 5927
-
 ----
 異動 : /fakeapi/channel-add.html
 異動 : /fakeapi/channel-setting.html
