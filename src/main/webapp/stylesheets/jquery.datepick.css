@@ -15,8 +15,10 @@ img.datepick-trigger {
 /* +datepick-div
 *----------------------------------------------------------------------------*/
 
-.ui-datepicker {
+.ui-datepicker,
+.datepick {
     display: none;
+    position: relative;
     z-index: 100000; /*must have*/
     float: left;
     width: 190px;
@@ -28,6 +30,11 @@ img.datepick-trigger {
     font: 14px Arial,Helvetica,sans-serif;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
+}
+
+.datepick {
+    display: block;
+    background-position: 0 -212px;
 }
 
 .ui-datepicker a {
@@ -43,8 +50,10 @@ img.datepick-trigger {
 *
 **/
 
-.datepick-control {
-    display: none;
+.datepick-control,
+.datepick-cmd-today,
+.datepick-ctrl {
+    display: none !important;
 }
 
 .datepick-links   .datepick-current a,
@@ -80,15 +89,12 @@ img.datepick-trigger {
 *
 **/
 
-.ui-datepicker {
-    position: relative;
-}
-
 .ui-datepicker .datepick-links .datepick-current {
     display: none;
 }
 
-.ui-datepicker .ui-datepicker-header .ui-datepicker-prev {
+.ui-datepicker .ui-datepicker-header .ui-datepicker-prev,
+.datepick .datepick-nav .datepick-cmd-prev {
     position: absolute;
     top: 10px;
     left: 15px;
@@ -98,11 +104,13 @@ img.datepick-trigger {
 	text-indent: -100000px;
 }
 
-.ui-datepicker .ui-datepicker-header .ui-datepicker-prev:hover {
+.ui-datepicker .ui-datepicker-header .ui-datepicker-prev:hover,
+.datepick .datepick-nav .datepick-cmd-prev:hover {
 	background: url(../images/arrow_left_press.png) no-repeat 0 0;
 }
 
-.ui-datepicker .ui-datepicker-header .ui-datepicker-next {
+.ui-datepicker .ui-datepicker-header .ui-datepicker-next,
+.datepick .datepick-nav .datepick-cmd-next {
     position: absolute;
     top: 10px;
     right: 15px;
@@ -112,7 +120,8 @@ img.datepick-trigger {
 	text-indent: -100000px;
 }
 
-.ui-datepicker .ui-datepicker-header .ui-datepicker-next:hover {
+.ui-datepicker .ui-datepicker-header .ui-datepicker-next:hover,
+.datepick .datepick-nav .datepick-cmd-next:hover {
 	background: url(../images/arrow_right_press.png) no-repeat 0 0;
 }
 
@@ -125,7 +134,8 @@ img.datepick-trigger {
 /* =datepick-header
 **************************************/
 
-.ui-datepicker-title {
+.ui-datepicker-title,
+.datepick-month-header {
     height: 30px;
     line-height: 30px;
     margin-bottom: 3px;
@@ -139,52 +149,70 @@ img.datepick-trigger {
 /* =datepick
 **************************************/
 
-table.ui-datepicker-calendar {
+table.ui-datepicker-calendar,
+.datepick .datepick-month table {
     margin: 0 auto;
     text-align: center;
 	border-collapse: collapse;
 	border-spacing: 0;
 }
 
-table.ui-datepicker-calendar th {
+table.ui-datepicker-calendar th,
+.datepick .datepick-month table th {
     margin: 0;
-    padding: 0;
+    padding: 2px;
     color: #555;
     font-weight: bold;
     font-size: 13px;
     text-align: center;
 }
 
-table.ui-datepicker-calendar th span {
+table.ui-datepicker-calendar th span,
+.datepick .datepick-month table th span {
     display: block;
-    width: 24px;
-    height: 25px;
-    line-height: 25px;
+    width: 20px;
+    height: 21px;
+    line-height: 21px;
 }
 
-table.ui-datepicker-calendar td {
+table.ui-datepicker-calendar td,
+.datepick .datepick-month table td {
+    padding: 2px;
     border: none;
 }
 
-table.ui-datepicker-calendar td a {
+table.ui-datepicker-calendar td a,
+.datepick .datepick-month table td a,
+.datepick .datepick-month table td span {
     display: block;
-    width: 24px;
-    height: 25px;
-    line-height: 25px;
+    width: 20px;
+    height: 21px;
+    line-height: 21px;
     padding: 0;
+    background: url(../images/bg_calander_highlight.png) no-repeat -25px 0;
     color: #555;
     font-size: 13px;
     text-align: center;
     text-decoration: none;
 }
 
-table.ui-datepicker-calendar td a.ui-state-active,
-table.ui-datepicker-calendar td a:hover {
-    background: url(../images/bg_calander_highlight.png) no-repeat 3px 2px;
-	color: #fff;
+.datepick .datepick-month table td span {
+    color: #9d9d9d;
 }
 
-table.ui-datepicker-calendar td.ui-state-disabled span {
+.datepick .datepick-month table td span.datepick-selected {
+    background-position: 0 -42px;
+}
+
+table.ui-datepicker-calendar td a.ui-state-active,
+table.ui-datepicker-calendar td a:hover,
+.datepick .datepick-month table td a.datepick-selected,
+.datepick .datepick-month table td a:hover {
+    background-position: 0 -21px;
+}
+
+table.ui-datepicker-calendar td.ui-state-disabled span,
+.datepick .datepick-month table td.ui-state-disabled span {
     display: block;
     width: 20px;
     height: 21px;

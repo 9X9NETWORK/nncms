@@ -15,17 +15,22 @@ var CMS_CONF = {
         '/api/users/{userId}/channels/{channelId}':         '/api/users/{userId}/channels/{channelId}',
         '/api/users/{userId}/channels/sorting':             '/api/users/{userId}/channels/sorting',
         '/api/users/{userId}/sns_auth/facebook':            '/api/users/{userId}/sns_auth/facebook',
+        '/api/users/{userId}/poi_campaigns':                '/api/users/{userId}/poi_campaigns',
+        '/api/users/{userId}/poi_events':                   '/api/users/{userId}/poi_events',
         '/api/channels/{channelId}':                        '/api/channels/{channelId}',
         '/api/channels/{channelId}/autosharing/facebook':   '/api/channels/{channelId}/autosharing/facebook',
         '/api/channels/{channelId}/episodes':               '/api/channels/{channelId}/episodes',
         '/api/channels/{channelId}/episodes/sorting':       '/api/channels/{channelId}/episodes/sorting',
+        '/api/channels/{channelId}/poi_points':             '/api/channels/{channelId}/poi_points',
         '/api/episodes/{episodeId}':                        '/api/episodes/{episodeId}',
         '/api/episodes/{episodeId}/programs':               '/api/episodes/{episodeId}/programs',
         '/api/programs/{programId}':                        '/api/programs/{programId}',
         '/api/programs/{programId}/title_cards':            '/api/programs/{programId}/title_cards',
-        '/api/programs/{programId}/pois':                   '/api/programs/{programId}/pois',
+        '/api/programs/{programId}/poi_points':             '/api/programs/{programId}/poi_points',
         '/api/title_card/{titlecardId}':                    '/api/title_card/{titlecardId}',
-        '/api/pois/{poiId}':                                '/api/pois/{poiId}'
+        '/api/poi_campaigns/{poiCampaignId}/pois':          '/api/poi_campaigns/{poiCampaignId}/pois',
+        '/api/poi_points/{poiPointId}':                     '/api/poi_points/{poiPointId}',
+        '/api/poi_events/{poiEventId}':                     '/api/poi_events/{poiEventId}'
     },
     FAKE_PACK: {
         '/api/login':                                       'fakeapi/login.php',
@@ -38,17 +43,22 @@ var CMS_CONF = {
         '/api/users/{userId}/channels/{channelId}':         'fakeapi/users_channels_del.php?userId={userId}&channelId={channelId}',
         '/api/users/{userId}/channels/sorting':             'fakeapi/users_channels_sorting.php?userId={userId}',
         '/api/users/{userId}/sns_auth/facebook':            'fakeapi/users_sns_auth_facebook.php?userId={userId}',
+        '/api/users/{userId}/poi_campaigns':                'fakeapi/users_poi_campaigns.php?userId={userId}',
+        '/api/users/{userId}/poi_events':                   'fakeapi/users_poi_events.php?userId={userId}',
         '/api/channels/{channelId}':                        'fakeapi/channels.php?channelId={channelId}',
         '/api/channels/{channelId}/autosharing/facebook':   'fakeapi/channels_autosharing_facebook.php?channelId={channelId}',
         '/api/channels/{channelId}/episodes':               'fakeapi/channels_episodes.php?channelId={channelId}',
         '/api/channels/{channelId}/episodes/sorting':       'fakeapi/channels_episodes_sorting.php?channelId={channelId}',
+        '/api/channels/{channelId}/poi_points':             'fakeapi/channels_poi_points.php?channelId={channelId}',
         '/api/episodes/{episodeId}':                        'fakeapi/episodes.php?episodeId={episodeId}',
         '/api/episodes/{episodeId}/programs':               'fakeapi/episodes_programs.php?episodeId={episodeId}',
         '/api/programs/{programId}':                        'fakeapi/programs.php?programId={programId}',
         '/api/programs/{programId}/title_cards':            'fakeapi/programs_title_cards.php?programId={programId}',
-        '/api/programs/{programId}/pois':                   'fakeapi/programs_pois.php?programId={programId}',
+        '/api/programs/{programId}/poi_points':             'fakeapi/programs_poi_points.php?programId={programId}',
         '/api/title_card/{titlecardId}':                    'fakeapi/title_card_del.php?titlecardId={titlecardId}',
-        '/api/pois/{poiId}':                                'fakeapi/pois.php?poiId={poiId}'
+        '/api/poi_campaigns/{poiCampaignId}/pois':          'fakeapi/poi_campaigns_pois.php?poiCampaignId={poiCampaignId}',
+        '/api/poi_points/{poiPointId}':                     'fakeapi/poi_points.php?poiPointId={poiPointId}',
+        '/api/poi_events/{poiEventId}':                     'fakeapi/poi_events.php?poiEventId={poiEventId}'
     },
     API: function (uri, repl) {
         var api = '';
@@ -118,6 +128,7 @@ var CMS_CONF = {
     FONT_RADIX_MAX: 48,
     USER_URL: null,
     USER_DATA: null,
+    CAMPAIGN_ID: null,
     LANG_SUPPORT: ['en', 'zh'],
     LC_MAP: {
         'en': 'en_US',
@@ -158,7 +169,21 @@ var CMS_CONF = {
     USER_SNS_AUTH: null,
     EPISODES_PAGING: [],
     EPISODES_PAGING_INFO: [],
-    SLIDER_MAX: 100
+    SLIDER_MAX: 100,
+    POI_TYPE_MAP: {
+        'event-hyper': {
+            code: 1,
+            plugin: 'hyperChannel'
+        },
+        'event-scheduled': {
+            code: 3,
+            plugin: 'tvShowNotice'
+        },
+        'event-instant': {
+            code: 2,
+            plugin: 'shoppingInfo'
+        }
+    }
 };
 
 switch (CMS_CONF.CMS_ENV) {
@@ -183,3 +208,26 @@ case 'production':
     CMS_CONF.IS_DEBUG = false;
     break;
 }
+
+nn.init();
+nn.debug(CMS_CONF.IS_DEBUG);
+nn.on(400, function (jqXHR, textStatus) {
+    if (CMS_CONF.IS_DEBUG) {
+        alert(textStatus + ': ' + jqXHR.responseText);
+    }
+    location.replace('index.html');
+});
+nn.on(401, function (jqXHR, textStatus) {
+    location.href = '../';
+});
+nn.on(403, function (jqXHR, textStatus) {
+    location.replace('index.html');
+});
+nn.on(404, function (jqXHR, textStatus) {
+    // nothing to do
+});
+nn.on(500, function (jqXHR, textStatus) {
+    if (CMS_CONF.IS_DEBUG) {
+        alert(textStatus + ': ' + jqXHR.responseText);
+    }
+});

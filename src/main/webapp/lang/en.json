@@ -1,18 +1,21 @@
 {
     "header": {
-        "Log out":                                                                                                                              "Log out",
         "9x9.tv Official Web":                                                                                                                  "9x9.tv Official Web",
-        "Watch 9x9.tv on the Web":                                                                                                              "Watch 9x9.tv on the Web"
+        "Watch 9x9.tv on the Web":                                                                                                              "Watch 9x9.tv on the Web",
+        "Partner Sign-in":                                                                                                                      "Partner Sign-in",
+        "Log out":                                                                                                                              "Log out"
     },
     "studio-nav": {
         "CMS":                                                                                                                                  "<span class=\"cms-icon\">CMS</span><p class=\"sub-title\">Content Management System</p>",
         "My Channels":                                                                                                                          "My Channels",
-        "My Portal":                                                                                                                          "My Portal",
+        "My Portal":                                                                                                                            "My Portal",
         "CMS Setup":                                                                                                                            "<img src=\"images/icon_studio_setup.png\" alt=\"\" />CMS Setup",
         "Connection is inactive, click to restart it.":                                                                                         "Connection is inactive, click to restart it."
     },
     "footer": {
-        "Language":                                                                                                                             "Language"
+        "© 2013 9x9.tv. All rights reserved.":                                                                                                  "© 2013 9x9.tv. All rights reserved.",
+        "English":                                                                                                                              "English",
+        "中文":                                                                                                                                 "中文"
     },
     "overlay": {
         "loading": {
@@ -73,7 +76,7 @@
             "Disconnect":                                                                                                                       "Disconnect",
             "{No}":                                                                                                                             "No",
             "Restart connection":                                                                                                               "Restart connection",
-            "{Close}":                                                                                                                          "<img src=\"images/icon_zoom.png\" alt=\"\" />Close"
+            "Back":                                                                                                                             "Back"
         }
     },
     "upload": {
@@ -106,7 +109,7 @@
             "CMS is the management center for your 9x9.tv list-form channels!":                                                                 "CMS is the management center for your 9x9.tv list-form channels!",
             "Sign In":                                                                                                                          "Sign In",
             "Sign in with Facebook":                                                                                                            "Sign in with Facebook",
-            "Sign In with your E-mail and password": "Sign In with your E-mail and password",
+            "Sign In with your E-mail and password":                                                                                            "Sign In with your E-mail and password",
             "E-mail":                                                                                                                           "E-mail",
             "Password":                                                                                                                         "Password",
             "Forgot password?":                                                                                                                 "Forgot password?",
@@ -132,7 +135,7 @@
             "If you still need assistance, please":                                                                                             "If you still need assistance, please",
             "contact us.":                                                                                                                      "contact us."
         },
-		"errMsg": {
+        "errMsg": {
             "Email format error!":                                                                                                              "Email format error!",
             "Please input password!":                                                                                                           "Please input password!",
             "Email and password do not match, please try again.":                                                                               "Email and password do not match, please try again.",
@@ -148,25 +151,25 @@
             "The two passwords you entered do not match.":                                                                                      "The two passwords you entered do not match.",
             "Please input 6 to 16 characters in username.":                                                                                     "Please input 6 to 16 characters in username.",
             "Only letters, numbers or low line are allowed.":                                                                                   " letters, numbers or low line are allowed."
-		}
+        }
     },
-     "portal-set": {
+    "portal-set": {
         "html-title": {
             "9x9.tv - My Portal":                                                                                                               "9x9.tv - My Portal"
         },
-	    "func-nav": {
-	        "Portal": "Portal",
-	        "Channel Store": "Channel Store",
+        "func-nav": {
+            "Portal":                                                                                                                           "Portal",
+            "Channel Store":                                                                                                                    "Channel Store",
             "My Portal":                                                                                                                        "My Portal",
-	        "Brand": "Brand"
-	    },
-	    "sets-list": {
-	        "Channels": "Channels",
-	        "Add Channels": "Add channels",
-	        "Edit": "Edit"
-	    },
+            "Brand":                                                                                                                            "Brand"
+        },
+        "sets-list": {
+            "Channels":                                                                                                                         "Channels",
+            "Add Channels":                                                                                                                     "Add channels",
+            "Edit":                                                                                                                             "Edit"
+        },
         "title-func": {
-            "My Portal": "My Portal",
+            "My Portal":                                                                                                                        "My Portal",
             "Portal":                                                                                                                           "Portal",
             "Reorder channels":                                                                                                                 "Reorder channels",
             "Save order":                                                                                                                       "Save order"
@@ -183,7 +186,7 @@
             "No Episodes":                                                                                                                      "No Episodes",
             "'s Favorite":                                                                                                                      "'s Favorite"
         }
-    },    
+    },
     "index": {
         "html-title": {
             "9x9.tv - My Channels":                                                                                                             "9x9.tv - My Channels"
@@ -379,13 +382,13 @@
             "Done":                                                                                                                             "Done"
         },
         "poi-event": {
-            "Add POI & interactive event":                                                                                                      "Add POI & interactive event",
-            "+ Add":                                                                                                                            "+ Add",
-            "Edit POI & interactive event":                                                                                                     "Edit POI & interactive event",
+            "+ Create POI & interactive event":                                                                                                 "+ Create POI & interactive event",
+            "POI & interactive event List":                                                                                                     "POI & interactive event List",
             "Add an interactive event and call to action message at a point of interaction.":                                                   "Add an interactive event and call to action message at a point of interaction.",
-            "Edit":                                                                                                                             "Edit",
+            "Create POI & interactive event":                                                                                                   "Create POI & interactive event",
+            "Edit POI & interactive event":                                                                                                     "Edit POI & interactive event",
             "Create POI":                                                                                                                       "Create POI",
-            "Add interactive event":                                                                                                            "Add interactive event",
+            "Edit POI":                                                                                                                         "Edit POI",
             "Required field":                                                                                                                   "Required field",
             "Name":                                                                                                                             "Name",
             "Duration":                                                                                                                         "Duration",
@@ -397,24 +400,49 @@
             "Separate with commas":                                                                                                             "Separate with commas",
             "Cancel":                                                                                                                           "Cancel",
             "Next":                                                                                                                             "Next",
+            "Save":                                                                                                                             "Save",
             "Please fill in all required fields.":                                                                                              "Please fill in all required fields.",
             "Start time or end time is not in the video playback time:":                                                                        "Start time or end time is not in the video playback time:",
             "Duration overlaps another POI's duration:":                                                                                        "Duration overlaps another POI's duration:",
-            "Zoom in":                                                                                                                          "Zoom in",
-            "Type":                                                                                                                             "Type",
-            "Hyper channel":                                                                                                                    "Hyper channel",
+            "Add interactive event":                                                                                                            "Add interactive event",
+            "Choose a type":                                                                                                                    "Choose a type",
+            "Hyper Link":                                                                                                                       "Hyper Link",
             "User can go to watch another 9x9.tv channel or episode.":                                                                          "User can go to watch another 9x9.tv channel or episode.",
+            "Scheduled Notification":                                                                                                           "Scheduled Notification",
+            "Send a scheduled notification to user to get more information.":                                                                   "Send a scheduled notification to user to get more information.",
+            "Instant Notification":                                                                                                             "Instant Notification",
+            "Send an instant notification to user to get more information.":                                                                    "Send an instant notification to user to get more information.",
+            "POI":                                                                                                                              "POI",
+            "Interactive event : Hyper Link":                                                                                                   "Interactive event : Hyper Link",
+            "Interactive event : Scheduled Notification":                                                                                       "Interactive event : Scheduled Notification",
+            "Interactive event : Instant Notification":                                                                                         "Interactive event : Instant Notification",
+            "PREVIEW":                                                                                                                          "PREVIEW",
+            "There is no valid video to preview.":                                                                                              "There is no valid video to preview.",
             "Display text":                                                                                                                     "Display text",
-            "Hyper to related channel to watch more!":                                                                                          "Hyper to related channel to watch more!",
+            "Input display text":                                                                                                               "Input display text",
             "Button text":                                                                                                                      "Button text",
-            "Watch now":                                                                                                                        "Watch now",
-            "Hyper channel URL":                                                                                                                "Hyper channel URL",
+            "Input button text":                                                                                                                "Input button text",
+            "Hyper link":                                                                                                                       "Hyper link",
             "Input 9x9 channel or episode URL":                                                                                                 "Input 9x9 channel or episode URL",
             "Invalid 9x9 URL, please try again.":                                                                                               "Invalid 9x9 URL, please try again.",
-            "Add":                                                                                                                              "Add",
-            "POI":                                                                                                                              "POI",
-            "Interactive event":                                                                                                                "Interactive event",
-            "Save":                                                                                                                             "Save"
+            "Mobile Notification and Time":                                                                                                     "Mobile Notification and Time",
+            "iOS":                                                                                                                              "iOS",
+            "iOS-button": {
+                "Cancel":                                                                                                                       "Cancel",
+                "OK":                                                                                                                           "OK"
+            },
+            "Android":                                                                                                                          "Android",
+            "Preview":                                                                                                                          "Preview",
+            "Notification":                                                                                                                     "Notification",
+            "Mobile notification message":                                                                                                      "Mobile notification message",
+            "Input Mobile notification message":                                                                                                "Input Mobile notification message",
+            "Recommend: less 34 bytes":                                                                                                         "Recommend: less 34 bytes",
+            "Mobile notification time":                                                                                                         "Mobile notification time",
+            "Add a mobile notification time to remind your viewers.":                                                                           "Add a mobile notification time to remind your viewers.",
+            "Hour":                                                                                                                             "Hour",
+            "Minute":                                                                                                                           "Minute",
+            "Mobile Notification Message":                                                                                                      "Mobile Notification Message",
+            "The mobile notification will instant send, when user pressed OK or Enter.":                                                        "The mobile notification will instant send, when user pressed OK or Enter."
         },
         "title-card": {
             "Text":                                                                                                                             "Text",

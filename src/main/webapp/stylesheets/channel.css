@@ -180,12 +180,15 @@ body.mac #title-func h2 {
     float: left;
     margin: 0 5px 6px 0;
     border: none;
+	opacity: 0.5;
+    filter: alpha(opacity=50);
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 #channel-list li .photo-list:hover img.ep {
     background-color: #fff;
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 
 
@@ -245,7 +248,7 @@ body.mac #title-func h2 {
 #channel-list li .func-wrap {
     float: right;
     position: relative;
-    width: 166px;
+    width: 196px;
     height: 116px;
 	margin: 5px 0 0 0;
 }
@@ -295,6 +298,20 @@ body.mac #title-func h2 {
     background: url(../images/btns.png) no-repeat;
     text-decoration: none;
     text-indent: -100000px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.channel-poi {
+    background-position: 0 -2072px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.channel-poi.disable,
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.channel-poi.disable:hover {
+    background-position: -46px -2071px;
+	cursor: default;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.channel-poi:hover {
+    background-position: -23px -2072px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.add {

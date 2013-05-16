@@ -415,7 +415,8 @@
 	background: url(../images/bg_popup_box_s_middle.png) repeat-x;
 }
 
-.overlay-l .overlay-container .overlay-wrap .btn-close {
+.overlay-l .overlay-container .overlay-wrap .btn-close,
+.overlay-l .overlay-container .overlay-wrap .overlay-btn-close {
 	position: absolute;
 	top: 7px;
 	right: -3px;
@@ -426,7 +427,8 @@
 	text-indent: -100000px;
 }
 
-.overlay-l .overlay-container .overlay-wrap .btn-close:hover {
+.overlay-l .overlay-container .overlay-wrap .btn-close:hover,
+.overlay-l .overlay-container .overlay-wrap .overlay-btn-close:hover {
 	background-position: 0 -24px;
 }
 
@@ -702,4 +704,823 @@
     left: 5px;
     border: none;
     clip: rect(17px, 16px, 35px, 0);
+}
+
+/* +poi-event-overlay
+*----------------------------------------------------------------------------*/
+
+#poi-event-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 100000;
+    width: 828px;
+    height: 599px;
+    margin: -300px 0 0 -424px;
+    padding: 0 11px 0 0;
+    background: url(../images/bg_popup_box_l.png) no-repeat right -599px;
+}
+
+#poi-event-overlay .wrap {
+    padding: 0 0 0 11px;
+    background: url(../images/bg_popup_box_l.png) no-repeat 0 0;
+}
+
+#poi-event-overlay .wrap .content {
+    position: relative;
+    height: 575px;
+    padding: 24px 10px 0;
+    background: url(../images/bg_popup_box_l.png) repeat-x 0 -1198px;
+}
+
+#poi-event-overlay .wrap .content .overlay-btn-close {
+    display: block;
+    position: absolute;
+    top: 7px;
+    right: -3px;
+    width: 22px;
+    height: 24px;
+    background: url(../images/btn_close_l.png) no-repeat 0 0;
+    text-indent: -100000px;
+}
+
+#poi-event-overlay .wrap .content .overlay-btn-close:hover {
+    background-position: 0 -24px
+}
+
+#poi-event-overlay .wrap .content h3 {
+    margin-bottom: 10px;
+    color: #b4b4b4;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4), 0px 1px 0px rgba(255, 255, 255, 0.4);
+    behavior: url(PIE.htc);
+}
+
+#poi-event-overlay      .wrap .content h3.edit,
+#poi-event-overlay.edit .wrap .content h3.create,
+#poi-event-overlay      .wrap .content .event .crumb.edit,
+#poi-event-overlay.edit .wrap .content .event .crumb.create {
+    display: none;
+}
+
+#poi-event-overlay      .wrap .content h3.create,
+#poi-event-overlay.edit .wrap .content h3.edit,
+#poi-event-overlay      .wrap .content .event .crumb.create,
+#poi-event-overlay.edit .wrap .content .event .crumb.edit {
+    display: block;
+}
+
+#poi-event-overlay .wrap .content p.crumb,
+#poi-event-overlay .wrap .content p.action {
+    margin-bottom: 18px;
+    color: #555;
+    font-size: 15px;
+    text-align: left;
+}
+
+#poi-event-overlay .wrap .content p.crumb a {
+    color: #555;
+    font-weight: bold;
+}
+
+#poi-event-overlay .wrap .content p.crumb a:hover {
+    color: #999;
+}
+
+#poi-event-overlay .wrap .content p.crumb span {
+    color: #999;
+}
+
+#poi-event-overlay .wrap .content p.action {
+    margin-bottom: 13px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#poi-event-overlay .wrap .content p.required {
+    position: absolute;
+    top: 74px;
+    right: 25px;
+    color: #555;
+    font-size: 13px;
+}
+
+/**
+*
+* =ul.list
+*
+**/
+
+#poi-event-overlay .wrap .content ul.list {
+    overflow: hidden;
+    width: 653px;
+    margin: 0 auto 12px;
+    padding: 0 0 0 135px;
+}
+
+#poi-event-overlay .wrap .content ul.list li {
+    position: relative;
+    float: left;
+    width: 259px;
+    height: 189px;
+    margin: 0 10px 2px 0;
+}
+
+#poi-event-overlay .wrap .content ul.list li .block {
+    width: 259px;
+    height: 173px;
+    padding-bottom: 16px;
+    cursor: pointer;
+}
+
+#poi-event-overlay .wrap .content ul.list li.event-coming-soon .block,
+#poi-event-overlay .wrap .content ul.list li.event-coming-soon .block .img {
+    cursor: default !important;
+}
+
+#poi-event-overlay .wrap .content ul.list li:hover .block {
+    width: 257px;
+    height: 171px;
+    border: 1px solid #b2b2b2;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#dbdbdb), to(#fbfbfb));
+    background: -webkit-linear-gradient(#dbdbdb, #fbfbfb);
+    background: -moz-linear-gradient(#dbdbdb, #fbfbfb);
+    background: -ms-linear-gradient(#dbdbdb, #fbfbfb);
+    background: -o-linear-gradient(#dbdbdb, #fbfbfb);
+    background: linear-gradient(#dbdbdb, #fbfbfb);
+    -pie-background: linear-gradient(#dbdbdb, #fbfbfb);
+    box-shadow: 0px 0px 3px rgba(100, 100, 100, 0.5) inset;
+    behavior: url(PIE.htc);
+}
+
+#poi-event-overlay .wrap .content ul.list li .block .img {
+    width: 237px;
+    height: 113px;
+    margin: 9px 0 14px 10px;
+    border-radius: 3px;
+    background: url(../images/poi_type.png) no-repeat 0 0;
+    cursor: pointer;
+}
+
+#poi-event-overlay .wrap .content ul.list li:hover .block .img {
+    margin: 8px 0 14px 9px;
+}
+
+#poi-event-overlay .wrap .content ul.list li .block .img.hyper {
+    box-shadow: 0 1px 10px rgba(124, 209, 250, 0.75) inset, 0 0 10px rgba(230, 255, 255, 0.9) inset, 0 0 2px rgba(255, 255, 255, 0.9) inset, 0 0 20px rgba(124, 209, 250, 0.5);
+    border: 1px solid #4e8eae;
+    background-color: #bfd6e0;
+    background-position: 0 0;
+    behavior: url(PIE.htc);
+}
+
+#poi-event-overlay .wrap .content ul.list li .block .img.schedule {
+    box-shadow: 0 1px 10px rgba(231, 244, 196, 0.75) inset, 0 0 10px rgba(255, 255, 227, 0.9) inset, 0 0 2px rgba(255, 255, 255, 0.9) inset, 0 0 20px rgba(163, 207, 80, 0.5);
+    border: 1px solid #6cc042;
+    background-color: #c1dca7;
+    background-position: 0 -116px;
+    behavior: url(PIE.htc);
+}
+
+#poi-event-overlay .wrap .content ul.list li .block .img.instant {
+    box-shadow: 0 1px 10px rgba(238, 126, 125, 0.1) inset, 0 0 10px rgba(255, 255, 255, 0.9) inset, 0 0 2px rgba(255, 143, 149, 0.9) inset, 0 0 20px rgba(237, 28, 36, 0.1);
+    border: 1px solid #bb3d3c;
+    background-color: #ddbaba;
+    background-position: 0 -231px;
+    behavior: url(PIE.htc);
+}
+
+#poi-event-overlay .wrap .content ul.list li .block .img.coming-soon {
+    box-shadow: 0 1px 10px rgba(255, 255, 255, 0.75) inset, 0 0 10px rgba(255, 255, 255, 0.9) inset, 0 0 2px rgba(255, 255, 255, 0.9) inset, 0 0 20px rgba(255, 255, 255, 0.8);
+    border: 1px solid #555;
+    background: #d8d8d8;
+    background-image: none;
+    behavior: url(PIE.htc);
+}
+
+#poi-event-overlay .wrap .content ul.list li .block .img h4 {
+    display: block;
+    position: absolute;
+    top: 23px;
+    left: 0;
+    width: 257px;
+    color: #555;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+}
+
+#poi-event-overlay .wrap .content ul.list li .block .coming-soon h4 {
+    top: 8px;
+    height: 115px;
+    line-height: 115px;
+    color: #fff;
+    font-size: 30px;
+}
+
+#poi-event-overlay .wrap .content ul.list li .block p {
+    width: 209px;
+    margin: 0 auto;
+    padding: 0 15px;
+    color: #555;
+    font-size: 13px;
+    line-height: 17px;
+    text-align: justify;
+}
+
+#poi-event-overlay .wrap .content ul.list li:hover .block p,
+#poi-event-overlay .wrap .content ul.list li:hover .block .img h4 {
+    color: #999;
+}
+
+#poi-event-overlay .wrap .content ul.list li.event-coming-soon:hover .block {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+}
+
+#poi-event-overlay .wrap .content ul.list li.event-coming-soon:hover .block h4 {
+    color: #fff;
+}
+
+/**
+*
+* =func
+*
+**/
+
+#poi-event-overlay .wrap .content .func {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    width: 788px;
+    height: 66px;
+    background: url(../images/bg_divider.png) repeat-x top;
+}
+
+#poi-event-overlay .wrap .content .func ul {
+    float: right;
+    padding: 12px 0 0;
+}
+
+#poi-event-overlay .wrap .content .func ul li {
+    float: left;
+    margin-right: 10px;
+}
+
+#poi-event-overlay .wrap .content .func ul li:last-child {
+    margin-right: 0;
+}
+
+#poi-event-overlay .wrap .content .func ul li.notice {
+    display: none;
+    height: 32px;
+    line-height: 32px;
+    color: #f00;
+    font-size: 13px;
+}
+
+body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
+    display: none;
+}
+
+#poi-event-overlay .wrap .content .func ul li a {
+    padding: 6px 11px 0;
+    color: #555;
+    font-size: 15px;
+}
+
+/**
+*
+* =video-wrap
+*
+**/
+
+#poi-event-overlay .wrap .content .video-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 590px;
+    height: 332px;
+    margin: 0 auto 14px;
+}
+
+#poi-event-overlay .wrap .content .video-wrap .video {
+    margin-top: -2.5rem;
+}
+
+#poi-event-overlay .wrap .content .video-wrap .mask {
+    position: absolute;
+    top: 127px;
+    left: 0;
+    width: 590px;
+    min-height: 35px;
+    height: auto !important;
+    height: 35px;
+    padding: 11px 0 0;
+    background: url(../images/bg_mask.png) repeat;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 46px;
+    text-align: center;
+}
+
+#poi-event-overlay .wrap .content .video-wrap .mask p {
+    height: 26px;
+    line-height: 26px;
+}
+
+#poi-event-overlay .wrap .content .video-wrap .mask .no-video {
+    width: 220px;
+    height: 16px;
+    line-height: 16px;
+    margin: 0 auto 9px;
+    padding-left: 18px;
+    font-size: 13px;
+    background: url(../images/icon_info.png) no-repeat 0 0;
+}
+
+/**
+*
+* =event-input
+*
+**/
+
+#poi-event-overlay .wrap .content .event-input {
+    overflow: hidden;
+}
+
+#poi-event-overlay .wrap .content .event-input .fminput {
+    float: left;
+    margin: 0 10px 11px 0;
+}
+
+#poi-event-overlay .wrap .content .event-input .fminput.even {
+    margin-right: 0;
+}
+
+#poi-event-overlay .wrap .content .event-input .fminput label {
+    float: left;
+    width: 103px;
+    height: 30px;
+    line-height: 30px;
+    color: #555;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#poi-event-overlay .wrap .content .event-input .fminput p.text {
+    float: left;
+    height: 30px;
+    padding: 0 0 0 3px;
+    background: url(../images/input_gray.png) no-repeat 0 0;
+}
+
+#poi-event-overlay .wrap .content .event-input .fminput p.text span {
+    display: block;
+    height: 30px;
+    padding: 0 3px 0 0;
+    background: url(../images/input_gray.png) no-repeat right -30px;
+}
+
+#poi-event-overlay .wrap .content .event-input .fminput p.text span .text {
+    width: 279px;
+    height: 30px;
+    padding-left: 4px;
+    border: none;
+    background: url(../images/input_gray.png) repeat-x 0 -60px;
+    color: #555;
+    font: 13px Arial, Helvetica;
+    line-height: 30px\0;
+}
+
+#poi-event-overlay .wrap .content .event-input .fminput .notice {
+    display: none;
+    height: 27px;
+    line-height: 27px;
+    padding-left: 10px;
+    color: #f00;
+    font-size: 13px;
+}
+
+/**
+*
+* =mobile-edit
+*
+**/
+
+#poi-event-overlay .wrap .content .event .mobile-edit {
+    margin-top: 25px;
+    padding-left: 23px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile {
+    float: left;
+    width: 378px;
+    margin-right: 40px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul {
+    overflow: hidden;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li {
+    float: left;
+    width: 186px;
+    height: 26px;
+    padding-right: 3px;
+    background: url(../images/bg_tab.png) no-repeat right -107px;
+    text-align: center;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li p {
+    height: 26px;
+    padding-left: 3px;
+    background: url(../images/bg_tab.png) no-repeat 0 1px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li p a {
+    display: block;
+    height: 26px;
+    line-height: 26px;
+    background: url(../images/bg_tab.png) repeat-x 0 -53px;
+    color: #999;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.on {
+    background: url(../images/bg_tab_on.png) no-repeat right -108px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.on p {
+    background: url(../images/bg_tab_on.png) no-repeat 0 -81px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.on p a {
+    background: url(../images/bg_tab_on.png) repeat-x 0 -54px;
+    color: #555;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.ios {
+    background: url(../images/bg_tab.png) no-repeat right -26px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.ios.on {
+    background: url(../images/bg_tab_on.png) no-repeat right -27px;
+}
+
+/* =schedule-ios
+**************************************/
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile .mobile-block {
+    height: 325px;
+    padding: 29px 0 0;
+    border-bottom: 1px solid #fff;
+    background: #e2e2e2;
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#e2e2e2), to(#e1e1e1));
+    background: -webkit-linear-gradient(#e2e2e2, #e1e1e1);
+    background: -moz-linear-gradient(#e2e2e2, #e1e1e1);
+    background: -ms-linear-gradient(#e2e2e2, #e1e1e1);
+    background: -o-linear-gradient(#e2e2e2, #e1e1e1);
+    background: linear-gradient(#e2e2e2, #e1e1e1);
+    -pie-background: linear-gradient(#e2e2e2, #e1e1e1);
+    behavior: url(PIE.htc);
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile .mobile-block .wrap {
+    width: 261px;
+    height: 205px;
+    margin: 0 auto;
+    padding: 120px 0 0;
+    background: url(../images/bg_mobile.png) no-repeat center 0;
+    text-align: center;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile #schedule-android .wrap,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile #instant-android  .wrap {
+    background-position: 0 -339px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile .mobile-block .wrap h4 {
+    margin-bottom: 42px;
+    color: #fff;
+    font-size: 25px;
+    text-align: center;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile .mobile-block .wrap h5 {
+    margin-bottom: 5px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile .mobile-block .wrap p {
+    width: 180px;
+    height: 32px;
+    margin: 0 auto 9px;
+    padding: 0 10px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    line-height: 16px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile .mobile-block .wrap p.button {
+    overflow: hidden;
+    float: none;
+    width: 185px;
+    height: 31px;
+    margin: 0 auto;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile .mobile-block .wrap p.button a {
+    float: left;
+    width: 89px;
+    height: 31px;
+    line-height: 31px;
+    margin-right: 7px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile .mobile-block .wrap p.button a.last {
+    margin-right: 0;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile #schedule-android .wrap h4,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile #instant-android  .wrap h4 {
+    margin-bottom: 33px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile #schedule-android .wrap h5,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile #schedule-android .wrap p,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile #instant-android  .wrap h5,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile #instant-android  .wrap p {
+    overflow: hidden;
+    width: 184px;
+    height: 15px;
+    padding: 0 16px 0 61px;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile #schedule-android .wrap p,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile #instant-android  .wrap p {
+    width: 170px;
+    padding: 0 0 0 30px;
+    font-size: 10.3px;
+    -webkit-text-size-adjust: none;
+}
+
+/**
+*
+* =notification
+*
+**/
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification {
+    float: left;
+    width: 332px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .msg {
+    margin-bottom: 12px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification h4 {
+    position: relative;
+    overflow: visible;
+    height: 16px;
+    line-height: 16px;
+    margin-bottom: 6px;
+    color: #555;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: left;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification p {
+    color: #555;
+    font-size: 13px;
+    line-height: 17px;
+    text-align: left;
+}
+
+#poi-event-overlay .wrap .content .event #instant-mobile .mobile-edit .notification p {
+    margin-bottom: 12px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification p.textarea {
+    float: left;
+    overflow: hidden;
+    width: 329px;
+    height: 92px;
+    margin-bottom: 6px;
+    padding-left: 3px;
+    background: url(../images/input_gray_lg.png) no-repeat 0 0;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification p.textarea span {
+    display: block;
+    padding-right: 3px;
+    background: url(../images/input_gray_lg.png) no-repeat right -92px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification p.textarea span span {
+    height: 92px;
+    padding: 0;
+    background: url(../images/input_gray_lg.png) repeat-x 0 -184px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification p.textarea span .textarea {
+    overflow: auto;
+    width: 326px;
+    height: 86px;
+    margin-top: 2px;
+    padding: 3px;
+    border: none;
+    background-color: transparent;
+    color: #555;
+    font-family: Arial, Helvetica;
+    font-size: 13px;
+	resize: none;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification h4 a .tip {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 159px;
+    z-index: 100001;
+    height: 45px;
+    padding-left: 4px;
+    background: url(../images/bg_bubble_left_m.png) no-repeat 0 0;
+}
+
+.zh #poi-event-overlay .wrap .content .event .mobile-edit .notification h4 a .tip {
+    left: 120px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification h4 a img {
+    vertical-align: middle;
+    border: none;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification h4 a .tip img {
+    position: absolute;
+    top: -7px;
+    left: 7px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification h4 a .tip .tip-right {
+    display: block;
+    padding-right: 4px;
+    background: url(../images/bg_bubble_right_m.png) no-repeat right 0;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification h4 a .tip .tip-middle {
+    display: block;
+    width: 171px;
+    height: 42px;
+    padding: 3px 5px 0;
+    background: url(../images/bg_bubble_middle_m.png) repeat-x;
+    color: #555;
+    font: 13px/17px Arial, Helvetica;
+    text-align: left;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification h4 a:hover .tip {
+    display: block;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time .datepicker {
+    float: left;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap {
+    padding-left: 230px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap h5 {
+    margin-bottom: 6px;
+    color: #555;
+    text-align: left;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select {
+	position: relative;
+	width: 80px;
+	height: 30px;
+    margin-bottom: 10px;
+    padding-left: 3px;
+    background: url(../images/input_gray.png) no-repeat 0 0;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-btn {
+	padding: 0;
+	width: 22px;
+	height: 23px;
+	background: url(../images/btns.png) 0 -400px no-repeat;
+	position: absolute;
+	top: 3px;
+	right: 5px;
+	z-index: 55;
+	cursor: pointer;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-btn.on,
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-btn:hover {
+	background-position: 0 -451px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select.disable .select-btn {
+	background: url(../images/btns.png) no-repeat 0 -501px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-txt {
+    overflow: hidden;
+    height: 30px;
+    padding: 0 3px 0 0;
+    background: url(../images/input_gray.png) no-repeat right -30px;
+    font-size: 13px;
+    line-height: 29px;
+    white-space: nowrap;
+    text-indent: 5px;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-txt a {
+    display: block;
+    height: 30px;
+    padding-right: 4px;
+    background: url(../images/input_gray.png) repeat-x 0 -60px;
+    color: #555;
+    text-decoration: none;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-list {
+    display: none;
+	position: absolute;
+	top: 27px;
+	left: 1px;
+	z-index: 60;
+	width: 80px;
+	border: 1px solid #b2b2b2;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	border-radius:  0 0 5px 5px;
+	filter: alpha(Opacity=90);
+	opacity: 0.9;
+    behavior: url(PIE.htc);
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .hour {
+    overflow: hidden;
+    height: 168px;
+	-moz-border-radius:  0 0 5px 5px;
+	-webkit-border-radius:  0 0 5px 5px;
+	border-radius:  0 0 5px 5px;
+    behavior: url(PIE.htc);
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .hour-wrap {
+    height: 672px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-list p {
+	width: 62px;
+	height: 28px;
+	margin: 0;
+	padding: 0 9px;
+	background: none;
+	background-color: #d2d2d2;
+	color: #555;
+	font-size: 13px;
+	line-height: 28px;
+	cursor: pointer;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-list p:hover {
+	background-color: #e4e4e4;
+	color: #999;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-list p.none:hover {
+	background-color: #d2d2d2;
+	color: #999;
+    cursor: default;
 }

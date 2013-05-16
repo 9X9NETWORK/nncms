@@ -74,12 +74,12 @@ function showSystemErrorOverlayAndHookError(msg) {
 
 function showProcessingOverlay() {
     $('#overlay-s .overlay-middle').html('<img src="images/icon_load_l.gif" alt="" />' + nn._(['overlay', 'loading', 'Processing...']));
-    $('#overlay-s').fadeIn();
+    $('#overlay-s').fadeIn().css('z-index', '1200')
 }
 
 function showSavingOverlay() {
     $('#overlay-s .overlay-middle').html('<img src="images/icon_load_l.gif" alt="" />' + nn._(['overlay', 'loading', 'Saving...']));
-    $('#overlay-s').fadeIn();
+    $('#overlay-s').fadeIn().css('z-index', '1200')
 }
 
 function buildUnsaveOverlay(hook) {
@@ -110,6 +110,13 @@ function showUnsavePoiOverlay(e) {
     $.blockUI({
         message: $('#unsave-poi-prompt')
     });
+}
+
+function showUnsavePoiMask(e) {
+    $('body').data('origin', e);
+    $('#unsave-poi-mask-prompt .content').text(nn._(['overlay', 'prompt', 'Unsaved changes will be lost, are you sure you want to cancel editing?']));
+    $('#poi-event-overlay').hide();
+    $('#unsave-poi-mask-prompt').show().css('z-index', '1100');
 }
 
 function showDeletePromptOverlay(msg) {
@@ -484,23 +491,23 @@ $(function () {
     // change language
     $('#language-change li a').click(function () {
         if ('signin' === $(this).data('page')) {
-    		var sign_lang = $(this).data('meta');
-		    if (-1 === $.inArray(sign_lang, CMS_CONF.LANG_SUPPORT)) {
-		        sign_lang = 'en';
-		    }
-    		$.cookie('signLang', sign_lang, { expires: 30 });
-    		setupLanguagePage();
+            var sign_lang = $(this).data('meta');
+            if (-1 === $.inArray(sign_lang, CMS_CONF.LANG_SUPPORT)) {
+                sign_lang = 'en';
+            }
+            $.cookie('signLang', sign_lang, { expires: 30 });
+            setupLanguagePage();
             $(this).parents('.select-list').slideDown();
             return false;
         } else {
-	        if (null !== CMS_CONF.USER_DATA && !$('body').hasClass('has-change')) {
-	            nn.api('PUT', CMS_CONF.API('/api/users/{userId}', {userId: CMS_CONF.USER_DATA.id}), {lang: $(this).data('meta')}, function (user) {
-	                var isStoreLangKey = false;
-	                setupLanguageAndRenderPage(user, isStoreLangKey);
-	            });
-	            $(this).parents('.select-list').slideDown();
-	            return false;
-	        }
+            if (null !== CMS_CONF.USER_DATA && !$('body').hasClass('has-change')) {
+                nn.api('PUT', CMS_CONF.API('/api/users/{userId}', {userId: CMS_CONF.USER_DATA.id}), {lang: $(this).data('meta')}, function (user) {
+                    var isStoreLangKey = false;
+                    setupLanguageAndRenderPage(user, isStoreLangKey);
+                });
+                $(this).parents('.select-list').slideDown();
+                return false;
+            }
        }
     });
 

@@ -7,6 +7,7 @@ $(function () {
     $('body').keyup(function (e) {
         if (27 === e.which) { // Esc
             $.unblockUI();
+            $('#ep-list ul li').removeClass('deleting').removeData('deleteId');
             if ($(this).hasClass('has-error')) {
                 location.replace('index.html');
             }
@@ -15,7 +16,7 @@ $(function () {
     });
     $(document).on('click', '.unblock, .btn-close, .fb-ok, .btn-no', function () {
         $.unblockUI();
-        $('#ep-list ul li').removeClass('deleting');
+        $('#ep-list ul li').removeClass('deleting').removeData('deleteId');
         return false;
     });
     $('#system-error .btn-ok, #system-error .btn-close').click(function () {

@@ -1,18 +1,21 @@
 {
     "header": {
-        "Log out":                                                                                                                              "登出",
         "9x9.tv Official Web":                                                                                                                  "9x9.tv官方網站",
-        "Watch 9x9.tv on the Web":                                                                                                              "9x9.tv應用程式"
+        "Watch 9x9.tv on the Web":                                                                                                              "9x9.tv應用程式",
+        "Partner Sign-in":                                                                                                                      "合作夥伴登入",
+        "Log out":                                                                                                                              "登出"
     },
     "studio-nav": {
         "CMS":                                                                                                                                  "<span class=\"cms-icon\">後台管理系統</span>",
         "My Channels":                                                                                                                          "我的頻道",
-        "My Portal":                                                                                                                          "我的入口",
+        "My Portal":                                                                                                                            "我的入口",
         "CMS Setup":                                                                                                                            "<img src=\"images/icon_studio_setup.png\" alt=\"\" />管理系統設置",
         "Connection is inactive, click to restart it.":                                                                                         "連結授權已失效，請點此重啟連結。"
     },
     "footer": {
-        "Language":                                                                                                                             "語言"
+        "© 2013 9x9.tv. All rights reserved.":                                                                                                  "© 2013 9x9.tv. All rights reserved.",
+        "English":                                                                                                                              "English",
+        "中文":                                                                                                                                 "中文"
     },
     "overlay": {
         "loading": {
@@ -73,7 +76,7 @@
             "Disconnect":                                                                                                                       "取消連結",
             "{No}":                                                                                                                             "否",
             "Restart connection":                                                                                                               "重啟連結",
-            "{Close}":                                                                                                                          "<img src=\"images/icon_zoom.png\" alt=\"\" />關閉"
+            "Back":                                                                                                                             "上一步"
         }
     },
     "upload": {
@@ -131,8 +134,8 @@
             "You should receive an email shortly.":                                                                                             "請收信完成密碼重新設定。",
             "If you still need assistance, please":                                                                                             "如果你還需要協助，請",
             "contact us.":                                                                                                                      "連絡我們。"
-		},
-		"errMsg": {
+        },
+        "errMsg": {
             "Email format error!":                                                                                                              "電子郵件格式錯誤！",
             "Please input password!":                                                                                                           "請輸入密碼！",
             "Email and password do not match, please try again.":                                                                               "信箱或密碼錯誤，請再次輸入。",
@@ -148,26 +151,26 @@
             "The two passwords you entered do not match.":                                                                                      "輸入密碼不一致，請重新輸入。",
             "Please input 6 to 16 characters in username.":                                                                                     "用戶名稱限制長度為6-16個字元。",
             "Only letters, numbers or low line are allowed.":                                                                                   "用戶名稱請輸入中英文、數字或底線。"
-		}
+        }
     },
-     "portal-set": {
+    "portal-set": {
         "html-title": {
             "9x9.tv - My Portal":                                                                                                               "9x9.tv - 我的入口"
         },
-	    "func-nav": {
-	        "Portal": "入口",
-	        "Channel Store": "頻道商店",
-            "My Portal": "我的入口",
-	        "Brand": "品牌"
-	    },
-	    "sets-list": {
-	        "Channels": "頻道",
-	        "Add Channels": "增加頻道",
-	        "Edit": "編輯"
-	    },
+        "func-nav": {
+            "Portal":                                                                                                                           "入口",
+            "Channel Store":                                                                                                                    "頻道商店",
+            "My Portal":                                                                                                                        "我的入口",
+            "Brand":                                                                                                                            "品牌"
+        },
+        "sets-list": {
+            "Channels":                                                                                                                         "頻道",
+            "Add Channels":                                                                                                                     "增加頻道",
+            "Edit":                                                                                                                             "編輯"
+        },
         "title-func": {
-            "My Portal": "我的入口",
-            "Portal": "我的入口",
+            "My Portal":                                                                                                                        "我的入口",
+            "Portal":                                                                                                                           "我的入口",
             "Reorder channels":                                                                                                                 "排序頻道",
             "Save order":                                                                                                                       "儲存排序"
         },
@@ -184,7 +187,7 @@
             "'s Favorite":                                                                                                                      "的最愛"
         }
     },
-     "index": {
+    "index": {
         "html-title": {
             "9x9.tv - My Channels":                                                                                                             "9x9.tv - 我的頻道"
         },
@@ -379,13 +382,13 @@
             "Done":                                                                                                                             "完成"
         },
         "poi-event": {
-            "Add POI & interactive event":                                                                                                      "新增互動時間點與事件",
-            "+ Add":                                                                                                                            "+ 新增",
-            "Edit POI & interactive event":                                                                                                     "編輯互動時間點與事件",
+            "+ Create POI & interactive event":                                                                                                 "+ 新增互動時間點與事件",
+            "POI & interactive event List":                                                                                                     "互動時間點與事件列表",
             "Add an interactive event and call to action message at a point of interaction.":                                                   "在一段特定的影片播放時間內，新增一個互動事件及其號召互動的訊息。",
-            "Edit":                                                                                                                             "編輯",
+            "Create POI & interactive event":                                                                                                   "新增互動時間點與事件",
+            "Edit POI & interactive event":                                                                                                     "編輯互動時間點與事件",
             "Create POI":                                                                                                                       "定義互動時間點",
-            "Add interactive event":                                                                                                            "設定互動事件",
+            "Edit POI":                                                                                                                         "編輯互動時間點",
             "Required field":                                                                                                                   "必填項目",
             "Name":                                                                                                                             "名稱",
             "Duration":                                                                                                                         "互動時間",
@@ -397,24 +400,49 @@
             "Separate with commas":                                                                                                             "用逗號分隔",
             "Cancel":                                                                                                                           "取消",
             "Next":                                                                                                                             "下一步",
+            "Save":                                                                                                                             "儲存",
             "Please fill in all required fields.":                                                                                              "請輸入必填項目。",
             "Start time or end time is not in the video playback time:":                                                                        "開始或結束時間不在影片實際播放的區間內:",
             "Duration overlaps another POI's duration:":                                                                                        "設定時間與另一個互動時間點重疊:",
-            "Zoom in":                                                                                                                          "放大檢視",
-            "Type":                                                                                                                             "類型",
-            "Hyper channel":                                                                                                                    "超連結頻道",
+            "Add interactive event":                                                                                                            "設定互動事件",
+            "Choose a type":                                                                                                                    "選擇事件類型",
+            "Hyper Link":                                                                                                                       "超連結頻道",
             "User can go to watch another 9x9.tv channel or episode.":                                                                          "使用者可前往觀賞另一個9x9.tv頻道或節目。",
-            "Display text":                                                                                                                     "互動訊息顯示文字",
-            "Hyper to related channel to watch more!":                                                                                          "更多精彩內容，歡迎點擊觀看相關頻道！",
+            "Scheduled Notification":                                                                                                           "排程通知",
+            "Send a scheduled notification to user to get more information.":                                                                   "設定排程通知，使用者可於特定時間獲得更多資訊。",
+            "Instant Notification":                                                                                                             "即時通知",
+            "Send an instant notification to user to get more information.":                                                                    "設定即時通知，使用者可即時獲得更多資訊。",
+            "POI":                                                                                                                              "互動時間點",
+            "Interactive event : Hyper Link":                                                                                                   "互動事件 : 超連結頻道",
+            "Interactive event : Scheduled Notification":                                                                                       "互動事件 : 排程通知",
+            "Interactive event : Instant Notification":                                                                                         "互動事件 : 即時通知",
+            "PREVIEW":                                                                                                                          "預覽畫面",
+            "There is no valid video to preview.":                                                                                              "找不到可有效預覽的畫面。",
+            "Display text":                                                                                                                     "訊息文字",
+            "Input display text":                                                                                                               "輸入訊息文字",
             "Button text":                                                                                                                      "按鈕文字",
-            "Watch now":                                                                                                                        "前往觀看",
-            "Hyper channel URL":                                                                                                                "超連結頻道網址",
+            "Input button text":                                                                                                                "輸入按鈕文字",
+            "Hyper link":                                                                                                                       "連結網址",
             "Input 9x9 channel or episode URL":                                                                                                 "輸入9x9頻道或節目網址",
             "Invalid 9x9 URL, please try again.":                                                                                               "9x9網址設定有誤，請重試。",
-            "Add":                                                                                                                              "新增",
-            "POI":                                                                                                                              "互動時間點",
-            "Interactive event":                                                                                                                "互動事件",
-            "Save":                                                                                                                             "儲存"
+            "Mobile Notification and Time":                                                                                                     "行動裝置通知與時間",
+            "iOS":                                                                                                                              "iOS",
+            "iOS-button": {
+                "Cancel":                                                                                                                       "關閉",
+                "OK":                                                                                                                           "啟動"
+            },
+            "Android":                                                                                                                          "Android",
+            "Preview":                                                                                                                          "預覽",
+            "Notification":                                                                                                                     "通知內容",
+            "Mobile notification message":                                                                                                      "行動裝置通知內容",
+            "Input Mobile notification message":                                                                                                "輸入行動裝置通知內容",
+            "Recommend: less 34 bytes":                                                                                                         "建議34字內",
+            "Mobile notification time":                                                                                                         "行動裝置通知時間",
+            "Add a mobile notification time to remind your viewers.":                                                                           "設定一個行動裝置通知時間提醒使用者。",
+            "Hour":                                                                                                                             "時",
+            "Minute":                                                                                                                           "分",
+            "Mobile Notification Message":                                                                                                      "行動裝置通知內容",
+            "The mobile notification will instant send, when user pressed OK or Enter.":                                                        "當使用者按下OK或Enter時，通知會即時送出。"
         },
         "title-card": {
             "Text":                                                                                                                             "字卡內文",

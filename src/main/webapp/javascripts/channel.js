@@ -13,6 +13,7 @@ $(function () {
     $('body').keyup(function (e) {
         if (27 === e.which) { // Esc
             $.unblockUI();
+            $('#channel-list li').removeClass('deleting').removeData('deleteId');
             if ($(this).hasClass('has-error')) {
                 location.replace('index.html');
             }
@@ -21,7 +22,7 @@ $(function () {
     });
     $(document).on('click', '.unblock, .btn-close, .fb-ok, .btn-no', function () {
         $.unblockUI();
-        $('#channel-list li').removeClass('deleting');
+        $('#channel-list li').removeClass('deleting').removeData('deleteId');
         return false;
     });
     $('#system-error .btn-ok, #system-error .btn-close').click(function () {

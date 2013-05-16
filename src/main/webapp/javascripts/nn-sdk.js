@@ -24,9 +24,18 @@
  *   + 2013-01-30 v0.0.5 by Louis
  *     - CORS cross domain support
  *
- * download latest release:
+ *   + 2013-05-09 v0.0.6 by Louis
+ *     - nn.api(): 'DELETE' workarround
+ *     - CSS/JS loader (also load jQuery automatically when missing)
+ *     - jQuery 1.9.1
+ *
+ * To download the latest release:
  *
  *   http://dev.teltel.com/louis/9x9-sdk-usage/js/release/latest/nn-sdk.js
+ *
+ * To download the latest development:
+ *
+ *   http://dev.teltel.com/louis/9x9-sdk/js/nn-sdk.js
  *
  * @author	Louis Jeng <louis.jeng@9x9.tv>
  */
@@ -34,23 +43,75 @@
 var nn = { };
 
 (function(nn) {
-	
+
 	nn.initialize = function(callback) {
 		// NOTE: 'this' is denote 'nn' object itself, but not always does.
-        
-        if (typeof $ == 'undefined') {
-            nn.log('nn: jQuery is missing!', 'error');
-            return;
+
+        var _init = function() {
+            if (typeof $ == 'undefined') {
+                return nn.log('nn: jQuery is still missing!', 'error');
+            }
+            nn.log('nn: jQuery is detected ' + $().jquery);
+            var _dfd = $.Deferred();
+            if (typeof callback == 'function') {
+                _dfd.done(callback);
+            }
+            $(function() {
+                nn.log('nn: initialized');
+                _dfd.resolve();
+            });
+            return _dfd.promise();
+        };
+        if (typeof $ != 'undefined') {
+            return _init();
         }
-		
-		nn.log('nn: initialized');
-        
-        if (typeof callback == 'function') {
-            return callback(nn);
-        }
-        return nn;
+        nn.log('nn: jQuery is missing, but we can load it automatically.');
+        nn.load(nn.jQueryUrl, _init);
 	};
+
+    nn.init = nn.initialize;
 	
+    nn.jQueryUrl = '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js';
+
+    nn.load = function(url, callback) {
+
+        var head = document.getElementsByTagName('head')[0];
+
+        // load css
+        if (url.substr(-4, 4) == '.css') {
+
+            var _dfd = $.Deferred();
+            var css = document.createElement('link');
+            css.type = "text/css";
+            css.rel = "stylesheet";
+            css.href = url;
+            css.onload = function() {
+                if (typeof callback == 'function') {
+                    _dfd.done(callback);
+                }
+                _dfd.resolve();
+            };
+            nn.log('nn.load: load CSS from ' + url);
+            head.appendChild(css);
+            return _dfd.promise();
+
+        } else {
+
+            if (typeof $ != 'undefined') {
+                // using jQuery
+                nn.log('nn.load: load JS by jQuery ' + url);
+                return $.getScript(url, callback);
+            }
+            // without using jQuery
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = url;
+            script.onload = callback;
+            nn.log('nn.load: load JS from ' + url);
+            head.appendChild(script);
+        }
+    };
+
 	nn.log = function(message, type) {
 	
         var blackbird = function() { };
@@ -109,13 +170,17 @@ var nn = { };
 	nn.api = function(method, resourceURI, parameter, callback, dataType) {
 		
 		nn.log('nn.api: ' + method + ' "' + resourceURI + '"');
-		nn.log(parameter, 'debug');
 		
 		if ($.inArray(method, ['PUT', 'GET', 'POST', 'DELETE', 'HEAD', 'OPTIONS']) == -1) {
 			nn.log('nn.api: not supported method', 'warning');
 			return;
 		}
 		
+        var withCredentials = false;
+        if (resourceURI.indexOf('gdata.youtube.com') < 0) {
+            withCredentials = true;
+        }
+
 		var localParameter = null;
 		var localCallback = null;
         var localDataType = 'json';
@@ -124,7 +189,7 @@ var nn = { };
 			localCallback = parameter;
             if (typeof callback == 'string') {
                 localDataType = callback;
-                nn.log('dataType = ' + localDataType);
+                nn.log('nn.api: dataType = ' + localDataType);
             }
 		} else if (typeof parameter == 'object' || (typeof parameter == 'string' && 
                                                     $.inArray(parameter, [ 'xml', 'html', 'script', 'json', 'jsonp', 'text' ]) < 0)) {
@@ -134,16 +199,27 @@ var nn = { };
 				localCallback = callback;
                 if (typeof dataType == 'string') {
                     localDataType = dataType;
-                    nn.log('dataType = ' + localDataType);
+                    nn.log('nn.api: dataType = ' + localDataType);
                 }
             } else if (typeof callback == 'string') {
                     localDataType = callback;
-                    nn.log('dataType = ' + localDataType);
+                    nn.log('nn.api: dataType = ' + localDataType);
             }
 		} else if (typeof parameter == 'string') {
             
             localDataType = parameter;
-            nn.log('dataType = ' + localDataType);
+            nn.log('nn.api: dataType = ' + localDataType);
+        }
+
+		nn.log(localParameter, 'debug');
+        
+        // workaround
+        if (method == 'DELETE' && localParameter) {
+            nn.log('nn.api: workaround');
+            var queryString = $.param(localParameter);
+            var conjunction = resourceURI.indexOf('?') < 0 ? '?' : '&';
+            resourceURI = [ resourceURI, queryString ].join(conjunction);
+            localParameter = null;
         }
 		
 		var _dfd = $.ajax({
@@ -154,7 +230,7 @@ var nn = { };
             'dataType':   localDataType,
 			'statusCode': nn.apiHooks,
             'xhrFields': {
-                'withCredentials': true
+                'withCredentials': withCredentials
             },
 			'success': function(data, textStatus, jqXHR) {
 				nn.log('nn.api: HTTP ' + jqXHR.status + ' ' + jqXHR.statusText);
@@ -273,6 +349,7 @@ var nn = { };
 		return result;
 	};
 	
+    // TODO: pack is a url
 	nn.i18n = function(pack) {
 		nn.langPack = $.extend(nn.langPack, pack);
 	};

@@ -1,0 +1,301 @@
+/*-----------------------------------------------------------------------------
+[TABLE OF CONTENTS]
+    +content-main
+        =channel-list
+-----------------------------------------------------------------------------*/
+
+#content-main-wrap {
+    margin-top: 69px !important;
+}
+
+#content-main #title-func h2 {
+    display: none;
+}
+
+#content-main.poi-list #title-func h2.poi-list,
+#content-main.poi-edit #title-func h2.poi-edit,
+#content-main.poi-create #title-func h2.poi-create {
+    display: block;
+}
+
+#title-func h2 em {
+    overflow:hidden;
+    float: left;
+    width: 300px;
+    height: 21px;
+    line-height: 21px;
+    font-style: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
+}
+
+#title-func h2 span {
+    float: left;
+}
+
+/**
+*
+* =poi-list
+*
+**/
+
+#poi-list .add {
+    padding-left: 10px;
+}
+
+#poi-list .add .btn-create-poi {
+    float: left;
+    margin: 0 8px 2px 0;
+    background: url(../images/btn_gray.png) no-repeat 0 -1px;
+}
+
+#poi-list .add .btn-create-poi span {
+    background: url(../images/btn_gray.png) no-repeat right -33px;
+}
+
+#poi-list .add .btn-create-poi span a {
+    padding: 5px 5px 0 5px;
+    background: url(../images/btn_gray.png) repeat-x 0 -65px;
+}
+
+#poi-list .add .btn-create-poi:hover {
+    background-position: 0 -97px;
+}
+
+#poi-list .add .btn-create-poi:hover span {
+    background-position: right -129px;
+}
+
+#poi-list .add .btn-create-poi:hover span a {
+    background-position: 0 -161px;
+}
+
+#poi-list .add .btn-create-poi.disable {
+    background-position: 0 -193px;
+}
+
+#poi-list .add .btn-create-poi.disable span {
+    background-position: right -225px;
+}
+
+#poi-list .add .btn-create-poi.disable span a {
+    background-position: 0 -257px;
+}
+
+#poi-list .add .create-notice {
+    position: relative;
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin: 6px 7px 0 0;
+    text-decoration: none;
+}
+
+#poi-list .add .create-notice img {
+    border: none;
+}
+
+#poi-list .add .create-notice .tip {
+    display: none;
+    position: absolute;
+    top: 22px;
+    left: -10px;
+    z-index: 1000;
+    height: 45px;
+    padding-left: 4px;
+    background: url(../images/bg_bubble_left_m.png) no-repeat 0 0;
+}
+
+#poi-list .add .create-notice .tip img {
+    position: absolute;
+    top: -8px;
+    left: 11px;
+    border: none;
+}
+
+#poi-list .add .create-notice .tip .tip-right {
+    display: block;
+    padding-right: 4px;
+    background: url(../images/bg_bubble_right_m.png) no-repeat right 0;
+}
+
+#poi-list .add .create-notice .tip .tip-middle {
+    display: block;
+    width: 247px;
+    height: 40px;
+    padding: 5px 5px 0;
+    background: url(../images/bg_bubble_middle_m.png) repeat-x;
+    color: #555;
+    font: 13px/17px Arial, Helvetica;
+    text-align: justify;
+}
+
+#poi-list .add .create-notice:hover .tip {
+    display: block;
+}
+
+#poi-list .no-episode,
+#poi-list .has-poi {
+    clear: both;
+    margin-bottom: 26px;
+    padding-left: 10px;
+    color: #555;
+    font-size: 13px;
+}
+
+#poi-list .poi-info {
+    overflow: hidden;
+    margin-left: 10px;
+    background: url(../images/bg_divider.png) repeat-x bottom;
+}
+
+#poi-list .poi-info h3 {
+    color: #555;
+    font-size: 13px;
+}
+
+#poi-list .poi-info p.poi-title {
+    float: left;
+    width: 480px;
+    height: 33px;
+    line-height: 33px;
+    margin: 0;
+    color: #555;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
+}
+
+#poi-list .poi-info p.func {
+    float: right;
+    width: auto;
+    padding: 0;
+}
+
+#poi-list .poi-info p.func .edit,
+#poi-list .poi-info p.func .btn-del {
+    float: left;
+    width: 22px;
+    height: 25px;
+    margin: 3px 7px 0 0;
+    background: url(../images/btns.png) no-repeat 0 -1060px;
+    text-indent: -100000px;
+}
+
+#poi-list .poi-info p.func .btn-del {
+    background: url(../images/btns.png) no-repeat 0 -856px;
+}
+
+#poi-list .poi-info p.func .edit:hover {
+    background-position: -23px -1060px;
+}
+
+#poi-list .poi-info p.func .btn-del:hover {
+    background-position: -23px -856px;
+}
+
+/**
+*
+* =poi-edit
+*
+**/
+
+#channel-poi .edit-block {
+    position: relative;
+}
+
+#channel-poi .edit-block h3 {
+    margin: 0 0 10px 0;
+    padding: 0 0 0 10px;
+}
+
+#channel-poi #poi-list h3 {
+    padding: 0;
+}
+
+#channel-poi .edit-block .fminput {
+    margin: 0 0 10px 2px;
+}
+
+#channel-poi .edit-block .fminput label {
+    float: left;
+    width: 130px;
+    padding: 7px 10px 0 10px;
+    color: #555;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#channel-poi .edit-block .fminput label acronym {
+    margin-left: -10px;
+}
+
+#channel-poi .edit-block .fminput .fmfield {
+    position: relative;
+    color: #555;
+    font-size: 13px;
+}
+
+#channel-poi .edit-block .fminput .fmfield p.text {
+    float: left;
+    height: 30px;
+    margin-right: 10px;
+    padding-left: 3px;
+    background: url(../images/bg_input.png) no-repeat 0 0;
+}
+
+#channel-poi .edit-block .fminput .fmfield p.text span {
+    display: block;
+    padding-right: 3px;
+    background: url(../images/bg_input.png) no-repeat right -30px;
+}
+
+#channel-poi .edit-block .fminput .fmfield p.text span .text {
+    width: 485px;
+    height: 30px;
+    padding-left: 4px;
+    border: none;
+    background: url(../images/bg_input.png) repeat-x 0 -60px;
+    color: #555;
+    font: 13px/30px Arial, Helvetica;
+}
+
+#channel-poi .edit-block .fminput .fmfield .notice {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+}
+
+#channel-poi .edit-block .form-btn {
+    position: absolute;
+    bottom: 6px;
+    right: 0;
+}
+
+#channel-poi .edit-block .form-btn .form-btn-wrap {
+    float: right;
+}
+
+#channel-poi .edit-block .form-btn .form-btn-wrap p {
+    float: left;
+    margin-right: 8px;
+}
+
+#channel-poi .edit-block .form-btn .form-btn-wrap p.notice {
+    height: 27px;
+    line-height: 27px;
+    color: #f00;
+    font-size: 13px;
+}
+
+#channel-poi .edit-block .form-btn .form-btn-wrap p input {
+    width: 71px;
+    padding: 0;
+}

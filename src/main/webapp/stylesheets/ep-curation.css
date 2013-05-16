@@ -359,7 +359,7 @@ p.auto-height {
 
 #epcurate-curation #cur-add .func {
     position: absolute;
-    bottom: -4px;
+    bottom: 0;
     right: 0;
 }
 
@@ -1010,7 +1010,7 @@ p.auto-height {
 	display: block;
     position: relative;
 	width: 36px;
-	height: 29px;
+	height: 25px;
 	background: url(../images/btns.png) no-repeat 0 -1973px;
 	text-indent: -100000px;
 }
@@ -1167,6 +1167,10 @@ p.auto-height {
 	border-radius: 0 0 5px 5px;
 	background: none !important;
 	background-color: #d2d2d2 !important;
+}
+
+#epcurate-curation #cur-edit .bg-color .color-list {
+    top: 25px;
 }
 
 #epcurate-curation #cur-edit .color-list li {
@@ -1529,7 +1533,7 @@ p.auto-height {
 
 #epcurate-curation #cur-poi .add .btn-add-poi {
     float: left;
-    margin: 0;
+    margin: 0 8px 0 0;
 }
 
 #epcurate-curation #cur-poi .add .btn-add-poi a {
@@ -1605,30 +1609,32 @@ p.auto-height {
     -moz-binding: url('ellipsis.xml#ellipsis');
 }
 
-#epcurate-curation #cur-poi .poi-list ul li .edit {
+#epcurate-curation #cur-poi .poi-list ul li p.func {
     float: right;
-    height: 25px;
-    line-height: 25px;
-    margin: 3px 0 0;
-    color: #555;
-    text-decoration: none;
+    width: auto;
+    padding: 0;
 }
 
-#epcurate-curation #cur-poi .poi-list ul li .edit span {
+#epcurate-curation #cur-poi .poi-list ul li .edit,
+#epcurate-curation #cur-poi .poi-list ul li .btn-del {
     float: left;
     width: 22px;
     height: 25px;
-    margin-right: 7px;
+    margin: 3px 7px 0 0;
     background: url(../images/btns.png) no-repeat 0 -1060px;
     text-indent: -100000px;
 }
 
-#epcurate-curation #cur-poi .poi-list ul li .edit:hover {
-    color: #999;
+#epcurate-curation #cur-poi .poi-list ul li .btn-del {
+    background: url(../images/btns.png) no-repeat 0 -856px;
 }
 
-#epcurate-curation #cur-poi .poi-list ul li .edit:hover span {
+#epcurate-curation #cur-poi .poi-list ul li .edit:hover {
     background-position: -23px -1060px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .btn-del:hover {
+    background-position: -23px -856px;
 }
 
 /* =cur-poi-edit
@@ -1678,46 +1684,16 @@ p.auto-height {
 
 #epcurate-curation #cur-poi-edit .content .required {
     position: absolute;
-    top: 0;
+    top: 36px;
     right: 0;
 }
 
-#epcurate-curation #cur-poi-edit .content ul {
+#epcurate-curation #cur-poi-edit .content p.title {
     overflow: hidden;
     margin-bottom: 11px;
-}
-
-#epcurate-curation #cur-poi-edit .content ul li {
-    float: left;
-    margin-right: 11px;
-    padding-right: 11px;
-    background: url(../images/line02.png) no-repeat right 3px;
-}
-
-#epcurate-curation #cur-poi-edit .content ul li.last {
-    margin: 0;
-    padding: 0;
-    background: none;
-}
-
-#epcurate-curation #cur-poi-edit .content ul li a {
     color: #555;
     font-weight: bold;
     font-size: 15px;
-}
-
-#epcurate-curation #cur-poi-edit .content ul li a:hover {
-    color: #999;
-}
-
-#epcurate-curation #cur-poi-edit .content ul li.active a {
-    font-weight: normal;
-    text-decoration: none;
-    cursor: default;
-}
-
-#epcurate-curation #cur-poi-edit .content ul li.active a:hover {
-    color: #555;
 }
 
 #epcurate-curation #cur-poi-edit .content .edit-form {
@@ -1884,7 +1860,7 @@ p.auto-height {
 
 #epcurate-curation #cur-poi-edit .content .btn-container {
 	position: absolute;
-	bottom: -4px;
+	bottom: 0;
 	right: 0;
 	float: right;
 }
@@ -1937,20 +1913,19 @@ p.auto-height {
 }
 
 #epcurate-curation #cur-poi-edit h3.edit,
-#epcurate-curation #cur-poi-edit ul.edit,
+#epcurate-curation #cur-poi-edit p.edit,
 #epcurate-curation #cur-poi-edit.edit h3,
-#epcurate-curation #cur-poi-edit.edit ul,
-#epcurate-curation #cur-poi-edit           .content .btn-container .btn-del,
-#epcurate-curation #cur-poi-edit           .content .btn-container .btn-save,
-#epcurate-curation #cur-poi-edit.edit .content .btn-container .btn-add,
-#epcurate-curation #cur-poi-edit.edit .content .btn-container .btn-next {
+#epcurate-curation #cur-poi-edit.edit p.title,
+#epcurate-curation #cur-poi-edit      .content .btn-container .btn-del,
+#epcurate-curation #cur-poi-edit      .content .btn-container .btn-save,
+#epcurate-curation #cur-poi-edit.edit .content .btn-container .btn-add {
     display: none;
 }
 
 #epcurate-curation #cur-poi-edit h3,
 #epcurate-curation #cur-poi-edit ul,
 #epcurate-curation #cur-poi-edit.edit h3.edit,
-#epcurate-curation #cur-poi-edit.edit ul.edit,
+#epcurate-curation #cur-poi-edit.edit p.edit,
 #epcurate-curation #cur-poi-edit.edit .content .btn-container .btn-del,
 #epcurate-curation #cur-poi-edit.edit .content .btn-container .btn-save {
     display: block;
