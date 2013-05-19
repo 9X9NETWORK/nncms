@@ -1203,7 +1203,7 @@ $(function () {
         return false;
     });
     // POI overlay - cancel and close
-    $('#poi-event-overlay').on('click', '.btn-cancel, .btn-close', function (e) {
+    $('#poi-event-overlay').on('click', '.btn-cancel, .overlay-btn-close', function (e) {
         if ($('body').hasClass('has-poi-change')) {
             showUnsavePoiMask(e);
             return false;

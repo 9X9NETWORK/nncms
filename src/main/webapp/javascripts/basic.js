@@ -74,12 +74,12 @@ function showSystemErrorOverlayAndHookError(msg) {
 
 function showProcessingOverlay() {
     $('#overlay-s .overlay-middle').html('<img src="images/icon_load_l.gif" alt="" />' + nn._(['overlay', 'loading', 'Processing...']));
-    $('#overlay-s').fadeIn().css('z-index', '1200')
+    $('#overlay-s').fadeIn().css('z-index', '1200');
 }
 
 function showSavingOverlay() {
     $('#overlay-s .overlay-middle').html('<img src="images/icon_load_l.gif" alt="" />' + nn._(['overlay', 'loading', 'Saving...']));
-    $('#overlay-s').fadeIn().css('z-index', '1200')
+    $('#overlay-s').fadeIn().css('z-index', '1200');
 }
 
 function buildUnsaveOverlay(hook) {

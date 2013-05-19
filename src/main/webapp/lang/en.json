@@ -69,14 +69,11 @@
         },
         "button": {
             "OK":                                                                                                                               "OK",
-            "Delete":                                                                                                                           "Delete",
-            "No":                                                                                                                               "No",
-            "Leave":                                                                                                                            "Leave",
             "Yes":                                                                                                                              "Yes",
+            "No":                                                                                                                               "No",
+            "Back":                                                                                                                             "Back",
             "Disconnect":                                                                                                                       "Disconnect",
-            "{No}":                                                                                                                             "No",
-            "Restart connection":                                                                                                               "Restart connection",
-            "Back":                                                                                                                             "Back"
+            "Restart connection":                                                                                                               "Restart connection"
         }
     },
     "upload": {
@@ -383,7 +380,7 @@
         },
         "poi-event": {
             "+ Create POI & interactive event":                                                                                                 "+ Create POI & interactive event",
-            "POI & interactive event List":                                                                                                     "POI & interactive event List",
+            "POI & interactive event list":                                                                                                     "POI & interactive event list",
             "Add an interactive event and call to action message at a point of interaction.":                                                   "Add an interactive event and call to action message at a point of interaction.",
             "Create POI & interactive event":                                                                                                   "Create POI & interactive event",
             "Edit POI & interactive event":                                                                                                     "Edit POI & interactive event",

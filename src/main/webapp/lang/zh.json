@@ -69,14 +69,11 @@
         },
         "button": {
             "OK":                                                                                                                               "OK",
-            "Delete":                                                                                                                           "刪除",
-            "No":                                                                                                                               "取消",
-            "Leave":                                                                                                                            "離開",
-            "Yes":                                                                                                                              "確定",
+            "Yes":                                                                                                                              "是",
+            "No":                                                                                                                               "否",
+            "Back":                                                                                                                             "上一步",
             "Disconnect":                                                                                                                       "取消連結",
-            "{No}":                                                                                                                             "否",
-            "Restart connection":                                                                                                               "重啟連結",
-            "Back":                                                                                                                             "上一步"
+            "Restart connection":                                                                                                               "重啟連結"
         }
     },
     "upload": {
@@ -383,7 +380,7 @@
         },
         "poi-event": {
             "+ Create POI & interactive event":                                                                                                 "+ 新增互動時間點與事件",
-            "POI & interactive event List":                                                                                                     "互動時間點與事件列表",
+            "POI & interactive event list":                                                                                                     "互動時間點與事件列表",
             "Add an interactive event and call to action message at a point of interaction.":                                                   "在一段特定的影片播放時間內，新增一個互動事件及其號召互動的訊息。",
             "Create POI & interactive event":                                                                                                   "新增互動時間點與事件",
             "Edit POI & interactive event":                                                                                                     "編輯互動時間點與事件",

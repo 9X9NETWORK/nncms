@@ -1,3 +1,99 @@
+版本: 1042
+作者: chihwen
+日期: 2013年5月19日 下午 08:11:20
+訊息:
+移除已用不到的語系設定
+
+1. 移除已用不到的語系設定。
+2. 修正 basic.js 遺漏的結尾分號。
+issue 6367
+----
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+
+版本: 1041
+作者: chihwen
+日期: 2013年5月19日 下午 06:28:31
+訊息:
+統一全站 刪除提示 與 未儲存提示 按鈕語系文案
+issue 6367
+----
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/epcurate-publish.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/index.html
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+
+版本: 1040
+作者: chihwen
+日期: 2013年5月19日 下午 05:59:56
+訊息:
+統一 POI 列表英文翻譯
+
+1. 統一 POI 列表英文翻譯。
+2. 同步 src 版本 1038。
+issue 6367
+----
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/javascripts/perfect-scrollbar.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+
+版本: 1035
+作者: chihwen
+日期: 2013年5月17日 下午 02:54:09
+訊息:
+修補版本 1033 結構異動後，右上角關閉事件遺失問題
+issue 6367
+----
+異動 : /fakeapi/javascripts/curation.js
+
+版本: 1034
+作者: chihwen
+日期: 2013年5月17日 下午 02:49:37
+訊息:
+統一全站 刪除提示 與 未儲存提示 按鈕語系文案
+issue 6367
+----
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/epcurate-publish.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/index.html
+
+版本: 1033
+作者: chihwen
+日期: 2013年5月17日 下午 02:04:06
+訊息:
+修正 Sub-ep POI event overlay 右上角關閉按鈕跑版問題
+
+1. 同步 src 版本 1032 (注意1032尚未完全同步完成)。
+   1. 調整 episode poi overlay 右上角 close button class。
+   2. 調整 coming soon 區塊樣式。
+   3. mobile notification time 的 tooltip 改成箭頭在下。
+2. 修正 Sub-ep POI event overlay 右上角關閉按鈕跑版問題。
+3. 調整 POI display text 及 button text 輸入字數限制。
+issue 6367
+----
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/stylesheets/lightbox.css
+
+版本: 1031
+作者: chihwen
+日期: 2013年5月16日 下午 11:49:38
+訊息:
+調整 POI 刪除提示與未儲存提示按鈕中文語系文案
+issue 6367
+----
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+
 版本: 1029
 作者: chihwen
 日期: 2013年5月16日 下午 10:12:30

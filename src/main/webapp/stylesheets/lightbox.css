@@ -894,7 +894,7 @@
 
 #poi-event-overlay .wrap .content ul.list li .block .img.coming-soon {
     box-shadow: 0 1px 10px rgba(255, 255, 255, 0.75) inset, 0 0 10px rgba(255, 255, 255, 0.9) inset, 0 0 2px rgba(255, 255, 255, 0.9) inset, 0 0 20px rgba(255, 255, 255, 0.8);
-    border: 1px solid #555;
+    border: 1px solid #a0a0a0;
     background: #d8d8d8;
     background-image: none;
     behavior: url(PIE.htc);
@@ -1360,7 +1360,7 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
 #poi-event-overlay .wrap .content .event .mobile-edit .notification h4 a .tip {
     display: none;
     position: absolute;
-    top: 20px;
+    top: -51px;
     left: 159px;
     z-index: 100001;
     height: 45px;
@@ -1379,7 +1379,7 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification h4 a .tip img {
     position: absolute;
-    top: -7px;
+    top: 41px;
     left: 7px;
 }
 

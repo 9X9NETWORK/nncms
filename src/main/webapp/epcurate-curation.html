@@ -266,7 +266,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'video-info', 'By'])} <a href="http://www.youtube.com/
 </div>
 {{if poiList.length > 0}}
 <div class="poi-list">
-<h3>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI & interactive event List'])}</h3>
+<h3>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI & interactive event list'])}</h3>
 <div class="poi-list-wrap">
 <a href="#" class="prev">prev</a>
 <a href="#" class="next">next</a>
@@ -362,7 +362,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 
 <script id="poi-event-overlay-tmpl" type="text/x-jquery-tmpl">
 <div id="poi-event-overlay-wrap" class="content" data-program-id="${targetId}" data-poi-point-id="${id}" data-poi-event-id="${eventId}" data-poi-event-type="${eventType}">
-<a href="#" class="btn-close">Close</a>
+<a href="#" class="overlay-btn-close">Close</a>
 <h3 class="create">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI & interactive event'])}</h3>
 <h3 class="edit">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Edit POI & interactive event'])}</h3>
 <div id="event-select" class="event">
@@ -416,11 +416,11 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 <div class="event-input">
 <div class="fminput">
 <label for="hyper_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Display text'])}:</label>
-<p class="text"><span><input type="text" name="displayText" id="hyper_display_text" maxlength="100" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
+<p class="text"><span><input type="text" name="displayText" id="hyper_display_text" maxlength="40" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
 </div>
 <div class="fminput even">
 <label for="hyper_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Button text'])}:</label>
-<p class="text"><span><input type="text" name="btnText" id="hyper_button_text" maxlength="100" value="${button}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
+<p class="text"><span><input type="text" name="btnText" id="hyper_button_text" maxlength="20" value="${button}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
 </div>
 <div class="fminput">
 <label for="hyper_link"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Hyper link'])}:</label>
@@ -454,11 +454,11 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 <div class="event-input">
 <div class="fminput">
 <label for="schedule_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Display text'])}:</label>
-<p class="text"><span><input type="text" name="displayText" id="schedule_display_text" maxlength="100" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
+<p class="text"><span><input type="text" name="displayText" id="schedule_display_text" maxlength="40" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
 </div>
 <div class="fminput even">
 <label for="schedule_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Button text'])}:</label>
-<p class="text"><span><input type="text" name="btnText" id="schedule_button_text" maxlength="100" value="${button}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
+<p class="text"><span><input type="text" name="btnText" id="schedule_button_text" maxlength="20" value="${button}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
 </div>
 </div>
 <div class="func">
@@ -515,7 +515,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 <div class="time">
 <h4>
 <acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile notification time'])}
-<a href="#" class="mobile-tip"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add a mobile notification time to remind your viewers.'])}</span></span></span></a>
+<a href="#" class="mobile-tip"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add a mobile notification time to remind your viewers.'])}</span></span></span></a>
 </h4>
 <div class="datepicker"></div>
 <input type="hidden" name="datepicker" id="datepicker_selected" value="2013/05/05,2013/05/06,2013/05/30" />
@@ -599,11 +599,11 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 <div class="event-input">
 <div class="fminput">
 <label for="instant_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Display text'])}:</label>
-<p class="text"><span><input type="text" name="displayText" id="instant_display_text" maxlength="100" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
+<p class="text"><span><input type="text" name="displayText" id="instant_display_text" maxlength="40" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
 </div>
 <div class="fminput even">
 <label for="instant_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Button text'])}:</label>
-<p class="text"><span><input type="text" name="btnText" id="instant_button_text" maxlength="100" value="${button}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
+<p class="text"><span><input type="text" name="btnText" id="instant_button_text" maxlength="20" value="${button}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
 </div>
 </div>
 <div class="func">
@@ -977,7 +977,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id=
 <p class="content">Are you sure you want to delete this title?</p>
 <div class="overlay-btn">
 <p class="btns btn-no"><span><a href="#">No</a></span></p>
-<p class="btns btn-del"><span><a href="#">Delete</a></span></p>
+<p class="btns btn-del"><span><a href="#">Yes</a></span></p>
 </div>
 </div>
 </div>
@@ -990,7 +990,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id=
 <p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
 <div class="overlay-btn">
 <p class="btns btn-no"><span><a href="#">No</a></span></p>
-<p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
+<p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
 </div>
 </div>
 </div>
@@ -1003,7 +1003,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id=
 <p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
 <div class="overlay-btn">
 <p class="btns btn-no"><span><a href="#">No</a></span></p>
-<p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
+<p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
 </div>
 </div>
 </div>
@@ -1016,7 +1016,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id=
 <p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
 <div class="overlay-btn">
 <p class="btns btn-no"><span><a href="#">No</a></span></p>
-<p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
+<p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
 </div>
 </div>
 </div>
@@ -1068,7 +1068,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id=
 <p class="content">Are you sure you want to delete this POI with interactive event?</p>
 <div class="overlay-btn">
 <p class="btns btn-no"><span><a href="#">No</a></span></p>
-<p class="btns btn-del"><span><a href="#">Delete</a></span></p>
+<p class="btns btn-del"><span><a href="#">Yes</a></span></p>
 </div>
 </div>
 </div>
