@@ -57,6 +57,7 @@
             "Not right now, thanks!":                                                                                                           "Not right now, thanks!"
         },
         "facebook": {
+            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.":"You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.",       
             "CMS Setup":                                                                                                                        "CMS Setup",
             "Connect to":                                                                                                                       "Connect to",
             "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.":                                     "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.",
@@ -68,6 +69,7 @@
             "Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?":                     "Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?"
         },
         "button": {
+            "Leave": "Leave",
             "OK":                                                                                                                               "OK",
             "Yes":                                                                                                                              "Yes",
             "No":                                                                                                                               "No",
@@ -98,6 +100,13 @@
         "drop":                                                                                                                                 "Drop"
     },
     "signin": {
+        "login-holder": {
+            "Sign In with your E-mail and password": "Sign In with your E-mail and password",
+            "Sign In": "Sign In"
+        },
+		"errMsg": {
+			"Error : USER_INVALID" : "Invalid E-mail, please retry."
+		},
         "html-title": {
             "9x9.tv - SignIn":                                                                                                                  "9x9.tv - SignIn"
         },
@@ -150,6 +159,124 @@
             "Only letters, numbers or low line are allowed.":                                                                                   " letters, numbers or low line are allowed."
         }
     },
+    "brand-setting": {
+        "html-title": {
+            "9x9.tv - Brand Setting": "9x9.tv - Brand Setting"
+        },
+        "func-nav": {
+            "My Portal": "My Portal",
+            "Channel Store": "Channel Store",
+            "Brand Settings": "Brand Settings"
+        },
+        "title-func": {
+            "Portal": "Portal",
+            "Brand Settings": "Brand Settings",
+            "Save": "Save"
+        },
+        "brand-layer": {
+            "Name:" : "Name:",
+            "Brand Logo:": "Brand Logo:",
+            "Best within 16 characters": "Best within 16 characters",
+            "Please fill in your brand name.": "Please fill in your brand name.",
+            "Better results with 260x200 or higher resolution image.": "Better results with 260x200 or higher resolution image.",
+            "Please upload png file.": "Please upload png file."
+        }
+    },
+     "store-manage": {
+        "html-title": {
+            "9x9.tv - Store Manage": "9x9.tv - Store Manage"
+        },
+        "func-nav": {
+            "My Portal": "My Portal",
+            "Channel Store": "Channel Store",
+            "Brand Settings": "Brand Settings"
+        },
+        "title-func": {
+            "Channel Store": "Channel Store",
+            "Portal": "Preview",
+            "Preview": "Preview",
+            "Save": "Save",
+            "Set Name" : "Set Name"
+        },
+        "store-layer": {
+            "xxx channels in category:":"{0} channels in category:",
+            "You can manage your channel store manually.":"You can manage your channel store manually.",
+            "Collapse": "Collapse",
+            "Expand Category": "Expand Category",
+            "Load More": "Load More",
+            "Processing...": "Processing..."
+        },
+        "channel-list": {
+            "Sorted by" : "Sorted by",
+            "Updated time" : "Updated time ", 
+            "Customized Order" : "Customized Order", 
+            "Best within 20 characters" : "Best within 20 characters", 
+            "Set Name" : "Set Name ", 
+            "Channel List" : "Channel List ", 
+            "Channels" : "Channels",
+            "Add channels": "Add channels", 
+            "Add channels sub": "",
+            "Please input channel URL":"Please input channel URL",
+            "Please input channel name or curator name":"Please input channel name or curator name",
+            "Set on top": "Set on top",
+            "Remove from top": "Remove from top",
+            "Remove channel": "Remove channel",
+            "Add channel": "Add channel",
+            "You can only set 4 channels on top": "You can only set 4 channels on top",
+            "Set name can't be empty": "Set name can't be empty"
+        }
+    },    
+     "portal-manage": {
+        "html-title": {
+            "9x9.tv - My Portal": "9x9.tv - My Portal"
+        },
+        "func-nav": {
+            "My Portal": "My Portal",
+            "Channel Store": "Channel Store",
+            "Brand": "Brand"
+        },
+        "sets-list": {
+            "Channels": "Channels",
+            "Add Channels": "Add Channels",
+            "Edit": "Edit"
+        },
+        "title-func": {
+            "My Portal": "My Portal",
+            "Portal": "Portal",
+            "Preview": "Preview",
+            "Save": "Save"
+        },
+        "portal-add-layer": {
+            "Channel URL" : "Channel URL",
+            "Keywords" : "Keywords",
+            "Search" : "Search",
+            "Find <span>?</span> channels, you can choose <span>?</span> channels." : "Find <span>{0}</span> channels, you can choose <span id='searchCanChannel'>{1}</span> channels.",
+            "Set Name:": "Set Name:",
+            "Results:": "Results:",
+            "Add channels into your “<span>Set 2</span>”": "Add channels into your “<span>{0}</span>”",
+            "Please fill in the channel url to search.": "Please fill in the channel url to search.",
+            "Please fill in the keywords to search.": "Please fill in the keywords to search.",
+            "Processing...": "Processing..."
+        },
+        "portal-layer": {
+            "You can add 27 channels into your channel set.":"You can add 27 channels into your channel set.",
+            "Processing...": "Processing..."
+        },
+        "channel-list": {
+            "Sorted by" : "Sorted by",
+            "Updated time" : "Updated time ", 
+            "Customized Order" : "Customized Order", 
+            "Best within 20 characters" : "Best within 20 characters", 
+            "Set Name" : "Set Name ", 
+            "Channel List" : "Channel List ", 
+            "Channels" : "Channels",
+            "Add channels": "Add",
+            "Add channels sub": "&nbsp;&nbsp;&nbsp;channels",
+            "Please input channel URL":"Please input channel URL",
+            "Please input channel name or curator name":"Please input channel name or curator name", 
+            "Please fill in your set name.": "Please fill in your set name."
+        }
+    },    
     "portal-set": {
         "html-title": {
             "9x9.tv - My Portal":                                                                                                               "9x9.tv - My Portal"

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<link rel="stylesheet" href="stylesheets/style.css?v=912" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=912" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=912" />
+<link rel="stylesheet" href="stylesheets/episode.css?v=912" />
+<link rel="stylesheet" href="stylesheets/portal.css?v=912" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+<script src="javascripts/nn-sdk.js?v=912"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=912"></script>
+<script src="javascripts/jquery.ellipsis.js?v=912"></script>
+<script src="javascripts/jquery.blockUI.js?v=912"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=912"></script>
+<script src="javascripts/jquery.charcounter.min.js?v=912"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=912"></script>
+<script src="javascripts/jquery.cookie.js?v=912"></script>
+<script src="javascripts/json2.js?v=912"></script>
+<script src="javascripts/purl.js?v=912"></script>
+<script src="javascripts/vertical.slider.js?v=912"></script>
+<script src="javascripts/config.js?v=912"></script>
+<script src="javascripts/controller.js?v=912"></script>
+<script src="javascripts/basic.js?v=912"></script>
+<script src="javascripts/portal.store.js?v=912"></script>
+
+<title>9x9.tv - Store Manage</title>
+</head>
+<body>
+<div id="fb-root"></div>
+
+<!-- Header Layer Begin -->
+<div id="header">
+  <a href="http://www.9x9.tv/" target="_blank" id="logo"></a>
+  <ul id="nav">
+    <li id="home"><span><a href="http://www.9x9.tv" target="_blank">9x9.tv Official Web</a></span></li>
+    <li id="tv"><span><a href="http://www.9x9.tv/tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
+    <li id="login" style="display:none" ><span>Partner Sign-in</span></li>
+    <li id="profile">
+      <p id="btn-profile"></p>
+      <p id="selected-profile">Guest</p>
+      <ul id="profile-dropdown" class="dropdown">
+        <li><a id="profile-logout" href="/api/login">Log out</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!-- Header Layer End -->
+
+<!-- Navigation Layer Begin -->
+<div id="studio-nav">
+    <div class="studio-nav-wrap">
+        <h3><a href="./">Studio</a></h3>
+        <ul>
+            <li><span><a href="index.html">My Channels</a></span></li>
+            <li class="on"><span><a href="#">My Portal</a></span></li>
+        </ul>
+        <div class="studio-setup fb-connect">
+            <p style="display: none" class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="#"><img src="images/icon_studio_setup.png" alt="" />CMS Settings</a></span></span></p>
+            <div class="reconnect-notice hide">
+                <img src="images/icon_notification.png" alt="" />
+                <p class="notice-left"><span class="notice-right"><span class="notice-middle langkey">Connection is inactive, click to restart it.</span></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navigation Layer End -->
+
+<!-- Content Layer Begin -->
+<div id="content-wrap" >
+
+	<!-- Content Nav Layer Begin -->
+    <div id="content-nav">
+        <div id="func-nav">
+            <ul>
+                <li><a href="portal-set.html" class="portal langkey">My Portal</a></li>
+                <li class="active"><a href="store-manage.html" class="store langkey">Channel Store</a></li>
+                <li><a href="brand-setting.html" class="brand langkey">Brand Settings</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Content Nav Layer End -->
+    
+	<div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
+
+	<div id="content-main"> 
+        <div id="title-func" class="clearfix ">
+        	<h2><span class="langkey">Channel Store</span> &gt; <span class="func_name"><span> </h2>
+            <ul>
+                <li id="set-save" class="last" ><p class="" style="">&nbsp;<span><a style="display: none" href="javascript:void(0)" class="langkey">Save</a></span></p></li>
+            </ul>
+    	</div>
+    
+            <!-- Portal Layer Begin -->
+            <div id="store-layer">
+                    <div id="store-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
+                   <div id="store-category" class="clearfix">
+                       <ul id="store-category-ul">
+                            
+                        </ul>
+                        <div class="btn-gray collapse">
+                            <p class="left"></p>
+                            <p class="center"><span class="icon langkey">Collapse</span></p>
+                            <p class="right"></p>
+                        </div>
+                        <div class="btn-gray expand">
+                            <p class="left"></p>
+                            <p class="center"><span class="icon langkey">Expand Category</span></p>
+                            <p class="right"></p>
+                        </div>
+                        <div class="clear info">
+                            <span class="form-title"></span>    
+                            <span class="form-content langkey">You can manage your channel store manually.</span>
+                        </div>
+                    </div>    
+    
+            <div id="store-constrain">
+            <div id="store-list">
+                
+                <ul class="channel-list">
+
+                </ul>
+                
+                <div class="load">
+                    <p class="left"></p>
+                    <p class="center"><span><img src="images/icon_load.gif"/><span class="langkey">Load More</span></span></p>
+                    <p class="right"></p>
+                </div>           
+              
+              </div>
+              </div>
+            
+            </div>
+            <!-- Portal Layer End -->
+
+
+	</div>
+
+</div>
+<!-- Content Layer End -->
+
+<!--============================== footer start ==============================-->
+<p id="footer-control"></p>
+<div id="footer">
+  <span>© 2013 9x9.tv. All rights reserved.</span>
+  <ul id="footer-list">
+    <li id="language-change">
+      <p class="select-txt"><a href="javascript:void(0);" id="language">Language</a></p>
+      <p class="select-btn"></p>
+      <ul class="select-list">
+        <li><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!--============================== footer close ==============================-->
+
+
+
+
+
+
+
+<script id="store-category-li-tmpl" type="text/x-jquery-tmpl">
+    <li data-meta="${id}" class="catLi {{if $item.actCat == id }}on{{/if}}">${name}</li>
+</script>
+
+
+<script id="store-chanels-li-tmpl" type="text/x-jquery-tmpl">
+	{{if msoMinus === "on"}}
+                    <li id="channel_${id}" class="channelItem minus">
+                        <div class="thumb">
+                            <div class="btn-minus on">
+                                <div class="icon-holder"></div>
+                                <div class="tip-white">
+                                    <p class="left"></p>
+                                    <p id="" class="center" >${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Add channel'])}</p>
+                                    <p class="right"></p>    
+                                </div>
+                                <div class="tip-top"></div>
+                            </div>
+                            <a href="/view?ch=${id}" target="_blank" >
+                                <img class="watermark" alt="" src="images/icon_playlist.png">
+                            </a>
+                            <div class="ch">
+                                <div class="img">
+                                <img src="${imageUrl}" />
+                                </div>
+                            </div>
+                        </div>
+                        <p class="ch-title">${name}</p>
+                    </li>
+	{{else}}                    
+                    <li id="channel_${id}" class="channelItem">
+                        <div class="thumb">
+                            <div class="btn-minus">
+                                <div class="icon-holder"></div>
+                                <div class="tip-white">
+                                    <p class="left"></p>
+                                    <p class="center">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Remove channel'])}</p>
+                                    <p class="right"></p>    
+                                </div>
+                                <div class="tip-top"></div>
+                            </div>
+                            <a href="/view?ch=${id}" target="_blank" >
+                                <img class="watermark" alt="" src="images/icon_playlist.png">
+                            </a>
+                            <div class="ch">
+                                <div class="img">
+                                <img src="${imageUrl}" />
+                                </div>
+                            </div>
+                        </div>
+                        <p class="ch-title">${name}</p>
+                    </li>
+	{{/if}}
+</script>
+
+
+<!-- Loading Layer Begin -->
+<div id="overlay-s">
+    <p class="overlay-content"><span class="overlay-right"><span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span></span></p>
+</div>
+<!-- Loading Layer End -->
+
+
+<div id="system-error" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">You are not authorized to edit this episode.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+<div class="overlay-btn">
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+<p class="btns btn-leave"><span><a href="#">Leave</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="publish-notice" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<p class="content">This episode has been published.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unpublish-notice" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<p class="content">This episode has been saved as an unpublished draft.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

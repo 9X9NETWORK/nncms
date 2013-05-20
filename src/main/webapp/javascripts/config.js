@@ -170,6 +170,7 @@ var CMS_CONF = {
     EPISODES_PAGING: [],
     EPISODES_PAGING_INFO: [],
     SLIDER_MAX: 100,
+	MSO: 0,
     POI_TYPE_MAP: {
         'event-hyper': {
             code: 1,
