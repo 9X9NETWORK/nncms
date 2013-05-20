@@ -4,7 +4,7 @@ $(document).on("click", "#set-preview", function(event) {
     console.log("#portal-constrain ** " + $("#portal-constrain").height());
     console.log("#portal-list ** " + $("#portal-list").height());
     console.log("#portal-slider ** " + $("#portal-slider").height());
-    alert($("#portal-list").css("top"));
+    //alert($("#portal-list").css("top"));
 });
 
 $(document).on("click", "#set-save", function(event) {
@@ -251,7 +251,7 @@ $(document).on("click", "#portal_search_channel", function(event) {
                     });
 
                 } else {
-                    alert("請輸入9x9格式網址!!");
+                    $("#msg-search").text(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Please fill in the channel url to search."])).show();
                 }
                 $('#overlay-s').fadeOut("slow");
                 break;
@@ -278,23 +278,15 @@ $(document).on("click", "#portal_search_channel", function(event) {
                                     channel.imageUrl = temp[0];
                                 }
                             }
-
                         }
-
                         items.push(channel);
                     });
-
-                    //$('#search-channel-list').html('');
-
                     $('#portal-search-item-tmpl').tmpl(items).appendTo('#search-channel-list');
 
                     var pageChannel = Math.floor($(".list-holder").width() / 117) * 2;
                     if (cntChannel > pageChannel) {
                         $("#searchNext").show();
                     }
-
-                    //alert("keyword :" + strInput + "\n筆數:" + cntChannel);
-                    //console.log("out str:\n" + outStr);
                     $('#overlay-s').fadeOut("slow");
                 });
                 break;
@@ -541,6 +533,7 @@ $(document).on('click', '#unsave-prompt .btn-leave', function() {
 });
 
 function _search_channel_clean() {
+    $("#msg-search").hide();
     $("#sRusult").html("");
     $("#search-channel-list").html("");
     $("#searchPrev").hide();
