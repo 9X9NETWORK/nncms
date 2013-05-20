@@ -361,7 +361,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 </script>
 
 <script id="poi-event-overlay-tmpl" type="text/x-jquery-tmpl">
-<div id="poi-event-overlay-wrap" class="content" data-program-id="${targetId}" data-poi-point-id="${id}" data-poi-event-id="${eventId}" data-poi-event-type="${eventType}">
+<div id="poi-event-overlay-wrap" class="content" data-program-id="${targetId}" data-poi-point-id="${id}" data-poi-event-id="${eventId}" data-poi-event-type="${eventType}" data-poi-event-type-key="${CMS_CONF.POI_TYPE_MAP[eventType]}">
 <a href="#" class="overlay-btn-close">Close</a>
 <h3 class="create">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI & interactive event'])}</h3>
 <h3 class="edit">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Edit POI & interactive event'])}</h3>
@@ -403,6 +403,8 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 
 <div id="event-hyper" class="event hide">
 <form name="eventHyperForm" id="eventHyperForm" method="get" action="">
+<input type="hidden" name="notifyMsg" value="" />
+<input type="hidden" name="notifyScheduler" value="" />
 <p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Hyper Link'])}</p>
 <p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Hyper Link'])}</p>
 <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
@@ -585,6 +587,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 
 <div id="event-instant" class="event hide">
 <form name="eventInstantForm" id="eventInstantForm" method="get" action="">
+<input type="hidden" name="notifyScheduler" value="" />
 <div id="instant-notify" class="instant">
 <p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Instant Notification'])} &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
 <p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Instant Notification'])} &gt; <a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</a></p>
@@ -653,7 +656,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 <div class="notification">
 <div class="msg">
 <h4><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile notification message'])}</h4>
-<p class="textarea"><span><span><textarea name="message" id="instant_msg" cols="80" class="textarea" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}">${notifyMsg}</textarea></span></span></p>
+<p class="textarea"><span><span><textarea name="notifyMsg" id="instant_msg" cols="80" class="textarea" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}">${notifyMsg}</textarea></span></span></p>
 <p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Recommend: less 34 bytes'])}</p>
 <p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'The mobile notification will instant send, when user pressed OK or Enter.'])}</p>
 </div>

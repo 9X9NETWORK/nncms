@@ -1153,7 +1153,7 @@ $(function () {
         $('#cur-poi-edit .edit-form .notice').addClass('hide');
     });
     $('#poi-event-overlay').on('click', 'input[type=text], textarea', function () {
-        $('#event-hyper .event-input .fminput .notice').hide();
+        $('#poi-event-overlay .event .event-input .fminput .notice').hide();
         $('#poi-event-overlay .event .func ul li.notice').hide();
     });
     // POI hook has change
@@ -1450,25 +1450,16 @@ $(function () {
         return false;
     });
 
-    // TODO
-    // POI overlay - save
-    $('#poi-event-overlay').on('click', '#event-scheduled .btn-save, #event-instant .btn-save', function () {
-        alert('TODO: under construction');
-        return false;
-        $.unblockUI();
-        $('#epcurate-curation .tab-content').addClass('hide');
-        $('#cur-poi').removeClass('hide');
-        $('#epcurate-curation ul.tabs li.edit-poi').addClass('hide');
-        $('#epcurate-curation ul.tabs li.poi').addClass('last on');
-        $('#epcurate-curation ul.tabs li.poi').removeClass('hide');
-        $('body').removeClass('has-poi-change');
-        return false;
-    });
-
-    // TODO 3 type
     // Save POI event
-    $('#poi-event-overlay').on('click', '#event-hyper .btn-save', function () {
-        chkPoiEventData(document.eventHyperForm, function (result) {
+    $('#poi-event-overlay').on('click', '#poi-event-overlay-wrap .btn-save', function () {
+        var poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey'),
+            formId = CMS_CONF.POI_TYPE_MAP[poiEventTypeKey].formId;
+        // TODO 3 type
+        if (-1 !== $.inArray(poiEventTypeKey, ['event-scheduled', 'event-instant'])) {
+            alert('TODO: under construction');
+            return false;
+        }
+        chkPoiEventData(document.forms[formId], function (result) {
             if (result) {
                 var programId = $('#poi-event-overlay-wrap').data('programId'),
                     poiPointId = $('#poi-event-overlay-wrap').data('poiPointId'),
@@ -1487,11 +1478,12 @@ $(function () {
                         endTime: $('#poiEndTime').val(),
                         tag: $('#poiTag').val()
                     },
+                    // TODO actionUrl: http://www.9x9.tv/poiAction?poiId=9876
                     poiEventContext = {
-                        "message": $('#event-hyper input[name=displayText]').val(),
+                        "message": $('#' + formId + ' input[name=displayText]').val(),
                         "button": [{
-                            "text": $('#event-hyper input[name=btnText]').val(),
-                            "actionUrl": $('#event-hyper input[name=channelUrl]').val()
+                            "text": $('#' + formId + ' input[name=btnText]').val(),
+                            "actionUrl": $('#' + formId + ' input[name=channelUrl]').val()
                         }]
                     },
                     poiEventData = {
@@ -1499,17 +1491,18 @@ $(function () {
                         name: $('#poiName').val(),
                         type: poiEventType,
                         context: JSON.stringify(poiEventContext),
-                        notifyMsg: '',
-                        notifyScheduler: ''
+                        notifyMsg: $('#' + formId + ' input[name=notifyMsg]').val(),
+                        notifyScheduler: $('#' + formId + ' input[name=notifyScheduler]').val()
                     },
+                    // TODO actionUrl: http://www.9x9.tv/poiAction?poiId=9876
                     poiEventDataExtend = {
                         eventId: poiEventId,
                         eventType: poiEventType,
-                        message: $('#event-hyper input[name=displayText]').val(),
-                        button: $('#event-hyper input[name=btnText]').val(),
-                        link: $('#event-hyper input[name=channelUrl]').val(),
-                        notifyMsg: '',
-                        notifyScheduler: ''
+                        message: $('#' + formId + ' input[name=displayText]').val(),
+                        button: $('#' + formId + ' input[name=btnText]').val(),
+                        link: $('#' + formId + ' input[name=channelUrl]').val(),
+                        notifyMsg: $('#' + formId + ' input[name=notifyMsg]').val(),
+                        notifyScheduler: $('#' + formId + ' input[name=notifyScheduler]').val()
                     };
                 if ($('#cur-poi-edit').hasClass('edit') && '' != poiPointId) {
                     // update mode
@@ -1672,6 +1665,7 @@ $(function () {
                                             endTime: poiItem.endTime,
                                             tag: poiItem.tag
                                         };
+                                        // TODO actionUrl: http://www.9x9.tv/poiAction?poiId=9876
                                         poiEventContext = {
                                             "message": poiItem.message,
                                             "button": [{
@@ -1683,8 +1677,8 @@ $(function () {
                                             name: poiItem.name,
                                             type: poiItem.eventType,
                                             context: JSON.stringify(poiEventContext),
-                                            notifyMsg: '',
-                                            notifyScheduler: ''
+                                            notifyMsg: poiItem.notifyMsg,
+                                            notifyScheduler: poiItem.notifyScheduler
                                         };
                                         nn.api('POST', CMS_CONF.API('/api/programs/{programId}/poi_points', {programId: program.id}), poiPointData, function (poi_point) {
                                             nn.api('POST', CMS_CONF.API('/api/users/{userId}/poi_events', {userId: CMS_CONF.USER_DATA.id}), poiEventData, function (poi_event) {
@@ -1841,6 +1835,7 @@ $(function () {
                                             endTime: poiItem.endTime,
                                             tag: poiItem.tag
                                         };
+                                        // TODO actionUrl: http://www.9x9.tv/poiAction?poiId=9876
                                         poiEventContext = {
                                             "message": poiItem.message,
                                             "button": [{
@@ -1852,8 +1847,8 @@ $(function () {
                                             name: poiItem.name,
                                             type: poiItem.eventType,
                                             context: JSON.stringify(poiEventContext),
-                                            notifyMsg: '',
-                                            notifyScheduler: ''
+                                            notifyMsg: poiItem.notifyMsg,
+                                            notifyScheduler: poiItem.notifyScheduler
                                         };
                                         nn.api('POST', CMS_CONF.API('/api/programs/{programId}/poi_points', {programId: program.id}), poiPointData, function (poi_point) {
                                             nn.api('POST', CMS_CONF.API('/api/users/{userId}/poi_events', {userId: CMS_CONF.USER_DATA.id}), poiEventData, function (poi_event) {
@@ -2140,7 +2135,7 @@ function chkPoiEventData(fm, callback) {
             return false;
         }
         if (nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input 9x9 channel or episode URL']) === fm.channelUrl.value) {
-            $('#event-hyper .event-input .fminput .notice').show();
+            $('#poi-event-overlay .event .event-input .fminput .notice').show();
             callback(false);
             return false;
         }
@@ -2163,27 +2158,27 @@ function chkPoiEventData(fm, callback) {
             hostAllow.push(CMS_CONF.USER_URL.attr('host'));
         }
         if (-1 === $.inArray(url.attr('host'), hostAllow)) {
-            $('#event-hyper .event-input .fminput .notice').show();
+            $('#poi-event-overlay .event .event-input .fminput .notice').show();
             callback(false);
             return false;
         }
         if (-1 === $.inArray(url.attr('path'), pathAllow)) {
-            $('#event-hyper .event-input .fminput .notice').show();
+            $('#poi-event-overlay .event .event-input .fminput .notice').show();
             callback(false);
             return false;
         }
         if ('/' == url.attr('path') && '' == url.attr('fragment')) {
-            $('#event-hyper .event-input .fminput .notice').show();
+            $('#poi-event-overlay .event .event-input .fminput .notice').show();
             callback(false);
             return false;
         }
         if ('/view' == url.attr('path') && '' == url.attr('query')) {
-            $('#event-hyper .event-input .fminput .notice').show();
+            $('#poi-event-overlay .event .event-input .fminput .notice').show();
             callback(false);
             return false;
         }
         if ('/playback' == url.attr('path') && '' == url.attr('query')) {
-            $('#event-hyper .event-input .fminput .notice').show();
+            $('#poi-event-overlay .event .event-input .fminput .notice').show();
             callback(false);
             return false;
         }
@@ -2208,13 +2203,13 @@ function chkPoiEventData(fm, callback) {
             }
         }
         if ('' == cid) {
-            $('#event-hyper .event-input .fminput .notice').show();
+            $('#poi-event-overlay .event .event-input .fminput .notice').show();
             callback(false);
             return false;
         }
         nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
             nn.log(textStatus + ': ' + jqXHR.responseText, 'warning');
-            $('#event-hyper .event-input .fminput .notice').show();
+            $('#poi-event-overlay .event .event-input .fminput .notice').show();
             callback(false);
             return false;
         });
@@ -2231,7 +2226,7 @@ function chkPoiEventData(fm, callback) {
                                 callback(true);
                                 return true;
                             } else {
-                                $('#event-hyper .event-input .fminput .notice').show();
+                                $('#poi-event-overlay .event .event-input .fminput .notice').show();
                                 callback(false);
                                 return false;
                             }
@@ -2245,7 +2240,7 @@ function chkPoiEventData(fm, callback) {
                         return true;
                     }
                 } else {
-                    $('#event-hyper .event-input .fminput .notice').show();
+                    $('#poi-event-overlay .event .event-input .fminput .notice').show();
                     callback(false);
                     return false;
                 }
@@ -2260,7 +2255,7 @@ function chkPoiEventData(fm, callback) {
                     callback(true);
                     return true;
                 } else {
-                    $('#event-hyper .event-input .fminput .notice').show();
+                    $('#poi-event-overlay .event .event-input .fminput .notice').show();
                     callback(false);
                     return false;
                 }
@@ -2675,7 +2670,8 @@ function buildPoiPointEditTmpl(poi_point) {
 
 function buildPoiEventOverlayTmpl(poi_event) {
     var videoData = $('#storyboard-list li.playing').tmplItem().data,
-        poiPointEventData = poi_event || {};
+        poiPointEventData = poi_event || {},
+        poiEventTypeKey = '';
     poiPointEventData = $.extend({
         id: 0,
         targetId: (videoData.id) ? videoData.id : 0,
@@ -2696,9 +2692,9 @@ function buildPoiEventOverlayTmpl(poi_event) {
             $('#poi-event-overlay .event').addClass('hide');
             if ($('#cur-poi-edit').hasClass('edit')) {
                 $('#poi-event-overlay').addClass('edit');
-                // TODO check event type
-                $('#event-hyper').removeClass('hide');
-                playPoiEventAndVideo('event-hyper');
+                poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey');
+                $('#' + poiEventTypeKey).removeClass('hide');
+                playPoiEventAndVideo(poiEventTypeKey);
             } else {
                 $('#poi-event-overlay').removeClass('edit');
                 $('#event-select').removeClass('hide');
@@ -2720,7 +2716,7 @@ function buildPoiEventOverlayTmpl(poi_event) {
 }
 
 function playPoiEventAndVideo(type) {
-    if (CMS_CONF.POI_TYPE_MAP[type]) {
+    if ('' != type && isNaN(type) && CMS_CONF.POI_TYPE_MAP[type]) {
         $('#poi-event-overlay-wrap').data('poiEventType', CMS_CONF.POI_TYPE_MAP[type]['code']);
         $('#poi-event-overlay-wrap').data('poiEventTypeKey', type);
         $('body').addClass('from-poi-overlay-edit-mode');

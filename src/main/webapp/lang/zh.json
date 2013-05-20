@@ -24,7 +24,7 @@
         },
         "system-error": {
             "Unknown error.":                                                                                                                   "未知的錯誤。",
-            "You are not authorized to PCS.": "你沒有授權使用 PCS ",
+            "You are not authorized to PCS.":                                                                                                   "你沒有授權使用PCS。",
             "You are not authorized to edit this channel.":                                                                                     "您沒有權限編輯此頻道。",
             "You are not authorized to edit this episode.":                                                                                     "您沒有權限編輯此節目。",
             "You are not authorized to edit episodes in this channel.":                                                                         "您沒有權限編輯此頻道的節目。",
@@ -58,7 +58,7 @@
             "Not right now, thanks!":                                                                                                           "現在不要，謝謝！"
         },
         "facebook": {
-            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.":"您將變更頻道排序至\"更新時間\"，系統將依頻道\"更新時間\"自動排序，除置頂頻道外，其餘您將無法手動進行變更順序。",       
+            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.":"您將變更頻道排序至\"更新時間\"，系統將依頻道\"更新時間\"自動排序，除置頂頻道外，其餘您將無法手動進行變更順序。",
             "CMS Setup":                                                                                                                        "管理系統設置",
             "Connect to":                                                                                                                       "連結帳號",
             "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.":                                     "連結帳號後，您可至頻道設定頁面為每個頻道設置是否自動分享至Facebook。",
@@ -70,7 +70,6 @@
             "Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?":                     "取消帳號連結將會同時取消所有頻道的自動分享設定，確定取消連結？"
         },
         "button": {
-            "Leave": "離開",
             "OK":                                                                                                                               "OK",
             "Yes":                                                                                                                              "是",
             "No":                                                                                                                               "否",
@@ -101,54 +100,6 @@
         "drop":                                                                                                                                 "投擲"
     },
     "signin": {
-        "login-holder": {
-            "Collect and Curate!"	:	"蒐集影片 策展頻道！",
-			"CMS is the management center for your 9x9.tv list-form channels!"	:	"後台管理系統是您策展9x9.tv頻道的管理中心！",
-			"Sign In"	:	"登入",
-			"Sign in with Facebook"	:	"使用Facebook登入",
-			"Sign In with your E-mail and password"	:	"輸入信箱與密碼登入",
-			"E-mail"	:	"信箱",
-			"Password"	:	"密碼",
-			"Forgot password?"	:	"忘記密碼",
-			"Need an account?"	:	"還沒有帳號嗎? ", 
-			"Sign up Now!":"馬上註冊!",
-			"Sign Up"	:	"註冊",
-			"Repeat Password"	:	"再次輸入密碼",
-			"This email has been used."	:	"此信箱已被使用",
-			"Two passwords don't match, please retype."	:	"輸入密碼不一致，請重新輸入",
-			"I have read and accepted the User Agreement and Privacy Policy"	:	"我已讀完並同意遵守隱私權政策與使用條款",
-			"User Name"	:	"用戶名稱",
-			"Create a unique user name in 9x9 which composed of 6-16 English letters ,numbers or low line."	:	"用戶名稱請輸入6-16個字元，只能使用中英文、數字和底線",
-			"Only letters, numbers or low line are allowed."	:	"用戶名稱只能使用中英文、數字或底線",
-			"Please input 6-16 characters in username."	:	"請在用戶名稱輸入6-16範圍的字元",
-			"Cancel"	:	"取消",
-			"Create My Account"	:	"送出",
-			"Forgot Password":"忘記密碼",
-			"Enter your email address and we`ll send you instructions.":"系統將會發送信件到您信箱，並導引您完成密碼設定。",
-			"Reset":"送出",
-			"Back to Sign In":"回到登入頁",
-			"Success!":"完成!",
-			"You should receive an email shortly.":"請收信前完成密碼重新設定。!",
-			"If you still need assistance, please":"如果你還需要協助，請!",
-			"contact us.":"連絡我們"
-		},
-		"errMsg": {
-			"Email format error!" : "電子郵件格式錯誤!",
-			"Please input password!" : "請輸入密碼!",
-			"Email and password do not match, please try again." : "信箱或密碼錯誤，請再次輸入!",
-			"Please fill your data!" : "請確實填入資料!",
-			"Please click agree !" : "你必需同意使用條款!",
-			"Passwrod not match!" : "密碼輸入必需相同!",
-			"Passwrod Enter 8-16 English letters ,numbers or low line!" : "密碼長度限制在6-16個字元內，組成字元沒有限制!",
-			"Invalid E-mail, please retry." : "無此帳號，請重新輸入",
-			"This email has been used." : "此信箱已被使用",
-			"Please input 6-16 characters in password." : "密碼長度限制為 6-16 個字元",
-			"USER_INVALID" : "無此帳號，請重新輸入",
-			"Please accept the agreements below." : "請接受以下的隱私權政策與使用條款。",
-			"The two passwords you entered do not match." : "輸入密碼不一致，請重新輸入。",
-			"Please input 6 to 16 characters in username." : "用戶名稱限制長度為6-16個字元",
-			"Only letters, numbers or low line are allowed." : "用戶名稱請輸入中英文、數字或底線。"
-		},
         "html-title": {
             "9x9.tv - SignIn":                                                                                                                  "9x9.tv - 登入"
         },
@@ -224,7 +175,7 @@
             "Please upload png file.": "請上傳 PNG 格式圖檔"
         }
     },
-     "store-manage": {
+    "store-manage": {
         "html-title": {
             "9x9.tv - Store Manage": "9x9.tv - 頻道商店 "
         },
@@ -267,8 +218,8 @@
             "You can only set 4 channels on top": "只能設定4個置頂頻道",
             "Set name can't be empty": "頻道組名稱不可空白"
         }
-    },    
-     "portal-manage": {
+    },
+    "portal-manage": {
         "html-title": {
             "9x9.tv - My Portal": "9x9.tv - 我的入口"
         },
@@ -323,8 +274,8 @@
             "You can only set 4 channels on top": "只能設定4個置頂頻道",
             "Please fill in your set name.": "請輸入頻道組名稱"
         }
-    },    
-     "portal-set": {
+    },
+    "portal-set": {
         "html-title": {
             "9x9.tv - My Portal": "9x9.tv - 我的入口"
         },
@@ -344,7 +295,6 @@
             "Portal": "我的入口"
         }
     },
-
     "index": {
         "html-title": {
             "9x9.tv - My Channels":                                                                                                             "9x9.tv - 我的頻道"

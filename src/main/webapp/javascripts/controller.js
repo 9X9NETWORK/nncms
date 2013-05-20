@@ -1332,7 +1332,7 @@ function setupLanguagePage() {
     }, 'json');
 }   // end of setupLanguagePage()
 
-$(function() {
+$(function () {
     nn.api('GET', CMS_CONF.API('/api/login'), function (user) {
         var tmpUrl = $.url();
         if (!user || !user.id) {

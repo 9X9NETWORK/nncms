@@ -24,6 +24,7 @@
         },
         "system-error": {
             "Unknown error.":                                                                                                                   "Unknown error.",
+            "You are not authorized to PCS.":                                                                                                   "You are not authorized to PCS.",
             "You are not authorized to edit this channel.":                                                                                     "You are not authorized to edit this channel.",
             "You are not authorized to edit this episode.":                                                                                     "You are not authorized to edit this episode.",
             "You are not authorized to edit episodes in this channel.":                                                                         "You are not authorized to edit episodes in this channel.",
@@ -57,7 +58,7 @@
             "Not right now, thanks!":                                                                                                           "Not right now, thanks!"
         },
         "facebook": {
-            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.":"You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.",       
+            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.":"You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.",
             "CMS Setup":                                                                                                                        "CMS Setup",
             "Connect to":                                                                                                                       "Connect to",
             "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.":                                     "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.",
@@ -69,7 +70,6 @@
             "Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?":                     "Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?"
         },
         "button": {
-            "Leave": "Leave",
             "OK":                                                                                                                               "OK",
             "Yes":                                                                                                                              "Yes",
             "No":                                                                                                                               "No",
@@ -100,13 +100,6 @@
         "drop":                                                                                                                                 "Drop"
     },
     "signin": {
-        "login-holder": {
-            "Sign In with your E-mail and password": "Sign In with your E-mail and password",
-            "Sign In": "Sign In"
-        },
-		"errMsg": {
-			"Error : USER_INVALID" : "Invalid E-mail, please retry."
-		},
         "html-title": {
             "9x9.tv - SignIn":                                                                                                                  "9x9.tv - SignIn"
         },
@@ -182,7 +175,7 @@
             "Please upload png file.": "Please upload png file."
         }
     },
-     "store-manage": {
+    "store-manage": {
         "html-title": {
             "9x9.tv - Store Manage": "9x9.tv - Store Manage"
         },
@@ -225,8 +218,8 @@
             "You can only set 4 channels on top": "You can only set 4 channels on top",
             "Set name can't be empty": "Set name can't be empty"
         }
-    },    
-     "portal-manage": {
+    },
+    "portal-manage": {
         "html-title": {
             "9x9.tv - My Portal": "9x9.tv - My Portal"
         },
@@ -244,7 +237,8 @@
             "My Portal": "My Portal",
             "Portal": "Portal",
             "Preview": "Preview",
-            "Save": "Save"
+            "Save": "Save",
+            "Set Name": "Set Name"
         },
         "portal-add-layer": {
             "Channel URL" : "Channel URL",
@@ -273,10 +267,14 @@
             "Add channels": "Add",
             "Add channels sub": "&nbsp;&nbsp;&nbsp;channels",
             "Please input channel URL":"Please input channel URL",
-            "Please input channel name or curator name":"Please input channel name or curator name", 
+            "Please input channel name or curator name":"Please input channel name or curator name",
+            "Set on top": "Set on top",
+            "Remove from top": "Remove from top",
+            "Remove channel": "Remove channel",
+            "You can only set 4 channels on top": "You can only set 4 channels on top",
             "Please fill in your set name.": "Please fill in your set name."
         }
-    },    
+    },
     "portal-set": {
         "html-title": {
             "9x9.tv - My Portal":                                                                                                               "9x9.tv - My Portal"
@@ -285,7 +283,7 @@
             "Portal":                                                                                                                           "Portal",
             "Channel Store":                                                                                                                    "Channel Store",
             "My Portal":                                                                                                                        "My Portal",
-            "Brand":                                                                                                                            "Brand"
+            "Brand Settings":                                                                                                                   "Brand Settings"
         },
         "sets-list": {
             "Channels":                                                                                                                         "Channels",
@@ -294,21 +292,7 @@
         },
         "title-func": {
             "My Portal":                                                                                                                        "My Portal",
-            "Portal":                                                                                                                           "Portal",
-            "Reorder channels":                                                                                                                 "Reorder channels",
-            "Save order":                                                                                                                       "Save order"
-        },
-        "channel-list": {
-            "Episodes":                                                                                                                         "Episodes",
-            "Followers":                                                                                                                        "Followers",
-            "Views":                                                                                                                            "Views",
-            "Update:":                                                                                                                          "Update:",
-            "Curate a new episode":                                                                                                             "Curate a new episode",
-            "Episode list":                                                                                                                     "Episode list",
-            "Channel settings":                                                                                                                 "Channel settings",
-            "Delete this channel":                                                                                                              "Delete this channel",
-            "No Episodes":                                                                                                                      "No Episodes",
-            "'s Favorite":                                                                                                                      "'s Favorite"
+            "Portal":                                                                                                                           "Portal"
         }
     },
     "index": {
