@@ -1333,9 +1333,7 @@ function setupLanguagePage() {
 }   // end of setupLanguagePage()
 
 $(function() {
-    nn.api('POST', CMS_CONF.API('/api/login'), {
-        token : $.cookie('user')
-    }, function(user) {
+    nn.api('GET', CMS_CONF.API('/api/login'), function (user) {
         var tmpUrl = $.url();
         if (!user || !user.id) {
             if ('signin.html' != tmpUrl.attr('file')) {
