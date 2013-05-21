@@ -544,7 +544,11 @@ function _search_channel_clean() {
 function portalManage() {
     var setId = CMS_CONF.USER_URL.param('id');
     //console.log("portalManage out set id");
-    if (setId != undefined && setId > 0) {
+    var msoId = CMS_CONF.MSO;
+    if (msoId < 1) {
+        location.href = "./";
+    }
+    else if (setId != undefined && setId > 0) {
         $("#cntChannelEmpty").hide();
         nn.api('GET', CMS_CONF.API('/api/sets/{setId}', {
             setId : setId
@@ -675,12 +679,11 @@ function portalManage() {
 }
 
 function portalSet() {
-    var msoId = 0;
-
-    msoId = CMS_CONF.MSO;
-
-    if (msoId > 0) {
-
+    var msoId = CMS_CONF.MSO;
+    if (msoId < 1) {
+        location.href = "./";
+    }
+    else{
         nn.api('GET', CMS_CONF.API('/api/mso/{msoId}/sets', {
             msoId : msoId
         }), null, function(sets) {
