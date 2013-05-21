@@ -1,3 +1,99 @@
+版本: 1056
+作者: chihwen
+日期: 2013年5月21日 下午 08:01:28
+訊息:
+修正無法取得 notifyMsg 欄位值的錯誤
+
+1. 修正無法取得 notifyMsg 欄位值的錯誤。
+   將表單資料存取，改以純 js 物件作指向，避免採 jQuery selector 不好切換 hidden input 及 textarea。
+2. 在操作多選日期及時間介面時，就重新清掉下方必填欄位未填寫的提示。
+issue 6367
+----
+異動 : /fakeapi/javascripts/curation.js
+
+版本: 1054
+作者: chihwen
+日期: 2013年5月21日 下午 07:16:06
+訊息:
+將 9x9 production SVN 版本 4736,4739,4742,4743 轉回 fakeapi 分支
+
+1. 在 index.html 加入 My Portal 入口。
+2. 在 controller.js 依 CMS_CONF.MSO 判斷是否移除 My Portal 入口。
+3. 調整 signin.html 加入隱私權政策與使用條款連結。
+issue 5927
+----
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+異動 : /fakeapi/signin.html
+
+版本: 1053
+作者: chihwen
+日期: 2013年5月21日 下午 05:29:43
+訊息:
+移除 POI event display 訊息文字長度限制
+issue 6367
+----
+異動 : /fakeapi/epcurate-curation.html
+
+版本: 1052
+作者: chihwen
+日期: 2013年5月21日 下午 05:07:02
+訊息:
+完成 Sub-ep Scheduled 及 Instant POI API 串接
+
+1. 完成 Sub-ep Scheduled 及 Instant POI API 串接。
+   1. 將 chkPoiData 更名為 chkPoiPointData。
+   2. 調整 POI overlay crumb 連結切換行為。
+   3. 調整 Scheduled 及 Instant 預覽影音及 POI 外掛頁下一步送出檢查行為。
+   4. 實作多選日期及時間設定功能。
+   5. 完成 POI API CRUD 操作。
+2. 調整 epcurate-curation.html DOM 結構。
+   1. 加入無法預覽影音提示結構。
+   2. 補齊所有型態下的欄位。
+   3. 校正 POI overlay crumb 結構及 hook。
+   4. 比照 channel POI overlay 結構作同步調整。
+   5. 調整行動裝置通知時間結構，以便實作多選日期及時間設定功能。
+3. 調整 config.js 加入 POI_ACTION_URL 基礎 POI action url 設定，指向 http://www.9x9.tv/poiAction?poiId=。
+4. 微調 iOS 及 Android 通知內容預覽定位。
+5. 微調 poi_events.php fakeapi 以便模擬及測試多選的行動裝置通知時間。
+issue 6367
+----
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/fakeapi/poi_events.php
+異動 : /fakeapi/javascripts/config.js
+異動 : /fakeapi/javascripts/curation.js
+異動 : /fakeapi/stylesheets/lightbox.css
+
+版本: 1048
+作者: chihwen
+日期: 2013年5月20日 下午 06:15:53
+訊息:
+將 9x9 production SVN 版本 4731~4733 轉回 fakeapi 分支
+issue 5927
+----
+異動 : /fakeapi/javascripts/config.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+異動 : /fakeapi/stylesheets/portal.css
+
+版本: 1047
+作者: chihwen
+日期: 2013年5月20日 下午 04:54:08
+訊息:
+加入依 POI 型態切換取值的架構
+
+1. 調整 config.js POI_TYPE_MAP 資料結構，埋設 POI 型態鍵值、以及對應的表單名稱等資訊，以便 POI 型態切換使用。
+2. 調整 epcurate-curation.html DOM 結構，以儲存 POI 型態鍵值，並統一 notifyMsg, notifyScheduler 等欄位名稱。
+3. 調整 curation.js 腳本，以因應 POI 型態切換取值。
+issue 6367
+----
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/javascripts/config.js
+異動 : /fakeapi/javascripts/curation.js
+
 版本: 1042
 作者: chihwen
 日期: 2013年5月19日 下午 08:11:20

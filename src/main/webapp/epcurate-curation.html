@@ -413,12 +413,15 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 <img src="images/poi.jpg" alt="" width="590" height="332" />
 </div>
 <div class="poi-display"></div>
-<p class="mask">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
+<div class="mask">
+<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
+<p class="no-video hide">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'There is no valid video to preview.'])}</p>
+</div>
 </div>
 <div class="event-input">
 <div class="fminput">
 <label for="hyper_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Display text'])}:</label>
-<p class="text"><span><input type="text" name="displayText" id="hyper_display_text" maxlength="40" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
+<p class="text"><span><input type="text" name="displayText" id="hyper_display_text" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
 </div>
 <div class="fminput even">
 <label for="hyper_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Button text'])}:</label>
@@ -442,21 +445,25 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 
 <div id="event-scheduled" class="event hide">
 <form name="eventScheduledForm" id="eventScheduledForm" method="get" action="">
+<input type="hidden" name="channelUrl" value="${link}" />
 <div id="schedule-notify" class="schedule">
 <p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Scheduled Notification'])} &gt; <span>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</span></p>
-<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Scheduled Notification'])} &gt; <a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</a></p>
+<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Scheduled Notification'])} &gt; <a href="#" class="crumb-next">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</a></p>
 <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
 <div class="video-wrap">
 <div id="event-scheduled-video" class="video">
 <img src="images/poi.jpg" alt="" width="590" height="332" />
 </div>
 <div class="poi-display"></div>
-<p class="mask">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
+<div class="mask">
+<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
+<p class="no-video hide">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'There is no valid video to preview.'])}</p>
+</div>
 </div>
 <div class="event-input">
 <div class="fminput">
 <label for="schedule_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Display text'])}:</label>
-<p class="text"><span><input type="text" name="displayText" id="schedule_display_text" maxlength="40" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
+<p class="text"><span><input type="text" name="displayText" id="schedule_display_text" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
 </div>
 <div class="fminput even">
 <label for="schedule_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Button text'])}:</label>
@@ -474,7 +481,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 
 <div id="schedule-mobile" class="schedule hide">
 <p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Scheduled Notification'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</p>
-<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Scheduled Notification'])} &gt; <a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</a></p>
+<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Scheduled Notification'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</p>
 <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
 <div class="mobile-edit">
 <div class="mobile">
@@ -487,9 +494,9 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 <h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Preview'])}</h4>
 <h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Notification'])}</h5>
 {{if '' != notifyMsg}}
-<p class="msg">${notifyMsg}</p>
+<p class="msg ellipsis multiline">${notifyMsg}</p>
 {{else}}
-<p class="msg">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
+<p class="msg ellipsis multiline">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
 {{/if}}
 <p class="button"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS-button', 'Cancel'])}</a><a href="#" class="last">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS-button', 'OK'])}</a></p>
 </div>
@@ -520,13 +527,14 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 <a href="#" class="mobile-tip"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add a mobile notification time to remind your viewers.'])}</span></span></span></a>
 </h4>
 <div class="datepicker"></div>
-<input type="hidden" name="datepicker" id="datepicker_selected" value="2013/05/05,2013/05/06,2013/05/30" />
-<input type="hidden" name="notifyScheduler" value="${notifyScheduler}" />
+<input type="hidden" name="datepicker" id="datepicker_selected" value="" />
+<input type="hidden" name="schedule" id="schedule_selected" value="" />
+<input type="hidden" name="notifyScheduler" id="timestamp_selected" value="${notifyScheduler}" />
 <div class="time-wrap">
 <h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Hour'])}:</h5>
 <div class="select enable">
 <p class="select-btn"></p>
-<p class="select-txt"><a href="#">00</a></p>
+<p class="select-txt"><a href="#" id="time_hour">00</a></p>
 <div class="select-list hour">
 <div class="hour-wrap">
 <p>00</p>
@@ -555,20 +563,18 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 <p>23</p>
 </div>
 </div>
-<input type="hidden" name="time_hour" value="00" />
 </div>
 
 <h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Minute'])}:</h5>
 <div class="select enable">
 <p class="select-btn"></p>
-<p class="select-txt"><a href="#">00</a></p>
+<p class="select-txt"><a href="#" id="time_min">00</a></p>
 <div class="select-list">
 <div class="min-wrap">
 <p>00</p>
 <p>30</p>
 </div>
 </div>
-<input type="hidden" name="time_min" value="00" />
 </div>
 </div>
 </div>
@@ -587,22 +593,26 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 
 <div id="event-instant" class="event hide">
 <form name="eventInstantForm" id="eventInstantForm" method="get" action="">
+<input type="hidden" name="channelUrl" value="${link}" />
 <input type="hidden" name="notifyScheduler" value="" />
 <div id="instant-notify" class="instant">
 <p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Instant Notification'])} &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
-<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Instant Notification'])} &gt; <a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</a></p>
+<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Instant Notification'])} &gt; <a href="#" class="crumb-next">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</a></p>
 <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
 <div class="video-wrap">
 <div id="event-instant-video" class="video">
 <img src="images/poi.jpg" alt="" width="590" height="332" />
 </div>
 <div class="poi-display"></div>
-<p class="mask">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
+<div class="mask">
+<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
+<p class="no-video hide">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'There is no valid video to preview.'])}</p>
+</div>
 </div>
 <div class="event-input">
 <div class="fminput">
 <label for="instant_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Display text'])}:</label>
-<p class="text"><span><input type="text" name="displayText" id="instant_display_text" maxlength="40" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
+<p class="text"><span><input type="text" name="displayText" id="instant_display_text" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
 </div>
 <div class="fminput even">
 <label for="instant_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Button text'])}:</label>
@@ -620,7 +630,7 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 
 <div id="instant-mobile" class="instant hide">
 <p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Instant Notification'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
-<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Instant Notification'])} &gt; <a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</a></p>
+<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Instant Notification'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
 <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
 <div class="mobile-edit clearfix">
 <div class="mobile">
@@ -633,9 +643,9 @@ ${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration
 <h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Preview'])}</h4>
 <h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Notification'])}</h5>
 {{if '' != notifyMsg}}
-<p class="msg">${notifyMsg}</p>
+<p class="msg ellipsis multiline">${notifyMsg}</p>
 {{else}}
-<p class="msg">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
+<p class="msg ellipsis multiline">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
 {{/if}}
 <p class="button"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS-button', 'Cancel'])}</a><a href="#" class="last">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS-button', 'OK'])}</a></p>
 </div>

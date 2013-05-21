@@ -874,7 +874,7 @@ $(function () {
         $('body').addClass('has-change');
         $('body').removeClass('has-titlecard-change');
         sumStoryboardInfo();
-        // TODO implement Done == Save?
+        // implement Done == Save?
         //$('#form-btn-save').trigger('click');
         return false;
     });
@@ -1212,15 +1212,10 @@ $(function () {
         $('#epcurate-curation ul.tabs li a.cur-poi').trigger('click');
         return false;
     });
-    // POI overlay - crumb root close
-    $('#poi-event-overlay').on('click', '.unblock', function () {
-        $.unblockUI();
-        return false;
-    });
 
     // POI point Next
     $('#cur-poi-edit').on('click', '#poi-edit .btn-next', function () {
-        if (chkPoiData(document.epcurateForm)) {
+        if (chkPoiPointData(document.epcurateForm)) {
             var poiPointId = 0,
                 poiEventId = 0,
                 hasPointEventCache = false;
@@ -1326,24 +1321,74 @@ $(function () {
         return false;
     });
 
-    // TODO
     // POI overlay - crumb switch
+    $('#poi-event-overlay').on('click', '.unblock', function (e) {
+        if ($('#cur-poi-edit').hasClass('edit')) {
+            // edit mode back must check and if pass then unblock poi overlay
+            var poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey'),
+                formId = CMS_CONF.POI_TYPE_MAP[poiEventTypeKey].formId;
+            chkPoiEventData(document.forms[formId], function (result) {
+                if (!result) {
+                    e.stopImmediatePropagation();
+                    return false;
+                } else {
+                    $.unblockUI();
+                    return false;
+                }
+            });
+        } else {
+            // insert mode back no check and unblock poi overlay
+            $.unblockUI();
+            return false;
+        }
+    });
     $('#poi-event-overlay').on('click', '.event .crumb a.crumb-event', function () {
+        // insert mode back no check and go to event-select (event type)
         var blockClass = $(this).attr('class'),
             block = blockClass.split(' ');
         $('#poi-event-overlay .event, #schedule-mobile, #instant-mobile').addClass('hide');
         $('#' + block[1] + ', #schedule-notify, #instant-notify').removeClass('hide');
         return false;
     });
-    $('#poi-event-overlay').on('click', '#schedule-mobile .crumb .crumb-mobile', function () {
-        $('#event-scheduled .schedule').addClass('hide');
-        $('#schedule-notify').removeClass('hide');
-        return false;
+    $('#poi-event-overlay').on('click', '#schedule-mobile .crumb .crumb-mobile', function (e) {
+        if ($('#cur-poi-edit').hasClass('edit')) {
+            // edit mode back must check and if pass then go to preivew video and POI plugin
+            chkPoiEventData(document.eventScheduledForm, function (result) {
+                if (!result) {
+                    e.stopImmediatePropagation();
+                    return false;
+                } else {
+                    $('#event-scheduled .schedule').addClass('hide');
+                    $('#schedule-notify').removeClass('hide');
+                    return false;
+                }
+            });
+        } else {
+            // insert mode back no check and go to preivew video and POI plugin
+            $('#event-scheduled .schedule').addClass('hide');
+            $('#schedule-notify').removeClass('hide');
+            return false;
+        }
     });
-    $('#poi-event-overlay').on('click', '#instant-mobile .crumb .crumb-mobile', function () {
-        $('#event-instant .instant').addClass('hide');
-        $('#instant-notify').removeClass('hide');
-        return false;
+    $('#poi-event-overlay').on('click', '#instant-mobile .crumb .crumb-mobile', function (e) {
+        if ($('#cur-poi-edit').hasClass('edit')) {
+            // edit mode back must check and if pass then go to preivew video and POI plugin
+            chkPoiEventData(document.eventInstantForm, function (result) {
+                if (!result) {
+                    e.stopImmediatePropagation();
+                    return false;
+                } else {
+                    $('#event-instant .instant').addClass('hide');
+                    $('#instant-notify').removeClass('hide');
+                    return false;
+                }
+            });
+        } else {
+            // insert mode back no check and go to preivew video and POI plugin
+            $('#event-instant .instant').addClass('hide');
+            $('#instant-notify').removeClass('hide');
+            return false;
+        }
     });
 
     // POI overlay - Choose a type
@@ -1373,26 +1418,58 @@ $(function () {
     });
 
     // POI overlay - Preview Video and POI Plugin Next
-    $('#poi-event-overlay').on('click', '#schedule-notify .btn-next', function () {
-        var dates = $('#datepicker_selected').val().split(',');
-        $('#poi-event-overlay .datepicker').datepick('setDate', dates);
-        $('#event-scheduled .schedule').addClass('hide');
-        $('#schedule-mobile').removeClass('hide');
-        // prevent layout broken
-        $('#schedule-mobile .mobile-edit .mobile ul li:first-child').attr('class', 'ios on');
-        $('#schedule-mobile .mobile-edit .mobile ul li:last-child').attr('class', 'android');
-        $('#schedule-ios').attr('class', 'mobile-block mobile-active');
-        $('#schedule-android').attr('class', 'mobile-block hide');
+    $('#poi-event-overlay').on('click', '#schedule-notify .btn-next, #schedule-notify .crumb.edit .crumb-next', function () {
+        chkPoiEventData(document.eventScheduledForm, function (result) {
+            if (result) {
+                // parse timestamp
+                if ('' !== $.trim($('#timestamp_selected').val())) {
+                    var stampList = [],
+                        formatTemp = '',
+                        dateTimeList = [],
+                        dateList = [];
+                    stampList = $('#timestamp_selected').val().split(',');
+                    $.each(stampList, function (i, stampItem) {
+                        formatTemp = formatTimestamp((stampItem - 0), '/', ':');
+                        dateTimeList.push(formatTemp);
+                        formatTemp = formatTemp.split(' ');
+                        dateList.push(formatTemp[0]);
+                    });
+                    if (formatTemp.length > 0 && formatTemp[1]) {
+                        formatTemp = formatTemp[1].split(':');
+                        if (formatTemp[0]) {
+                            $('#time_hour').text(formatTemp[0]);
+                        }
+                        if (formatTemp[1]) {
+                            $('#time_min').text(formatTemp[1]);
+                        }
+                    }
+                    $('#datepicker_selected').val(dateList.join(','));
+                    $('#schedule_selected').val(dateTimeList.join(','));
+                    $('#poi-event-overlay .datepicker').datepick('setDate', dateList);
+                }
+                $('#event-scheduled .schedule').addClass('hide');
+                $('#schedule-mobile').removeClass('hide');
+                // prevent layout broken
+                $('#schedule-mobile .mobile-edit .mobile ul li:first-child').attr('class', 'ios on');
+                $('#schedule-mobile .mobile-edit .mobile ul li:last-child').attr('class', 'android');
+                $('#schedule-ios').attr('class', 'mobile-block mobile-active');
+                $('#schedule-android').attr('class', 'mobile-block hide');
+            }
+        });
         return false;
     });
-    $('#poi-event-overlay').on('click', '#instant-notify .btn-next', function () {
-        $('#event-instant .instant').addClass('hide');
-        $('#instant-mobile').removeClass('hide');
-        // prevent layout broken
-        $('#instant-mobile .mobile-edit .mobile ul li:first-child').attr('class', 'ios on');
-        $('#instant-mobile .mobile-edit .mobile ul li:last-child').attr('class', 'android');
-        $('#instant-ios').attr('class', 'mobile-block mobile-active');
-        $('#instant-android').attr('class', 'mobile-block hide');
+    $('#poi-event-overlay').on('click', '#instant-notify .btn-next, #instant-notify .crumb.edit .crumb-next', function () {
+        chkPoiEventData(document.eventInstantForm, function (result) {
+            if (result) {
+                $('#event-instant .instant').addClass('hide');
+                $('#instant-mobile').removeClass('hide');
+                // prevent layout broken
+                $('#instant-mobile .mobile-edit .mobile ul li:first-child').attr('class', 'ios on');
+                $('#instant-mobile .mobile-edit .mobile ul li:last-child').attr('class', 'android');
+                $('#instant-ios').attr('class', 'mobile-block mobile-active');
+                $('#instant-android').attr('class', 'mobile-block hide');
+            }
+        });
         return false;
     });
 
@@ -1431,6 +1508,7 @@ $(function () {
 
     // POI overlay - Scheduled Hour and Minute
     $('#poi-event-overlay').on('click', '.time .select .select-txt, .time .select .select-btn', function () {
+        $('#poi-event-overlay .event .func ul li.notice').hide();
         $('#poi-event-overlay .select-list').hide();
         $(this).parent().children('.select-btn').toggleClass('on');
         if ($(this).parent().children('.select-btn').hasClass('on')) {
@@ -1447,21 +1525,37 @@ $(function () {
         $(this).parent().parent().parent().children('.select-btn').removeClass('on');
         $(this).parent().parent().parent().children('.select-txt').children().text(selectOption);
         $(this).parents('.select-list').hide();
+        // recount timestamp
+        if ('' !== $.trim($('#datepicker_selected').val())) {
+            var selectedList = [],
+                scheduleDate = '',
+                scheduleList = [],
+                timestampList = [];
+            selectedList = $('#datepicker_selected').val().split(',');
+            $.each(selectedList, function (i, selectedItem) {
+                scheduleDate = selectedItem + ' ' + $('#time_hour').text() + ':' + $('#time_min').text() + ':00'
+                scheduleList.push(scheduleDate);
+                timestampList.push(Date.parse(scheduleDate));
+            });
+            $('#schedule_selected').val(scheduleList.join(','));
+            $('#timestamp_selected').val(timestampList.join(','));
+        }
         return false;
     });
 
     // Save POI event
     $('#poi-event-overlay').on('click', '#poi-event-overlay-wrap .btn-save', function () {
         var poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey'),
-            formId = CMS_CONF.POI_TYPE_MAP[poiEventTypeKey].formId;
-        // TODO 3 type
-        if (-1 !== $.inArray(poiEventTypeKey, ['event-scheduled', 'event-instant'])) {
-            alert('TODO: under construction');
-            return false;
-        }
-        chkPoiEventData(document.forms[formId], function (result) {
+            formId = CMS_CONF.POI_TYPE_MAP[poiEventTypeKey].formId,
+            fm = document.forms[formId];
+        chkPoiEventData(fm, function (result) {
             if (result) {
-                var programId = $('#poi-event-overlay-wrap').data('programId'),
+                var displayText = $.trim(fm.displayText.value),
+                    btnText = $.trim(fm.btnText.value),
+                    channelUrl = $.trim(fm.channelUrl.value),
+                    notifyMsg = $.trim(fm.notifyMsg.value),
+                    notifyScheduler = $.trim(fm.notifyScheduler.value),
+                    programId = $('#poi-event-overlay-wrap').data('programId'),
                     poiPointId = $('#poi-event-overlay-wrap').data('poiPointId'),
                     poiEventId = $('#poi-event-overlay-wrap').data('poiEventId'),
                     poiEventType = $('#poi-event-overlay-wrap').data('poiEventType'),
@@ -1478,12 +1572,11 @@ $(function () {
                         endTime: $('#poiEndTime').val(),
                         tag: $('#poiTag').val()
                     },
-                    // TODO actionUrl: http://www.9x9.tv/poiAction?poiId=9876
                     poiEventContext = {
-                        "message": $('#' + formId + ' input[name=displayText]').val(),
+                        "message": displayText,
                         "button": [{
-                            "text": $('#' + formId + ' input[name=btnText]').val(),
-                            "actionUrl": $('#' + formId + ' input[name=channelUrl]').val()
+                            "text": btnText,
+                            "actionUrl": channelUrl
                         }]
                     },
                     poiEventData = {
@@ -1491,18 +1584,17 @@ $(function () {
                         name: $('#poiName').val(),
                         type: poiEventType,
                         context: JSON.stringify(poiEventContext),
-                        notifyMsg: $('#' + formId + ' input[name=notifyMsg]').val(),
-                        notifyScheduler: $('#' + formId + ' input[name=notifyScheduler]').val()
+                        notifyMsg: notifyMsg,
+                        notifyScheduler: notifyScheduler
                     },
-                    // TODO actionUrl: http://www.9x9.tv/poiAction?poiId=9876
                     poiEventDataExtend = {
                         eventId: poiEventId,
                         eventType: poiEventType,
-                        message: $('#' + formId + ' input[name=displayText]').val(),
-                        button: $('#' + formId + ' input[name=btnText]').val(),
-                        link: $('#' + formId + ' input[name=channelUrl]').val(),
-                        notifyMsg: $('#' + formId + ' input[name=notifyMsg]').val(),
-                        notifyScheduler: $('#' + formId + ' input[name=notifyScheduler]').val()
+                        message: displayText,
+                        button: btnText,
+                        link: channelUrl,
+                        notifyMsg: notifyMsg,
+                        notifyScheduler: notifyScheduler
                     };
                 if ($('#cur-poi-edit').hasClass('edit') && '' != poiPointId) {
                     // update mode
@@ -1535,27 +1627,34 @@ $(function () {
                                     eventId: poi_event.id
                                 };
                                 nn.api('POST', CMS_CONF.API('/api/poi_campaigns/{poiCampaignId}/pois', {poiCampaignId: CMS_CONF.CAMPAIGN_ID}), poiData, function (poi) {
-                                    // update id
-                                    poiPointData.id = poi_point.id;
-                                    poiPointData.targetId = poi_point.targetId;
-                                    poiPointData.type = poi_point.type;
-                                    poiEventDataExtend.eventId = poi_event.id;
-                                    poiPointData = $.extend(poiPointData, poiEventDataExtend);
-                                    $.each(poiList, function (i, poiItem) {
-                                        if (!hasPush && parseInt(poiItem.startTime, 10) > parseInt(poiPointData.startTime, 10)) {
-                                            poiTemp.push(poiPointData);
-                                            hasPush = true;
-                                        }
-                                        poiTemp.push(poiItem);
-                                    });
-                                    if (!hasPush) {
-                                        poiTemp.push(poiPointData);
+                                    if (-1 !== $.inArray(CMS_CONF.POI_TYPE_MAP[poi_event.type], ['event-scheduled', 'event-instant'])) {
+                                        poiEventContext.button[0].actionUrl = CMS_CONF.POI_ACTION_URL + poi.id;
+                                        poiEventData.context = JSON.stringify(poiEventContext);
+                                        poiEventDataExtend.link = CMS_CONF.POI_ACTION_URL + poi.id;
                                     }
-                                    tmplItemData.poiList = poiTemp;
-                                    buildPoiInfoTmpl($('#storyboard-listing li.playing'));
-                                    $('body').removeClass('has-poi-change');
-                                    $('#epcurate-curation ul.tabs li a.cur-poi').trigger('click');
-                                    $('#overlay-s').fadeOut(0);
+                                    nn.api('PUT', CMS_CONF.API('/api/poi_events/{poiEventId}', {poiEventId: poi_event.id}), poiEventData, function (poi_event) {
+                                        // update id
+                                        poiPointData.id = poi_point.id;
+                                        poiPointData.targetId = poi_point.targetId;
+                                        poiPointData.type = poi_point.type;
+                                        poiEventDataExtend.eventId = poi_event.id;
+                                        poiPointData = $.extend(poiPointData, poiEventDataExtend);
+                                        $.each(poiList, function (i, poiItem) {
+                                            if (!hasPush && parseInt(poiItem.startTime, 10) > parseInt(poiPointData.startTime, 10)) {
+                                                poiTemp.push(poiPointData);
+                                                hasPush = true;
+                                            }
+                                            poiTemp.push(poiItem);
+                                        });
+                                        if (!hasPush) {
+                                            poiTemp.push(poiPointData);
+                                        }
+                                        tmplItemData.poiList = poiTemp;
+                                        buildPoiInfoTmpl($('#storyboard-listing li.playing'));
+                                        $('body').removeClass('has-poi-change');
+                                        $('#epcurate-curation ul.tabs li a.cur-poi').trigger('click');
+                                        $('#overlay-s').fadeOut(0);
+                                    });
                                 });
                             });
                         });
@@ -1665,7 +1764,6 @@ $(function () {
                                             endTime: poiItem.endTime,
                                             tag: poiItem.tag
                                         };
-                                        // TODO actionUrl: http://www.9x9.tv/poiAction?poiId=9876
                                         poiEventContext = {
                                             "message": poiItem.message,
                                             "button": [{
@@ -1687,15 +1785,22 @@ $(function () {
                                                     eventId: poi_event.id
                                                 };
                                                 nn.api('POST', CMS_CONF.API('/api/poi_campaigns/{poiCampaignId}/pois', {poiCampaignId: CMS_CONF.CAMPAIGN_ID}), poiData, function (poi) {
-                                                    // update poi to DOM
-                                                    poiItem.id = poi_point.id;
-                                                    poiItem.targetId = poi_point.targetId;
-                                                    poiItem.type = poi_point.type;
-                                                    poiItem.eventId = poi_event.id;
-                                                    tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
-                                                    tmplItemData = tmplItem.data;
-                                                    tmplItemData.poiList[key] = poiItem;
-                                                    //tmplItem.update();
+                                                    if (-1 !== $.inArray(CMS_CONF.POI_TYPE_MAP[poi_event.type], ['event-scheduled', 'event-instant'])) {
+                                                        poiEventContext.button[0].actionUrl = CMS_CONF.POI_ACTION_URL + poi.id;
+                                                        poiEventData.context = JSON.stringify(poiEventContext);
+                                                        poiItem.link = CMS_CONF.POI_ACTION_URL + poi.id;
+                                                    }
+                                                    nn.api('PUT', CMS_CONF.API('/api/poi_events/{poiEventId}', {poiEventId: poi_event.id}), poiEventData, function (poi_event) {
+                                                        // update poi to DOM
+                                                        poiItem.id = poi_point.id;
+                                                        poiItem.targetId = poi_point.targetId;
+                                                        poiItem.type = poi_point.type;
+                                                        poiItem.eventId = poi_event.id;
+                                                        tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
+                                                        tmplItemData = tmplItem.data;
+                                                        tmplItemData.poiList[key] = poiItem;
+                                                        //tmplItem.update();
+                                                    });
                                                 });
                                             });
                                         });
@@ -1835,7 +1940,6 @@ $(function () {
                                             endTime: poiItem.endTime,
                                             tag: poiItem.tag
                                         };
-                                        // TODO actionUrl: http://www.9x9.tv/poiAction?poiId=9876
                                         poiEventContext = {
                                             "message": poiItem.message,
                                             "button": [{
@@ -1857,15 +1961,22 @@ $(function () {
                                                     eventId: poi_event.id
                                                 };
                                                 nn.api('POST', CMS_CONF.API('/api/poi_campaigns/{poiCampaignId}/pois', {poiCampaignId: CMS_CONF.CAMPAIGN_ID}), poiData, function (poi) {
-                                                    // update poi to DOM
-                                                    poiItem.id = poi_point.id;
-                                                    poiItem.targetId = poi_point.targetId;
-                                                    poiItem.type = poi_point.type;
-                                                    poiItem.eventId = poi_event.id;
-                                                    tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
-                                                    tmplItemData = tmplItem.data;
-                                                    tmplItemData.poiList[key] = poiItem;
-                                                    //tmplItem.update();
+                                                    if (-1 !== $.inArray(CMS_CONF.POI_TYPE_MAP[poi_event.type], ['event-scheduled', 'event-instant'])) {
+                                                        poiEventContext.button[0].actionUrl = CMS_CONF.POI_ACTION_URL + poi.id;
+                                                        poiEventData.context = JSON.stringify(poiEventContext);
+                                                        poiItem.link = CMS_CONF.POI_ACTION_URL + poi.id;
+                                                    }
+                                                    nn.api('PUT', CMS_CONF.API('/api/poi_events/{poiEventId}', {poiEventId: poi_event.id}), poiEventData, function (poi_event) {
+                                                        // update poi to DOM
+                                                        poiItem.id = poi_point.id;
+                                                        poiItem.targetId = poi_point.targetId;
+                                                        poiItem.type = poi_point.type;
+                                                        poiItem.eventId = poi_event.id;
+                                                        tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
+                                                        tmplItemData = tmplItem.data;
+                                                        tmplItemData.poiList[key] = poiItem;
+                                                        //tmplItem.update();
+                                                    });
                                                 });
                                             });
                                         });
@@ -2007,7 +2118,7 @@ function chkCurationData(fm, src) {
     return true;
 }
 
-function chkPoiData(fm) {
+function chkPoiPointData(fm) {
     fm.poiName.value = $.trim(fm.poiName.value);
     fm.poiTag.value = $.trim(fm.poiTag.value);
     var poiList = $('#storyboard-list li.playing').tmplItem().data.poiList,
@@ -2115,20 +2226,35 @@ function chkPoiData(fm) {
 }
 
 function chkPoiEventData(fm, callback) {
+    var poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey');
     fm.displayText.value = $.trim(fm.displayText.value);
     fm.btnText.value = $.trim(fm.btnText.value);
+    fm.channelUrl.value = $.trim(fm.channelUrl.value);
+    fm.notifyMsg.value = $.trim(fm.notifyMsg.value);
+    fm.notifyScheduler.value = $.trim(fm.notifyScheduler.value);
     if ('' === fm.displayText.value || '' === fm.btnText.value) {
         $('#poi-event-overlay .event .func ul li.notice').show();
         callback(false);
         return false;
     }
-    if (!fm.channelUrl) {
+    if (-1 !== $.inArray(poiEventTypeKey, ['event-scheduled', 'event-instant'])) {
+        if (!$('#schedule-mobile').hasClass('hide') || !$('#instant-mobile').hasClass('hide')) {
+            if ('' === fm.notifyMsg.value) {
+                $('#poi-event-overlay .event .func ul li.notice').show();
+                callback(false);
+                return false;
+            }
+            if ('event-scheduled' === poiEventTypeKey && '' === fm.notifyScheduler.value) {
+                $('#poi-event-overlay .event .func ul li.notice').show();
+                callback(false);
+                return false;
+            }
+        }
         // notice and url reset
         $('#poi-event-overlay .event .func ul li.notice').hide();
         callback(true);
         return true;
     } else {
-        fm.channelUrl.value = $.trim(fm.channelUrl.value);
         if ('' === fm.channelUrl.value) {
             $('#poi-event-overlay .event .func ul li.notice').show();
             callback(false);
@@ -2701,13 +2827,30 @@ function buildPoiEventOverlayTmpl(poi_event) {
             }
             $('#poi-event-overlay .datepicker').datepick({
                 changeMonth: false,
+                dateFormat: 'yyyy/mm/dd',
                 monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
                 minDate: +0,
                 multiSelect: 999,
-                onSelect: function (dateText, inst) {
+                onSelect: function (dates) {
                     $('body').addClass('has-poi-change');
                     $('body').addClass('has-change');
+                    $('#poi-event-overlay .event .func ul li.notice').hide();
+                    var selectedDate = '',
+                        selectedList = [],
+                        scheduleDate = '',
+                        scheduleList = [],
+                        timestampList = [];
+                    $.each(dates, function (i, dateItem) {
+                        selectedDate = $.datepick.formatDate('yyyy/mm/dd', dateItem);
+                        selectedList.push(selectedDate);
+                        scheduleDate = selectedDate + ' ' + $('#time_hour').text() + ':' + $('#time_min').text() + ':00';
+                        scheduleList.push(scheduleDate);
+                        timestampList.push(Date.parse(scheduleDate));
+                    });
+                    $('#datepicker_selected').val(selectedList.join(','));
+                    $('#schedule_selected').val(scheduleList.join(','));
+                    $('#timestamp_selected').val(timestampList.join(','));
                 }
             });
             $('#schedule-mobile .notification .time .hour').perfectScrollbar();

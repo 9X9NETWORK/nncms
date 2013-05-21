@@ -1205,7 +1205,7 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .mobile .mobile-block .wrap h4 {
-    margin-bottom: 42px;
+    margin-bottom: 38px;
     color: #fff;
     font-size: 25px;
     text-align: center;
@@ -1216,6 +1216,11 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     color: #fff;
     font-weight: bold;
     font-size: 13px;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile #schedule-android .wrap h5,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile #instant-android .wrap h5 {
+    margin-bottom: 0;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .mobile .mobile-block .wrap p {
