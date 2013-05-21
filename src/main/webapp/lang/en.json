@@ -118,7 +118,7 @@
             "Repeat Password":                                                                                                                  "Repeat Password",
             "This email has been used.":                                                                                                        "This email has been used.",
             "Two passwords don't match, please retype.":                                                                                        "Two passwords don't match, please retype.",
-            "I have read and accepted the User Agreement and Privacy Policy":                                                                   "I have read and accepted the User Agreement and Privacy Policy",
+            "I have read and accepted the User Agreement and Privacy Policy":                                                                   "I have read and accepted the <a target='_blank' href='/en/terms.html'>User Agreement</a> and <a target='_blank' href='/en/policy.html'>Privacy Policy</a>",
             "User Name":                                                                                                                        "User Name",
             "Create a unique user name in 9x9 which composed of 6-16 English letters ,numbers or low line.":                                    "Create a unique user name in 9x9 which composed of 6-16 English letters ,numbers or low line.",
             "Only letters, numbers or low line are allowed.":                                                                                   "Only letters, numbers or low line are allowed.",

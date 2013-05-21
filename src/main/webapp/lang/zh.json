@@ -118,7 +118,7 @@
             "Repeat Password":                                                                                                                  "再次輸入密碼",
             "This email has been used.":                                                                                                        "此信箱已被使用。",
             "Two passwords don't match, please retype.":                                                                                        "輸入密碼不一致，請重新輸入。",
-            "I have read and accepted the User Agreement and Privacy Policy":                                                                   "我已讀完並同意遵守隱私權政策與使用條款",
+            "I have read and accepted the User Agreement and Privacy Policy":                                                                   "我已讀完並同意遵守<a target='_blank' href='/zh/policy.html'>隱私權政策</a>與<a target='_blank' href='/zh/terms.html'>使用條款</a>",
             "User Name":                                                                                                                        "用戶名稱",
             "Create a unique user name in 9x9 which composed of 6-16 English letters ,numbers or low line.":                                    "用戶名稱請輸入6-16個字元，只能使用中英文、數字和底線。",
             "Only letters, numbers or low line are allowed.":                                                                                   "用戶名稱只能使用中英文、數字或底線。",

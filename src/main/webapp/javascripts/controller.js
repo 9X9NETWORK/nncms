@@ -1204,6 +1204,12 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
                 portalSet();
                 break;
             case 'index.html':
+                if (CMS_CONF.MSO > 0) {
+                    $("#my-portal").removeClass("hide");
+                }
+                else{
+                    $("#my-portal").remove();
+                }
                 initFacebookJavaScriptSdk();
                 listChannel(CMS_CONF.PAGE_ID);
                 break;
@@ -1320,6 +1326,14 @@ function setupLanguagePage() {
             }
             $(this).text(nn._(['signin', 'login-holder', $(this).data('langkey')]));
         });
+        
+        $('#signup-layer .langkeyH').each(function () {
+            if ($(this).data('langkey') === undefined) {
+                $(this).data('langkey', $(this).html());
+            }
+            $(this).html(nn._(['signin', 'login-holder', $(this).data('langkey')]));
+        });
+
         var tmpStr = '';
         $('#login-layer .flangkey, #signup-layer .flangkey, #forgot-password-layer .flangkey').each(function () {
             if ($(this).data('langkey') === undefined) {
