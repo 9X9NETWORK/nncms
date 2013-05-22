@@ -1322,6 +1322,9 @@ $(function () {
     });
 
     // POI overlay - crumb switch
+    $('#poi-event-overlay').on('click', '.event .crumb a', function () {
+        $('#poi-event-overlay .event .func ul li.notice').hide();
+    });
     $('#poi-event-overlay').on('click', '.unblock', function (e) {
         if ($('#cur-poi-edit').hasClass('edit')) {
             // edit mode back must check and if pass then unblock poi overlay
@@ -1446,6 +1449,22 @@ $(function () {
                     $('#datepicker_selected').val(dateList.join(','));
                     $('#schedule_selected').val(dateTimeList.join(','));
                     $('#poi-event-overlay .datepicker').datepick('setDate', dateList);
+                } else {
+                    // default date time
+                    var today = new Date((new Date()).getTime()),
+                        tomorrow = new Date((new Date()).getTime() + (24 * 60 * 60 * 1000)),
+                        hour = 19,
+                        min = '00',
+                        selected = (today.getHours() > hour) ? tomorrow : today,
+                        selectedDate = selected.getFullYear() + '/' + (selected.getMonth() + 1) + '/' + selected.getDate(),
+                        selectedTime = hour + ':' + min + ':00',
+                        selectedDateTime = selectedDate + ' ' + selectedTime;
+                    $('#time_hour').text(hour);
+                    $('#time_min').text(min);
+                    $('#datepicker_selected').val(selectedDate);
+                    $('#schedule_selected').val(selectedDateTime);
+                    $('#timestamp_selected').val(Date.parse(selectedDateTime));
+                    $('#poi-event-overlay .datepicker').datepick('setDate', selectedDate);
                 }
                 $('#event-scheduled .schedule').addClass('hide');
                 $('#schedule-mobile').removeClass('hide');
@@ -2825,6 +2844,12 @@ function buildPoiEventOverlayTmpl(poi_event) {
                 $('#poi-event-overlay').removeClass('edit');
                 $('#event-select').removeClass('hide');
             }
+            $('#poi-event-overlay input[name=btnText]').charCounter(20, {
+                container: '<span class="hide"><\/span>',
+                format: '%1 characters to go!',
+                delay: 0,
+                multibyte: true
+            });
             $('#poi-event-overlay .datepicker').datepick({
                 changeMonth: false,
                 dateFormat: 'yyyy/mm/dd',

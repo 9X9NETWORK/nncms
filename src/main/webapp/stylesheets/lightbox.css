@@ -460,10 +460,11 @@
 .overlay-l .overlay-container .overlay-wrap .overlay-btn .btns {
 	display: inline-block;
 	width: 67px;
+    margin-right: 13px;
 }
 
-.overlay-l .overlay-container .overlay-wrap .overlay-btn .btns:first-child {
-	margin-right: 13px;
+.overlay-l .overlay-container .overlay-wrap .overlay-btn .btns:last-child {
+	margin-right: 0;
 }
 
 /**
@@ -665,6 +666,81 @@
 .zh .setup-notice .overlay-container .disconnect-notice p.content {
     padding-left: 66px;
     text-align: left;
+}
+
+/**
+*
+* =change-pwd-overlay
+*
+**/
+
+#change-pwd-overlay h4 {
+    margin-bottom: 23px;
+}
+
+#change-pwd-overlay .overlay-btn {
+    width: 246px;
+    margin: 0 auto;
+}
+
+#change-pwd-overlay .change-pwd p.text {
+    width: 243px;
+    height: 31px;
+    margin: 0 auto 10px;
+    padding-left: 3px;
+    background: url(../images/input_box_left_g.png) no-repeat 0 0;
+}
+
+#change-pwd-overlay .change-pwd p.text.last {
+    margin-bottom: 5px;
+}
+
+#change-pwd-overlay .change-pwd p.text span {
+    display: block;
+}
+
+#change-pwd-overlay .change-pwd p.text span.input-right {
+    padding-right: 3px;
+    background: url(../images/input_box_right_g.png) no-repeat right 0;
+}
+
+#change-pwd-overlay .change-pwd p.text span.input-middle {
+    background: url(../images/input_box_middle_g.png) repeat-x;
+}
+
+#change-pwd-overlay .change-pwd span .text {
+    width: 216px;
+    height: 31px;
+    padding-left: 24px;
+    border: none;
+    background: url(../images/icon_password.png) no-repeat 3px 8px;
+    color: #555;
+    font: 13px/30px Arial, Helvetica;
+}
+
+#change-pwd-overlay .change-pwd .notice {
+    padding-left: 92px;
+    color: #f00;
+    font-size: 13px;
+    text-align: left;
+}
+
+#change-pwd-overlay .overlay-btn {
+    left: 50%;
+    margin-left: -123px;
+}
+
+#change-pwd-overlay .overlay-btn .btn-cancel {
+    float: left;
+}
+
+#change-pwd-overlay .overlay-btn .btn-chg-pwd {
+    float: right;
+    width: 135px;
+}
+
+#change-pwd-overlay .overlay-btn .btn-chg-pwd a {
+    width: 132px;
 }
 
 /**

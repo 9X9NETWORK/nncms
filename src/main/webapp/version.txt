@@ -1,3 +1,35 @@
+版本: 1063
+作者: chihwen
+日期: 2013年5月22日 上午 11:47:26
+訊息:
+針對 POI 外掛 btnText 按鈕文字欄位，加入中文10個字，英數20個字的限制
+issue 6367
+----
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/javascripts/curation.js
+
+版本: 1060
+作者: chihwen
+日期: 2013年5月22日 上午 12:01:37
+訊息:
+調整多選日期邏輯，增加預設日期及時間功能
+
+1. 調整多選日期邏輯，增加預設日期及時間功能。
+   預設選定日期為當天，預設時間為19點00分 (若時間大於19點，則日期自動取明天)。
+2. 當點選 POI event overlay crumb 連結時，也同時重新清除必填欄位未填提示。
+issue 6367
+----
+異動 : /fakeapi/javascripts/curation.js
+
+版本: 1058
+作者: chihwen
+日期: 2013年5月21日 下午 10:31:20
+訊息:
+同步 src 版本 1049,1051 (注意1049尚未完全同步完成)
+issue 6367
+----
+異動 : /fakeapi/stylesheets/lightbox.css
+
 版本: 1056
 作者: chihwen
 日期: 2013年5月21日 下午 08:01:28
