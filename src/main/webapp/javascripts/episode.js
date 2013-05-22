@@ -153,7 +153,7 @@ $(function () {
                 folderID = parseInt(tmpMeta.replace("paging_", ""));
                 if (!('undefined' === typeof CMS_CONF.EPISODES_PAGING[folderID].length)) {
                     var sizePage = CMS_CONF.EPISODES_PAGING[folderID].length;
-                    for (i = 0; i < sizePage; i++) {
+                    for (var i = 0; i < sizePage; i++) {
                         episodes.push(CMS_CONF.EPISODES_PAGING[folderID][i].id);
                     }
                 }

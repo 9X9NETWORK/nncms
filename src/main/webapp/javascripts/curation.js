@@ -2894,10 +2894,10 @@ function playPoiEventAndVideo(type) {
         var displayText = strip_tags($.trim($('#poi-event-overlay #' + type + ' input[name=displayText]').val())),
             buttonsText = strip_tags($.trim($('#poi-event-overlay #' + type + ' input[name=btnText]').val()));
         if ('' == displayText) {
-            displayText = 'Input display text';
+            displayText = nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text']);
         }
         if ('' == buttonsText) {
-            buttonsText = 'Input button text';
+            buttonsText = nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input button text']);
         }
         $('#poi-event-overlay #' + type + ' .video-wrap .poi-display').poi({
             type: CMS_CONF.POI_TYPE_MAP[type]['plugin'],
