@@ -249,6 +249,7 @@
             "Results:": "Results:",
             "Add channels into your “<span>Set 2</span>”": "Add channels into your “<span>{0}</span>”",
             "Please fill in the channel url to search.": "Please fill in the channel url to search.",
+            "Please fill in the correct url.": "Please fill in the correct url.",
             "Please fill in the keywords to search.": "Please fill in the keywords to search.",
             "Processing...": "Processing..."
         },

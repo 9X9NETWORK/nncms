@@ -1,6 +1,13 @@
 $(document).on("keyup", "#brand-title-val", function(event) {
     $(".clearfix .msg-error").hide();
+    $('body').addClass('has-change');
     $("#name-charcounter").text($("#brand-title-val").val().length);
+});
+
+$(document).on('change', '#brand-title-val', function() {
+    $(".clearfix .msg-error").hide();
+    $("#name-charcounter").text($("#brand-title-val").val().length);
+    $('body').addClass('has-change');
 });
 
 $(document).on('click', '#content-nav a, .select-list li a, .studio-nav-wrap a, #profile-dropdown a', function(e) {

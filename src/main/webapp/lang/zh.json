@@ -249,6 +249,7 @@
             "Results:": "搜尋結果:",
             "Add channels into your “<span>Set 2</span>”": "增加頻道到你的 “<span>{0}</span>”頻道組",
             "Please fill in the channel url to search.": "請輸入頻道網址搜尋",
+            "Please fill in the correct url.": "請輸入正確網址搜尋",
             "Please fill in the keywords to search.": "請輸入關鍵字搜尋",
             "Processing...": "處理中..."
         },

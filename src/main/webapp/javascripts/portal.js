@@ -106,6 +106,12 @@ $(document).on("keyup", "#setName", function(event) {
     $("#name-charcounter").text($("#setName").val().length);
 });
 
+$(document).on('change', '#setName', function() {
+    $(".clearfix .msg-portal").hide();
+    $("#name-charcounter").text($("#setName").val().length);
+    $('body').addClass('has-change');
+});
+
 $(document).on("click", "#portal-set li", function(event) {
     var nextUrl = "portal-manage.html?id=" + $(this).data("meta");
     location.href = nextUrl;
@@ -251,7 +257,7 @@ $(document).on("click", "#portal_search_channel", function(event) {
                     });
 
                 } else {
-                    $("#msg-search").text(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Please fill in the channel url to search."])).show();
+                    $("#msg-search").text(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Please fill in the correct url."])).show();
                 }
                 $('#overlay-s').fadeOut("slow");
                 break;
@@ -547,8 +553,7 @@ function portalManage() {
     var msoId = CMS_CONF.MSO;
     if (msoId < 1) {
         location.href = "./";
-    }
-    else if (setId != undefined && setId > 0) {
+    } else if (setId != undefined && setId > 0) {
         $("#cntChannelEmpty").hide();
         nn.api('GET', CMS_CONF.API('/api/sets/{setId}', {
             setId : setId
@@ -560,7 +565,9 @@ function portalManage() {
 
                 nn.api('GET', CMS_CONF.API('/api/mso/{msoId}/sets', {
                     msoId : set.msoId
-                }), null, function(sets) {
+                }), {
+                    lang : "zh"
+                }, function(sets) {
                     var cntSetsItem = sets.length;
                     //alert(cntChanels);
                     // maybe modify
@@ -682,53 +689,55 @@ function portalSet() {
     var msoId = CMS_CONF.MSO;
     if (msoId < 1) {
         location.href = "./";
-    }
-    else{
+    } else {
         nn.api('GET', CMS_CONF.API('/api/mso/{msoId}/sets', {
             msoId : msoId
-        }), null, function(sets) {
-            var cntSets = sets.length;
-
+        }), {
+            lang : "zh"
+        }, function(sets) {
+            var cntSets = sets.length, sliceStart = 0, sliceEnd = 3, procSets = [];
+            if (sliceEnd > cntSets) {
+                sliceEnd = cntSets;
+            }
+            procSets = sets.slice(sliceStart, sliceEnd);
             var outStr = "";
             $('#portal-set').html('');
-            $('#portal-sets-tmpl').tmpl(sets).appendTo('#portal-set');
+            $('#portal-sets-tmpl').tmpl(procSets).appendTo('#portal-set');
 
             var strCh = "", strEp = "", mroeImg = [], moreImgUrl = "";
             var cntChannel = 0;
             outStr += sets[0]["name"] + '\n';
-            $.each(sets, function(i, set) {
-                if (i < 3) {
-                    //console.log("********iii****[" + i + "]");
-                    //outStr += set.id + "*";
-                    nn.api('GET', CMS_CONF.API('/api/sets/{setId}/channels', {
-                        setId : set.id
-                    }), null, function(channels) {
-                        cntChannel = channels.length;
-                        strCh = "#chset_" + set.id;
-                        strEp = "#epset_" + set.id;
+            $.each(procSets, function(i, set) {
+                //console.log("********iii****[" + i + "]");
+                //outStr += set.id + "*";
+                console.log("********iii****[" + i + "] \n set id :" + set.id);
+                nn.api('GET', CMS_CONF.API('/api/sets/{setId}/channels', {
+                    setId : set.id
+                }), null, function(channels) {
+                    cntChannel = channels.length;
+                    strCh = "#chset_" + set.id;
+                    strEp = "#epset_" + set.id;
 
-                        if (cntChannel > 0) {
-                            mroeImg = [];
-                            moreImgUrl = CMS_CONF.EPISODE_DEFAULT_IMAGE
-                            mroeImg = channels[0].moreImageUrl.split('|');
-                            if (mroeImg[0] && mroeImg[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) {
-                                moreImgUrl = mroeImg[0];
-                            }
-                            if ('' === channels[0].imageUrl) {
-                                channels[0].imageUrl = "images/ch_default.png";
-                            }
-                            $(strCh).attr("src", channels[0].imageUrl);
-                            $(strEp).attr("src", moreImgUrl);
-                            //console.log(channels[0].imageUrl);
-                            //console.log(strCh + moreImgUrl);
-
+                    if (cntChannel > 0) {
+                        mroeImg = [];
+                        moreImgUrl = CMS_CONF.EPISODE_DEFAULT_IMAGE
+                        mroeImg = channels[0].moreImageUrl.split('|');
+                        if (mroeImg[0] && mroeImg[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) {
+                            moreImgUrl = mroeImg[0];
                         }
-                    });
-                }
+                        if ('' === channels[0].imageUrl) {
+                            channels[0].imageUrl = "images/ch_default.png";
+                        }
+                        $(strCh).attr("src", channels[0].imageUrl);
+                        $(strEp).attr("src", moreImgUrl);
+                        //console.log(channels[0].imageUrl);
+                        //console.log(strCh + moreImgUrl);
+                    }
+                });
+
             });
             //alert("gg");
             //console.log("out str:\n" + outStr);
-
         });
     }
     $('#title-func .langkey').each(function() {
