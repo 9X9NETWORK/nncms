@@ -1,5 +1,6 @@
-/* predefine global variables here: jQuery nn CMS_CONF $ alert location autoHeight scrollbar window document sumStoryboardInfo rebuildVideoNumber setFormWidth setVideoMeasure setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp switchPublishStatus switchRerunCheckbox truncateFormTitle setFormHeight setTaglistWidth uploadImage FB ellipsisPage portals */
+/* predefine global variables here: nn CMS_CONF $ location autoHeight scrollbar window document sumStoryboardInfo rebuildVideoNumber setFormWidth setVideoMeasure setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp switchPublishStatus switchRerunCheckbox truncateFormTitle setFormHeight setTaglistWidth uploadImage FB ellipsisPage brandSeting storeManage portalManage portalSet */
 /*jslint eqeq: true, nomen: true, plusplus: true, regexp: true, unparam: true, sloppy: true, vars: true */
+
 function renderConnectFacebookUI() {
     $('#settingForm .connect-switch').removeClass('hide');
     $('#settingForm .connected').addClass('hide');
@@ -52,13 +53,17 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
             }
         }
         $('#fb-page-list').remove();
-        $('#fb-page-list-tmpl').tmpl({cntPage: pages.length}).appendTo('div.page-list-middle');
+        $('#fb-page-list-tmpl').tmpl({
+            cntPage: pages.length
+        }).appendTo('div.page-list-middle');
         $('#fb-page-list-tmpl-item').tmpl(pages).appendTo('#fb-page-list');
         ellipsisPage();
     }
     // checked default fadebook page
     if ('channel-setting.html' == CMS_CONF.USER_URL.attr('file') && CMS_CONF.USER_URL.param('id') > 0) {
-        nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/facebook', {channelId: CMS_CONF.USER_URL.param('id')}), null, function (autoshares) {
+        nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/facebook', {
+            channelId: CMS_CONF.USER_URL.param('id')
+        }), null, function (autoshares) {
             if (autoshares && autoshares.length > 0) {
                 var isCheckedTimeline = false,
                     tempIds = [],
@@ -188,7 +193,9 @@ function initFacebookJavaScriptSdk() {
             var js,
                 id = 'facebook-jssdk',
                 ref = d.getElementsByTagName('script')[0];
-            if (d.getElementById(id)) { return; }
+            if (d.getElementById(id)) {
+                return;
+            }
             js = d.createElement('script');
             js.id = id;
             js.async = true;
@@ -209,7 +216,9 @@ function initFacebookJavaScriptSdk() {
             });
         });
 
-        nn.api('GET', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {userId: CMS_CONF.USER_DATA.id}), null, function (facebook) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {
+            userId: CMS_CONF.USER_DATA.id
+        }), null, function (facebook) {
             if (!facebook || !facebook.userId) {
                 // ready for connect facebook
                 CMS_CONF.FB_RESTART_CONNECT = false;
@@ -263,7 +272,9 @@ function buildEpcurateCuration(pageId, fm, crumb) {
             crumb.name = 'New episode';
         }
         if (cid > 0 && !isNaN(cid) && CMS_CONF.USER_DATA.id) {
-            nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
+            nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
+                userId: CMS_CONF.USER_DATA.id
+            }), null, function (data) {
                 var channelIds = [];
                 if (data.length > 0) {
                     $.each(data, function (i, list) {
@@ -274,7 +285,9 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                     showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                     return;
                 }
-                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: cid}), null, function (channel) {
+                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
+                    channelId: cid
+                }), null, function (channel) {
                     if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                         showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                         return;
@@ -302,12 +315,16 @@ function buildEpcurateCuration(pageId, fm, crumb) {
         }
     } else {
         // update mode: data from api
-        nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), null, function (episode) {
+        nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {
+            episodeId: $('#id').val()
+        }), null, function (episode) {
             if ('' != cid && cid != episode.channelId) {
                 showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
                 return;
             }
-            nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
+            nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
+                userId: CMS_CONF.USER_DATA.id
+            }), null, function (data) {
                 var channelIds = [];
                 if (data.length > 0) {
                     $.each(data, function (i, list) {
@@ -318,7 +335,9 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                     showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                     return;
                 }
-                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: episode.channelId}), null, function (channel) {
+                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
+                    channelId: episode.channelId
+                }), null, function (channel) {
                     if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                         showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                         return;
@@ -346,7 +365,9 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                         isZoneLimited = null,
                         isMobileLimited = null,
                         isEmbedLimited = null;
-                    nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {episodeId: $('#id').val()}), null, function (programs) {
+                    nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {
+                        episodeId: $('#id').val()
+                    }), null, function (programs) {
                         $.each(programs, function (idx, programItem) {
                             if (normalPattern.test(programItem.fileUrl)) {
                                 programList.push(programItem);
@@ -375,8 +396,12 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                 }
                             });
                             nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.slice(-11) + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
-                                nn.api('GET', CMS_CONF.API('/api/programs/{programId}/title_cards', {programId: programItem.id}), null, function (title_card) {
-                                    nn.api('GET', CMS_CONF.API('/api/programs/{programId}/poi_points', {programId: programItem.id}), null, function (poi_points) {
+                                nn.api('GET', CMS_CONF.API('/api/programs/{programId}/title_cards', {
+                                    programId: programItem.id
+                                }), null, function (title_card) {
+                                    nn.api('GET', CMS_CONF.API('/api/programs/{programId}/poi_points', {
+                                        programId: programItem.id
+                                    }), null, function (poi_points) {
                                         committedCnt += 1;
                                         beginTitleCard = null;
                                         endTitleCard = null;
@@ -512,13 +537,17 @@ function buildEpcuratePublish(pageId, fm, crumb) {
         showSystemErrorOverlayAndHookError('Invalid episode ID, please try again.');
         return;
     }
-    nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {episodeId: $('#id').val()}), null, function (episode) {
+    nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {
+        episodeId: $('#id').val()
+    }), null, function (episode) {
         if ('' != cid && cid != episode.channelId) {
             showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
             return;
         }
         $('#channelId').val(episode.channelId);
-        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
+            userId: CMS_CONF.USER_DATA.id
+        }), null, function (data) {
             var channelIds = [];
             if (data.length > 0) {
                 $.each(data, function (i, list) {
@@ -529,7 +558,9 @@ function buildEpcuratePublish(pageId, fm, crumb) {
                 showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
                 return;
             }
-            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: episode.channelId}), null, function (channel) {
+            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
+                channelId: episode.channelId
+            }), null, function (channel) {
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                     showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                     return;
@@ -581,7 +612,9 @@ function buildEpcuratePublish(pageId, fm, crumb) {
                 switchPublishStatus($('input[name=status]:checked').val(), $('input[name=status]:checked').attr('name'));
                 switchRerunCheckbox();
                 $.uniform.update();
-                nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {episodeId: $('#id').val()}), null, function (programs) {
+                nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {
+                    episodeId: $('#id').val()
+                }), null, function (programs) {
                     $('#img-list').html('');
                     $('#img-list-tmpl-item').tmpl(programs).appendTo('#img-list');
                     if ('' != episode.imageUrl) {
@@ -625,7 +658,9 @@ function buildEpcuratePublish(pageId, fm, crumb) {
 
 function listEpisode(pageId, id) {
     if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
-        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
+            userId: CMS_CONF.USER_DATA.id
+        }), null, function (data) {
             var channelIds = [];
             if (data.length > 0) {
                 $.each(data, function (i, list) {
@@ -637,15 +672,21 @@ function listEpisode(pageId, id) {
                 return;
             }
             showProcessingOverlay();
-            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: id}), null, function (channel) {
+            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
+                channelId: id
+            }), null, function (channel) {
                 $('#func-nav ul').html('');
                 $('#episode-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
-                    nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {userId: CMS_CONF.USER_DATA.id}), null, function (favorites) {
+                    nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {
+                        userId: CMS_CONF.USER_DATA.id
+                    }), null, function (favorites) {
                         var cntEpisode = favorites.length;
                         channel.name = CMS_CONF.USER_DATA.name + nn._([pageId, 'title-func', "'s Favorite"]);
                         $('#title-func').html('');
-                        $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
+                        $('#title-func-tmpl').tmpl(channel, {
+                            cntEpisode: cntEpisode
+                        }).appendTo('#title-func');
                         $('#channel-name').data('width', $('#channel-name').width());
                         $('#content-main-wrap .constrain').html('');
                         if (cntEpisode > 0) {
@@ -660,10 +701,14 @@ function listEpisode(pageId, id) {
                         $('#overlay-s').fadeOut();
                     });
                 } else {
-                    nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/episodes', {channelId: id}), null, function (episodes) {
+                    nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/episodes', {
+                        channelId: id
+                    }), null, function (episodes) {
                         var cntEpisode = episodes.length;
                         $('#title-func').html('');
-                        $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
+                        $('#title-func-tmpl').tmpl(channel, {
+                            cntEpisode: cntEpisode
+                        }).appendTo('#title-func');
                         $('#channel-name').data('width', $('#channel-name').width());
                         $('#content-main-wrap .constrain').html('');
                         CMS_CONF.EPISODES_PAGING = [];
@@ -684,7 +729,6 @@ function listEpisode(pageId, id) {
                                 }
                                 tmpEpisodes = [];
                                 for (i = 0; i < cntPageFirstEpisodes; i++) {
-                                    //episodes[i].seq = tmpCntEpisode - episodes[i].seq;
                                     episodes[i].seq = tmpCntEpisode - i;
                                     tmpEpisodes.push(episodes[i]);
                                 }
@@ -694,16 +738,16 @@ function listEpisode(pageId, id) {
                                     'pageStart': tmpCntEpisode,
                                     'pageEnd': (tmpCntEpisode - cntPageFirstEpisodes + 1)
                                 });
+                                var tmpStart = 0,
+                                    tmpEnd = 0,
+                                    ii = 0;
                                 for (i = 0; i < cntPage; i++) {
                                     tmpEpisodes = [];
-                                    var tmpStart = 0,
-                                        tmpEnd = 0,
-                                        ii = 0;
                                     tmpStart = i * iPageSize + cntPageFirstEpisodes;
                                     tmpEnd = tmpStart + iPageSize;
+                                    ii = 0;
                                     for (ii = tmpStart; ii < tmpEnd; ii++) {
                                         // serial DESC
-                                        //episodes[ii].seq =  tmpCntEpisode - episodes[ii].seq;
                                         episodes[ii].seq = cntEpisode - ii;
                                         tmpEpisodes.push(episodes[ii]);
                                     }
@@ -717,16 +761,14 @@ function listEpisode(pageId, id) {
                             } else {
                                 tmpEpisodes = [];
                                 for (i = 0; i < cntEpisode; i++) {
-                                    //episodes[i].seq =  tmpCntEpisode - episodes[i].seq;
                                     // the number srilal is DESC
-                                    episodes[i].seq =  cntEpisode - i;
+                                    episodes[i].seq = cntEpisode - i;
                                     tmpEpisodes.push(episodes[i]);
                                 }
                                 CMS_CONF.EPISODES_PAGING.push(tmpEpisodes);
                             }
 
                             $('#episode-list-tmpl').tmpl().appendTo('#content-main-wrap .constrain');
-                            //$('#episode-list-tmpl-item').tmpl(episodes).appendTo('#episode-list');
                             $('#episode-list-tmpl-item').tmpl(CMS_CONF.EPISODES_PAGING[0]).appendTo('#episode-list');
                             // folder list
                             $('#episode-list-tmpl-folder').tmpl(CMS_CONF.EPISODES_PAGING_INFO).appendTo('#episode-list');
@@ -741,7 +783,9 @@ function listEpisode(pageId, id) {
                             });
                             $('#episode-list').sortable('disable');
                         } else {
-                            $('#episode-first-tmpl').tmpl({ id: id }).appendTo('#content-main-wrap .constrain');
+                            $('#episode-first-tmpl').tmpl({
+                                id: id
+                            }).appendTo('#content-main-wrap .constrain');
                             // episode first cycle
                             $('#selected-episode p.episode-pager').html('');
                             $('#selected-episode .wrapper ul.content').cycle({
@@ -767,7 +811,9 @@ function listEpisode(pageId, id) {
     } else if ('' !== id && id == 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
         // for fake favorite channel
         showProcessingOverlay();
-        nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {userId: CMS_CONF.USER_DATA.id}), null, function (favorites) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {
+            userId: CMS_CONF.USER_DATA.id
+        }), null, function (favorites) {
             var cntEpisode = favorites.length;
             var channel = {
                 contentType: CMS_CONF.YOUR_FAVORITE,
@@ -776,7 +822,9 @@ function listEpisode(pageId, id) {
             $('#func-nav ul').html('');
             $('#episode-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
             $('#title-func').html('');
-            $('#title-func-tmpl').tmpl(channel, { cntEpisode: cntEpisode }).appendTo('#title-func');
+            $('#title-func-tmpl').tmpl(channel, {
+                cntEpisode: cntEpisode
+            }).appendTo('#title-func');
             $('#channel-name').data('width', $('#channel-name').width());
             $('#content-main-wrap .constrain').html('');
             if (cntEpisode > 0) {
@@ -798,7 +846,9 @@ function listEpisode(pageId, id) {
 
 function updateChannel(pageId, id) {
     if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
-        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (data) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
+            userId: CMS_CONF.USER_DATA.id
+        }), null, function (data) {
             var channelIds = [];
             if (data.length > 0) {
                 $.each(data, function (i, list) {
@@ -809,7 +859,9 @@ function updateChannel(pageId, id) {
                 showSystemErrorOverlayAndHookError('You are not authorized to edit this channel.');
                 return;
             }
-            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {channelId: id}), null, function (channel) {
+            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
+                channelId: id
+            }), null, function (channel) {
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                     showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                     return;
@@ -850,8 +902,12 @@ function updateChannel(pageId, id) {
                     $('#sphere-select-txt').text(CMS_CONF.SPHERE_MAP[channel.sphere]);
                     $('.category').removeClass('disable').addClass('enable');
                     var sphere = channel.sphere;
-                    if ('other' === sphere) { sphere = 'en'; }
-                    nn.api('GET', CMS_CONF.API('/api/categories'), { lang: sphere }, function (categories) {
+                    if ('other' === sphere) {
+                        sphere = 'en';
+                    }
+                    nn.api('GET', CMS_CONF.API('/api/categories'), {
+                        lang: sphere
+                    }, function (categories) {
                         $('#browse-category').data('realCateCnt', categories.length);
                         $.each(categories, function (i, list) {
                             CMS_CONF.CATEGORY_MAP[list.id] = list.name;
@@ -878,14 +934,20 @@ function updateChannel(pageId, id) {
                         if ('' != channel.categoryId && CMS_CONF.CATEGORY_MAP[channel.categoryId]) {
                             $('.tag-list').removeClass('hide');
                             $('#categoryId-select-txt').text(CMS_CONF.CATEGORY_MAP[channel.categoryId]);
-                            nn.api('GET', CMS_CONF.API('/api/tags'), { categoryId: channel.categoryId }, function (tags) {
+                            nn.api('GET', CMS_CONF.API('/api/tags'), {
+                                categoryId: channel.categoryId
+                            }, function (tags) {
                                 $('#tag-list').html('');
                                 if (tags && tags.length > 0) {
                                     $('.tag-list').removeClass('hide');
                                     var currentTags = $('#tag').val();
                                     currentTags = currentTags.split(',');
-                                    if (!currentTags) { currentTags = []; }
-                                    $('#tag-list-tmpl-item').tmpl({ tags: tags }).appendTo('#tag-list');
+                                    if (!currentTags) {
+                                        currentTags = [];
+                                    }
+                                    $('#tag-list-tmpl-item').tmpl({
+                                        tags: tags
+                                    }).appendTo('#tag-list');
                                     if (currentTags.length > 0) {
                                         $('#tag-list li span a').each(function () {
                                             if (-1 !== $.inArray($(this).text(), currentTags)) {
@@ -953,11 +1015,15 @@ function createChannel(pageId) {
 function listChannel(pageId) {
     if (CMS_CONF.USER_DATA.id) {
         showProcessingOverlay();
-        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {userId: CMS_CONF.USER_DATA.id}), null, function (channels) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
+            userId: CMS_CONF.USER_DATA.id
+        }), null, function (channels) {
             var cntChannel = channels.length,
                 hasFavoriteChannel = false;
             $('#title-func').html('');
-            $('#title-func-tmpl').tmpl(null, { cntChannel: cntChannel }).appendTo('#title-func');
+            $('#title-func-tmpl').tmpl(null, {
+                cntChannel: cntChannel
+            }).appendTo('#title-func');
             if (cntChannel > 0) {
                 var items = [],
                     temp = [];
@@ -971,7 +1037,9 @@ function listChannel(pageId) {
                         channel.moreImageUrl_1 = 'images/favorite_ch.png';
                         if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
                             temp = channel.moreImageUrl.split('|');
-                            if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_2 = temp[0]; }
+                            if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) {
+                                channel.moreImageUrl_2 = temp[0];
+                            }
                         }
                         channel.name = CMS_CONF.USER_DATA.name + nn._([pageId, 'channel-list', "'s Favorite"]);
                     } else {
@@ -983,7 +1051,9 @@ function listChannel(pageId) {
                         }
                         if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
                             temp = channel.moreImageUrl.split('|');
-                            if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) { channel.moreImageUrl_2 = temp[0]; }
+                            if (temp[0] && temp[0] !== CMS_CONF.EPISODE_DEFAULT_IMAGE) {
+                                channel.moreImageUrl_2 = temp[0];
+                            }
                         }
                     }
                     items.push(channel);
@@ -1093,8 +1163,12 @@ function rebuildCrumbAndParam(cid, eid) {
     $('#epcurate-nav-publish').attr('href', 'epcurate-publish.html' + qrystr);
     $('#form-btn-back').attr('href', $('#epcurate-nav-' + $('#form-btn-back').attr('rel')).attr('href'));
     $('#form-btn-next').attr('href', $('#epcurate-nav-' + $('#form-btn-next').attr('rel')).attr('href'));
-    if (cmsCrumb.id) { $('#id').val(cmsCrumb.id); }
-    if (cmsCrumb.channelId) { $('#channelId').val(cmsCrumb.channelId); }
+    if (cmsCrumb.id) {
+        $('#id').val(cmsCrumb.id);
+    }
+    if (cmsCrumb.channelId) {
+        $('#channelId').val(cmsCrumb.channelId);
+    }
 
     return cmsCrumb;
 }   // end of rebuildCrumbAndParam()
@@ -1103,22 +1177,24 @@ function setupUserCampaignId() {
     if (null !== CMS_CONF.USER_DATA) {
         if (CMS_CONF.CAMPAIGN_ID && !isNaN(CMS_CONF.CAMPAIGN_ID)) {
             return CMS_CONF.CAMPAIGN_ID;
-        } else {
-            nn.api('GET', CMS_CONF.API('/api/users/{userId}/poi_campaigns', {userId: CMS_CONF.USER_DATA.id}), null, function (poi_campaign) {
-                if (poi_campaign && poi_campaign.length > 0 && poi_campaign[0] && !isNaN(poi_campaign[0].id)) {
-                    CMS_CONF.CAMPAIGN_ID = poi_campaign[0].id;
-                    return CMS_CONF.CAMPAIGN_ID;
-                } else {
-                    var parameter = {
-                        name: CMS_CONF.USER_DATA.name + "'s campaign"
-                    };
-                    nn.api('POST', CMS_CONF.API('/api/users/{userId}/poi_campaigns', {userId: CMS_CONF.USER_DATA.id}), parameter, function (poi_campaign) {
-                        CMS_CONF.CAMPAIGN_ID = poi_campaign.id;
-                        return CMS_CONF.CAMPAIGN_ID;
-                    });
-                }
-            });
         }
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/poi_campaigns', {
+            userId: CMS_CONF.USER_DATA.id
+        }), null, function (poi_campaign) {
+            if (poi_campaign && poi_campaign.length > 0 && poi_campaign[0] && !isNaN(poi_campaign[0].id)) {
+                CMS_CONF.CAMPAIGN_ID = poi_campaign[0].id;
+                return CMS_CONF.CAMPAIGN_ID;
+            }
+            var parameter = {
+                name: CMS_CONF.USER_DATA.name + "'s campaign"
+            };
+            nn.api('POST', CMS_CONF.API('/api/users/{userId}/poi_campaigns', {
+                userId: CMS_CONF.USER_DATA.id
+            }), parameter, function (poi_campaign) {
+                CMS_CONF.CAMPAIGN_ID = poi_campaign.id;
+                return CMS_CONF.CAMPAIGN_ID;
+            });
+        });
     } else {
         nn.log('Can not invoke getUserCampaignId()!', 'error');
     }
@@ -1353,7 +1429,7 @@ $(function () {
             if ('signin.html' == tmpUrl.attr('file')) {
                 location.href = 'index.html';
             } else {
-                var tmpPriv = parseInt(user.priv) / 1000 + 111;
+                var tmpPriv = parseInt(user.priv, 10) / 1000 + 111;
                 CMS_CONF.MSO = 0;
                 if (tmpPriv > 221 && user.msoId > 0) {
                     CMS_CONF.MSO = user.msoId;

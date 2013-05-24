@@ -1116,14 +1116,14 @@ $(function () {
         $('#cur-poi-edit .edit-form .notice').addClass('hide');
         return false;
     });
+    // POI Add button
     $('#cur-poi').on('click', '.btn-add-poi a', function () {
-        // Add button
         buildPoiPointEditTmpl();
         $('#cur-poi-edit').removeClass('edit');
         return false;
     });
+    // POI Edit button
     $('#cur-poi').on('click', '.poi-list a.edit', function () {
-        // Edit button
         var poiPointId = $(this).data('poiPointId'),
             tmplItem = $('#storyboard-listing li.playing').tmplItem(),
             tmplItemData = tmplItem.data,
@@ -1152,6 +1152,7 @@ $(function () {
     $('#cur-poi-edit').on('click', '.edit-form input, .btn-reset', function () {
         $('#cur-poi-edit .edit-form .notice').addClass('hide');
     });
+    // POI overlay notice reset
     $('#poi-event-overlay').on('click', 'input[type=text], textarea', function () {
         $('#poi-event-overlay .event .event-input .fminput .notice').hide();
         $('#poi-event-overlay .event .func ul li.notice').hide();
@@ -1160,6 +1161,7 @@ $(function () {
     $('#cur-poi-edit').on('change', '.edit-form input', function () {
         $('body').addClass('has-poi-change');
     });
+    // POI overlay hook has change
     $('#poi-event-overlay').on('change', 'input[type=text], textarea', function () {
         $('body').addClass('has-poi-change');
         $('body').addClass('has-change');
@@ -1323,8 +1325,11 @@ $(function () {
 
     // POI overlay - crumb switch
     $('#poi-event-overlay').on('click', '.event .crumb a', function () {
+        // POI overlay notice reset
+        $('#poi-event-overlay .event .event-input .fminput .notice').hide();
         $('#poi-event-overlay .event .func ul li.notice').hide();
     });
+    // POI overlay - first crumb (close POI overlay)
     $('#poi-event-overlay').on('click', '.unblock', function (e) {
         if ($('#cur-poi-edit').hasClass('edit')) {
             // edit mode back must check and if pass then unblock poi overlay
@@ -1339,12 +1344,14 @@ $(function () {
                     return false;
                 }
             });
+            return false;
         } else {
             // insert mode back no check and unblock poi overlay
             $.unblockUI();
             return false;
         }
     });
+    // POI overlay - crumb into event type
     $('#poi-event-overlay').on('click', '.event .crumb a.crumb-event', function () {
         // insert mode back no check and go to event-select (event type)
         var blockClass = $(this).attr('class'),
@@ -1353,6 +1360,7 @@ $(function () {
         $('#' + block[1] + ', #schedule-notify, #instant-notify').removeClass('hide');
         return false;
     });
+    // POI overlay - crumb into preivew video and POI plugin
     $('#poi-event-overlay').on('click', '#schedule-mobile .crumb .crumb-mobile', function (e) {
         if ($('#cur-poi-edit').hasClass('edit')) {
             // edit mode back must check and if pass then go to preivew video and POI plugin
@@ -1361,13 +1369,16 @@ $(function () {
                     e.stopImmediatePropagation();
                     return false;
                 } else {
+                    $('body').addClass('from-poi-overlay-edit-mode');
                     $('#event-scheduled .schedule').addClass('hide');
                     $('#schedule-notify').removeClass('hide');
                     return false;
                 }
             });
+            return false;
         } else {
             // insert mode back no check and go to preivew video and POI plugin
+            $('body').addClass('from-poi-overlay-edit-mode');
             $('#event-scheduled .schedule').addClass('hide');
             $('#schedule-notify').removeClass('hide');
             return false;
@@ -1381,13 +1392,16 @@ $(function () {
                     e.stopImmediatePropagation();
                     return false;
                 } else {
+                    $('body').addClass('from-poi-overlay-edit-mode');
                     $('#event-instant .instant').addClass('hide');
                     $('#instant-notify').removeClass('hide');
                     return false;
                 }
             });
+            return false;
         } else {
             // insert mode back no check and go to preivew video and POI plugin
+            $('body').addClass('from-poi-overlay-edit-mode');
             $('#event-instant .instant').addClass('hide');
             $('#instant-notify').removeClass('hide');
             return false;
@@ -1403,6 +1417,8 @@ $(function () {
         $('#' + type).removeClass('hide');
         playPoiEventAndVideo(type);
     });
+
+    // POI overlay - POI plugin realtime edit preview
     $('#poi-event-overlay').on('change keyup keydown', 'input[name=displayText]', function () {
         var val = strip_tags($(this).val().replace(/\n/g, ''));
         $('#poi-event-overlay .event .video-wrap .poi-display').poi('displayText', val);
@@ -1420,11 +1436,11 @@ $(function () {
         $(this).val(val);
     });
 
-    // POI overlay - Preview Video and POI Plugin Next
+    // POI overlay - Scheduled Preview Video and POI Plugin Next
     $('#poi-event-overlay').on('click', '#schedule-notify .btn-next, #schedule-notify .crumb.edit .crumb-next', function () {
         chkPoiEventData(document.eventScheduledForm, function (result) {
             if (result) {
-                // parse timestamp
+                // parse multi schedule timestamp (ready for next step)
                 if ('' !== $.trim($('#timestamp_selected').val())) {
                     var stampList = [],
                         formatTemp = '',
@@ -1450,7 +1466,7 @@ $(function () {
                     $('#schedule_selected').val(dateTimeList.join(','));
                     $('#poi-event-overlay .datepicker').datepick('setDate', dateList);
                 } else {
-                    // default date time
+                    // default schedule datetime
                     var today = new Date((new Date()).getTime()),
                         tomorrow = new Date((new Date()).getTime() + (24 * 60 * 60 * 1000)),
                         hour = 19,
@@ -1477,6 +1493,7 @@ $(function () {
         });
         return false;
     });
+    // POI overlay - Instant Preview Video and POI Plugin Next
     $('#poi-event-overlay').on('click', '#instant-notify .btn-next, #instant-notify .crumb.edit .crumb-next', function () {
         chkPoiEventData(document.eventInstantForm, function (result) {
             if (result) {
@@ -1513,7 +1530,7 @@ $(function () {
         return false;
     });
 
-    // POI overlay - Mobile notification message
+    // POI overlay - Mobile notification message realtime edit preview
     $('#poi-event-overlay').on('change keyup keydown', '#schedule_msg', function () {
         var val = strip_tags($(this).val().replace(/\n/g, ''));
         $(this).val(val);
@@ -1544,7 +1561,7 @@ $(function () {
         $(this).parent().parent().parent().children('.select-btn').removeClass('on');
         $(this).parent().parent().parent().children('.select-txt').children().text(selectOption);
         $(this).parents('.select-list').hide();
-        // recount timestamp
+        // rebuild multi schedule timestamp
         if ('' !== $.trim($('#datepicker_selected').val())) {
             var selectedList = [],
                 scheduleDate = '',
@@ -3339,6 +3356,8 @@ function countPoiItem() {
 function unblockPoiUI() {
     $.unblockUI();  // ready for unblock POI event overlay
     $('body').removeClass('enter-poi-edit-mode');
+    $('body').removeClass('from-poi-edit-mode');
+    $('body').removeClass('from-poi-overlay-edit-mode');
     $('#storyboard, #content-main-wrap .form-btn, #epcurate-nav ul li.publish').unblock();
     $('#epcurate-nav ul li.publish').removeClass('mask');
     $('#video-player .video').removeClass('transparent');
