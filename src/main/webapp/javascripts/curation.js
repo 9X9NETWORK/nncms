@@ -49,6 +49,7 @@ $(function () {
                 $('#poi-event-overlay').show();
             } else {
                 $.unblockUI();
+                $('#poi-event-overlay .wrap').html('');
             }
             $('#poi-list-page ol li').removeClass('deleting').removeData('deleteId');
             if ($(this).hasClass('has-error')) {
@@ -166,6 +167,7 @@ $(function () {
         $('body').removeClass('has-poi-change');
         $.unblockUI();
         $('#unsave-poi-mask-prompt').hide();
+        $('#poi-event-overlay .wrap').html('');
         $('#epcurate-curation ul.tabs li a.cur-poi').trigger('click');
         return false;
     });
@@ -1211,6 +1213,7 @@ $(function () {
             return false;
         }
         $.unblockUI();
+        $('#poi-event-overlay .wrap').html('');
         $('#epcurate-curation ul.tabs li a.cur-poi').trigger('click');
         return false;
     });
@@ -1651,6 +1654,7 @@ $(function () {
                     tmplItemData.poiList = poiTemp;
                     buildPoiInfoTmpl($('#storyboard-listing li.playing'));
                     $('body').removeClass('has-poi-change');
+                    $('#poi-event-overlay .wrap').html('');
                     $('#epcurate-curation ul.tabs li a.cur-poi').trigger('click');
                 } else {
                     // insert mode
@@ -1688,6 +1692,7 @@ $(function () {
                                         tmplItemData.poiList = poiTemp;
                                         buildPoiInfoTmpl($('#storyboard-listing li.playing'));
                                         $('body').removeClass('has-poi-change');
+                                        $('#poi-event-overlay .wrap').html('');
                                         $('#epcurate-curation ul.tabs li a.cur-poi').trigger('click');
                                         $('#overlay-s').fadeOut(0);
                                     });
@@ -1712,6 +1717,7 @@ $(function () {
                         tmplItemData.poiList = poiTemp;
                         buildPoiInfoTmpl($('#storyboard-listing li.playing'));
                         $('body').removeClass('has-poi-change');
+                        $('#poi-event-overlay .wrap').html('');
                         $('#epcurate-curation ul.tabs li a.cur-poi').trigger('click');
                         $('#overlay-s').fadeOut(0);
                     }
@@ -2846,20 +2852,28 @@ function buildPoiEventOverlayTmpl(poi_event) {
         notifyMsg: '',
         notifyScheduler: ''
     }, poiPointEventData);
-    $('#poi-event-overlay .wrap').html('');
-    $('#poi-event-overlay-tmpl').tmpl(poiPointEventData).prependTo('#poi-event-overlay .wrap');
+    if ($('#poi-event-overlay-wrap').length === 0) {
+        $('#poi-event-overlay .wrap').html('');
+        $('#poi-event-overlay-tmpl').tmpl(poiPointEventData).prependTo('#poi-event-overlay .wrap');
+    } else {
+        $('#poi-event-overlay-wrap').tmplItem().data = poiPointEventData;
+    }
+    poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey');
     $.blockUI({
         message: $('#poi-event-overlay'),
         onBlock: function () {
             $('#poi-event-overlay .event').addClass('hide');
             if ($('#cur-poi-edit').hasClass('edit')) {
                 $('#poi-event-overlay').addClass('edit');
-                poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey');
                 $('#' + poiEventTypeKey).removeClass('hide');
                 playPoiEventAndVideo(poiEventTypeKey);
             } else {
                 $('#poi-event-overlay').removeClass('edit');
-                $('#event-select').removeClass('hide');
+                if (poiEventTypeKey && CMS_CONF.POI_TYPE_MAP[poiEventTypeKey]) {
+                    $('#' + poiEventTypeKey).removeClass('hide');
+                } else {
+                    $('#event-select').removeClass('hide');
+                }
             }
             $('#poi-event-overlay input[name=btnText]').charCounter(20, {
                 container: '<span class="hide"><\/span>',
