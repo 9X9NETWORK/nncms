@@ -1131,19 +1131,13 @@ $(function () {
             tmplItemData = tmplItem.data,
             poiList = tmplItemData.poiList;
         if ('' != poiPointId) {
-            if (poiPointId > 0 && !isNaN(poiPointId)) {
-                nn.api('GET', CMS_CONF.API('/api/poi_points/{poiPointId}', {poiPointId: poiPointId}), null, function (poi_point) {
-                    buildPoiPointEditTmpl(poi_point);
-                });
-            } else {
-                $.each(poiList, function (i, poiItem) {
-                    if (poiItem.id == poiPointId) {
-                        buildPoiPointEditTmpl(poiItem);
-                        // NOTE: return false here is break the $.each() loop
-                        return false;
-                    }
-                });
-            }
+            $.each(poiList, function (i, poiItem) {
+                if (poiItem.id == poiPointId) {
+                    buildPoiPointEditTmpl(poiItem);
+                    // NOTE: return false here is break the $.each() loop
+                    return false;
+                }
+            });
             // enter edit mode
             $('#cur-poi-edit').addClass('edit');
         }
