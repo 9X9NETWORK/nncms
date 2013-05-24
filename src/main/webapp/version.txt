@@ -1,3 +1,12 @@
+版本: 1081
+作者: chihwen
+日期: 2013年5月24日 下午 11:03:49
+訊息:
+簡化排程通知功能中的 today 取值方式
+issue 6367
+----
+異動 : /fakeapi/javascripts/curation.js
+
 版本: 1079
 作者: chihwen
 日期: 2013年5月24日 下午 10:37:44

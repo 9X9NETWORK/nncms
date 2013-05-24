@@ -1464,7 +1464,7 @@ $(function () {
                     $('#poi-event-overlay .datepicker').datepick('setDate', dateList);
                 } else {
                     // default schedule datetime
-                    var today = new Date((new Date()).getTime()),
+                    var today = new Date(),
                         tomorrow = new Date((new Date()).getTime() + (24 * 60 * 60 * 1000)),
                         hour = 19,
                         min = '00',
