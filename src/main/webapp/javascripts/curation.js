@@ -2839,7 +2839,8 @@ function buildPoiPointEditTmpl(poi_point) {
 function buildPoiEventOverlayTmpl(poi_event) {
     var videoData = $('#storyboard-list li.playing').tmplItem().data,
         poiPointEventData = poi_event || {},
-        poiEventTypeKey = '';
+        poiEventTypeKey = '',
+        hasPointEventCache = false;
     poiPointEventData = $.extend({
         id: 0,
         targetId: (videoData.id) ? videoData.id : 0,
@@ -2853,9 +2854,11 @@ function buildPoiEventOverlayTmpl(poi_event) {
         notifyScheduler: ''
     }, poiPointEventData);
     if ($('#poi-event-overlay-wrap').length === 0) {
+        hasPointEventCache = false;
         $('#poi-event-overlay .wrap').html('');
         $('#poi-event-overlay-tmpl').tmpl(poiPointEventData).prependTo('#poi-event-overlay .wrap');
     } else {
+        hasPointEventCache = true;
         $('#poi-event-overlay-wrap').tmplItem().data = poiPointEventData;
     }
     poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey');
@@ -2866,7 +2869,9 @@ function buildPoiEventOverlayTmpl(poi_event) {
             if ($('#cur-poi-edit').hasClass('edit')) {
                 $('#poi-event-overlay').addClass('edit');
                 $('#' + poiEventTypeKey).removeClass('hide');
-                playPoiEventAndVideo(poiEventTypeKey);
+                if (false === hasPointEventCache) {
+                    playPoiEventAndVideo(poiEventTypeKey);
+                }
             } else {
                 $('#poi-event-overlay').removeClass('edit');
                 if (poiEventTypeKey && CMS_CONF.POI_TYPE_MAP[poiEventTypeKey]) {

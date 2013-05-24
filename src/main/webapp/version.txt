@@ -1,3 +1,73 @@
+版本: 1078
+作者: chihwen
+日期: 2013年5月24日 下午 09:54:12
+訊息:
+盡量避免重新定格影片，若曾經定格過而且還快取住，就不重新定格
+issue 6367
+----
+異動 : /fakeapi/javascripts/curation.js
+
+版本: 1077
+作者: chihwen
+日期: 2013年5月24日 下午 09:23:53
+訊息:
+當透過 POI overlay 第一個麵包屑關閉 overlay 後，再進入 overlay 時要重建先前的編輯內容
+issue 6367
+----
+異動 : /fakeapi/javascripts/curation.js
+
+版本: 1076
+作者: chihwen
+日期: 2013年5月24日 下午 03:11:01
+訊息:
+調整 curation.js 以解決點擊 POI overlay crumb 後，無法正確定格影片的問題
+
+1. 調整 curation.js 以解決點擊 POI overlay crumb 後，無法正確定格影片的問題。
+2. 調整 curation.js 增加及改良功能識別用註解，以利後續維護。
+3. 調整 curation.js 避免點擊 POI overlay crumb 後，網址最後方產生 #。
+4. 重構 controller.js 以改良程式編碼風格。
+issue 6367
+----
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/javascripts/curation.js
+
+版本: 1075
+作者: chihwen
+日期: 2013年5月22日 下午 06:45:13
+訊息:
+調整 controller.js 以便通過 JSLint 程式品質檢查
+issue 6423
+----
+異動 : /fakeapi/javascripts/controller.js
+
+版本: 1074
+作者: chihwen
+日期: 2013年5月22日 下午 06:01:21
+訊息:
+將 9x9 production SVN 版本 4751 轉回 fakeapi 分支
+issue 5927
+----
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+
+版本: 1069
+作者: chihwen
+日期: 2013年5月22日 下午 04:19:37
+訊息:
+修正在中文版時 POI 外掛預設文案 preview 仍呈現英文的問題
+issue 6367
+----
+異動 : /fakeapi/javascripts/curation.js
+
+版本: 1066
+作者: chihwen
+日期: 2013年5月22日 下午 02:14:34
+訊息:
+修正 9x9 加入 ep list 分頁功能時，所誤留下的全域變數
+issue 5927
+----
+異動 : /fakeapi/javascripts/episode.js
+
 版本: 1063
 作者: chihwen
 日期: 2013年5月22日 上午 11:47:26
