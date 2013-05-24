@@ -1,3 +1,24 @@
+版本: 1084
+作者: chihwen
+日期: 2013年5月24日 下午 11:57:04
+訊息:
+調整字卡外掛，加入 JSLint 全域變數標記，以便未來品質檢查維護之用
+issue 5370
+----
+異動 : /fakeapi/javascripts/jquery.titlecard.js
+
+版本: 1083
+作者: chihwen
+日期: 2013年5月24日 下午 11:42:39
+訊息:
+調整 controller.js 加入 JSLint 全域變數標記，以便未來品質檢查維護之用
+
+/*global 全域變數1, 全域變數2, 全域變數3, .... */
+詳細說明可參考：http://www.jslint.com/lint.html
+issue 6367
+----
+異動 : /fakeapi/javascripts/controller.js
+
 版本: 1081
 作者: chihwen
 日期: 2013年5月24日 下午 11:03:49

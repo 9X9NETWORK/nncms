@@ -1,5 +1,5 @@
-/* predefine global variables here: nn CMS_CONF $ location autoHeight scrollbar window document sumStoryboardInfo rebuildVideoNumber setFormWidth setVideoMeasure setSpace setEpisodeWidth showProcessingOverlay showSystemErrorOverlayAndHookError formatTimestamp switchPublishStatus switchRerunCheckbox truncateFormTitle setFormHeight setTaglistWidth uploadImage FB ellipsisPage brandSeting storeManage portalManage portalSet */
 /*jslint eqeq: true, nomen: true, plusplus: true, regexp: true, unparam: true, sloppy: true, vars: true */
+/*global nn, CMS_CONF, $, location, autoHeight, scrollbar, window, document, sumStoryboardInfo, rebuildVideoNumber, setFormWidth, setVideoMeasure, setSpace, setEpisodeWidth, showProcessingOverlay, showSystemErrorOverlayAndHookError, formatTimestamp, switchPublishStatus, switchRerunCheckbox, truncateFormTitle, setFormHeight, setTaglistWidth, uploadImage, FB, ellipsisPage, brandSeting, storeManage, portalManage, portalSet */
 
 function renderConnectFacebookUI() {
     $('#settingForm .connect-switch').removeClass('hide');

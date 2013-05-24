@@ -1,5 +1,5 @@
-/* predefine global variables here: jQuery nn window */
 /*jslint eqeq: true, regexp: true, sloppy: true, vars: true */
+/*global jQuery, nn, window */
 /*!
  * jQuery Title Card Player plugin
  *
@@ -7,9 +7,10 @@
  * @requires    jQuery UI v1.8.23 or later
  * @requires    9x9 SDK (nn-sdk.js)
  * @author      Chih-Wen Yang <chihwen@doubleservice.com>
- * @version     1.6.0
+ * @version     1.6.1
  *
  * - Change Log:
+ *      1.6.1:  2013/05/24 - Some minor cleanup to pass JSLint coding quality tool check (http://www.jslint.com/).
  *      1.6.0:  2012/10/24 - 1. Detect both width and height then decide calculate title card size according to width or to height.
  *                           2. Title card size will be 16:9, so there might be black area on the left & right, or top & bottom.
  *                           3. Improved background image and background color switch rule due to system default background image.
@@ -140,7 +141,7 @@
         // param overloading check
         var playedCallback = null,
             cancelCallback = null;
-        if ('undefined' === typeof options) {
+        if (undefined === options) {
             nn.log('play with default values', 'debug');
             playedCallback = null;
         } else {
@@ -414,8 +415,14 @@
     $.fn.titlecard.allows = {
         align: ['left', 'center', 'right'],
         effect: ['none', 'fade', 'blind', 'clip', 'fold', 'drop', 'bounce', 'explode', 'highlight', 'puff', 'pulsate', 'scale', 'shake', 'slide'],
-        duration: { min: 5, max: 20 },
-        fontSize: { min: 6, max: 48 },
+        duration: {
+            min: 5,
+            max: 20
+        },
+        fontSize: {
+            min: 6,
+            max: 48
+        },
         fontStyle: ['normal', 'italic'],
         fontWeight: ['normal', 'bold', 'bolder']
     };
