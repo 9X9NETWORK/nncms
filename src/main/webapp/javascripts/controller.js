@@ -1390,7 +1390,7 @@ function setupLanguagePage() {
             $(this).text(nn._(['header', $(this).data('langkey')]));
         });
 
-        $('#login-layer .langkey, #signup-layer .langkey, #forgot-password-layer .langkey').each(function () {
+        $('#login-layer .langkey, #signup-layer .langkey, #forgot-password-layer .langkey, #reset-password-layer .langkey').each(function () {
             if ($(this).data('langkey') === undefined) {
                 $(this).data('langkey', $(this).text());
             }
@@ -1405,7 +1405,7 @@ function setupLanguagePage() {
         });
 
         var tmpStr = '';
-        $('#login-layer .flangkey, #signup-layer .flangkey, #forgot-password-layer .flangkey').each(function () {
+        $('#login-layer .flangkey, #signup-layer .flangkey, #forgot-password-layer .flangkey, #reset-password-layer .flangkey').each(function () {
             if ($(this).data('langkey') === undefined) {
                 $(this).data('langkey', $(this).attr('defvalue'));
             }
@@ -1413,12 +1413,15 @@ function setupLanguagePage() {
             $(this).attr('defvalue', tmpStr);
             $(this).attr('value', tmpStr);
         });
+        
+        resetPassCheck();
+        
     }, 'json');
 }   // end of setupLanguagePage()
 
 $(function () {
     nn.api('GET', CMS_CONF.API('/api/login'), function (user) {
-        var tmpUrl = $.url();
+        var tmpUrl = $.url(location.href.replace("@","%40"));
         if (!user || !user.id) {
             if ('signin.html' != tmpUrl.attr('file')) {
                 location.href = 'signin.html';

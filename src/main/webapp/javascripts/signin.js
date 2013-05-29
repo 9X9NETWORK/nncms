@@ -1,3 +1,57 @@
+$(document).on("click", "#btn-reset-password-close, #reset-password-cancel", function(event) {
+    $("#reset-password-layer").hide();
+    $("#reset-password-layer .msg-error").text("").hide();
+
+});
+
+$(document).on("click", "#btn-new-password", function(event) {
+    var tmpUrl = $.url(location.href.replace("@", "%40"));
+    var inAction = tmpUrl.param("ac"), inEmail = tmpUrl.param("e"), inToken = tmpUrl.param("pass");
+    var pass = $('#new_pass').val();
+    var pass_re = $('#new_pass_re').val();
+    if ("" === pass || pass != pass_re) {
+        $("#reset-password-layer .msg-error").text(nn._(['signin', 'errMsg', "Two passwords don't match, please retype."])).show();
+    } else {
+        var API_url = "/playerAPI/resetpwd";
+        var API_param = "?email=" + inEmail + "&token=" + inToken + "&password=" + pass + "&rx=g" + new Date().getTime() + "&v=32";
+        API_url += API_param;
+
+        if (pass.length < 6 || pass.length > 16) {
+            $("#reset-password-layer .msg-error").text(nn._(['signin', 'errMsg', 'Please input 6-16 characters in password.'])).show();
+            $('#overlay-s').fadeOut();
+            return false;
+        }
+
+        showProcessingOverlay();
+        var d = $.get(API_url, function(data) {
+            $("#waiting-layer").hide();
+            var lines = data.split('\n');
+            var fields = lines[0].split('\t');
+            if (fields[0] == '0') {
+                $('#overlay-s').fadeOut();
+            } else
+                //notice_ok(thumbing, 'chpw error ' + fields[0] + ': ' + fields[1], "");USER_PERMISSION_ERROR
+                $('#overlay-s').fadeOut();
+            $("#reset-password-layer .msg-error").text(nn._(['signin', 'errMsg', "USER_PERMISSION_ERROR"])).show();
+            //alert(fields[1]) ;
+        });
+    }
+});
+
+function resetPassCheck() {
+    // signin.html?ac=resetpwd&e=marshsu%40gmail.com&pass=5f7cb242796d7f77653af165fae5bab1
+    var tmpUrl = $.url(location.href.replace("@", "%40"));
+    var inAction = tmpUrl.param("ac"), inEmail = tmpUrl.param("e"), inPass = tmpUrl.param("pass");
+
+    if ("resetpwd" === inAction) {
+        if (inEmail != "" && inPass != "") {
+            $("#reset-password-layer").show();
+        } else {
+            location.href = "signin.html";
+        }
+    }
+}
+
 $(function() {
 
     var mms = new Date().getTime();
@@ -214,7 +268,7 @@ $(function() {
         }
     });
 
-    $('#si_passwordfak, #su_passwordfak, #su_password_refak').on("focus", function() {
+    $('#si_passwordfak, #su_passwordfak, #su_password_refak, #new_passfak, #new_pass_refak').on("focus", function() {
         $(".msg-error").hide();
         $(this).hide();
         var actID = "#" + $(this).attr('id').replace("fak", "");
@@ -222,7 +276,7 @@ $(function() {
         $(actID).focus();
     });
 
-    $('#si_password, #su_password, #su_password_re').focusout(function() {
+    $('#si_password, #su_password, #su_password_re, #new_pass, #new_pass_re').focusout(function() {
         $(this).val($.trim($(this).val()));
         var actID = "#" + $(this).attr('id') + "fak";
         if ($(this).val() == "") {

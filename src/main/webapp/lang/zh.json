@@ -128,6 +128,9 @@
             "Forgot Password":                                                                                                                  "忘記密碼",
             "Enter your email address and we`ll send you instructions.":                                                                        "系統將會發送信件到您信箱，並導引您完成密碼設定。",
             "Reset":                                                                                                                            "送出",
+            "Reset Password": "重設密碼",
+            "New Password": "新密碼",
+            "Repeat New Password": "再輸入新密碼",
             "Back to Sign In":                                                                                                                  "回到登入頁",
             "Success!":                                                                                                                         "完成！",
             "You should receive an email shortly.":                                                                                             "請收信完成密碼重新設定。",
@@ -135,6 +138,8 @@
             "contact us.":                                                                                                                      "連絡我們。"
         },
         "errMsg": {
+            "Two passwords don't match, please retype.": "輸入密碼不一致，請重新輸入。",
+            "USER_PERMISSION_ERROR": "密碼新設定定失敗，請重新申請密碼設定",
             "Email format error!":                                                                                                              "電子郵件格式錯誤！",
             "Please input password!":                                                                                                           "請輸入密碼！",
             "Email and password do not match, please try again.":                                                                               "信箱或密碼錯誤，請再次輸入。",

@@ -58,6 +58,11 @@ $(document).on("click", ".load", function(event) {
 
 });
 
+$(document).on("click", "#set-save", function(event) {
+    showProcessingOverlay();
+    setTimeout('$("#overlay-s").fadeOut("slow")', 600);
+});
+
 $(document).on("click", ".catLi", function(event) {
     var msoId = 0;
 

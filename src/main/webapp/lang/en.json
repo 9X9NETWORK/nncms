@@ -128,6 +128,9 @@
             "Forgot Password":                                                                                                                  "Forgot Password",
             "Enter your email address and we`ll send you instructions.":                                                                        "Enter your email address and we`ll send you instructions.",
             "Reset":                                                                                                                            "Reset",
+            "Reset Password": "Reset Password",
+            "New Password": "New Password",
+            "Repeat New Password": "Repeat New Password",
             "Back to Sign In":                                                                                                                  "Back to Sign In",
             "Success!":                                                                                                                         "Success!",
             "You should receive an email shortly.":                                                                                             "You should receive an email shortly.",
@@ -135,6 +138,8 @@
             "contact us.":                                                                                                                      "contact us."
         },
         "errMsg": {
+            "Two passwords don't match, please retype.": "Two passwords don't match, please retype.",
+            "USER_PERMISSION_ERROR": "Password reset failure, please try a again",
             "Email format error!":                                                                                                              "Email format error!",
             "Please input password!":                                                                                                           "Please input password!",
             "Email and password do not match, please try again.":                                                                               "Email and password do not match, please try again.",
