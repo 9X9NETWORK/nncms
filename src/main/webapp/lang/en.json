@@ -23,6 +23,7 @@
             "Processing...":                                                                                                                    "Processing..."
         },
         "system-error": {
+            "Password reset success!": "Password reset success!",
             "Unknown error.":                                                                                                                   "Unknown error.",
             "You are not authorized to PCS.":                                                                                                   "You are not authorized to PCS.",
             "You are not authorized to edit this channel.":                                                                                     "You are not authorized to edit this channel.",
@@ -403,6 +404,7 @@
             "Click on <span>Favorite</span> button when watching channels to collect more episodes":                                            "Click on <span>Favorite</span> button when watching channels to collect more episodes",
             "Edit":                                                                                                                             "Edit",
             "Delete":                                                                                                                           "Delete",
+            "Get URL": "Get URL",
             "Draft":                                                                                                                            "Draft",
             "Curate new episode to tell a story":                                                                                               "Curate new episode to tell a story",
             "<strong>Curate online videos</strong> into each single episode.":                                                                  "<strong>Curate online videos</strong> into each single episode.",

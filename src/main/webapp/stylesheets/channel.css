@@ -56,16 +56,15 @@ body.mac #title-func h2 {
 
 #channel-list li {
     position: relative;
-    overflow: hidden;
     margin-top: -2px;
 }
 
-#channel-list.ui-sortable li:hover {
+#channel-list.ui-sortable li.clearfix:hover {
     background: url(../images/bg_main2.png) repeat 2px 0;
     cursor: move;
 }
 
-#channel-list.ui-sortable.ui-sortable-disabled li:hover {
+#channel-list.ui-sortable.ui-sortable-disabled li.clearfix:hover {
     background: none;
     cursor: default;
 }
@@ -248,13 +247,13 @@ body.mac #title-func h2 {
 #channel-list li .func-wrap {
     float: right;
     position: relative;
-    width: 196px;
+    width: 216px;
     height: 116px;
 	margin: 5px 0 0 0;
 }
 
 #channel-list li .func-wrap p.time {
-    padding: 10px 0 0;
+    padding: 10px 0 0 2px;
     font-size: 13px;
 }
 
@@ -268,13 +267,13 @@ body.mac #title-func h2 {
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap {
-    padding: 0 3px 0 0;
+    padding: 0px 3px 0px 0px;
     background: url(../images/edit_box_right.png) no-repeat right 0;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul {
     height: 31px;
-    padding: 0 7px 0 15px;
+    padding: 0 0 0px 7px;
     border: none;
     background: url(../images/edit_box_middle.png) repeat 0 0;
 }
@@ -283,7 +282,10 @@ body.mac #title-func h2 {
     position: relative;
     float: left;
     overflow: visible;
-    margin: 0 8px 0 0;
+    margin: 0 9px 0 0;
+}
+#channel-list li .func-wrap .func-btns .btn-wrap ul li.last {
+    margin: 0 -2px 0 0;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li:hover {
@@ -295,79 +297,93 @@ body.mac #title-func h2 {
     width: 22px;
     height: 25px;
     margin: 2px 0 0;
-    background: url(../images/btns.png) no-repeat;
+    background: url(../images/btn_func.png) no-repeat;
     text-decoration: none;
     text-indent: -100000px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.channel-poi {
-    background-position: 0 -2072px;
+    background-position: 0 -22px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.channel-poi.disable,
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.channel-poi.disable:hover {
-    background-position: -46px -2071px;
+    background-position: -46px -22px;
 	cursor: default;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.channel-poi:hover {
-    background-position: -23px -2072px;
+    background-position: -23px -22px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.add {
-    background-position: 0 -550px;
+    background-position: 0 3px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.add.disable,
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.add.disable:hover {
-    background-position: 0 -600px;
+    background-position: -46px 3px;
 	cursor: default;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.add:hover {
-    background-position: -23px -550px;
+    background-position: -23px 3px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.detail {
-    background-position: 0 -652px;
+    background-position: 0 -47px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.detail.disable,
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.detail.disable:hover {
-    background-position: 0 -702px;
+    background-position: -46px -47px;
 	cursor: default;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.detail:hover {
-    background-position: -23px -652px;
+    background-position: -23px -47px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting {
-    background-position: 0 -754px;
+    background-position: 0 -72px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting.disable,
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting.disable:hover {
-    background-position: 0 -804px;
+    background-position: -46px -72px;
 	cursor: default;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.setting:hover {
-    background-position: -23px -754px;
+    background-position: -23px -72px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.del {
-    background-position: 0 -856px;
+    background-position: 0 -97px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.del.disable,
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.del.disable:hover {
-    background-position: 0 -906px;
+    background-position: -46px -97px;
 	cursor: default;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a.del:hover {
-    background-position: -23px -856px;
+    background-position: -23px -97px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.url {
+    background-position: 0 -122px;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.url.disable,
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.url.disable:hover {
+    background-position: -46px -122px;
+	cursor: default;
+}
+
+#channel-list li .func-wrap .func-btns .btn-wrap ul li a.url:hover {
+    background-position: -23px -122px;
 }
 
 #channel-list li .func-wrap .func-btns .btn-wrap ul li a .tip {
@@ -680,9 +696,9 @@ body.mac #title-func h2 {
 	display: none;
 	position: absolute;
 	top: 27px;
-	left: 1px;
+	left: 0;
 	z-index: 60;
-	width: 180px;
+	width: 181px;
 	border: 1px solid #b2b2b2;
 	border-bottom: none;
 	-moz-border-radius: 0 0 5px 5px;
@@ -696,7 +712,7 @@ body.mac #title-func h2 {
 	width: 162px;
 	height: 28px;
 	margin: 0;
-	padding: 0 9px;
+	padding: 0 13px 0 6px;
 	border-top: 1px solid #f5f5f5;
 	border-bottom: 1px solid #c9c9c9;
 	background: none;
@@ -710,6 +726,11 @@ body.mac #title-func h2 {
 #content-main-wrap form .fminput .fmfield .select .select-list li:hover {
 	background-color: #e4e4e4;
 	color: #999;
+}
+#content-main-wrap form .fminput .fmfield .select .select-list li.on {
+	background-color: #e4e4e4;
+	color: #999;
+	cursor: default;
 }
 
 #content-main-wrap form .fminput .fmfield .select .select-list li.none:hover {
@@ -758,12 +779,24 @@ body.mac #title-func h2 {
 
 #content-main-wrap form .fminput .fmfield .connected .share-item {
     height: 30px;
+	padding: 0 0 0 17px;
+}
+#content-main-wrap form .fminput .fmfield .connected .share-item.first {
+    height: 40px;
+	padding: 0 0 0 0;
 }
 
 #content-main-wrap form .fminput .fmfield .connected .share-item img {
     float: left;
     border: none;
+	margin: 0;
 }
+#content-main-wrap form .fminput .fmfield .connected .share-item.first img {
+    float: left;
+    border: none;
+	margin: 5px 10px 5px 0px;
+}
+
 
 #content-main-wrap form .fminput .fmfield .connected .share-item label {
     width: 75px;
@@ -1120,4 +1153,24 @@ body.mac #title-func h2 {
 
 #content-main-wrap form .form-btn .form-btn-wrap .btn-cancel {
     margin-right: 15px;
+}
+
+/* Get URL */
+#channel-list .get-url {
+	position: absolute;
+	top: -16px;
+	left: 0;
+	display: none;
+	z-index: 99;
+	font-size: 13px;
+	text-align: left;
+}
+#channel-list .get-url .tip-bottom {
+	width: 22px;
+	height: 9px;
+	margin: -31px 0 0 1px;
+	position: absolute;
+	background: url(../images/bg_tip_bottom.png) no-repeat center bottom;
+	bottom: 3px;
+	right: 12px;
 }

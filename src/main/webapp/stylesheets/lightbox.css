@@ -674,6 +674,24 @@
 *
 **/
 
+#change-pwd-overlay {
+    width: 427px;
+    height: 316px;
+    margin: -158px 0 0 -219px;
+    background: url(../images/overlay_bg_m_l.png) no-repeat 0 0;
+}
+
+#change-pwd-overlay .overlay-container {
+    height: 316px;
+    background: url(../images/overlay_bg_m_r.png) no-repeat right 0;
+}
+
+#change-pwd-overlay .overlay-container .overlay-wrap {
+    height: 297px;
+    padding: 19px 0 0;
+    background: url(../images/overlay_bg_m_c.png) repeat-x;
+}
+
 #change-pwd-overlay h4 {
     margin-bottom: 23px;
 }
@@ -692,7 +710,7 @@
 }
 
 #change-pwd-overlay .change-pwd p.text.last {
-    margin-bottom: 5px;
+    margin-bottom: 12px;
 }
 
 #change-pwd-overlay .change-pwd p.text span {
@@ -1080,6 +1098,7 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     width: 590px;
     height: 332px;
     margin: 0 auto 14px;
+    background-color: #a0a0a0;
 }
 
 #poi-event-overlay .wrap .content .video-wrap .video {

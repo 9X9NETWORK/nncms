@@ -23,6 +23,7 @@
             "Processing...":                                                                                                                    "處理中..."
         },
         "system-error": {
+            "Password reset success!": "密碼重新設定成功!",
             "Unknown error.":                                                                                                                   "未知的錯誤。",
             "You are not authorized to PCS.":                                                                                                   "你沒有授權使用PCS。",
             "You are not authorized to edit this channel.":                                                                                     "您沒有權限編輯此頻道。",
@@ -403,6 +404,7 @@
             "Click on <span>Favorite</span> button when watching channels to collect more episodes":                                            "觀看頻道時，點 <span>Favorite</span> 將節目收藏到我的最愛頻道。",
             "Edit":                                                                                                                             "編輯",
             "Delete":                                                                                                                           "刪除",
+            "Get URL": "網址",
             "Draft":                                                                                                                            "草稿",
             "Curate new episode to tell a story":                                                                                               "策展新節目",
             "<strong>Curate online videos</strong> into each single episode.":                                                                  "在一集節目中<strong>輕鬆策展多個影片</strong>。",

@@ -238,12 +238,12 @@ body.mac #title-func ul li p span a {
     margin-top: -2px;
 }
 
-#episode-list.ui-sortable li:hover {
+#episode-list.ui-sortable li.clearfix:hover {
     background: url(../images/bg_main2.png) repeat 2px 0;
     cursor: move;
 }
 
-#episode-list.ui-sortable.ui-sortable-disabled li:hover {
+#episode-list.ui-sortable.ui-sortable-disabled li.clearfix:hover {
     background: none;
     cursor: default;
 }
@@ -350,7 +350,6 @@ body.mac #title-func ul li p span a {
 }
 
 #ep-list ul li .wrap {
-    overflow: hidden;
     float: left;
     padding: 7px 0 10px;
     background: url(../images/divider_vertical.png) repeat-y right 0;
@@ -358,7 +357,6 @@ body.mac #title-func ul li p span a {
 
 #ep-list ul li .episode {
     position: relative;
-    overflow: hidden;
     float: left;
 }
 
@@ -456,6 +454,7 @@ body.mac #title-func ul li p span a {
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
     -moz-binding: url('ellipsis.xml#ellipsis');
+	white-space: nowrap;
 }
 
 #ep-list ul li .episode h3 a {
@@ -484,14 +483,20 @@ body.mac #title-func ul li p span a {
 #ep-list ul li .episode .btns .btn-wrap ul {
     overflow: hidden;
     height: 29px;
-    padding: 2px 7px 0 5px;
+    padding: 2px 7px 0 7px;
     border: none;
     background: url(../images/edit_box_middle.png) repeat 0 0;
 }
 
 #ep-list ul li .episode .btns .btn-wrap ul li {
     float: left;
-    margin-right: 12px;
+    margin-right: 9px;
+    background: none;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li:last-child {
+    float: left;
+    margin-right: 0;
     background: none;
 }
 
@@ -511,39 +516,53 @@ body.mac #title-func ul li p span a {
 }
 
 #ep-list ul li .episode .btns .btn-wrap ul li a.edit span,
-#ep-list ul li .episode .btns .btn-wrap ul li a.del   span {
+#ep-list ul li .episode .btns .btn-wrap ul li a.del span,
+#ep-list ul li .episode .btns .btn-wrap ul li a.url span {
     float: left;
     width: 20px;
     height: 25px;
     margin-right: 7px;
-    background: url(../images/btns.png) no-repeat;
+    background: url(../images/btn_func.png) no-repeat;
     text-indent: -100000px;
 }
 
 #ep-list ul li .episode .btns .btn-wrap ul li a.edit span {
-    background-position: 0 -1060px;
+    background-position: 0 -147px;
 }
 
 #ep-list ul li .episode .btns .btn-wrap ul li a.edit.disable             span,
 #ep-list ul li .episode .btns .btn-wrap ul li a.edit.disable:hover span {
-    background-position: 0 -1110px;
+    background-position: -46px -147px;
 }
 
 #ep-list ul li .episode .btns .btn-wrap ul li a.edit:hover span {
-    background-position: -23px -1060px;
+    background-position: -23px -147px;
 }
 
 #ep-list ul li .episode .btns .btn-wrap ul li a.del span {
-    background-position: 0 -856px;
+    background-position: 0px -97px;
 }
 
 #ep-list ul li .episode .btns .btn-wrap ul li a.del.disable             span,
 #ep-list ul li .episode .btns .btn-wrap ul li a.del.disable:hover span {
-    background-position: 0 -906px;
+   background-position: -46px -97px;
 }
 
 #ep-list ul li .episode .btns .btn-wrap ul li a.del:hover span {
-    background-position: -23px -856px;
+    background-position: -23px -97px;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li a.url span {
+    background-position: 0px -122px;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li a.url.disable             span,
+#ep-list ul li .episode .btns .btn-wrap ul li a.url.disable:hover span {
+   background-position: -46px -122px;
+}
+
+#ep-list ul li .episode .btns .btn-wrap ul li a.url:hover span {
+    background-position: -23px -122px;
 }
 
 #ep-list ul li .episode .btns .btn-wrap ul li a.disable {
@@ -554,13 +573,13 @@ body.mac #title-func ul li p span a {
 #ep-list ul li .publish-time,
 #ep-list ul li .views {
     float: left;
-    width: 155px;
+    width: 140px;
     color: #555;
     font: 13px Arial, Helvetica;
 }
 
 #title-func .caption .views, #ep-list ul li .views {
-    width: 65px;
+    width: 50px;
 }
 
 #ep-list ul li .scheduled-time  p,
@@ -919,4 +938,27 @@ body.mac #title-func ul li p span a {
   position: absolute;
   top: 6px;
   right: 8px;
+}
+
+/* Get URL */
+#ep-list .get-url {
+	position: absolute;
+	top: -50px;
+	left: 313px;
+	display: none;
+	z-index: 99;
+	font-size: 13px;
+	text-align: left;
+}
+#ep-list.favorite .get-url {
+	left: 263px;
+}
+.episode-list .get-url .tip-bottom {
+	width: 22px;
+	height: 9px;
+	margin: -31px 0 0 1px;
+	position: absolute;
+	background: url(../images/bg_tip_bottom.png) no-repeat center bottom;
+	bottom: 3px;
+	left: 2px;
 }

@@ -179,6 +179,11 @@ $(function () {
         $('body').addClass('has-change');
         var selectOption = $(this).text(),
             metadata = $(this).data('meta');
+        // shareing url
+        if ($(this).hasClass("surl-li")) {
+            $("#surl-ul .surl-li").removeClass("on");
+            $(this).addClass("on");
+        }
         // region (sphere) relate to category
         if ('sphere-select-list' === $(this).parent().attr('id')) {
             var srcname = $(this).parent().parent().children('.select-txt').children().text();
@@ -417,6 +422,21 @@ $(function () {
             });
             var qrystring = $('#settingForm').serialize(),
                 parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
+            // shring url
+            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/brand', {
+                channelId : CMS_CONF.USER_URL.param('id')
+            }), null, function(cBrand) {
+                var surlText = $("#surl-text").text();
+                if (cBrand.brand != surlText) {
+                    nn.api('PUT', CMS_CONF.API('/api/channels/{channelId}/autosharing/brand', {
+                        channelId : CMS_CONF.USER_URL.param('id')
+                    }), {
+                        brand : surlText
+                    }, function(cBrands) {
+
+                    });
+                }
+            }); 
             nn.api('PUT', CMS_CONF.API('/api/channels/{channelId}', {channelId: CMS_CONF.USER_URL.param('id')}), parameter, function (channel) {
                 if ($('.connect-switch.hide').length > 0 && $('.reconnected.hide').length > 0) {
                     var userIds = [],

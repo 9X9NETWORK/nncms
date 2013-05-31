@@ -869,6 +869,26 @@ function updateChannel(pageId, id) {
                 showProcessingOverlay();
                 $('#content-main').html('');
                 $('#content-main-tmpl').tmpl(channel).appendTo('#content-main');
+                
+                // sharing url
+                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/brand', {
+                    channelId : id
+                }), null, function(cBrand) {
+                    $("#surl-text").text(cBrand.brand);
+                }).then(function(ccBrand) {
+                    nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/validBrands', {
+                        channelId : id
+                    }), null, function(cBrands) {
+                        $("#surl-ul").html("");
+                        $('#surl-tmpl-item').tmpl(cBrands, {
+                            selBrand : ccBrand.brand
+                        }).appendTo('#surl-ul');
+                        var cntBrand = cBrands.length;
+                        for ( i = 0; i < cntBrand; i++) {
+                        }
+                    });
+                });
+                 
                 $('#name').charCounter(20, {
                     container: '#name-charcounter',
                     format: '%1',

@@ -180,12 +180,23 @@
 <a href="#" class="switch-off">OFF</a>
 </div>
 <div class="connected hide">
+<div class="share-item first">
+<img alt="facebook" src="images/icon_fb.png">
+<div class="fmfield">
+<div class="select enable">
+<p class="select-btn"></p>
+<p class="select-txt"><a href="#" id="surl-text">CTS</a></p>
+<ul class="select-list" id="surl-ul" style="display: none;">
+<li class="on" data-meta="9x9.tv">9x9.tv</li>
+<li data-meta="CTS">CTS</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="share-item">
-<img src="images/icon_fb.png" alt="facebook" />
 <label id="fbTimeline-label" for="fbTimeline"><input type="checkbox" name="fbTimeline" id="fbTimeline" value="y" />${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Timeline'])}</label>
 </div>
 <div class="share-item">
-<img src="images/icon_fb.png" alt="facebook" />
 <label id="fbPage-label" for="fbPage"><input type="checkbox" name="fbPage" id="fbPage" value="y" />${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Page'])}</label>
 <div class="page-list disable">
 <div class="page-list-right">
@@ -216,6 +227,12 @@
 </div>
 </div>
 </script>
+
+<script id="surl-tmpl-item" type="text/x-jquery-tmpl">
+    <li class="surl-li {{if $item.selBrand === brand}}on{{/if}}" data-meta="${brand}">${brand}</li>
+</script>
+
+
 
 <script id="category-list-tmpl-item" type="text/x-jquery-tmpl">
 {{if $item.dataArrayIndex($item.data) < 3}}

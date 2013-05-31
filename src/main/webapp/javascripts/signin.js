@@ -1,7 +1,18 @@
 $(document).on("click", "#btn-reset-password-close, #reset-password-cancel", function(event) {
     $("#reset-password-layer").hide();
     $("#reset-password-layer .msg-error").text("").hide();
+    location.href = "./signin.html";
 
+});
+
+$(document).on("click", "#system-error .btn-ok, #system-error .btn-close", function(event) {
+    $.unblockUI();
+    if ($('body').hasClass('has-error')) {
+        hasErrorRedirect();
+    } else {
+        location.href = "./signin.html";
+    }
+    return false;
 });
 
 $(document).on("click", "#btn-new-password", function(event) {
@@ -29,11 +40,12 @@ $(document).on("click", "#btn-new-password", function(event) {
             var fields = lines[0].split('\t');
             if (fields[0] == '0') {
                 $('#overlay-s').fadeOut();
-            } else
-                //notice_ok(thumbing, 'chpw error ' + fields[0] + ': ' + fields[1], "");USER_PERMISSION_ERROR
+                $("#reset-password-layer").hide();
+                showSystemErrorOverlay("Password reset success!");
+            } else {
                 $('#overlay-s').fadeOut();
-            $("#reset-password-layer .msg-error").text(nn._(['signin', 'errMsg', "USER_PERMISSION_ERROR"])).show();
-            //alert(fields[1]) ;
+                $("#reset-password-layer .msg-error").text(nn._(['signin', 'errMsg', "USER_PERMISSION_ERROR"])).show();
+            }
         });
     }
 });
