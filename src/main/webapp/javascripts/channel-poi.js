@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true, nomen: true, regexp: true, unparam: true, sloppy: true */
-/*global $, nn, CMS_CONF, showSavingOverlay, showProcessingOverlay, showUnsaveOverlay, showUnsavePoiOverlay, showUnsavePoiMask, showDeletePoiPromptOverlay, strip_tags, formatTimestamp */
+/*global $, nn, CMS_CONF, showProcessingOverlay, showSavingOverlay, showUnsaveOverlay, showUnsavePoiOverlay, showUnsavePoiMask, showDeletePoiPromptOverlay, strip_tags, formatTimestamp */
 
 function setFormHeight() {
     var windowHeight    = $(window).height(),
@@ -53,12 +53,12 @@ function chkPoiPointData(fm) {
 }
 
 function chkPoiEventData(fm, callback) {
-    var poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey');
     fm.displayText.value = $.trim(fm.displayText.value);
     fm.btnText.value = $.trim(fm.btnText.value);
     fm.channelUrl.value = $.trim(fm.channelUrl.value);
     fm.notifyMsg.value = $.trim(fm.notifyMsg.value);
     fm.notifyScheduler.value = $.trim(fm.notifyScheduler.value);
+    var poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey');
     if ('' === fm.displayText.value || '' === fm.btnText.value) {
         $('#poi-event-overlay .event .func ul li.notice').show();
         callback(false);
@@ -141,7 +141,7 @@ function onYouTubePlayerStateChange(newState) {
     startSeconds = startSeconds - 1 + 1;
     // unstarted (-1), ended (0), playing (1), paused (2), buffering (3), video cued (5)
     if (-1 === newState) {
-        $('#poi-event-overlay .wrap .content .video-wrap .no-video').removeClass('hide');
+        //$('#poi-event-overlay .wrap .content .video-wrap .no-video').removeClass('hide');
         CMS_CONF.YOUTUBE_PLAYER.playVideo();
     }
     if (1 === newState) {
@@ -572,6 +572,7 @@ $(function () {
         var poiPointId = $(this).data('poiPointId'),
             poiList = $('#channel-poi-wrap').tmplItem().data.poiList;
         if (poiPointId) {
+            // enter edit mode
             $('#channel-poi .edit-block').addClass('hide');
             $('#poi-point-edit').addClass('edit');
             $.each(poiList, function (i, poiItem) {
@@ -581,7 +582,6 @@ $(function () {
                     return false;
                 }
             });
-            // enter edit mode
             $('#poi-point-edit').removeClass('hide');
             $('#content-main').removeAttr('class');
             $('#content-main').addClass('poi-edit');
@@ -857,7 +857,6 @@ $(function () {
     $('#poi-event-overlay').on('click', '#schedule-notify .btn-next, #schedule-notify .crumb.edit .crumb-next', function () {
         chkPoiEventData(document.eventScheduledForm, function (result) {
             if (result) {
-                // parse multi schedule timestamp (ready for next step)
                 var stampList = [],
                     formatTemp = '',
                     dateTimeList = [],
@@ -870,6 +869,7 @@ $(function () {
                     selectedDate = selected.getFullYear() + '/' + (selected.getMonth() + 1) + '/' + selected.getDate(),
                     selectedTime = hour + ':' + min + ':00',
                     selectedDateTime = selectedDate + ' ' + selectedTime;
+                // parse multi schedule timestamp (ready for next step)
                 if ('' !== $.trim($('#timestamp_selected').val())) {
                     stampList = $('#timestamp_selected').val().split(',');
                     $.each(stampList, function (i, stampItem) {

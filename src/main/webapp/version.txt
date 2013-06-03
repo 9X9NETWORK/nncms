@@ -1,3 +1,24 @@
+版本: 1104
+作者: chihwen
+日期: 2013年6月3日 下午 06:22:47
+訊息:
+微調 Channel POI 預載無影音提示邏輯，避免與 Episode POI 行為不一致
+
+1. 避免 Chrome 會閃一下"There is no valid video to preview."之後才看到預覽畫面。
+2. 比照 Channel POI 的調整，同步改良 Episode POI 的相關設計。
+3. 重構 curation.js 以便通過 JSLint 檢查。
+4. 微調 basic.js 程式碼撰寫風格，以一致化設計。
+5. 比照 curation.js 的調整，同步 channel-poi.js 以一致化設計。
+6. 微調 controller.js 程式碼撰寫風格，以一致化設計。
+issue 6423
+----
+異動 : /fakeapi/channel-poi.html
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/javascripts/channel-poi.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/javascripts/curation.js
+
 版本: 1103
 作者: chihwen
 日期: 2013年6月3日 上午 10:54:14

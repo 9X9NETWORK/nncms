@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true, bitwise: true, nomen: true, regexp: true, unparam: true, sloppy: true */
-/*global $, nn, CMS_CONF, scrollbar, buildFacebookPagesMap, renderAutoShareUI, setFormHeight, FB, renderConnectFacebookUI, setupLanguagePage, setupLanguageAndRenderPage */
+/*global $, nn, CMS_CONF, FB, scrollbar, setFormHeight, buildFacebookPagesMap, renderAutoShareUI, renderConnectFacebookUI, setupLanguagePage, setupLanguageAndRenderPage */
 
 function autoWidth() {
     var contentNavWidth = 200,  // $('#content-nav')
@@ -62,7 +62,9 @@ function hideFbPageList() {
 }
 
 function showSystemErrorOverlay(msg) {
-    if ('' === $.trim(msg)) { msg = 'Unknown error.'; }
+    if ('' === $.trim(msg)) {
+        msg = 'Unknown error.';
+    }
     $('#system-error .content').text(nn._(['overlay', 'system-error', msg]));
     $.blockUI.defaults.overlayCSS.opacity = '0.9';
     $.blockUI({
@@ -366,9 +368,13 @@ $(function () {
                 userId: authResponse.userID,
                 accessToken: authResponse.accessToken
             };
-            nn.api('POST', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {userId: CMS_CONF.USER_DATA.id}), parameter, function (result) {
+            nn.api('POST', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {
+                userId: CMS_CONF.USER_DATA.id
+            }), parameter, function (result) {
                 if ('OK' === result) {
-                    nn.api('GET', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {userId: CMS_CONF.USER_DATA.id}), null, function (facebook) {
+                    nn.api('GET', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {
+                        userId: CMS_CONF.USER_DATA.id
+                    }), null, function (facebook) {
                         $('#overlay-s').fadeOut('slow', function () {
                             // ready for disconnect facebook
                             CMS_CONF.FB_RESTART_CONNECT = false;
@@ -443,7 +449,9 @@ $(function () {
     $('#confirm-disconnect .btn-disconnect').click(function () {
         $.unblockUI();
         showProcessingOverlay();
-        nn.api('DELETE', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {userId: CMS_CONF.USER_DATA.id}), null, function (facebook) {
+        nn.api('DELETE', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {
+            userId: CMS_CONF.USER_DATA.id
+        }), null, function (facebook) {
             $('#overlay-s').fadeOut('slow', function () {
                 if ('OK' === facebook) {
                     CMS_CONF.FB_RESTART_CONNECT = false;
@@ -494,13 +502,19 @@ $(function () {
             if (-1 === $.inArray(sign_lang, CMS_CONF.LANG_SUPPORT)) {
                 sign_lang = 'en';
             }
-            $.cookie('signLang', sign_lang, { expires: 30 });
+            $.cookie('signLang', sign_lang, {
+                expires: 30
+            });
             setupLanguagePage();
             $(this).parents('.select-list').slideDown();
             return false;
         }
         if (null !== CMS_CONF.USER_DATA && !$('body').hasClass('has-change')) {
-            nn.api('PUT', CMS_CONF.API('/api/users/{userId}', {userId: CMS_CONF.USER_DATA.id}), {lang: $(this).data('meta')}, function (user) {
+            nn.api('PUT', CMS_CONF.API('/api/users/{userId}', {
+                userId: CMS_CONF.USER_DATA.id
+            }), {
+                lang: $(this).data('meta')
+            }, function (user) {
                 var isStoreLangKey = false;
                 setupLanguageAndRenderPage(user, isStoreLangKey);
             });
