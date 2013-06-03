@@ -59,7 +59,7 @@
             "Not right now, thanks!":                                                                                                           "現在不要，謝謝！"
         },
         "facebook": {
-            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.":"您將變更頻道排序至\"更新時間\"，系統將依頻道\"更新時間\"自動排序，除置頂頻道外，其餘您將無法手動進行變更順序。",
+            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.": "您將變更頻道排序至\"更新時間\"，系統將依頻道\"更新時間\"自動排序，除置頂頻道外，其餘您將無法手動進行變更順序。",
             "CMS Setup":                                                                                                                        "管理系統設置",
             "Connect to":                                                                                                                       "連結帳號",
             "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.":                                     "連結帳號後，您可至頻道設定頁面為每個頻道設置是否自動分享至Facebook。",
@@ -320,6 +320,7 @@
             "Views":                                                                                                                            "觀看次數",
             "Update:":                                                                                                                          "更新:",
             "Curate a new episode":                                                                                                             "策展新節目",
+            "Channel POI":                                                                                                                      "頻道互動時間點",
             "Episode list":                                                                                                                     "節目列表",
             "Channel settings":                                                                                                                 "頻道設定",
             "Delete this channel":                                                                                                              "刪除頻道",
@@ -334,6 +335,7 @@
         },
         "func-nav": {
             "Episode list":                                                                                                                     "節目列表",
+            "Channel POI":                                                                                                                      "頻道互動時間點",
             "Settings":                                                                                                                         "頻道設定"
         },
         "title-func": {
@@ -379,12 +381,76 @@
             "Save":                                                                                                                             "儲存"
         }
     },
+    "channel-poi": {
+        "html-title": {
+            "9x9.tv - Channel POI":                                                                                                             "9x9.tv - 頻道互動時間點"
+        },
+        "func-nav": {
+            "Episode list":                                                                                                                     "節目列表",
+            "Channel POI":                                                                                                                      "頻道互動時間點",
+            "Settings":                                                                                                                         "頻道設定"
+        },
+        "poi-event": {
+            "+ Create Channel POI & interactive event":                                                                                         "+ 新增頻道互動時間點與事件",
+            "Channel POI & interactive event list":                                                                                             "頻道互動時間點與事件列表",
+            "Create a channel interactive event and call to action message at a point of interaction.":                                         "在一段特定的影片播放時間點，新增一個頻道互動事件及其號召互動的訊息。",
+            "Please create an episode at least in the channel.":                                                                                "請在頻道裡至少創建一個節目。",
+            "You cannot have more than one Channel POI & interactive event.":                                                                   "您只能新增一個互動時間點與事件。",
+            "Create Channel POI & interactive event":                                                                                           "新增頻道互動時間點與事件",
+            "Edit Channel POI & interactive event":                                                                                             "編輯頻道互動時間點與事件",
+            "Create POI":                                                                                                                       "定義互動時間點",
+            "Edit POI":                                                                                                                         "編輯互動時間點",
+            "Required field":                                                                                                                   "必填項目",
+            "Name":                                                                                                                             "名稱",
+            "Tags":                                                                                                                             "標籤",
+            "Separate with commas":                                                                                                             "用逗號分隔",
+            "Cancel":                                                                                                                           "取消",
+            "Next":                                                                                                                             "下一步",
+            "Save":                                                                                                                             "儲存",
+            "Please fill in all required fields.":                                                                                              "請輸入必填項目。",
+            "Add interactive event":                                                                                                            "設定互動事件",
+            "Choose a type":                                                                                                                    "選擇事件類型",
+            "Coming Soon":                                                                                                                      "即將推出",
+            "Scheduled Notification":                                                                                                           "排程通知",
+            "Send a scheduled notification to user to get more information.":                                                                   "設定排程通知，使用者可於特定時間獲得更多資訊。",
+            "Instant Notification":                                                                                                             "即時通知",
+            "Send an instant notification to user to get more information.":                                                                    "設定即時通知，使用者可即時獲得更多資訊。",
+            "POI":                                                                                                                              "互動時間點",
+            "Interactive event : Scheduled Notification":                                                                                       "互動事件 : 排程通知",
+            "Interactive event : Instant Notification":                                                                                         "互動事件 : 即時通知",
+            "PREVIEW":                                                                                                                          "預覽畫面",
+            "There is no valid video to preview.":                                                                                              "找不到可有效預覽的畫面。",
+            "Display text":                                                                                                                     "訊息文字",
+            "Input display text":                                                                                                               "輸入訊息文字",
+            "Button text":                                                                                                                      "按鈕文字",
+            "Input button text":                                                                                                                "輸入按鈕文字",
+            "Mobile Notification and Time":                                                                                                     "行動裝置通知與時間",
+            "iOS":                                                                                                                              "iOS",
+            "iOS-button": {
+                "Cancel":                                                                                                                       "關閉",
+                "OK":                                                                                                                           "啟動"
+            },
+            "Android":                                                                                                                          "Android",
+            "Preview":                                                                                                                          "預覽",
+            "Notification":                                                                                                                     "通知內容",
+            "Mobile notification message":                                                                                                      "行動裝置通知內容",
+            "Input Mobile notification message":                                                                                                "輸入行動裝置通知內容",
+            "Recommend: less 34 bytes":                                                                                                         "建議34字內",
+            "Mobile notification time":                                                                                                         "行動裝置通知時間",
+            "Add a mobile notification time to remind your viewers.":                                                                           "設定一個行動裝置通知時間提醒使用者。",
+            "Hour":                                                                                                                             "時",
+            "Minute":                                                                                                                           "分",
+            "Mobile Notification Message":                                                                                                      "行動裝置通知內容",
+            "The mobile notification will instant send, when user pressed OK or Enter.":                                                        "當使用者按下OK或Enter時，通知會即時送出。"
+        }
+    },
     "episode-list": {
         "html-title": {
             "9x9.tv - Episode list":                                                                                                            "9x9.tv - 節目列表"
         },
         "func-nav": {
             "Episode list":                                                                                                                     "節目列表",
+            "Channel POI":                                                                                                                      "頻道互動時間點",
             "Settings":                                                                                                                         "頻道設定"
         },
         "title-func": {

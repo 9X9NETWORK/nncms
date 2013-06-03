@@ -1,3 +1,6 @@
+/*jslint browser: true, devel: true, unparam: true, sloppy: true */
+/*global $, nn */
+
 var CMS_CONF = {
     // for DS.com: development, demonstration
     // for 9x9.tv: testing, production
@@ -171,6 +174,7 @@ var CMS_CONF = {
     EPISODES_PAGING_INFO: [],
     SLIDER_MAX: 100,
     MSO: 0,
+    YOUTUBE_PLAYER: null,
     POI_ACTION_URL: 'http://www.9x9.tv/poiAction?poiId=',
     POI_TYPE_MAP: {
         0: '',
@@ -237,9 +241,6 @@ nn.on(401, function (jqXHR, textStatus) {
 });
 nn.on(403, function (jqXHR, textStatus) {
     location.replace('index.html');
-});
-nn.on(404, function (jqXHR, textStatus) {
-    // nothing to do
 });
 nn.on(500, function (jqXHR, textStatus) {
     if (CMS_CONF.IS_DEBUG) {

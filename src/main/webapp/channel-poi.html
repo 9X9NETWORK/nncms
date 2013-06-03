@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html class="en" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<link rel="stylesheet" href="stylesheets/style.css?v=1026" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=1026" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=1026" />
+<link rel="stylesheet" href="stylesheets/jquery.datepick.css?v=1026" />
+<link rel="stylesheet" href="stylesheets/perfect-scrollbar.css?v=1026" />
+<link rel="stylesheet" href="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.css?v=1026" />
+<link rel="stylesheet" href="stylesheets/channel-poi.css?v=1026" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+<script src="javascripts/nn-sdk.js?v=1026"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=1026"></script>
+<script src="javascripts/jquery.ellipsis.js?v=1026"></script>
+<script src="javascripts/jquery.blockUI.js?v=1026"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=1026"></script>
+<script src="javascripts/jquery.charcounter.min.js?v=1026"></script>
+<script src="javascripts/jquery.uniform.min.js?v=1026"></script>
+<script src="javascripts/jquery.swfobject.min.js?v=1026"></script>
+<script src="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.js?v=1026"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=1026"></script>
+<script src="javascripts/jquery.cookie.js?v=1026"></script>
+<script src="javascripts/jquery.datepick.js?v=1026"></script>
+<script src="javascripts/perfect-scrollbar.js?v=1026"></script>
+<script src="javascripts/json2.js?v=1026"></script>
+<script src="javascripts/purl.js?v=1026"></script>
+<script src="javascripts/vertical.slider.js?v=1026"></script>
+<script src="javascripts/config.js?v=1026"></script>
+<script src="javascripts/controller.js?v=1026"></script>
+<script src="javascripts/basic.js?v=1026"></script>
+<script src="javascripts/channel-poi.js?v=1026"></script>
+<title>9x9.tv - Channel POI</title>
+</head>
+<body>
+<div id="fb-root"></div>
+
+<!--============================== header start ==============================-->
+<div id="header">
+  <a href="../" target="_blank" id="logo"></a>
+  <ul id="nav">
+    <li id="home"><span><a href="../" target="_blank">9x9.tv Official Web</a></span></li>
+    <li id="tv"><span><a href="../tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
+    <li id="profile">
+      <p id="btn-profile"></p>
+      <p id="selected-profile">Guest</p>
+      <ul id="profile-dropdown" class="dropdown">
+        <li><a id="profile-logout" href="signin.html">Log out</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!--============================== header close ==============================-->
+
+<div id="studio-nav">
+<div class="studio-nav-wrap">
+<h3><a href="index.html">CMS</a></h3>
+<ul>
+<li class="on"><span><a href="index.html">My Channels</a></span></li>
+<li id="my-portal" class="hide"><span><a href="portal-set.html">My Portal</a></span></li>
+</ul>
+<div class="studio-setup">
+<p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="#"><img src="images/icon_studio_setup.png" alt="" />CMS Setup</a></span></span></p>
+<div class="reconnect-notice hide">
+<img src="images/icon_notification.png" alt="" />
+<p class="notice-left"><span class="notice-right"><span class="notice-middle langkey">Connection is inactive, click to restart it.</span></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<!--============================== content-wrap start ========================-->
+<div id="content-wrap">
+<div id="content-nav">
+<div id="func-nav">
+<ul>
+<!-- template = #func-nav-tmpl -->
+</ul>
+</div>
+</div>
+<div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
+<div id="content-main" class="poi-list">
+<!-- template = #content-main-tmpl -->
+</div>
+</div>
+<!--============================== content-wrap close ========================-->
+
+<script id="func-nav-tmpl" type="text/x-jquery-tmpl">
+<li><a href="episode-list.html?id=${id}" class="episode">${nn._([CMS_CONF.PAGE_ID, 'func-nav', 'Episode list'])}</a></li>
+<li class="active"><a href="channel-poi.html?id=${id}" class="poi">${nn._([CMS_CONF.PAGE_ID, 'func-nav', 'Channel POI'])}</a></li>
+<li><a href="channel-setting.html?id=${id}" class="setting">${nn._([CMS_CONF.PAGE_ID, 'func-nav', 'Settings'])}</a></li>
+</script>
+
+<script id="content-main-tmpl" type="text/x-jquery-tmpl">
+<div id="channel-poi-wrap">
+<div id="title-func" data-width="" class="clearfix">
+<h2 class="poi-list"><em data-meta="${name}">${name}</em><span>&gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Channel POI & interactive event list'])}</span></h2>
+<h2 class="poi-create"><em data-meta="${name}">${name}</em><span>&gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create Channel POI & interactive event'])}</span></h2>
+<h2 class="poi-edit"><em data-meta="${name}">${name}</em><span>&gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Edit Channel POI & interactive event'])}</span></h2>
+<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
+</div>
+<div id="content-main-wrap">
+<div class="constrain">
+<div id="channel-poi" data-ytid="" data-starttime="">
+
+<div id="poi-list" class="edit-block">
+<div class="add clearfix">
+<p class="btns btn-create-poi enable"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', '+ Create Channel POI & interactive event'])}</a></span></p>
+<a href="javascript:void(0);" class="create-notice"><img alt="" src="images/icon_question.png"><span class="tip"><img alt="" src="images/bg_tip_top.png"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create a channel interactive event and call to action message at a point of interaction.'])}</span></span></span></a>
+</div>
+<p class="no-episode hide">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Please create an episode at least in the channel.'])}</p>
+<p class="has-poi hide">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'You cannot have more than one Channel POI & interactive event.'])}</p>
+<div class="poi-info hide">
+<h3>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Channel POI & interactive event list'])}</h3>
+<ul id="poi-list-page">
+<!-- template = #poi-list-page-tmpl -->
+</ul>
+</div>
+</div>
+
+<div id="poi-point-edit" class="edit-block hide">
+<!-- template = #poi-point-edit-tmpl -->
+</div>
+
+</div>
+</div>
+</div>
+<div id="preload-channel-video" class="hide"></div>
+</div>
+</script>
+
+<script id="poi-list-page-tmpl" type="text/x-jquery-tmpl">
+<li>
+<ol>
+{{each poiItem}}
+<li>
+<p class="poi-title">${name}</p>
+<p class="func">
+<a href="#!cid=${targetId}&id=${id}" data-channel-id="${targetId}" data-poi-point-id="${id}" class="edit">Edit</a>
+<a href="#!cid=${targetId}&id=${id}" data-channel-id="${targetId}" data-poi-point-id="${id}" class="btn-del">Delete</a>
+</p>
+</li>
+{{/each}}
+</ol>
+</li>
+</script>
+
+<script id="poi-point-edit-tmpl" type="text/x-jquery-tmpl">
+<div id="poi-point-edit-wrap" data-channel-id="${targetId}" data-poi-point-id="${id}">
+{{if $item.isEditMode}}
+<h3>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Edit POI'])}</h3>
+{{else}}
+<h3>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</h3>
+{{/if}}
+<form name="poiPointForm" id="poiPointForm" method="get" action="">
+<div class="fminput clearfix">
+<label for="poiName"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Name'])}</label>
+<div class="fmfield">
+<p class="text"><span><input type="text" name="poiName" id="poiName" maxlength="500" value="${name}" class="text" /></span></p>
+</div>
+</div>
+<div class="fminput clearfix">
+<label for="poiTag">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Tags'])}</label>
+<div class="fmfield">
+<p class="text"><span><input type="text" name="poiTag" id="poiTag" maxlength="500" value="${tag}" class="text" /></span></p>
+<span class="notice">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Separate with commas'])}</span>
+</div>
+</div>
+<div class="form-btn">
+<div class="form-btn-wrap">
+<p class="notice hide">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</p>
+<p class="btns btn-cancel"><span class="btn-right"><span class="btn-middle"><input type="button" value="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}" /></span></span></p>
+<p class="btns btn-next"><span class="btn-right"><span class="btn-middle"><input type="button" value="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Next'])}" /></span></span></p>
+</div>
+</div>
+</form>
+</div>
+</script>
+
+<script id="poi-event-overlay-tmpl" type="text/x-jquery-tmpl">
+<div id="poi-event-overlay-wrap" class="content" data-channel-id="${targetId}" data-poi-point-id="${id}" data-poi-event-id="${eventId}" data-poi-event-type="${eventType}" data-poi-event-type-key="${CMS_CONF.POI_TYPE_MAP[eventType]}">
+<a href="#" class="overlay-btn-close">Close</a>
+<h3 class="create">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create Channel POI & interactive event'])}</h3>
+<h3 class="edit">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Edit Channel POI & interactive event'])}</h3>
+<div id="event-select" class="event">
+<p class="crumb"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</p>
+<p class="action">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Choose a type'])}</p>
+<ul class="list">
+<li class="event-scheduled">
+<div class="block">
+<div class="img schedule">
+<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Scheduled Notification'])}</h4>
+</div>
+<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Send a scheduled notification to user to get more information.'])}</p>
+</div>
+</li>
+<li class="event-instant">
+<div class="block">
+<div class="img instant">
+<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Instant Notification'])}</h4>
+</div>
+<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Send an instant notification to user to get more information.'])}</p>
+</div>
+</li>
+</ul>
+<div class="func">
+<ul>
+<li class="btns"><span><a href="#" class="btn-cancel">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
+</ul>
+</div>
+</div>
+
+<div id="event-scheduled" class="event hide">
+<form name="eventScheduledForm" id="eventScheduledForm" method="get" action="">
+<input type="hidden" name="channelUrl" value="${link}" />
+<div id="schedule-notify" class="schedule">
+<p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Scheduled Notification'])} &gt; <span>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</span></p>
+<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Scheduled Notification'])} &gt; <a href="#" class="crumb-next">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</a></p>
+<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
+<div class="video-wrap">
+<div id="event-scheduled-video" class="video"></div>
+<div class="poi-display"></div>
+<div class="mask">
+<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
+<p class="no-video">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'There is no valid video to preview.'])}</p>
+</div>
+</div>
+<div class="event-input">
+<div class="fminput">
+<label for="schedule_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Display text'])}:</label>
+<p class="text"><span><input type="text" name="displayText" id="schedule_display_text" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
+</div>
+<div class="fminput even">
+<label for="schedule_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Button text'])}:</label>
+<p class="text"><span><input type="text" name="btnText" id="schedule_button_text" maxlength="20" value="${button}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
+</div>
+</div>
+<div class="func">
+<ul>
+<li class="notice">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
+<li class="btns"><span><a href="#" class="btn-cancel">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
+<li class="btns"><span><a href="#" class="btn-next">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Next'])}</a></span></li>
+</ul>
+</div>
+</div>
+
+<div id="schedule-mobile" class="schedule hide">
+<p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Scheduled Notification'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</p>
+<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Scheduled Notification'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</p>
+<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
+<div class="mobile-edit">
+<div class="mobile">
+<ul>
+<li class="ios on"><p><a href="#" class="ios">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS'])}</a></p></li>
+<li class="android"><p><a href="#" class="android">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Android'])}</a></p></li>
+</ul>
+<div id="schedule-ios" class="mobile-block mobile-active">
+<div class="wrap">
+<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Preview'])}</h4>
+<h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Notification'])}</h5>
+{{if '' != notifyMsg}}
+<p class="msg ellipsis multiline">${notifyMsg}</p>
+{{else}}
+<p class="msg ellipsis multiline">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
+{{/if}}
+<p class="button"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS-button', 'Cancel'])}</a><a href="#" class="last">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS-button', 'OK'])}</a></p>
+</div>
+</div>
+<div id="schedule-android" class="mobile-block hide">
+<div class="wrap">
+<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Preview'])}</h4>
+<h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Notification'])}</h5>
+{{if '' != notifyMsg}}
+<p class="msg">${notifyMsg}</p>
+{{else}}
+<p class="msg">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
+{{/if}}
+</div>
+</div>
+</div>
+
+<div class="notification">
+<div class="msg">
+<h4><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile notification message'])}</h4>
+<p class="textarea"><span><span><textarea name="notifyMsg" id="schedule_msg" cols="80" class="textarea" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}">${notifyMsg}</textarea></span></span></p>
+<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Recommend: less 34 bytes'])}</p>
+</div>
+
+<div class="time">
+<h4>
+<acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile notification time'])}
+<a href="#" class="mobile-tip"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add a mobile notification time to remind your viewers.'])}</span></span></span></a>
+</h4>
+<div class="datepicker"></div>
+<input type="hidden" name="datepicker" id="datepicker_selected" value="" />
+<input type="hidden" name="schedule" id="schedule_selected" value="" />
+<input type="hidden" name="notifyScheduler" id="timestamp_selected" value="${notifyScheduler}" />
+<div class="time-wrap">
+<h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Hour'])}:</h5>
+<div class="select enable">
+<p class="select-btn"></p>
+<p class="select-txt"><a href="#" id="time_hour">00</a></p>
+<div class="select-list hour">
+<div class="hour-wrap">
+<p>00</p>
+<p>01</p>
+<p>02</p>
+<p>03</p>
+<p>04</p>
+<p>05</p>
+<p>06</p>
+<p>07</p>
+<p>08</p>
+<p>09</p>
+<p>10</p>
+<p>11</p>
+<p>12</p>
+<p>13</p>
+<p>14</p>
+<p>15</p>
+<p>16</p>
+<p>17</p>
+<p>18</p>
+<p>19</p>
+<p>20</p>
+<p>21</p>
+<p>22</p>
+<p>23</p>
+</div>
+</div>
+</div>
+
+<h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Minute'])}:</h5>
+<div class="select enable">
+<p class="select-btn"></p>
+<p class="select-txt"><a href="#" id="time_min">00</a></p>
+<div class="select-list">
+<div class="min-wrap">
+<p>00</p>
+<p>30</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="func">
+<ul>
+<li class="notice">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
+<li class="btns"><span><a href="#" class="btn-cancel">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
+<li class="btns"><span><a href="#" class="btn-save">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Save'])}</a></span></li>
+</ul>
+</div>
+</div>
+</form>
+</div>
+
+<div id="event-instant" class="event hide">
+<form name="eventInstantForm" id="eventInstantForm" method="get" action="">
+<input type="hidden" name="channelUrl" value="${link}" />
+<input type="hidden" name="notifyScheduler" value="" />
+<div id="instant-notify" class="instant">
+<p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Instant Notification'])} &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
+<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Instant Notification'])} &gt; <a href="#" class="crumb-next">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</a></p>
+<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
+<div class="video-wrap">
+<div id="event-instant-video" class="video"></div>
+<div class="poi-display"></div>
+<div class="mask">
+<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
+<p class="no-video">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'There is no valid video to preview.'])}</p>
+</div>
+</div>
+<div class="event-input">
+<div class="fminput">
+<label for="instant_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Display text'])}:</label>
+<p class="text"><span><input type="text" name="displayText" id="instant_display_text" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
+</div>
+<div class="fminput even">
+<label for="instant_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Button text'])}:</label>
+<p class="text"><span><input type="text" name="btnText" id="instant_button_text" maxlength="20" value="${button}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
+</div>
+</div>
+<div class="func">
+<ul>
+<li class="notice">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
+<li class="btns"><span><a href="#" class="btn-cancel">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
+<li class="btns"><span><a href="#" class="btn-next">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Next'])}</a></span></li>
+</ul>
+</div>
+</div>
+
+<div id="instant-mobile" class="instant hide">
+<p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Instant Notification'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
+<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Instant Notification'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
+<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
+<div class="mobile-edit clearfix">
+<div class="mobile">
+<ul>
+<li class="ios on"><p><a href="#" class="ios">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS'])}</a></p></li>
+<li class="android"><p><a href="#" class="android">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Android'])}</a></p></li>
+</ul>
+<div id="instant-ios" class="mobile-block mobile-active">
+<div class="wrap">
+<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Preview'])}</h4>
+<h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Notification'])}</h5>
+{{if '' != notifyMsg}}
+<p class="msg ellipsis multiline">${notifyMsg}</p>
+{{else}}
+<p class="msg ellipsis multiline">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
+{{/if}}
+<p class="button"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS-button', 'Cancel'])}</a><a href="#" class="last">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS-button', 'OK'])}</a></p>
+</div>
+</div>
+<div id="instant-android" class="mobile-block hide">
+<div class="wrap">
+<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Preview'])}</h4>
+<h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Notification'])}</h5>
+{{if '' != notifyMsg}}
+<p class="msg">${notifyMsg}</p>
+{{else}}
+<p class="msg">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
+{{/if}}
+</div>
+</div>
+</div>
+
+<div class="notification">
+<div class="msg">
+<h4><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile notification message'])}</h4>
+<p class="textarea"><span><span><textarea name="notifyMsg" id="instant_msg" cols="80" class="textarea" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}">${notifyMsg}</textarea></span></span></p>
+<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Recommend: less 34 bytes'])}</p>
+<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'The mobile notification will instant send, when user pressed OK or Enter.'])}</p>
+</div>
+</div>
+</div>
+<div class="func">
+<ul>
+<li class="notice">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
+<li class="btns"><span><a href="#" class="btn-cancel">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
+<li class="btns"><span><a href="#" class="btn-save">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Save'])}</a></span></li>
+</ul>
+</div>
+</div>
+</form>
+</div>
+</div>
+</script>
+
+<!--============================== footer start ==============================-->
+<p id="footer-control"></p>
+<div id="footer">
+  <span>© 2013 9x9.tv. All rights reserved.</span>
+  <ul id="footer-list">
+    <li id="language-change">
+      <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
+      <p class="select-btn"></p>
+      <ul class="select-list">
+        <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!--============================== footer close ==============================-->
+
+<div id="overlay-s">
+<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span></span></p>
+</div>
+
+<div id="system-error" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">You are not authorized to edit this channel.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+<div class="overlay-btn">
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+<p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="fb-connect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap fb-connect">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">CMS Setup</h4>
+<p class="fb-connect">
+<span class="content">Connect to</span>
+<img src="images/icon_fb.png" alt="facebook" class="icon" />
+<a href="#" class="switch-on hide">ON</a>
+<a href="#" class="switch-off">OFF</a>
+</p>
+<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
+</div>
+</div>
+</div>
+
+<div id="restart-connect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap restart-connect">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">CMS Setup</h4>
+<div class="reconnect-func">
+<span class="content">Connect to</span>
+<img src="images/icon_fb.png" alt="facebook" class="icon" />
+<p class="btns btn-reconnect"><span class="btn-right"><a href="#">Restart connection</a></span></p>
+</div>
+<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
+<p class="content notice">Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.</p>
+</div>
+</div>
+</div>
+
+<div id="fb-connect-failed" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap connect-fail">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">CMS Setup</h4>
+<h5>Can not connect to Facebook correctly!</h5>
+<p class="content">Please try again and make sure you agree on all permissions.</p>
+<div class="overlay-btn">
+<p class="btns btn-failed-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="disconnect-notice" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap disconnect-notice">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">CMS Setup</h4>
+<h5>Account disconnected!</h5>
+<p class="content">{If you want to enable auto sharing again, please:}</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="confirm-disconnect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap disconnect">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">CMS Setup</h4>
+<p class="content">Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?</p>
+<div class="overlay-btn">
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+<p class="btns btn-disconnect"><span><a href="#">Disconnect</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="fb-connect-failed2" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap channel-connect-fail">
+<a href="#" class="btn-close">Close</a>
+<h5>Can not connect to Facebook correctly!</h5>
+<p class="content">Please try again and make sure you agree on all permissions.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unsave-poi-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="overlay-btn-close">Close</a>
+<p class="content">Unsaved changes will be lost, are you sure you want to cancel editing?</p>
+<div class="overlay-btn">
+<p class="btns overlay-btn-no"><span><a href="#">No</a></span></p>
+<p class="btns overlay-btn-yes"><span><a href="#">Yes</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unsave-poi-mask-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="overlay-btn-close">Close</a>
+<p class="content">Unsaved changes will be lost, are you sure you want to cancel editing?</p>
+<div class="overlay-btn">
+<p class="btns overlay-btn-no"><span><a href="#">Back</a></span></p>
+<p class="btns overlay-btn-yes"><span><a href="#">Yes</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="del-poi-notice" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Are you sure you want to delete this POI with interactive event?</p>
+<div class="overlay-btn">
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+<p class="btns btn-del"><span><a href="#">Yes</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="poi-event-overlay" class="lightbox-content">
+<div class="wrap">
+<!-- template = #poi-event-overlay-tmpl -->
+</div>
+</div>
+
+</body>
+</html>

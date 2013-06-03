@@ -1,3 +1,116 @@
+版本: 1103
+作者: chihwen
+日期: 2013年6月3日 上午 10:54:14
+訊息:
+將 9x9 production SVN 版本 4781,4794 轉回 fakeapi 分支
+
+1. 將 9x9 production SVN 版本 4781,4794 轉回 fakeapi 分支。
+2. 同步 src 版本 1100,1101。
+   1. 移除已用不到的檔案
+   2. 從 teltel_ui 版本 1091,1095,1096 轉入 src 分支 (主要是 1091 這個版本)
+issue 5927
+----
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-poi.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/episode-list.html
+已加入 : /fakeapi/images/bg_tip_l.png
+已加入 : /fakeapi/images/btn_func.png
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/controller.js
+已刪除 : /fakeapi/javascripts/library.js
+異動 : /fakeapi/javascripts/signin.js
+已刪除 : /fakeapi/javascripts/uploads.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+異動 : /fakeapi/signin.html
+異動 : /fakeapi/stylesheets/channel.css
+異動 : /fakeapi/stylesheets/episode.css
+已刪除 : /fakeapi/stylesheets/library.css
+異動 : /fakeapi/stylesheets/style.css
+
+版本: 1097
+作者: chihwen
+日期: 2013年6月2日 下午 08:23:45
+訊息:
+完成 Channel POI API 串接
+
+1. 完成 Channel POI template 模板設計。
+2. 完成 Channel POI 多國語系與未儲存提示設計。
+3. 完成 Channel POI 影片定格預載及快取設計。
+4. 完成 Channel POI 單筆 POI 維護管控設計。
+5. 完成 Channel POI API CRUD 串接設計。
+6. 將 Channel POI, Channel setting, Episode list 的左側選單，統一採用 template 改寫 (func-nav-tmpl)。
+7. 調整 POI fakeapi 以便模擬 Channel POI 及 Episode POI 資料新增行為。
+8. 調整 config.js 加入 YOUTUBE_PLAYER 以便存放全域的 YouTube 影片播放物件。
+9. 調整 controller.js 加入 buildChannelPoi() 以便負責 Channel POI 初始載入建構邏輯。
+10. 調整 controller.js 在 html 加入 lang 屬性，以便未來語系 :lang(zh) 樣式的應用。
+11. 調整 curation.js 比照 Channel POI 的校正，同步修正 curation.js 上的錯誤以及 iOS 截字邏輯。
+12. 重構 channel-poi.js 以便通過 JSLint 檢查。
+13. 重構 config.js 以便通過 JSLint 檢查。
+14. 重構 basic.js 以便通過 JSLint 檢查。
+15. 重構 controller.js 以便通過 JSLint 檢查。
+16. 同步 src 版本 1089,1090,1092,1094。
+
+TODO：
+比照 Channel POI 的調整，同步改良 Episode POI 的相關設計。
+issue 6423
+----
+異動 : /fakeapi/channel-poi.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/javascripts/channel-poi.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+異動 : /fakeapi/stylesheets/channel-poi.css
+異動 : /fakeapi/stylesheets/lightbox.css
+異動 : /fakeapi/stylesheets/style.css
+異動 : /fakeapi/javascripts/curation.js
+異動 : /fakeapi/fakeapi/poi_events.php
+異動 : /fakeapi/javascripts/config.js
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/fakeapi/poi_points.php
+異動 : /fakeapi/stylesheets/channel.css
+異動 : /fakeapi/stylesheets/ep-curation.css
+異動 : /fakeapi/stylesheets/epcurate.css
+異動 : /fakeapi/stylesheets/episode.css
+已加入 : /fakeapi/images/input_white_lg.png
+
+版本: 1088
+作者: chihwen
+日期: 2013年5月28日 下午 01:05:22
+訊息:
+完成初步 Channel POI 靜態修版整合
+
+同步 src 版本 1019~1021,1024,1025,1027,1032,1038,1051,1062,1068,1071 (注意1062尚未完全同步完成)
+
+除了上述同步之外的調整如下：
+在 index, episode-list, channel-setting 等頁面，加入 Channel POI 入口及相關語系設定。
+issue 6423
+----
+已加入 : /fakeapi/channel-poi.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/index.html
+已加入 : /fakeapi/javascripts/channel-poi.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+已加入 : /fakeapi/stylesheets/channel-poi.css
+異動 : /fakeapi/stylesheets/lightbox.css
+異動 : /fakeapi/stylesheets/style.css
+
+版本: 1086
+作者: chihwen
+日期: 2013年5月27日 下午 01:00:28
+訊息:
+調整 curation.js 以解決從 unsave Back 或 POI point Next 後，無法正確定格影片的問題
+issue 6367
+----
+異動 : /fakeapi/javascripts/curation.js
+
 版本: 1084
 作者: chihwen
 日期: 2013年5月24日 下午 11:57:04

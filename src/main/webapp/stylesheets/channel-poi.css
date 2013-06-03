@@ -21,7 +21,6 @@
 #title-func h2 em {
     overflow:hidden;
     float: left;
-    width: 300px;
     height: 21px;
     line-height: 21px;
     font-style: normal;
@@ -140,7 +139,7 @@
 #poi-list .no-episode,
 #poi-list .has-poi {
     clear: both;
-    margin-bottom: 26px;
+    margin-bottom: 3px;
     padding-left: 10px;
     color: #555;
     font-size: 13px;
@@ -148,13 +147,17 @@
 
 #poi-list .poi-info {
     overflow: hidden;
-    margin-left: 10px;
-    background: url(../images/bg_divider.png) repeat-x bottom;
+    margin: 26px 0 0 10px;
 }
 
 #poi-list .poi-info h3 {
     color: #555;
     font-size: 13px;
+}
+
+#poi-list .poi-info ul li ol li {
+    overflow: hidden;
+    background: url(../images/bg_divider.png) repeat-x bottom;
 }
 
 #poi-list .poi-info p.poi-title {
@@ -248,13 +251,13 @@
     height: 30px;
     margin-right: 10px;
     padding-left: 3px;
-    background: url(../images/bg_input.png) no-repeat 0 0;
+    background: url(../images/input_white.png) no-repeat 0 0;
 }
 
 #channel-poi .edit-block .fminput .fmfield p.text span {
     display: block;
     padding-right: 3px;
-    background: url(../images/bg_input.png) no-repeat right -30px;
+    background: url(../images/input_white.png) no-repeat right -30px;
 }
 
 #channel-poi .edit-block .fminput .fmfield p.text span .text {
@@ -262,7 +265,7 @@
     height: 30px;
     padding-left: 4px;
     border: none;
-    background: url(../images/bg_input.png) repeat-x 0 -60px;
+    background: url(../images/input_white.png) repeat-x 0 -60px;
     color: #555;
     font: 13px/30px Arial, Helvetica;
 }

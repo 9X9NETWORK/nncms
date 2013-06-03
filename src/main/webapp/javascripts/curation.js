@@ -45,6 +45,7 @@ $(function () {
                 }
             }
             if ('block' === $('#unsave-poi-mask-prompt').css('display')) {
+                $('body').addClass('from-poi-overlay-edit-mode');
                 $('#unsave-poi-mask-prompt').hide();
                 $('#poi-event-overlay').show();
             } else {
@@ -172,6 +173,7 @@ $(function () {
         return false;
     });
     $('#unsave-poi-mask-prompt .overlay-btn-no, #unsave-poi-mask-prompt .overlay-btn-close').click(function () {
+        $('body').addClass('from-poi-overlay-edit-mode');
         $('#unsave-poi-mask-prompt').hide();
         $('#poi-event-overlay').show();
         return false;
@@ -1217,7 +1219,7 @@ $(function () {
         if (chkPoiPointData(document.epcurateForm)) {
             var poiPointId = 0,
                 poiEventId = 0,
-                hasPointEventCache = false;
+                hasPointEventCache = false,
                 tmplItem = $('#storyboard-listing li.playing').tmplItem(),
                 tmplItemData = tmplItem.data,
                 poiList = tmplItemData.poiList,
@@ -1537,6 +1539,12 @@ $(function () {
         var val = strip_tags($(this).val().replace(/\n/g, ''));
         $(this).val(val);
         $('#instant-mobile .mobile-block p.msg').text(val);
+    });
+    $('#poi-event-overlay').on('blur', '#schedule_msg', function () {
+        $('#schedule-ios p.msg').ellipsis();
+    });
+    $('#poi-event-overlay').on('blur', '#instant_msg', function () {
+        $('#instant-ios p.msg').ellipsis();
     });
 
     // POI overlay - Scheduled Hour and Minute
@@ -2859,6 +2867,7 @@ function buildPoiEventOverlayTmpl(poi_event) {
     $.blockUI({
         message: $('#poi-event-overlay'),
         onBlock: function () {
+            $('body').addClass('from-poi-overlay-edit-mode');
             $('#poi-event-overlay .event').addClass('hide');
             if ($('#cur-poi-edit').hasClass('edit')) {
                 $('#poi-event-overlay').addClass('edit');

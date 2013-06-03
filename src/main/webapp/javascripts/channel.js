@@ -180,9 +180,9 @@ $(function () {
         var selectOption = $(this).text(),
             metadata = $(this).data('meta');
         // shareing url
-        if ($(this).hasClass("surl-li")) {
-            $("#surl-ul .surl-li").removeClass("on");
-            $(this).addClass("on");
+        if ($(this).hasClass('surl-li')) {
+            $('#surl-ul .surl-li').removeClass('on');
+            $(this).addClass('on');
         }
         // region (sphere) relate to category
         if ('sphere-select-list' === $(this).parent().attr('id')) {
@@ -424,15 +424,15 @@ $(function () {
                 parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
             // shring url
             nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/brand', {
-                channelId : CMS_CONF.USER_URL.param('id')
-            }), null, function(cBrand) {
-                var surlText = $("#surl-text").text();
+                channelId: CMS_CONF.USER_URL.param('id')
+            }), null, function (cBrand) {
+                var surlText = $('#surl-text').text();
                 if (cBrand.brand != surlText) {
                     nn.api('PUT', CMS_CONF.API('/api/channels/{channelId}/autosharing/brand', {
-                        channelId : CMS_CONF.USER_URL.param('id')
+                        channelId: CMS_CONF.USER_URL.param('id')
                     }), {
-                        brand : surlText
-                    }, function(cBrands) {
+                        brand: surlText
+                    }, function (cBrands) {
 
                     });
                 }

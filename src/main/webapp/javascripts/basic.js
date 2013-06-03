@@ -1,3 +1,6 @@
+/*jslint browser: true, devel: true, bitwise: true, nomen: true, regexp: true, unparam: true, sloppy: true */
+/*global $, nn, CMS_CONF, scrollbar, buildFacebookPagesMap, renderAutoShareUI, setFormHeight, FB, renderConnectFacebookUI, setupLanguagePage, setupLanguageAndRenderPage */
+
 function autoWidth() {
     var contentNavWidth = 200,  // $('#content-nav')
         scrollbarWidth = 35;    // padding15 + slider5 + padding15
@@ -46,7 +49,7 @@ function hideFbPageList() {
             $('.page-list').removeClass('on');
             hasHideFbPageList = true;
         }
-        if ('none' != $('#main-wrap-slider').css('display')) {
+        if ('none' !== $('#main-wrap-slider').css('display')) {
             $('#content-main-wrap form').height('auto');
             $('#content-main-wrap').height($('#content-main-wrap form').height() + 70 + 65);
             $('#main-wrap-slider .slider-vertical').slider('destroy');
@@ -59,7 +62,7 @@ function hideFbPageList() {
 }
 
 function showSystemErrorOverlay(msg) {
-    if ('' == $.trim(msg)) { msg = 'Unknown error.'; }
+    if ('' === $.trim(msg)) { msg = 'Unknown error.'; }
     $('#system-error .content').text(nn._(['overlay', 'system-error', msg]));
     $.blockUI.defaults.overlayCSS.opacity = '0.9';
     $.blockUI({
@@ -163,10 +166,10 @@ function showUnpublishNoticeOverlay() {
 }
 
 function formatTimestamp(timestamp, dateSeparator, timeSeparator) {
-    if ('undefined' === typeof dateSeparator) {
+    if (dateSeparator === undefined) {
         dateSeparator = '-';
     }
-    if ('undefined' === typeof timeSeparator) {
+    if (timeSeparator === undefined) {
         timeSeparator = ':';
     }
     var a = new Date(timestamp),
@@ -184,7 +187,7 @@ function formatTimestamp(timestamp, dateSeparator, timeSeparator) {
 }
 
 function formatDuration(duration, autoPadding) {
-    if ('' == $.trim(duration) || isNaN(duration)) {
+    if ('' === $.trim(duration) || isNaN(duration)) {
         duration = 0;
     }
     var durationMin = parseInt(duration / 60, 10),
@@ -204,13 +207,11 @@ function formatDuration(duration, autoPadding) {
     }
     if (durationHou > 0) {
         return durationHou + ':' + durationMin + ':' + durationSec;
-    } else {
-        if (true === autoPadding) {
-            return '00:' + durationMin + ':' + durationSec;
-        } else {
-            return durationMin + ':' + durationSec;
-        }
     }
+    if (true === autoPadding) {
+        return '00:' + durationMin + ':' + durationSec;
+    }
+    return durationMin + ':' + durationSec;
 }
 
 function nl2br(text) {
@@ -219,7 +220,7 @@ function nl2br(text) {
 
 function strip_tags(input, allowed) {
     // version: 1109.2015
-    allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+    allowed = (((allowed || "").toString()).toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
     var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
         commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
     return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
@@ -245,16 +246,15 @@ function str_replace(search, replace, subject, count) {
         this.window[count] = 0;
     }
 
-    for (i = 0, sl = s.length; i < sl; i++) {
-        if (s[i] === '') {
-            continue;
-        }
-        for (j = 0, fl = f.length; j < fl; j++) {
-            temp = s[i] + '';
-            repl = ra ? (r[j] !== undefined ? r[j] : '') : r[0];
-            s[i] = (temp).split(f[j]).join(repl);
-            if (count && s[i] !== temp) {
-                this.window[count] += (temp.length - s[i].length) / f[j].length;
+    for (i = 0, sl = s.length; i < sl; i += 1) {
+        if (s[i] !== '') {
+            for (j = 0, fl = f.length; j < fl; j += 1) {
+                temp = s[i].toString();
+                repl = ra ? (r[j] !== undefined ? r[j] : '') : r[0];
+                s[i] = temp.split(f[j]).join(repl);
+                if (count && s[i] !== temp) {
+                    this.window[count] += (temp.length - s[i].length) / f[j].length;
+                }
             }
         }
     }
@@ -265,11 +265,19 @@ function htmlspecialchars(string, quote_style, charset, double_encode) {
     // version: 1109.2015
     var optTemp = 0,
         i = 0,
-        noquotes = false;
-    if (typeof quote_style === 'undefined' || quote_style === null) {
+        noquotes = false,
+        OPTS = {
+            'ENT_NOQUOTES': 0,
+            'ENT_HTML_QUOTE_SINGLE': 1,
+            'ENT_HTML_QUOTE_DOUBLE': 2,
+            'ENT_COMPAT': 2,
+            'ENT_QUOTES': 3,
+            'ENT_IGNORE': 4
+        };
+    if (quote_style === undefined || quote_style === null) {
         quote_style = 2;
     }
-    if ('' == string || null == string) {
+    if ('' === string || null === string) {
         string = '';
     }
     string = string.toString();
@@ -278,25 +286,16 @@ function htmlspecialchars(string, quote_style, charset, double_encode) {
     }
     string = string.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-    var OPTS = {
-        'ENT_NOQUOTES': 0,
-        'ENT_HTML_QUOTE_SINGLE': 1,
-        'ENT_HTML_QUOTE_DOUBLE': 2,
-        'ENT_COMPAT': 2,
-        'ENT_QUOTES': 3,
-        'ENT_IGNORE': 4
-    };
     if (quote_style === 0) {
         noquotes = true;
     }
     if (typeof quote_style !== 'number') { // Allow for a single string or an array of string flags
         quote_style = [].concat(quote_style);
-        for (i = 0; i < quote_style.length; i++) {
+        for (i = 0; i < quote_style.length; i += 1) {
             // Resolve string input to bitwise e.g. 'ENT_IGNORE' becomes 4
             if (OPTS[quote_style[i]] === 0) {
                 noquotes = true;
-            }
-            else if (OPTS[quote_style[i]]) {
+            } else if (OPTS[quote_style[i]]) {
                 optTemp = optTemp | OPTS[quote_style[i]];
             }
         }
@@ -499,32 +498,33 @@ $(function () {
             setupLanguagePage();
             $(this).parents('.select-list').slideDown();
             return false;
-        } else {
-            if (null !== CMS_CONF.USER_DATA && !$('body').hasClass('has-change')) {
-                nn.api('PUT', CMS_CONF.API('/api/users/{userId}', {userId: CMS_CONF.USER_DATA.id}), {lang: $(this).data('meta')}, function (user) {
-                    var isStoreLangKey = false;
-                    setupLanguageAndRenderPage(user, isStoreLangKey);
-                });
-                $(this).parents('.select-list').slideDown();
-                return false;
-            }
-       }
+        }
+        if (null !== CMS_CONF.USER_DATA && !$('body').hasClass('has-change')) {
+            nn.api('PUT', CMS_CONF.API('/api/users/{userId}', {userId: CMS_CONF.USER_DATA.id}), {lang: $(this).data('meta')}, function (user) {
+                var isStoreLangKey = false;
+                setupLanguageAndRenderPage(user, isStoreLangKey);
+            });
+            $(this).parents('.select-list').slideDown();
+            return false;
+        }
     });
 
     // common dropdown (share with header, footer, channel-add and channel-setting)
     function showDropdown(btn) {
+        var str = '',
+            id = '';
         hideFbPageList();
         $('.dropdown, .select-list').hide();
         $('.dropdown')
             .parents('li:not(' + btn + ')').removeClass('on')
             .children('.on:not(' + btn + ')').removeClass('on');
         $(btn).toggleClass('on');
-        var str = $(btn).attr('id');
-        if (str.search('btn') == 0) {
+        str = $(btn).attr('id');
+        if (str.search('btn') === 0) {
             // slice(4) for btn-xxx
             str = $(btn).attr('id').slice(4);
         }
-        var id = '#' + str + '-dropdown';
+        id = '#' + str + '-dropdown';
         if ($(btn).hasClass('on')) {
             $(id).show();
         } else {

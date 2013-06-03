@@ -50,9 +50,9 @@
 
 <div id="studio-nav">
 <div class="studio-nav-wrap">
-<h3><a href="./">CMS</a></h3>
+<h3><a href="index.html">CMS</a></h3>
 <ul>
-<li class="on"><span><a href="./">My Channels</a></span></li>
+<li class="on"><span><a href="index.html">My Channels</a></span></li>
 <li id="my-portal" class="hide"><span><a href="portal-set.html">My Portal</a></span></li>
 </ul>
 <div class="studio-setup">
@@ -100,7 +100,7 @@
 <span>{{html nn._(['overlay', 'channel-tutorial', 'Create a<br />new channel'])}}</span>
 </a>
 </p>
-<p class="btns unblock"><span><a href="./">${nn._(['overlay', 'channel-tutorial', 'Not right now, thanks!'])}</a></span></p>
+<p class="btns unblock"><span><a href="index.html">${nn._(['overlay', 'channel-tutorial', 'Not right now, thanks!'])}</a></span></p>
 </div>
 </script>
 
@@ -138,6 +138,7 @@
 <div class="btn-wrap disable">
 <ul>
 <li><a href="javascript:void(0);" class="add disable">Add</a></li>
+<li><a href="javascript:void(0);" class="channel-poi disable">Channel POI</a></li>
 <li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
 <li><a href="javascript:void(0);" class="setting disable">Setting</a></li>
 <li><a href="javascript:void(0);" class="del disable">Del</a></li>
@@ -147,6 +148,7 @@
 <div class="btn-wrap enable">
 <ul>
 <li><a href="epcurate-curation.html?cid=${id}" class="add">Add<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Curate a new episode'])}</span></span></span></span></a></li>
+<li><a href="channel-poi.html?id=${id}" class="channel-poi">Channel POI<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Channel POI'])}</span></span></span></span></a></li>
 <li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
 <li><a href="channel-setting.html?id=${id}" class="setting">Setting<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Channel settings'])}</span></span></span></span></a></li>
 <li><a href="/api/users/${$item.userId}/channels/${id}" rel="${id}" class="del">Del<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Delete this channel'])}</span></span></span></span></a></li>

@@ -1,5 +1,5 @@
-/*jslint eqeq: true, nomen: true, plusplus: true, regexp: true, unparam: true, sloppy: true, vars: true */
-/*global nn, CMS_CONF, $, location, autoHeight, scrollbar, window, document, sumStoryboardInfo, rebuildVideoNumber, setFormWidth, setVideoMeasure, setSpace, setEpisodeWidth, showProcessingOverlay, showSystemErrorOverlayAndHookError, formatTimestamp, switchPublishStatus, switchRerunCheckbox, truncateFormTitle, setFormHeight, setTaglistWidth, uploadImage, FB, ellipsisPage, brandSeting, storeManage, portalManage, portalSet */
+/*jslint browser: true, devel: true, eqeq: true, nomen: true, plusplus: true, regexp: true, unparam: true, sloppy: true, vars: true */
+/*global $, nn, CMS_CONF, autoHeight, scrollbar, sumStoryboardInfo, rebuildVideoNumber, setFormWidth, setVideoMeasure, setSpace, setEpisodeWidth, showProcessingOverlay, showSystemErrorOverlayAndHookError, formatTimestamp, switchPublishStatus, switchRerunCheckbox, truncateFormTitle, setFormHeight, setTaglistWidth, uploadImage, FB, ellipsisPage, preloadChannelVideo, brandSeting, storeManage, portalManage, portalSet, resetPassCheck */
 
 function renderConnectFacebookUI() {
     $('#settingForm .connect-switch').removeClass('hide');
@@ -676,7 +676,7 @@ function listEpisode(pageId, id) {
                 channelId: id
             }), null, function (channel) {
                 $('#func-nav ul').html('');
-                $('#episode-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
+                $('#func-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
                 if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
                     nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {
                         userId: CMS_CONF.USER_DATA.id
@@ -820,7 +820,7 @@ function listEpisode(pageId, id) {
                 name: CMS_CONF.USER_DATA.name + nn._([pageId, 'title-func', "'s Favorite"])
             };
             $('#func-nav ul').html('');
-            $('#episode-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
+            $('#func-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
             $('#title-func').html('');
             $('#title-func-tmpl').tmpl(channel, {
                 cntEpisode: cntEpisode
@@ -843,6 +843,78 @@ function listEpisode(pageId, id) {
         return;
     }
 }   // end of listEpisode()
+
+function buildChannelPoi(pageId, id) {
+    if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
+        nn.api('GET', CMS_CONF.API('/api/users/{userId}/channels', {
+            userId: CMS_CONF.USER_DATA.id
+        }), null, function (data) {
+            var channelIds = [],
+                channelPoi = {},
+                poiPage = [],
+                poiItem = [];
+            if (data.length > 0) {
+                $.each(data, function (i, list) {
+                    channelIds.push(list.id);
+                });
+            }
+            if (-1 === $.inArray(parseInt(id, 10), channelIds)) {
+                showSystemErrorOverlayAndHookError('You are not authorized to edit this channel.');
+                return;
+            }
+            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
+                channelId: id
+            }), null, function (channel) {
+                if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
+                    showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
+                    return;
+                }
+                showProcessingOverlay();
+                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/episodes', {
+                    channelId: id
+                }), null, function (epList) {
+                    nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/poi_points', {
+                        channelId: id
+                    }), null, function (poiList) {
+                        channelPoi = $.extend(channelPoi, channel);
+                        channelPoi.epList = epList;
+                        channelPoi.poiList = poiList;
+                        $('#poi-event-overlay .wrap').html('');     // reset for language switch
+                        $('#func-nav ul').html('');
+                        $('#func-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
+                        $('#content-main').html('');
+                        $('#content-main-tmpl').tmpl(channelPoi).appendTo('#content-main');
+                        if (epList && epList.length <= 0) {
+                            $('#poi-list .btn-create-poi').removeClass('enable').addClass('disable');
+                            $('#poi-list .no-episode').removeClass('hide');
+                        }
+                        if (poiList && poiList.length > 0) {
+                            $('#poi-list .btn-create-poi').removeClass('enable').addClass('disable');
+                            $('#poi-list .has-poi').removeClass('hide');
+                            $('#poi-list .poi-info').removeClass('hide');
+                            $.each(poiList, function (i, item) {
+                                poiItem.push(item);
+                            });
+                            if (poiItem.length > 0) {
+                                poiPage.push({poiItem: poiItem});
+                                poiItem = [];
+                            }
+                        }
+                        $('#poi-list-page').html('');
+                        $('#poi-list-page-tmpl').tmpl(poiPage).prependTo('#poi-list-page');
+                        $('#overlay-s').fadeOut('fast', function () {
+                            setFormHeight();
+                            preloadChannelVideo();
+                        });
+                    });
+                });
+            });
+        });
+    } else {
+        showSystemErrorOverlayAndHookError('Invalid channel ID, please try again.');
+        return;
+    }
+}   // end of buildChannelPoi()
 
 function updateChannel(pageId, id) {
     if (id > 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
@@ -867,28 +939,31 @@ function updateChannel(pageId, id) {
                     return;
                 }
                 showProcessingOverlay();
+                $('#func-nav ul').html('');
+                $('#func-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
                 $('#content-main').html('');
                 $('#content-main-tmpl').tmpl(channel).appendTo('#content-main');
-                
+
                 // sharing url
                 nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/brand', {
-                    channelId : id
-                }), null, function(cBrand) {
+                    channelId: id
+                }), null, function (cBrand) {
                     $("#surl-text").text(cBrand.brand);
-                }).then(function(ccBrand) {
+                }).then(function (ccBrand) {
                     nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/validBrands', {
-                        channelId : id
-                    }), null, function(cBrands) {
-                        $("#surl-ul").html("");
+                        channelId: id
+                    }), null, function (cBrands) {
+                        var cntBrand = cBrands.length,
+                            i = 0;
+                        $('#surl-ul').html('');
                         $('#surl-tmpl-item').tmpl(cBrands, {
-                            selBrand : ccBrand.brand
+                            selBrand: ccBrand.brand
                         }).appendTo('#surl-ul');
-                        var cntBrand = cBrands.length;
-                        for ( i = 0; i < cntBrand; i++) {
+                        for (i = 0; i < cntBrand; i += 1) {
                         }
                     });
                 });
-                 
+
                 $('#name').charCounter(20, {
                     container: '#name-charcounter',
                     format: '%1',
@@ -910,8 +985,6 @@ function updateChannel(pageId, id) {
                 initFacebookJavaScriptSdk();
                 $('#channel-name').data('width', $('#channel-name').width());
                 // setup channel data
-                $('#func-nav .episode').attr('href', 'episode-list.html?id=' + id);
-                $('#func-nav .setting').attr('href', 'channel-setting.html?id=' + id);
                 if ('' != $.trim(channel.imageUrl)) {
                     $('#thumbnail-imageUrl').attr('src', channel.imageUrl + '?n=' + Math.random());
                 }
@@ -1229,6 +1302,7 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
         CMS_CONF.USER_DATA.lang = lang;
     }
     $('html').removeClass(CMS_CONF.LANG_SUPPORT.join(' ')).addClass(lang);
+    $('html').attr('lang', lang);
 
     nn.api('GET', 'lang/' + lang + '.json', null, function (langPack) {
         // setup user profile
@@ -1313,6 +1387,11 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
                 // because auto share template parse order issue, initFacebookJavaScriptSdk() be bundled to updateChannel()
                 updateChannel(CMS_CONF.PAGE_ID, CMS_CONF.USER_URL.param('id'));
                 break;
+            case 'channel-poi.html':
+                setupUserCampaignId();
+                initFacebookJavaScriptSdk();
+                buildChannelPoi(CMS_CONF.PAGE_ID, CMS_CONF.USER_URL.param('id'));
+                break;
             case 'episode-list.html':
                 initFacebookJavaScriptSdk();
                 listEpisode(CMS_CONF.PAGE_ID, CMS_CONF.USER_URL.param('id'));
@@ -1389,6 +1468,7 @@ function setupLanguagePage() {
     $('#language-en, #language-zh').parent('li').removeClass('on');
     $('#language-' + lang).parent('li').addClass('on');
     $('html').removeClass(CMS_CONF.LANG_SUPPORT.join(' ')).addClass(lang);
+    $('html').attr('lang', lang);
 
     nn.api('GET', 'lang/' + lang + '.json', null, function (langPack) {
         // setup lang pack
@@ -1433,15 +1513,13 @@ function setupLanguagePage() {
             $(this).attr('defvalue', tmpStr);
             $(this).attr('value', tmpStr);
         });
-        
         resetPassCheck();
-        
     }, 'json');
 }   // end of setupLanguagePage()
 
 $(function () {
     nn.api('GET', CMS_CONF.API('/api/login'), function (user) {
-        var tmpUrl = $.url(location.href.replace("@","%40"));
+        var tmpUrl = $.url(location.href.replace('@', '%40'));
         if (!user || !user.id) {
             if ('signin.html' != tmpUrl.attr('file')) {
                 location.href = 'signin.html';

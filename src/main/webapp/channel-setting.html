@@ -52,9 +52,9 @@
 
 <div id="studio-nav">
 <div class="studio-nav-wrap">
-<h3><a href="./">CMS</a></h3>
+<h3><a href="index.html">CMS</a></h3>
 <ul>
-<li class="on"><span><a href="./">My Channels</a></span></li>
+<li class="on"><span><a href="index.html">My Channels</a></span></li>
 </ul>
 <div class="studio-setup">
 <p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="#"><img src="images/icon_studio_setup.png" alt="" />CMS Setup</a></span></span></p>
@@ -71,8 +71,7 @@
 <div id="content-nav">
 <div id="func-nav">
 <ul>
-<li><a href="" class="episode">Episode list</a></li>
-<li class="active"><a href="" class="setting">Settings</a></li>
+<!-- template = #func-nav-tmpl -->
 </ul>
 </div>
 </div>
@@ -82,6 +81,12 @@
 </div>
 </div>
 <!--============================== content-wrap close ========================-->
+
+<script id="func-nav-tmpl" type="text/x-jquery-tmpl">
+<li><a href="episode-list.html?id=${id}" class="episode">${nn._([CMS_CONF.PAGE_ID, 'func-nav', 'Episode list'])}</a></li>
+<li><a href="channel-poi.html?id=${id}" class="poi">${nn._([CMS_CONF.PAGE_ID, 'func-nav', 'Channel POI'])}</a></li>
+<li class="active"><a href="channel-setting.html?id=${id}" class="setting">${nn._([CMS_CONF.PAGE_ID, 'func-nav', 'Settings'])}</a></li>
+</script>
 
 <script id="content-main-tmpl" type="text/x-jquery-tmpl">
 <div id="title-func" class="clearfix">
@@ -186,9 +191,8 @@
 <div class="select enable">
 <p class="select-btn"></p>
 <p class="select-txt"><a href="#" id="surl-text">CTS</a></p>
-<ul class="select-list" id="surl-ul" style="display: none;">
-<li class="on" data-meta="9x9.tv">9x9.tv</li>
-<li data-meta="CTS">CTS</li>
+<ul id="surl-ul" class="select-list" style="display: none;">
+<!-- template = #surl-tmpl-item -->
 </ul>
 </div>
 </div>
@@ -228,12 +232,6 @@
 </div>
 </script>
 
-<script id="surl-tmpl-item" type="text/x-jquery-tmpl">
-    <li class="surl-li {{if $item.selBrand === brand}}on{{/if}}" data-meta="${brand}">${brand}</li>
-</script>
-
-
-
 <script id="category-list-tmpl-item" type="text/x-jquery-tmpl">
 {{if $item.dataArrayIndex($item.data) < 3}}
 <li class="first-row" data-meta="${id}">${name}</li>
@@ -248,6 +246,10 @@
 <li><span><a href="#">${$value}</a></span></li>
 {{/if}}
 {{/each}}
+</script>
+
+<script id="surl-tmpl-item" type="text/x-jquery-tmpl">
+<li class="surl-li {{if $item.selBrand === brand}}on{{/if}}" data-meta="${brand}">${brand}</li>
 </script>
 
 <script id="fb-page-list-tmpl" type="text/x-jquery-tmpl">

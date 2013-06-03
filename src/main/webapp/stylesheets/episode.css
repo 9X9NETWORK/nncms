@@ -366,9 +366,10 @@ body.mac #title-func ul li p span a {
     overflow: hidden;
     width: 80px;
     height: 45px;
-    margin: 0 10px 0 6px;
-    padding: 10px;
-    background: url(../images/thumbnail_box_sm.png) no-repeat 0 0;
+    margin: 3px 13px 0 9px;
+    padding: 7px;
+    background-color: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3), 0px 0px 4px rgba(255, 255, 255,0.3) inset;
     text-align: center;
 }
 
@@ -408,12 +409,12 @@ body.mac #title-func ul li p span a {
     text-align: center;
 }
 
-#ep-list ul li .episode p.img       span.duration,
+#ep-list ul li .episode p.img    span.duration,
 #ep-list ul li .episode p.no-img span.duration {
     display: block;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 7px;
+    right: 7px;
     float: right;
     height: 14px;
     padding: 0 0 0 2px;
@@ -421,7 +422,7 @@ body.mac #title-func ul li p span a {
     -webkit-text-size-adjust: none;
 }
 
-#ep-list ul li .episode p.img       span .time-right,
+#ep-list ul li .episode p.img    span .time-right,
 #ep-list ul li .episode p.no-img span .time-right {
     display: block;
     float: left;
@@ -431,7 +432,7 @@ body.mac #title-func ul li p span a {
     background: url(../images/time_box_right.png) no-repeat right 0;
 }
 
-#ep-list ul li .episode p.img       span .time-middle,
+#ep-list ul li .episode p.img    span .time-middle,
 #ep-list ul li .episode p.no-img span .time-middle {
     display: block;
     float: left;
@@ -450,6 +451,7 @@ body.mac #title-func ul li p span a {
     margin-bottom: 11px;
     padding-right: 10px;
     font: bold 13px/21px Arial, Helvetica;
+    white-space: nowrap;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;

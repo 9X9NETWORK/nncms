@@ -1080,6 +1080,7 @@ background: #e4e4e4;
     display: block;
     height: 25px;
     padding-left: 30px;
+    background: url(../images/icon_nav.png) no-repeat 0 0;
     color: #555;
     font-weight: bold;
     font-size: 15px;
@@ -1096,6 +1097,7 @@ background: #e4e4e4;
     padding: 1px 0 0;
 }
 
+#func-nav ul li.active a,
 #func-nav ul li a:hover {
     color: #fff;
 }
@@ -1105,63 +1107,57 @@ background: #e4e4e4;
 }
 
 #func-nav ul li a.episode {
-    background: url(../images/icon_nav.png) no-repeat 0 0;
+    background-position: 0 0;
 }
 
 #func-nav ul li a.poi {
-    background: url(../images/icon_nav.png) no-repeat 0 -250px;
+    background-position: 0 -250px;
 }
 
 #func-nav ul li a.setting {
-    background: url(../images/icon_nav.png) no-repeat 0 -50px;
+    background-position: 0 -50px;
 }
 
 #func-nav ul li a.portal {
-    background: url(../images/icon_nav.png) no-repeat 0 -100px;
+    background-position: 0 -100px;
 }
 
 #func-nav ul li a.store {
-    background: url(../images/icon_nav.png) no-repeat 0 -150px;
+    background-position: 0 -150px;
 }
 
 #func-nav ul li a.brand {
-    background: url(../images/icon_nav.png) no-repeat 0 -200px;
+    background-position: 0 -200px;
 }
 
 #func-nav ul li.active a.episode,
 #func-nav ul li        a.episode:hover {
-    background: url(../images/icon_nav.png) no-repeat 0 -25px;
-    color: #fff;
+    background-position: 0 -25px;
 }
 
 #func-nav ul li.active a.setting,
 #func-nav ul li        a.setting:hover {
-    background: url(../images/icon_nav.png) no-repeat 0 -75px;
-    color: #fff;
+    background-position: 0 -75px;
 }
 
 #func-nav ul li.active a.poi,
 #func-nav ul li        a.poi:hover {
-    background: url(../images/icon_nav.png) no-repeat 0 -275px;
-    color: #fff;
+    background-position: 0 -275px;
 }
 
 #func-nav ul li.active a.portal,
 #func-nav ul li        a.portal:hover {
-    background: url(../images/icon_nav.png) no-repeat 0 -125px;
-    color: #fff;
+    background-position: 0 -125px;
 }
 
 #func-nav ul li.active a.store,
 #func-nav ul li        a.store:hover {
-    background: url(../images/icon_nav.png) no-repeat 0 -175px;
-    color: #fff;
+    background-position: 0 -175px;
 }
 
 #func-nav ul li.active a.brand,
 #func-nav ul li        a.brand:hover {
-    background: url(../images/icon_nav.png) no-repeat 0 -225px;
-    color: #fff;
+    background-position: 0 -225px;
 }
 
 #func-nav ul li.active a {

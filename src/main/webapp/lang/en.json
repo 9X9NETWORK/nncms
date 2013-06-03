@@ -59,7 +59,7 @@
             "Not right now, thanks!":                                                                                                           "Not right now, thanks!"
         },
         "facebook": {
-            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.":"You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.",
+            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.": "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.",
             "CMS Setup":                                                                                                                        "CMS Setup",
             "Connect to":                                                                                                                       "Connect to",
             "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.":                                     "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.",
@@ -320,6 +320,7 @@
             "Views":                                                                                                                            "Views",
             "Update:":                                                                                                                          "Update:",
             "Curate a new episode":                                                                                                             "Curate a new episode",
+            "Channel POI":                                                                                                                      "Channel POI",
             "Episode list":                                                                                                                     "Episode list",
             "Channel settings":                                                                                                                 "Channel settings",
             "Delete this channel":                                                                                                              "Delete this channel",
@@ -334,6 +335,7 @@
         },
         "func-nav": {
             "Episode list":                                                                                                                     "Episode list",
+            "Channel POI":                                                                                                                      "Channel POI",
             "Settings":                                                                                                                         "Settings"
         },
         "title-func": {
@@ -379,12 +381,76 @@
             "Save":                                                                                                                             "Save"
         }
     },
+    "channel-poi": {
+        "html-title": {
+            "9x9.tv - Channel POI":                                                                                                             "9x9.tv - Channel POI"
+        },
+        "func-nav": {
+            "Episode list":                                                                                                                     "Episode list",
+            "Channel POI":                                                                                                                      "Channel POI",
+            "Settings":                                                                                                                         "Settings"
+        },
+        "poi-event": {
+            "+ Create Channel POI & interactive event":                                                                                         "+ Create Channel POI & interactive event",
+            "Channel POI & interactive event list":                                                                                             "Channel POI & interactive event list",
+            "Create a channel interactive event and call to action message at a point of interaction.":                                         "Create a channel interactive event and call to action message at a point of interaction.",
+            "Please create an episode at least in the channel.":                                                                                "Please create an episode at least in the channel.",
+            "You cannot have more than one Channel POI & interactive event.":                                                                   "You cannot have more than one Channel POI & interactive event.",
+            "Create Channel POI & interactive event":                                                                                           "Create Channel POI & interactive event",
+            "Edit Channel POI & interactive event":                                                                                             "Edit Channel POI & interactive event",
+            "Create POI":                                                                                                                       "Create POI",
+            "Edit POI":                                                                                                                         "Edit POI",
+            "Required field":                                                                                                                   "Required field",
+            "Name":                                                                                                                             "Name",
+            "Tags":                                                                                                                             "Tags",
+            "Separate with commas":                                                                                                             "Separate with commas",
+            "Cancel":                                                                                                                           "Cancel",
+            "Next":                                                                                                                             "Next",
+            "Save":                                                                                                                             "Save",
+            "Please fill in all required fields.":                                                                                              "Please fill in all required fields.",
+            "Add interactive event":                                                                                                            "Add interactive event",
+            "Choose a type":                                                                                                                    "Choose a type",
+            "Coming Soon":                                                                                                                      "Coming Soon",
+            "Scheduled Notification":                                                                                                           "Scheduled Notification",
+            "Send a scheduled notification to user to get more information.":                                                                   "Send a scheduled notification to user to get more information.",
+            "Instant Notification":                                                                                                             "Instant Notification",
+            "Send an instant notification to user to get more information.":                                                                    "Send an instant notification to user to get more information.",
+            "POI":                                                                                                                              "POI",
+            "Interactive event : Scheduled Notification":                                                                                       "Interactive event : Scheduled Notification",
+            "Interactive event : Instant Notification":                                                                                         "Interactive event : Instant Notification",
+            "PREVIEW":                                                                                                                          "PREVIEW",
+            "There is no valid video to preview.":                                                                                              "There is no valid video to preview.",
+            "Display text":                                                                                                                     "Display text",
+            "Input display text":                                                                                                               "Input display text",
+            "Button text":                                                                                                                      "Button text",
+            "Input button text":                                                                                                                "Input button text",
+            "Mobile Notification and Time":                                                                                                     "Mobile Notification and Time",
+            "iOS":                                                                                                                              "iOS",
+            "iOS-button": {
+                "Cancel":                                                                                                                       "Cancel",
+                "OK":                                                                                                                           "OK"
+            },
+            "Android":                                                                                                                          "Android",
+            "Preview":                                                                                                                          "Preview",
+            "Notification":                                                                                                                     "Notification",
+            "Mobile notification message":                                                                                                      "Mobile notification message",
+            "Input Mobile notification message":                                                                                                "Input Mobile notification message",
+            "Recommend: less 34 bytes":                                                                                                         "Recommend: less 34 bytes",
+            "Mobile notification time":                                                                                                         "Mobile notification time",
+            "Add a mobile notification time to remind your viewers.":                                                                           "Add a mobile notification time to remind your viewers.",
+            "Hour":                                                                                                                             "Hour",
+            "Minute":                                                                                                                           "Minute",
+            "Mobile Notification Message":                                                                                                      "Mobile Notification Message",
+            "The mobile notification will instant send, when user pressed OK or Enter.":                                                        "The mobile notification will instant send, when user pressed OK or Enter."
+        }
+    },
     "episode-list": {
         "html-title": {
             "9x9.tv - Episode list":                                                                                                            "9x9.tv - Episode list"
         },
         "func-nav": {
             "Episode list":                                                                                                                     "Episode list",
+            "Channel POI":                                                                                                                      "Channel POI",
             "Settings":                                                                                                                         "Settings"
         },
         "title-func": {
