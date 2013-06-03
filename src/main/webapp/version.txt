@@ -1,3 +1,26 @@
+版本: 1105
+作者: chihwen
+日期: 2013年6月4日 上午 01:19:03
+訊息:
+重構 channel.js, episode.js, epcurate.js 以便通過 JSLint 檢查
+
+1. 重構 channel.js, episode.js, epcurate.js 以便通過 JSLint 檢查。
+2. 統一在 html 加入 lang 屬性，以便未來語系 :lang(zh) 樣式的應用。
+3. 微調 login.html 腳本及結構，以便通過 JSLint 檢查。
+4. 比照正式機，加入 favicon.ico 站台圖示。
+issue 6423
+----
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/epcurate-publish.html
+異動 : /fakeapi/episode-list.html
+已加入 : /fakeapi/favicon.ico
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/epcurate.js
+異動 : /fakeapi/javascripts/episode.js
+異動 : /fakeapi/login.html
+
 版本: 1104
 作者: chihwen
 日期: 2013年6月3日 下午 06:22:47

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="en">
+<html class="en" lang="en">
 <head>
 <meta charset="utf-8" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -12,10 +12,15 @@
 
 <script type="text/javascript">
 // <![CDATA[
+/*jslint browser: true, devel: true, sloppy: true */
+/*global $, nn, CMS_CONF */
+
 $(function () {
     $('#loginForm').submit(function () {
         var fm = this,
-            pattern = /^[\w\-]+(\.[\w\-]+)*@([\w\-]+\.)+[a-zA-Z]{2,7}$/;
+            pattern = /^[\w\-]+(\.[\w\-]+)*@([\w\-]+\.)+[a-zA-Z]{2,7}$/,
+            qrystring = '',
+            parameter = null;
         fm.email.value = $.trim(fm.email.value);
         fm.password.value = $.trim(fm.password.value);
         if ('' === fm.email.value) {
@@ -35,8 +40,8 @@ $(function () {
             return false;
         }
         $('.btn-submit').attr('disabled', 'disabled');
-        var qrystring = $(this).serialize(),
-            parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
+        qrystring = $(this).serialize();
+        parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
         nn.api('POST', CMS_CONF.API('/api/login'), parameter, function (user) {
             $('.btn-submit').removeAttr('disabled');
             if (!user || !user.id) {
@@ -55,10 +60,10 @@ $(function () {
 <form id="loginForm" name="loginForm" method="post" action="/api/login">
 <h1>9x9.tv Member Login</h1>
 <p>
-<label for="email">email: <input type="text" name="email" id="email" value="" /></label>
+<label for="email">Email: <input type="text" name="email" id="email" value="" /></label>
 </p>
 <p>
-<label for="password">password: <input type="password" name="password" id="password" value="" /></label>
+<label for="password">Password: <input type="password" name="password" id="password" value="" /></label>
 </p>
 <input type="submit" value="Login" class="btn-submit" />
 </form>
