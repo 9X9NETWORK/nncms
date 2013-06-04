@@ -203,7 +203,7 @@ function preloadChannelVideo() {
         youTubeUrlPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
         ytData = null,
         //isZoneLimited = null, // unused
-        isMobileLimited = null,
+        isSyndicateLimited = null,
         isEmbedLimited = null,
         isSyndicateAllow = null,
         isUnplayableVideo = null;
@@ -243,9 +243,9 @@ function preloadChannelVideo() {
                                     // The name and reasonCode attributes and the tag value provide insight into the reason why the video is not playable.
                                     ytData = youtubes.data;
                                     //isZoneLimited = (ytData.restrictions) ? true : false; // unused
-                                    isMobileLimited = ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false;
+                                    isSyndicateLimited = ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false;
                                     isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
-                                    isSyndicateAllow = (isMobileLimited && ytData.accessControl && ytData.accessControl.syndicate && 'allowed' === ytData.accessControl.syndicate) ? true : false;
+                                    isSyndicateAllow = (isSyndicateLimited && ytData.accessControl && ytData.accessControl.syndicate && 'allowed' === ytData.accessControl.syndicate) ? true : false;
                                     isUnplayableVideo = (ytData.status && !isSyndicateAllow) ? true : false;
                                 }
                                 if (ytData && !isEmbedLimited && !isUnplayableVideo) {
@@ -397,8 +397,10 @@ function goBackPoiList(isSaveMode) {
     $.unblockUI();
     // cache from event type video to preload video
     if ($('#preload-channel-video #youTubePlayerChrome').length === 0 && $('#youTubePlayerChrome').length > 0) {
+        $('#preload-channel-video').addClass('hide');
         $('#youTubePlayerChrome').appendTo($('#preload-channel-video'));
         $('body').addClass('has-load-video');
+        $('#youTubePlayerChrome').attr('width', 590).attr('height', 332);
     }
     $('#poi-event-overlay .wrap').html('');
     $('#poi-point-edit').html('');

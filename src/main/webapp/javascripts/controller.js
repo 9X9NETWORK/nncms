@@ -350,7 +350,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                         chName: channel.name,
                         epName: episode.name
                     }));
-                    // merge 9x9 api and youtube api (ytId, ytDuration, uploader, uploadDate, isZoneLimited, isMobileLimited, isEmbedLimited)
+                    // merge 9x9 api and youtube api (ytId, ytDuration, uploader, uploadDate, isZoneLimited, isSyndicateLimited, isEmbedLimited)
                     var normalPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
                         preloadImage = [],
                         programList = [],
@@ -363,7 +363,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                         endTitleCard = null,
                         isPrivateVideo = null,
                         isZoneLimited = null,
-                        isMobileLimited = null,
+                        isSyndicateLimited = null,
                         isEmbedLimited = null;
                     nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {
                         episodeId: $('#id').val()
@@ -448,13 +448,13 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                             ytData = youtubes.data;
                                             isPrivateVideo = false;
                                             isZoneLimited = (ytData.restrictions) ? true : false;
-                                            isMobileLimited = ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false;
+                                            isSyndicateLimited = ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false;
                                             isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
                                         } else {
                                             ytData = null;
                                             isPrivateVideo = (youtubes.error && youtubes.error.code && 403 == youtubes.error.code) ? true : false;
                                             isZoneLimited = null;
-                                            isMobileLimited = null;
+                                            isSyndicateLimited = null;
                                             isEmbedLimited = null;
                                         }
                                         if (ytData && false === isEmbedLimited) {
@@ -473,7 +473,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                                 uploadDate: ytData.uploaded,
                                                 isPrivateVideo: isPrivateVideo,
                                                 isZoneLimited: isZoneLimited,
-                                                isMobileLimited: isMobileLimited,
+                                                isSyndicateLimited: isSyndicateLimited,
                                                 isEmbedLimited: isEmbedLimited
                                             };
                                         } else {
@@ -487,7 +487,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                                 uploadDate: ((youtubes.error) ? (youtubes.error.code + 'T') : 'Non-embeddableT'),   // fake uploadDate (error code)
                                                 isPrivateVideo: isPrivateVideo,
                                                 isZoneLimited: isZoneLimited,
-                                                isMobileLimited: isMobileLimited,
+                                                isSyndicateLimited: isSyndicateLimited,
                                                 isEmbedLimited: isEmbedLimited
                                             };
                                         }

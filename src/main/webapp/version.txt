@@ -1,3 +1,28 @@
+版本: 1107
+作者: chihwen
+日期: 2013年6月4日 下午 04:08:56
+訊息:
+將 isMobileLimited 更名為 isSyndicateLimited 以避免誤解語意
+
+1. 將 isMobileLimited 更名為 isSyndicateLimited 以避免誤解語意。
+   syndicate 是代表是否可以把影片在非瀏覽器上 (例如手機或電視)，跟網站一起聯合發佈，指的不只是手機。
+2. 微調 channel-poi.js 避免從 event type 影音，快取回 preload DOM 時，誤漏出預載畫面。
+issue 6423
+----
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/javascripts/channel-poi.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/javascripts/curation.js
+
+版本: 1106
+作者: chihwen
+日期: 2013年6月4日 下午 12:21:31
+訊息:
+改良 Sub-ep POI 新增模式，比照 Channel POI 盡可能快取影音定格預覽
+issue 6367
+----
+異動 : /fakeapi/javascripts/curation.js
+
 版本: 1105
 作者: chihwen
 日期: 2013年6月4日 上午 01:19:03
