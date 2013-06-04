@@ -10,11 +10,9 @@
 </head>
 <body>
 
-<script type="text/javascript">
-// <![CDATA[
+<script>
 /*jslint browser: true, devel: true, sloppy: true */
 /*global $, nn, CMS_CONF */
-
 $(function () {
     $('#loginForm').submit(function () {
         var fm = this,
@@ -54,7 +52,6 @@ $(function () {
         return false;
     });
 });
-// ]]>
 </script>
 
 <form id="loginForm" name="loginForm" method="post" action="/api/login">

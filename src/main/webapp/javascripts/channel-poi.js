@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true, nomen: true, regexp: true, unparam: true, sloppy: true */
-/*global $, nn, CMS_CONF, showProcessingOverlay, showSavingOverlay, showUnsaveOverlay, showUnsavePoiOverlay, showUnsavePoiMask, showDeletePoiPromptOverlay, strip_tags, formatTimestamp */
+/*global $, nn, CMS_CONF, showProcessingOverlay, showSavingOverlay, showUnsaveOverlay, showUnsavePoiOverlay, showUnsavePoiMask, showDeletePoiPromptOverlay, formatTimestamp, strip_tags */
 
 function setFormHeight() {
     var windowHeight    = $(window).height(),

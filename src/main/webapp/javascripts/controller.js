@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true, eqeq: true, nomen: true, plusplus: true, regexp: true, unparam: true, sloppy: true, vars: true */
-/*global $, nn, CMS_CONF, FB, autoHeight, scrollbar, sumStoryboardInfo, rebuildVideoNumber, setFormWidth, setFormHeight, setVideoMeasure, setSpace, setEpisodeWidth, showProcessingOverlay, showSystemErrorOverlayAndHookError, formatTimestamp, switchPublishStatus, switchRerunCheckbox, truncateFormTitle, setTaglistWidth, uploadImage, ellipsisPage, preloadChannelVideo, brandSeting, storeManage, portalManage, portalSet, resetPassCheck */
+/*global $, nn, CMS_CONF, FB, scrollbar, autoHeight, showSystemErrorOverlayAndHookError, showProcessingOverlay, formatTimestamp, truncateFormTitle, setFormHeight, setTaglistWidth, ellipsisPage, uploadImage, setEpisodeWidth, preloadChannelVideo, setVideoMeasure, setSpace, sumStoryboardInfo, rebuildVideoNumber, setFormWidth, switchPublishStatus, switchRerunCheckbox, brandSeting, storeManage, portalManage, portalSet, resetPassCheck */
 
 function renderConnectFacebookUI() {
     $('#settingForm .connect-switch').removeClass('hide');

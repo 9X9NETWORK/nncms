@@ -1,3 +1,22 @@
+版本: 1109
+作者: chihwen
+日期: 2013年6月4日 下午 10:18:11
+訊息:
+微調 JSLint /*global*/ 全域變數設定順序
+
+1. 微調 JSLint /*global*/ 全域變數設定順序。
+   1. 按照外部函式庫, basic.js, controller.js, 各頁專屬腳本等順序作排列。
+   2. 各頁專屬腳本，則按照 channel, episode, channel-poi, curation, epcurate 等順序作排列。
+2. 微調 login.html 移除已過時的屬性及註解。
+issue 6423
+----
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/javascripts/channel-poi.js
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/javascripts/curation.js
+異動 : /fakeapi/login.html
+
 版本: 1107
 作者: chihwen
 日期: 2013年6月4日 下午 04:08:56

@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true, bitwise: true, nomen: true, regexp: true, unparam: true, sloppy: true */
-/*global $, nn, CMS_CONF, FB, scrollbar, setFormHeight, buildFacebookPagesMap, renderAutoShareUI, renderConnectFacebookUI, setupLanguagePage, setupLanguageAndRenderPage */
+/*global $, nn, CMS_CONF, FB, scrollbar, renderConnectFacebookUI, renderAutoShareUI, buildFacebookPagesMap, setupLanguageAndRenderPage, setupLanguagePage, setFormHeight */
 
 function autoWidth() {
     var contentNavWidth = 200,  // $('#content-nav')

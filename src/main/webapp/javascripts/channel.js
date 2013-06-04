@@ -1,5 +1,5 @@
 /*jslint browser: true, devel: true, nomen: true, unparam: true, sloppy: true */
-/*global $, nn, CMS_CONF, FB, SWFUpload, scrollbar, autoHeight, showProcessingOverlay, showSavingOverlay, showUnsaveOverlay, showDeletePromptOverlay, hideFbPageList, scrollToBottom, buildFacebookPagesMap, renderAutoShareUI, checkCriticalPerm */
+/*global $, nn, CMS_CONF, FB, SWFUpload, scrollbar, autoHeight, scrollToBottom, hideFbPageList, showProcessingOverlay, showSavingOverlay, showUnsaveOverlay, showDeletePromptOverlay, checkCriticalPerm, renderAutoShareUI, buildFacebookPagesMap */
 
 function chkData(fm) {
     fm.name.value = $.trim(fm.name.value);
