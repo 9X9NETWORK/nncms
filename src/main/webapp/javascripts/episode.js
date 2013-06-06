@@ -161,6 +161,14 @@ $(function () {
             $('#episode-list-tmpl-folder-up').tmpl(CMS_CONF.EPISODES_PAGING_INFO[folderID]).appendTo('#tmpEPL');
             $('#episode-list-tmpl-item').tmpl(CMS_CONF.EPISODES_PAGING[folderID]).appendTo('#tmpEPL');
             $('#episode-list-tmpl-folder-down').tmpl(CMS_CONF.EPISODES_PAGING_INFO[folderID]).appendTo('#tmpEPL');
+
+            // sharing url
+            $("#tmpEPL div.get-url").each(function(){
+                $(this).children().remove();
+                $(this).append( $("#tmpHtml").html() );
+                
+            });
+
             $('#tmpEPL .isItem').addClass('itemFolder_' + folderID);
             tmpOut = $('#tmpEPL').html();
             $('#tmpEPL').remove();

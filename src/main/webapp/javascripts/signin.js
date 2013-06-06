@@ -51,7 +51,6 @@ $(document).on("click", "#btn-new-password", function(event) {
 });
 
 function resetPassCheck() {
-    // signin.html?ac=resetpwd&e=marshsu%40gmail.com&pass=5f7cb242796d7f77653af165fae5bab1
     var tmpUrl = $.url(location.href.replace("@", "%40"));
     var inAction = tmpUrl.param("ac"), inEmail = tmpUrl.param("e"), inPass = tmpUrl.param("pass");
 

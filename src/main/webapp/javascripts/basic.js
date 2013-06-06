@@ -1,6 +1,63 @@
 /*jslint browser: true, devel: true, bitwise: true, nomen: true, regexp: true, unparam: true, sloppy: true */
 /*global $, nn, CMS_CONF, FB, scrollbar, renderConnectFacebookUI, renderAutoShareUI, buildFacebookPagesMap, setupLanguageAndRenderPage, setupLanguagePage, setFormHeight */
 
+/* Get URL */
+$(document).on("click", ".url", function(event) {
+    if (!$(this).hasClass("disable")) {
+        var obj_get_url = $(this).parents('li').find('.get-url');
+
+        $('.get-url').hide();
+        obj_get_url.find("input.srul-text").val(iniSharingList(obj_get_url));
+
+        $(this).parents('li').find('.tip').hide();
+        obj_get_url.fadeIn(400);
+    }
+});
+
+$(document).on("click", "html", function(event) {
+    $('.get-url').hide();
+});
+
+$(document).on("click", ".get-url, .url", function(event) {
+    event.stopPropagation();
+});
+
+/* Dropdown Gray */
+$(document).on("click", ".select-gray", function(event) {
+    event.stopPropagation();
+});
+
+$(document).on("click", ".select-gray .select-btn", function(event) {
+    $(this).parents('div').find('.select-dropdown').toggleClass('on');
+    $(this).toggleClass("on");
+});
+
+$(document).on("click", ".select-gray .select-dropdown li", function(event) {
+    var obj_get_url = $(this).parents('li').find('.get-url');
+    var urlText = $(this).parent('ul').parent("div").parent("div").parent("div").find('.srul-text');
+    $(this).parent('ul').parent("div").find('.select-txt-gray').text($(this).data('meta'));
+    $(this).parent('ul').find("li").removeClass("on");
+    $(this).addClass("on");
+    obj_get_url.find("input.srul-text").val(iniSharingList(obj_get_url));
+    $(this).parents('div').find('.select-dropdown').toggleClass('on');
+    $(this).parents('div').find('.select-btn').toggleClass('on');
+});
+
+$(document).on("click", "html, .get-url", function(event) {
+    $('.select-gray .select-dropdown, .select-gray .select-btn').removeClass("on");
+});
+
+function iniSharingList(inObj) {
+    var strCid = "", strEid = "", strBrand = "", strBaseURL = "http://www.9x9.tv/view?", strSurl = "";
+
+    strBrand = inObj.find(".select-txt-gray").text();
+    strCid = inObj.data("metach");
+    strEid = inObj.data("metaep");
+
+    strSurl = strBaseURL + ["brand=" + strBrand, "ch=" + strCid, "ep=e" + strEid].join("&");
+    return strSurl;
+}
+
 function autoWidth() {
     var contentNavWidth = 200,  // $('#content-nav')
         scrollbarWidth = 35;    // padding15 + slider5 + padding15

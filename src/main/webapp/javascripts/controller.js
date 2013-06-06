@@ -804,6 +804,21 @@ function listEpisode(pageId, id) {
                         autoHeight();
                         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
                         $('#overlay-s').fadeOut();
+
+                        // sharing url
+                        nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/validBrands', {
+                            channelId : id
+                        }), null, function(cBrands) {
+                            var surl_html = "", tmpBrand = [];
+                            tmpBrand =[{brand: cBrands[0].brand}] ;
+                            $("#get-url-part-tmpl").tmpl(cBrands,{li_sel:cBrands[0].brand}).appendTo("#tmpHtml2");
+                            $("#tmpHtml").html("");
+                            $("#get-url-tmpl").tmpl(tmpBrand,{li_items:$("#tmpHtml2").html()}).appendTo("#tmpHtml");
+                            $("div.get-url").each(function(){
+                                $(this).children().remove();
+                                $(this).append( $("#tmpHtml").html() );
+                            });
+                        }); 
                     });
                 }
             });
