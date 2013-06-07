@@ -315,6 +315,9 @@
             "Save order":                                                                                                                       "Save order"
         },
         "channel-list": {
+            "Get URL": "Get URL",
+            "Brand": "Brand",
+            "URL": "URL",
             "Episodes":                                                                                                                         "Episodes",
             "Followers":                                                                                                                        "Followers",
             "Views":                                                                                                                            "Views",

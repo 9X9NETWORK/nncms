@@ -90,6 +90,37 @@
 </div>
 <!--============================== content-wrap close ========================-->
 
+<script id="get-url-part-tmpl" type="text/x-jquery-tmpl">
+<li class="surl-li {{if $item.li_sel === brand}}on{{/if}}" data-meta="${brand}">${brand}</li>
+</script>
+
+<script id="get-url-tmpl" type="text/x-jquery-tmpl">
+    <div class="tip-white-l">
+        <div class="left"></div>
+        <div class="center">
+            <div class="title">${nn._([CMS_CONF.PAGE_ID, 'channel-list', "Brand"])}</div> 
+            <div class="select-gray" id="">
+                <div class="select-content-gray">
+                    <p class="select-btn"></p>
+                    <p class="select-txt-gray">${brand}</p>
+                    <ul class="select-dropdown">{{html $item.li_items}}</ul>
+                </div>
+            </div>
+            <div class="title">${nn._([CMS_CONF.PAGE_ID, 'channel-list', "URL"])}</div> 
+            <div class="input-gray">
+                <p class="left"></p>
+                <p class="center">
+                    <input id="" class="textfield srul-text" value="http://www.9x9.tv/view?brand=${brand}&ch=xxxx&ep=xxxx" onclick="this.select()" />
+                </p>
+                <p class="right"></p>
+            </div>       
+        </div>
+        <div class="right"></div>
+    </div>
+    <div class="tip-bottom"></div>
+</script>
+
+
 <script id="lightbox-create-channel-tmpl" type="text/x-jquery-tmpl">
 <div id="lightbox-create-channel" class="lightbox-content">
 <h3 class="index-collect-title">${nn._(['overlay', 'channel-tutorial', 'Collect and Curate!'])}</h3>
@@ -132,6 +163,33 @@
 </div>
 
 <div class="func-wrap">
+    <div id="get-url-${id}" class="get-url" data-metain="0" data-metaep="0" data-metach="${id}">
+        <div class="tip-white-l">
+            <div class="left"></div>
+            <div class="center">
+                <div class="title">Brand</div> 
+                <div class="select-gray" id="">
+                    <div class="select-content-gray">
+                        <p id="" class="select-btn"></p>
+                        <p id="" class="select-txt-gray">9x9</p>
+                        <ul id="" class="select-dropdown">                            <li class="on" data-meta="9x9.tv">9x9.tv</li>
+                            <li data-meta="CTS">CTS</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="title">URL</div> 
+                <div class="input-gray">
+                    <p class="left"></p>
+                    <p class="center"> 
+                        <input id="" class="textfield" value="http://www.9x9.tv/view?brand={msoId}&ch=xxxx&ep=xxxx" onclick="this.select()" />
+                    </p>
+                    <p class="right"></p>
+                </div>       
+            </div>
+            <div class="right"></div>
+        </div>
+        <div class="tip-bottom"></div>
+    </div>
 <p class="time">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Update:'])} ${formatTimestamp(updateDate)}</p>
 <div class="func-btns">
 {{if contentType == CMS_CONF.YOUR_FAVORITE}}
@@ -142,6 +200,7 @@
 <li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
 <li><a href="javascript:void(0);" class="setting disable">Setting</a></li>
 <li><a href="javascript:void(0);" class="del disable">Del</a></li>
+<li><a href="javascript:void(0);" class="url disable">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Get URL'])}</a></li>
 </ul>
 </div>
 {{else}}
@@ -152,6 +211,7 @@
 <li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
 <li><a href="channel-setting.html?id=${id}" class="setting">Setting<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Channel settings'])}</span></span></span></span></a></li>
 <li><a href="/api/users/${$item.userId}/channels/${id}" rel="${id}" class="del">Del<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Delete this channel'])}</span></span></span></span></a></li>
+<li><a href="javascript:void(0);" class="url{{if 1 > cntEpisode}} disable{{/if}}">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Get URL'])}<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Get URL'])}</span></span></span></span></a></li>
 </ul>
 </div>
 {{/if}}
@@ -299,5 +359,7 @@
 </div>
 </div>
 
+<div id="tmpHtml2" style="display: none"></div>
+<div id="tmpHtml" style="display: none"></div>
 </body>
 </html>

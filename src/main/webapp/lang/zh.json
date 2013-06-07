@@ -315,6 +315,9 @@
             "Save order":                                                                                                                       "儲存排序"
         },
         "channel-list": {
+            "Get URL": "網址",
+            "Brand": "品牌",
+            "URL": "網址",
             "Episodes":                                                                                                                         "節目",
             "Followers":                                                                                                                        "粉絲",
             "Views":                                                                                                                            "觀看次數",
