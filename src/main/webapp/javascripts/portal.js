@@ -1,10 +1,31 @@
 $(document).on("click", "#set-preview", function(event) {
-    //$("#portal-list").css({top:"200px"});
-    //scrollbar("#portal-constrain", "#portal-list", "#portal-slider");
-    console.log("#portal-constrain ** " + $("#portal-constrain").height());
-    console.log("#portal-list ** " + $("#portal-list").height());
-    console.log("#portal-slider ** " + $("#portal-slider").height());
-    //alert($("#portal-list").css("top"));
+
+    if ("javascript:void(0)" === $(this).attr("href")) {
+        var preUrl = $.url().attr('host') + "/tv#/streaming/" + CMS_CONF.USER_URL.param('id');
+        var msoId = CMS_CONF.MSO;
+        var thisA = $(this);
+
+        if (msoId === 1) {
+            preUrl = "http://" + preUrl;
+            thisA.attr("href", preUrl);
+        } else {
+            nn.api('PUT', CMS_CONF.API('/api/mso/{msoId}', {
+                msoId : msoId
+            }), null, function(mso) {
+                var tmpMsoName = mso.name + ".";
+                if (preUrl.indexOf("www.") === 0) {
+                    preUrl.replace("www.", tmpMsoName);
+                } else {
+                    preUrl = tmpMsoName + preUrl;
+                }
+                preUrl = "http://" + preUrl;
+                thisA.attr("href", preUrl);
+                
+            });
+            return false;
+            //setTimeout(function(){alert("tt")}, 500);
+        }
+    }
 });
 
 $(document).on("click", "#set-save", function(event) {
@@ -884,4 +905,7 @@ $(function() {
 
 
     window.onbeforeunload = confirmExit;
+    
+    setTimeout(function(){$("#set-preview").click();}, 3000);
+    
 });

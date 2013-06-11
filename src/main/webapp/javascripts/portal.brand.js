@@ -108,7 +108,7 @@ function uploadImage() {
     var parameter = {
         'prefix' : 'pcs',
         'type' : 'image',
-        'size' : 20485760,
+        'size' : 500,
         'acl' : 'public-read'
     };
     nn.api('GET', CMS_CONF.API('/api/s3/attributes'), parameter, function(s3attr) {
