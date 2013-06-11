@@ -1,609 +1,365 @@
 <!DOCTYPE html>
 <html class="en" lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="cache-control" content="no-cache" />
-	<meta http-equiv="pragma" content="no-cache" />
-	<meta http-equiv="expires" content="0" />
-	<link rel="stylesheet" href="stylesheets/style.css?v=1026" />
-	<link rel="stylesheet" href="stylesheets/lightbox.css?v=1026" />
-	<link rel="stylesheet" href="stylesheets/channel.css?v=1026" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-	<script src="javascripts/nn-sdk.js?v=1026"></script>
-	<script src="javascripts/jquery.mousewheel.min.js?v=1026"></script>
-	<script src="javascripts/jquery.ellipsis.js?v=1026"></script>
-	<script src="javascripts/jquery.blockUI.js?v=1026"></script>
-	<script src="javascripts/jquery.toggleval.min.js?v=1026"></script>
-	<script src="javascripts/jquery.charcounter.min.js?v=1026"></script>
-	<script src="javascripts/jquery.tmpl.min.js?v=1026"></script>
-	<script src="javascripts/jquery.cookie.js?v=1026"></script>
-	<script src="javascripts/json2.js?v=1026"></script>
-	<script src="javascripts/purl.js?v=1026"></script>
-	<script src="javascripts/vertical.slider.js?v=1026"></script>
-	<script src="javascripts/config.js?v=1026"></script>
-	<script src="javascripts/controller.js?v=1026"></script>
-	<script src="javascripts/basic.js?v=1026"></script>
-	<script src="javascripts/channel.js?v=1026"></script>
-	<title>9x9.tv - My Channels</title>
+<meta charset="utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<link rel="stylesheet" href="stylesheets/style.css?v=1026" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=1026" />
+<link rel="stylesheet" href="stylesheets/channel.css?v=1026" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
+<script src="javascripts/nn-sdk.js?v=1026"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=1026"></script>
+<script src="javascripts/jquery.ellipsis.js?v=1026"></script>
+<script src="javascripts/jquery.blockUI.js?v=1026"></script>
+<script src="javascripts/jquery.toggleval.min.js?v=1026"></script>
+<script src="javascripts/jquery.charcounter.min.js?v=1026"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=1026"></script>
+<script src="javascripts/jquery.cookie.js?v=1026"></script>
+<script src="javascripts/json2.js?v=1026"></script>
+<script src="javascripts/purl.js?v=1026"></script>
+<script src="javascripts/vertical.slider.js?v=1026"></script>
+<script src="javascripts/config.js?v=1026"></script>
+<script src="javascripts/controller.js?v=1026"></script>
+<script src="javascripts/basic.js?v=1026"></script>
+<script src="javascripts/channel.js?v=1026"></script>
+<title>9x9.tv - My Channels</title>
 </head>
 <body>
-	<div id="fb-root"></div>
-	<!-- template = #lightbox-create-channel-tmpl -->
+<div id="fb-root"></div>
+<!-- template = #lightbox-create-channel-tmpl -->
 
-	<!--============================== header start ==============================-->
-	<div id="header">
-		<a href="../" target="_blank" id="logo"></a>
-		<ul id="nav">
-			<li id="home">
-				<span>
-					<a href="../" target="_blank">9x9.tv Official Web</a>
-				</span>
-			</li>
-			<li id="tv">
-				<span>
-					<a href="../tv" target="_blank">Watch 9x9.tv on the Web</a>
-				</span>
-			</li>
-			<li id="profile">
-				<p id="btn-profile"></p>
-				<p id="selected-profile">Guest</p>
-				<ul id="profile-dropdown" class="dropdown">
-					<li>
-						<a id="profile-logout" href="signin.html">Log out</a>
-					</li>
-				</ul>
-			</li>
-		</ul>
-	</div>
-	<!--============================== header close ==============================-->
+<!--============================== header start ==============================-->
+<div id="header">
+  <a href="../" target="_blank" id="logo"></a>
+  <ul id="nav">
+    <li id="home"><span><a href="../" target="_blank">9x9.tv Official Web</a></span></li>
+    <li id="tv"><span><a href="../tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
+    <li id="profile">
+      <p id="btn-profile"></p>
+      <p id="selected-profile">Guest</p>
+      <ul id="profile-dropdown" class="dropdown">
+        <li><a id="profile-logout" href="signin.html">Log out</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!--============================== header close ==============================-->
 
-	<div id="studio-nav">
-		<div class="studio-nav-wrap">
-			<h3>
-				<a href="index.html">CMS</a>
-			</h3>
-			<ul>
-				<li class="on">
-					<span>
-						<a href="index.html">My Channels</a>
-					</span>
-				</li>
-				<li id="my-portal" class="hide">
-					<span>
-						<a href="portal-set.html">My Portal</a>
-					</span>
-				</li>
-			</ul>
-			<div class="studio-setup">
-				<p class="btn-left">
-					<span class="btn-right">
-						<span class="btn-middle">
-							<a href="#">
-								<img src="images/icon_studio_setup.png" alt="" />
-								CMS Setup
-							</a>
-						</span>
-					</span>
-				</p>
-				<div class="reconnect-notice hide">
-					<img src="images/icon_notification.png" alt="" />
-					<p class="notice-left">
-						<span class="notice-right">
-							<span class="notice-middle langkey">Connection is inactive, click to restart it.</span>
-						</span>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="studio-nav">
+<div class="studio-nav-wrap">
+<h3><a href="index.html">CMS</a></h3>
+<ul>
+<li class="on"><span><a href="index.html">My Channels</a></span></li>
+<li id="my-portal" class="hide"><span><a href="portal-set.html">My Portal</a></span></li>
+</ul>
+<div class="studio-setup">
+<p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="#"><img src="images/icon_studio_setup.png" alt="" />CMS Setup</a></span></span></p>
+<div class="reconnect-notice hide">
+<img src="images/icon_notification.png" alt="" />
+<p class="notice-left"><span class="notice-right"><span class="notice-middle langkey">Connection is inactive, click to restart it.</span></span></p>
+</div>
+</div>
+</div>
+</div>
 
-	<!--============================== content-wrap start ========================-->
-	<div id="content-wrap">
-		<div id="content-nav">
-			<div id="func-nav">
-				<ul>
-					<li class="btns">
-						<span>
-							<a href="channel-add.html">Create a new channel</a>
-						</span>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div id="main-wrap-slider" class="slider-wrap">
-			<div class="slider-vertical"></div>
-		</div>
-		<div id="content-main">
-			<div id="title-func" class="clearfix">
-				<!-- template = #title-func-tmpl -->
-			</div>
-			<div id="content-main-wrap">
-				<div class="constrain">
-					<ul id="channel-list">
-						<!-- template = #channel-list-tmpl-item -->
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--============================== content-wrap close ========================-->
+<!--============================== content-wrap start ========================-->
+<div id="content-wrap">
+<div id="content-nav">
+<div id="func-nav">
+<ul>
+<li class="btns"><span><a href="channel-add.html">Create a new channel</a></span></li>
+</ul>
+</div>
+</div>
+<div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
+<div id="content-main">
+<div id="title-func" class="clearfix">
+<!-- template = #title-func-tmpl -->
+</div>
+<div id="content-main-wrap">
+<div class="constrain">
+<ul id="channel-list">
+<!-- template = #channel-list-tmpl-item -->
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!--============================== content-wrap close ========================-->
 
-	<script id="get-url-part-tmpl" type="text/x-jquery-tmpl">
-		<li class="surl-li {{if $item.li_sel === brand}}on{{/if}}" data-meta="${brand}">${brand}</li>
-	</script>
+<script id="get-url-part-tmpl" type="text/x-jquery-tmpl">
+<li class="surl-li {{if $item.li_sel === brand}}on{{/if}}" data-meta="${brand}">${brand}</li>
+</script>
 
-	<script id="get-url-tmpl" type="text/x-jquery-tmpl">
-		<div class="tip-white-l">
-			<div class="left"></div>
-			<div class="center">
-				<div class="title">${nn._([CMS_CONF.PAGE_ID, 'channel-list', "Brand"])}</div>
-				<div class="select-gray" id="">
-					<div class="select-content-gray">
-						<p class="select-btn"></p>
-						<p class="select-txt-gray">${brand}</p>
-						<ul class="select-dropdown">{{html $item.li_items}}</ul>
-					</div>
-				</div>
-				<div class="title">${nn._([CMS_CONF.PAGE_ID, 'channel-list', "URL"])}</div>
-				<div class="input-gray">
-					<p class="left"></p>
-					<p class="center">
-						<input id="" class="textfield srul-text" value="http://www.9x9.tv/view?brand=${brand}&ch=xxxx&ep=xxxx" onclick="this.select()" />			
-					</p>
-					<p class="right"></p>
-				</div>
-			</div>
-			<div class="right"></div>
-		</div>
-		<div class="tip-bottom"></div>
-	</script>
+<script id="get-url-tmpl" type="text/x-jquery-tmpl">
+    <div class="tip-white-l">
+        <div class="left"></div>
+        <div class="center">
+            <div class="title">${nn._([CMS_CONF.PAGE_ID, 'channel-list', "Brand"])}</div> 
+            <div class="select-gray" id="">
+                <div class="select-content-gray">
+                    <p class="select-btn"></p>
+                    <p class="select-txt-gray">${brand}</p>
+                    <ul class="select-dropdown">{{html $item.li_items}}</ul>
+                </div>
+            </div>
+            <div class="title">${nn._([CMS_CONF.PAGE_ID, 'channel-list', "URL"])}</div> 
+            <div class="input-gray">
+                <p class="left"></p>
+                <p class="center">
+                    <input id="" class="textfield srul-text" value="http://www.9x9.tv/view?brand=${brand}&ch=xxxx&ep=xxxx" onclick="this.select()" />
+                </p>
+                <p class="right"></p>
+            </div>       
+        </div>
+        <div class="right"></div>
+    </div>
+    <div class="tip-bottom"></div>
+</script>
 
-	<script id="lightbox-create-channel-tmpl" type="text/x-jquery-tmpl">
-		<div id="lightbox-create-channel" class="lightbox-content">
-			<h3 class="index-collect-title">
-				${nn._(['overlay', 'channel-tutorial', 'Collect and Curate!'])}
-			</h3>
-			<p class="desc">
-				${nn._(['overlay', 'channel-tutorial', 'CMS is the management center for your 9x9.tv list-form channels!'])}
-			</p>
-			<p class="create">
-				<a href="channel-add.html">
-					create
-					<img src="images/icon_add.png" alt="" />			
-					<span>
-						{{html nn._(['overlay', 'channel-tutorial', 'Create a
-						<br />			
-						new channel'])}}
-					</span>
-				</a>
-			</p>
-			<p class="btns unblock">
-				<span>
-					<a href="index.html">
-						${nn._(['overlay', 'channel-tutorial', 'Not right now, thanks!'])}
-					</a>
-				</span>
-			</p>
-		</div>
-	</script>
 
-	<script id="title-func-tmpl" type="text/x-jquery-tmpl">
-		<h2>
-			${nn._([CMS_CONF.PAGE_ID, 'title-func', 'My Channels'])} (
-			<span id="channel-counter">${$item.cntChannel}</span>
-			)
-		</h2>
-		<p class="order btns">
-			<span>
-				<a href="javascript:void(0);" class="reorder">
-					${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Reorder channels'])}
-				</a>
-			</span>
-		</p>
-	</script>
+<script id="lightbox-create-channel-tmpl" type="text/x-jquery-tmpl">
+<div id="lightbox-create-channel" class="lightbox-content">
+<h3 class="index-collect-title">${nn._(['overlay', 'channel-tutorial', 'Collect and Curate!'])}</h3>
+<p class="desc">${nn._(['overlay', 'channel-tutorial', 'CMS is the management center for your 9x9.tv list-form channels!'])}</p>
+<p class="create">
+<a href="channel-add.html">create
+<img src="images/icon_add.png" alt="" />
+<span>{{html nn._(['overlay', 'channel-tutorial', 'Create a<br />new channel'])}}</span>
+</a>
+</p>
+<p class="btns unblock"><span><a href="index.html">${nn._(['overlay', 'channel-tutorial', 'Not right now, thanks!'])}</a></span></p>
+</div>
+</script>
 
-	<script id="channel-list-tmpl-item" type="text/x-jquery-tmpl">
-		<li class="clearfix" data-meta="${id}">
-			<div class="container">
-				<div class="container-right">
-					<div class="container-bottom">
-						<div class="container-left">
-							<div class="wrap">
-								<div class="photo-list">
-									<a href="/view?ch=${id}" target="_blank">
-										<img src="images/icon_playlist.png" alt="" class="watermark" />			
-										<img src="${moreImageUrl_1}" alt="" width="32" height="32" class="ch" />			
-										<img src="${moreImageUrl_2}" alt="" width="192" height="108" class="ep" />			
-									</a>
-								</div>
+<script id="title-func-tmpl" type="text/x-jquery-tmpl">
+<h2>${nn._([CMS_CONF.PAGE_ID, 'title-func', 'My Channels'])} (<span id="channel-counter">${$item.cntChannel}</span>)</h2>
+<p class="order btns"><span><a href="javascript:void(0);" class="reorder">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Reorder channels'])}</a></span></p>
+</script>
 
-								<div class="info">
-									<h3 data-meta="${name}">
-										<a href="episode-list.html?id=${id}">${name}</a>
-									</h3>
-									<p>
-										<span>${cntEpisode}</span>
-										${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episodes'])}
-									</p>
-									<p>
-										<span>${cntSubscribe}</span>
-										${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Followers'])}
-									</p>
-									<p>
-										<span>${cntView}</span>
-										${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Views'])}
-									</p>
-								</div>
+<script id="channel-list-tmpl-item" type="text/x-jquery-tmpl">
+<li class="clearfix" data-meta="${id}">
+<div class="container">
+<div class="container-right">
+<div class="container-bottom">
+<div class="container-left">
+<div class="wrap">
+<div class="photo-list">
+<a href="/view?ch=${id}" target="_blank">
+<img src="images/icon_playlist.png" alt="" class="watermark" />
+<img src="${moreImageUrl_1}" alt="" width="32" height="32" class="ch" />
+<img src="${moreImageUrl_2}" alt="" width="192" height="108" class="ep" />
+</a>
+</div>
 
-								<div class="func-wrap">
-									<div id="get-url-${id}" class="get-url" data-metain="0" data-metaep="0" data-metach="${id}">
-										<div class="tip-white-l">
-											<div class="left"></div>
-											<div class="center">
-												<div class="title">Brand</div>
-												<div class="select-gray" id="">
-													<div class="select-content-gray">
-														<p id="" class="select-btn"></p>
-														<p id="" class="select-txt-gray">9x9</p>
-														<ul id="" class="select-dropdown">
-															<li class="on" data-meta="9x9.tv">9x9.tv</li>
-															<li data-meta="CTS">CTS</li>
-														</ul>
-													</div>
-												</div>
-												<div class="title">URL</div>
-												<div class="input-gray">
-													<p class="left"></p>
-													<p class="center">
-														<input id="" class="textfield" value="http://www.9x9.tv/view?brand={msoId}&ch=xxxx&ep=xxxx" onclick="this.select()" />			
-													</p>
-													<p class="right"></p>
-												</div>
-											</div>
-											<div class="right"></div>
-										</div>
-										<div class="tip-bottom"></div>
-									</div>
-									<p class="time">
-										${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Update:'])} ${formatTimestamp(updateDate)}
-									</p>
-									<div class="func-btns">
-										{{if contentType == CMS_CONF.YOUR_FAVORITE}}
-										<div class="btn-wrap disable">
-											<ul>
-												<li>
-													<a href="javascript:void(0);" class="add disable">Add</a>
-												</li>
-												<li>
-													<a href="javascript:void(0);" class="channel-poi disable">Channel POI</a>
-												</li>
-												<li>
-													<a href="episode-list.html?id=${id}" class="detail">
-														Detail
-														<span class="tip">
-															<img src="images/bg_tip_bottom.png" alt="" />			
-															<span class="tip-left">
-																<span class="tip-right">
-																	<span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episode list'])}</span>
-																</span>
-															</span>
-														</span>
-													</a>
-												</li>
-												<li>
-													<a href="javascript:void(0);" class="setting disable">Setting</a>
-												</li>
-												<li>
-													<a href="javascript:void(0);" class="del disable">Del</a>
-												</li>
-												<li>
-													<a href="javascript:void(0);" class="url disable">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Get URL'])}</a>
-												</li>
-											</ul>
-										</div>
-										{{else}}
-										<div class="btn-wrap enable">
-											<ul>
-												<li>
-													<a href="epcurate-curation.html?cid=${id}" class="add">
-														Add
-														<span class="tip">
-															<img src="images/bg_tip_bottom.png" alt="" />			
-															<span class="tip-left">
-																<span class="tip-right">
-																	<span class="tip-middle">
-																		${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Curate a new episode'])}
-																	</span>
-																</span>
-															</span>
-														</span>
-													</a>
-												</li>
-												<li>
-													<a href="channel-poi.html?id=${id}" class="channel-poi">
-														Channel POI
-														<span class="tip">
-															<img src="images/bg_tip_bottom.png" alt="" />			
-															<span class="tip-left">
-																<span class="tip-right">
-																	<span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Channel POI'])}</span>
-																</span>
-															</span>
-														</span>
-													</a>
-												</li>
-												<li>
-													<a href="episode-list.html?id=${id}" class="detail">
-														Detail
-														<span class="tip">
-															<img src="images/bg_tip_bottom.png" alt="" />			
-															<span class="tip-left">
-																<span class="tip-right">
-																	<span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episode list'])}</span>
-																</span>
-															</span>
-														</span>
-													</a>
-												</li>
-												<li>
-													<a href="channel-setting.html?id=${id}" class="setting">
-														Setting
-														<span class="tip">
-															<img src="images/bg_tip_bottom.png" alt="" />			
-															<span class="tip-left">
-																<span class="tip-right">
-																	<span class="tip-middle">
-																		${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Channel settings'])}
-																	</span>
-																</span>
-															</span>
-														</span>
-													</a>
-												</li>
-												<li>
-													<a href="/api/users/${$item.userId}/channels/${id}" rel="${id}" class="del">
-														Del
-														<span class="tip">
-															<img src="images/bg_tip_bottom.png" alt="" />			
-															<span class="tip-left">
-																<span class="tip-right">
-																	<span class="tip-middle">
-																		${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Delete this channel'])}
-																	</span>
-																</span>
-															</span>
-														</span>
-													</a>
-												</li>
-												<li>
-													<a href="javascript:void(0);" class="url{{if 1 >
-														cntEpisode}} disable{{/if}}">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Get URL'])}
-														<span class="tip">
-															<img src="images/bg_tip_bottom.png" alt="" />			
-															<span class="tip-left">
-																<span class="tip-right">
-																	<span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Get URL'])}</span>
-																</span>
-															</span>
-														</span>
-													</a>
-												</li>
-											</ul>
-										</div>
-										{{/if}}
-									</div>
-								</div>
-							</div>
-							<p class="drag">
-								<span>move</span>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</li>
-	</script>
+<div class="info">
+<h3 data-meta="${name}"><a href="episode-list.html?id=${id}">${name}</a></h3>
+<p><span>${cntEpisode}</span>${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episodes'])}</p>
+<p><span>${cntSubscribe}</span>${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Followers'])}</p>
+<p><span>${cntView}</span>${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Views'])}</p>
+</div>
 
-	<!--============================== footer start ==============================-->
-	<p id="footer-control"></p>
-	<div id="footer">
-		<span>© 2013 9x9.tv. All rights reserved.</span>
-		<ul id="footer-list">
-			<li id="language-change">
-				<p class="select-txt">
-					<a href="javascript:void(0);" id="language">English</a>
-				</p>
-				<p class="select-btn"></p>
-				<ul class="select-list">
-					<li class="on">
-						<a href="javascript:void(0);" id="language-en" data-meta="en">English</a>
-					</li>
-					<li>
-						<a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a>
-					</li>
-				</ul>
-			</li>
-		</ul>
-	</div>
-	<!--============================== footer close ==============================-->
+<div class="func-wrap">
+    <div id="get-url-${id}" class="get-url" data-metain="0" data-metaep="0" data-metach="${id}">
+        <div class="tip-white-l">
+            <div class="left"></div>
+            <div class="center">
+                <div class="title">Brand</div> 
+                <div class="select-gray" id="">
+                    <div class="select-content-gray">
+                        <p id="" class="select-btn"></p>
+                        <p id="" class="select-txt-gray">9x9</p>
+                        <ul id="" class="select-dropdown">                            <li class="on" data-meta="9x9.tv">9x9.tv</li>
+                            <li data-meta="CTS">CTS</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="title">URL</div> 
+                <div class="input-gray">
+                    <p class="left"></p>
+                    <p class="center"> 
+                        <input id="" class="textfield" value="http://www.9x9.tv/view?brand={msoId}&ch=xxxx&ep=xxxx" onclick="this.select()" />
+                    </p>
+                    <p class="right"></p>
+                </div>       
+            </div>
+            <div class="right"></div>
+        </div>
+        <div class="tip-bottom"></div>
+    </div>
+<p class="time">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Update:'])} ${formatTimestamp(updateDate)}</p>
+<div class="func-btns">
+{{if contentType == CMS_CONF.YOUR_FAVORITE}}
+<div class="btn-wrap disable">
+<ul>
+<li><a href="javascript:void(0);" class="add disable">Add</a></li>
+<li><a href="javascript:void(0);" class="channel-poi disable">Channel POI</a></li>
+<li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
+<li><a href="javascript:void(0);" class="setting disable">Setting</a></li>
+<li><a href="javascript:void(0);" class="del disable">Del</a></li>
+<li><a href="javascript:void(0);" class="url disable">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Get URL'])}</a></li>
+</ul>
+</div>
+{{else}}
+<div class="btn-wrap enable">
+<ul>
+<li><a href="epcurate-curation.html?cid=${id}" class="add">Add<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Curate a new episode'])}</span></span></span></span></a></li>
+<li><a href="channel-poi.html?id=${id}" class="channel-poi">Channel POI<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Channel POI'])}</span></span></span></span></a></li>
+<li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
+<li><a href="channel-setting.html?id=${id}" class="setting">Setting<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Channel settings'])}</span></span></span></span></a></li>
+<li><a href="/api/users/${$item.userId}/channels/${id}" rel="${id}" class="del">Del<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Delete this channel'])}</span></span></span></span></a></li>
+<li><a href="javascript:void(0);" class="url{{if 1 > cntEpisode}} disable{{/if}}">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Get URL'])}<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'channel-list', 'Get URL'])}</span></span></span></span></a></li>
+</ul>
+</div>
+{{/if}}
+</div>
+</div>
+</div>
+<p class="drag"><span>move</span></p>
+</div>
+</div>
+</div>
+</div>
+</li>
+</script>
 
-	<div id="overlay-s">
-		<p class="overlay-content">
-			<span class="overlay-right">
-				<span class="overlay-middle">
-					<img src="images/icon_load_l.gif" alt="" />
-					Saving...
-				</span>
-			</span>
-		</p>
-	</div>
+<!--============================== footer start ==============================-->
+<p id="footer-control"></p>
+<div id="footer">
+  <span>© 2013 9x9.tv. All rights reserved.</span>
+  <ul id="footer-list">
+    <li id="language-change">
+      <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
+      <p class="select-btn"></p>
+      <ul class="select-list">
+        <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!--============================== footer close ==============================-->
 
-	<div id="system-error" class="lightbox-content overlay-l">
-		<div class="overlay-container">
-			<div class="overlay-wrap">
-				<a href="#" class="btn-close">Close</a>
-				<p class="content">You are not authorized to edit this channel.</p>
-				<div class="overlay-btn">
-					<p class="btns btn-ok">
-						<span>
-							<a href="#">OK</a>
-						</span>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="overlay-s">
+<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span></span></p>
+</div>
 
-	<div id="delete-prompt" class="lightbox-content overlay-l">
-		<div class="overlay-container">
-			<div class="overlay-wrap">
-				<a href="#" class="btn-close">Close</a>
-				<p class="content">
-					Are you sure you want to delete this channel? All data will be removed permanently.
-				</p>
-				<div class="overlay-btn">
-					<p class="btns btn-no">
-						<span>
-							<a href="#">No</a>
-						</span>
-					</p>
-					<p class="btns btn-del">
-						<span>
-							<a href="#">Yes</a>
-						</span>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="system-error" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">You are not authorized to edit this channel.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
 
-	<div id="unsave-prompt" class="lightbox-content overlay-l">
-		<div class="overlay-container">
-			<div class="overlay-wrap">
-				<a href="#" class="btn-close">Close</a>
-				<p class="content">
-					Unsaved changes will be lost, are you sure you want to leave?
-				</p>
-				<div class="overlay-btn">
-					<p class="btns btn-no">
-						<span>
-							<a href="#">No</a>
-						</span>
-					</p>
-					<p class="btns btn-leave">
-						<span>
-							<a href="#">Yes</a>
-						</span>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="delete-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Are you sure you want to delete this channel? All data will be removed permanently.</p>
+<div class="overlay-btn">
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+<p class="btns btn-del"><span><a href="#">Yes</a></span></p>
+</div>
+</div>
+</div>
+</div>
 
-	<div id="fb-connect" class="lightbox-content overlay-l setup-notice">
-		<div class="overlay-container">
-			<div class="overlay-wrap fb-connect">
-				<a href="#" class="btn-close">Close</a>
-				<h4 class="cms-setup">CMS Setup</h4>
-				<p class="fb-connect">
-					<span class="content">Connect to</span>
-					<img src="images/icon_fb.png" alt="facebook" class="icon" />
-					<a href="#" class="switch-on hide">ON</a>
-					<a href="#" class="switch-off">OFF</a>
-				</p>
-				<p class="content">
-					After connecting, you can enable Facebook auto sharing for each channel in Channel settings.
-				</p>
-			</div>
-		</div>
-	</div>
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+<div class="overlay-btn">
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+<p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
+</div>
+</div>
+</div>
+</div>
 
-	<div id="restart-connect" class="lightbox-content overlay-l setup-notice">
-		<div class="overlay-container">
-			<div class="overlay-wrap restart-connect">
-				<a href="#" class="btn-close">Close</a>
-				<h4 class="cms-setup">CMS Setup</h4>
-				<div class="reconnect-func">
-					<span class="content">Connect to</span>
-					<img src="images/icon_fb.png" alt="facebook" class="icon" />
-					<p class="btns btn-reconnect">
-						<span class="btn-right">
-							<a href="#">Restart connection</a>
-						</span>
-					</p>
-				</div>
-				<p class="content">
-					After connecting, you can enable Facebook auto sharing for each channel in Channel settings.
-				</p>
-				<p class="content notice">
-					Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.
-				</p>
-			</div>
-		</div>
-	</div>
+<div id="fb-connect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap fb-connect">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">CMS Setup</h4>
+<p class="fb-connect">
+<span class="content">Connect to</span>
+<img src="images/icon_fb.png" alt="facebook" class="icon" />
+<a href="#" class="switch-on hide">ON</a>
+<a href="#" class="switch-off">OFF</a>
+</p>
+<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
+</div>
+</div>
+</div>
 
-	<div id="fb-connect-failed" class="lightbox-content overlay-l setup-notice">
-		<div class="overlay-container">
-			<div class="overlay-wrap connect-fail">
-				<a href="#" class="btn-close">Close</a>
-				<h4 class="cms-setup">CMS Setup</h4>
-				<h5>Can not connect to Facebook correctly!</h5>
-				<p class="content">Please try again and make sure you agree on all permissions.</p>
-				<div class="overlay-btn">
-					<p class="btns btn-failed-ok">
-						<span>
-							<a href="#">OK</a>
-						</span>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="restart-connect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap restart-connect">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">CMS Setup</h4>
+<div class="reconnect-func">
+<span class="content">Connect to</span>
+<img src="images/icon_fb.png" alt="facebook" class="icon" />
+<p class="btns btn-reconnect"><span class="btn-right"><a href="#">Restart connection</a></span></p>
+</div>
+<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
+<p class="content notice">Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.</p>
+</div>
+</div>
+</div>
 
-	<div id="disconnect-notice" class="lightbox-content overlay-l setup-notice">
-		<div class="overlay-container">
-			<div class="overlay-wrap disconnect-notice">
-				<a href="#" class="btn-close">Close</a>
-				<h4 class="cms-setup">CMS Setup</h4>
-				<h5>Account disconnected!</h5>
-				<p class="content">{If you want to enable auto sharing again, please:}</p>
-				<div class="overlay-btn">
-					<p class="btns btn-ok">
-						<span>
-							<a href="#">OK</a>
-						</span>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="fb-connect-failed" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap connect-fail">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">CMS Setup</h4>
+<h5>Can not connect to Facebook correctly!</h5>
+<p class="content">Please try again and make sure you agree on all permissions.</p>
+<div class="overlay-btn">
+<p class="btns btn-failed-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
 
-	<div id="confirm-disconnect" class="lightbox-content overlay-l setup-notice">
-		<div class="overlay-container">
-			<div class="overlay-wrap disconnect">
-				<a href="#" class="btn-close">Close</a>
-				<h4 class="cms-setup">CMS Setup</h4>
-				<p class="content">
-					Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?
-				</p>
-				<div class="overlay-btn">
-					<p class="btns btn-no">
-						<span>
-							<a href="#">No</a>
-						</span>
-					</p>
-					<p class="btns btn-disconnect">
-						<span>
-							<a href="#">Disconnect</a>
-						</span>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="disconnect-notice" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap disconnect-notice">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">CMS Setup</h4>
+<h5>Account disconnected!</h5>
+<p class="content">{If you want to enable auto sharing again, please:}</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
 
-	<div id="tmpHtml2" style="display: none"></div>
-	<div id="tmpHtml" style="display: none"></div>
+<div id="confirm-disconnect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap disconnect">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">CMS Setup</h4>
+<p class="content">Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?</p>
+<div class="overlay-btn">
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+<p class="btns btn-disconnect"><span><a href="#">Disconnect</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="tmpHtml2" style="display: none"></div>
+<div id="tmpHtml" style="display: none"></div>
 </body>
 </html>
