@@ -108,7 +108,7 @@ function uploadImage() {
     var parameter = {
         'prefix' : 'pcs',
         'type' : 'image',
-        'size' : 500,
+        'size' : 512000,
         'acl' : 'public-read'
     };
     nn.api('GET', CMS_CONF.API('/api/s3/attributes'), parameter, function(s3attr) {
@@ -155,6 +155,10 @@ function uploadImage() {
             }
         };
         var handlerFileQueue = function(file) {
+            if( file.size > parameter.size ){
+                showSystemErrorOverlay(nn._([CMS_CONF.PAGE_ID, 'brand-layer', 'your upload file is large than 500KB, please reupload file.']));
+                return false;
+            }
             if (!file.type) {
                 file.type = nn.getFileTypeByName(file.name);
                 // Mac Chrome compatible

@@ -1,5 +1,4 @@
 $(document).on("click", "#set-preview", function(event) {
-
     if ("javascript:void(0)" === $(this).attr("href")) {
         var preUrl = $.url().attr('host') + "/tv#/streaming/" + CMS_CONF.USER_URL.param('id');
         var msoId = CMS_CONF.MSO;
@@ -20,10 +19,8 @@ $(document).on("click", "#set-preview", function(event) {
                 }
                 preUrl = "http://" + preUrl;
                 thisA.attr("href", preUrl);
-                
             });
             return false;
-            //setTimeout(function(){alert("tt")}, 500);
         }
     }
 });
@@ -227,9 +224,11 @@ $(document).on("click", "#portal_search_channel", function(event) {
         }
 
         msgErr = nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', msgErr]);
-        $("#msg-search").text(msgErr);
-        $("#msg-search").show();
+        //$("#msg-search").text(msgErr);
+        //$("#msg-search").show();
+        $("#sRusult").text(msgErr);
     } else {
+        $("#portal-add-layer").fadeOut();
         showProcessingOverlay();
         switch(searchType) {
             case "url":
@@ -245,7 +244,7 @@ $(document).on("click", "#portal_search_channel", function(event) {
                         cntChannel = channels.length;
 
                         var canChannel = 27 - $("#channelCnt").text();
-                        $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Find <span>?</span> channels, you can choose <span>?</span> channels."], [cntChannel, canChannel]));
+                        $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel, canChannel]));
 
                         //alert($("#sRusult").data("canAdd"));
                         var items = [], temp = [];
@@ -278,8 +277,10 @@ $(document).on("click", "#portal_search_channel", function(event) {
                     });
 
                 } else {
-                    $("#msg-search").text(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Please fill in the correct url."])).show();
+                    //$("#msg-search").text(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Please fill in the correct url."])).show();
+                    $("#sRusult").text(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Please fill in the correct url."])).show();
                 }
+                $("#portal-add-layer").fadeIn();
                 $('#overlay-s').fadeOut("slow");
                 break;
             case "keywords":
@@ -290,8 +291,14 @@ $(document).on("click", "#portal_search_channel", function(event) {
                     cntChannel = channels.length;
 
                     var canChannel = 27 - $("#channelCnt").text();
+                    
+                    if( cntChannel > 0 ){
+                        $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel, canChannel]));
+                    }else{
+                        $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any channels."], [strInput]));                        
+                    }
 
-                    $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Find <span>?</span> channels, you can choose <span>?</span> channels."], [cntChannel, canChannel]));
+                    
 
                     var items = [], temp = [];
                     $.each(channels, function(i, channel) {
@@ -314,6 +321,7 @@ $(document).on("click", "#portal_search_channel", function(event) {
                     if (cntChannel > pageChannel) {
                         $("#searchNext").show();
                     }
+                    $("#portal-add-layer").fadeIn();
                     $('#overlay-s').fadeOut("slow");
                 });
                 break;
@@ -390,7 +398,7 @@ $(document).on("click", "#search-channel-list .checkbox", function(event) {
     }
 
     $("#sRusult").data("canAdd", canAdd);
-    $("#searchCanChannel").text(canAdd);
+    //$("#searchCanChannel").text(canAdd);
     li_on = $("#search-channel-list li .on").length;
     if (li_on > 0) {
         $("#searchAdd").show();

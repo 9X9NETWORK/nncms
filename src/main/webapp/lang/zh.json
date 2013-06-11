@@ -178,8 +178,9 @@
             "Brand Logo:": "品牌商標:",
             "Best within 16 characters": "建議長度不超過16個字元 ",
             "Please fill in your brand name.": "請輸入品牌名稱",
-            "Better results with 260x200 or higher resolution image.": "圖檔最佳解析為 260x200",
-            "Please upload png file.": "請上傳 PNG 格式圖檔"
+            "Better results with 260x200 or higher resolution image.": "圖檔最佳解析為 260x200, 檔案大小不超過500KB",
+            "Please upload png file.": "請上傳 PNG 格式圖檔",
+            "your upload file is large than 500KB, please reupload file.": "您上傳的檔案超過500KB，請重新上傳較小檔案。"
         }
     },
     "store-manage": {
@@ -251,7 +252,8 @@
             "Channel URL": "頻道網址",
             "Keywords": "關鍵字",
             "Search": "搜尋",
-            "Find <span>?</span> channels, you can choose <span>?</span> channels.": "找到 <span>{0}</span> 頻道, 你可以選擇 <span id='searchCanChannel'>{1}</span> 個頻道。",
+            "Find [<span>?</span>] channels.": "找到 [<span>{0}</span>] 個頻道。",
+            "Your search - [xxx] didn't match any channels.": "找不到符合 [<span>{0}</span>] 的頻道。",
             "Set Name:": "搜尋依:",
             "Results:": "搜尋結果:",
             "Add channels into your “<span>Set 2</span>”": "增加頻道到你的 “<span>{0}</span>”頻道組",

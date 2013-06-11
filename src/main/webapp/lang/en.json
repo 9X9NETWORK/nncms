@@ -178,8 +178,9 @@
             "Brand Logo:": "Brand Logo:",
             "Best within 16 characters": "Best within 16 characters",
             "Please fill in your brand name.": "Please fill in your brand name.",
-            "Better results with 260x200 or higher resolution image.": "Better results with 260x200 or higher resolution image.",
-            "Please upload png file.": "Please upload png file."
+            "Better results with 260x200 or higher resolution image.": "Better results with 260x200 or higher resolution image, file size cna't over 500KB",
+            "Please upload png file.": "Please upload png file.",
+            "your upload file is large than 500KB, please reupload file.": "your upload file is large than 500KB, please reupload file."
         }
     },
     "store-manage": {
@@ -251,7 +252,8 @@
             "Channel URL": "Channel URL",
             "Keywords": "Keywords",
             "Search": "Search",
-            "Find <span>?</span> channels, you can choose <span>?</span> channels.": "Find <span>{0}</span> channels, you can choose <span id='searchCanChannel'>{1}</span> channels.",
+            "Find [<span>?</span>] channels.": "Find [<span>{0}</span>] channels.",
+            "Your search - [xxx] didn't match any channels.": "Your search - [<span>{0}</span>] didn't match any channels.",
             "Set Name:": "Set Name:",
             "Results:": "Results:",
             "Add channels into your “<span>Set 2</span>”": "Add channels into your “<span>{0}</span>”",
