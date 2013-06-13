@@ -5,34 +5,31 @@ function setFormHeight() {
     var windowHeight    = $(window).height(),
         windowWidth     = $(window).width(),
         titleFuncHeight = $('#title-func').height(),
-        listEmWidth     = $('#title-func h2.poi-list em').width(),
         listSpanWidth   = $('#title-func h2.poi-list span').width(),
-        createEmWidth   = $('#title-func h2.poi-create em').width(),
         createSpanWidth = $('#title-func h2.poi-create span').width(),
-        editEmWidth     = $('#title-func h2.poi-edit em').width(),
         editSpanWidth   = $('#title-func h2.poi-edit span').width(),
-        contentHeight   = windowHeight - titleFuncHeight - 94 - 48 - 38 - 10;   // 94:header+studio-nav 48:footer 38:title-func-padding
+        headerHeight = $('#header').height(),
+        navHeight = $('#studio-nav').height(),
+        contentHeight = windowHeight - titleFuncHeight - headerHeight - navHeight + 5 - 48 - 38 - 10;   // 5:header and studio-nav overlap 48:footer 38:title-func-padding
     if (windowWidth > 1220) {
         $('#channel-poi input.text').width(windowWidth - 734);
-        $('#title-func h2').width(windowWidth - 584).data('width', $(this).width());
+        $('#title-func h2').width(windowWidth - 584);
     } else {
         $('#channel-poi input.text').width(433);
-        $('#title-func h2').width(583).data('width', '583');
+        $('#title-func h2').width(583);
     }
-    $('#title-func').data('width', $('#title-func h2').width());
-
-    if (listEmWidth > $('#title-func').data('width') - listSpanWidth) {
-        $('#title-func h2.poi-list em').width($('#title-func').data('width') - $('#title-func h2.poi-list span').width());
+    if ($('#title-func h2.poi-list em').data('width') > $('#title-func h2.poi-list').width() - listSpanWidth) {
+        $('#title-func h2.poi-list em').width($('#title-func h2.poi-list').width() - listSpanWidth - 1);
     } else {
         $('#title-func h2.poi-list em').width('auto');
     }
-    if (createEmWidth > $('#title-func').data('width') - createSpanWidth) {
-        $('#title-func h2.poi-create em').width($('#title-func').data('width') - $('#title-func h2.poi-create span').width());
+    if ($('#title-func h2.poi-create em').data('width') > $('#title-func h2.poi-create').width() - createSpanWidth) {
+        $('#title-func h2.poi-create em').width($('#title-func h2.poi-create').width() - createSpanWidth - 1);
     } else {
         $('#title-func h2.poi-create em').width('auto');
     }
-    if (editEmWidth > $('#title-func').data('width') - editSpanWidth) {
-        $('#title-func h2.poi-edit em').width($('#title-func').data('width') - $('#title-func h2.poi-edit span').width());
+    if ($('#title-func h2.poi-edit em').data('width') > $('#title-func h2.poi-edit').width() - editSpanWidth) {
+        $('#title-func h2.poi-edit em').width($('#title-func h2.poi-edit').width() - editSpanWidth - 1);
     } else {
         $('#title-func h2.poi-edit em').width('auto');
     }
@@ -202,10 +199,11 @@ function preloadChannelVideo() {
         selectedEp = null,
         youTubeUrlPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
         ytData = null,
-        //isZoneLimited = null, // unused
-        isSyndicateLimited = null,
+        //isZoneLimited = null,             // unused
+        hasSyndicateDenied = null,
+        hasLimitedSyndication = null,
+        //isSyndicateLimited = null,        // unused
         isEmbedLimited = null,
-        isSyndicateAllow = null,
         isUnplayableVideo = null;
     if (videoId && videoId.length === 11 && $('#youTubePlayerChrome').length === 0) {
         loadYouTubeFlash(preloadHook);
@@ -243,12 +241,13 @@ function preloadChannelVideo() {
                                     // The name and reasonCode attributes and the tag value provide insight into the reason why the video is not playable.
                                     ytData = youtubes.data;
                                     //isZoneLimited = (ytData.restrictions) ? true : false; // unused
-                                    isSyndicateLimited = ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false;
+                                    hasSyndicateDenied = (ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false;
+                                    hasLimitedSyndication = (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason) ? true : false;
+                                    //isSyndicateLimited = (hasSyndicateDenied || hasLimitedSyndication) ? true : false;
                                     isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
-                                    isSyndicateAllow = (isSyndicateLimited && ytData.accessControl && ytData.accessControl.syndicate && 'allowed' === ytData.accessControl.syndicate) ? true : false;
-                                    isUnplayableVideo = (ytData.status && !isSyndicateAllow) ? true : false;
+                                    isUnplayableVideo = (isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication)) ? true : false;
                                 }
-                                if (ytData && !isEmbedLimited && !isUnplayableVideo) {
+                                if (ytData && !isUnplayableVideo) {
                                     $('#channel-poi').data('ytid', ytData.id);
                                     $('#channel-poi').data('starttime', parseInt(programs[idx].startTime, 10) + freezePosSec);
                                     loadYouTubeFlash(preloadHook);
@@ -407,6 +406,7 @@ function goBackPoiList(isSaveMode) {
     $('#channel-poi .edit-block').addClass('hide');
     $('#poi-list').removeClass('hide');
     $('#content-main').removeAttr('class');
+    $('#title-func h2').hide();
     $('#content-main').addClass('poi-list');
     if (isSaveMode) {
         $('#poi-list .has-poi').removeClass('hide');
@@ -561,6 +561,7 @@ $(function () {
         buildPoiPointEditTmpl();
         $('#poi-point-edit').removeClass('hide');
         $('#content-main').removeAttr('class');
+        $('#title-func h2').hide();
         $('#content-main').addClass('poi-create');
         setFormHeight();
         return false;
@@ -586,6 +587,7 @@ $(function () {
             });
             $('#poi-point-edit').removeClass('hide');
             $('#content-main').removeAttr('class');
+            $('#title-func h2').hide();
             $('#content-main').addClass('poi-edit');
             setFormHeight();
         }

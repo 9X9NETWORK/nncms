@@ -5,26 +5,26 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=1026" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=1026" />
-<link rel="stylesheet" href="stylesheets/episode.css?v=1026" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=1026"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=1026"></script>
-<script src="javascripts/jquery.ellipsis.js?v=1026"></script>
-<script src="javascripts/jquery.blockUI.js?v=1026"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=1026"></script>
-<script src="javascripts/jquery.cycle.all.js?v=1026"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=1026"></script>
-<script src="javascripts/jquery.cookie.js?v=1026"></script>
-<script src="javascripts/json2.js?v=1026"></script>
-<script src="javascripts/purl.js?v=1026"></script>
-<script src="javascripts/vertical.slider.js?v=1026"></script>
-<script src="javascripts/config.js?v=1026"></script>
-<script src="javascripts/controller.js?v=1026"></script>
-<script src="javascripts/basic.js?v=1026"></script>
-<script src="javascripts/episode.js?v=1026"></script>
+<link rel="stylesheet" href="stylesheets/style.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/episode.css?v=1135" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="javascripts/nn-sdk.js?v=1135"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=1135"></script>
+<script src="javascripts/jquery.ellipsis.min.js?v=1135"></script>
+<script src="javascripts/jquery.blockUI.min.js?v=1135"></script>
+<script src="javascripts/jquery.cycle.all.min.js?v=1135"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=1135"></script>
+<script src="javascripts/jquery.cookie.min.js?v=1135"></script>
+<script src="javascripts/json2.min.js?v=1135"></script>
+<script src="javascripts/purl.min.js?v=1135"></script>
+<script src="javascripts/vertical.slider.min.js?v=1135"></script>
+<script src="javascripts/config.js?v=1135"></script>
+<script src="javascripts/controller.js?v=1135"></script>
+<script src="javascripts/basic.js?v=1135"></script>
+<script src="javascripts/get-url.js?v=1135"></script>
+<script src="javascripts/episode.js?v=1135"></script>
 <title>9x9.tv - Episode list</title>
 </head>
 <body>
@@ -49,12 +49,13 @@
 
 <div id="studio-nav">
 <div class="studio-nav-wrap">
-<h3><a href="index.html">CMS</a></h3>
+<h3><a href="index.html"><span class="cms-icon">CMS</span><p class="sub-title">Content Management System</p></a></h3>
 <ul>
 <li class="on"><span><a href="index.html">My Channels</a></span></li>
+<li id="my-portal" class="hide"><span><a href="portal-set.html">My Portal</a></span></li>
 </ul>
 <div class="studio-setup">
-<p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="#"><img src="images/icon_studio_setup.png" alt="" />CMS Setup</a></span></span></p>
+<p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="cms-settings.html"><img src="images/icon_studio_setup.png" alt="" />CMS Settings</a></span></span></p>
 <div class="reconnect-notice hide">
 <img src="images/icon_notification.png" alt="" />
 <p class="notice-left"><span class="notice-right"><span class="notice-middle langkey">Connection is inactive, click to restart it.</span></span></p>
@@ -98,7 +99,7 @@
 </script>
 
 <script id="title-func-tmpl" type="text/x-jquery-tmpl">
-<h2><span id="channel-name" data-meta="${name}" data-width="">${name}</span><span class="title-crumb">&gt; ${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Episode list'])} (<span id="episode-counter">${$item.cntEpisode}</span>)</span></h2>
+<h2><span id="channel-name" data-width="">${name}</span><span class="title-crumb">&gt; ${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Episode list'])} (<span id="episode-counter">${$item.cntEpisode}</span>)</span></h2>
 {{if contentType != CMS_CONF.YOUR_FAVORITE && $item.cntEpisode > 0}}
 <ul>
 <li><p class="curate btns"><span><a href="epcurate-curation.html?cid=${id}" class="curate">${nn._([CMS_CONF.PAGE_ID, 'title-func', 'Curate a new episode'])}</a></span></p></li>
@@ -118,6 +119,36 @@
 {{/if}}
 </script>
 
+<script id="get-url-part-tmpl" type="text/x-jquery-tmpl">
+<li class="surl-li{{if $item.li_sel === brand}} on{{/if}}" data-meta="${brand}">${brand}</li>
+</script>
+
+<script id="get-url-tmpl" type="text/x-jquery-tmpl">
+<div class="tip-white-l">
+    <div class="left"></div>
+    <div class="center">
+        <div class="title">${nn._([CMS_CONF.PAGE_ID, 'episode-list', "Brand"])}</div>
+        <div class="select-gray" id="">
+            <div class="select-content-gray">
+                <p class="select-btn"></p>
+                <p class="select-txt-gray">${brand}</p>
+                <ul class="select-dropdown">{{html $item.li_items}}</ul>
+            </div>
+        </div>
+        <div class="title">${nn._([CMS_CONF.PAGE_ID, 'episode-list', "URL"])}</div>
+        <div class="input-gray">
+            <p class="left"></p>
+            <p class="center">
+                <input id="" class="textfield srul-text" value="http://www.9x9.tv/view?brand=${brand}&ch=xxxx&ep=xxxx" onclick="this.select()" />
+            </p>
+            <p class="right"></p>
+        </div>
+    </div>
+    <div class="right"></div>
+</div>
+<div class="tip-bottom"></div>
+</script>
+
 <script id="episode-favorite-first-tmpl" type="text/x-jquery-tmpl">
 <div id="ep-no">
 <h3>{{html nn._([CMS_CONF.PAGE_ID, 'episode-list', "You don't have any episodes yet"])}}</h3>
@@ -134,38 +165,6 @@
 </div>
 </script>
 
-<script id="get-url-part-tmpl" type="text/x-jquery-tmpl">
-<li class="surl-li {{if $item.li_sel === brand}}on{{/if}}" data-meta="${brand}">${brand}</li>
-</script>
-
-<script id="get-url-tmpl" type="text/x-jquery-tmpl">
-    <div class="tip-white-l">
-        <div class="left"></div>
-        <div class="center">
-            <div class="title">${nn._([CMS_CONF.PAGE_ID, 'episode-list', "Brand"])}</div> 
-            <div class="select-gray" id="">
-                <div class="select-content-gray">
-                    <p class="select-btn"></p>
-                    <p class="select-txt-gray">${brand}</p>
-                    <ul class="select-dropdown">{{html $item.li_items}}</ul>
-                </div>
-            </div>
-            <div class="title">${nn._([CMS_CONF.PAGE_ID, 'episode-list', "URL"])}</div> 
-            <div class="input-gray">
-                <p class="left"></p>
-                <p class="center">
-                    <input id="" class="textfield srul-text" value="http://www.9x9.tv/view?brand=${brand}&ch=xxxx&ep=xxxx" onclick="this.select()" />
-                </p>
-                <p class="right"></p>
-            </div>       
-        </div>
-        <div class="right"></div>
-    </div>
-    <div class="tip-bottom"></div>
-</script>
-
-
-
 <script id="episode-favorite-list-tmpl-item" type="text/x-jquery-tmpl">
 <li class="clearfix">
 <div class="container">
@@ -177,7 +176,7 @@
 </a>
 <span class="duration"><span class="time-right"><span class="time-middle">${formatDuration(duration)}</span></span></span>
 </p>
-<h3 data-meta="${name}"><a href="${playbackUrl}" target="_blank">${name}</a></h3>
+<h3><a href="${playbackUrl}" target="_blank">${name}</a></h3>
 <div class="btns">
 <div class="btn-wrap disable">
 <ul>
@@ -290,11 +289,11 @@
 <div class="container-bottom">
 <div class="container-left">
 <div class="wrap">
-    <div id="get-url-${id}" class="get-url"  data-metach="${$.url().param('id')}"  data-metaep="${id}">
+    <div id="get-url-${id}" class="get-url" data-metach="${$.url().param('id')}" data-metaep="${id}">
         <div class="tip-white-l">
             <div class="left"></div>
             <div class="center">
-                <div class="title">Brand</div> 
+                <div class="title">Brand</div>
                 <div class="select-gray" id="">
                     <div class="select-content-gray">
                         <p class="select-btn"></p>
@@ -305,14 +304,14 @@
                         </ul>
                     </div>
                 </div>
-                <div class="title">URL</div> 
+                <div class="title">URL</div>
                 <div class="input-gray">
                     <p class="left"></p>
-                    <p class="center"> 
+                    <p class="center">
                         <input class="textfield srul-text" value="http://www.9x9.tv/view?brand={msoId}&ch=xxxx&ep=xxxx" onclick="this.select()" />
                     </p>
                     <p class="right"></p>
-                </div>       
+                </div>
             </div>
             <div class="right"></div>
         </div>
@@ -331,7 +330,7 @@
 {{/if}}
 <span class="duration"><span class="time-right"><span class="time-middle">${formatDuration(duration)}</span></span></span>
 </p>
-<h3 data-meta="${name}"><a href="${playbackUrl}" target="_blank">${name}</a></h3>
+<h3><a href="${playbackUrl}" target="_blank">${name}</a></h3>
 <div class="btns">
 <div class="btn-wrap enable">
 <ul>
@@ -427,80 +426,6 @@
 <div class="overlay-btn">
 <p class="btns btn-no"><span><a href="#">No</a></span></p>
 <p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="fb-connect" class="lightbox-content overlay-l setup-notice">
-<div class="overlay-container">
-<div class="overlay-wrap fb-connect">
-<a href="#" class="btn-close">Close</a>
-<h4 class="cms-setup">CMS Setup</h4>
-<p class="fb-connect">
-<span class="content">Connect to</span>
-<img src="images/icon_fb.png" alt="facebook" class="icon" />
-<a href="#" class="switch-on hide">ON</a>
-<a href="#" class="switch-off">OFF</a>
-</p>
-<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
-</div>
-</div>
-</div>
-
-<div id="restart-connect" class="lightbox-content overlay-l setup-notice">
-<div class="overlay-container">
-<div class="overlay-wrap restart-connect">
-<a href="#" class="btn-close">Close</a>
-<h4 class="cms-setup">CMS Setup</h4>
-<div class="reconnect-func">
-<span class="content">Connect to</span>
-<img src="images/icon_fb.png" alt="facebook" class="icon" />
-<p class="btns btn-reconnect"><span class="btn-right"><a href="#">Restart connection</a></span></p>
-</div>
-<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
-<p class="content notice">Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.</p>
-</div>
-</div>
-</div>
-
-<div id="fb-connect-failed" class="lightbox-content overlay-l setup-notice">
-<div class="overlay-container">
-<div class="overlay-wrap connect-fail">
-<a href="#" class="btn-close">Close</a>
-<h4 class="cms-setup">CMS Setup</h4>
-<h5>Can not connect to Facebook correctly!</h5>
-<p class="content">Please try again and make sure you agree on all permissions.</p>
-<div class="overlay-btn">
-<p class="btns btn-failed-ok"><span><a href="#">OK</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="disconnect-notice" class="lightbox-content overlay-l setup-notice">
-<div class="overlay-container">
-<div class="overlay-wrap disconnect-notice">
-<a href="#" class="btn-close">Close</a>
-<h4 class="cms-setup">CMS Setup</h4>
-<h5>Account disconnected!</h5>
-<p class="content">{If you want to enable auto sharing again, please:}</p>
-<div class="overlay-btn">
-<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="confirm-disconnect" class="lightbox-content overlay-l setup-notice">
-<div class="overlay-container">
-<div class="overlay-wrap disconnect">
-<a href="#" class="btn-close">Close</a>
-<h4 class="cms-setup">CMS Setup</h4>
-<p class="content">Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?</p>
-<div class="overlay-btn">
-<p class="btns btn-no"><span><a href="#">No</a></span></p>
-<p class="btns btn-disconnect"><span><a href="#">Disconnect</a></span></p>
 </div>
 </div>
 </div>

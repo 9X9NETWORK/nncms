@@ -1,3 +1,493 @@
+版本: 1144
+作者: chihwen
+日期: 2013年6月13日 下午 02:56:24
+訊息:
+將 alert 改為 nn.log 避免直接輸入除錯訊息
+issue 6337
+----
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/curation.js
+異動 : /fakeapi/javascripts/epcurate.js
+異動 : /fakeapi/javascripts/episode.js
+
+版本: 1143
+作者: chihwen
+日期: 2013年6月13日 下午 02:46:11
+訊息:
+將 index 頁專用的 js 從 channel.js 抽取出來獨立為 index.js
+issue 6337
+----
+已加入 : /fakeapi/javascripts/index.js
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/channel.js
+
+版本: 1142
+作者: chihwen
+日期: 2013年6月13日 下午 12:55:14
+訊息:
+將 9x9 production SVN 版本 4840,4841,4883,4884,4885 轉回 fakeapi 分支
+
+1. 將 9x9 production SVN 版本 4840,4841,4883,4884,4885 轉回 fakeapi 分支。
+2. 將 index 及 episode-list 頁中，相關 Get URL 共用腳本，獨立集中放到 get-url.js 中。
+3. 修正 production SVN 版本 4794 (controller.js, channel.js) 移除用不到的 code 以便通過 JSLint 檢查。
+issue 5927
+----
+已加入 : /fakeapi/javascripts/get-url.js
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/javascripts/episode.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+異動 : /fakeapi/stylesheets/portal.css
+
+版本: 1140
+作者: chihwen
+日期: 2013年6月12日 上午 12:07:37
+訊息:
+同步採用 9x9 給的 unplayable video 邏輯，但詳細無效影音呈現規格待 PM 重新 review
+
+1. 同步採用 9x9 給的 unplayable video 邏輯，但詳細無效影音呈現規格待 PM 重新 review。
+   信件主旨：Re: Remove format= and orderby= from Youtube data API to avoid hitting cache
+   寄件日期：2013/6/6 (星期四) 上午 10:36
+   if (y.accessControl.embed === 'denied'
+       || y.accessControl.syndicate === 'denied'
+       || (y.status && !(y.status.reason && y.status.reason === 'limitedSyndication'))) {
+2. 修正 #poi-event-overlay 區塊產生錯誤快取問題。
+3. 將 POI 相關腳本及樣式引入都移到最上面。
+issue 6423
+----
+異動 : /fakeapi/channel-poi.html
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/javascripts/channel-poi.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/javascripts/curation.js
+
+版本: 1139
+作者: chihwen
+日期: 2013年6月11日 下午 09:58:25
+訊息:
+將 jQuery 核心升級為 v1.10.1、jQuery UI 升級為 v1.10.3
+
+1. 將 jQuery 升級為 v1.10.1、jQuery UI 升級為 v1.10.3。
+2. 調整 config.js 利用 nn.load 依環境除錯設定，動態引入 jQuery Migrate。
+   注意：使用未 min 版的 jQuery Migrate 才會顯示不相容警告。
+3. 因應升級 jQuery 核心，將 checked 及 disabled 由 .attr() 或 .removeAttr() 改為 .prop()。
+   1. 將 .attr('checked', 'checked') 改為 .prop('checked', true)。
+   2. 將 .removeAttr('checked') 改為 .prop('checked', false)。
+   3. 將 .attr('checked') 改為 .prop('checked')。
+   4. 將 .attr('disabled', 'disabled') 改為 .prop('disabled', true)。
+   5. 將 .removeAttr('disabled') 改為 .prop('disabled', false)。
+4. 因應升級 jQuery 核心，將 $.browser.msie 移除，改用 /MSIE/.test(navigator.userAgent) 作判斷。
+5. 因應升級 jQuery 核心，將 andSelf() 改用 addBack() 取代。
+6. 將 jquery.uniform.min.js 由 v1.7.5 升級為 v2.1.1。
+   注意要因應調整 uniform.css 把相關透明度設定移到樣式中。
+   https://github.com/pixelmatrix/uniform
+issue 6428
+----
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-poi.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/cms-settings.html
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/epcurate-publish.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/config.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/javascripts/curation.js
+異動 : /fakeapi/javascripts/epcurate.js
+異動 : /fakeapi/javascripts/jquery.swfobject.js
+異動 : /fakeapi/javascripts/jquery.swfobject.min.js
+異動 : /fakeapi/javascripts/jquery.uniform.js
+異動 : /fakeapi/javascripts/jquery.uniform.min.js
+異動 : /fakeapi/login.html
+異動 : /fakeapi/signin.html
+異動 : /fakeapi/stylesheets/uniform.css
+
+版本: 1138
+作者: chihwen
+日期: 2013年6月11日 下午 04:08:48
+訊息:
+將所有腳本函式庫改請求 min 版本，以便節省傳輸量，並同時保留未 min 的版本
+
+1. 將所有腳本函式庫改請求 min 版本，以便節省傳輸量，並同時保留未 min 的版本。
+2. 升級並測試各腳本函式庫，改用最新的版本。
+   1. jquery.mousewheel.min.js 升級為 v3.1.3。
+      https://github.com/brandonaaron/jquery-mousewheel
+   2. jquery.blockUI.min.js 升級為 v2.61。
+      https://github.com/malsup/blockui/
+   3. jquery.cookie.min.js 升級為 v1.3.1。
+      https://github.com/carhartl/jquery-cookie
+   4. json2.min.js 升級為 2013-05-26。
+      https://github.com/douglascrockford/JSON-js
+   5. purl.min.js 升級為 v2.3.1。
+      https://github.com/allmarkedup/purl
+   6. perfect-scrollbar.min.js 升級為 Jun 01, 2013 (e19c7e8c0acf050e1a4b8ac66eca061e48f70476)
+      注意這個函式庫有客製微調過，請見 src 版本 1038。
+      https://github.com/noraesae/perfect-scrollbar
+   7. 注意 jquery.uniform.min.js 沒有升級維持 v1.7.5 (升級會出錯)。
+      https://github.com/pixelmatrix/uniform/tree/v1.7.5
+   8. jquery.countdown.min.js 升級為 v1.6.2。
+      http://keith-wood.name/countdown.html
+   9. jquery.autotab.min.js 升級為 v1.1b。
+      http://www.mathachew.com/sandbox/jquery-autotab/
+   10. jquery.cycle.all.min.js 升級為 v3.0.2。
+       https://github.com/malsup/cycle
+3. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=1135)。
+4. 廢棄各頁 jquery.toggleval.min.js 引入，改用 placeholder 實現。
+5. 刪除沒有使用的 jquery.corner.js。
+6. 調整 fakeapi 避免產生 404 圖片請求、調整 brand 相關 api 以模擬示範測試資料。
+7. 重構 jquery.titlecard.js, horizontal-slider.js, vertical.slider.js, jquery.ellipsis.js 以便通過 JSLint 檢查。
+issue 6428
+----
+已刪除 : /fakeapi/javascripts/jquery.corner.js
+已加入 : /fakeapi/javascripts/horizontal-slider.min.js
+已加入 : /fakeapi/javascripts/jquery.autotab.js
+已加入 : /fakeapi/javascripts/jquery.blockUI.min.js
+已加入 : /fakeapi/javascripts/jquery.charcounter.js
+已加入 : /fakeapi/javascripts/jquery.cookie.min.js
+已加入 : /fakeapi/javascripts/jquery.countdown.js
+已加入 : /fakeapi/javascripts/jquery.cycle.all.min.js
+已加入 : /fakeapi/javascripts/jquery.datepick.min.js
+已加入 : /fakeapi/javascripts/jquery.ellipsis.min.js
+已加入 : /fakeapi/javascripts/jquery.mousewheel.js
+已加入 : /fakeapi/javascripts/jquery.swfobject.js
+已加入 : /fakeapi/javascripts/jquery.titlecard.min.js
+已加入 : /fakeapi/javascripts/jquery.tmpl.js
+已加入 : /fakeapi/javascripts/jquery.toggleval.js
+已加入 : /fakeapi/javascripts/jquery.uniform.js
+已加入 : /fakeapi/javascripts/json2.min.js
+已加入 : /fakeapi/javascripts/perfect-scrollbar.min.js
+已加入 : /fakeapi/javascripts/purl.min.js
+已加入 : /fakeapi/javascripts/vertical.slider.min.js
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-poi.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/cms-settings.html
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/epcurate-publish.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/fakeapi/channels.php
+異動 : /fakeapi/fakeapi/channels_autosharing_brand.php
+異動 : /fakeapi/fakeapi/channels_autosharing_validBrands.php
+異動 : /fakeapi/fakeapi/channels_episodes.php
+異動 : /fakeapi/fakeapi/episodes.php
+異動 : /fakeapi/fakeapi/users_channels.php
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/horizontal-slider.js
+異動 : /fakeapi/javascripts/jquery.autotab.min.js
+異動 : /fakeapi/javascripts/jquery.blockUI.js
+異動 : /fakeapi/javascripts/jquery.charcounter.min.js
+異動 : /fakeapi/javascripts/jquery.cookie.js
+異動 : /fakeapi/javascripts/jquery.countdown.min.js
+異動 : /fakeapi/javascripts/jquery.cycle.all.js
+異動 : /fakeapi/javascripts/jquery.ellipsis.js
+異動 : /fakeapi/javascripts/jquery.mousewheel.min.js
+異動 : /fakeapi/javascripts/jquery.swfobject.min.js
+異動 : /fakeapi/javascripts/jquery.titlecard.js
+異動 : /fakeapi/javascripts/jquery.tmpl.min.js
+異動 : /fakeapi/javascripts/jquery.toggleval.min.js
+異動 : /fakeapi/javascripts/jquery.uniform.min.js
+異動 : /fakeapi/javascripts/json2.js
+異動 : /fakeapi/javascripts/perfect-scrollbar.js
+異動 : /fakeapi/javascripts/purl.js
+異動 : /fakeapi/javascripts/vertical.slider.js
+異動 : /fakeapi/login.html
+異動 : /fakeapi/signin.html
+
+版本: 1135
+作者: chihwen
+日期: 2013年6月10日 上午 11:32:03
+訊息:
+同步 src 版本 1134 (因應 studio-nav 高度變高，slider 高度 js 計算也跟著調整)
+
+1. 因應 studio-nav 高度變高，slider 高度 js 計算也跟著調整。
+2. 調整 Episode list Views 中文翻譯，避免欄位標題列產生折行。
+issue 6337
+----
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/lang/zh.json
+
+版本: 1133
+作者: chihwen
+日期: 2013年6月9日 下午 12:56:23
+訊息:
+重構 basic.js, channel.js, cms-settings.js, episode.js 以精簡程式碼
+
+1. 調整 basic.js 將 scrollToBottom 移到 channel.js。
+2. 調整 basic.js 將 str_replace, htmlspecialchars, htmlEscape 等用不到的函式移除。
+3. 調整 channel.js 移除用不到的 hook .fb-ok。
+4. 調整 channel.js 移除用不到的邏輯 sync connect switch。
+5. 調整 cms-settings.js 補強 中文字、英數字、底線 檢查邏輯。
+6. 調整 episode.js 移除用不到的 hook .fb-ok。
+7. 調整 episode.js 盡可能避免把事件掛載在 $(document).on( 上。
+issue 6428
+----
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/cms-settings.js
+異動 : /fakeapi/javascripts/episode.js
+
+版本: 1132
+作者: chihwen
+日期: 2013年6月9日 上午 11:29:28
+訊息:
+將 9x9 production SVN 版本 4840,4841 轉回 fakeapi 分支 (注意尚未全部同步完成)
+
+並將 en.json 及 zh.json 等語系檔作內容最小化處理，盡量保持可維護性，以及避免檔案K數越來越大。
+issue 5927
+----
+異動 : /fakeapi/javascripts/signin.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+
+版本: 1131
+作者: chihwen
+日期: 2013年6月7日 下午 10:54:14
+訊息:
+重構 channel-poi.js 以便通過 JSLint 檢查
+
+注意事項：
+controller.js 有一個空區塊錯誤 Empty block.
+for (i = 0; i < cntBrand; i += 1) {
+
+channel.js 有一個空區塊錯誤 Empty block.
+}, function (cBrands) {
+
+這是客戶負責的部份，再請 Mars Review 修正。
+issue 6428
+----
+異動 : /fakeapi/javascripts/channel-poi.js
+
+版本: 1129
+作者: chihwen
+日期: 2013年6月7日 下午 10:22:46
+訊息:
+同步 src 版本 1127 (調整 channel-poi channel name 的截字功能)
+
+1. 調整 content-main 高度計算方式。
+2. 調整 channel-poi channel name 的截字功能。
+issue 6337
+----
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/javascripts/channel-poi.js
+異動 : /fakeapi/javascripts/cms-settings.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/stylesheets/channel-poi.css
+
+版本: 1128
+作者: chihwen
+日期: 2013年6月7日 下午 06:22:54
+訊息:
+修正 CMS Settings 儲存按鈕位置問題 (表頭中英語系高度不一致問題)
+
+1. 修正 CMS Settings 儲存按鈕位置問題 (表頭中英語系高度不一致問題)。
+   調整 controller.js 在載入頁面後，立即進行 $(window).trigger('resize');
+2. 調整 cms-settings.js 加入 resetChangePwdForm() 以便統一重置變更密碼表單。
+   呼叫時機為：在叫出變更密碼 overlay 時、在成功完成變更密碼時、在按下 ESC 或取消或關閉變更密碼時。
+3. 同步 src 版本 1124,1125 basic.js, channel-poi.js, channel.js, cms-settings.js, style.css)。
+   1. 把 header、studio-nav 的高度變成參數取代固定數字 94。
+   2. 調整 studio-nav 的行高，讓中、英文版的 studio-nav 會一樣高。
+   3. 調整 content-main、content-wrap 高度計算。
+   4. channel-poi 的 channel-name 預留 1px 的寬度避免變兩行。
+issue 6428
+----
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/javascripts/channel-poi.js
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/cms-settings.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/stylesheets/style.css
+
+版本: 1126
+作者: chihwen
+日期: 2013年6月7日 下午 04:34:05
+訊息:
+完成 CMS Settings 更改密碼功能
+
+1. 完成 CMS Settings 更改密碼功能。
+   1. 密碼欄位也限 6~16 個字元。
+   2. 加入 notice reset 重置邏輯。
+2. 修正 email 讀取欄位，改抓 userEmail (不論是 FB 登入或 9x9 登入，都可以取得該使用者的 e-mail)。
+
+TODO：
+1. 待測試 CORS nn.on 攔截 400 錯誤問題 (為了實現「舊密碼錯誤，請重新輸入。」的呈現邏輯)。
+2. 儲存按鈕位置問題 (表頭中英語系高度不一致問題)。
+issue 6428
+----
+異動 : /fakeapi/cms-settings.html
+異動 : /fakeapi/javascripts/cms-settings.js
+
+版本: 1123
+作者: chihwen
+日期: 2013年6月7日 下午 02:23:06
+訊息:
+完成 CMS Settings 更改用戶名稱以及未儲存提示功能
+
+1. 完成 CMS Settings 更改用戶名稱功能。
+   1. 調整檢查規則，允許輸入中文字，中文算2個字元。
+   2. 調整 controller.js 在載入後，限定用戶名稱欄位輸入長度，最多16個字元，中文算2個字元。
+   3. 加入 notice reset 重置邏輯。
+2. 完成 CMS Settings 未儲存提示功能。
+3. 改良表單送出事件，以便支援原生 submit 功能 (支援透過鍵盤直接送出表單機制)。
+4. 調整 fakeapi PUT /api/users/{userId} 允許更改用戶名稱。
+
+TODO：
+1. 更改密碼。
+2. 儲存按鈕位置問題 (表頭中英語系高度不一致問題)。
+issue 6428
+----
+異動 : /fakeapi/fakeapi/users.php
+異動 : /fakeapi/javascripts/cms-settings.js
+異動 : /fakeapi/javascripts/controller.js
+
+版本: 1122
+作者: chihwen
+日期: 2013年6月7日 上午 12:26:00
+訊息:
+完成 CMS Settings 連結Facebook帳號 相關整合
+
+1. 完成 CMS Settings 連結Facebook帳號 相關整合。
+2. 判斷是否採 Facebook 登入，以切換表單輸入介面呈現邏輯。
+3. 重構 cms-settings.js 以便通過 JSLint 檢查。
+4. 修補 CMS Settings 多國語系功能。
+
+TODO：
+1. 更改用戶名稱 (待確認允許字元規格)。
+2. 更改密碼。
+3. 未儲存提示。
+4. 儲存按鈕位置問題 (表頭中英語系高度不一致問題)。
+issue 6428
+----
+異動 : /fakeapi/cms-settings.html
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/cms-settings.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+
+版本: 1121
+作者: chihwen
+日期: 2013年6月6日 下午 10:04:22
+訊息:
+同步 src 版本 1118 (調整 channel-add、channel-setting scorllbar 問題)
+issue 6337
+----
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/javascripts/channel.js
+
+版本: 1119
+作者: chihwen
+日期: 2013年6月6日 下午 04:27:26
+訊息:
+完成 CMS Settings 多國語系及 Template 模板雛型整理
+
+1. 完成 CMS Settings 多國語系及 Template 模板雛型整理。
+2. 調整 cms-settings.js 將事件改以 on 註冊，以因應 Template 機制的整合。
+3. 為了通過 JSLint 作準備，調整 cms-settings.js 將通用處理函式往上搬，讓 DOM Ready 區保持在最下方。
+4. 調整 controller.js 加入 buildCmsSettings() 以便負責 CMS Settings 初始載入建構邏輯。
+5. 調整各頁 CMS logo 結構及語系，避免還沒切換語系前，短暫的跑版問題。
+issue 6428
+----
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-poi.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/cms-settings.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/cms-settings.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+
+版本: 1116
+作者: chihwen
+日期: 2013年6月6日 上午 12:25:57
+訊息:
+同步 src 版本 1112 (channel-add, channel-setting, epcurate-publish 的上傳圖片白框改用 CSS 取代)
+issue 6337
+----
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/epcurate-publish.html
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/javascripts/epcurate.js
+異動 : /fakeapi/stylesheets/channel.css
+異動 : /fakeapi/stylesheets/epcurate.css
+
+版本: 1114
+作者: chihwen
+日期: 2013年6月5日 下午 04:58:23
+訊息:
+完成初步 CMS Settings 靜態修版整合
+
+同步 src 版本 1049,1050,1062,1064,1067,1070。
+
+除了上述同步之外的調整如下：
+1. 移除各頁已用不到的 Facebook 相關 overlay。
+   1. 所有 Facebook 相關 overlay 移到 CMS Settings 頁。
+   2. 但 channel-add 及 channel-setting 保留 fb-connect-failed2 以供 FB Share 設定使用。
+2. basic.js 移除之前各頁所共用的 Facebook 相關 overlay 行為處理 (TODO 待轉移到 cms-settings)。
+3. channel.js 加入先前放在 basic.js 中的 checkCriticalPerm() 函式。
+4. 調整右上角 CMS Settings 語系及 Facebook 相關 overlay 語系。
+issue 6428
+----
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-poi.html
+異動 : /fakeapi/channel-setting.html
+已加入 : /fakeapi/cms-settings.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/javascripts/channel.js
+已加入 : /fakeapi/javascripts/cms-settings.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+已加入 : /fakeapi/stylesheets/cms-settings.css
+
+版本: 1113
+作者: chihwen
+日期: 2013年6月5日 下午 03:17:57
+訊息:
+因應 9x9 production SVN 版本 4794 (fakeapi 版本 1103) 增加 fakeapi 程式
+
+以避免在 local 開發端，載入 channel setting 時會出錯，相關 API 如下。
+
+/api/channels/{channelId}/autosharing/brand
+GET = get brand that channel sharing at
+PUT = set brand that channel sharing at
+
+/api/channels/{channelId}/autosharing/validBrands
+GET = get brands that channel can sharing at
+issue 5927
+----
+已加入 : /fakeapi/fakeapi/channels_autosharing_brand.php
+已加入 : /fakeapi/fakeapi/channels_autosharing_validBrands.php
+異動 : /fakeapi/javascripts/config.js
+
+版本: 1110
+作者: chihwen
+日期: 2013年6月5日 上午 11:39:28
+訊息:
+同步 src 版本 1108 (單行截字功能盡可能改由 CSS 控制)
+issue 6337
+----
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-poi.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/episode.js
+異動 : /fakeapi/stylesheets/channel.css
+異動 : /fakeapi/stylesheets/ep-curation.css
+
 版本: 1109
 作者: chihwen
 日期: 2013年6月4日 下午 10:18:11

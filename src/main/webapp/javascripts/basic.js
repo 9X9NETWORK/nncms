@@ -1,22 +1,5 @@
 /*jslint browser: true, devel: true, bitwise: true, nomen: true, regexp: true, unparam: true, sloppy: true */
-/*global $, nn, CMS_CONF, FB, scrollbar, renderConnectFacebookUI, renderAutoShareUI, buildFacebookPagesMap, setupLanguageAndRenderPage, setupLanguagePage, setFormHeight */
-function iniSharingList(inObj) {
-    var strCid = "", strEid = "", strBrand = "", strBaseURL = "http://www.9x9.tv/view?", strSurl = "";
-    var userUrlFile = CMS_CONF.USER_URL.attr('file');
-    if ('' === userUrlFile) {
-        userUrlFile = 'index.html';
-    }
-    strBrand = inObj.find(".select-txt-gray").text();
-    strCid = inObj.data("metach");
-    strEid = inObj.data("metaep");
-    if (userUrlFile === 'index.html') {
-        strSurl = strBaseURL + ["brand=" + strBrand, "ch=" + strCid].join("&");
-    } else {
-        strSurl = strBaseURL + ["brand=" + strBrand, "ch=" + strCid, "ep=e" + strEid].join("&");
-
-    }
-    return strSurl;
-}
+/*global $, nn, CMS_CONF, scrollbar, setupLanguageAndRenderPage, setupLanguagePage */
 
 function autoWidth() {
     var contentNavWidth = 200,  // $('#content-nav')
@@ -34,11 +17,13 @@ function autoHeight() {
         titleFuncPaddingTop = parseInt($('#title-func').css('padding-top'), 10),
         titleFuncPaddingBottom = parseInt($('#title-func').css('padding-bottom'), 10),
         titleFuncHeight = parseInt(titleFuncContentHeight + titleFuncPaddingTop + titleFuncPaddingBottom, 10),
-        sliderHeight = windowHeight - titleFuncHeight - 157;            // 157: (header45 + studio-nav49)94 + footer48 + space15
-    $('#content-wrap').height($(window).height() - 94);                 // 94: header45(50-5) + studio-nav49(36+13);
-    $('#content-main').height($(window).height() - footerHeight - 94);  // 94: header45(50-5) + studio-nav49(36+13);
-    $('.epcurate-curation#content-wrap, .epcurate-publish#content-wrap').height($(window).height() - 46);   // $('#epcurate-nav .epcurate-nav-wrap')
-    $('.epcurate-curation #content-main, .epcurate-publish #content-main').height($(window).height() - 94); // 94: epcurate-nav46 + form-btn48  
+        headerHeight = $('#header').height(),
+        navHeight = $('#studio-nav').height(),
+        sliderHeight = windowHeight - titleFuncHeight - headerHeight - navHeight - 58;                                  // 58: footer48 + space15 - (header and studio-nav overlap)5
+    $('#content-wrap').height($(window).height() - headerHeight - navHeight + 5);                                       // 5: header and studio-nav overlap;
+    $('#content-main').height($(window).height() - footerHeight - headerHeight - navHeight + 5);                        // 5: header and studio-nav overlap;
+    $('.epcurate-curation#content-wrap, .epcurate-publish#content-wrap').height($(window).height() - 46);               // $('#epcurate-nav .epcurate-nav-wrap')
+    $('.epcurate-curation #content-main, .epcurate-publish #content-main').height($(window).height() - 94);             // 94: epcurate-nav46 + form-btn48  
     $('#content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + titleFuncHeight + 15);     // 15: space between footer and content
     $('.epcurate-publish #content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + 270);    // 270: datepicker height + form-btn48 + space15
     $('.epcurate-curation #content-main-wrap').height($('#content-main-wrap').children('.constrain').height());
@@ -52,12 +37,6 @@ function autoHeight() {
     }
 }
 
-function scrollToBottom() {
-    scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-    $('#content-main-wrap').css('top', '-' + parseInt($('#content-main-wrap').height() - $('#content-main').height(), 10) + 'px');
-    $('#main-wrap-slider .ui-slider-handle').css('bottom', '0');
-}
-
 function hideFbPageList() {
     if ($('#settingForm').length > 0) {
         var hasHideFbPageList = false;
@@ -67,8 +46,8 @@ function hideFbPageList() {
             hasHideFbPageList = true;
         }
         if ('none' !== $('#main-wrap-slider').css('display')) {
-            $('#content-main-wrap form').height('auto');
-            $('#content-main-wrap').height($('#content-main-wrap form').height() + 70 + 65);
+            $('#content-main-wrap form').height($('#content-main-wrap form').data('height'));
+            $('#content-main-wrap').height($('#content-main-wrap form').height() + 70 + 61);
             $('#main-wrap-slider .slider-vertical').slider('destroy');
             if (hasHideFbPageList) {
                 $('#content-main-wrap').css('top', '0');
@@ -247,123 +226,6 @@ function strip_tags(input, allowed) {
     });
 }
 
-function str_replace(search, replace, subject, count) {
-    // version: 1109.2015
-    var i = 0,
-        j = 0,
-        temp = '',
-        repl = '',
-        sl = 0,
-        fl = 0,
-        f = [].concat(search),
-        r = [].concat(replace),
-        s = subject,
-        ra = Object.prototype.toString.call(r) === '[object Array]',
-        sa = Object.prototype.toString.call(s) === '[object Array]';
-    s = [].concat(s);
-    if (count) {
-        this.window[count] = 0;
-    }
-
-    for (i = 0, sl = s.length; i < sl; i += 1) {
-        if (s[i] !== '') {
-            for (j = 0, fl = f.length; j < fl; j += 1) {
-                temp = s[i].toString();
-                repl = ra ? (r[j] !== undefined ? r[j] : '') : r[0];
-                s[i] = temp.split(f[j]).join(repl);
-                if (count && s[i] !== temp) {
-                    this.window[count] += (temp.length - s[i].length) / f[j].length;
-                }
-            }
-        }
-    }
-    return sa ? s : s[0];
-}
-
-function htmlspecialchars(string, quote_style, charset, double_encode) {
-    // version: 1109.2015
-    var optTemp = 0,
-        i = 0,
-        noquotes = false,
-        OPTS = {
-            'ENT_NOQUOTES': 0,
-            'ENT_HTML_QUOTE_SINGLE': 1,
-            'ENT_HTML_QUOTE_DOUBLE': 2,
-            'ENT_COMPAT': 2,
-            'ENT_QUOTES': 3,
-            'ENT_IGNORE': 4
-        };
-    if (quote_style === undefined || quote_style === null) {
-        quote_style = 2;
-    }
-    if ('' === string || null === string) {
-        string = '';
-    }
-    string = string.toString();
-    if (double_encode !== false) { // Put this first to avoid double-encoding
-        string = string.replace(/&/g, '&amp;');
-    }
-    string = string.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-    if (quote_style === 0) {
-        noquotes = true;
-    }
-    if (typeof quote_style !== 'number') { // Allow for a single string or an array of string flags
-        quote_style = [].concat(quote_style);
-        for (i = 0; i < quote_style.length; i += 1) {
-            // Resolve string input to bitwise e.g. 'ENT_IGNORE' becomes 4
-            if (OPTS[quote_style[i]] === 0) {
-                noquotes = true;
-            } else if (OPTS[quote_style[i]]) {
-                optTemp = optTemp | OPTS[quote_style[i]];
-            }
-        }
-        quote_style = optTemp;
-    }
-    if (quote_style & OPTS.ENT_HTML_QUOTE_SINGLE) {
-        string = string.replace(/'/g, '&#039;');
-    }
-    if (!noquotes) {
-        string = string.replace(/"/g, '&quot;');
-    }
-
-    return string;
-}
-
-function htmlEscape(string, skipAmp) {
-    var data = str_replace('&amp;#', '&#', htmlspecialchars(string, 'ENT_QUOTES', null, false));
-    if (true === skipAmp) {
-        data = str_replace('&amp;', '&', data);
-    }
-    return data;
-}
-
-function checkCriticalPerm(authResponse, callback) {
-    if (authResponse && authResponse.accessToken) {
-        var parameter = {
-            access_token: authResponse.accessToken
-        };
-        // ON PURPOSE to wait facebook sync
-        setTimeout(function () {
-            // FB.api('/me/permissions', { anticache: (new Date()).getTime() }, function (response) {
-            nn.api('GET', 'https://graph.facebook.com/me/permissions', parameter, function (response) {
-                var permList = null,
-                    hasCriticalPerm = false;
-                if (response.data && response.data[0]) {
-                    permList = response.data[0];
-                    if (permList.manage_pages && permList.publish_stream) {
-                        hasCriticalPerm = true;
-                    }
-                }
-                // callback is handleRevokedPerm or handleAutoSharePerm
-                if ('function' === typeof callback) {
-                    callback(hasCriticalPerm, authResponse);
-                }
-            }, 'jsonp');
-        }, 1000);
-    }
-}
-
 $(function () {
     if (navigator.userAgent.indexOf('Mac') > 0) {
         $('body').addClass('mac');
@@ -374,120 +236,6 @@ $(function () {
     // checkbox checked highlight (but radio customize by page)
     $(document).on('click', 'input[type=checkbox]', function () {
         $(this).parents('label').toggleClass('checked');
-    });
-
-    // studio setup (callback of checkCriticalPerm)
-    function handleRevokedPerm(hasCriticalPerm, authResponse) {
-        if (hasCriticalPerm && authResponse && authResponse.userID && authResponse.accessToken) {
-            $.unblockUI();
-            showProcessingOverlay();
-            var parameter = {
-                userId: authResponse.userID,
-                accessToken: authResponse.accessToken
-            };
-            nn.api('POST', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {
-                userId: CMS_CONF.USER_DATA.id
-            }), parameter, function (result) {
-                if ('OK' === result) {
-                    nn.api('GET', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {
-                        userId: CMS_CONF.USER_DATA.id
-                    }), null, function (facebook) {
-                        $('#overlay-s').fadeOut('slow', function () {
-                            // ready for disconnect facebook
-                            CMS_CONF.FB_RESTART_CONNECT = false;
-                            $('#studio-nav .reconnect-notice').addClass('hide');
-                            CMS_CONF.FB_PAGES_MAP = buildFacebookPagesMap(facebook);
-                            CMS_CONF.USER_SNS_AUTH = facebook;
-                            $('.setup-notice p.fb-connect a.switch-on').removeClass('hide');
-                            $('.setup-notice p.fb-connect a.switch-off').addClass('hide');
-                            // show studio setup (connect switch) again
-                            $.blockUI({
-                                message: $('#fb-connect')
-                            });
-                            // sync channel setting
-                            if ($('#settingForm').length > 0) {
-                                var isAutoCheckedTimeline = true;
-                                renderAutoShareUI(facebook, isAutoCheckedTimeline);
-                                setTimeout(function () {
-                                    autoHeight();
-                                    setFormHeight();
-                                    scrollToBottom();
-                                }, 1000);
-                            }
-                        });
-                    });
-                }
-            });
-        } else {
-            // connected but has not critical permission!!
-            $.blockUI({
-                message: $('#fb-connect-failed')
-            });
-        }
-    }
-    $('#studio-nav .studio-setup .btn-left').click(function () {
-        // studio setup
-        // ON PURPOSE to skip unsave check
-        var hook = (true === CMS_CONF.FB_RESTART_CONNECT) ? '#restart-connect' : '#fb-connect';
-        $.blockUI({
-            message: $(hook)
-        });
-        return false;
-    });
-    $('#fb-connect .switch-off, #restart-connect .btn-reconnect').click(function () {
-        // connect facebook
-        FB.login(function (response) {
-            if (response.authResponse) {
-                // connected but not sure have critical permission
-                checkCriticalPerm(response.authResponse, handleRevokedPerm);
-            } else {
-                // cancel login nothing happens (maybe unknown or not_authorized)
-                nn.log(response, 'debug');
-            }
-        }, {scope: CMS_CONF.FB_REQ_PERMS.join(',')});
-
-        return false;
-    });
-    $('#fb-connect-failed .btn-failed-ok').click(function () {
-        // continue to show studio setup
-        var hook = (true === CMS_CONF.FB_RESTART_CONNECT) ? '#restart-connect' : '#fb-connect';
-        $.blockUI({
-            message: $(hook)
-        });
-        return false;
-    });
-    $('#fb-connect .switch-on').click(function () {
-        // disconnect facebook
-        $.blockUI({
-            message: $('#confirm-disconnect')
-        });
-        return false;
-    });
-    $('#confirm-disconnect .btn-disconnect').click(function () {
-        $.unblockUI();
-        showProcessingOverlay();
-        nn.api('DELETE', CMS_CONF.API('/api/users/{userId}/sns_auth/facebook', {
-            userId: CMS_CONF.USER_DATA.id
-        }), null, function (facebook) {
-            $('#overlay-s').fadeOut('slow', function () {
-                if ('OK' === facebook) {
-                    CMS_CONF.FB_RESTART_CONNECT = false;
-                    $('#studio-nav .reconnect-notice').addClass('hide');
-                    CMS_CONF.FB_PAGES_MAP = null;
-                    CMS_CONF.USER_SNS_AUTH = null;
-                    $('.setup-notice p.fb-connect a.switch-on').addClass('hide');
-                    $('.setup-notice p.fb-connect a.switch-off').removeClass('hide');
-                    $.blockUI({
-                        message: $('#disconnect-notice')
-                    });
-                    // sync channel setting
-                    if ($('#settingForm').length > 0) {
-                        renderConnectFacebookUI();
-                    }
-                }
-            });
-        });
-        return false;
     });
 
     // common unblock

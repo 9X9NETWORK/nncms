@@ -1,87 +1,6 @@
 /*jslint browser: true, devel: true, nomen: true, unparam: true, sloppy: true */
 /*global $, nn, CMS_CONF, scrollbar, autoHeight, showSavingOverlay, showUnsaveOverlay, showDeletePromptOverlay, listEpisode */
 
-/* Get URL */
-$(document).on("click", ".url", function(event) {
-    var userUrlFile = CMS_CONF.USER_URL.attr('file');
-    if ('' === userUrlFile) {
-        userUrlFile = 'index.html';
-    }
-    if (!$(this).hasClass("disable")) {
-        var obj_get_url = $(this).parents('li').find('.get-url');
-
-        if (userUrlFile === 'index.html') {
-            var strMetaCh = obj_get_url.data("metach"), strMetaIn = obj_get_url.data("metain");
-            // sharing url
-            if (strMetaIn != "1") {
-                nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/validBrands', {
-                    channelId : strMetaCh
-                }), null, function(cBrands) {
-                    //alert(strMetaCh);
-                    var surl_html = "", tmpBrand = [];
-                    tmpBrand = [{
-                        brand : cBrands[0].brand
-                    }];
-                    $("#tmpHtml2").empty();
-                    $("#get-url-part-tmpl").tmpl(cBrands, {
-                        li_sel : cBrands[0].brand
-                    }).appendTo("#tmpHtml2");
-                    $("#tmpHtml").empty();
-                    $("#get-url-tmpl").tmpl(tmpBrand, {
-                        li_items : $("#tmpHtml2").html()
-                    }).appendTo("#tmpHtml");
-
-                    obj_get_url.children().remove();
-                    obj_get_url.append($("#tmpHtml").html());
-                    obj_get_url.find("input.srul-text").val(iniSharingList(obj_get_url));
-                    obj_get_url.data("metain", 1);
-                });
-            }
-
-        }
-
-        $('.get-url').hide();
-        obj_get_url.find("input.srul-text").val(iniSharingList(obj_get_url));
-
-        $(this).parents('li').find('.tip').hide();
-        obj_get_url.fadeIn(400);
-    }
-});
-
-$(document).on("click", "html", function(event) {
-    $('.get-url').hide();
-});
-
-$(document).on("click", ".get-url, .url", function(event) {
-    event.stopPropagation();
-});
-
-/* Dropdown Gray */
-$(document).on("click", ".select-gray", function(event) {
-    event.stopPropagation();
-});
-
-$(document).on("click", ".select-gray .select-btn", function(event) {
-    $(this).parents('div').find('.select-dropdown').toggleClass('on');
-    $(this).toggleClass("on");
-});
-
-$(document).on("click", ".select-gray .select-dropdown li", function(event) {
-    var obj_get_url = $(this).parents('li').find('.get-url');
-    var urlText = $(this).parent('ul').parent("div").parent("div").parent("div").find('.srul-text');
-    $(this).parent('ul').parent("div").find('.select-txt-gray').text($(this).data('meta'));
-    $(this).parent('ul').find("li").removeClass("on");
-    $(this).addClass("on");
-    obj_get_url.find("input.srul-text").val(iniSharingList(obj_get_url));
-    $(this).parents('div').find('.select-dropdown').toggleClass('on');
-    $(this).parents('div').find('.select-btn').toggleClass('on');
-});
-
-$(document).on("click", "html, .get-url", function(event) {
-    $('.select-gray .select-dropdown, .select-gray .select-btn').removeClass("on");
-});
-
-
 function setEpisodeWidth() {
     var wrapWidth = $('#content-main-wrap').width(),
         contentmainWidth = $('#content-main').width(),
@@ -98,19 +17,12 @@ function setEpisodeWidth() {
     $('#ep-list ul li .wrap, #title-func .caption').width(wrapWidth - 31 - 1);  // 1:border
     $('#ep-list ul li .episode, #title-func .caption  p.episode').width(wrapWidth - 31 - numberWidth - scheduledWidth - publishWidth - viewsWidth - 1);   // 1:border
     $('#ep-list ul li .number').width(numberWidth - 20);    // 20 is padding
-    $('#ep-list ul li .episode h3').each(function (index) {
-        $('a', this).text($(this).data('meta'));
-    });
-    // ON PURPOSE to mark ellipsis feature temporarily for performance issue
-    //$('#ep-list ul li .episode h3').addClass('ellipsis').ellipsis();
     if ($('#ep-list ul li .episode').length > 0 && $('#channel-name').data('width') + crumbWidth + 10 > contentmainWidth - titleBtnsWidth) {  // 10: title-func padding
         $('#title-func h2').width(contentmainWidth - titleBtnsWidth - 10 - 15);  // 10: title-func padding, 15: channel name and btns space
         $('#channel-name').width($('#title-func h2').width() - crumbWidth - 6);  // 6: channel name margin
-        //$('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
     } else {
         $('#title-func h2').width('auto');
         $('#channel-name').width('auto');
-        //$('#channel-name').text($('#channel-name').data('meta')).addClass('ellipsis').ellipsis();
     }
 }
 
@@ -176,7 +88,7 @@ $(function () {
             return false;
         }
     });
-    $(document).on('click', '.unblock, .btn-close, .fb-ok, .btn-no', function () {
+    $(document).on('click', '.unblock, .btn-close, .btn-no', function () {
         $.unblockUI();
         $('#ep-list ul li').removeClass('deleting').removeData('deleteId');
         return false;
@@ -244,10 +156,9 @@ $(function () {
             $('#episode-list-tmpl-folder-down').tmpl(CMS_CONF.EPISODES_PAGING_INFO[folderID]).appendTo('#tmpEPL');
 
             // sharing url
-            $("#tmpEPL div.get-url").each(function(){
+            $('#tmpEPL div.get-url').each(function () {
                 $(this).children().remove();
-                $(this).append( $("#tmpHtml").html() );
-                
+                $(this).append($('#tmpHtml').html());
             });
 
             $('#tmpEPL .isItem').addClass('itemFolder_' + folderID);
@@ -365,7 +276,7 @@ $(function () {
     });
 
     // episode list delete
-    $(document).on('click', '#ep-list .enable a.del', function () {
+    $('#content-main-wrap').on('click', '#ep-list .enable a.del', function () {
         if ($('body').hasClass('in-reorder')) {
             // in reorder desable function
             return false;
@@ -395,12 +306,12 @@ $(function () {
                     });
                 } else {
                     $('#overlay-s').fadeOut(0, function () {
-                        alert('Delete error');
+                        nn.log('Delete error', 'error');
                     });
                 }
             });
         } else {
-            alert('Nothing to delete');
+            nn.log('Nothing to delete', 'error');
         }
         return false;
     });

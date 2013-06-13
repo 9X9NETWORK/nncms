@@ -558,7 +558,7 @@ function computeTitleCardEditOption() {
 function enableTitleCardEdit() {
     $('#cur-edit .edit-title').removeClass('disable');
     $('#cur-edit .select').attr('class', 'select enable');
-    $('#cur-edit input, #cur-edit textarea').removeAttr('disabled');
+    $('#cur-edit input, #cur-edit textarea').prop('disabled', false);
     $.uniform.update('#cur-edit input, #cur-edit textarea');
     $('#cur-edit .font-container .font-l, #cur-edit .font-container .font-s').removeClass('disabled').addClass('enable');
 }
@@ -566,7 +566,7 @@ function enableTitleCardEdit() {
 function disableTitleCardEdit() {
     $('#cur-edit .edit-title').addClass('disable');
     $('#cur-edit .select').attr('class', 'select disable');
-    $('#cur-edit input, #cur-edit textarea').attr('disabled', 'disabled');
+    $('#cur-edit input, #cur-edit textarea').prop('disabled', true);
     $.uniform.update('#cur-edit input, #cur-edit textarea');
     $('#cur-edit .font-container .font-l, #cur-edit .font-container .font-s').removeClass('enable').addClass('disabled');
 }
@@ -590,7 +590,7 @@ function removeTrimTimeEditHook() {
 
 function enableTrimTimeEdit() {
     $('#cur-edit p.time').removeClass('disable');
-    $('#cur-edit input.time').removeAttr('disabled');
+    $('#cur-edit input.time').prop('disabled', false);
     $('#cur-edit .set-time .total-time').addClass('hide');
     $('#cur-edit .btn-wrap .btns').removeClass('hide');
     $('#cur-edit .btn-wrap .btn-edit').addClass('hide');
@@ -598,7 +598,7 @@ function enableTrimTimeEdit() {
 
 function disableTrimTimeEdit() {
     $('#cur-edit p.time').addClass('disable');
-    $('#cur-edit input.time').attr('disabled', 'disabled');
+    $('#cur-edit input.time').prop('disabled', true);
     $('#cur-edit .set-time .total-time').removeClass('hide');
     $('#cur-edit .btn-wrap .btns').addClass('hide');
     $('#cur-edit .btn-wrap .btn-edit').removeClass('hide');
@@ -863,6 +863,8 @@ function unblockPoiUI() {
     $('#storyboard, #content-main-wrap .form-btn, #epcurate-nav ul li.publish').unblock();
     $('#epcurate-nav ul li.publish').removeClass('mask');
     $('#video-player .video').removeClass('transparent');
+    $('#poi-event-overlay .wrap').html('');
+    $('#cur-poi-edit').html('');
 }
 
 function removePoiTab() {
@@ -912,9 +914,9 @@ function uploadImage(isDisableEdit) {
                 this.setButtonText('<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>');
                 this.setButtonDisabled(false);
                 if (code === -280) { // user cancel upload
-                    alert(message); // show some error prompt
+                    nn.log(message, 'error'); // show some error prompt
                 } else {
-                    alert(message); // show some error prompt
+                    nn.log(message, 'error'); // show some error prompt
                 }
             },
             handlerFileQueue = function (file) {
@@ -1737,8 +1739,11 @@ $(function () {
             videoNumberBase = $('#storyboard-list li').length,
             isPrivateVideo = null,
             isZoneLimited = null,
+            hasSyndicateDenied = null,
+            hasLimitedSyndication = null,
             isSyndicateLimited = null,
-            isEmbedLimited = null;
+            isEmbedLimited = null,
+            isUnplayableVideo = null;
         if ('' === videoUrl || nn._([CMS_CONF.PAGE_ID, 'add-video', 'Paste YouTube video URLs to add (separate with different lines)']) === videoUrl) {
             $('#videourl').get(0).focus();
             $('#cur-add .notice').text(nn._([CMS_CONF.PAGE_ID, 'add-video', 'Paste YouTube video URLs to add.'])).removeClass('hide').show();
@@ -1784,14 +1789,18 @@ $(function () {
                         ytData = youtubes.data;
                         isPrivateVideo = false;
                         isZoneLimited = (ytData.restrictions) ? true : false;
-                        isSyndicateLimited = ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false;
+                        hasSyndicateDenied = (ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false;
+                        hasLimitedSyndication = (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason) ? true : false;
+                        isSyndicateLimited = (hasSyndicateDenied || hasLimitedSyndication) ? true : false;
                         isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
+                        isUnplayableVideo = (isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication)) ? true : false;
                     } else {
                         ytData = null;
                         isPrivateVideo = (youtubes.error && youtubes.error.code && 403 === youtubes.error.code) ? true : false;
                         isZoneLimited = null;
                         isSyndicateLimited = null;
                         isEmbedLimited = null;
+                        isUnplayableVideo = null;
                     }
                     if (true === isEmbedLimited) {
                         embedLimitedList.push(normalList[idx]);
@@ -1816,7 +1825,8 @@ $(function () {
                             isPrivateVideo: isPrivateVideo,
                             isZoneLimited: isZoneLimited,
                             isSyndicateLimited: isSyndicateLimited,
-                            isEmbedLimited: isEmbedLimited
+                            isEmbedLimited: isEmbedLimited,
+                            isUnplayableVideo: isUnplayableVideo
                         };
                         ytList[idx] = ytItem;
                     } else {
@@ -2342,12 +2352,12 @@ $(function () {
     // Title Card - Setting UI - Font (bold, italic, radix/size, align)
     $('#cur-edit').on('click', '#fontWeight', function () {
         $('body').addClass('has-titlecard-change');
-        var weight = $(this).attr('checked') ? 'bold' : 'normal';
+        var weight = $(this).prop('checked') ? 'bold' : 'normal';
         $('#titlecard-inner').css('font-weight', weight);
     });
     $('#cur-edit').on('click', '#fontStyle', function () {
         $('body').addClass('has-titlecard-change');
-        var style = $(this).attr('checked') ? 'italic' : 'normal';
+        var style = $(this).prop('checked') ? 'italic' : 'normal';
         $('#titlecard-inner').css('font-style', style);
     });
     switchFontRadix($('#fontSize').val());

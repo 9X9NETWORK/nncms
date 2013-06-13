@@ -508,7 +508,7 @@
             "Episode": "節目",
             "Scheduled time": "排程時間",
             "Publish time": "發佈時間",
-            "Views": "觀看次數"
+            "Views": "觀看數"
         },
         "episode-list": {
             "You don't have any episodes yet": "您尚無任何節目",

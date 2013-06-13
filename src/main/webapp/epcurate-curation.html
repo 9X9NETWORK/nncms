@@ -5,42 +5,41 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=1026" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=1026" />
-<link rel="stylesheet" href="stylesheets/uniform.css?v=1026" />
-<link rel="stylesheet" href="stylesheets/playback.css?v=1026" />
-<link rel="stylesheet" href="stylesheets/jquery.datepick.css?v=1026" />
-<link rel="stylesheet" href="stylesheets/perfect-scrollbar.css?v=1026" />
-<link rel="stylesheet" href="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.css?v=1026" />
-<link rel="stylesheet" href="stylesheets/epcurate.css?v=1026" />
-<link rel="stylesheet" href="stylesheets/ep-curation.css?v=1026" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=1026"></script>
-<script src="javascripts/jquery.mousewheel.min.js?v=1026"></script>
-<script src="javascripts/jquery.ellipsis.js?v=1026"></script>
-<script src="javascripts/jquery.blockUI.js?v=1026"></script>
-<script src="javascripts/jquery.toggleval.min.js?v=1026"></script>
-<script src="javascripts/jquery.charcounter.min.js?v=1026"></script>
-<script src="javascripts/jquery.uniform.min.js?v=1026"></script>
-<script src="javascripts/jquery.swfobject.min.js?v=1026"></script>
-<script src="javascripts/jquery.titlecard.js?v=1026"></script>
-<script src="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.js?v=1026"></script>
-<script src="javascripts/jquery.tmpl.min.js?v=1026"></script>
-<script src="javascripts/jquery.cookie.js?v=1026"></script>
-<script src="javascripts/jquery.countdown.min.js?v=1026"></script>
-<script src="javascripts/jquery.autotab.min.js?v=1026"></script>
-<script src="javascripts/jquery.cycle.all.js?v=1026"></script>
-<script src="javascripts/jquery.datepick.js?v=1026"></script>
-<script src="javascripts/perfect-scrollbar.js?v=1026"></script>
-<script src="javascripts/json2.js?v=1026"></script>
-<script src="javascripts/purl.js?v=1026"></script>
-<script src="javascripts/swfupload/swfupload.js?v=1026"></script>
-<script src="javascripts/horizontal-slider.js?v=1026"></script>
-<script src="javascripts/config.js?v=1026"></script>
-<script src="javascripts/controller.js?v=1026"></script>
-<script src="javascripts/basic.js?v=1026"></script>
-<script src="javascripts/curation.js?v=1026"></script>
+<link rel="stylesheet" href="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/style.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/playback.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/jquery.datepick.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/perfect-scrollbar.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/epcurate.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/ep-curation.css?v=1135" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.js?v=1135"></script>
+<script src="javascripts/nn-sdk.js?v=1135"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=1135"></script>
+<script src="javascripts/jquery.ellipsis.min.js?v=1135"></script>
+<script src="javascripts/jquery.blockUI.min.js?v=1135"></script>
+<script src="javascripts/jquery.charcounter.min.js?v=1135"></script>
+<script src="javascripts/jquery.uniform.min.js?v=1135"></script>
+<script src="javascripts/jquery.swfobject.min.js?v=1135"></script>
+<script src="javascripts/jquery.titlecard.min.js?v=1135"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=1135"></script>
+<script src="javascripts/jquery.cookie.min.js?v=1135"></script>
+<script src="javascripts/jquery.countdown.min.js?v=1135"></script>
+<script src="javascripts/jquery.autotab.min.js?v=1135"></script>
+<script src="javascripts/jquery.cycle.all.min.js?v=1135"></script>
+<script src="javascripts/jquery.datepick.min.js?v=1135"></script>
+<script src="javascripts/perfect-scrollbar.min.js?v=1135"></script>
+<script src="javascripts/json2.min.js?v=1135"></script>
+<script src="javascripts/purl.min.js?v=1135"></script>
+<script src="javascripts/swfupload/swfupload.js?v=1135"></script>
+<script src="javascripts/horizontal-slider.min.js?v=1135"></script>
+<script src="javascripts/config.js?v=1135"></script>
+<script src="javascripts/controller.js?v=1135"></script>
+<script src="javascripts/basic.js?v=1135"></script>
+<script src="javascripts/curation.js?v=1135"></script>
 <title>9x9.tv - Episode Curation - Curation</title>
 </head>
 <body>
@@ -188,8 +187,8 @@
 
 <script id="video-info-tmpl" type="text/x-jquery-tmpl">
 <div id="video-info-wrap">
-<h3 class="ellipsis multiline"><span class="title">${name}</span></h3>
-<p>
+<h3><span class="title">${name}</span></h3>
+<p class="info">
 {{if ytDuration > duration}}
 ${$item.startHMS} - ${$item.endHMS} 
 (${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Original'])} <span class="duration">${formatDuration(ytDuration)}</span>)
@@ -250,8 +249,8 @@ ${nn._([CMS_CONF.PAGE_ID, 'video-info', 'By'])} <a href="http://www.youtube.com/
 
 <script id="poi-info-tmpl" type="text/x-jquery-tmpl">
 <div id="poi-info">
-<h3 class="ellipsis"><span class="title">${name}</span></h3>
-<p class="ellipsis">
+<h3><span class="title">${name}</span></h3>
+<p class="info">
 {{if ytDuration > duration}}
 ${$item.startHMS} - ${$item.endHMS} 
 (${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Original'])} <span class="duration">${formatDuration(ytDuration)}</span>)

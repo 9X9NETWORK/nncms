@@ -69,7 +69,7 @@ function uploadImage() {
                 this.setButtonDisabled(false); // enable upload button again
                 var url = 'http://' + s3attr.bucket + '.s3.amazonaws.com/' + parameter.prefix + '-thumbnail-' + timestamp + '-' + file.size + file.type.toLowerCase();
                 $('#thumbnail-list ul li.new').remove();
-                $('#thumbnail-list ul').prepend('<li class="new"><img src="' + url + '" alt="" /></li>');
+                $('#thumbnail-list ul').prepend('<li class="new"><div class="img"><img src="' + url + '" alt="" /></div></li>');
                 $('#thumbnail-list ul').cycle('destroy');
                 $('#thumbnail-list ul').cycle({
                     fx: 'scrollHorz',
@@ -89,9 +89,9 @@ function uploadImage() {
                 this.setButtonText('<span class="uploadstyle">' + nn._(['upload', 'Upload']) + '</span>');
                 this.setButtonDisabled(false);
                 if (code === -280) { // user cancel upload
-                    alert(message); // show some error prompt
+                    nn.log(message, 'error'); // show some error prompt
                 } else {
-                    alert(message); // show some error prompt
+                    nn.log(message, 'error'); // show some error prompt
                 }
             },
             handlerFileQueue = function (file) {
@@ -242,7 +242,7 @@ function switchPublishStatus(flag, name) {
     }
     if ('draft' === flag) {
         $('#date-time').addClass('hide');
-        $('input[name=rerun]').removeAttr('checked');
+        $('input[name=rerun]').prop('checked', false);
         $('input[name=rerun]').parents('label').removeClass('checked');
         $.uniform.update('input[name=rerun]');
     }
@@ -253,10 +253,10 @@ function switchPublishStatus(flag, name) {
 function switchRerunCheckbox() {
     if (!$('#schedule-rerun-label').hasClass('hide')) {
         if ($('input[name=rerun]').is(':checked')) {
-            $('input[name=status]').removeAttr('checked');
+            $('input[name=status]').prop('checked', false);
             $('input[name=status]').parents('label').removeClass('checked');
             $.uniform.update('input[name=status]');
-            $('#status_published').attr('checked', 'checked');
+            $('#status_published').prop('checked', true);
             $('#status_published').parents('label').addClass('checked');
             $.uniform.update('#status_published');
             $('#date-time').removeClass('hide');

@@ -34,6 +34,10 @@ div.radio span {
 div.radio span input {
     width: 17px;
     height: 19px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 }
 
 div.radio.focus span, 
@@ -70,4 +74,8 @@ div.checker span {
 div.checker input {
     width: 22px;
     height: 29px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 }

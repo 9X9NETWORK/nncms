@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="en" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<link rel="stylesheet" href="stylesheets/style.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=1135" />
+<link rel="stylesheet" href="stylesheets/cms-settings.css?v=1135" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="javascripts/nn-sdk.js?v=1135"></script>
+<script src="javascripts/jquery.mousewheel.min.js?v=1135"></script>
+<script src="javascripts/jquery.ellipsis.min.js?v=1135"></script>
+<script src="javascripts/jquery.blockUI.min.js?v=1135"></script>
+<script src="javascripts/jquery.charcounter.min.js?v=1135"></script>
+<script src="javascripts/jquery.uniform.min.js?v=1135"></script>
+<script src="javascripts/jquery.tmpl.min.js?v=1135"></script>
+<script src="javascripts/jquery.cookie.min.js?v=1135"></script>
+<script src="javascripts/json2.min.js?v=1135"></script>
+<script src="javascripts/purl.min.js?v=1135"></script>
+<script src="javascripts/vertical.slider.min.js?v=1135"></script>
+<script src="javascripts/config.js?v=1135"></script>
+<script src="javascripts/controller.js?v=1135"></script>
+<script src="javascripts/basic.js?v=1135"></script>
+<script src="javascripts/cms-settings.js?v=1135"></script>
+<title>9x9.tv - CMS Settings</title>
+</head>
+<body>
+<div id="fb-root"></div>
+
+<!--============================== header start ==============================-->
+<div id="header">
+  <a href="../" target="_blank" id="logo"></a>
+  <ul id="nav">
+    <li id="home"><span><a href="../" target="_blank">9x9.tv Official Web</a></span></li>
+    <li id="tv"><span><a href="../tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
+    <li id="profile">
+      <p id="btn-profile"></p>
+      <p id="selected-profile">Guest</p>
+      <ul id="profile-dropdown" class="dropdown">
+        <li><a id="profile-logout" href="signin.html">Log out</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!--============================== header close ==============================-->
+
+<div id="studio-nav">
+<div class="studio-nav-wrap">
+<h3><a href="index.html"><span class="cms-icon">CMS</span><p class="sub-title">Content Management System</p></a></h3>
+<ul>
+<li><span><a href="index.html">My Channels</a></span></li>
+<li id="my-portal" class="hide"><span><a href="portal-set.html">My Portal</a></span></li>
+</ul>
+<div class="studio-setup click">
+<p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="cms-settings.html"><img src="images/icon_studio_setup.png" alt="" />CMS Settings</a></span></span></p>
+</div>
+</div>
+</div>
+
+<!--============================== content-wrap start ========================-->
+<div id="content-wrap">
+<div id="content-nav">
+&nbsp;
+</div>
+<div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
+<div id="content-main">
+<!-- template = #content-main-tmpl -->
+</div>
+</div>
+<!--============================== content-wrap close ========================-->
+
+<script id="content-main-tmpl" type="text/x-jquery-tmpl">
+<div id="title-func" class="clearfix">
+<h2>${nn._([CMS_CONF.PAGE_ID, 'title-func', 'CMS Settings'])}</h2>
+</div>
+<div id="content-main-wrap">
+<div class="constrain">
+<div id="cms-setting">
+<form name="cmsSettingForm" id="cmsSettingForm" method="post" action="" data-height="361">
+{{if CMS_CONF.USER_DATA.fbUser}}
+<p class="login-notice">${nn._([CMS_CONF.PAGE_ID, 'setting-form', "If you signed in with Facebook, you can't change your name and password."])}</p>
+{{/if}}
+<div class="fminput clearfix">
+<label>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Email'])}</label>
+<div class="fmfield">
+<p class="email">${CMS_CONF.USER_DATA.userEmail}</p>
+</div>
+</div>
+<div class="fminput clearfix{{if !CMS_CONF.USER_DATA.fbUser}} username{{/if}}">
+<label>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Username'])}</label>
+<div class="fmfield">
+<p class="text{{if CMS_CONF.USER_DATA.fbUser}} disable{{/if}}"><span><input type="text" name="username" id="username" maxlength="16" value="${CMS_CONF.USER_DATA.name}"{{if CMS_CONF.USER_DATA.fbUser}} readonly="readonly"{{/if}} class="text" /></span></p>
+<p class="username-notice">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Username in 9x9 which composed of 6-16 English letters, numbers or low line.'])}</p>
+<p class="notice letter-notice hide">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Only letters, numbers or low line are allowed.'])}</p>
+<p class="notice count-notice hide">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Please input 6 to 16 characters in username.'])}</p>
+</div>
+</div>
+<div class="fminput clearfix">
+<label>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Password'])}</label>
+<div class="fmfield">
+<p class="btns btn-change-pwd{{if CMS_CONF.USER_DATA.fbUser}} disable{{else}} enable{{/if}}"><span class="btn-right"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Change password'])}</a></span></p>
+</div>
+</div>
+<div class="fminput clearfix">
+<label>${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Facebook'])}</label>
+<div class="fmfield">
+<div class="connect">
+<img src="images/icon_fb.png" alt="facebook" />
+<p class="btns btn-connect-fb"><img src="images/icon_notification.png" alt="" class="notify hide" /><span class="btn-right"><span class="btn-middle"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Connect to Facebook'])}</a></span></span></p>
+<p class="notice hide">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Connection is inactive, click to restart it.'])}</p>
+</div>
+</div>
+</div>
+<div class="form-btn">
+<div class="form-btn-wrap">
+<p class="notice hide">${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Please fill in all required fields.'])}</p>
+<p class="btns btn-save enable"><span class="btn-right"><span class="btn-middle"><input type="button" value="${nn._([CMS_CONF.PAGE_ID, 'setting-form', 'Save'])}" /></span></span></p>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</script>
+
+<script id="change-pwd-overlay-tmpl" type="text/x-jquery-tmpl">
+<div id="change-pwd-overlay-wrap" class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">${nn._([CMS_CONF.PAGE_ID, 'overlay', 'Change Password'])}</h4>
+<div class="change-pwd">
+<form name="changePwdForm" id="changePwdForm" method="post" action="">
+<p class="text"><span class="input-right"><span class="input-middle"><input type="password" name="pwd_old" id="pwd_old" maxlength="16" value="" placeholder="${nn._([CMS_CONF.PAGE_ID, 'overlay', 'Old Password'])}" class="text" /></span></span></p>
+<p class="text"><span class="input-right"><span class="input-middle"><input type="password" name="pwd_new" id="pwd_new" maxlength="16" value="" placeholder="${nn._([CMS_CONF.PAGE_ID, 'overlay', 'New Password'])}" class="text" /></span></span></p>
+<p class="text last"><span class="input-right"><span class="input-middle"><input type="password" name="pwd_confirm" id="pwd_confirm" maxlength="16" value="" placeholder="${nn._([CMS_CONF.PAGE_ID, 'overlay', 'Repeat New Password'])}" class="text" /></span></span></p>
+<p class="notice hide">${nn._([CMS_CONF.PAGE_ID, 'overlay', 'Please input your old password.'])}</p>
+</form>
+</div>
+<div class="overlay-btn">
+<p class="btns btn-cancel"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'overlay', 'Cancel'])}</a></span></p>
+<p class="btns btn-chg-pwd"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'overlay', 'Change password'])}</a></span></p>
+</div>
+</div>
+</script>
+
+<!--============================== footer start ==============================-->
+<p id="footer-control"></p>
+<div id="footer">
+  <span>© 2013 9x9.tv. All rights reserved.</span>
+  <ul id="footer-list">
+    <li id="language-change">
+      <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
+      <p class="select-btn"></p>
+      <ul class="select-list">
+        <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<!--============================== footer close ==============================-->
+
+<div id="overlay-s">
+<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span></span></p>
+</div>
+
+<div id="system-error" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">You are not authorized to edit this channel.</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+<div class="overlay-container">
+<div class="overlay-wrap">
+<a href="#" class="btn-close">Close</a>
+<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+<div class="overlay-btn">
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+<p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="change-pwd-overlay" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<!-- template = #change-pwd-overlay-tmpl -->
+</div>
+</div>
+
+<div id="fb-connect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap fb-connect">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">Connect to Facebook</h4>
+<p class="fb-connect">
+<span class="content">Connect to</span>
+<img src="images/icon_fb.png" alt="facebook" class="icon" />
+<a href="#" class="switch-on hide">ON</a>
+<a href="#" class="switch-off">OFF</a>
+</p>
+<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
+</div>
+</div>
+</div>
+
+<div id="restart-connect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap restart-connect">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">Connect to Facebook</h4>
+<div class="reconnect-func">
+<span class="content">Connect to</span>
+<img src="images/icon_fb.png" alt="facebook" class="icon" />
+<p class="btns btn-reconnect"><span class="btn-right"><a href="#">Restart connection</a></span></p>
+</div>
+<p class="content">After connecting, you can enable Facebook auto sharing for each channel in Channel settings.</p>
+<p class="content notice">Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.</p>
+</div>
+</div>
+</div>
+
+<div id="confirm-disconnect" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap disconnect">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">Connect to Facebook</h4>
+<p class="content">Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?</p>
+<div class="overlay-btn">
+<p class="btns btn-no"><span><a href="#">No</a></span></p>
+<p class="btns btn-disconnect"><span><a href="#">Disconnect</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="disconnect-notice" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap disconnect-notice">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">Connect to Facebook</h4>
+<h5>Account disconnected!</h5>
+<p class="content">{If you want to enable auto sharing again, please:}</p>
+<div class="overlay-btn">
+<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="fb-connect-failed" class="lightbox-content overlay-l setup-notice">
+<div class="overlay-container">
+<div class="overlay-wrap connect-fail">
+<a href="#" class="btn-close">Close</a>
+<h4 class="cms-setup">Connect to Facebook</h4>
+<h5>Can not connect to Facebook correctly!</h5>
+<p class="content">Please try again and make sure you agree on all permissions.</p>
+<div class="overlay-btn">
+<p class="btns btn-failed-ok"><span><a href="#">OK</a></span></p>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

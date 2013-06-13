@@ -5,11 +5,11 @@ function renderConnectFacebookUI() {
     $('#settingForm .connect-switch').removeClass('hide');
     $('#settingForm .connected').addClass('hide');
     $('#settingForm .reconnected').addClass('hide');
-    $('#fbTimeline').removeAttr('checked');
+    $('#fbTimeline').prop('checked', false);
     $('#fbTimeline-label').removeClass('checked');
     $.uniform.update('#fbTimeline');
-    $('#fbPage').removeAttr('disabled');
-    $('#fbPage').removeAttr('checked');
+    $('#fbPage').prop('disabled', false);
+    $('#fbPage').prop('checked', false);
     $('#fbPage-label').removeClass('checked');
     $.uniform.update('#fbPage');
     $('#fb-page-list').remove();
@@ -28,16 +28,16 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
         $('#settingForm .reconnected').addClass('hide');
     }
     if (true === isAutoCheckedTimeline) {
-        $('#fbTimeline').attr('checked', 'checked');
+        $('#fbTimeline').prop('checked', true);
         $('#fbTimeline-label').addClass('checked');
         $.uniform.update('#fbTimeline');
     }
     // disable facebook page or rebuild fb-page-list
     if (!facebook.pages || 'string' === typeof facebook.pages || 0 == facebook.pages.length) {
-        $('#fbPage').attr('disabled', 'disabled');
+        $('#fbPage').prop('disabled', true);
         $.uniform.update('#fbPage');
     } else {
-        $('#fbPage').removeAttr('disabled');
+        $('#fbPage').prop('disabled', false);
         $.uniform.update('#fbPage');
         var pages = facebook.pages,
             rowNum = 2,
@@ -78,11 +78,11 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
                     }
                 });
                 if (true === isCheckedTimeline) {
-                    $('#fbTimeline').attr('checked', 'checked');
+                    $('#fbTimeline').prop('checked', true);
                     $('#fbTimeline-label').addClass('checked');
                     $.uniform.update('#fbTimeline');
                 } else {
-                    $('#fbTimeline').removeAttr('checked');
+                    $('#fbTimeline').prop('checked', false);
                     $('#fbTimeline-label').removeClass('checked');
                     $.uniform.update('#fbTimeline');
                 }
@@ -96,7 +96,7 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
                         }
                     });
                     if (pageNames.length > 0) {
-                        $('#fbPage').attr('checked', 'checked');
+                        $('#fbPage').prop('checked', true);
                         $('#fbPage-label').addClass('checked');
                         $.uniform.update('#fbPage');
                         $('.page-list').removeClass('disable').addClass('enable');
@@ -221,10 +221,12 @@ function initFacebookJavaScriptSdk() {
         }), null, function (facebook) {
             if (!facebook || !facebook.userId) {
                 // ready for connect facebook
+                // sync cms settings
                 CMS_CONF.FB_RESTART_CONNECT = false;
                 $('#studio-nav .reconnect-notice').addClass('hide');
                 CMS_CONF.FB_PAGES_MAP = null;
                 CMS_CONF.USER_SNS_AUTH = null;
+                // sync connect switch
                 $('.setup-notice p.fb-connect a.switch-on').addClass('hide');
                 $('.setup-notice p.fb-connect a.switch-off').removeClass('hide');
                 // sync channel setting
@@ -235,13 +237,16 @@ function initFacebookJavaScriptSdk() {
                 // ready for disconnect facebook
                 // ON PURPOSE to use callback design pattern to maintain async order issue (make sure have critical permissions)
                 checkRestartConnect(facebook, function (facebook, isRestartConnect) {
+                    // sync cms settings
                     CMS_CONF.FB_RESTART_CONNECT = isRestartConnect;
                     if (true === isRestartConnect) {
                         $('#studio-nav .reconnect-notice').removeClass('hide');
                         $('#studio-nav .reconnect-notice .notice-left').stop(true).delay(2000).slideDown(100).delay(10000).fadeOut(1500);
+                        $('#cms-setting .connect .notice, #cms-setting .connect .notify').removeClass('hide');
                     }
                     CMS_CONF.FB_PAGES_MAP = buildFacebookPagesMap(facebook);
                     CMS_CONF.USER_SNS_AUTH = facebook;
+                    // sync connect switch
                     $('.setup-notice p.fb-connect a.switch-on').removeClass('hide');
                     $('.setup-notice p.fb-connect a.switch-off').addClass('hide');
                     // sync channel setting
@@ -350,7 +355,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                         chName: channel.name,
                         epName: episode.name
                     }));
-                    // merge 9x9 api and youtube api (ytId, ytDuration, uploader, uploadDate, isZoneLimited, isSyndicateLimited, isEmbedLimited)
+                    // merge 9x9 api and youtube api (ytId, ytDuration, uploader, uploadDate, isZoneLimited, isSyndicateLimited, isEmbedLimited, isUnplayableVideo)
                     var normalPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
                         preloadImage = [],
                         programList = [],
@@ -363,8 +368,11 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                         endTitleCard = null,
                         isPrivateVideo = null,
                         isZoneLimited = null,
+                        hasSyndicateDenied = null,
+                        hasLimitedSyndication = null,
                         isSyndicateLimited = null,
-                        isEmbedLimited = null;
+                        isEmbedLimited = null,
+                        isUnplayableVideo = null;
                     nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}/programs', {
                         episodeId: $('#id').val()
                     }), null, function (programs) {
@@ -448,14 +456,18 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                             ytData = youtubes.data;
                                             isPrivateVideo = false;
                                             isZoneLimited = (ytData.restrictions) ? true : false;
-                                            isSyndicateLimited = ((ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) || (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason)) ? true : false;
+                                            hasSyndicateDenied = (ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false;
+                                            hasLimitedSyndication = (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason) ? true : false;
+                                            isSyndicateLimited = (hasSyndicateDenied || hasLimitedSyndication) ? true : false;
                                             isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
+                                            isUnplayableVideo = (isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication)) ? true : false;
                                         } else {
                                             ytData = null;
                                             isPrivateVideo = (youtubes.error && youtubes.error.code && 403 == youtubes.error.code) ? true : false;
                                             isZoneLimited = null;
                                             isSyndicateLimited = null;
                                             isEmbedLimited = null;
+                                            isUnplayableVideo = null;
                                         }
                                         if (ytData && false === isEmbedLimited) {
                                             ytItem = {
@@ -474,7 +486,8 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                                 isPrivateVideo: isPrivateVideo,
                                                 isZoneLimited: isZoneLimited,
                                                 isSyndicateLimited: isSyndicateLimited,
-                                                isEmbedLimited: isEmbedLimited
+                                                isEmbedLimited: isEmbedLimited,
+                                                isUnplayableVideo: isUnplayableVideo
                                             };
                                         } else {
                                             ytItem = {
@@ -483,12 +496,13 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                                 endTitleCard: endTitleCard,
                                                 ytId: programItem.fileUrl.slice(-11),
                                                 ytDuration: 0,                                                                      // fake origin duration (invalid video)
-                                                uploader: ((youtubes.error) ? youtubes.error.message : 'Non-embeddable'),           // fake uploader (error message)
-                                                uploadDate: ((youtubes.error) ? (youtubes.error.code + 'T') : 'Non-embeddableT'),   // fake uploadDate (error code)
+                                                uploader: ((youtubes.error) ? youtubes.error.message : 'Unplayable-Video'),         // fake uploader (error message)
+                                                uploadDate: ((youtubes.error) ? (youtubes.error.code + 'T') : 'Unplayable-VideoT'), // fake uploadDate (error code)
                                                 isPrivateVideo: isPrivateVideo,
                                                 isZoneLimited: isZoneLimited,
                                                 isSyndicateLimited: isSyndicateLimited,
-                                                isEmbedLimited: isEmbedLimited
+                                                isEmbedLimited: isEmbedLimited,
+                                                isUnplayableVideo: isUnplayableVideo
                                             };
                                         }
                                         ytItem = $.extend(programItem, ytItem);
@@ -575,7 +589,7 @@ function buildEpcuratePublish(pageId, fm, crumb) {
                     uploadImage();
                 }
                 $('#origin_status').val('Draft');
-                $('#status_draft').attr('checked', 'checked');
+                $('#status_draft').prop('checked', true);
                 $('p.radio-list input').uniform();
                 if (true === episode.isPublic) {
                     $('#origin_status').val('Published');
@@ -584,7 +598,7 @@ function buildEpcuratePublish(pageId, fm, crumb) {
                     $('#schedule-publish').addClass('hide');
                     $('#schedule-rerun-label').removeClass('hide');
                     $('#schedule-rerun').removeClass('hide');
-                    $('#status_published').attr('checked', 'checked');
+                    $('#status_published').prop('checked', true);
                 } else {
                     $('p.radio-list').addClass('draft');
                     $('#schedule-publish-label').removeClass('hide');
@@ -595,10 +609,10 @@ function buildEpcuratePublish(pageId, fm, crumb) {
                 if (episode.scheduleDate) {
                     if (true === episode.isPublic) {
                         $('#origin_status').val('Scheduled to rerun');
-                        $('#rerun_y').attr('checked', 'checked');
+                        $('#rerun_y').prop('checked', true);
                     } else {
                         $('#origin_status').val('Scheduled to publish');
-                        $('#status_scheduled').attr('checked', 'checked');
+                        $('#status_scheduled').prop('checked', true);
                     }
                     scheduleDateTime = formatTimestamp(episode.scheduleDate, '/', ':').split(' ');
                     $('#publishDate').val(scheduleDateTime[0]);
@@ -622,14 +636,14 @@ function buildEpcuratePublish(pageId, fm, crumb) {
                         $('#imageUrl').val(episode.imageUrl);
                         $('#imageUrlOld').val(episode.imageUrl);
                         $('#img-list li').each(function () {
-                            if (episode.imageUrl === $(this).children('img').attr('src')) {
+                            if (episode.imageUrl === $(this).children('.img').children('img').attr('src')) {
                                 hasMatch = true;
                                 $(this).clone().prependTo('#img-list');
                                 $(this).remove();
                             }
                         });
                         if (!hasMatch) {
-                            $('#img-list').prepend('<li class="new"><img src="' + episode.imageUrl + '" alt="' + episode.name + '" /></li>');
+                            $('#img-list').prepend('<li class="new"><div class="img"><img src="' + episode.imageUrl + '" alt="' + episode.name + '" /></div></li>');
                         }
                     }
                     $('#thumbnail-list ul').cycle({
@@ -807,18 +821,21 @@ function listEpisode(pageId, id) {
 
                         // sharing url
                         nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/validBrands', {
-                            channelId : id
-                        }), null, function(cBrands) {
-                            var surl_html = "", tmpBrand = [];
-                            tmpBrand =[{brand: cBrands[0].brand}] ;
-                            $("#get-url-part-tmpl").tmpl(cBrands,{li_sel:cBrands[0].brand}).appendTo("#tmpHtml2");
-                            $("#tmpHtml").html("");
-                            $("#get-url-tmpl").tmpl(tmpBrand,{li_items:$("#tmpHtml2").html()}).appendTo("#tmpHtml");
-                            $("div.get-url").each(function(){
+                            channelId: id
+                        }), null, function (cBrands) {
+                            var tmpBrand = [ { brand: cBrands[0].brand } ];
+                            $('#get-url-part-tmpl').tmpl(cBrands, {
+                                li_sel: cBrands[0].brand
+                            }).appendTo('#tmpHtml2');
+                            $('#tmpHtml').html('');
+                            $('#get-url-tmpl').tmpl(tmpBrand, {
+                                li_items: $('#tmpHtml2').html()
+                            }).appendTo('#tmpHtml');
+                            $('div.get-url').each(function () {
                                 $(this).children().remove();
-                                $(this).append( $("#tmpHtml").html() );
+                                $(this).append($('#tmpHtml').html());
                             });
-                        }); 
+                        });
                     });
                 }
             });
@@ -918,6 +935,11 @@ function buildChannelPoi(pageId, id) {
                         $('#poi-list-page').html('');
                         $('#poi-list-page-tmpl').tmpl(poiPage).prependTo('#poi-list-page');
                         $('#overlay-s').fadeOut('fast', function () {
+                            $('#title-func h2.poi-list em').data('width', $('#title-func h2.poi-list em').width());
+                            $('#title-func h2.poi-create em').data('width', $('#title-func h2.poi-create em').width());
+                            $('#title-func h2.poi-edit em').data('width', $('#title-func h2.poi-edit em').width());
+                            $('#title-func h2').hide();
+                            $('#title-func h2.poi-list').show();
                             setFormHeight();
                             preloadChannelVideo();
                         });
@@ -968,14 +990,10 @@ function updateChannel(pageId, id) {
                     nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/validBrands', {
                         channelId: id
                     }), null, function (cBrands) {
-                        var cntBrand = cBrands.length,
-                            i = 0;
                         $('#surl-ul').html('');
                         $('#surl-tmpl-item').tmpl(cBrands, {
                             selBrand: ccBrand.brand
                         }).appendTo('#surl-ul');
-                        for (i = 0; i < cntBrand; i += 1) {
-                        }
                     });
                 });
 
@@ -1119,6 +1137,24 @@ function createChannel(pageId) {
         $('#settingForm .btn-cancel, #settingForm .btn-create').removeClass('disable').addClass('enable');
     });
 }   // end of createChannel()
+
+function buildCmsSettings(pageId) {
+    showProcessingOverlay();
+    $('#content-main').html('');
+    $('#content-main-tmpl').tmpl().appendTo('#content-main');
+    $('#change-pwd-overlay .overlay-container').html('');
+    $('#change-pwd-overlay-tmpl').tmpl().appendTo('#change-pwd-overlay .overlay-container');
+    $('#overlay-s').fadeOut('fast', function () {
+        $('#username').charCounter(16, {
+            container: '<span class="hide"><\/span>',
+            format: '%1 characters to go!',
+            delay: 0,
+            multibyte: true
+        });
+        setFormHeight();
+        $(window).trigger('resize');
+    });
+}   // end of buildCmsSettings()
 
 function listChannel(pageId) {
     if (CMS_CONF.USER_DATA.id) {
@@ -1311,7 +1347,8 @@ function setupUserCampaignId() {
 function setupLanguageAndRenderPage(user, isStoreLangKey) {
     // fetch user lang
     CMS_CONF.USER_DATA = user;
-    var lang = CMS_CONF.USER_DATA.lang;
+    var msie = /MSIE/.test(navigator.userAgent),
+        lang = CMS_CONF.USER_DATA.lang;
     if (-1 === $.inArray(lang, CMS_CONF.LANG_SUPPORT)) {
         lang = 'en';
         CMS_CONF.USER_DATA.lang = lang;
@@ -1331,7 +1368,7 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
 
         // store lang key
         if (true === isStoreLangKey) {
-            if (!$.browser.msie) {
+            if (!msie) {
                 // avoid IE8 bug
                 $('title').data('langkey', $('title').text());
             }
@@ -1392,6 +1429,10 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
                 initFacebookJavaScriptSdk();
                 listChannel(CMS_CONF.PAGE_ID);
                 break;
+            case 'cms-settings.html':
+                initFacebookJavaScriptSdk();
+                buildCmsSettings(CMS_CONF.PAGE_ID);
+                break;
             case 'channel-add.html':
                 CMS_CONF.PAGE_ID = 'channel';
                 // because auto share template parse order issue, initFacebookJavaScriptSdk() be bundled to createChannel()
@@ -1436,7 +1477,7 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
 
         // replace lang value
         // NOTE: get CMS_CONF.PAGE_ID after render page
-        if (!$.browser.msie) {
+        if (!msie) {
             // avoid IE8 bug
             $('title').text(nn._([CMS_CONF.PAGE_ID, 'html-title', $('title').data('langkey')]));
         }
@@ -1475,7 +1516,8 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
 
 function setupLanguagePage() {
     // fetch user lang
-    var lang = $.cookie('signLang');
+    var msie = /MSIE/.test(navigator.userAgent),
+        lang = $.cookie('signLang');
     if (-1 === $.inArray(lang, CMS_CONF.LANG_SUPPORT)) {
         lang = 'en';
     }
@@ -1492,7 +1534,7 @@ function setupLanguagePage() {
         CMS_CONF.EFFECT_MAP = langPack['effect-map'];
         nn.i18n(langPack);
 
-        if (!$.browser.msie) {
+        if (!msie) {
             if ($('title').data('langkey') === undefined) {
                 $('title').data('langkey', $('title').text());
             }

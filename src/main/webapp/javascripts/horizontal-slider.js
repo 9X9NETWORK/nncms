@@ -1,3 +1,5 @@
+/*jslint unparam: true, sloppy: true, vars: true */
+/*global $, CMS_CONF */
 // scrollbar('#storyboard-wrap', '#storyboard-list', '#storyboard-slider');
 
 function scrollbar(outer, inner, sliderwrap) {
@@ -9,7 +11,7 @@ function scrollbar(outer, inner, sliderwrap) {
 
     if (difference > 0) {
         $(sliderwrap).show();
-        var proportion = difference / $(inner).width();
+        //var proportion = difference / $(inner).width();
 
         // set the proportional height - round it to make sure everything adds up correctly later on
         //var handleWidth = $(outer).width() - (proportion * $(outer).width());
@@ -49,7 +51,7 @@ function scrollbar(outer, inner, sliderwrap) {
         var sliderWidth = origSliderWidth - handleWidth;
 
         // so the slider needs to have both top and bottom margins equal to half the difference
-        var sliderMargin = (origSliderWidth - sliderWidth) * 0.5;
+        //var sliderMargin = (origSliderWidth - sliderWidth) * 0.5;
 
         $(sliderwrap + ' .ui-slider').css({ width: sliderWidth });
     } else {

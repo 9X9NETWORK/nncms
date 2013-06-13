@@ -1,5 +1,5 @@
-/*jslint eqeq: true, regexp: true, sloppy: true, vars: true */
-/*global jQuery, nn, window */
+/*jslint browser: true, regexp: true, sloppy: true, vars: true */
+/*global jQuery, nn */
 /*!
  * jQuery Title Card Player plugin
  *
@@ -7,9 +7,10 @@
  * @requires    jQuery UI v1.8.23 or later
  * @requires    9x9 SDK (nn-sdk.js)
  * @author      Chih-Wen Yang <chihwen@doubleservice.com>
- * @version     1.6.1
+ * @version     1.6.2
  *
  * - Change Log:
+ *      1.6.2:  2013/06/11 - Some minor cleanup to pass JSLint coding quality tool check (http://www.jslint.com/).
  *      1.6.1:  2013/05/24 - Some minor cleanup to pass JSLint coding quality tool check (http://www.jslint.com/).
  *      1.6.0:  2012/10/24 - 1. Detect both width and height then decide calculate title card size according to width or to height.
  *                           2. Title card size will be 16:9, so there might be black area on the left & right, or top & bottom.
@@ -240,8 +241,8 @@
             // basic html structure and css style
             wrapperHtml  = '<div class="' + wrapperCanvas + '"><div class="' + wrapperOuter + '">';
             wrapperHtml += '<div class="' + wrapperMiddle + '"><div class="' + wrapperInner + '"></div></div>';
-            if (('' != opts.backgroundImage && '' == opts.backgroundColor)
-                    || ('' != opts.backgroundImage && '' != opts.backgroundColor && $.fn.titlecard.system.backgroundImage != opts.backgroundImage)) {
+            if (('' !== opts.backgroundImage && '' === opts.backgroundColor)
+                    || ('' !== opts.backgroundImage && '' !== opts.backgroundColor && $.fn.titlecard.system.backgroundImage !== opts.backgroundImage)) {
                 wrapperHtml += '<img src="' + opts.backgroundImage + '" style="width: 100%; height: 100%; border: none;" />';
             }
             wrapperHtml += '</div></div>';

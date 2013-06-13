@@ -18,6 +18,16 @@
     line-height: 27px;
 }
 
+#channel-name {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
+}
+
 body.mac #title-func h2 {
     font-weight: 300;
 }
@@ -203,7 +213,6 @@ body.mac #title-func h2 {
 	display: none;
 }
 
-
 /* =info
 **************************************/
 
@@ -214,10 +223,16 @@ body.mac #title-func h2 {
 }
 
 #channel-list li .info h3 {
+    overflow: hidden;
     padding: 5px 0 0;
     margin: 5px 0 35px 0;
     font-weight: 600;
     font-size: 17px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
 }
 
 #channel-list li .info h3 a {
@@ -557,16 +572,51 @@ body.mac #title-func h2 {
 	resize: none;
 }
 
-#content-main-wrap form .fminput .fmfield p.img {
+#content-main-wrap form .fminput .fmfield .thumbnail {
     position: relative;
     float: left;
     overflow: hidden;
-    width: 84px;
+    width: 62px;
     height: 62px;
     margin-right: 10px;
-    padding: 10px 0 10px 0;
-    background: url(../images/thumbnail_box.png) no-repeat 0 0;
+    padding: 8px 7px 6px;
+    background-color: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3), 0px 0px 4px rgba(255, 255, 255,0.3) inset;
     text-align: center;
+}
+
+#content-main-wrap form .fminput .fmfield .thumbnail .img-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 62px;
+    height: 62px;
+}
+
+#content-main-wrap form .fminput .fmfield .thumbnail .img-wrap .img {
+    position: absolute;
+    width: 206px;
+    height: 62px;
+    top: 0;
+    left: 50%;
+    margin: 0 0 0 -103px;
+}
+
+#content-main-wrap form .fminput .fmfield .thumbnail .img-wrap .img .photo {
+    display: block;
+    width: auto !important;
+    max-width: 206px !important;
+    min-width: 62px !important;
+    height: 62px !important;
+    margin: 0 auto;
+}
+
+#content-main-wrap form .fminput .fmfield .thumbnail .loading {
+    display: none;
+    position: absolute;
+    top: 8px;
+    left: 7px;
+    width: 62px;
+    height: 62px;
 }
 
 #content-main-wrap form .fminput .fmfield .swfupload {
@@ -579,21 +629,9 @@ body.mac #title-func h2 {
 	background: none;
 }
 
-#content-main-wrap form .fminput .fmfield p.img .thumbnail {
-    width: 62px;
-    height: 62px;
-}
-
 #content-main-wrap form .fminput .fmfield p.default .thumbnail {
     width: 129px;
     height: 82px;
-}
-
-#content-main-wrap form .fminput .fmfield p.img img.loading {
-    display: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
 }
 
 #content-main-wrap form .fminput .fmfield p.btns {
@@ -964,23 +1002,25 @@ body.mac #title-func h2 {
 
 #content-main #content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul li a {
     display: block;
-    padding: 6.5px 0;
+    overflow: hidden;
+    height: 15px;
+    line-height: 15px;
+    margin-top: 6.5px;
+    padding: 0 0 0 26px;
+    background: url(../images/bg_checkbox.png) no-repeat 4px 0;
     color: #555;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
     text-decoration: none;
 }
 #content-main #content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul li a:hover {
 	color: #999;
 }
 
-#content-main #content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul li a span {
-    display: block;
-    height: 15px;
-    line-height: 15px;
-    padding: 0 0 0 26px;
-    background: url(../images/bg_checkbox.png) no-repeat 4px 0;
-}
-
-#content-main #content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul li.checked a span {
+#content-main #content-main-wrap form .fminput .fmfield .connected .share-item .page-list ul li.checked a {
     background: url(../images/check_box_check.png) no-repeat 4px center;
     font-weight: bold;
 }

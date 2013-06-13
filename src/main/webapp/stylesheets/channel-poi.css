@@ -9,13 +9,14 @@
 }
 
 #content-main #title-func h2 {
-    display: none;
+    visibility: hidden;
 }
 
 #content-main.poi-list #title-func h2.poi-list,
 #content-main.poi-edit #title-func h2.poi-edit,
 #content-main.poi-create #title-func h2.poi-create {
-    display: block;
+    display: block !important;
+    visibility: visible;
 }
 
 #title-func h2 em {

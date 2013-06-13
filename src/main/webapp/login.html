@@ -2,10 +2,10 @@
 <html class="en" lang="en">
 <head>
 <meta charset="utf-8" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="javascripts/nn-sdk.js?v=1026"></script>
-<script src="javascripts/purl.js?v=1026"></script>
-<script src="javascripts/config.js?v=1026"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="javascripts/nn-sdk.js?v=1135"></script>
+<script src="javascripts/purl.min.js?v=1135"></script>
+<script src="javascripts/config.js?v=1135"></script>
 <title>9x9.tv - Login</title>
 </head>
 <body>
@@ -37,11 +37,11 @@ $(function () {
             fm.password.focus();
             return false;
         }
-        $('.btn-submit').attr('disabled', 'disabled');
+        $('.btn-submit').prop('disabled', true);
         qrystring = $(this).serialize();
         parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
         nn.api('POST', CMS_CONF.API('/api/login'), parameter, function (user) {
-            $('.btn-submit').removeAttr('disabled');
+            $('.btn-submit').prop('disabled', false);
             if (!user || !user.id) {
                 alert('Login failed, please try again.');
             } else {

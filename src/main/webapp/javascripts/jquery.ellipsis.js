@@ -1,24 +1,28 @@
+/*jslint sloppy: true */
+/*global jQuery */
+
 (function ($) {
     $.fn.ellipsis = function () {
+        var el, text, multiline, t, height, width, func;
         return this.each(function () {
-            var el = $(this);
-            if ('hidden' == el.css('overflow')) {
-                var text = el.html();
-                var multiline = el.hasClass('multiline');
-                var t = $(this.cloneNode(true))
-                        .hide()
-                        .css('position', 'absolute')
-                        .css('overflow', 'visible')
-                        .width(multiline ? el.width() : 'auto')
-                        .height(multiline ? 'auto' : el.height());
+            el = $(this);
+            if ('hidden' === el.css('overflow')) {
+                text = el.html();
+                multiline = el.hasClass('multiline');
+                t = $(this.cloneNode(true))
+                    .hide()
+                    .css('position', 'absolute')
+                    .css('overflow', 'visible')
+                    .width(multiline ? el.width() : 'auto')
+                    .height(multiline ? 'auto' : el.height());
                 el.after(t);
-                var height = function () {
+                height = function () {
                     return t.height() > el.height();
                 };
-                var width = function () {
+                width = function () {
                     return t.width() > el.width();
                 };
-                var func = multiline ? height : width;
+                func = multiline ? height : width;
                 while (text.length > 0 && func()) {
                     text = text.substr(0, text.length - 1);
                     t.html(text + '...');
@@ -28,4 +32,4 @@
             }
         });
     };
-})(jQuery);
+}(jQuery));

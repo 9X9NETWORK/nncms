@@ -553,23 +553,38 @@
 
 #content-wrap form .fminput .fmfield .img-list ul {
     overflow: hidden;
-    width: 129px;
-    height: 82px;
+    width: 126px;
+    height: 77px;
     margin-left: 27px;
+    padding: 3px;
 }
 
 #content-wrap form .fminput .fmfield .img-list ul li {
-    float: left;
+    position: releative;
     overflow: hidden;
-    width: 129px;
-    height: 82px;
-    background: url(../images/thumbnail_box_lg.png) no-repeat 0 0;
+    width: 126px;
+    height: 77px;
+    margin: 3px 0 0 3px;
+    background-color: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3), 0px 0px 4px rgba(255, 255, 255,0.3) inset;
 }
 
-#content-wrap form .fminput .fmfield .img-list ul li img {
-    width: 110px;
-    height: 62px;
-    margin: 10px 0 0 10px;
+#content-wrap form .fminput .fmfield .img-list ul li .img {
+    position: absolute;
+    width: 320px;
+    height: 63px;
+    top: 7px;
+    left: 50%;
+    margin: 0 0 0 -160px;
+}
+
+#content-wrap form .fminput .fmfield .img-list ul li .img img {
+    display: block;
+    width: auto !important;
+    max-width: 320px !important;
+    min-width: 112px !important;
+    height: 63px !important;
+    margin: 0 auto;
 }
 
 #content-wrap form .fminput .fmfield .img-upload-func {

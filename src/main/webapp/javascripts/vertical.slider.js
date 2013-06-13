@@ -1,3 +1,5 @@
+/*jslint unparam: true, sloppy: true, vars: true */
+/*global $, CMS_CONF */
 // scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
 
 function scrollbar(outer, inner, sliderwrap) {
@@ -12,7 +14,7 @@ function scrollbar(outer, inner, sliderwrap) {
         var proportion = difference / $(inner).height();
 
         // this value can fix epislode over 200 scroll problem
-        var iRange = parseInt($(inner).height() / $(outer).height()) * 8;
+        var iRange = parseInt($(inner).height() / $(outer).height(), 10) * 8;
         if (iRange < 100) {
             // before default slider max / value
             iRange = 100;

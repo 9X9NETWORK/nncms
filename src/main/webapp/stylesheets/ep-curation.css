@@ -409,20 +409,36 @@ p.auto-height {
 }
 
 #epcurate-curation #cur-edit h3,
-#epcurate-curation #cur-poi   h3 {
+#epcurate-curation #cur-poi  h3 {
     overflow: hidden;
     height: 20px;
     line-height: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
 }
 
-#epcurate-curation #cur-poi   h3 {
+#epcurate-curation #cur-poi h3 {
     font-size: 13px;
 }
 
 #epcurate-curation #cur-edit h3 span,
-#epcurate-curation #cur-poi   h3 span {
+#epcurate-curation #cur-poi  h3 span {
     float: none;
     margin: 0;
+}
+
+#epcurate-curation #cur-edit p.info,
+#epcurate-curation #cur-poi  p.info {
+    overflow: hidden;
+    height: 16px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
 }
 
 #epcurate-curation #cur-edit p.desc {
@@ -431,7 +447,7 @@ p.auto-height {
 }
 
 #epcurate-curation #cur-edit p a,
-#epcurate-curation #cur-poi   p a {
+#epcurate-curation #cur-poi  p a {
     float: none;
     margin: 0;
     color: #555;
@@ -439,7 +455,7 @@ p.auto-height {
 }
 
 #epcurate-curation #cur-edit p a:hover,
-#epcurate-curation #cur-poi   p a:hover {
+#epcurate-curation #cur-poi  p a:hover {
     color: #999;
 }
 
