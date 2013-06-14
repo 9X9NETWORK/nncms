@@ -343,6 +343,9 @@ $(function () {
             } else {
                 // cancel login nothing happens (maybe unknown or not_authorized)
                 nn.log(response, 'debug');
+                $.blockUI({
+                    message: $('#fb-connect-failed')
+                });
             }
         }, {scope: CMS_CONF.FB_REQ_PERMS.join(',')});
         return false;

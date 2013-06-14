@@ -186,7 +186,7 @@ function uploadImage() {
                 }
             },
             settings = {
-                flash_url:                  'javascripts/swfupload/swfupload.swf',
+                flash_url:                  'javascripts/libs/swfupload/swfupload.swf',
                 upload_url:                 'http://' + s3attr.bucket + '.s3.amazonaws.com/', // http://9x9tmp-ds.s3.amazonaws.com/
                 file_size_limit:            parameter.size,
                 file_types:                 '*.jpg; *.png; *.gif',
@@ -523,6 +523,9 @@ $(function () {
             } else {
                 // cancel login nothing happens (maybe unknown or not_authorized)
                 nn.log(response, 'debug');
+                $.blockUI({
+                    message: $('#fb-connect-failed2')
+                });
             }
         }, {scope: CMS_CONF.FB_REQ_PERMS.join(',')});
 

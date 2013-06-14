@@ -1,8 +1,127 @@
+版本: 1147
+作者: chihwen
+日期: 2013年6月14日 下午 12:28:18
+訊息:
+將函式庫類的 js 移到 javascripts/libs/ 下，以利未來維護管理
+
+1. 因應函式庫移動到 javascripts/libs/ 下，調整各 html 引入路徑。
+2. 因應函式庫移動到 javascripts/libs/ 下，調整 swfupload.swf 路徑 (channel.js, curation.js, epcurate.js)。
+issue 6337
+----
+已刪除 : /fakeapi/javascripts/horizontal-slider.js
+已刪除 : /fakeapi/javascripts/horizontal-slider.min.js
+已刪除 : /fakeapi/javascripts/jquery.autotab.js
+已刪除 : /fakeapi/javascripts/jquery.autotab.min.js
+已刪除 : /fakeapi/javascripts/jquery.blockUI.js
+已刪除 : /fakeapi/javascripts/jquery.blockUI.min.js
+已刪除 : /fakeapi/javascripts/jquery.charcounter.js
+已刪除 : /fakeapi/javascripts/jquery.charcounter.min.js
+已刪除 : /fakeapi/javascripts/jquery.cookie.js
+已刪除 : /fakeapi/javascripts/jquery.cookie.min.js
+已刪除 : /fakeapi/javascripts/jquery.countdown.js
+已刪除 : /fakeapi/javascripts/jquery.countdown.min.js
+已刪除 : /fakeapi/javascripts/jquery.cycle.all.js
+已刪除 : /fakeapi/javascripts/jquery.cycle.all.min.js
+已刪除 : /fakeapi/javascripts/jquery.datepick.js
+已刪除 : /fakeapi/javascripts/jquery.datepick.min.js
+已刪除 : /fakeapi/javascripts/jquery.ellipsis.js
+已刪除 : /fakeapi/javascripts/jquery.ellipsis.min.js
+已刪除 : /fakeapi/javascripts/jquery.mousewheel.js
+已刪除 : /fakeapi/javascripts/jquery.mousewheel.min.js
+已刪除 : /fakeapi/javascripts/jquery.swfobject.js
+已刪除 : /fakeapi/javascripts/jquery.swfobject.min.js
+已刪除 : /fakeapi/javascripts/jquery.titlecard.js
+已刪除 : /fakeapi/javascripts/jquery.titlecard.min.js
+已刪除 : /fakeapi/javascripts/jquery.tmpl.js
+已刪除 : /fakeapi/javascripts/jquery.tmpl.min.js
+已刪除 : /fakeapi/javascripts/jquery.toggleval.js
+已刪除 : /fakeapi/javascripts/jquery.toggleval.min.js
+已刪除 : /fakeapi/javascripts/jquery.ui.datepicker-en.js
+已刪除 : /fakeapi/javascripts/jquery.ui.datepicker-zh.js
+已刪除 : /fakeapi/javascripts/jquery.uniform.js
+已刪除 : /fakeapi/javascripts/jquery.uniform.min.js
+已刪除 : /fakeapi/javascripts/json2.js
+已刪除 : /fakeapi/javascripts/json2.min.js
+已刪除 : /fakeapi/javascripts/nn-sdk.js
+已刪除 : /fakeapi/javascripts/perfect-scrollbar.js
+已刪除 : /fakeapi/javascripts/perfect-scrollbar.min.js
+已刪除 : /fakeapi/javascripts/purl.js
+已刪除 : /fakeapi/javascripts/purl.min.js
+已刪除 : /fakeapi/javascripts/swfupload
+已刪除 : /fakeapi/javascripts/vertical.slider.js
+已刪除 : /fakeapi/javascripts/vertical.slider.min.js
+已加入 : /fakeapi/javascripts/libs
+已加入 : /fakeapi/javascripts/libs/horizontal-slider.js (從路徑複製: /fakeapi/javascripts/horizontal-slider.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/horizontal-slider.min.js (從路徑複製: /fakeapi/javascripts/horizontal-slider.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.autotab.js (從路徑複製: /fakeapi/javascripts/jquery.autotab.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.autotab.min.js (從路徑複製: /fakeapi/javascripts/jquery.autotab.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.blockUI.js (從路徑複製: /fakeapi/javascripts/jquery.blockUI.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.blockUI.min.js (從路徑複製: /fakeapi/javascripts/jquery.blockUI.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.charcounter.js (從路徑複製: /fakeapi/javascripts/jquery.charcounter.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.charcounter.min.js (從路徑複製: /fakeapi/javascripts/jquery.charcounter.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.cookie.js (從路徑複製: /fakeapi/javascripts/jquery.cookie.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.cookie.min.js (從路徑複製: /fakeapi/javascripts/jquery.cookie.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.countdown.js (從路徑複製: /fakeapi/javascripts/jquery.countdown.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.countdown.min.js (從路徑複製: /fakeapi/javascripts/jquery.countdown.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.cycle.all.js (從路徑複製: /fakeapi/javascripts/jquery.cycle.all.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.cycle.all.min.js (從路徑複製: /fakeapi/javascripts/jquery.cycle.all.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.datepick.js (從路徑複製: /fakeapi/javascripts/jquery.datepick.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.datepick.min.js (從路徑複製: /fakeapi/javascripts/jquery.datepick.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.ellipsis.js (從路徑複製: /fakeapi/javascripts/jquery.ellipsis.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.ellipsis.min.js (從路徑複製: /fakeapi/javascripts/jquery.ellipsis.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.mousewheel.js (從路徑複製: /fakeapi/javascripts/jquery.mousewheel.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.mousewheel.min.js (從路徑複製: /fakeapi/javascripts/jquery.mousewheel.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.swfobject.js (從路徑複製: /fakeapi/javascripts/jquery.swfobject.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.swfobject.min.js (從路徑複製: /fakeapi/javascripts/jquery.swfobject.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.titlecard.js (從路徑複製: /fakeapi/javascripts/jquery.titlecard.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.titlecard.min.js (從路徑複製: /fakeapi/javascripts/jquery.titlecard.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.tmpl.js (從路徑複製: /fakeapi/javascripts/jquery.tmpl.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.tmpl.min.js (從路徑複製: /fakeapi/javascripts/jquery.tmpl.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.toggleval.js (從路徑複製: /fakeapi/javascripts/jquery.toggleval.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.toggleval.min.js (從路徑複製: /fakeapi/javascripts/jquery.toggleval.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.ui.datepicker-en.js (從路徑複製: /fakeapi/javascripts/jquery.ui.datepicker-en.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.ui.datepicker-zh.js (從路徑複製: /fakeapi/javascripts/jquery.ui.datepicker-zh.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.uniform.js (從路徑複製: /fakeapi/javascripts/jquery.uniform.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/jquery.uniform.min.js (從路徑複製: /fakeapi/javascripts/jquery.uniform.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/json2.js (從路徑複製: /fakeapi/javascripts/json2.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/json2.min.js (從路徑複製: /fakeapi/javascripts/json2.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/nn-sdk.js (從路徑複製: /fakeapi/javascripts/nn-sdk.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/perfect-scrollbar.js (從路徑複製: /fakeapi/javascripts/perfect-scrollbar.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/perfect-scrollbar.min.js (從路徑複製: /fakeapi/javascripts/perfect-scrollbar.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/purl.js (從路徑複製: /fakeapi/javascripts/purl.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/purl.min.js (從路徑複製: /fakeapi/javascripts/purl.min.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/swfupload (從路徑複製: /fakeapi/javascripts/swfupload, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/vertical.slider.js (從路徑複製: /fakeapi/javascripts/vertical.slider.js, 版本, 1145)
+已加入 : /fakeapi/javascripts/libs/vertical.slider.min.js (從路徑複製: /fakeapi/javascripts/vertical.slider.min.js, 版本, 1145)
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-poi.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/cms-settings.html
+異動 : /fakeapi/epcurate-curation.html
+異動 : /fakeapi/epcurate-publish.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/index.html
+異動 : /fakeapi/login.html
+異動 : /fakeapi/signin.html
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/curation.js
+異動 : /fakeapi/javascripts/epcurate.js
+
+版本: 1146
+作者: chihwen
+日期: 2013年6月14日 上午 11:44:10
+訊息:
+在進行 FB Connect 或 Reconnect 時，若遭遇取消登入的話，就跳 FB Connect 失敗 overlay (maybe unknown or not_authorized)
+issue 6428
+----
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/cms-settings.js
+
 版本: 1144
 作者: chihwen
 日期: 2013年6月13日 下午 02:56:24
 訊息:
-將 alert 改為 nn.log 避免直接輸入除錯訊息
+將 alert 改為 nn.log 避免直接輸出除錯訊息
 issue 6337
 ----
 異動 : /fakeapi/javascripts/channel.js
