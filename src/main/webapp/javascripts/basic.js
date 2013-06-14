@@ -1,4 +1,4 @@
-/*jslint browser: true, devel: true, bitwise: true, nomen: true, regexp: true, unparam: true, sloppy: true */
+/*jslint browser: true, nomen: true, regexp: true, unparam: true, sloppy: true */
 /*global $, nn, CMS_CONF, scrollbar, setupLanguageAndRenderPage, setupLanguagePage */
 
 function autoWidth() {

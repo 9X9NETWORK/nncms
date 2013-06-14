@@ -1,4 +1,4 @@
-/*jslint browser: true, devel: true, nomen: true, unparam: true, sloppy: true */
+/*jslint browser: true, nomen: true, unparam: true, sloppy: true */
 /*global $, nn, CMS_CONF, scrollbar, autoHeight, showSavingOverlay, showUnsaveOverlay, showDeletePromptOverlay, listEpisode */
 
 function setEpisodeWidth() {

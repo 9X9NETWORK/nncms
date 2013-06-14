@@ -1,4 +1,4 @@
-/*jslint browser: true, devel: true, nomen: true, regexp: true, unparam: true, sloppy: true */
+/*jslint browser: true, nomen: true, regexp: true, unparam: true, sloppy: true */
 /*global $, nn, CMS_CONF, SWFUpload, scrollbar, showSystemErrorOverlay, showProcessingOverlay, showSavingOverlay, showUnsaveOverlay, showUnsaveTrimTimeOverlay, showUnsaveTitleCardOverlay, showUnsavePoiOverlay, showUnsavePoiMask, showDeletePromptOverlay, showDeletePoiPromptOverlay, showDraftNoticeOverlay, formatTimestamp, formatDuration, nl2br, strip_tags, rebuildCrumbAndParam */
 
 function chkDuration() {

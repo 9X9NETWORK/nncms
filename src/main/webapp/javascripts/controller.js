@@ -1,4 +1,4 @@
-/*jslint browser: true, devel: true, eqeq: true, nomen: true, plusplus: true, regexp: true, unparam: true, sloppy: true, vars: true */
+/*jslint browser: true, nomen: true, regexp: true, unparam: true, sloppy: true */
 /*global $, nn, CMS_CONF, FB, scrollbar, autoHeight, showSystemErrorOverlayAndHookError, showProcessingOverlay, formatTimestamp, truncateFormTitle, setFormHeight, setTaglistWidth, ellipsisPage, uploadImage, setEpisodeWidth, preloadChannelVideo, setVideoMeasure, setSpace, sumStoryboardInfo, rebuildVideoNumber, setFormWidth, switchPublishStatus, switchRerunCheckbox, brandSeting, storeManage, portalManage, portalSet, resetPassCheck */
 
 function renderConnectFacebookUI() {
@@ -33,7 +33,7 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
         $.uniform.update('#fbTimeline');
     }
     // disable facebook page or rebuild fb-page-list
-    if (!facebook.pages || 'string' === typeof facebook.pages || 0 == facebook.pages.length) {
+    if (!facebook.pages || 'string' === typeof facebook.pages || 0 === facebook.pages.length) {
         $('#fbPage').prop('disabled', true);
         $.uniform.update('#fbPage');
     } else {
@@ -45,7 +45,7 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
             i = 0;
         if (modPageLen > 0) {
             modPageLen = rowNum - modPageLen;
-            for (i = 0; i < modPageLen; i++) {
+            for (i = 0; i < modPageLen; i += 1) {
                 pages.push({
                     id: 0,
                     name: ''
@@ -60,7 +60,7 @@ function renderAutoShareUI(facebook, isAutoCheckedTimeline) {
         ellipsisPage();
     }
     // checked default fadebook page
-    if ('channel-setting.html' == CMS_CONF.USER_URL.attr('file') && CMS_CONF.USER_URL.param('id') > 0) {
+    if ('channel-setting.html' === CMS_CONF.USER_URL.attr('file') && CMS_CONF.USER_URL.param('id') > 0) {
         nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/facebook', {
             channelId: CMS_CONF.USER_URL.param('id')
         }), null, function (autoshares) {
@@ -132,7 +132,8 @@ function buildFacebookPagesMap(facebook) {
 }   // end of buildFacebookPagesMap()
 
 function checkRestartConnect(facebook, callback) {
-    var isRestartConnect = false;
+    var isRestartConnect = false,
+        parameter = null;
     if (facebook && facebook.userId && facebook.accessToken) {
         if (facebook.pages && 'string' === typeof facebook.pages) {
             // ON PURPOSE to keep deep nesting if/else level because async facebook API call
@@ -145,7 +146,7 @@ function checkRestartConnect(facebook, callback) {
                 callback(facebook, isRestartConnect);
             }
         } else {
-            var parameter = {
+            parameter = {
                 access_token: facebook.accessToken
             };
             // FB.api('/{facebook.userId}/permissions', { anticache: (new Date()).getTime() }, function (response) {
@@ -251,7 +252,7 @@ function initFacebookJavaScriptSdk() {
                     $('.setup-notice p.fb-connect a.switch-off').addClass('hide');
                     // sync channel setting
                     if ($('#settingForm').length > 0) {
-                        var isAutoCheckedTimeline = ('channel-add.html' == CMS_CONF.USER_URL.attr('file')) ? true : false;
+                        var isAutoCheckedTimeline = ('channel-add.html' === CMS_CONF.USER_URL.attr('file')) ? true : false;
                         renderAutoShareUI(facebook, isAutoCheckedTimeline);
                     }
                 });
@@ -267,13 +268,13 @@ function buildEpcurateCuration(pageId, fm, crumb) {
     var eid = fm.id.value,
         cid = fm.channelId.value;
     $('#cur-add textarea').attr('placeholder', nn._([CMS_CONF.PAGE_ID, 'add-video', 'Paste YouTube video URLs to add (separate with different lines)']));
-    if ('' == eid && '' == cid) {
+    if (!eid && !cid) {
         showSystemErrorOverlayAndHookError('Invalid channel ID and episode ID, please try again.');
         return;
     }
-    if ('' == eid) {
+    if (!eid) {
         // insert mode: data from cookie
-        if (!crumb.name || '' == $.trim(crumb.name)) {
+        if (!crumb.name || '' === $.trim(crumb.name)) {
             crumb.name = 'New episode';
         }
         if (cid > 0 && !isNaN(cid) && CMS_CONF.USER_DATA.id) {
@@ -293,7 +294,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                 nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
                     channelId: cid
                 }), null, function (channel) {
-                    if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
+                    if (channel.contentType === CMS_CONF.YOUR_FAVORITE) {
                         showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                         return;
                     }
@@ -323,7 +324,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
         nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {
             episodeId: $('#id').val()
         }), null, function (episode) {
-            if ('' != cid && cid != episode.channelId) {
+            if ('' !== cid && cid !== episode.channelId) {
                 showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
                 return;
             }
@@ -343,7 +344,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                 nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
                     channelId: episode.channelId
                 }), null, function (channel) {
-                    if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
+                    if (channel.contentType === CMS_CONF.YOUR_FAVORITE) {
                         showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                         return;
                     }
@@ -415,7 +416,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                         endTitleCard = null;
                                         if (title_card.length > 0) {
                                             if (title_card[1]) {
-                                                if (1 == title_card[1].type) {
+                                                if (1 === title_card[1].type) {
                                                     beginTitleCard = title_card[0];
                                                     endTitleCard = title_card[1];
                                                 } else {
@@ -424,7 +425,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                                 }
                                             } else {
                                                 if (title_card[0]) {
-                                                    if (0 == title_card[0].type) {
+                                                    if (0 === title_card[0].type) {
                                                         beginTitleCard = title_card[0];
                                                     } else {
                                                         endTitleCard = title_card[0];
@@ -432,9 +433,9 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                                 }
                                             }
                                         }
-                                        if (beginTitleCard && beginTitleCard.message && '' != $.trim(beginTitleCard.message)) {
+                                        if (beginTitleCard && beginTitleCard.message && '' !== $.trim(beginTitleCard.message)) {
                                             beginTitleCard.message = $.trim(beginTitleCard.message).replace(/\{BR\}/g, '\n');
-                                            if (beginTitleCard.bgImage && '' != $.trim(beginTitleCard.bgImage)) {
+                                            if (beginTitleCard.bgImage && '' !== $.trim(beginTitleCard.bgImage)) {
                                                 preloadImage.push({
                                                     image: beginTitleCard.bgImage
                                                 });
@@ -442,9 +443,9 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                         } else {
                                             beginTitleCard = null;
                                         }
-                                        if (endTitleCard && endTitleCard.message && '' != $.trim(endTitleCard.message)) {
+                                        if (endTitleCard && endTitleCard.message && '' !== $.trim(endTitleCard.message)) {
                                             endTitleCard.message = $.trim(endTitleCard.message).replace(/\{BR\}/g, '\n');
-                                            if (endTitleCard.bgImage && '' != $.trim(endTitleCard.bgImage)) {
+                                            if (endTitleCard.bgImage && '' !== $.trim(endTitleCard.bgImage)) {
                                                 preloadImage.push({
                                                     image: endTitleCard.bgImage
                                                 });
@@ -463,7 +464,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
                                             isUnplayableVideo = (isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication)) ? true : false;
                                         } else {
                                             ytData = null;
-                                            isPrivateVideo = (youtubes.error && youtubes.error.code && 403 == youtubes.error.code) ? true : false;
+                                            isPrivateVideo = (youtubes.error && youtubes.error.code && 403 === youtubes.error.code) ? true : false;
                                             isZoneLimited = null;
                                             isSyndicateLimited = null;
                                             isEmbedLimited = null;
@@ -544,7 +545,7 @@ function buildEpcuratePublish(pageId, fm, crumb) {
         cid = fm.channelId.value,
         scheduleDateTime = '',
         tomorrow = '';
-    if ('' == eid || !crumb.id) {
+    if (!eid || !crumb.id) {
         if (crumb.channelId) {
             $('#form-btn-leave').data('gobackUrl', $('#epcurate-nav-curation').attr('href'));
         }
@@ -554,7 +555,7 @@ function buildEpcuratePublish(pageId, fm, crumb) {
     nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {
         episodeId: $('#id').val()
     }), null, function (episode) {
-        if ('' != cid && cid != episode.channelId) {
+        if (cid && cid !== episode.channelId) {
             showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
             return;
         }
@@ -575,7 +576,7 @@ function buildEpcuratePublish(pageId, fm, crumb) {
             nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
                 channelId: episode.channelId
             }), null, function (channel) {
-                if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
+                if (channel.contentType === CMS_CONF.YOUR_FAVORITE) {
                     showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                     return;
                 }
@@ -631,7 +632,7 @@ function buildEpcuratePublish(pageId, fm, crumb) {
                 }), null, function (programs) {
                     $('#img-list').html('');
                     $('#img-list-tmpl-item').tmpl(programs).appendTo('#img-list');
-                    if ('' != episode.imageUrl) {
+                    if ('' !== episode.imageUrl) {
                         var hasMatch = false;
                         $('#imageUrl').val(episode.imageUrl);
                         $('#imageUrlOld').val(episode.imageUrl);
@@ -691,7 +692,7 @@ function listEpisode(pageId, id) {
             }), null, function (channel) {
                 $('#func-nav ul').html('');
                 $('#func-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
-                if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
+                if (channel.contentType === CMS_CONF.YOUR_FAVORITE) {
                     nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {
                         userId: CMS_CONF.USER_DATA.id
                     }), null, function (favorites) {
@@ -718,7 +719,16 @@ function listEpisode(pageId, id) {
                     nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/episodes', {
                         channelId: id
                     }), null, function (episodes) {
-                        var cntEpisode = episodes.length;
+                        var cntEpisode = episodes.length,
+                            tmpCntEpisode = cntEpisode,
+                            tmpEpisodes = [],
+                            i = 0,
+                            cntPage = 0,
+                            iPageSize = 30,
+                            cntPageFirstEpisodes = 0,
+                            tmpStart = 0,
+                            tmpEnd = 0,
+                            ii = 0;
                         $('#title-func').html('');
                         $('#title-func-tmpl').tmpl(channel, {
                             cntEpisode: cntEpisode
@@ -727,22 +737,17 @@ function listEpisode(pageId, id) {
                         $('#content-main-wrap .constrain').html('');
                         CMS_CONF.EPISODES_PAGING = [];
                         CMS_CONF.EPISODES_PAGING_INFO = [];
-                        var tmpCntEpisode = cntEpisode,
-                            tmpEpisodes = [],
-                            i = 0;
                         if (cntEpisode > 0) {
                             // pagging
-                            var cntPage = 0;
-                            var iPageSize = 30;
                             if (cntEpisode > iPageSize) {
                                 cntPage = parseInt((cntEpisode / iPageSize), 10);
-                                var cntPageFirstEpisodes = cntEpisode % iPageSize;
-                                if (cntPage > 1 && cntPageFirstEpisodes == 0) {
+                                cntPageFirstEpisodes = cntEpisode % iPageSize;
+                                if (cntPage > 1 && cntPageFirstEpisodes === 0) {
                                     cntPage -= 1;
                                     cntPageFirstEpisodes = 30;
                                 }
                                 tmpEpisodes = [];
-                                for (i = 0; i < cntPageFirstEpisodes; i++) {
+                                for (i = 0; i < cntPageFirstEpisodes; i += 1) {
                                     episodes[i].seq = tmpCntEpisode - i;
                                     tmpEpisodes.push(episodes[i]);
                                 }
@@ -752,15 +757,12 @@ function listEpisode(pageId, id) {
                                     'pageStart': tmpCntEpisode,
                                     'pageEnd': (tmpCntEpisode - cntPageFirstEpisodes + 1)
                                 });
-                                var tmpStart = 0,
-                                    tmpEnd = 0,
-                                    ii = 0;
-                                for (i = 0; i < cntPage; i++) {
+                                for (i = 0; i < cntPage; i += 1) {
                                     tmpEpisodes = [];
                                     tmpStart = i * iPageSize + cntPageFirstEpisodes;
                                     tmpEnd = tmpStart + iPageSize;
                                     ii = 0;
-                                    for (ii = tmpStart; ii < tmpEnd; ii++) {
+                                    for (ii = tmpStart; ii < tmpEnd; ii += 1) {
                                         // serial DESC
                                         episodes[ii].seq = cntEpisode - ii;
                                         tmpEpisodes.push(episodes[ii]);
@@ -774,7 +776,7 @@ function listEpisode(pageId, id) {
                                 }
                             } else {
                                 tmpEpisodes = [];
-                                for (i = 0; i < cntEpisode; i++) {
+                                for (i = 0; i < cntEpisode; i += 1) {
                                     // the number srilal is DESC
                                     episodes[i].seq = cntEpisode - i;
                                     tmpEpisodes.push(episodes[i]);
@@ -840,17 +842,17 @@ function listEpisode(pageId, id) {
                 }
             });
         });
-    } else if ('' !== id && id == 0 && !isNaN(id) && CMS_CONF.USER_DATA.id) {
+    } else if ('' !== id && parseInt(id, 10) === 0 && CMS_CONF.USER_DATA.id) {
         // for fake favorite channel
         showProcessingOverlay();
         nn.api('GET', CMS_CONF.API('/api/users/{userId}/my_favorites', {
             userId: CMS_CONF.USER_DATA.id
         }), null, function (favorites) {
-            var cntEpisode = favorites.length;
-            var channel = {
-                contentType: CMS_CONF.YOUR_FAVORITE,
-                name: CMS_CONF.USER_DATA.name + nn._([pageId, 'title-func', "'s Favorite"])
-            };
+            var cntEpisode = favorites.length,
+                channel = {
+                    contentType: CMS_CONF.YOUR_FAVORITE,
+                    name: CMS_CONF.USER_DATA.name + nn._([pageId, 'title-func', "'s Favorite"])
+                };
             $('#func-nav ul').html('');
             $('#func-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
             $('#title-func').html('');
@@ -897,7 +899,7 @@ function buildChannelPoi(pageId, id) {
             nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
                 channelId: id
             }), null, function (channel) {
-                if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
+                if (channel.contentType === CMS_CONF.YOUR_FAVORITE) {
                     showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                     return;
                 }
@@ -971,7 +973,7 @@ function updateChannel(pageId, id) {
             nn.api('GET', CMS_CONF.API('/api/channels/{channelId}', {
                 channelId: id
             }), null, function (channel) {
-                if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
+                if (channel.contentType === CMS_CONF.YOUR_FAVORITE) {
                     showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
                     return;
                 }
@@ -1018,13 +1020,13 @@ function updateChannel(pageId, id) {
                 initFacebookJavaScriptSdk();
                 $('#channel-name').data('width', $('#channel-name').width());
                 // setup channel data
-                if ('' != $.trim(channel.imageUrl)) {
+                if ('' !== $.trim(channel.imageUrl)) {
                     $('#thumbnail-imageUrl').attr('src', channel.imageUrl + '?n=' + Math.random());
                 }
-                if ('' != channel.lang && CMS_CONF.LANG_MAP[channel.lang]) {
+                if ('' !== channel.lang && CMS_CONF.LANG_MAP[channel.lang]) {
                     $('#lang-select-txt').text(CMS_CONF.LANG_MAP[channel.lang]);
                 }
-                if ('' != channel.sphere && CMS_CONF.SPHERE_MAP[channel.sphere]) {
+                if ('' !== channel.sphere && CMS_CONF.SPHERE_MAP[channel.sphere]) {
                     $('#sphere-select-txt').text(CMS_CONF.SPHERE_MAP[channel.sphere]);
                     $('.category').removeClass('disable').addClass('enable');
                     var sphere = channel.sphere;
@@ -1043,7 +1045,7 @@ function updateChannel(pageId, id) {
                             i = 0;
                         if (modCatLen > 0) {
                             modCatLen = rowNum - modCatLen;
-                            for (i = 0; i < modCatLen; i++) {
+                            for (i = 0; i < modCatLen; i += 1) {
                                 categories.push({
                                     id: 0,
                                     name: ''
@@ -1057,7 +1059,7 @@ function updateChannel(pageId, id) {
                             }
                         }).appendTo('#browse-category');
                         $('#browse-category li[data-meta=0]').addClass('none');
-                        if ('' != channel.categoryId && CMS_CONF.CATEGORY_MAP[channel.categoryId]) {
+                        if ('' !== channel.categoryId && CMS_CONF.CATEGORY_MAP[channel.categoryId]) {
                             $('.tag-list').removeClass('hide');
                             $('#categoryId-select-txt').text(CMS_CONF.CATEGORY_MAP[channel.categoryId]);
                             nn.api('GET', CMS_CONF.API('/api/tags'), {
@@ -1163,20 +1165,20 @@ function listChannel(pageId) {
             userId: CMS_CONF.USER_DATA.id
         }), null, function (channels) {
             var cntChannel = channels.length,
-                hasFavoriteChannel = false;
+                hasFavoriteChannel = false,
+                items = [],
+                temp = [];
             $('#title-func').html('');
             $('#title-func-tmpl').tmpl(null, {
                 cntChannel: cntChannel
             }).appendTo('#title-func');
             if (cntChannel > 0) {
-                var items = [],
-                    temp = [];
                 $.each(channels, function (i, channel) {
                     temp = [];
                     channel.moreImageUrl_1 = CMS_CONF.CHANNEL_DEFAULT_IMAGE;
                     channel.moreImageUrl_2 = CMS_CONF.CHANNEL_DEFAULT_IMAGE2;
                     channel.moreImageUrl_3 = CMS_CONF.CHANNEL_DEFAULT_IMAGE2;
-                    if (channel.contentType == CMS_CONF.YOUR_FAVORITE) {
+                    if (channel.contentType === CMS_CONF.YOUR_FAVORITE) {
                         hasFavoriteChannel = true;
                         channel.moreImageUrl_1 = 'images/favorite_ch.png';
                         if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
@@ -1239,11 +1241,11 @@ function listChannel(pageId) {
 }   // end of listChannel()
 
 function fadeEpcurateHeaderAndFooter() {
-    var cmsEpe = $.cookie('cms-epe');
+    var cmsEpe = $.cookie('cms-epe'),
+        referrer = document.referrer;
     if (!cmsEpe) {
         $('#header, #footer-control, #footer').removeClass('hide').fadeOut(3000);
-        var referrer = document.referrer;
-        if ('' == referrer) {
+        if (!referrer) {
             referrer = 'index.html';
         }
         $.cookie('cms-epe', referrer);
@@ -1259,7 +1261,8 @@ function fadeEpcurateHeaderAndFooter() {
 function rebuildCrumbAndParam(cid, eid) {
     var cmsCrumb = {},
         cidFromGet = 0,
-        eidFromGet = 0;
+        eidFromGet = 0,
+        qrystr = {};
     if ($.cookie('cms-crumb')) {
         cmsCrumb = $.url('http://fake.url.dev.teltel.com/?' + $.cookie('cms-crumb')).param();
     }
@@ -1292,15 +1295,14 @@ function rebuildCrumbAndParam(cid, eid) {
     }
     $.cookie('cms-crumb', $.param(cmsCrumb));
     // rebuild url param by first-time entry
-    var qrystr = {};
-    if (cmsCrumb.channelId && '' != cmsCrumb.channelId) {
+    if (cmsCrumb.channelId && cmsCrumb.channelId > 0) {
         qrystr.cid = cmsCrumb.channelId;
     }
-    if (cmsCrumb.id && '' != cmsCrumb.id) {
+    if (cmsCrumb.id && cmsCrumb.id > 0) {
         qrystr.id = cmsCrumb.id;
     }
     qrystr = $.param(qrystr);
-    if ('' != qrystr) {
+    if ('' !== qrystr) {
         qrystr = '?' + qrystr;
     }
     $('#epcurate-nav-curation').attr('href', 'epcurate-curation.html' + qrystr);
@@ -1357,6 +1359,9 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
     $('html').attr('lang', lang);
 
     nn.api('GET', 'lang/' + lang + '.json', null, function (langPack) {
+        var userUrlFile = null,
+            cmsCrumb = null,
+            fm = null;
         // setup user profile
         $('#selected-profile').text(CMS_CONF.USER_DATA.name);
 
@@ -1394,7 +1399,7 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
         }
 
         // render page
-        var userUrlFile = CMS_CONF.USER_URL.attr('file');
+        userUrlFile = CMS_CONF.USER_URL.attr('file');
         if ('' === userUrlFile) {
             userUrlFile = 'index.html';
         }
@@ -1458,8 +1463,8 @@ function setupLanguageAndRenderPage(user, isStoreLangKey) {
             }
         } else {
             fadeEpcurateHeaderAndFooter();
-            var cmsCrumb = rebuildCrumbAndParam(),
-                fm = document.epcurateForm;
+            cmsCrumb = rebuildCrumbAndParam();
+            fm = document.epcurateForm;
             switch (userUrlFile) {
             case 'epcurate-publish.html':
                 buildEpcuratePublish(CMS_CONF.PAGE_ID, fm, cmsCrumb);
@@ -1576,18 +1581,20 @@ function setupLanguagePage() {
 
 $(function () {
     nn.api('GET', CMS_CONF.API('/api/login'), function (user) {
-        var tmpUrl = $.url(location.href.replace('@', '%40'));
+        var tmpUrl = $.url(location.href.replace('@', '%40')),
+            tmpPriv = 0,
+            isStoreLangKey = true;
         if (!user || !user.id) {
-            if ('signin.html' != tmpUrl.attr('file')) {
+            if ('signin.html' !== tmpUrl.attr('file')) {
                 location.href = 'signin.html';
             } else {
                 setupLanguagePage();
             }
         } else {
-            if ('signin.html' == tmpUrl.attr('file')) {
+            if ('signin.html' === tmpUrl.attr('file')) {
                 location.href = 'index.html';
             } else {
-                var tmpPriv = parseInt(user.priv, 10) / 1000 + 111;
+                tmpPriv = parseInt(user.priv, 10) / 1000 + 111;
                 CMS_CONF.MSO = 0;
                 if (tmpPriv > 221 && user.msoId > 0) {
                     CMS_CONF.MSO = user.msoId;
@@ -1598,7 +1605,6 @@ $(function () {
                     $('#studio-nav #my-portal').remove();
                 }
                 CMS_CONF.USER_URL = $.url();
-                var isStoreLangKey = true;
                 setupLanguageAndRenderPage(user, isStoreLangKey);
             }
         }

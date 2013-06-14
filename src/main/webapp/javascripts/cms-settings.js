@@ -1,4 +1,4 @@
-/*jslint browser: true, devel: true, nomen: true, regexp: true, sloppy: true */
+/*jslint browser: true, nomen: true, regexp: true, sloppy: true */
 /*global $, nn, CMS_CONF, FB, showProcessingOverlay, showSavingOverlay, showUnsaveOverlay, buildFacebookPagesMap */
 
 function setFormHeight() {

@@ -1,3 +1,24 @@
+版本: 1148
+作者: chihwen
+日期: 2013年6月14日 下午 06:21:02
+訊息:
+調整 controller.js jslint 設定，以便通過更嚴格的 JSLint 程式品質檢查
+
+1. 調整 controller.js 中的 jslint 設定，以便通過更嚴格的 JSLint 程式品質檢查。
+2. 調整其他 js 檔中的 jslint 設定，以符合 JSLint 程式品質檢查設定。
+3. 將 9x9 production SVN 版本 4907 中針對 signin.html 的調整，轉回 fakeapi 分支。
+issue 5927
+----
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/javascripts/channel-poi.js
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/cms-settings.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/javascripts/curation.js
+異動 : /fakeapi/javascripts/epcurate.js
+異動 : /fakeapi/javascripts/episode.js
+異動 : /fakeapi/signin.html
+
 版本: 1147
 作者: chihwen
 日期: 2013年6月14日 下午 12:28:18
