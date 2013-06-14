@@ -72,8 +72,8 @@ $(document).on("click", ".catLi", function(event) {
     $(this).addClass("on");
     $(".func_name").text($(this).text());
     $('.channel-list li').remove();
-    $('#store-slider .slider-vertical').slider('destroy');
-    scrollbar("#store-constrain", "#store-list", "#store-slider");
+    //$('#store-slider .slider-vertical').slider('destroy');
+    //scrollbar("#store-constrain", "#store-list", "#store-slider");
     $('#store-slider .slider-vertical').slider('value', 100);
     listCatChannel(msoId, $(this).data("meta"), channelPageSize);
 
