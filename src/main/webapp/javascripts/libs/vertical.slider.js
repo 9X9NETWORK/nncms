@@ -68,6 +68,7 @@ function scrollbar(outer, inner, sliderwrap) {
 
         $(sliderwrap + ' .ui-slider').css({ height: sliderHeight, 'margin-top': sliderMargin });
     } else {
+        $(sliderwrap + ' .slider-vertical').slider();
         $(sliderwrap).hide();
     }
 
@@ -83,8 +84,8 @@ function scrollbar(outer, inner, sliderwrap) {
         $(sliderwrap + ' .slider-vertical').slider('value', 100 - clickValue);
     });
 */
-    $(outer + ', ' + sliderwrap + ' .slider-wrap').unbind('mousewheel');
-    $(outer + ', ' + sliderwrap + ' .slider-wrap').mousewheel(function (event, delta) {
+    $(outer + ', ' + sliderwrap + ' .slider-vertical').unbind('mousewheel');
+    $(outer + ', ' + sliderwrap + ' .slider-vertical').mousewheel(function (event, delta) {
         var speed = 2;
         var sliderVal = $(sliderwrap + ' .slider-vertical').slider('value');
         sliderVal += (delta * speed);

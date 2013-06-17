@@ -345,7 +345,7 @@
             "If you signed in with Facebook, you can't change your name and password.": "Facebook登入用戶不可更改用戶名稱與密碼",
             "Email": "信箱",
             "Username": "用戶名稱",
-            "Username in 9x9 which composed of 6-16 English letters, numbers or low line.": "用戶名稱請輸入6-16個字元，只能使用中英文、數字和底線。",
+            "Username in 9x9 which is composed of 6-16 English letters, numbers or low line.": "用戶名稱請輸入6-16個字元，只能使用中英文、數字和底線。",
             "Password": "密碼",
             "Change password": "更改密碼",
             "Facebook": "Facebook",

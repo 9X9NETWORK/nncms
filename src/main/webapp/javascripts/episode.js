@@ -42,7 +42,7 @@ function setPageScroll(isDown) {
     eplHeightAfter = $('#content-main-wrap').height();
     scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
     if ('none' === $('#main-wrap-slider').css('display')) {
-        $('#main-wrap-slider .slider-vertical').slider('destroy');
+        $('#main-wrap-slider').hide();
         $('#content-main-wrap').css('top', '0');
     }
     newPos = CMS_CONF.SLIDER_MAX;
@@ -321,7 +321,7 @@ $(function () {
         autoHeight();
         scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
         if ('none' === $('#main-wrap-slider').css('display')) {
-            $('#main-wrap-slider .slider-vertical').slider('destroy');
+            $('#main-wrap-slider').hide();
             $('#content-main-wrap').css('top', '0');
         }
     });

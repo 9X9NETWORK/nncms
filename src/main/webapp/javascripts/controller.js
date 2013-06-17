@@ -324,7 +324,7 @@ function buildEpcurateCuration(pageId, fm, crumb) {
         nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {
             episodeId: $('#id').val()
         }), null, function (episode) {
-            if ('' !== cid && cid !== episode.channelId) {
+            if (cid > 0 && parseInt(cid, 10) !== episode.channelId) {
                 showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
                 return;
             }
@@ -555,7 +555,7 @@ function buildEpcuratePublish(pageId, fm, crumb) {
     nn.api('GET', CMS_CONF.API('/api/episodes/{episodeId}', {
         episodeId: $('#id').val()
     }), null, function (episode) {
-        if (cid && cid !== episode.channelId) {
+        if (cid > 0 && parseInt(cid, 10) !== episode.channelId) {
             showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
             return;
         }

@@ -48,7 +48,7 @@ function hideFbPageList() {
         if ('none' !== $('#main-wrap-slider').css('display')) {
             $('#content-main-wrap form').height($('#content-main-wrap form').data('height'));
             $('#content-main-wrap').height($('#content-main-wrap form').height() + 70 + 61);
-            $('#main-wrap-slider .slider-vertical').slider('destroy');
+            $('#main-wrap-slider').hide();
             if (hasHideFbPageList) {
                 $('#content-main-wrap').css('top', '0');
             }

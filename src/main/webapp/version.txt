@@ -1,3 +1,31 @@
+版本: 1150
+作者: chihwen
+日期: 2013年6月17日 下午 08:55:55
+訊息:
+避免在 jQuery UI Slider 未初始化前操作其方法 (scrollbar 特效)
+
+1. 避免在 jQuery UI Slider 未初始化前操作其方法 (scrollbar 特效)。
+   調整 vertical.slider.js 及 horizontal-slider.js 始終初始化 slider 套件。
+   以修正這段錯誤訊息 cannot call methods on slider prior to initialization; attempted to call method 'value'
+2. 再進一步以隱藏 scrollbar 代替 destroy slider 特效，以避免誤擊上述錯誤。
+3. 修正 JSLint 嚴格比對所產生的後遺症，以明確轉型後再比對作因應 (controller.js)。
+4. 修正相關英文語系 (cms-settings.html, en.json, zh.json)。
+issue 6428
+----
+異動 : /fakeapi/cms-settings.html
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/controller.js
+異動 : /fakeapi/javascripts/epcurate.js
+異動 : /fakeapi/javascripts/episode.js
+異動 : /fakeapi/javascripts/index.js
+異動 : /fakeapi/javascripts/libs/horizontal-slider.js
+異動 : /fakeapi/javascripts/libs/horizontal-slider.min.js
+異動 : /fakeapi/javascripts/libs/vertical.slider.js
+異動 : /fakeapi/javascripts/libs/vertical.slider.min.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+
 版本: 1148
 作者: chihwen
 日期: 2013年6月14日 下午 06:21:02

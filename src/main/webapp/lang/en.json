@@ -68,7 +68,7 @@
             "Can not connect to Facebook correctly!": "Can not connect to Facebook correctly!",
             "Please try again and make sure you agree on all permissions.": "Please try again and make sure you agree on all permissions.",
             "Account disconnected!": "Account disconnected!",
-            "{If you want to enable auto sharing again, please:}": "If you want to enable auto sharing again, please:<br /><br />1. Connect account<br />2. Enable auto sharing for each channel in Channel settings<br />3. publish new episode, 9x9.tv will auto share it<br />",
+            "{If you want to enable auto sharing again, please:}": "If you want to enable auto sharing again, please:<br /><br />1. Connect to account<br />2. Enable auto sharing for each channel in Channel settings<br />3. Publish a new episode, 9x9.tv will automatically share it<br />",
             "Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?": "Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?"
         },
         "button": {
@@ -345,7 +345,7 @@
             "If you signed in with Facebook, you can't change your name and password.": "If you signed in with Facebook, you can't change your name and password.",
             "Email": "Email",
             "Username": "Username",
-            "Username in 9x9 which composed of 6-16 English letters, numbers or low line.": "Username in 9x9 which composed of 6-16 English letters, numbers or low line.",
+            "Username in 9x9 which is composed of 6-16 English letters, numbers or low line.": "Username in 9x9 which is composed of 6-16 English letters, numbers or low line.",
             "Password": "Password",
             "Change password": "Change password",
             "Facebook": "Facebook",
