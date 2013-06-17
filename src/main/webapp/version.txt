@@ -1,3 +1,18 @@
+版本: 1151
+作者: chihwen
+日期: 2013年6月18日 上午 02:36:29
+訊息:
+修正版本 1150 不能只是隱藏 scrollbar 代替 destroy slider 特效，不然頁面依然會被滾動
+
+改成先 destroy slider 特效，然後立即進行初始化，最後緊接著再隱藏的作法。
+issue 6428
+----
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/javascripts/channel.js
+異動 : /fakeapi/javascripts/epcurate.js
+異動 : /fakeapi/javascripts/episode.js
+異動 : /fakeapi/javascripts/index.js
+
 版本: 1150
 作者: chihwen
 日期: 2013年6月17日 下午 08:55:55
