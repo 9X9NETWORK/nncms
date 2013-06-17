@@ -182,7 +182,7 @@ function _drawChannels(inPageSize, isEnd) {
             if ('' === tmpArr.imageUrl) {
                 tmpArr.imageUrl = "images/ch_default.png";
             }
-            //tmpArr.imageUrl = tmpArr.imageUrl.split('|')[0];
+            tmpArr.imageUrl = tmpArr.imageUrl.split('|')[0];
 
             tmpArr.msoMinus = strMinus;
             outChannels.push(tmpArr);
