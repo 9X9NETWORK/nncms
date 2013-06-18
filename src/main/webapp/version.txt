@@ -1,3 +1,27 @@
+版本: 1153
+作者: chihwen
+日期: 2013年6月18日 下午 02:43:16
+訊息:
+同步 src 版本 1152 以及 轉回 production SVN 版本 4918
+
+1. 同步 src 版本 1152。
+   調整 studio-nav 的樣式和結構，讓「Content Management System」的結構可以 p 和 span 並存。
+issue 6337
+
+2. 將 9x9 production SVN 版本 4918 轉回 fakeapi 分支。
+   修正 PCS Channel store scrollbar 無法正確顯示 (同步 autoHeight() 調整)。
+issue 5927
+----
+異動 : /fakeapi/channel-add.html
+異動 : /fakeapi/channel-poi.html
+異動 : /fakeapi/channel-setting.html
+異動 : /fakeapi/cms-settings.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/basic.js
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/stylesheets/style.css
+
 版本: 4920
 作者: Mars
 日期: 2013/6/18 18:09

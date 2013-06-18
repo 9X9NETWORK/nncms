@@ -6,8 +6,8 @@
         "Log out": "Log out"
     },
     "studio-nav": {
-        "CMS": "<span class=\"cms-icon\">CMS</span><p class=\"sub-title\">Content Management System</p>",
-        "CMSContent Management System": "<span class=\"cms-icon\">CMS</span><p class=\"sub-title\">Content Management System</p>",
+        "CMS": "<span class=\"cms-icon\">CMS</span><span class=\"sub-title\">Content Management System</span>",
+        "CMSContent Management System": "<span class=\"cms-icon\">CMS</span><span class=\"sub-title\">Content Management System</span>",
         "My Channels": "My Channels",
         "My Portal": "My Portal",
         "CMS Settings": "<img src=\"images/icon_studio_setup.png\" alt=\"\" />CMS Settings",

@@ -1354,6 +1354,7 @@ padding: 4px 10px 0;
 	font-weight: bold;
 }
 #studio-nav .studio-nav-wrap h3 .sub-title {
+    display: block;
 	font-size: 11px;
 	font-weight: normal;
     line-height: 16px;
