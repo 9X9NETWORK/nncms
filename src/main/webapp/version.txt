@@ -1,3 +1,14 @@
+版本: 4917
+作者: Mars
+日期: 2013/6/18 14:02
+訊息:
+修正版本 4916 ，修正 PCS Channel store scrollbar 無法正確顯示
+
+autoHeight() 調整
+----
+異動 : /javascripts/basic.js
+異動 : /javascripts/portal.store.js
+
 版本: 1151
 作者: chihwen
 日期: 2013年6月18日 上午 02:36:29

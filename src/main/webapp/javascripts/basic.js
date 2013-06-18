@@ -35,6 +35,10 @@ function autoHeight() {
         $('#main-wrap-slider').height(windowHeight - 134);  // 134: epcurate-nav46 + content-main-wrap margin25 + form-btn48 + space between footer and content15
         $('#main-wrap-slider').attr('data-orig-slider-height', windowHeight - 134);
     }
+    if ($('#store-slider').length > 0) {
+        $('#store-slider').height(sliderHeight - $("#store-category").height());
+        $('#store-slider').attr('data-orig-slider-height', sliderHeight - $("#store-category").height());
+    }
 }
 
 function hideFbPageList() {
