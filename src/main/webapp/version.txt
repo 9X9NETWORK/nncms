@@ -1,3 +1,12 @@
+版本: 4920
+作者: Mars
+日期: 2013/6/18 18:09
+訊息:
+修正版本 4917 ，修正 PCS portal-manage.html preview url / sort 設定問題
+
+----
+異動 : /javascripts/portal.js
+
 版本: 4917
 作者: Mars
 日期: 2013/6/18 14:02

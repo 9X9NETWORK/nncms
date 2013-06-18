@@ -8,12 +8,12 @@ $(document).on("click", "#set-preview", function(event) {
             preUrl = "http://" + preUrl;
             thisA.attr("href", preUrl);
         } else {
-            nn.api('PUT', CMS_CONF.API('/api/mso/{msoId}', {
+            nn.api('GET', CMS_CONF.API('/api/mso/{msoId}', {
                 msoId : msoId
             }), null, function(mso) {
                 var tmpMsoName = mso.name + ".";
                 if (preUrl.indexOf("www.") === 0) {
-                    preUrl.replace("www.", tmpMsoName);
+                    preUrl = preUrl.replace("www.", tmpMsoName);
                 } else {
                     preUrl = tmpMsoName + preUrl;
                 }
@@ -412,7 +412,7 @@ $(document).on("click", "#search-channel-list .checkbox", function(event) {
 $(document).on("click", ".sort-list .sType", function(event) {
     var setId = CMS_CONF.USER_URL.param('id');
 
-    $("#channel-list").sortable("destroy");
+    //$("#channel-list").sortable("destroy");
 
     var expSort = ".empty, .isSortable";
     if ($("#sortingType").val() == 2) {
@@ -447,7 +447,7 @@ $(document).on("click", "#yes-no-prompt .btn-yes", function(event) {
     $("body").removeClass("has-change");
     var setId = CMS_CONF.USER_URL.param('id');
 
-    $("#channel-list").sortable("destroy");
+    //$("#channel-list").sortable("destroy");
     $(".sType").removeClass("on");
     $(this).addClass("on");
     $("#sortingType").val($(this).attr("tvalue"));
