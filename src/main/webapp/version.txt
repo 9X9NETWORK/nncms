@@ -1,3 +1,14 @@
+版本: 4933
+作者: Mars
+日期: 2013/6/20 17:35
+訊息:
+修正 PCS portal-manage.html 預覽( Previewer ) 
+1. 修正使用跟 player api 相同的 id 格式
+2. msoid 是 9x9 preview url => http://player.9x9.tv/#/streaming/xx-xx
+3. 其他 mso preview url => http://{mso-name}.9x9.tv/#/streaming/xx-xx
+----
+異動 : /javascripts/portal.js
+
 版本: 1153
 作者: chihwen
 日期: 2013年6月18日 下午 02:43:16

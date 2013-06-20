@@ -1,27 +1,42 @@
 $(document).on("click", "#set-preview", function(event) {
     if ("javascript:void(0)" === $(this).attr("href")) {
-        var preUrl = $.url().attr('host') + "/tv#/streaming/" + CMS_CONF.USER_URL.param('id');
+        // 2013/06/20 remove tv from URL
+        var setId = CMS_CONF.USER_URL.param('id');
+        var preUrl = $.url().attr('host') + "/#/streaming/";
         var msoId = CMS_CONF.MSO;
         var thisA = $(this);
 
-        if (msoId === 1) {
-            preUrl = "http://" + preUrl;
-            thisA.attr("href", preUrl);
-        } else {
+        nn.api('GET', CMS_CONF.API('/api/sets/{setId}', {
+            setId : setId
+        }), null, function(setInfo) {
+            // process after get set info
+        }).then(function(ccSetInfo) {
+
             nn.api('GET', CMS_CONF.API('/api/mso/{msoId}', {
                 msoId : msoId
             }), null, function(mso) {
                 var tmpMsoName = mso.name + ".";
-                if (preUrl.indexOf("www.") === 0) {
-                    preUrl = preUrl.replace("www.", tmpMsoName);
+                preUrl += ccSetInfo.displayId + "-" + setId;
+                if (msoId === 1) {
+                    if (preUrl.indexOf("www.") === 0) {
+                        preUrl = preUrl.replace("www.", "player.");
+                    } else {
+                        preUrl = "player." + preUrl;
+                    }
                 } else {
-                    preUrl = tmpMsoName + preUrl;
+                    if (preUrl.indexOf("www.") === 0) {
+                        preUrl = preUrl.replace("www.", tmpMsoName);
+                    } else {
+                        preUrl = tmpMsoName + preUrl;
+                    }
                 }
                 preUrl = "http://" + preUrl;
                 thisA.attr("href", preUrl);
+                return false;
+
             });
-            return false;
-        }
+        });
+
     }
 });
 
