@@ -893,7 +893,7 @@ background: #e4e4e4;
 
 #content-wrap {
     position: absolute;
-    top: 94px;
+    top: 103px;
     left: 0;
     z-index: 49;
     overflow: hidden;
@@ -1354,8 +1354,10 @@ padding: 4px 10px 0;
 	font-weight: bold;
 }
 #studio-nav .studio-nav-wrap h3 .sub-title {
+    display: block;
 	font-size: 11px;
-	font-weight: normal;	
+	font-weight: normal;
+    line-height: 16px;
 }
 
 /* Tip White */
