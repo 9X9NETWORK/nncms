@@ -586,6 +586,7 @@ function _search_channel_clean() {
     $("#msg-search").hide();
     $("#sRusult").html("");
     $("#search-channel-list").html("");
+    $("#searchAdd").hide();
     $("#searchPrev").hide();
     $("#searchNext").hide();
     $("#input-portal-ch").val($("#input-portal-ch").data("tmpIn"));

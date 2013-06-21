@@ -1,3 +1,18 @@
+版本: 4937
+作者: Mars
+日期: 2013/6/21 17:30
+訊息:
+修正 PCS portal-manage.html 預覽( 新增頻道 ) / Cunnie 修正 CSS 
+1. 在搜尋後，點選頻道，關掉後 channel list 會清空，但 Add 按鈕沒消失，
+2. Add 按鈕翻譯
+
+----
+異動 : /portal-manage.html
+異動 : /javascripts/portal.js
+異動 : /lang/en.json
+異動 : /lang/zh.json
+異動 : /stylesheets/style.css
+
 版本: 4933
 作者: Mars
 日期: 2013/6/20 17:35

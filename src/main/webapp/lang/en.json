@@ -252,6 +252,7 @@
             "Channel URL": "Channel URL",
             "Keywords": "Keywords",
             "Search": "Search",
+            "Add": "Add",
             "Find [<span>?</span>] channels.": "Find [<span>{0}</span>] channels.",
             "Your search - [xxx] didn't match any channels.": "Your search - [<span>{0}</span>] didn't match any channels.",
             "Set Name:": "Set Name:",

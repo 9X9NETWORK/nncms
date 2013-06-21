@@ -252,6 +252,7 @@
             "Channel URL": "頻道網址",
             "Keywords": "關鍵字",
             "Search": "搜尋",
+            "Add": "增加",
             "Find [<span>?</span>] channels.": "找到 [<span>{0}</span>] 個頻道。",
             "Your search - [xxx] didn't match any channels.": "找不到符合 [<span>{0}</span>] 的頻道。",
             "Set Name:": "搜尋依:",
