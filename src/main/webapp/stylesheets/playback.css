@@ -1,15 +1,15 @@
-/*-----------------------------------------------------------------------------
-[TABLE OF CONTENTS]
-    +content-main
-        =epcurateForm
------------------------------------------------------------------------------*/
+/* background */
+#btn-prev,
+#btn-play,
+#btn-pause,
+#btn-next, 
+#volume-control,
+#btn-expand,
+#btn-shrink {
+    background: #000 url(../images/btn_controls.png) no-repeat 0 0;
+}
 
-/**
-*
-* =video-control
-*
-**/
-
+/* video-control */
 #video-control {
     display: none;
     overflow: hidden;
@@ -60,29 +60,7 @@
     background: url(../images/btn_knob.png) 0 0 no-repeat;
     cursor: pointer;
 }
-/*
-#play-dragger {
-    position: absolute;
-    top: 7px;
-    left: 0;
-    z-index: 35;
-    width: 100%;
-    width: 590px;
-    height: 8px;
-}
 
-#play-dragger .ui-slider-handle,
-#play-dragger .jScrollPaneDrag {
-    position: absolute;
-    top: -5px;
-    left: 0;
-    z-index: 35;
-    width: 18px;
-    height: 18px;
-    background: url(../images/btn_knob.png) 0 0 no-repeat;
-    cursor: pointer;
-}
-*/
 #video-control ul {
     position: relative;
     overflow: hidden;
@@ -97,7 +75,7 @@
 #btn-prev {
     width: 34px;
     height: 25px;
-    background: #000 url(../images/btn_controls.png) no-repeat 0 -298px;
+    background-position: 0 -298px;
     cursor: pointer;
 }
 
@@ -109,7 +87,7 @@
 #btn-play {
     width: 57px;
     height: 25px;
-    background: #000 url(../images/btn_controls.png) 0 2px no-repeat;
+    background-position: 0 2px;
     cursor: pointer;
 }
 
@@ -121,7 +99,7 @@
 #btn-pause {
     width: 57px;
     height: 25px;
-    background: #000 url(../images/btn_controls.png) 0 -98px no-repeat;
+    background-position: 0 -98px;
     cursor: pointer;
 }
 
@@ -133,7 +111,7 @@
 #btn-next {
     width: 34px;
     height: 25px;
-    background: #000 url(../images/btn_controls.png) no-repeat 0 -198px;
+    background-position: 0 -198px;
     cursor: pointer;
 }
 
@@ -145,7 +123,7 @@
 #volume-control {
     width: 101px;
     height: 25px;
-    background: #000 url(../images/btn_controls.png) no-repeat 0 -398px;
+    background-position: 0 -398px;
     position: relative;
 }
 
@@ -184,7 +162,7 @@
     position: absolute;
     top: -3px;
     left: 0;
-    z-index: 35;  
+    z-index: 35;
     cursor: pointer;
 }
 
@@ -231,7 +209,7 @@
     z-index: 10;
     width: 20px;
     height: 13px;
-    background: url(../images/btn_controls.png) 0 -700px;
+    background-position: 0 -700px;
     cursor: pointer;
 }
 
@@ -255,7 +233,7 @@
     z-index: 10;
     width: 27px;
     height: 25px;
-    background: #000 url(../images/btn_controls.png) 0 -498px no-repeat;
+    background-position: 0 -498px;
     cursor: pointer;
 }
 

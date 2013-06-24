@@ -1,20 +1,9 @@
-/*-----------------------------------------------------------------------------
-[TABLE OF CONTENTS]
-    +datepick-div
-        =datepick-control
-        =datepick-links
-        +datepick-one-month
-            =datepick-header
-            =datepick
------------------------------------------------------------------------------*/
-
+/* datepick */
 img.datepick-trigger {
     vertical-align: middle;
 }
 
-/* +datepick-div
-*----------------------------------------------------------------------------*/
-
+/* datepick-div */
 .ui-datepicker,
 .datepick {
     display: none;
@@ -44,12 +33,7 @@ img.datepick-trigger {
     text-decoration: none;
 }
 
-/**
-*
-* =datepick-control
-*
-**/
-
+/* datepick-control */
 .datepick-control,
 .datepick-cmd-today,
 .datepick-ctrl {
@@ -83,12 +67,7 @@ img.datepick-trigger {
     color: #c4c4c4;
 }
 
-/**
-*
-* =datepick-links
-*
-**/
-
+/* datepcik-links */
 .ui-datepicker .datepick-links .datepick-current {
     display: none;
 }
@@ -98,15 +77,15 @@ img.datepick-trigger {
     position: absolute;
     top: 10px;
     left: 15px;
-	width: 7px;
-	height: 10px;
-	background: url(../images/arrow_left.png) no-repeat 0 0;
-	text-indent: -100000px;
+    width: 7px;
+    height: 10px;
+    background: url(../images/arrow_left.png) no-repeat 0 0;
+    text-indent: -100000px;
 }
 
 .ui-datepicker .ui-datepicker-header .ui-datepicker-prev:hover,
 .datepick .datepick-nav .datepick-cmd-prev:hover {
-	background: url(../images/arrow_left_press.png) no-repeat 0 0;
+    background: url(../images/arrow_left_press.png) no-repeat 0 0;
 }
 
 .ui-datepicker .ui-datepicker-header .ui-datepicker-next,
@@ -114,26 +93,18 @@ img.datepick-trigger {
     position: absolute;
     top: 10px;
     right: 15px;
-	width: 7px;
-	height: 10px;
-	background: url(../images/arrow_right.png) no-repeat 0 0;
-	text-indent: -100000px;
+    width: 7px;
+    height: 10px;
+    background: url(../images/arrow_right.png) no-repeat 0 0;
+    text-indent: -100000px;
 }
 
 .ui-datepicker .ui-datepicker-header .ui-datepicker-next:hover,
 .datepick .datepick-nav .datepick-cmd-next:hover {
-	background: url(../images/arrow_right_press.png) no-repeat 0 0;
+    background: url(../images/arrow_right_press.png) no-repeat 0 0;
 }
 
-/**
-*
-* +datepick-one-month
-*
-**/
-
-/* =datepick-header
-**************************************/
-
+/* datepick-header */
 .ui-datepicker-title,
 .datepick-month-header {
     height: 30px;
@@ -146,15 +117,13 @@ img.datepick-trigger {
     -webkit-border-radius: 4px;
 }
 
-/* =datepick
-**************************************/
-
+/* datepick-content */
 table.ui-datepicker-calendar,
 .datepick .datepick-month table {
     margin: 0 auto;
     text-align: center;
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 table.ui-datepicker-calendar th,

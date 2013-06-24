@@ -1,13 +1,4 @@
-/*-----------------------------------------------------------------------------
-[TABLE OF CONTENTS]
-    +content-main
-        =lightbox-create-channel
-        =lightbox-upload-video
-        =lightbox-play-video
-        =overlay-l
-        =draft-notice, =invalid-notice
------------------------------------------------------------------------------*/
-
+/* overlay common */
 .blockOverlay {
     position: absolute !important;
     background-color: #777 !important;
@@ -29,12 +20,23 @@
     display: none;
 }
 
-/**
-*
-* =lightbox-create-channel
-*
-**/
+#poi-event-overlay .wrap .content .event-input .fminput p.text,
+#poi-event-overlay .wrap .content .event-input .fminput p.text span,
+#poi-event-overlay .wrap .content .event-input .fminput p.text span .text,
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select,
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-txt,
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-txt a {
+    background: url(../images/input_gray.png) no-repeat 0 0;
+}
 
+.lightbox-upload-video .upload-audio .upload-audio-wrap .btn-close,
+.overlay-l .overlay-container .overlay-wrap .btn-close,
+.overlay-l .overlay-container .overlay-wrap .overlay-btn-close,
+#poi-event-overlay .wrap .content .overlay-btn-close {
+    background: url(../images/btn_close_l.png) no-repeat 0 0;
+}
+
+/* create channel overlay */
 #lightbox-create-channel {
     display: none;
     position: fixed;
@@ -105,26 +107,22 @@
 }
 
 #lightbox-create-channel p.btns:hover {
-	background-image: url(../images/popup_btn_left_press.png) !important;
+    background-image: url(../images/popup_btn_left_press.png) !important;
 }
 
 #lightbox-create-channel p.btns:hover span {
-	background-image: url(../images/popup_btn_right_press.png) !important;
+    background-image: url(../images/popup_btn_right_press.png) !important;
 }
 
 #lightbox-create-channel p.btns:hover span a {
-	background-image: url(../images/popup_btn_middle_press.png) !important;
+    background-image: url(../images/popup_btn_middle_press.png) !important;
 }
+
 #lightbox-create-channel p.btns:hover span a:hover {
-	color: #999;
+    color: #999;
 }
 
-/**
-*
-* =lightbox-upload-video
-*
-**/
-
+/* upload video overlay */
 .lightbox-upload-video {
     display: none;
     width: 635px;
@@ -135,8 +133,8 @@
     cursor: default;
 }
 
-.lightbox-upload-video .btn-save               span input,
-.lightbox-upload-video .btn-cancel           span input,
+.lightbox-upload-video .btn-save        span input,
+.lightbox-upload-video .btn-cancel      span input,
 .lightbox-upload-video .btn-upload-file span input {
     padding: 0 10px;
 }
@@ -165,7 +163,6 @@
     right: -3px;
     width: 22px;
     height: 24px;
-    background: url(../images/btn_close_l.png) no-repeat 0 0;
     text-indent: -100000px;
 }
 
@@ -221,7 +218,7 @@
 }
 
 .lightbox-upload-video .upload-audio .upload-audio-wrap form .fminput .fmfield .highlight {
-	margin: 2px 0 0;
+    margin: 2px 0 0;
     color: #f00;
 }
 
@@ -342,9 +339,9 @@
 
 .lightbox-upload-video .upload-audio .upload-audio-wrap form .form-btn .form-btn-wrap {
     float: right;
-	position: absolute;
-	bottom: 0;
-	right: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .lightbox-upload-video .upload-audio .upload-audio-wrap form .form-btn .form-btn-wrap .btns {
@@ -355,89 +352,78 @@
     margin-right: 10px;
 }
 
-/**
-*
-* =lightbox-play-video
-*
-**/
-
+/* play video overlay */
 #lightbox-play-video,
 #lightbox-play-audio {
     display: none;
-	overflow: hidden;
+    overflow: hidden;
     width: 707px;
     height: 490px;
     margin: -245px 0 0 -354px;
 }
 
 #lightbox-play-video .video-wrap iframe {
-	float: left;
+    float: left;
 }
 
 #lightbox-play-audio .video-wrap img {
-	float: left;
-	width: 707px;
-	height: 398px;
+    float: left;
+    width: 707px;
+    height: 398px;
 }
 
-/**
-*
-* =overlay-l
-*
-**/
-
+/* overlay-l */
 .overlay-l {
     position: fixed;
     top: 50%;
     left: 50%;
-	width: 253px;
-	height: 172px;
-	margin: -86px 0 0 -127px;
-	padding-left: 10px;
-	background: url(../images/bg_popup_box_s_left.png) no-repeat 0 0;
+    width: 253px;
+    height: 172px;
+    margin: -86px 0 0 -127px;
+    padding-left: 10px;
+    background: url(../images/bg_popup_box_s_left.png) no-repeat 0 0;
 }
 
 .zh .overlay-l {
-	width: 266px;
+    width: 266px;
     margin: -86px 0 0 -133px;
 }
 
 .overlay-l .overlay-container {
-	height: 172px;
-	padding-right: 10px;
-	background: url(../images/bg_popup_box_s_right.png) no-repeat right 0;
+    height: 172px;
+    padding-right: 10px;
+    background: url(../images/bg_popup_box_s_right.png) no-repeat right 0;
 }
 
 .overlay-l .overlay-container .overlay-wrap {
-	position: relative;
-	height: 122px;
-	padding: 50px 0 0;
-	background: url(../images/bg_popup_box_s_middle.png) repeat-x;
+    position: relative;
+    height: 122px;
+    padding: 50px 0 0;
+    background: url(../images/bg_popup_box_s_middle.png) repeat-x;
 }
 
 .overlay-l .overlay-container .overlay-wrap .btn-close,
 .overlay-l .overlay-container .overlay-wrap .overlay-btn-close {
-	position: absolute;
-	top: 7px;
-	right: -3px;
-	display: block;
-	width: 22px;
-	height: 24px;
-	background: url(../images/btn_close_l.png) no-repeat 0 0;
-	text-indent: -100000px;
+    position: absolute;
+    top: 7px;
+    right: -3px;
+    display: block;
+    width: 22px;
+    height: 24px;
+    text-indent: -100000px;
 }
 
 .overlay-l .overlay-container .overlay-wrap .btn-close:hover,
 .overlay-l .overlay-container .overlay-wrap .overlay-btn-close:hover {
-	background-position: 0 -24px;
+    background-position: 0 -24px;
 }
 
 .overlay-l .overlay-container .overlay-wrap p.content {
-	padding: 0 8px;
-	color: #555;
-	font-weight: normal;
-	font-size: 13px;
-	text-align: left;
+    padding: 0 8px;
+    color: #555;
+    font-weight: normal;
+    font-size: 13px;
+    text-align: left;
 }
 
 .overlay-l .overlay-container .overlay-wrap p.content span {
@@ -449,30 +435,25 @@
 }
 
 .overlay-l .overlay-container .overlay-wrap .overlay-btn {
-	overflow: hidden;
-	position: absolute;
-	bottom: 20px;
-	left: 0;
-	width: 100%;
-	text-align: center;
+    overflow: hidden;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
 }
 
 .overlay-l .overlay-container .overlay-wrap .overlay-btn .btns {
-	display: inline-block;
-	width: 67px;
+    display: inline-block;
+    width: 67px;
     margin-right: 13px;
 }
 
 .overlay-l .overlay-container .overlay-wrap .overlay-btn .btns:last-child {
-	margin-right: 0;
+    margin-right: 0;
 }
 
-/**
-*
-* =draft-notice, =invalid-notice
-*
-**/
-
+/* draft notice, invalid notice overlay */
 #draft-notice,
 #invalid-notice {
     width: 417px;
@@ -503,12 +484,7 @@
     text-align: center;
 }
 
-/**
-*
-* =draft-notice, =invalid-notice
-*
-**/
-
+/* setup notice overlay */
 .setup-notice,
 .zh .setup-notice {
     width: 427px;
@@ -594,7 +570,7 @@
 .setup-notice p.fb-connect a.switch-on {
     color: #fff;
     text-indent: -29px;
-    text-shadow: 0px 0px 10px #fff;
+    text-shadow: 0 0 10px #fff;
 }
 
 .setup-notice p.fb-connect a.switch-off {
@@ -607,7 +583,7 @@
     line-height: 17px;
 }
 
-.setup-notice .overlay-container .fb-connect p.content,
+.setup-notice .overlay-container .fb-connect      p.content,
 .setup-notice .overlay-container .restart-connect p.content {
     margin-top: 12px;
 }
@@ -668,12 +644,7 @@
     text-align: left;
 }
 
-/**
-*
-* =change-pwd-overlay
-*
-**/
-
+/* change password overlay */
 #change-pwd-overlay {
     width: 427px;
     height: 316px;
@@ -761,12 +732,7 @@
     width: 132px;
 }
 
-/**
-*
-* =poi-zoom
-*
-**/
-
+/* poi zoom overlay */
 #poi-zoom {
     position: fixed;
     top: 50%;
@@ -800,8 +766,12 @@
     clip: rect(17px, 16px, 35px, 0);
 }
 
-/* +poi-event-overlay
-*----------------------------------------------------------------------------*/
+/* poi event overlay */
+#poi-event-overlay,
+#poi-event-overlay .wrap,
+#poi-event-overlay .wrap .content {
+    background: url(../images/bg_popup_box_l.png) no-repeat 0 0;
+}
 
 #poi-event-overlay {
     position: fixed;
@@ -812,19 +782,19 @@
     height: 599px;
     margin: -300px 0 0 -424px;
     padding: 0 11px 0 0;
-    background: url(../images/bg_popup_box_l.png) no-repeat right -599px;
+    background-position: right -599px;
 }
 
 #poi-event-overlay .wrap {
     padding: 0 0 0 11px;
-    background: url(../images/bg_popup_box_l.png) no-repeat 0 0;
 }
 
 #poi-event-overlay .wrap .content {
     position: relative;
     height: 575px;
     padding: 24px 10px 0;
-    background: url(../images/bg_popup_box_l.png) repeat-x 0 -1198px;
+    background-repeat: repeat-x;
+    background-position: 0 -1198px;
 }
 
 #poi-event-overlay .wrap .content .overlay-btn-close {
@@ -834,7 +804,6 @@
     right: -3px;
     width: 22px;
     height: 24px;
-    background: url(../images/btn_close_l.png) no-repeat 0 0;
     text-indent: -100000px;
 }
 
@@ -848,7 +817,7 @@
     font-weight: bold;
     font-size: 30px;
     text-align: center;
-    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4), 0px 1px 0px rgba(255, 255, 255, 0.4);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
     behavior: url(PIE.htc);
 }
 
@@ -901,12 +870,7 @@
     font-size: 13px;
 }
 
-/**
-*
-* =ul.list
-*
-**/
-
+/* poi event overlay ul.list */
 #poi-event-overlay .wrap .content ul.list {
     overflow: hidden;
     width: 653px;
@@ -945,7 +909,7 @@
     background: -o-linear-gradient(#dbdbdb, #fbfbfb);
     background: linear-gradient(#dbdbdb, #fbfbfb);
     -pie-background: linear-gradient(#dbdbdb, #fbfbfb);
-    box-shadow: 0px 0px 3px rgba(100, 100, 100, 0.5) inset;
+    box-shadow: 0 0 3px rgba(100, 100, 100, 0.5) inset;
     behavior: url(PIE.htc);
 }
 
@@ -1039,12 +1003,7 @@
     color: #fff;
 }
 
-/**
-*
-* =func
-*
-**/
-
+/* poi event overlay func */
 #poi-event-overlay .wrap .content .func {
     position: absolute;
     bottom: 0;
@@ -1086,12 +1045,7 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     font-size: 15px;
 }
 
-/**
-*
-* =video-wrap
-*
-**/
-
+/* poi event overlay video wrap */
 #poi-event-overlay .wrap .content .video-wrap {
     position: relative;
     overflow: hidden;
@@ -1141,12 +1095,7 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     width: 170px;
 }
 
-/**
-*
-* =event-input
-*
-**/
-
+/* poi event overlay event input */
 #poi-event-overlay .wrap .content .event-input {
     overflow: hidden;
 }
@@ -1174,14 +1123,13 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     float: left;
     height: 30px;
     padding: 0 0 0 3px;
-    background: url(../images/input_gray.png) no-repeat 0 0;
 }
 
 #poi-event-overlay .wrap .content .event-input .fminput p.text span {
     display: block;
     height: 30px;
     padding: 0 3px 0 0;
-    background: url(../images/input_gray.png) no-repeat right -30px;
+    background-position: right -30px;
 }
 
 #poi-event-overlay .wrap .content .event-input .fminput p.text span .text {
@@ -1189,10 +1137,10 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     height: 30px;
     padding-left: 4px;
     border: none;
-    background: url(../images/input_gray.png) repeat-x 0 -60px;
+    background-repeat: repeat-x;
+    background-position: 0 -60px;
     color: #555;
-    font: 13px Arial, Helvetica;
-    line-height: 30px\0;
+    font: 13px/30px Arial, Helvetica;
 }
 
 #poi-event-overlay .wrap .content .event-input .fminput .notice {
@@ -1204,12 +1152,7 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     font-size: 13px;
 }
 
-/**
-*
-* =mobile-edit
-*
-**/
-
+/* poi event overlay mobile edit */
 #poi-event-overlay .wrap .content .event .mobile-edit {
     margin-top: 25px;
     padding-left: 23px;
@@ -1225,55 +1168,69 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     overflow: hidden;
 }
 
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li p,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li p a,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.ios {
+    background: url(../images/bg_tab.png) no-repeat 0 0;
+}
+
 #poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li {
     float: left;
     width: 186px;
     height: 26px;
     padding-right: 3px;
-    background: url(../images/bg_tab.png) no-repeat right -107px;
+    background-position: right -107px;
     text-align: center;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li p {
     height: 26px;
     padding-left: 3px;
-    background: url(../images/bg_tab.png) no-repeat 0 1px;
+    background-position: 0 1px;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li p a {
     display: block;
     height: 26px;
     line-height: 26px;
-    background: url(../images/bg_tab.png) repeat-x 0 -53px;
+    background-repeat: repeat-x;
+    background-position: 0 -53px;
     color: #999;
     font-size: 13px;
     text-decoration: none;
 }
 
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.on,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.on p,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.on p a,
+#poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.ios.on {
+    background: url(../images/bg_tab_on.png) no-repeat 0 0;
+}
+
 #poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.on {
-    background: url(../images/bg_tab_on.png) no-repeat right -108px;
+    background-position: right -108px;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.on p {
-    background: url(../images/bg_tab_on.png) no-repeat 0 -81px;
+    background-position: 0 -81px;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.on p a {
-    background: url(../images/bg_tab_on.png) repeat-x 0 -54px;
+    background-repeat: repeat-x;
+    background-position: 0 -54px;
     color: #555;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.ios {
-    background: url(../images/bg_tab.png) no-repeat right -26px;
+    background-position: right -26px;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .mobile ul li.ios.on {
-    background: url(../images/bg_tab_on.png) no-repeat right -27px;
+    background-position: right -27px;
 }
 
-/* =schedule-ios
-**************************************/
-
+/* poi event overlay schedule ios */
 #poi-event-overlay .wrap .content .event .mobile-edit .mobile .mobile-block {
     height: 325px;
     padding: 29px 0 0;
@@ -1387,12 +1344,7 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     -webkit-text-size-adjust: none;
 }
 
-/**
-*
-* =notification
-*
-**/
-
+/* poi event overlay notification */
 #poi-event-overlay .wrap .content .event .mobile-edit .notification {
     float: left;
     width: 332px;
@@ -1425,6 +1377,11 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     margin-bottom: 12px;
 }
 
+#poi-event-overlay .wrap .content .event .mobile-edit .notification p.textarea,
+#poi-event-overlay .wrap .content .event .mobile-edit .notification p.textarea span {
+    background: url(../images/input_gray_lg.png) no-repeat 0 0;
+}
+
 #poi-event-overlay .wrap .content .event .mobile-edit .notification p.textarea {
     float: left;
     overflow: hidden;
@@ -1432,19 +1389,19 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     height: 92px;
     margin-bottom: 6px;
     padding-left: 3px;
-    background: url(../images/input_gray_lg.png) no-repeat 0 0;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification p.textarea span {
     display: block;
     padding-right: 3px;
-    background: url(../images/input_gray_lg.png) no-repeat right -92px;
+    background-position: right -92px;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification p.textarea span span {
     height: 92px;
     padding: 0;
-    background: url(../images/input_gray_lg.png) repeat-x 0 -184px;
+    background-repeat: repeat-x;
+    background-position: 0 -184px;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification p.textarea span .textarea {
@@ -1458,7 +1415,7 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     color: #555;
     font-family: Arial, Helvetica;
     font-size: 13px;
-	resize: none;
+    resize: none;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification h4 a .tip {
@@ -1523,40 +1480,44 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select {
-	position: relative;
-	width: 80px;
-	height: 30px;
+    position: relative;
+    width: 80px;
+    height: 30px;
     margin-bottom: 10px;
     padding-left: 3px;
-    background: url(../images/input_gray.png) no-repeat 0 0;
+}
+
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-btn,
+#poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select.disable .select-btn {
+    background: url(../images/btns.png) no-repeat 0 0;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-btn {
-	padding: 0;
-	width: 22px;
-	height: 23px;
-	background: url(../images/btns.png) 0 -400px no-repeat;
-	position: absolute;
-	top: 3px;
-	right: 5px;
-	z-index: 55;
-	cursor: pointer;
+    padding: 0;
+    width: 22px;
+    height: 23px;
+    background-position:0 -400px;
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    z-index: 55;
+    cursor: pointer;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-btn.on,
 #poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-btn:hover {
-	background-position: 0 -451px;
+    background-position: 0 -451px;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select.disable .select-btn {
-	background: url(../images/btns.png) no-repeat 0 -501px;
+    background-position: 0 -501px;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-txt {
     overflow: hidden;
     height: 30px;
     padding: 0 3px 0 0;
-    background: url(../images/input_gray.png) no-repeat right -30px;
+    background-position: right -30px;
     font-size: 13px;
     line-height: 29px;
     white-space: nowrap;
@@ -1571,33 +1532,34 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     display: block;
     height: 30px;
     padding-right: 4px;
-    background: url(../images/input_gray.png) repeat-x 0 -60px;
+    background-repeat: repeat-x;
+    background-position: 0 -60px;
     color: #555;
     text-decoration: none;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-list {
     display: none;
-	position: absolute;
-	top: 27px;
-	left: 1px;
-	z-index: 60;
-	width: 80px;
-	border: 1px solid #b2b2b2;
-	-moz-border-radius: 0 0 5px 5px;
-	-webkit-border-radius: 0 0 5px 5px;
-	border-radius:  0 0 5px 5px;
-	filter: alpha(Opacity=90);
-	opacity: 0.9;
+    position: absolute;
+    top: 27px;
+    left: 1px;
+    z-index: 60;
+    width: 80px;
+    border: 1px solid #b2b2b2;
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    border-radius:  0 0 5px 5px;
+    filter: alpha(Opacity=90);
+    opacity: 0.9;
     behavior: url(PIE.htc);
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .hour {
     overflow: hidden;
     height: 168px;
-	-moz-border-radius:  0 0 5px 5px;
-	-webkit-border-radius:  0 0 5px 5px;
-	border-radius:  0 0 5px 5px;
+    -moz-border-radius:  0 0 5px 5px;
+    -webkit-border-radius:  0 0 5px 5px;
+    border-radius:  0 0 5px 5px;
     behavior: url(PIE.htc);
 }
 
@@ -1606,25 +1568,25 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-list p {
-	width: 62px;
-	height: 28px;
-	margin: 0;
-	padding: 0 9px;
-	background: none;
-	background-color: #d2d2d2;
-	color: #555;
-	font-size: 13px;
-	line-height: 28px;
-	cursor: pointer;
+    width: 62px;
+    height: 28px;
+    margin: 0;
+    padding: 0 9px;
+    background: none;
+    background-color: #d2d2d2;
+    color: #555;
+    font-size: 13px;
+    line-height: 28px;
+    cursor: pointer;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-list p:hover {
-	background-color: #e4e4e4;
-	color: #999;
+    background-color: #e4e4e4;
+    color: #999;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-list p.none:hover {
-	background-color: #d2d2d2;
-	color: #999;
+    background-color: #d2d2d2;
+    color: #999;
     cursor: default;
 }

@@ -1,9 +1,4 @@
-/*-----------------------------------------------------------------------------
-[TABLE OF CONTENTS]
-    +content-main
-        =epcurateForm
------------------------------------------------------------------------------*/
-
+/* epcurate */
 #epcurate-nav {
     top: 0 !important;
 }
@@ -25,22 +20,17 @@
 }
 
 .blockOverlay {
-	height: 100% !important;
+    height: 100% !important;
 }
 
 #main-wrap-slider {
     top: 25px !important;
 }
 
-/**
-*
-* =epcurateForm
-*
-**/
-
+/* epcurateForm */
 #content-wrap form {
     position: relative;
-	height: 100%;
+    height: 100%;
 }
 
 #container-wrap.publish-setting form {
@@ -67,7 +57,7 @@
 }
 
 #content-wrap form .fminput {
-	margin-bottom: 3px;
+    margin-bottom: 3px;
 }
 
 #content-wrap form .fminput label {
@@ -200,7 +190,7 @@
 #content-wrap form .fminput .fmfield p.radio-list.draft span.glow-middle label {
     margin: 0;
     padding: 0;
-    font-weight: nromal;
+    font-weight: normal;
 }
 
 #content-wrap form .fminput .fmfield p.radio-list.draft span.glow-middle label.checked {
@@ -218,11 +208,17 @@
     cursor: pointer;
 }
 
+#content-wrap form .fminput .fmfield p.radio-list .checker span,
+#content-wrap form .fminput .fmfield .checkbox,
+#content-wrap form .fminput .fmfield .checkbox a.on,
+#content-wrap form .fminput .fmfield .checkbox a:hover {
+    background: url(../images/bg_checkbox.png) no-repeat 0 0;
+}
+
 #content-wrap form .fminput .fmfield p.radio-list .checker span {
     display: block;
     width: 14px;
     height: 15px;
-    background: url(../images/bg_checkbox.png) no-repeat 0 0;
 }
 
 #content-wrap form .fminput .fmfield p.radio-list .checker input {
@@ -367,7 +363,7 @@
     float: left;
     width: 63px;
     height: 25px;
-	margin-bottom: 8px;
+    margin-bottom: 8px;
     background: url(../images/btn_on.png) no-repeat 0 0;
     color: #555;
     line-height: 25px;
@@ -379,7 +375,7 @@
     float: left;
     width: 63px;
     height: 25px;
-	margin-bottom: 8px;
+    margin-bottom: 8px;
     background: url(../images/btn_off.png) no-repeat 0 0;
     color: #555;
     line-height: 25px;
@@ -400,29 +396,33 @@
     color: #f00;
 }
 
-/* =disable
-**************************************/
-
+/* disable */
 #content-wrap form .disable label,
 #content-wrap form .disable label acronym {
     color: #999;
 }
 
-/* =text
-**************************************/
+/* text */
+#content-wrap form .fminput .fmfield p.text,
+#content-wrap form .fminput .fmfield p.text span,
+#content-wrap form .fminput .fmfield p.text span .text,
+#content-wrap form .fminput .fmfield .select,
+#content-wrap form .fminput .fmfield .select .select-txt,
+#content-wrap form .fminput .fmfield .select .select-txt a {
+    background: url(../images/input_white.png) no-repeat 0 0;
+}
 
 #content-wrap form .fminput .fmfield p.text {
     float: left;
     height: 30px;
     margin: 0 10px 10px 0;
     padding-left: 3px;
-    background: url(../images/input_white.png) no-repeat 0 0;
 }
 
 #content-wrap form .fminput .fmfield p.text span {
     display: block;
     padding-right: 3px;
-    background: url(../images/input_white.png) no-repeat right -30px;
+    background-position: right -30px;
 }
 
 #content-wrap form .fminput .fmfield p.text span .text {
@@ -430,11 +430,12 @@
     height: 30px;
     padding-left: 2px;
     border: none;
-    background: url(../images/input_white.png) repeat-x 0 -60px;
+    background-repeat: repeat-x;
+    background-position: 0 -60px;
     color: #555;
     font-family: Arial, Helvetica;
     font-size: 13px;
-    line-height: 30px\0;
+    line-height: 30px;
 }
 
 #content-wrap form .disable .fmfield p.text {
@@ -454,8 +455,11 @@
     width: 485px;
 }
 
-/* =textarea
-**************************************/
+/* textarea */
+#content-wrap form .fminput .fmfield p.textarea,
+#content-wrap form .fminput .fmfield p.textarea span {
+    background: url(../images/input_white_lg.png) no-repeat 0 0;
+}
 
 #content-wrap form .fminput .fmfield p.textarea {
     overflow: hidden;
@@ -463,13 +467,12 @@
     height: 92px;
     margin: 0 10px 10px 0;
     padding-left: 3px;
-    background: url(../images/input_white_lg.png) no-repeat 0 0;
 }
 
 #content-wrap form .fminput .fmfield p.textarea span {
     display: block;
     padding-right: 3px;
-    background: url(../images/input_white_lg.png) no-repeat right -92px;
+    background-position: right -92px;
 }
 
 #content-wrap form .fminput .fmfield p.textarea span span {
@@ -489,7 +492,7 @@
     color: #555;
     font-family: Arial, Helvetica;
     font-size: 13px;
-	resize: none;
+    resize: none;
 }
 
 #content-wrap form .disable .fmfield p.textarea {
@@ -504,9 +507,7 @@
     background-position: 0 -460px;
 }
 
-/* =thumbnail
-**************************************/
-
+/* thumbnail */
 #content-wrap form .fminput .fmfield .img-list {
     position: relative;
     float: left;
@@ -566,7 +567,7 @@
     height: 77px;
     margin: 3px 0 0 3px;
     background-color: #fff;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3), 0px 0px 4px rgba(255, 255, 255,0.3) inset;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3), 0 0 4px rgba(255, 255, 255,0.3) inset;
 }
 
 #content-wrap form .fminput .fmfield .img-list ul li .img {
@@ -602,13 +603,10 @@
     color: #f00;
 }
 
-/* =checkbox
-**************************************/
-
+/* checkbox */
 #content-wrap form .fminput .fmfield .checkbox {
     float: left;
     height: 19px;
-    background: url(../images/bg_checkbox.png) no-repeat 0 0;
     color: #555;
     line-height: 18px;
     text-decoration: none;
@@ -623,12 +621,10 @@
 
 #content-wrap form .fminput .fmfield .checkbox a.on,
 #content-wrap form .fminput .fmfield .checkbox a:hover {
-    background: url(../images/icon_check.png) no-repeat 4px center;
+    background-position: 4px center;
 }
 
-/* =radio
-**************************************/
-
+/* radio */
 #content-wrap form .fminput .fmfield .radio {
     overflow: hidden;
 }
@@ -656,7 +652,7 @@
 #content-wrap form .disable .fmfield .radio li a,
 #content-wrap form .disable .fmfield .radio li a:hover {
     background-position: 0 -18px;
-	color: #bbb;
+    color: #bbb;
 }
 
 #content-wrap form .disable .fmfield .radio li.on a,
@@ -664,45 +660,48 @@
     background-position: 0 -56px;
 }
 
-/* =select
-**************************************/
-
+/* select */
 #content-wrap form .fminput .fmfield .select {
-	position: relative;
+    position: relative;
     float: left;
-	width: 180px;
-	height: 30px;
+    width: 180px;
+    height: 30px;
     margin-right: 10px;
     padding-left: 3px;
-    background: url(../images/input_white.png) no-repeat 0 0;
 }
 
 #content-wrap form .fminput .fmfield .select.disable {
     background-position: 0 -90px;
 }
 
+#content-wrap form .fminput .fmfield .select .select-btn,
+#content-wrap form .fminput .fmfield .select.disable .select-btn,
+#content-wrap form .fminput .fmfield .select .select-btn:hover {
+    background: url(../images/btns.png) no-repeat 0 0;
+}
+
 #content-wrap form .fminput .fmfield .select .select-btn {
-	padding: 0;
-	width: 22px;
-	height: 23px;
-	background: url(../images/btns.png) 0 -400px no-repeat;
-	position: absolute;
-	top: 3px;
-	right: 5px;
-	z-index: 55;
-	cursor: pointer;
+    padding: 0;
+    width: 22px;
+    height: 23px;
+    background-position: 0 -400px;
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    z-index: 55;
+    cursor: pointer;
 }
 
 #content-wrap form .fminput .fmfield .select.disable .select-btn,
 #content-wrap form .fminput .fmfield .select .select-btn:hover {
-	background: url(../images/btns.png) no-repeat 0 -501px;
+    background-position: 0 -501px;
 }
 
 #content-wrap form .fminput .fmfield .select .select-txt {
     overflow: hidden;
     height: 30px;
     padding: 0 3px 0 0;
-    background: url(../images/input_white.png) no-repeat right -30px;
+    background-position: right -30px;
     font-size: 13px;
     line-height: 30px;
     white-space: nowrap;
@@ -721,7 +720,8 @@
     display: block;
     height: 30px;
     padding-right: 4px;
-    background: url(../images/input_white.png) repeat-x 0 -60px;
+    background-repeat: repeat-x;
+    background-position: 0 -60px;
     color: #555;
     text-decoration: none;
 }
@@ -731,54 +731,52 @@
 }
 
 #content-wrap form .fminput .fmfield .select .select-list {
-	display: none;
-	position: absolute;
-	top: 27px;
-	left: 2px;
-	z-index: 60;
-	width: 198px;
-	border: 1px solid #b2b2b2;
-	border-bottom: none;
-	-moz-border-radius: 0 0 5px 5px;
-	-webkit-border-radius: 0 0 5px 5px;
-	border-radius:  0 0 5px 5px;
-	filter: alpha(Opacity=90);
-	opacity: 0.9;
+    display: none;
+    position: absolute;
+    top: 27px;
+    left: 2px;
+    z-index: 60;
+    width: 198px;
+    border: 1px solid #b2b2b2;
+    border-bottom: none;
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    border-radius:  0 0 5px 5px;
+    filter: alpha(Opacity=90);
+    opacity: 0.9;
 }
 
 #content-wrap form .fminput .fmfield .select .select-list li {
-	width: 180px;
-	height: 28px;
-	margin: 0;
-	padding: 0 9px;
-	border-top: 1px solid #f5f5f5;
-	border-bottom: 1px solid #c9c9c9;
-	background: none;
-	background-color: #d2d2d2;
-	color: #555;
-	font-size: 13px;
-	line-height: 28px;
-	cursor: pointer;
+    width: 180px;
+    height: 28px;
+    margin: 0;
+    padding: 0 9px;
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #c9c9c9;
+    background: none;
+    background-color: #d2d2d2;
+    color: #555;
+    font-size: 13px;
+    line-height: 28px;
+    cursor: pointer;
 }
 
 #content-wrap form .fminput .fmfield .select .select-list li:hover {
-	background-color: #e4e4e4;
-	color: #999;
+    background-color: #e4e4e4;
+    color: #999;
 }
 
 #content-wrap form .fminput .fmfield .select .select-list li:first-child {
-	border-top: none;
+    border-top: none;
 }
 
 #content-wrap form .fminput .fmfield .select .select-list li:last-child {
-	-moz-border-radius:  0 0 5px 5px;
-	-webkit-border-radius:  0 0 5px 5px;
-	border-radius:  0 0 5px 5px;
+    -moz-border-radius:  0 0 5px 5px;
+    -webkit-border-radius:  0 0 5px 5px;
+    border-radius:  0 0 5px 5px;
 }
 
-/* =form-btn
-**************************************/
-
+/* form-btn */
 #content-wrap form .form-btn {
     overflow: hidden;
     position: absolute;
@@ -786,7 +784,7 @@
     left: 50%;
     z-index: 100001;
     width: 96%;
-	min-width: 969px;
+    min-width: 969px;
     height: 48px;
     margin-left: -48%;
     padding: 0 0 0;
@@ -829,14 +827,14 @@
 }
 
 #content-wrap form .form-btn .wrap p.next {
-	left: 167px;
+    left: 167px;
     text-align: left;
 }
 
 #content-wrap.epcurate-publish   form .form-btn .wrap p.notice {
     position: absolute;
     top: 15px;
-	left: 167px;
+    left: 167px;
     width: auto;
     color: #f00;
     font-size: 13px;
@@ -845,7 +843,7 @@
 
 #content-wrap form .form-btn .wrap p.back a:hover,
 #content-wrap form .form-btn .wrap p.next a:hover {
-	color: #999;
+    color: #999;
 }
 
 #content-wrap form .form-btn .btns span input {

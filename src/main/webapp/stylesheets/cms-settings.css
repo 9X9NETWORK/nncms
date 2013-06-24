@@ -1,15 +1,4 @@
-/*-----------------------------------------------------------------------------
-[TABLE OF CONTENTS]
-    +content-main
-        =channel-list
------------------------------------------------------------------------------*/
-
-/**
-*
-* =settingForm
-*
-**/
-
+/* CMS setting form */
 #content-main-wrap form {
     position: relative;
     padding: 0 0 56px 0;
@@ -41,18 +30,24 @@
     font-size: 13px;
 }
 
+/* text */
+#content-main-wrap form .fminput .fmfield p.text,
+#content-main-wrap form .fminput .fmfield p.text span,
+#content-main-wrap form .fminput .fmfield p.text span .text {
+    background: url(../images/input_white.png) no-repeat 0 0;
+}
+
 #content-main-wrap form .fminput .fmfield p.text {
     float: left;
     height: 30px;
     margin-bottom: 7px;
     padding-left: 3px;
-    background: url(../images/input_white.png) no-repeat 0 0;
 }
 
 #content-main-wrap form .fminput .fmfield p.text span {
     display: block;
     padding-right: 3px;
-    background: url(../images/input_white.png) no-repeat right -30px;
+    background-position: right -30px;
 }
 
 #content-main-wrap form .fminput .fmfield p.text span .text {
@@ -60,7 +55,8 @@
     height: 30px;
     padding-left: 4px;
     border: none;
-    background: url(../images/input_white.png) repeat-x 0 -60px;
+    background-repeat: repeat-x;
+    background-position: 0 -60px;
     color: #555;
     font: 13px/30px Arial, Helvetica;
 }
@@ -85,21 +81,30 @@
     font-size: 13px;
 }
 
+/* btns */
 #content-main-wrap form .fminput .fmfield p.btns {
     float: left;
 }
 
+#content-main-wrap form .fminput .fmfield p.btns.disable,
+#content-main-wrap form .fminput .fmfield p.btns.disable span,
+#content-main-wrap form .fminput .fmfield p.btns.disable span a,
+#content-main-wrap form .fminput .fmfield p.btns.disable span input {
+    background: url(../images/btn_gray.png) no-repeat 0 0;
+}
+
 #content-main-wrap form .fminput .fmfield p.btns.disable {
-    background: url(../images/btn_gray.png) no-repeat 0 -193px;
+    background-position: 0 -193px;
 }
 
 #content-main-wrap form .fminput .fmfield p.btns.disable span {
-    background: url(../images/btn_gray.png) no-repeat right -225px;
+    background-position: right -225px;
 }
 
 #content-main-wrap form .fminput .fmfield p.btns.disable span a,
 #content-main-wrap form .fminput .fmfield p.btns.disable span input {
-    background: url(../images/btn_gray.png) repeat 0 -257px;
+    background-repeat: repeat;
+    background-position: 0 -257px;
     color: #999;
 }
 

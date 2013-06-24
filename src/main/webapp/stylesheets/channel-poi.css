@@ -1,9 +1,4 @@
-/*-----------------------------------------------------------------------------
-[TABLE OF CONTENTS]
-    +content-main
-        =channel-list
------------------------------------------------------------------------------*/
-
+/* Channel POI */
 #content-main-wrap {
     margin-top: 69px !important;
 }
@@ -12,8 +7,8 @@
     visibility: hidden;
 }
 
-#content-main.poi-list #title-func h2.poi-list,
-#content-main.poi-edit #title-func h2.poi-edit,
+#content-main.poi-list   #title-func h2.poi-list,
+#content-main.poi-edit   #title-func h2.poi-edit,
 #content-main.poi-create #title-func h2.poi-create {
     display: block !important;
     visibility: visible;
@@ -36,29 +31,31 @@
     float: left;
 }
 
-/**
-*
-* =poi-list
-*
-**/
-
+/* poi list */
 #poi-list .add {
     padding-left: 10px;
+}
+
+#poi-list .add .btn-create-poi,
+#poi-list .add .btn-create-poi span,
+#poi-list .add .btn-create-poi span a {
+    background: url(../images/btn_gray.png) no-repeat 0 0;
 }
 
 #poi-list .add .btn-create-poi {
     float: left;
     margin: 0 8px 2px 0;
-    background: url(../images/btn_gray.png) no-repeat 0 -1px;
+    background-position: 0 -1px;
 }
 
 #poi-list .add .btn-create-poi span {
-    background: url(../images/btn_gray.png) no-repeat right -33px;
+    background-position: right -33px;
 }
 
 #poi-list .add .btn-create-poi span a {
     padding: 5px 5px 0 5px;
-    background: url(../images/btn_gray.png) repeat-x 0 -65px;
+    background-repeat: repeat-x;
+    background-position: 0 -65px;
 }
 
 #poi-list .add .btn-create-poi:hover {
@@ -194,7 +191,7 @@
 }
 
 #poi-list .poi-info p.func .btn-del {
-    background: url(../images/btns.png) no-repeat 0 -856px;
+    background-position: 0 -856px;
 }
 
 #poi-list .poi-info p.func .edit:hover {
@@ -205,12 +202,7 @@
     background-position: -23px -856px;
 }
 
-/**
-*
-* =poi-edit
-*
-**/
-
+/* poi edit */
 #channel-poi .edit-block {
     position: relative;
 }
@@ -247,18 +239,23 @@
     font-size: 13px;
 }
 
+#channel-poi .edit-block .fminput .fmfield p.text,
+#channel-poi .edit-block .fminput .fmfield p.text span,
+#channel-poi .edit-block .fminput .fmfield p.text span .text {
+    background: url(../images/input_white.png) no-repeat 0 0;
+}
+
 #channel-poi .edit-block .fminput .fmfield p.text {
     float: left;
     height: 30px;
     margin-right: 10px;
     padding-left: 3px;
-    background: url(../images/input_white.png) no-repeat 0 0;
 }
 
 #channel-poi .edit-block .fminput .fmfield p.text span {
     display: block;
     padding-right: 3px;
-    background: url(../images/input_white.png) no-repeat right -30px;
+    background-position: right -30px;
 }
 
 #channel-poi .edit-block .fminput .fmfield p.text span .text {
@@ -266,7 +263,8 @@
     height: 30px;
     padding-left: 4px;
     border: none;
-    background: url(../images/input_white.png) repeat-x 0 -60px;
+    background-repeat: repeat-x;
+    background-position: 0 -60px;
     color: #555;
     font: 13px/30px Arial, Helvetica;
 }

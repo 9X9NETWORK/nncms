@@ -774,7 +774,7 @@
     margin: -5px 0 -5px 0;
     cursor: pointer;
     width: 150px;
-	background: none;
+    background: none;
 }
 #func-nav ul li .sub-nav li a:hover {
     font-weight: bold;

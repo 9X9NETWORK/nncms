@@ -1,3 +1,65 @@
+版本: 1229
+作者: chihwen
+日期: 2013年6月24日 下午 10:42:21
+訊息:
+1. 根據客戶提供的 coding guideline 調整 css。
+2. 統一 tab = 4 space。
+3. 將 tab 改為空格，並移除行未多餘的空白。
+issue 6337
+----
+異動 : /fakeapi/stylesheets/channel-poi.css
+異動 : /fakeapi/stylesheets/channel.css
+異動 : /fakeapi/stylesheets/cms-settings.css
+異動 : /fakeapi/stylesheets/ep-curation.css
+異動 : /fakeapi/stylesheets/epcurate.css
+異動 : /fakeapi/stylesheets/episode.css
+異動 : /fakeapi/stylesheets/jquery.datepick.css
+異動 : /fakeapi/stylesheets/lightbox.css
+異動 : /fakeapi/stylesheets/perfect-scrollbar.css
+異動 : /fakeapi/stylesheets/playback.css
+異動 : /fakeapi/stylesheets/poi-hide.css
+異動 : /fakeapi/stylesheets/portal.css
+異動 : /fakeapi/stylesheets/style.css
+異動 : /fakeapi/stylesheets/titlecard-hide.css
+異動 : /fakeapi/stylesheets/uniform.css
+
+版本: 1203
+作者: chihwen
+日期: 2013年6月21日 下午 09:56:51
+訊息:
+從 9x9 production SVN 版本 4938 轉入 fakeapi 分支
+issue 5927
+----
+異動 : /fakeapi/lang/en.json
+異動 : /fakeapi/lang/zh.json
+
+版本: 1198
+作者: chihwen
+日期: 2013年6月21日 下午 06:10:35
+訊息:
+同步 src2 版本 1196 (調整拼錯字的 css)
+issue 6367
+----
+異動 : /fakeapi/stylesheets/epcurate.css
+
+版本: 1194
+作者: chihwen
+日期: 2013年6月21日 下午 05:35:53
+訊息:
+修正全新節目時，多筆POI新增重覆問題
+issue 6367
+----
+異動 : /fakeapi/javascripts/curation.js
+
+版本: 1190
+作者: chihwen
+日期: 2013年6月21日 下午 02:18:52
+訊息:
+將 teltel_ui 版本 1187 合併回 fakeapi 分支
+issue 5927
+----
+異動 : /fakeapi/stylesheets/style.css
+
 版本: 4937
 作者: Mars
 日期: 2013/6/21 17:30
@@ -5,7 +67,6 @@
 修正 PCS portal-manage.html 預覽( 新增頻道 ) / Cunnie 修正 CSS 
 1. 在搜尋後，點選頻道，關掉後 channel list 會清空，但 Add 按鈕沒消失，
 2. Add 按鈕翻譯
-
 ----
 異動 : /portal-manage.html
 異動 : /javascripts/portal.js
