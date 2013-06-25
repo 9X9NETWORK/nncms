@@ -275,26 +275,22 @@ $(document).on("click", "#portal_search_channel", function(event) {
                                         channel.imageUrl = temp[0];
                                     }
                                 }
-
                             }
                             items.push(channel);
                         });
-
                         cntChannel = items.length;
                         if (cntChannel > 0) {
                             nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/validBrands', {
                                 channelId : items[0].id
                             }), null, function(cBrands) {
                                 var isValid = false;
-                                console.log("**** Name :" + CMS_CONF.MSOINFO.name);
-                                for (var i = 0,    iCount = cBrands.length; i < iCount; i++) {
+                                for (var i = 0, iCount = cBrands.length; i < iCount; i++) {
                                     if (CMS_CONF.MSOINFO.name === cBrands[i].brand) {
                                         isValid = true;
+                                        break;
                                     }
-
                                 }
                                 if (isValid === true) {
-
                                     $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel, canChannel]));
                                     $('#portal-search-item-tmpl').tmpl(items).appendTo('#search-channel-list');
                                 } else {
@@ -302,19 +298,14 @@ $(document).on("click", "#portal_search_channel", function(event) {
                                 }
 
                             });
-
                         } else {
                             $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any channels."], [strInput]));
                         }
-                        //$('#search-channel-list').html('');
-
                         var pageChannel = Math.floor($(".list-holder").width() / 117) * 2;
                         if (cntChannel > pageChannel) {
                             $("#searchNext").show();
                         }
-
                     });
-
                 } else {
                     //$("#msg-search").text(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Please fill in the correct url."])).show();
                     $("#sRusult").text(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Please fill in the correct url."])).show();
