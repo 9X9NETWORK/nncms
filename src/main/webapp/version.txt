@@ -1,3 +1,13 @@
+版本: 4953
+作者: Mars
+日期: 2013/6/25 11:14
+訊息:
+修正 PCS portal-manage.html / store-manage.html 需要帶入 supportedRegion 參數 
+----
+異動 : /javascripts/controller.js
+異動 : /javascripts/portal.js
+異動 : /javascripts/portal.store.js
+
 版本: 1229
 作者: chihwen
 日期: 2013年6月24日 下午 10:42:21

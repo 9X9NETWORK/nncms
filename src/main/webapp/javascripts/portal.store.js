@@ -97,10 +97,10 @@ $(document).on("click", "#store-category .btn-gray", function(event) {
 
 function listCatChannel(inMsoId, inCatId, inPageSize) {
     console.log("inMsoId : " + inMsoId);
-    nn.api('GET', CMS_CONF.API('/api/mso/{msoId}/store', {
-        msoId : 1
-    }), {
-        categoryId : inCatId
+    // base
+    nn.api('GET', CMS_CONF.API('/api/store'), {
+        categoryId : inCatId,
+        sphere : CMS_CONF.MSOINFO.supportedRegion
     }, function(channels) {
         var pageInfo = [];
         var cntChannelSource = channels.length;

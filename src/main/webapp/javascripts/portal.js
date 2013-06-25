@@ -259,12 +259,13 @@ $(document).on("click", "#portal_search_channel", function(event) {
                         cntChannel = channels.length;
 
                         var canChannel = 27 - $("#channelCnt").text();
-                        $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel, canChannel]));
 
                         //alert($("#sRusult").data("canAdd"));
-                        var items = [], temp = [];
+                        var items = [], temp = [], tfRegion = false;
+
                         $.each(channels, function(i, channel) {
                             temp = [];
+                            tfRegion = false;
 
                             if (channel.imageUrl == '') {
                                 channel.imageUrl = 'images/ch_default.png';
@@ -277,9 +278,21 @@ $(document).on("click", "#portal_search_channel", function(event) {
 
                             }
 
-                            items.push(channel);
+                            if ((CMS_CONF.MSOINFO.supportedRegion === null || (CMS_CONF.MSOINFO.supportedRegion === null && channel.sphere === null ) || CMS_CONF.MSOINFO.supportedRegion === channel.sphere ) || -1 !== $.inArray(channel.sphere, CMS_CONF.MSOINFO.supportedRegion.split(','))) {
+                                tfRegion = true;
+                            }
+                            // contentType != 11, isPublic = true, sphere = mso.supportedRegion, status
+                            if (0 === channel.status && true === channel.isPublic && 11 !== channel.contentType && tfRegion) {
+                                items.push(channel);
+                            }
                         });
 
+                        cntChannel = items.length;
+                        if (cntChannel > 0) {
+                            $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel, canChannel]));
+                        } else {
+                            $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any channels."], [strInput]));
+                        }
                         //$('#search-channel-list').html('');
 
                         $('#portal-search-item-tmpl').tmpl(items).appendTo('#search-channel-list');
@@ -301,19 +314,12 @@ $(document).on("click", "#portal_search_channel", function(event) {
             case "keywords":
                 var api_fix = "?keyword=" + strInput;
                 nn.api('GET', CMS_CONF.API('/api/channels'), {
-                    keyword : strInput
+                    keyword : strInput,
+                    sphere : CMS_CONF.MSOINFO.supportedRegion
                 }, function(channels) {
                     cntChannel = channels.length;
 
                     var canChannel = 27 - $("#channelCnt").text();
-                    
-                    if( cntChannel > 0 ){
-                        $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel, canChannel]));
-                    }else{
-                        $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any channels."], [strInput]));                        
-                    }
-
-                    
 
                     var items = [], temp = [];
                     $.each(channels, function(i, channel) {
@@ -330,6 +336,14 @@ $(document).on("click", "#portal_search_channel", function(event) {
                         }
                         items.push(channel);
                     });
+
+                    cntChannel = items.length;
+                    if (cntChannel > 0) {
+                        $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel, canChannel]));
+                    } else {
+                        $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any channels."], [strInput]));
+                    }
+
                     $('#portal-search-item-tmpl').tmpl(items).appendTo('#search-channel-list');
 
                     var pageChannel = Math.floor($(".list-holder").width() / 117) * 2;
@@ -929,7 +943,10 @@ $(function() {
 
 
     window.onbeforeunload = confirmExit;
-    
-    setTimeout(function(){$("#set-preview").click();}, 3000);
-    
+
+    setTimeout(function() {
+        // set preview info
+        $("#set-preview").click();
+    }, 3000);
+
 });
