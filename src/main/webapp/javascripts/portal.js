@@ -317,7 +317,7 @@ $(document).on("click", "#portal_search_channel", function(event) {
                 var api_fix = "?keyword=" + strInput;
                 nn.api('GET', CMS_CONF.API('/api/channels'), {
                     keyword : strInput,
-                    sphere : CMS_CONF.MSOINFO.supportedRegion
+                    mso : CMS_CONF.MSOINFO.name
                 }, function(channels) {
                     cntChannel = channels.length;
 

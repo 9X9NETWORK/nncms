@@ -1,3 +1,11 @@
+版本: 4959
+作者: Mars
+日期: 2013/6/25 18:23
+訊息:
+修改 portal-manage.html sphere : CMS_CONF.MSOINFO.supportedRegion 參數修改成  mso : CMS_CONF.MSOINFO.name
+----
+異動 : /javascripts/portal.js
+
 版本: 4958
 作者: Mars
 日期: 2013/6/25 18:16
