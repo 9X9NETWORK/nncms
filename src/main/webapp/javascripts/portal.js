@@ -277,25 +277,36 @@ $(document).on("click", "#portal_search_channel", function(event) {
                                 }
 
                             }
-
-                            if ((CMS_CONF.MSOINFO.supportedRegion === null || (CMS_CONF.MSOINFO.supportedRegion === null && channel.sphere === null ) || CMS_CONF.MSOINFO.supportedRegion === channel.sphere ) || -1 !== $.inArray(channel.sphere, CMS_CONF.MSOINFO.supportedRegion.split(','))) {
-                                tfRegion = true;
-                            }
-                            // contentType != 11, isPublic = true, sphere = mso.supportedRegion, status
-                            if (0 === channel.status && true === channel.isPublic && 11 !== channel.contentType && tfRegion) {
-                                items.push(channel);
-                            }
+                            items.push(channel);
                         });
 
                         cntChannel = items.length;
                         if (cntChannel > 0) {
-                            $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel, canChannel]));
+                            nn.api('GET', CMS_CONF.API('/api/channels/{channelId}/autosharing/validBrands', {
+                                channelId : items[0].id
+                            }), null, function(cBrands) {
+                                var isValid = false;
+                                console.log("**** Name :" + CMS_CONF.MSOINFO.name);
+                                for (var i = 0,    iCount = cBrands.length; i < iCount; i++) {
+                                    if (CMS_CONF.MSOINFO.name === cBrands[i].brand) {
+                                        isValid = true;
+                                    }
+
+                                }
+                                if (isValid === true) {
+
+                                    $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel, canChannel]));
+                                    $('#portal-search-item-tmpl').tmpl(items).appendTo('#search-channel-list');
+                                } else {
+                                    $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any channels."], [strInput]));
+                                }
+
+                            });
+
                         } else {
                             $("#sRusult").html(nn._([CMS_CONF.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any channels."], [strInput]));
                         }
                         //$('#search-channel-list').html('');
-
-                        $('#portal-search-item-tmpl').tmpl(items).appendTo('#search-channel-list');
 
                         var pageChannel = Math.floor($(".list-holder").width() / 117) * 2;
                         if (cntChannel > pageChannel) {

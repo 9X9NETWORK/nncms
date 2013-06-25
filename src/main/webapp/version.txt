@@ -1,3 +1,11 @@
+版本: 4957
+作者: Mars
+日期: 2013/6/25 17:32
+訊息:
+修正 PCS portal-manage.html url search result validBrands 檢查 
+----
+異動 : /javascripts/portal.js
+
 版本: 4953
 作者: Mars
 日期: 2013/6/25 11:14
