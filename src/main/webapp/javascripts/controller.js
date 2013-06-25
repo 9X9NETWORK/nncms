@@ -1598,12 +1598,12 @@ $(function () {
                 CMS_CONF.MSO = 0;
                 if (tmpPriv > 221 && user.msoId > 0) {
                     CMS_CONF.MSO = user.msoId;
-                    if( -1 !== $.inArray(tmpUrl.attr('file'), ["store-manage.html", "portal-manage.html"]) ){
+                    if (-1 !== $.inArray(tmpUrl.attr('file'), ['store-manage.html', 'portal-manage.html'])) {
                         // set mso info
                         nn.api('GET', CMS_CONF.API('/api/mso/{msoId}', {
-                            msoId : CMS_CONF.MSO
-                        }), null, function(msoInfo) {
-                            CMS_CONF.MSOINFO = msoInfo ;
+                            msoId: CMS_CONF.MSO
+                        }), null, function (msoInfo) {
+                            CMS_CONF.MSOINFO = msoInfo;
                         });
                     }
                 }
