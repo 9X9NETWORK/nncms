@@ -343,7 +343,7 @@ body.mac #title-func ul li p span a {
     float: left;
 }
 
-#ep-list ul li .episode p.img {
+#ep-list ul li .episode .img {
     position: relative;
     float: left;
     overflow: hidden;
@@ -356,13 +356,38 @@ body.mac #title-func ul li p span a {
     text-align: center;
 }
 
-#ep-list ul li .episode p.img a ,
+#ep-list ul li .episode .img .img-container {
+    position: relative;
+    overflow: hidden;
+    width: 80px;
+    height: 45px;
+}
+
+#ep-list ul li .episode .img .img-container .img-wrap {
+    position: absolute;
+    width: 320px;
+    height: 45px;
+    top: 0;
+    left: 50%;
+    margin: 0 0 0 -160px;
+}
+
+#ep-list ul li .episode .img .img-container .img-wrap img.photo {
+    display: block;
+    width: auto !important;
+    max-width: 320px !important;
+    min-width: 80px !important;
+    height: 45px !important;
+    margin: 0 auto;
+}
+
+#ep-list ul li .episode .img a ,
 #ep-list ul li .episode p.img a img {
     display: block;
     border: none;
 }
 
-#ep-list ul li .episode p.img a img.watermark {
+#ep-list ul li .episode .img a img.watermark {
     display: none;
     position: absolute;
     top: 50%;
@@ -371,14 +396,14 @@ body.mac #title-func ul li p span a {
     margin: -16px 0 0 -16px;
 }
 
-#ep-list ul li .episode p.img a:hover img.img {
+#ep-list ul li .episode .img a:hover img.photo {
     background-color: #fff;
     opacity: 0.5;
     filter: alpha(opacity=50);
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 
-#ep-list ul li .episode p.img a:hover img.watermark {
+#ep-list ul li .episode .img a:hover img.watermark {
     display: block;
 }
 
@@ -392,7 +417,7 @@ body.mac #title-func ul li p span a {
     text-align: center;
 }
 
-#ep-list ul li .episode p.img    span.duration,
+#ep-list ul li .episode .img     span.duration,
 #ep-list ul li .episode p.no-img span.duration {
     display: block;
     position: absolute;
@@ -405,7 +430,7 @@ body.mac #title-func ul li p span a {
     -webkit-text-size-adjust: none;
 }
 
-#ep-list ul li .episode p.img    span .time-right,
+#ep-list ul li .episode .img    span .time-right,
 #ep-list ul li .episode p.no-img span .time-right {
     display: block;
     float: left;
@@ -415,7 +440,7 @@ body.mac #title-func ul li p span a {
     background: url(../images/time_box_right.png) no-repeat right 0;
 }
 
-#ep-list ul li .episode p.img    span .time-middle,
+#ep-list ul li .episode .img     span .time-middle,
 #ep-list ul li .episode p.no-img span .time-middle {
     display: block;
     float: left;

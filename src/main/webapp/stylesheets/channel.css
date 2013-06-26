@@ -140,25 +140,70 @@ body.mac #title-func h2 {
 #channel-list li .photo-list {
     position: relative;
     float: left;
-    width: 203px;
-    padding: 7px 4px 4px 8px;
+    overflow: hidden;
+    width: 192px;
+    height: 108px;
+    margin: 7px 15px 0 8px;
+}
+
+#channel-list li .photo-list .ep {
+    position: absolute;
+    width: 320px;
+    height: 45px;
+    top: 0;
+    left: 50%;
+    margin: 0 0 0 -160px;
+}
+
+#channel-list li .photo-list .ep img {
+    display: block;
+    width: auto !important;
+    max-width: 320px !important;
+    min-width: 192px !important;
+    height: 108px !important;
+    margin: 0 auto;
+    border: none;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+}
+
+#channel-list li .photo-list:hover .ep img {
+    background-color: #fff;
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+}
+
+#channel-list li .photo-list .ch {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 32px;
+    height: 32px;
+}
+
+#channel-list li .photo-list .ch .img {
+    position: absolute;
+    left: 50%;
+    width: 100px;
+    height: 32px;
+    margin: 0 0 0 -50px;
+}
+
+#channel-list li .photo-list .ch .img img {
+    display: block;
+    max-width: 100px !important;
+    min-width: 32px !important;
+    width: auto !important;
+    height: 32px !important;
+    margin: 0 auto;
 }
 
 #channel-list li .photo-list a {
     text-decoration: none;
 }
-
-#channel-list li .photo-list a span {
-    display: block;
-    position: absolute;
-    top: 40px;
-    left: 5px;
-    width: 152px;
-    color: #555;
-    font-size: 17px;
-    text-align: center;
-}
-
+/*
 #channel-list li .photo-list img {
     float: left;
     margin: 0 5px 6px 0;
@@ -175,8 +220,6 @@ body.mac #title-func h2 {
 }
 
 #channel-list li .photo-list img.ep {
-    float: left;
-    margin: 0 5px 6px 0;
     border: none;
     opacity: 0.5;
     filter: alpha(opacity=50);
@@ -189,17 +232,13 @@ body.mac #title-func h2 {
     filter: alpha(opacity=100);
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
-
+*/
 #channel-list li .photo-list a img.watermark {
     position: absolute;
     display: block;
-    top: 46px;
-    left: 92px;
+    top: 39px;
+    left: 84px;
     z-index: 10;
-}
-
-#channel-list li .photo-list a:hover span {
-    display: none;
 }
 
 /* Channel list info */

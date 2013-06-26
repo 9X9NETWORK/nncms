@@ -1,3 +1,30 @@
+版本: 1246
+作者: chihwen
+日期: 2013年6月26日 下午 09:44:04
+訊息:
+1. 從 9x9 production SVN 版本 4973 轉入 fakeapi 分支。
+2. index 和 episode-list 的圖片比例調整成照 9x9 所提供的樣式。
+issue 5927
+----
+異動 : /fakeapi/epcurate-publish.html
+異動 : /fakeapi/episode-list.html
+異動 : /fakeapi/images/icon_checkbox.png
+異動 : /fakeapi/index.html
+異動 : /fakeapi/javascripts/index.js
+異動 : /fakeapi/stylesheets/channel.css
+異動 : /fakeapi/stylesheets/epcurate.css
+異動 : /fakeapi/stylesheets/episode.css
+異動 : /fakeapi/stylesheets/portal.css
+
+版本: 1233
+作者: chihwen
+日期: 2013年6月25日 下午 02:30:35
+訊息:
+從 9x9 production SVN 版本 4953 轉入 fakeapi 分支
+issue 5927
+----
+異動 : /fakeapi/javascripts/controller.js
+
 版本: 4973
 作者: Mars
 日期: 2013/6/26 13:39

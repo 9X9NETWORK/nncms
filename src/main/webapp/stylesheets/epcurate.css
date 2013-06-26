@@ -579,10 +579,17 @@
     margin: 0 0 0 -160px;
 }
 
+#content-wrap form .fminput .fmfield .img-list ul li .img .img-wrap {
+    overflow: hidden;
+    width: 112px;
+    height: 63px;
+    margin: 0 auto;
+}
+
 #content-wrap form .fminput .fmfield .img-list ul li .img img {
     display: block;
     width: auto !important;
-    max-width: 320px !important;
+    max-width: 144px !important;
     min-width: 112px !important;
     height: 63px !important;
     margin: 0 auto;

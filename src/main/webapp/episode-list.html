@@ -169,13 +169,17 @@
 <li class="clearfix">
 <div class="container">
 <div class="episode">
-<p class="img">
+<div class="img">
+<div class="img-container">
+<div class="img-wrap">
 <a href="${playbackUrl}" target="_blank">
 <img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="${imageUrl}" alt="" width="80" height="45" class="img" />
+<img src="${imageUrl}" alt="" class="photo" />
 </a>
 <span class="duration"><span class="time-right"><span class="time-middle">${formatDuration(duration)}</span></span></span>
-</p>
+</div>
+</div>
+</div>
 <h3><a href="${playbackUrl}" target="_blank">${name}</a></h3>
 <div class="btns">
 <div class="btn-wrap disable">
@@ -319,17 +323,21 @@
     </div>
 <div class="number">${seq}</div>
 <div class="episode">
-<p class="img">
+<div class="img">
+<div class="img-container">
+<div class="img-wrap">
 {{if null != publishDate}}
 <a href="${playbackUrl}" target="_blank">
 <img src="images/icon_playlist.png" alt="" class="watermark" />
-<img src="${imageUrl}" alt="" width="80" height="45" class="img" />
+<img src="${imageUrl}" alt="" class="photo" />
 </a>
 {{else}}
-<img src="${imageUrl}" alt="" width="80" height="45" class="img" />
+<img src="${imageUrl}" alt="" class="photo" />
 {{/if}}
 <span class="duration"><span class="time-right"><span class="time-middle">${formatDuration(duration)}</span></span></span>
-</p>
+</div>
+</div>
+</div>
 <h3><a href="${playbackUrl}" target="_blank">${name}</a></h3>
 <div class="btns">
 <div class="btn-wrap enable">
