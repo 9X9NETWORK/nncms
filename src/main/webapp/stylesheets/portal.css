@@ -184,7 +184,7 @@
     float: left;
 }
 #signup-checkbox.on {
-    background-position: 0 -50px;
+    background-position: 0 -19px;
 }
 #signup-agree {
     width: 220px;
@@ -1449,20 +1449,20 @@
 }
 /* Checkbox */
 .checkbox {
-    width: 15px;
-    height: 15px;
-    background: url(../images/icon_checkbox.png) 0 0 no-repeat;
+    width: 22px;
+    height: 22px;
+    background: url(../images/icon_checkbox.png) 0 -38px no-repeat;
     cursor: pointer;
     display: block;
     float: left;
 }
 .checkbox.on {
-    background-position: 0 -50px;
+    background-position: 0 -63px;
 }
 #portal-add-layer .checkbox {
     position: absolute;
-    left: 7px;
-    top: 7px;
+    left: 0;
+    top: 0;
     z-index: 4;
 }
 /* Dropdown Gray */
@@ -1721,31 +1721,45 @@
     right: 14px;
     z-index: 2;
 }
-#brand-layer .img {
-    width: 275px;
-    height: 208px;
-    background: #fff;
-    text-align: center;
-    padding: 7px 0 0 0;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3), 0px 0px 4px rgba(255, 255, 255, 0.3) inset;
-    float: left;
-    margin: 15px 0 0 0;
-}
 #brand-layer .loading {
     display: none;
 }
-#brand-layer .thumbnail {
+#brand-layer .logo {
+	width: 260px;
+    height: 200px;
+	overflow: hidden;
+	position: absolute;
+	left: 111px;
+	top: 17px;
+	border: 7px solid #fff;
+	background: #fff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3), 0px 0px 4px rgba(255, 255, 255, 0.3) inset;
+}
+#brand-layer .logo .img {
+   	width: 450px;
+    height: 200px;
+	position: absolute;
+	left: 50%;
+	margin: 0 0 0 -225px;
+	display: block;
+}
+#brand-layer .logo .img .thumbnail {
+    width: auto !important;
+    max-width: 450px !important;
+    min-width: 260px !important;
+    height: 200px !important;
+    margin: 0 auto;
+    display: block;
 }
 #brand-layer .upload-img {
     top: -10px;
     position: relative;
 }
 #brand-layer .upload-btn {
-    position: relative;
-    float: left;
+    position: absolute;
     top: 17px;
     text-align: left;
-    left: 15px;
+    left: 400px;
 }
 #brand-layer .upload-img .notice {
     font-weight: normal;

@@ -1,3 +1,14 @@
+版本: 4973
+作者: Mars
+日期: 2013/6/26 13:39
+訊息:
+修改 portal-manage.html - add channel 的搜尋結果的 checkbox 大小 
+修改 brand-setting.html - Brand Logo css 
+----
+異動 : /brand-setting.html
+異動 : /javascripts/stylesheets/portal.css
+異動 : /images/icon_checkbox.png
+
 版本: 4959
 作者: Mars
 日期: 2013/6/25 18:23
