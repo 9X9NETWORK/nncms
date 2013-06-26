@@ -1725,23 +1725,23 @@
     display: none;
 }
 #brand-layer .logo {
-	width: 260px;
+    width: 260px;
     height: 200px;
-	overflow: hidden;
-	position: absolute;
-	left: 111px;
-	top: 17px;
-	border: 7px solid #fff;
-	background: #fff;
+    overflow: hidden;
+    position: absolute;
+    left: 111px;
+    top: 17px;
+    border: 7px solid #fff;
+    background: #fff;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3), 0px 0px 4px rgba(255, 255, 255, 0.3) inset;
 }
 #brand-layer .logo .img {
-   	width: 450px;
+    width: 450px;
     height: 200px;
-	position: absolute;
-	left: 50%;
-	margin: 0 0 0 -225px;
-	display: block;
+    position: absolute;
+    left: 50%;
+    margin: 0 0 0 -225px;
+    display: block;
 }
 #brand-layer .logo .img .thumbnail {
     width: auto !important;
