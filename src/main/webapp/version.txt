@@ -1,1663 +1,935 @@
-版本: 1246
+版本: 1285
 作者: chihwen
-日期: 2013年6月26日 下午 09:44:04
+日期: 2013年6月28日 下午 12:25:56
 訊息:
-1. 從 9x9 production SVN 版本 4973 轉入 fakeapi 分支。
-2. index 和 episode-list 的圖片比例調整成照 9x9 所提供的樣式。
+避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=1278)
+issue 6337
+----
+異動 : /api/javascripts/v2/example/start-example.html
+異動 : /api/brand-setting.html
+異動 : /api/channel-add.html
+異動 : /api/channel-poi.html
+異動 : /api/channel-setting.html
+異動 : /api/cms-settings.html
+異動 : /api/epcurate-curation.html
+異動 : /api/epcurate-publish.html
+異動 : /api/episode-list.html
+異動 : /api/index.html
+異動 : /api/login.html
+異動 : /api/portal-manage.html
+異動 : /api/portal-set.html
+異動 : /api/signin.html
+異動 : /api/store-manage.html
+
+版本: 1278
+作者: chihwen
+日期: 2013年6月28日 上午 11:34:28
+訊息:
+從 src 版本 1276 轉入 api
+調整 channel-add 和 channel-setting 的 fb-connect 在有 brand 下拉時跟沒有的時候是兼容的。
+issue 6337
+----
+異動 : /api/channel-setting.html
+異動 : /api/stylesheets/channel.css
+
+版本: 1273
+作者: chihwen
+日期: 2013年6月28日 上午 12:16:08
+訊息:
+從 teltel_ui2 版本 1272 轉入 api
+調整靜態修版 JSON 版 fakeapi 以便 sample 不同的靜態情境
+1. 調整 config.js 依頻道序號組合 JSON 版 fakeapi 檔名。
+   1. 調整 PROTOTYPE_PACK 中 /api/channels/{channelId} 對應 fakeapi/json/channels_{channelId}.json
+   2. 調整 PROTOTYPE_PACK 中 /api/channels/{channelId}/episodes 對應 fakeapi/json/channels_episodes_{channelId}.json
+   3. 在各環境下的 API PACK 中，加入 /api/users/{userId}/my_favorites/fake 對應。
+2. 依頻道序號建立 JSON 版 fakeapi 靜態 json 檔。
+   1. GET_channels_頻道序號.json：模擬各頻道資料。
+   2. GET_channels_episodes_頻道序號.json：模擬各頻道下的節目清單資料。
+3. 刪除因上述異動，已用不到的 fakeapi 檔。
+4. 調整 func.episode.js 當以 episode-list.html?id=0 進入節目清單時，
+   故意在原抓取最愛頻道 API 尾端加入 /fake 以作為識別運用 (/api/users/{userId}/my_favorites/fake)。
+5. 利用上述識別，在靜態修版中，作為 Favorite First 的入口，並加入對應的 fakeapi 檔 (GET_users_my_favorites_fake.json)。
+6. 修正 episode-list.html 在最愛的 Favorite 節目清單下，其列表標頭不該出現 No. 欄位。
+issue 6594
+----
+異動 : /api/episode-list.html
+已刪除 : /api/fakeapi/json/GET_channels.json
+已加入 : /api/fakeapi/json/GET_channels_8758.json
+已加入 : /api/fakeapi/json/GET_channels_8759.json
+已加入 : /api/fakeapi/json/GET_channels_8760.json
+已加入 : /api/fakeapi/json/GET_channels_8764.json
+已加入 : /api/fakeapi/json/GET_channels_8765.json
+已加入 : /api/fakeapi/json/GET_channels_8769.json
+已加入 : /api/fakeapi/json/GET_channels_8770.json
+已加入 : /api/fakeapi/json/GET_channels_8771.json
+已加入 : /api/fakeapi/json/GET_channels_8774.json
+已加入 : /api/fakeapi/json/GET_channels_8775.json
+已加入 : /api/fakeapi/json/GET_channels_8776.json
+已加入 : /api/fakeapi/json/GET_channels_8777.json
+已加入 : /api/fakeapi/json/GET_channels_8778.json
+已加入 : /api/fakeapi/json/GET_channels_8779.json
+已加入 : /api/fakeapi/json/GET_channels_8780.json
+已加入 : /api/fakeapi/json/GET_channels_8784.json
+已加入 : /api/fakeapi/json/GET_channels_8786.json
+已加入 : /api/fakeapi/json/GET_channels_8787.json
+已加入 : /api/fakeapi/json/GET_channels_8788.json
+已加入 : /api/fakeapi/json/GET_channels_8789.json
+已加入 : /api/fakeapi/json/GET_channels_8790.json
+已加入 : /api/fakeapi/json/GET_channels_8794.json
+已加入 : /api/fakeapi/json/GET_channels_8795.json
+已加入 : /api/fakeapi/json/GET_channels_8797.json
+已加入 : /api/fakeapi/json/GET_channels_8798.json
+已加入 : /api/fakeapi/json/GET_channels_8810.json
+已加入 : /api/fakeapi/json/GET_channels_8814.json
+已刪除 : /api/fakeapi/json/GET_channels_episodes.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8758.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8759.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8764.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8765.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8769.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8770.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8771.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8774.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8775.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8776.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8777.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8778.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8779.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8780.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8784.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8786.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8787.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8788.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8789.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8790.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8794.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8795.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8797.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8798.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8810.json
+已加入 : /api/fakeapi/json/GET_channels_episodes_8814.json
+已加入 : /api/fakeapi/json/GET_users_my_favorites_fake.json
+異動 : /api/javascripts/v2/config.js
+異動 : /api/javascripts/v2/func.episode.js
+
+版本: 1267
+作者: chihwen
+日期: 2013年6月27日 下午 01:51:02
+訊息:
+微調新腳本架構 Start Example 啟始範例頁
+issue 6594
+----
+異動 : /api/javascripts/v2/example/start-example.html
+
+版本: 1263
+作者: chihwen
+日期: 2013年6月27日 下午 01:39:24
+訊息:
+加入新腳本架構 Start Example 啟始範例頁
+issue 6594
+----
+已加入 : /api/javascripts/v2/example/domready.start-example.js
+異動 : /api/javascripts/v2/example/func.file-name.js
+已加入 : /api/javascripts/v2/example/func.start-example.js
+已加入 : /api/javascripts/v2/example/start-example.html
+
+版本: 1259
+作者: chihwen
+日期: 2013年6月27日 上午 11:43:55
+訊息:
+將 epcurate-publish 節目縮圖的圖片結構由腳本轉移到結構，避免未來維護可能遺漏的問題
+issue 6337
+----
+異動 : /api/epcurate-publish.html
+異動 : /api/javascripts/v2/func.epcurate.js
+
+版本: 1258
+作者: chihwen
+日期: 2013年6月27日 上午 11:30:32
+訊息:
+修正 epcurate-publish 遺漏的圖片結構
+TODO：
+將這部份結構改移到 template 上，避免未來維護可能遺漏的問題
+issue 6337
+----
+異動 : /api/javascripts/v2/func.epcurate.js
+
+版本: 1257
+作者: chihwen
+日期: 2013年6月27日 上午 11:03:44
+訊息:
+改良 titlecard 有無背景圖片判斷，將複雜的判斷邏輯從模板集中到函式中
+issue 6594
+----
+異動 : /api/epcurate-curation.html
+異動 : /api/javascripts/v2/func.curation.js
+
+版本: 1247
+作者: chihwen
+日期: 2013年6月26日 下午 09:53:07
+訊息:
+根據 9x9 提供的 coding guideline 將 tab 改為空格
+issue 6337
+----
+異動 : /api/fakeapi/channels_episodes.php
+異動 : /api/portal-set.html
+
+版本: 1245
+作者: chihwen
+日期: 2013年6月26日 下午 09:14:20
+訊息:
+從 9x9 production SVN 版本 4973 轉入 api 分支
 issue 5927
 ----
-異動 : /fakeapi/epcurate-publish.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/images/icon_checkbox.png
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/index.js
-異動 : /fakeapi/stylesheets/channel.css
-異動 : /fakeapi/stylesheets/epcurate.css
-異動 : /fakeapi/stylesheets/episode.css
-異動 : /fakeapi/stylesheets/portal.css
+異動 : /api/brand-setting.html
+異動 : /api/images/icon_checkbox.png
+異動 : /api/stylesheets/portal.css
 
-版本: 1233
+版本: 1244
 作者: chihwen
-日期: 2013年6月25日 下午 02:30:35
+日期: 2013年6月26日 下午 09:02:25
 訊息:
-從 9x9 production SVN 版本 4953 轉入 fakeapi 分支
+1. 以巢狀縮排的書寫方式，調整 PCS 各 HTML 原始碼。
+2. 修正共用函式 func.common.js 在調整語系後，右下角語系下拉選單未正確切換問題。
+3. 校正 Sign In 頁，網頁 title 語系設定。
+4. 調整 brand-setting.html 及 func.portal.brand.js 移除用不到的 #portal-add-layer 區塊。
+issue 6337
+----
+異動 : /api/brand-setting.html
+異動 : /api/javascripts/v2/func.common.js
+異動 : /api/javascripts/v2/func.portal.brand.js
+異動 : /api/lang/en.json
+異動 : /api/lang/zh.json
+異動 : /api/portal-manage.html
+異動 : /api/portal-set.html
+異動 : /api/signin.html
+異動 : /api/store-manage.html
+
+版本: 1243
+作者: chihwen
+日期: 2013年6月26日 下午 06:53:21
+訊息:
+以巢狀縮排的書寫方式，調整 CCS 各 HTML 原始碼
+issue 6337
+----
+異動 : /api/channel-add.html
+異動 : /api/channel-poi.html
+異動 : /api/channel-setting.html
+異動 : /api/cms-settings.html
+異動 : /api/epcurate-curation.html
+異動 : /api/epcurate-publish.html
+異動 : /api/episode-list.html
+異動 : /api/index.html
+
+版本: 1242
+作者: chihwen
+日期: 2013年6月26日 下午 12:11:28
+訊息:
+從 src2 版本 1241 轉入 api
+index 和 episode-list 的圖片比例調整成照 9x9 所提供的樣式。
+issue 6337
+----
+異動 : /api/epcurate-publish.html
+異動 : /api/episode-list.html
+異動 : /api/index.html
+異動 : /api/javascripts/v2/func.index.js
+異動 : /api/stylesheets/channel.css
+異動 : /api/stylesheets/epcurate.css
+異動 : /api/stylesheets/episode.css
+
+版本: 1237
+作者: chihwen
+日期: 2013年6月25日 下午 06:44:56
+訊息:
+從 9x9 production SVN 版本 4957~4959 轉入 api 分支
 issue 5927
 ----
-異動 : /fakeapi/javascripts/controller.js
+異動 : /api/javascripts/v2/domready.portal.manage.js
 
-版本: 4973
-作者: Mars
-日期: 2013/6/26 13:39
-訊息:
-修改 portal-manage.html - add channel 的搜尋結果的 checkbox 大小 
-修改 brand-setting.html - Brand Logo css 
-----
-異動 : /brand-setting.html
-異動 : /javascripts/stylesheets/portal.css
-異動 : /images/icon_checkbox.png
-
-版本: 4959
-作者: Mars
-日期: 2013/6/25 18:23
-訊息:
-修改 portal-manage.html sphere : CMS_CONF.MSOINFO.supportedRegion 參數修改成  mso : CMS_CONF.MSOINFO.name
-----
-異動 : /javascripts/portal.js
-
-版本: 4958
-作者: Mars
-日期: 2013/6/25 18:16
-訊息:
-4957 程式碼整理
-----
-異動 : /javascripts/portal.js
-
-版本: 4957
-作者: Mars
-日期: 2013/6/25 17:32
-訊息:
-修正 PCS portal-manage.html url search result validBrands 檢查 
-----
-異動 : /javascripts/portal.js
-
-版本: 4953
-作者: Mars
-日期: 2013/6/25 11:14
-訊息:
-修正 PCS portal-manage.html / store-manage.html 需要帶入 supportedRegion 參數 
-----
-異動 : /javascripts/controller.js
-異動 : /javascripts/portal.js
-異動 : /javascripts/portal.store.js
-
-版本: 1229
+版本: 1232
 作者: chihwen
-日期: 2013年6月24日 下午 10:42:21
+日期: 2013年6月25日 下午 02:25:22
 訊息:
-1. 根據客戶提供的 coding guideline 調整 css。
+從 9x9 production SVN 版本 4953 轉入 api 分支
+修正 PCS portal-manage.html / store-manage.html 需要帶入 supportedRegion 參數
+1. 調整 config.js 加入 /api/store fakeapi 對應設定。
+2. 調整 config.js 加入 cms.global.MSOINFO 以便在登入後記錄 MSO 資訊。
+3. 加入 fakeapi 模擬檔 fakeapi/store_search.php, fakeapi/json/GET_store_search.json。
+4. 調整 domready.common.js 若擁有 My Portal 管理權限，而且進入 portal-manage, store-manage 時，在登入後記錄 MSO 資訊。
+5. 調整 func.portal.store.js 的 $page.listCatChannel 函式，改抓取 /api/store 以作為基礎頻道清單。
+6. 調整 domready.portal.manage.js 整合過濾 supportedRegion 調整頻道搜尋功能。
+issue 5927
+----
+已加入 : /api/fakeapi/json/GET_store_search.json
+已加入 : /api/fakeapi/store_search.php
+異動 : /api/javascripts/v2/config.js
+異動 : /api/javascripts/v2/domready.common.js
+異動 : /api/javascripts/v2/domready.portal.manage.js
+異動 : /api/javascripts/v2/func.portal.store.js
+
+版本: 1231
+作者: chihwen
+日期: 2013年6月25日 下午 02:06:29
+訊息:
+1. 因應 /api/tags 請求參數規格異動，同步調整前端 API 請求。
+   由於 /api/categories 不分區域(台灣、美國、全世界)，已統一類別 id 的關係，
+   所以 /api/tags 請求參數，除了類別 categoryId 外，再加入 lang 區域設定。
+2. 調整 PHP 版 fakeapi 將自動化的 end() 取出陣列尾，改為明確指定第一筆陣列。
+issue 6594
+----
+異動 : /api/fakeapi/episodes_programs.php
+異動 : /api/fakeapi/mso.php
+異動 : /api/fakeapi/mso_store.php
+異動 : /api/fakeapi/sets.php
+異動 : /api/fakeapi/sets_channels.php
+異動 : /api/javascripts/v2/domready.channel.js
+異動 : /api/javascripts/v2/func.channel.js
+
+版本: 1226
+作者: chihwen
+日期: 2013年6月24日 下午 10:40:31
+訊息:
+1. 根據 9x9 提供的 coding guideline 調整 css。
 2. 統一 tab = 4 space。
 3. 將 tab 改為空格，並移除行未多餘的空白。
 issue 6337
 ----
-異動 : /fakeapi/stylesheets/channel-poi.css
-異動 : /fakeapi/stylesheets/channel.css
-異動 : /fakeapi/stylesheets/cms-settings.css
-異動 : /fakeapi/stylesheets/ep-curation.css
-異動 : /fakeapi/stylesheets/epcurate.css
-異動 : /fakeapi/stylesheets/episode.css
-異動 : /fakeapi/stylesheets/jquery.datepick.css
-異動 : /fakeapi/stylesheets/lightbox.css
-異動 : /fakeapi/stylesheets/perfect-scrollbar.css
-異動 : /fakeapi/stylesheets/playback.css
-異動 : /fakeapi/stylesheets/poi-hide.css
-異動 : /fakeapi/stylesheets/portal.css
-異動 : /fakeapi/stylesheets/style.css
-異動 : /fakeapi/stylesheets/titlecard-hide.css
-異動 : /fakeapi/stylesheets/uniform.css
+異動 : /api/stylesheets/channel-poi.css
+異動 : /api/stylesheets/channel.css
+異動 : /api/stylesheets/cms-settings.css
+異動 : /api/stylesheets/ep-curation.css
+異動 : /api/stylesheets/epcurate.css
+異動 : /api/stylesheets/episode.css
+異動 : /api/stylesheets/jquery.datepick.css
+異動 : /api/stylesheets/lightbox.css
+異動 : /api/stylesheets/perfect-scrollbar.css
+異動 : /api/stylesheets/playback.css
+異動 : /api/stylesheets/poi-hide.css
+異動 : /api/stylesheets/portal.css
+異動 : /api/stylesheets/style.css
+異動 : /api/stylesheets/titlecard-hide.css
+異動 : /api/stylesheets/uniform.css
 
-版本: 1203
+版本: 1220
 作者: chihwen
-日期: 2013年6月21日 下午 09:56:51
+日期: 2013年6月24日 下午 10:20:16
 訊息:
-從 9x9 production SVN 版本 4938 轉入 fakeapi 分支
+從 fakeapi2 版本 1219 轉入 api 分支
+修正頻道設定頁 FB 粉絲專頁下拉選單與 Scrollbar 搭配運作不正確的問題
+1. 調整共用函式 $common.hideFbPageList 邏輯。
+2. 調整頻道頁函式 $page.scrollToBottom, $page.renderAutoShareUI, $page.init 邏輯。
+3. 調整頻道頁 DOM Ready FB授權返回、 FB粉絲專頁下拉選單、$(window).resize 等事件註冊邏輯。
+issue 6337
+----
+異動 : /api/javascripts/v2/domready.channel.js
+異動 : /api/javascripts/v2/func.channel.js
+異動 : /api/javascripts/v2/func.common.js
+
+版本: 1208
+作者: chihwen
+日期: 2013年6月23日 下午 10:26:17
+訊息:
+1. 加入 PCS 相關 fakeapi。
+2. 調整 config.js 加入 PCS 相關 fakeapi。
+3. 因應 PCS 的需求，調整 /api/categories, /api/login, /api/users/{userId} 等 fakeapi 內容。
+4. 調整 brand-setting.html 移除重覆的 id="overlay-s" 區塊。
+5. 調整 portal-manage.html 換掉會產生 404 錯誤的圖片連結。
+issue 6594
+----
+異動 : /api/brand-setting.html
+異動 : /api/fakeapi/categories.php
+已加入 : /api/fakeapi/channels_search.php
+已加入 : /api/fakeapi/json/DELETE_mso_store.json
+已加入 : /api/fakeapi/json/DELETE_sets_channels.json
+異動 : /api/fakeapi/json/GET_categories.json
+已加入 : /api/fakeapi/json/GET_channels_search.json
+異動 : /api/fakeapi/json/GET_login.json
+已加入 : /api/fakeapi/json/GET_mso.json
+已加入 : /api/fakeapi/json/GET_mso_sets.json
+已加入 : /api/fakeapi/json/GET_mso_store.json
+已加入 : /api/fakeapi/json/GET_sets.json
+已加入 : /api/fakeapi/json/GET_sets_channels.json
+異動 : /api/fakeapi/json/POST_login.json
+已加入 : /api/fakeapi/json/POST_mso_store.json
+已加入 : /api/fakeapi/json/POST_sets_channels.json
+已加入 : /api/fakeapi/json/PUT_mso.json
+已加入 : /api/fakeapi/json/PUT_sets.json
+已加入 : /api/fakeapi/json/PUT_sets_channels_sorting.json
+異動 : /api/fakeapi/json/PUT_users.json
+異動 : /api/fakeapi/login.php
+已加入 : /api/fakeapi/mso.php
+已加入 : /api/fakeapi/mso_sets.php
+已加入 : /api/fakeapi/mso_store.php
+已加入 : /api/fakeapi/sets.php
+已加入 : /api/fakeapi/sets_channels.php
+已加入 : /api/fakeapi/sets_channels_sorting.php
+異動 : /api/fakeapi/users.php
+異動 : /api/javascripts/v2/config.js
+異動 : /api/portal-manage.html
+
+版本: 1204
+作者: chihwen
+日期: 2013年6月21日 下午 11:18:45
+訊息:
+修正新架構下 Channel Store 頁 Load More 運作不正確的問題
+修正在轉換新架構時，為了通過 JSLint 檢查，而誤轉錯的業務邏輯
+issue 6594
+----
+異動 : /api/javascripts/v2/domready.portal.store.js
+
+版本: 1202
+作者: chihwen
+日期: 2013年6月21日 下午 09:54:15
+訊息:
+從 9x9 production SVN 版本 4938 轉入 api 分支
 issue 5927
 ----
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
+異動 : /api/javascripts/v2/func.portal.manage.js
+異動 : /api/lang/en.json
+異動 : /api/lang/zh.json
+異動 : /api/portal-manage.html
 
-版本: 1198
+版本: 1199
 作者: chihwen
-日期: 2013年6月21日 下午 06:10:35
+日期: 2013年6月21日 下午 06:16:09
 訊息:
+修正 publish 頁，在只有單筆影音的條件下，thumbnail圖片定位會跑版的問題
 同步 src2 版本 1196 (調整拼錯字的 css)
-issue 6367
-----
-異動 : /fakeapi/stylesheets/epcurate.css
-
-版本: 1194
-作者: chihwen
-日期: 2013年6月21日 下午 05:35:53
-訊息:
-修正全新節目時，多筆POI新增重覆問題
-issue 6367
-----
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1190
-作者: chihwen
-日期: 2013年6月21日 下午 02:18:52
-訊息:
-將 teltel_ui 版本 1187 合併回 fakeapi 分支
-issue 5927
-----
-異動 : /fakeapi/stylesheets/style.css
-
-版本: 4937
-作者: Mars
-日期: 2013/6/21 17:30
-訊息:
-修正 PCS portal-manage.html 預覽( 新增頻道 ) / Cunnie 修正 CSS 
-1. 在搜尋後，點選頻道，關掉後 channel list 會清空，但 Add 按鈕沒消失，
-2. Add 按鈕翻譯
-----
-異動 : /portal-manage.html
-異動 : /javascripts/portal.js
-異動 : /lang/en.json
-異動 : /lang/zh.json
-異動 : /stylesheets/style.css
-
-版本: 4933
-作者: Mars
-日期: 2013/6/20 17:35
-訊息:
-修正 PCS portal-manage.html 預覽( Previewer ) 
-1. 修正使用跟 player api 相同的 id 格式
-2. msoid 是 9x9 preview url => http://player.9x9.tv/#/streaming/xx-xx
-3. 其他 mso preview url => http://{mso-name}.9x9.tv/#/streaming/xx-xx
-----
-異動 : /javascripts/portal.js
-
-版本: 1153
-作者: chihwen
-日期: 2013年6月18日 下午 02:43:16
-訊息:
-同步 src 版本 1152 以及 轉回 production SVN 版本 4918
-
-1. 同步 src 版本 1152。
-   調整 studio-nav 的樣式和結構，讓「Content Management System」的結構可以 p 和 span 並存。
-issue 6337
-
-2. 將 9x9 production SVN 版本 4918 轉回 fakeapi 分支。
-   修正 PCS Channel store scrollbar 無法正確顯示 (同步 autoHeight() 調整)。
-issue 5927
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-poi.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/cms-settings.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/stylesheets/style.css
-
-版本: 4920
-作者: Mars
-日期: 2013/6/18 18:09
-訊息:
-修正版本 4917 ，修正 PCS portal-manage.html preview url / sort 設定問題
-
-----
-異動 : /javascripts/portal.js
-
-版本: 4917
-作者: Mars
-日期: 2013/6/18 14:02
-訊息:
-修正版本 4916 ，修正 PCS Channel store scrollbar 無法正確顯示
-
-autoHeight() 調整
-----
-異動 : /javascripts/basic.js
-異動 : /javascripts/portal.store.js
-
-版本: 1151
-作者: chihwen
-日期: 2013年6月18日 上午 02:36:29
-訊息:
-修正版本 1150 不能只是隱藏 scrollbar 代替 destroy slider 特效，不然頁面依然會被滾動
-
-改成先 destroy slider 特效，然後立即進行初始化，最後緊接著再隱藏的作法。
-issue 6428
-----
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/epcurate.js
-異動 : /fakeapi/javascripts/episode.js
-異動 : /fakeapi/javascripts/index.js
-
-版本: 1150
-作者: chihwen
-日期: 2013年6月17日 下午 08:55:55
-訊息:
-避免在 jQuery UI Slider 未初始化前操作其方法 (scrollbar 特效)
-
-1. 避免在 jQuery UI Slider 未初始化前操作其方法 (scrollbar 特效)。
-   調整 vertical.slider.js 及 horizontal-slider.js 始終初始化 slider 套件。
-   以修正這段錯誤訊息 cannot call methods on slider prior to initialization; attempted to call method 'value'
-2. 再進一步以隱藏 scrollbar 代替 destroy slider 特效，以避免誤擊上述錯誤。
-3. 修正 JSLint 嚴格比對所產生的後遺症，以明確轉型後再比對作因應 (controller.js)。
-4. 修正相關英文語系 (cms-settings.html, en.json, zh.json)。
-issue 6428
-----
-異動 : /fakeapi/cms-settings.html
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/javascripts/epcurate.js
-異動 : /fakeapi/javascripts/episode.js
-異動 : /fakeapi/javascripts/index.js
-異動 : /fakeapi/javascripts/libs/horizontal-slider.js
-異動 : /fakeapi/javascripts/libs/horizontal-slider.min.js
-異動 : /fakeapi/javascripts/libs/vertical.slider.js
-異動 : /fakeapi/javascripts/libs/vertical.slider.min.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-
-版本: 1148
-作者: chihwen
-日期: 2013年6月14日 下午 06:21:02
-訊息:
-調整 controller.js jslint 設定，以便通過更嚴格的 JSLint 程式品質檢查
-
-1. 調整 controller.js 中的 jslint 設定，以便通過更嚴格的 JSLint 程式品質檢查。
-2. 調整其他 js 檔中的 jslint 設定，以符合 JSLint 程式品質檢查設定。
-3. 將 9x9 production SVN 版本 4907 中針對 signin.html 的調整，轉回 fakeapi 分支。
-issue 5927
-----
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/channel-poi.js
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/cms-settings.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/javascripts/curation.js
-異動 : /fakeapi/javascripts/epcurate.js
-異動 : /fakeapi/javascripts/episode.js
-異動 : /fakeapi/signin.html
-
-版本: 1147
-作者: chihwen
-日期: 2013年6月14日 下午 12:28:18
-訊息:
-將函式庫類的 js 移到 javascripts/libs/ 下，以利未來維護管理
-
-1. 因應函式庫移動到 javascripts/libs/ 下，調整各 html 引入路徑。
-2. 因應函式庫移動到 javascripts/libs/ 下，調整 swfupload.swf 路徑 (channel.js, curation.js, epcurate.js)。
 issue 6337
 ----
-已刪除 : /fakeapi/javascripts/horizontal-slider.js
-已刪除 : /fakeapi/javascripts/horizontal-slider.min.js
-已刪除 : /fakeapi/javascripts/jquery.autotab.js
-已刪除 : /fakeapi/javascripts/jquery.autotab.min.js
-已刪除 : /fakeapi/javascripts/jquery.blockUI.js
-已刪除 : /fakeapi/javascripts/jquery.blockUI.min.js
-已刪除 : /fakeapi/javascripts/jquery.charcounter.js
-已刪除 : /fakeapi/javascripts/jquery.charcounter.min.js
-已刪除 : /fakeapi/javascripts/jquery.cookie.js
-已刪除 : /fakeapi/javascripts/jquery.cookie.min.js
-已刪除 : /fakeapi/javascripts/jquery.countdown.js
-已刪除 : /fakeapi/javascripts/jquery.countdown.min.js
-已刪除 : /fakeapi/javascripts/jquery.cycle.all.js
-已刪除 : /fakeapi/javascripts/jquery.cycle.all.min.js
-已刪除 : /fakeapi/javascripts/jquery.datepick.js
-已刪除 : /fakeapi/javascripts/jquery.datepick.min.js
-已刪除 : /fakeapi/javascripts/jquery.ellipsis.js
-已刪除 : /fakeapi/javascripts/jquery.ellipsis.min.js
-已刪除 : /fakeapi/javascripts/jquery.mousewheel.js
-已刪除 : /fakeapi/javascripts/jquery.mousewheel.min.js
-已刪除 : /fakeapi/javascripts/jquery.swfobject.js
-已刪除 : /fakeapi/javascripts/jquery.swfobject.min.js
-已刪除 : /fakeapi/javascripts/jquery.titlecard.js
-已刪除 : /fakeapi/javascripts/jquery.titlecard.min.js
-已刪除 : /fakeapi/javascripts/jquery.tmpl.js
-已刪除 : /fakeapi/javascripts/jquery.tmpl.min.js
-已刪除 : /fakeapi/javascripts/jquery.toggleval.js
-已刪除 : /fakeapi/javascripts/jquery.toggleval.min.js
-已刪除 : /fakeapi/javascripts/jquery.ui.datepicker-en.js
-已刪除 : /fakeapi/javascripts/jquery.ui.datepicker-zh.js
-已刪除 : /fakeapi/javascripts/jquery.uniform.js
-已刪除 : /fakeapi/javascripts/jquery.uniform.min.js
-已刪除 : /fakeapi/javascripts/json2.js
-已刪除 : /fakeapi/javascripts/json2.min.js
-已刪除 : /fakeapi/javascripts/nn-sdk.js
-已刪除 : /fakeapi/javascripts/perfect-scrollbar.js
-已刪除 : /fakeapi/javascripts/perfect-scrollbar.min.js
-已刪除 : /fakeapi/javascripts/purl.js
-已刪除 : /fakeapi/javascripts/purl.min.js
-已刪除 : /fakeapi/javascripts/swfupload
-已刪除 : /fakeapi/javascripts/vertical.slider.js
-已刪除 : /fakeapi/javascripts/vertical.slider.min.js
-已加入 : /fakeapi/javascripts/libs
-已加入 : /fakeapi/javascripts/libs/horizontal-slider.js (從路徑複製: /fakeapi/javascripts/horizontal-slider.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/horizontal-slider.min.js (從路徑複製: /fakeapi/javascripts/horizontal-slider.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.autotab.js (從路徑複製: /fakeapi/javascripts/jquery.autotab.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.autotab.min.js (從路徑複製: /fakeapi/javascripts/jquery.autotab.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.blockUI.js (從路徑複製: /fakeapi/javascripts/jquery.blockUI.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.blockUI.min.js (從路徑複製: /fakeapi/javascripts/jquery.blockUI.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.charcounter.js (從路徑複製: /fakeapi/javascripts/jquery.charcounter.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.charcounter.min.js (從路徑複製: /fakeapi/javascripts/jquery.charcounter.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.cookie.js (從路徑複製: /fakeapi/javascripts/jquery.cookie.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.cookie.min.js (從路徑複製: /fakeapi/javascripts/jquery.cookie.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.countdown.js (從路徑複製: /fakeapi/javascripts/jquery.countdown.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.countdown.min.js (從路徑複製: /fakeapi/javascripts/jquery.countdown.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.cycle.all.js (從路徑複製: /fakeapi/javascripts/jquery.cycle.all.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.cycle.all.min.js (從路徑複製: /fakeapi/javascripts/jquery.cycle.all.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.datepick.js (從路徑複製: /fakeapi/javascripts/jquery.datepick.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.datepick.min.js (從路徑複製: /fakeapi/javascripts/jquery.datepick.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.ellipsis.js (從路徑複製: /fakeapi/javascripts/jquery.ellipsis.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.ellipsis.min.js (從路徑複製: /fakeapi/javascripts/jquery.ellipsis.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.mousewheel.js (從路徑複製: /fakeapi/javascripts/jquery.mousewheel.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.mousewheel.min.js (從路徑複製: /fakeapi/javascripts/jquery.mousewheel.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.swfobject.js (從路徑複製: /fakeapi/javascripts/jquery.swfobject.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.swfobject.min.js (從路徑複製: /fakeapi/javascripts/jquery.swfobject.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.titlecard.js (從路徑複製: /fakeapi/javascripts/jquery.titlecard.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.titlecard.min.js (從路徑複製: /fakeapi/javascripts/jquery.titlecard.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.tmpl.js (從路徑複製: /fakeapi/javascripts/jquery.tmpl.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.tmpl.min.js (從路徑複製: /fakeapi/javascripts/jquery.tmpl.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.toggleval.js (從路徑複製: /fakeapi/javascripts/jquery.toggleval.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.toggleval.min.js (從路徑複製: /fakeapi/javascripts/jquery.toggleval.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.ui.datepicker-en.js (從路徑複製: /fakeapi/javascripts/jquery.ui.datepicker-en.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.ui.datepicker-zh.js (從路徑複製: /fakeapi/javascripts/jquery.ui.datepicker-zh.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.uniform.js (從路徑複製: /fakeapi/javascripts/jquery.uniform.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/jquery.uniform.min.js (從路徑複製: /fakeapi/javascripts/jquery.uniform.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/json2.js (從路徑複製: /fakeapi/javascripts/json2.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/json2.min.js (從路徑複製: /fakeapi/javascripts/json2.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/nn-sdk.js (從路徑複製: /fakeapi/javascripts/nn-sdk.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/perfect-scrollbar.js (從路徑複製: /fakeapi/javascripts/perfect-scrollbar.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/perfect-scrollbar.min.js (從路徑複製: /fakeapi/javascripts/perfect-scrollbar.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/purl.js (從路徑複製: /fakeapi/javascripts/purl.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/purl.min.js (從路徑複製: /fakeapi/javascripts/purl.min.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/swfupload (從路徑複製: /fakeapi/javascripts/swfupload, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/vertical.slider.js (從路徑複製: /fakeapi/javascripts/vertical.slider.js, 版本, 1145)
-已加入 : /fakeapi/javascripts/libs/vertical.slider.min.js (從路徑複製: /fakeapi/javascripts/vertical.slider.min.js, 版本, 1145)
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-poi.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/cms-settings.html
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/epcurate-publish.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-異動 : /fakeapi/login.html
-異動 : /fakeapi/signin.html
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/curation.js
-異動 : /fakeapi/javascripts/epcurate.js
+異動 : /api/stylesheets/epcurate.css
 
-版本: 1146
+版本: 1195
 作者: chihwen
-日期: 2013年6月14日 上午 11:44:10
+日期: 2013年6月21日 下午 05:43:23
 訊息:
-在進行 FB Connect 或 Reconnect 時，若遭遇取消登入的話，就跳 FB Connect 失敗 overlay (maybe unknown or not_authorized)
-issue 6428
+修正建立全新節目時，多筆 POI 新增會產生重覆的問題
+比照 fakeapi 版本 1194 同步修正新架構
+issue 6367
 ----
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/cms-settings.js
+異動 : /api/javascripts/v2/domready.curation.js
 
-版本: 1144
+版本: 1192
 作者: chihwen
-日期: 2013年6月13日 下午 02:56:24
+日期: 2013年6月21日 下午 02:23:46
 訊息:
-將 alert 改為 nn.log 避免直接輸出除錯訊息
-issue 6337
-----
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/curation.js
-異動 : /fakeapi/javascripts/epcurate.js
-異動 : /fakeapi/javascripts/episode.js
-
-版本: 1143
-作者: chihwen
-日期: 2013年6月13日 下午 02:46:11
-訊息:
-將 index 頁專用的 js 從 channel.js 抽取出來獨立為 index.js
-issue 6337
-----
-已加入 : /fakeapi/javascripts/index.js
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/channel.js
-
-版本: 1142
-作者: chihwen
-日期: 2013年6月13日 下午 12:55:14
-訊息:
-將 9x9 production SVN 版本 4840,4841,4883,4884,4885 轉回 fakeapi 分支
-
-1. 將 9x9 production SVN 版本 4840,4841,4883,4884,4885 轉回 fakeapi 分支。
-2. 將 index 及 episode-list 頁中，相關 Get URL 共用腳本，獨立集中放到 get-url.js 中。
-3. 修正 production SVN 版本 4794 (controller.js, channel.js) 移除用不到的 code 以便通過 JSLint 檢查。
+將 teltel_ui 版本 1187 合併回 api 分支
 issue 5927
 ----
-已加入 : /fakeapi/javascripts/get-url.js
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/javascripts/episode.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-異動 : /fakeapi/stylesheets/portal.css
+異動 : /api/stylesheets/style.css
 
-版本: 1140
+版本: 1186
 作者: chihwen
-日期: 2013年6月12日 上午 12:07:37
+日期: 2013年6月20日 下午 11:21:32
 訊息:
-同步採用 9x9 給的 unplayable video 邏輯，但詳細無效影音呈現規格待 PM 重新 review
-
-1. 同步採用 9x9 給的 unplayable video 邏輯，但詳細無效影音呈現規格待 PM 重新 review。
-   信件主旨：Re: Remove format= and orderby= from Youtube data API to avoid hitting cache
-   寄件日期：2013/6/6 (星期四) 上午 10:36
-   if (y.accessControl.embed === 'denied'
-       || y.accessControl.syndicate === 'denied'
-       || (y.status && !(y.status.reason && y.status.reason === 'limitedSyndication'))) {
-2. 修正 #poi-event-overlay 區塊產生錯誤快取問題。
-3. 將 POI 相關腳本及樣式引入都移到最上面。
-issue 6423
-----
-異動 : /fakeapi/channel-poi.html
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/javascripts/channel-poi.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1139
-作者: chihwen
-日期: 2013年6月11日 下午 09:58:25
-訊息:
-將 jQuery 核心升級為 v1.10.1、jQuery UI 升級為 v1.10.3
-
-1. 將 jQuery 升級為 v1.10.1、jQuery UI 升級為 v1.10.3。
-2. 調整 config.js 利用 nn.load 依環境除錯設定，動態引入 jQuery Migrate。
-   注意：使用未 min 版的 jQuery Migrate 才會顯示不相容警告。
-3. 因應升級 jQuery 核心，將 checked 及 disabled 由 .attr() 或 .removeAttr() 改為 .prop()。
-   1. 將 .attr('checked', 'checked') 改為 .prop('checked', true)。
-   2. 將 .removeAttr('checked') 改為 .prop('checked', false)。
-   3. 將 .attr('checked') 改為 .prop('checked')。
-   4. 將 .attr('disabled', 'disabled') 改為 .prop('disabled', true)。
-   5. 將 .removeAttr('disabled') 改為 .prop('disabled', false)。
-4. 因應升級 jQuery 核心，將 $.browser.msie 移除，改用 /MSIE/.test(navigator.userAgent) 作判斷。
-5. 因應升級 jQuery 核心，將 andSelf() 改用 addBack() 取代。
-6. 將 jquery.uniform.min.js 由 v1.7.5 升級為 v2.1.1。
-   注意要因應調整 uniform.css 把相關透明度設定移到樣式中。
-   https://github.com/pixelmatrix/uniform
-issue 6428
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-poi.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/cms-settings.html
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/epcurate-publish.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/config.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/javascripts/curation.js
-異動 : /fakeapi/javascripts/epcurate.js
-異動 : /fakeapi/javascripts/jquery.swfobject.js
-異動 : /fakeapi/javascripts/jquery.swfobject.min.js
-異動 : /fakeapi/javascripts/jquery.uniform.js
-異動 : /fakeapi/javascripts/jquery.uniform.min.js
-異動 : /fakeapi/login.html
-異動 : /fakeapi/signin.html
-異動 : /fakeapi/stylesheets/uniform.css
-
-版本: 1138
-作者: chihwen
-日期: 2013年6月11日 下午 04:08:48
-訊息:
-將所有腳本函式庫改請求 min 版本，以便節省傳輸量，並同時保留未 min 的版本
-
-1. 將所有腳本函式庫改請求 min 版本，以便節省傳輸量，並同時保留未 min 的版本。
-2. 升級並測試各腳本函式庫，改用最新的版本。
-   1. jquery.mousewheel.min.js 升級為 v3.1.3。
-      https://github.com/brandonaaron/jquery-mousewheel
-   2. jquery.blockUI.min.js 升級為 v2.61。
-      https://github.com/malsup/blockui/
-   3. jquery.cookie.min.js 升級為 v1.3.1。
-      https://github.com/carhartl/jquery-cookie
-   4. json2.min.js 升級為 2013-05-26。
-      https://github.com/douglascrockford/JSON-js
-   5. purl.min.js 升級為 v2.3.1。
-      https://github.com/allmarkedup/purl
-   6. perfect-scrollbar.min.js 升級為 Jun 01, 2013 (e19c7e8c0acf050e1a4b8ac66eca061e48f70476)
-      注意這個函式庫有客製微調過，請見 src 版本 1038。
-      https://github.com/noraesae/perfect-scrollbar
-   7. 注意 jquery.uniform.min.js 沒有升級維持 v1.7.5 (升級會出錯)。
-      https://github.com/pixelmatrix/uniform/tree/v1.7.5
-   8. jquery.countdown.min.js 升級為 v1.6.2。
-      http://keith-wood.name/countdown.html
-   9. jquery.autotab.min.js 升級為 v1.1b。
-      http://www.mathachew.com/sandbox/jquery-autotab/
-   10. jquery.cycle.all.min.js 升級為 v3.0.2。
-       https://github.com/malsup/cycle
-3. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=1135)。
-4. 廢棄各頁 jquery.toggleval.min.js 引入，改用 placeholder 實現。
-5. 刪除沒有使用的 jquery.corner.js。
-6. 調整 fakeapi 避免產生 404 圖片請求、調整 brand 相關 api 以模擬示範測試資料。
-7. 重構 jquery.titlecard.js, horizontal-slider.js, vertical.slider.js, jquery.ellipsis.js 以便通過 JSLint 檢查。
-issue 6428
-----
-已刪除 : /fakeapi/javascripts/jquery.corner.js
-已加入 : /fakeapi/javascripts/horizontal-slider.min.js
-已加入 : /fakeapi/javascripts/jquery.autotab.js
-已加入 : /fakeapi/javascripts/jquery.blockUI.min.js
-已加入 : /fakeapi/javascripts/jquery.charcounter.js
-已加入 : /fakeapi/javascripts/jquery.cookie.min.js
-已加入 : /fakeapi/javascripts/jquery.countdown.js
-已加入 : /fakeapi/javascripts/jquery.cycle.all.min.js
-已加入 : /fakeapi/javascripts/jquery.datepick.min.js
-已加入 : /fakeapi/javascripts/jquery.ellipsis.min.js
-已加入 : /fakeapi/javascripts/jquery.mousewheel.js
-已加入 : /fakeapi/javascripts/jquery.swfobject.js
-已加入 : /fakeapi/javascripts/jquery.titlecard.min.js
-已加入 : /fakeapi/javascripts/jquery.tmpl.js
-已加入 : /fakeapi/javascripts/jquery.toggleval.js
-已加入 : /fakeapi/javascripts/jquery.uniform.js
-已加入 : /fakeapi/javascripts/json2.min.js
-已加入 : /fakeapi/javascripts/perfect-scrollbar.min.js
-已加入 : /fakeapi/javascripts/purl.min.js
-已加入 : /fakeapi/javascripts/vertical.slider.min.js
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-poi.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/cms-settings.html
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/epcurate-publish.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/fakeapi/channels.php
-異動 : /fakeapi/fakeapi/channels_autosharing_brand.php
-異動 : /fakeapi/fakeapi/channels_autosharing_validBrands.php
-異動 : /fakeapi/fakeapi/channels_episodes.php
-異動 : /fakeapi/fakeapi/episodes.php
-異動 : /fakeapi/fakeapi/users_channels.php
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/horizontal-slider.js
-異動 : /fakeapi/javascripts/jquery.autotab.min.js
-異動 : /fakeapi/javascripts/jquery.blockUI.js
-異動 : /fakeapi/javascripts/jquery.charcounter.min.js
-異動 : /fakeapi/javascripts/jquery.cookie.js
-異動 : /fakeapi/javascripts/jquery.countdown.min.js
-異動 : /fakeapi/javascripts/jquery.cycle.all.js
-異動 : /fakeapi/javascripts/jquery.ellipsis.js
-異動 : /fakeapi/javascripts/jquery.mousewheel.min.js
-異動 : /fakeapi/javascripts/jquery.swfobject.min.js
-異動 : /fakeapi/javascripts/jquery.titlecard.js
-異動 : /fakeapi/javascripts/jquery.tmpl.min.js
-異動 : /fakeapi/javascripts/jquery.toggleval.min.js
-異動 : /fakeapi/javascripts/jquery.uniform.min.js
-異動 : /fakeapi/javascripts/json2.js
-異動 : /fakeapi/javascripts/perfect-scrollbar.js
-異動 : /fakeapi/javascripts/purl.js
-異動 : /fakeapi/javascripts/vertical.slider.js
-異動 : /fakeapi/login.html
-異動 : /fakeapi/signin.html
-
-版本: 1135
-作者: chihwen
-日期: 2013年6月10日 上午 11:32:03
-訊息:
-同步 src 版本 1134 (因應 studio-nav 高度變高，slider 高度 js 計算也跟著調整)
-
-1. 因應 studio-nav 高度變高，slider 高度 js 計算也跟著調整。
-2. 調整 Episode list Views 中文翻譯，避免欄位標題列產生折行。
-issue 6337
-----
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/lang/zh.json
-
-版本: 1133
-作者: chihwen
-日期: 2013年6月9日 下午 12:56:23
-訊息:
-重構 basic.js, channel.js, cms-settings.js, episode.js 以精簡程式碼
-
-1. 調整 basic.js 將 scrollToBottom 移到 channel.js。
-2. 調整 basic.js 將 str_replace, htmlspecialchars, htmlEscape 等用不到的函式移除。
-3. 調整 channel.js 移除用不到的 hook .fb-ok。
-4. 調整 channel.js 移除用不到的邏輯 sync connect switch。
-5. 調整 cms-settings.js 補強 中文字、英數字、底線 檢查邏輯。
-6. 調整 episode.js 移除用不到的 hook .fb-ok。
-7. 調整 episode.js 盡可能避免把事件掛載在 $(document).on( 上。
-issue 6428
-----
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/cms-settings.js
-異動 : /fakeapi/javascripts/episode.js
-
-版本: 1132
-作者: chihwen
-日期: 2013年6月9日 上午 11:29:28
-訊息:
-將 9x9 production SVN 版本 4840,4841 轉回 fakeapi 分支 (注意尚未全部同步完成)
-
-並將 en.json 及 zh.json 等語系檔作內容最小化處理，盡量保持可維護性，以及避免檔案K數越來越大。
+將 9x9 production SVN 版本 4934 中針對 portal.js 的調整，轉回 api 分支
 issue 5927
 ----
-異動 : /fakeapi/javascripts/signin.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
+異動 : /api/javascripts/v2/domready.portal.manage.js
 
-版本: 1131
+版本: 1183
 作者: chihwen
-日期: 2013年6月7日 下午 10:54:14
+日期: 2013年6月20日 下午 03:06:06
 訊息:
-重構 channel-poi.js 以便通過 JSLint 檢查
+1. 改良腳本撰寫風格 Follow 自動格式化工具 JsFormat 所產生出來的格式，盡量異中求同減少可能的差異。
+2. 在所有 $(window).resize(function () { 區塊上方，統一加入備忘註解說明 // NOTE: Keep Window Resize Event at the bottom of this file。
+3. Follow JsFormat 移除檔尾所預留的一行空行 (這一行空行本來是為了跨平台所準備)。
+4. Follow JsFormat 讓所有物件屬性維持同樣的撰寫風格。
+5. Follow JsFormat 讓所有 if 判斷式本身多個條件間的斷行，全部合併為一行。
+6. Follow JsFormat 讓所有多行字串串接之間的分組斷行，全部合併為一行。
+7. Follow JsFormat 讓最後一行針對立即函式參數的註解，再往內縮 1 層。
+8. Follow JsFormat 讓所有物件屬性鍵與其後冒號之間沒有空白。
+9. Follow JsFormat 讓所有變數宣告，維持一行一個宣告。
+10. Follow JsFormat 讓所有暱名函式 function 與 ( 之間，只保有一個空白。
+JsFormat 設定如下：
+{
+    // exposed jsbeautifier options
+    "indent_with_tabs": false,
+    "preserve_newlines": true,
+    "max_preserve_newlines": 4,
+    "space_in_paren": false,
+    "jslint_happy": true,
+    "brace_style": "collapse",
+    "keep_array_indentation": true,
+    "keep_function_indentation": false,
+    "eval_code": false,
+    "unescape_strings": false,
+    "break_chained_methods": false,
 
-注意事項：
-controller.js 有一個空區塊錯誤 Empty block.
-for (i = 0; i < cntBrand; i += 1) {
-
-channel.js 有一個空區塊錯誤 Empty block.
-}, function (cBrands) {
-
-這是客戶負責的部份，再請 Mars Review 修正。
-issue 6428
+    // jsformat options
+    "format_on_save": false
+}
+在使用 JsFormat 時，有幾個比較有問題的注意事項如下：
+1. JsFormat 會將多行物件屬性中的上下垂直對齊空白全部移除，例如 config.js 裡的 API_PACK 設定。
+2. JsFormat 會把多行變數指派中的上下垂直對齊空白全部移除。
+3. JsFormat 會移除單行程式後方，與其後註解之間的空白，與註解之間只會留下一個空白。
+4. JsFormat 會讓陣列物件屬性內縮 2 層，但 JSLint 預期所有階層都只能再往內縮 1 層，JSLint 可透過 /*jslint white: true */ 關閉此項檢查。
+5. JsFormat 會在 function 註解下方與 function 區塊開頭上方之間，強制多插入一行空行。
+6. JsFormat 強制 function 區塊的上方，至少一定要保留一行空行。
+7. JsFormat 會把連續鏈性使用函數時，代表階層關係的斷行及縮排，全部移除縮排只保留斷行 (例如 func.curation.js)。
+8. JsFormat 會把 if 判斷式本身多個條件間的斷行，全部合併為一行 (前提是以二元運算子為開頭，建議 follow JsFormat 全部合併為一行)。
+9. JsFormat 會把 if 判斷式本身多個條件間的斷行，全部只會內縮 1 層 (前提是以二元運算子為結束，建議 follow JsFormat 全部合併為一行)。
+   JSLint 預期在這種狀況下應該內縮 2 層，以便和判斷式內的程式內縮 1 層作區隔。
+10. JsFormat 會把多行字串串接之間的分組斷行，全部合併為一行。
+issue 6594
 ----
-異動 : /fakeapi/javascripts/channel-poi.js
+異動 : /api/javascripts/v2/config.js
+異動 : /api/javascripts/v2/domready.channel-poi.js
+異動 : /api/javascripts/v2/domready.channel.js
+異動 : /api/javascripts/v2/domready.cms-settings.js
+異動 : /api/javascripts/v2/domready.common.js
+異動 : /api/javascripts/v2/domready.curation.js
+異動 : /api/javascripts/v2/domready.epcurate.js
+異動 : /api/javascripts/v2/domready.episode.js
+異動 : /api/javascripts/v2/domready.get-url.js
+異動 : /api/javascripts/v2/domready.index.js
+異動 : /api/javascripts/v2/domready.portal.brand.js
+異動 : /api/javascripts/v2/domready.portal.manage.js
+異動 : /api/javascripts/v2/domready.portal.set.js
+異動 : /api/javascripts/v2/domready.portal.store.js
+異動 : /api/javascripts/v2/domready.signin.js
+異動 : /api/javascripts/v2/example/domready.file-name.js
+異動 : /api/javascripts/v2/example/func.file-name.js
+異動 : /api/javascripts/v2/func.channel-poi.js
+異動 : /api/javascripts/v2/func.channel.js
+異動 : /api/javascripts/v2/func.cms-settings.js
+異動 : /api/javascripts/v2/func.common.js
+異動 : /api/javascripts/v2/func.curation.js
+異動 : /api/javascripts/v2/func.epcurate.js
+異動 : /api/javascripts/v2/func.episode.js
+異動 : /api/javascripts/v2/func.get-url.js
+異動 : /api/javascripts/v2/func.index.js
+異動 : /api/javascripts/v2/func.portal.brand.js
+異動 : /api/javascripts/v2/func.portal.manage.js
+異動 : /api/javascripts/v2/func.portal.set.js
+異動 : /api/javascripts/v2/func.portal.store.js
+異動 : /api/javascripts/v2/func.signin.js
 
-版本: 1129
+版本: 1180
 作者: chihwen
-日期: 2013年6月7日 下午 10:22:46
+日期: 2013年6月19日 下午 11:40:42
 訊息:
-同步 src 版本 1127 (調整 channel-poi channel name 的截字功能)
-
-1. 調整 content-main 高度計算方式。
-2. 調整 channel-poi channel name 的截字功能。
-issue 6337
+1. 改良各頁 func 腳本，以簡化命名空間設置，並補強相關套用註釋說明。
+2. 改良 domready.common.js 盡早初始全系統共用的全域變數 cms.global.USER_URL 避免程式讀取出錯。
+3. 改良 domready.portal.manage.js 將 for loop 以 $.each 改寫，以便通過 JSLint 檢查。
+4. 調整腳本設計框架套用範例檔，加入私有變數示範、補強相關套用註釋說明、簡化命名空間設置。
+issue 6594
 ----
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/channel-poi.js
-異動 : /fakeapi/javascripts/cms-settings.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/stylesheets/channel-poi.css
+異動 : /api/javascripts/v2/domready.common.js
+異動 : /api/javascripts/v2/domready.portal.manage.js
+異動 : /api/javascripts/v2/example/domready.file-name.js
+異動 : /api/javascripts/v2/example/func.file-name.js
+異動 : /api/javascripts/v2/func.channel-poi.js
+異動 : /api/javascripts/v2/func.channel.js
+異動 : /api/javascripts/v2/func.cms-settings.js
+異動 : /api/javascripts/v2/func.common.js
+異動 : /api/javascripts/v2/func.curation.js
+異動 : /api/javascripts/v2/func.epcurate.js
+異動 : /api/javascripts/v2/func.episode.js
+異動 : /api/javascripts/v2/func.get-url.js
+異動 : /api/javascripts/v2/func.index.js
+異動 : /api/javascripts/v2/func.portal.brand.js
+異動 : /api/javascripts/v2/func.portal.manage.js
+異動 : /api/javascripts/v2/func.portal.set.js
+異動 : /api/javascripts/v2/func.portal.store.js
+異動 : /api/javascripts/v2/func.signin.js
 
-版本: 1128
+版本: 1174
 作者: chihwen
-日期: 2013年6月7日 下午 06:22:54
+日期: 2013年6月19日 下午 04:14:13
 訊息:
-修正 CMS Settings 儲存按鈕位置問題 (表頭中英語系高度不一致問題)
-
-1. 修正 CMS Settings 儲存按鈕位置問題 (表頭中英語系高度不一致問題)。
-   調整 controller.js 在載入頁面後，立即進行 $(window).trigger('resize');
-2. 調整 cms-settings.js 加入 resetChangePwdForm() 以便統一重置變更密碼表單。
-   呼叫時機為：在叫出變更密碼 overlay 時、在成功完成變更密碼時、在按下 ESC 或取消或關閉變更密碼時。
-3. 同步 src 版本 1124,1125 basic.js, channel-poi.js, channel.js, cms-settings.js, style.css)。
-   1. 把 header、studio-nav 的高度變成參數取代固定數字 94。
-   2. 調整 studio-nav 的行高，讓中、英文版的 studio-nav 會一樣高。
-   3. 調整 content-main、content-wrap 高度計算。
-   4. channel-poi 的 channel-name 預留 1px 的寬度避免變兩行。
-issue 6428
+校正 My Portal 語系歸錯類的問題
+issue 6594
 ----
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/channel-poi.js
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/cms-settings.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/stylesheets/style.css
+異動 : /api/javascripts/v2/func.portal.manage.js
+異動 : /api/lang/en.json
+異動 : /api/lang/zh.json
 
-版本: 1126
+版本: 1173
 作者: chihwen
-日期: 2013年6月7日 下午 04:34:05
+日期: 2013年6月19日 下午 02:34:05
 訊息:
-完成 CMS Settings 更改密碼功能
-
-1. 完成 CMS Settings 更改密碼功能。
-   1. 密碼欄位也限 6~16 個字元。
-   2. 加入 notice reset 重置邏輯。
-2. 修正 email 讀取欄位，改抓 userEmail (不論是 FB 登入或 9x9 登入，都可以取得該使用者的 e-mail)。
-
-TODO：
-1. 待測試 CORS nn.on 攔截 400 錯誤問題 (為了實現「舊密碼錯誤，請重新輸入。」的呈現邏輯)。
-2. 儲存按鈕位置問題 (表頭中英語系高度不一致問題)。
-issue 6428
+1. 將 My Portal 相關應用，改寫為新的腳本設計架構。
+2. 重新整理 HTML 結構，統一並移除用不到的結構。
+3. 移除新設計架構下已不用到的腳本。
+4. 暫時調整設定檔，維持 development 階段，並利用 CORS 機制，
+   接取 dev6.9x9.tv API 環境，這點正式上線時，要記得調為正式上線的模式。
+issue 6594
 ----
-異動 : /fakeapi/cms-settings.html
-異動 : /fakeapi/javascripts/cms-settings.js
+異動 : /api/brand-setting.html
+已刪除 : /api/javascripts/basic.js
+已刪除 : /api/javascripts/channel-poi.js
+已刪除 : /api/javascripts/channel.js
+已刪除 : /api/javascripts/cms-settings.js
+已刪除 : /api/javascripts/config.js
+已刪除 : /api/javascripts/controller.js
+已刪除 : /api/javascripts/curation.js
+已刪除 : /api/javascripts/epcurate.js
+已刪除 : /api/javascripts/episode.js
+已刪除 : /api/javascripts/get-url.js
+已刪除 : /api/javascripts/index.js
+已刪除 : /api/javascripts/libs/horizontal-slider.js
+已刪除 : /api/javascripts/libs/horizontal-slider.min.js
+已刪除 : /api/javascripts/libs/vertical.slider.js
+已刪除 : /api/javascripts/libs/vertical.slider.min.js
+已刪除 : /api/javascripts/portal.brand.js
+已刪除 : /api/javascripts/portal.js
+已刪除 : /api/javascripts/portal.store.js
+已刪除 : /api/javascripts/signin.js
+異動 : /api/javascripts/v2/config.js
+已加入 : /api/javascripts/v2/domready.portal.brand.js
+已加入 : /api/javascripts/v2/domready.portal.manage.js
+已加入 : /api/javascripts/v2/domready.portal.set.js
+已加入 : /api/javascripts/v2/domready.portal.store.js
+已加入 : /api/javascripts/v2/func.portal.brand.js
+已加入 : /api/javascripts/v2/func.portal.manage.js
+已加入 : /api/javascripts/v2/func.portal.set.js
+已加入 : /api/javascripts/v2/func.portal.store.js
+異動 : /api/portal-manage.html
+異動 : /api/portal-set.html
+異動 : /api/store-manage.html
 
-版本: 1123
+版本: 1168
 作者: chihwen
-日期: 2013年6月7日 下午 02:23:06
+日期: 2013年6月19日 下午 01:26:38
 訊息:
-完成 CMS Settings 更改用戶名稱以及未儲存提示功能
-
-1. 完成 CMS Settings 更改用戶名稱功能。
-   1. 調整檢查規則，允許輸入中文字，中文算2個字元。
-   2. 調整 controller.js 在載入後，限定用戶名稱欄位輸入長度，最多16個字元，中文算2個字元。
-   3. 加入 notice reset 重置邏輯。
-2. 完成 CMS Settings 未儲存提示功能。
-3. 改良表單送出事件，以便支援原生 submit 功能 (支援透過鍵盤直接送出表單機制)。
-4. 調整 fakeapi PUT /api/users/{userId} 允許更改用戶名稱。
-
-TODO：
-1. 更改密碼。
-2. 儲存按鈕位置問題 (表頭中英語系高度不一致問題)。
-issue 6428
+改良腳本 init 程式進入點設計架構
+1. 調整共用 func 腳本，如果發現 page 物件自動偵測有問題的話，盡早讓程式回應錯誤。
+2. 調整共用 func 腳本，統一所有頁面的程式進入點，全部導向各頁的 init 函式，並允許傳入初始化參數。
+   若初始化參數裡的 init 設定為 true 的話，代表是由此程式架構所自動呼叫而來的。
+3. 調整 episode func 腳本，在 init 程式進入點判斷是否由程式架構所呼叫，若是的話才出現處理中 overlay。
+4. 調整各頁 func 腳本，在 init 程式進入點，加入初始化參數，以便 init 後續運用。
+5. 調整腳本範例檔，在 init 程式進入點，加入初始化參數，以便 init 後續運用。
+6. 調整腳本範例檔，加入 page 等級的全域變數設定範例。
+issue 6594
 ----
-異動 : /fakeapi/fakeapi/users.php
-異動 : /fakeapi/javascripts/cms-settings.js
-異動 : /fakeapi/javascripts/controller.js
+異動 : /api/javascripts/v2/example/domready.file-name.js
+異動 : /api/javascripts/v2/example/func.file-name.js
+異動 : /api/javascripts/v2/func.channel-poi.js
+異動 : /api/javascripts/v2/func.channel.js
+異動 : /api/javascripts/v2/func.cms-settings.js
+異動 : /api/javascripts/v2/func.common.js
+異動 : /api/javascripts/v2/func.curation.js
+異動 : /api/javascripts/v2/func.epcurate.js
+異動 : /api/javascripts/v2/func.episode.js
+異動 : /api/javascripts/v2/func.index.js
+異動 : /api/javascripts/v2/func.signin.js
 
-版本: 1122
+版本: 1167
 作者: chihwen
-日期: 2013年6月7日 上午 12:26:00
+日期: 2013年6月18日 下午 09:31:16
 訊息:
-完成 CMS Settings 連結Facebook帳號 相關整合
-
-1. 完成 CMS Settings 連結Facebook帳號 相關整合。
-2. 判斷是否採 Facebook 登入，以切換表單輸入介面呈現邏輯。
-3. 重構 cms-settings.js 以便通過 JSLint 檢查。
-4. 修補 CMS Settings 多國語系功能。
-
-TODO：
-1. 更改用戶名稱 (待確認允許字元規格)。
-2. 更改密碼。
-3. 未儲存提示。
-4. 儲存按鈕位置問題 (表頭中英語系高度不一致問題)。
-issue 6428
+從 fakeapi2 版本 1166 轉入 api 分支
+issue 6594
 ----
-異動 : /fakeapi/cms-settings.html
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/cms-settings.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
+異動 : /api/channel-add.html
+異動 : /api/channel-poi.html
+異動 : /api/channel-setting.html
+異動 : /api/cms-settings.html
+異動 : /api/epcurate-curation.html
+異動 : /api/epcurate-publish.html
+異動 : /api/episode-list.html
+已加入 : /api/fakeapi
+已加入 : /api/fakeapi/categories.php
+已加入 : /api/fakeapi/channels.php
+已加入 : /api/fakeapi/channels_autosharing_brand.php
+已加入 : /api/fakeapi/channels_autosharing_facebook.php
+已加入 : /api/fakeapi/channels_autosharing_validBrands.php
+已加入 : /api/fakeapi/channels_episodes.php
+已加入 : /api/fakeapi/channels_episodes_sorting.php
+已加入 : /api/fakeapi/channels_poi_points.php
+已加入 : /api/fakeapi/episodes.php
+已加入 : /api/fakeapi/episodes_programs.php
+已加入 : /api/fakeapi/json
+已加入 : /api/fakeapi/json/DELETE_channels_autosharing_facebook.json
+已加入 : /api/fakeapi/json/DELETE_episodes.json
+已加入 : /api/fakeapi/json/DELETE_episodes_programs.json
+已加入 : /api/fakeapi/json/DELETE_login.json
+已加入 : /api/fakeapi/json/DELETE_poi_events.json
+已加入 : /api/fakeapi/json/DELETE_poi_points.json
+已加入 : /api/fakeapi/json/DELETE_title_card_del.json
+已加入 : /api/fakeapi/json/DELETE_users_channels_del.json
+已加入 : /api/fakeapi/json/DELETE_users_sns_auth_facebook.json
+已加入 : /api/fakeapi/json/GET_categories.json
+已加入 : /api/fakeapi/json/GET_channels.json
+已加入 : /api/fakeapi/json/GET_channels_autosharing_brand.json
+已加入 : /api/fakeapi/json/GET_channels_autosharing_facebook.json
+已加入 : /api/fakeapi/json/GET_channels_autosharing_validBrands.json
+已加入 : /api/fakeapi/json/GET_channels_episodes.json
+已加入 : /api/fakeapi/json/GET_channels_poi_points.json
+已加入 : /api/fakeapi/json/GET_episodes.json
+已加入 : /api/fakeapi/json/GET_episodes_programs.json
+已加入 : /api/fakeapi/json/GET_login.json
+已加入 : /api/fakeapi/json/GET_poi_campaigns_pois.json
+已加入 : /api/fakeapi/json/GET_poi_events.json
+已加入 : /api/fakeapi/json/GET_poi_points.json
+已加入 : /api/fakeapi/json/GET_programs_poi_points.json
+已加入 : /api/fakeapi/json/GET_programs_title_cards.json
+已加入 : /api/fakeapi/json/GET_s3_attributes.json
+已加入 : /api/fakeapi/json/GET_tags.json
+已加入 : /api/fakeapi/json/GET_users_channels.json
+已加入 : /api/fakeapi/json/GET_users_my_favorites.json
+已加入 : /api/fakeapi/json/GET_users_poi_campaigns.json
+已加入 : /api/fakeapi/json/GET_users_sns_auth_facebook.json
+已加入 : /api/fakeapi/json/POST_channels_autosharing_facebook.json
+已加入 : /api/fakeapi/json/POST_channels_episodes.json
+已加入 : /api/fakeapi/json/POST_channels_poi_points.json
+已加入 : /api/fakeapi/json/POST_episodes_programs.json
+已加入 : /api/fakeapi/json/POST_login.json
+已加入 : /api/fakeapi/json/POST_poi_campaigns_pois.json
+已加入 : /api/fakeapi/json/POST_programs_poi_points.json
+已加入 : /api/fakeapi/json/POST_programs_title_cards.json
+已加入 : /api/fakeapi/json/POST_users_channels.json
+已加入 : /api/fakeapi/json/POST_users_poi_campaigns.json
+已加入 : /api/fakeapi/json/POST_users_poi_events.json
+已加入 : /api/fakeapi/json/POST_users_sns_auth_facebook.json
+已加入 : /api/fakeapi/json/PUT_channels.json
+已加入 : /api/fakeapi/json/PUT_channels_autosharing_brand.json
+已加入 : /api/fakeapi/json/PUT_channels_episodes_sorting.json
+已加入 : /api/fakeapi/json/PUT_episodes.json
+已加入 : /api/fakeapi/json/PUT_poi_events.json
+已加入 : /api/fakeapi/json/PUT_poi_points.json
+已加入 : /api/fakeapi/json/PUT_programs.json
+已加入 : /api/fakeapi/json/PUT_users.json
+已加入 : /api/fakeapi/json/PUT_users_channels_sorting.json
+已加入 : /api/fakeapi/login.php
+已加入 : /api/fakeapi/poi_campaigns_pois.php
+已加入 : /api/fakeapi/poi_events.php
+已加入 : /api/fakeapi/poi_points.php
+已加入 : /api/fakeapi/programs.php
+已加入 : /api/fakeapi/programs_poi_points.php
+已加入 : /api/fakeapi/programs_title_cards.php
+已加入 : /api/fakeapi/s3_attributes.php
+已加入 : /api/fakeapi/tags.php
+已加入 : /api/fakeapi/title_card_del.php
+已加入 : /api/fakeapi/users.php
+已加入 : /api/fakeapi/users_channels.php
+已加入 : /api/fakeapi/users_channels_del.php
+已加入 : /api/fakeapi/users_channels_sorting.php
+已加入 : /api/fakeapi/users_my_favorites.php
+已加入 : /api/fakeapi/users_poi_campaigns.php
+已加入 : /api/fakeapi/users_poi_events.php
+已加入 : /api/fakeapi/users_sns_auth_facebook.php
+異動 : /api/index.html
+異動 : /api/javascripts/libs/horizontal-slider.js
+異動 : /api/javascripts/libs/horizontal-slider.min.js
+已加入 : /api/javascripts/libs/nn-sdk.prototype.js
+異動 : /api/javascripts/libs/vertical.slider.js
+異動 : /api/javascripts/libs/vertical.slider.min.js
+已加入 : /api/javascripts/v2
+已加入 : /api/javascripts/v2/config.js
+已加入 : /api/javascripts/v2/domready.channel-poi.js
+已加入 : /api/javascripts/v2/domready.channel.js
+已加入 : /api/javascripts/v2/domready.cms-settings.js
+已加入 : /api/javascripts/v2/domready.common.js
+已加入 : /api/javascripts/v2/domready.curation.js
+已加入 : /api/javascripts/v2/domready.epcurate.js
+已加入 : /api/javascripts/v2/domready.episode.js
+已加入 : /api/javascripts/v2/domready.get-url.js
+已加入 : /api/javascripts/v2/domready.index.js
+已加入 : /api/javascripts/v2/domready.signin.js
+已加入 : /api/javascripts/v2/example
+已加入 : /api/javascripts/v2/example/domready.file-name.js
+已加入 : /api/javascripts/v2/example/func.file-name.js
+已加入 : /api/javascripts/v2/func.channel-poi.js
+已加入 : /api/javascripts/v2/func.channel.js
+已加入 : /api/javascripts/v2/func.cms-settings.js
+已加入 : /api/javascripts/v2/func.common.js
+已加入 : /api/javascripts/v2/func.curation.js
+已加入 : /api/javascripts/v2/func.epcurate.js
+已加入 : /api/javascripts/v2/func.episode.js
+已加入 : /api/javascripts/v2/func.get-url.js
+已加入 : /api/javascripts/v2/func.index.js
+已加入 : /api/javascripts/v2/func.signin.js
+異動 : /api/lang/en.json
+異動 : /api/lang/zh.json
+異動 : /api/login.html
+異動 : /api/signin.html
+已刪除 : /api/version.txt
 
-版本: 1121
+版本: 1165
 作者: chihwen
-日期: 2013年6月6日 下午 10:04:22
+日期: 2013年6月18日 下午 08:26:05
 訊息:
-同步 src 版本 1118 (調整 channel-add、channel-setting scorllbar 問題)
-issue 6337
+從 9x9 production SVN 版本 4922 轉入 api 分支
+issue 6594
 ----
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/channel.js
-
-版本: 1119
-作者: chihwen
-日期: 2013年6月6日 下午 04:27:26
-訊息:
-完成 CMS Settings 多國語系及 Template 模板雛型整理
-
-1. 完成 CMS Settings 多國語系及 Template 模板雛型整理。
-2. 調整 cms-settings.js 將事件改以 on 註冊，以因應 Template 機制的整合。
-3. 為了通過 JSLint 作準備，調整 cms-settings.js 將通用處理函式往上搬，讓 DOM Ready 區保持在最下方。
-4. 調整 controller.js 加入 buildCmsSettings() 以便負責 CMS Settings 初始載入建構邏輯。
-5. 調整各頁 CMS logo 結構及語系，避免還沒切換語系前，短暫的跑版問題。
-issue 6428
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-poi.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/cms-settings.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/cms-settings.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-
-版本: 1116
-作者: chihwen
-日期: 2013年6月6日 上午 12:25:57
-訊息:
-同步 src 版本 1112 (channel-add, channel-setting, epcurate-publish 的上傳圖片白框改用 CSS 取代)
-issue 6337
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/epcurate-publish.html
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/javascripts/epcurate.js
-異動 : /fakeapi/stylesheets/channel.css
-異動 : /fakeapi/stylesheets/epcurate.css
-
-版本: 1114
-作者: chihwen
-日期: 2013年6月5日 下午 04:58:23
-訊息:
-完成初步 CMS Settings 靜態修版整合
-
-同步 src 版本 1049,1050,1062,1064,1067,1070。
-
-除了上述同步之外的調整如下：
-1. 移除各頁已用不到的 Facebook 相關 overlay。
-   1. 所有 Facebook 相關 overlay 移到 CMS Settings 頁。
-   2. 但 channel-add 及 channel-setting 保留 fb-connect-failed2 以供 FB Share 設定使用。
-2. basic.js 移除之前各頁所共用的 Facebook 相關 overlay 行為處理 (TODO 待轉移到 cms-settings)。
-3. channel.js 加入先前放在 basic.js 中的 checkCriticalPerm() 函式。
-4. 調整右上角 CMS Settings 語系及 Facebook 相關 overlay 語系。
-issue 6428
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-poi.html
-異動 : /fakeapi/channel-setting.html
-已加入 : /fakeapi/cms-settings.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/channel.js
-已加入 : /fakeapi/javascripts/cms-settings.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-已加入 : /fakeapi/stylesheets/cms-settings.css
-
-版本: 1113
-作者: chihwen
-日期: 2013年6月5日 下午 03:17:57
-訊息:
-因應 9x9 production SVN 版本 4794 (fakeapi 版本 1103) 增加 fakeapi 程式
-
-以避免在 local 開發端，載入 channel setting 時會出錯，相關 API 如下。
-
-/api/channels/{channelId}/autosharing/brand
-GET = get brand that channel sharing at
-PUT = set brand that channel sharing at
-
-/api/channels/{channelId}/autosharing/validBrands
-GET = get brands that channel can sharing at
-issue 5927
-----
-已加入 : /fakeapi/fakeapi/channels_autosharing_brand.php
-已加入 : /fakeapi/fakeapi/channels_autosharing_validBrands.php
-異動 : /fakeapi/javascripts/config.js
-
-版本: 1110
-作者: chihwen
-日期: 2013年6月5日 上午 11:39:28
-訊息:
-同步 src 版本 1108 (單行截字功能盡可能改由 CSS 控制)
-issue 6337
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-poi.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/episode.js
-異動 : /fakeapi/stylesheets/channel.css
-異動 : /fakeapi/stylesheets/ep-curation.css
-
-版本: 1109
-作者: chihwen
-日期: 2013年6月4日 下午 10:18:11
-訊息:
-微調 JSLint /*global*/ 全域變數設定順序
-
-1. 微調 JSLint /*global*/ 全域變數設定順序。
-   1. 按照外部函式庫, basic.js, controller.js, 各頁專屬腳本等順序作排列。
-   2. 各頁專屬腳本，則按照 channel, episode, channel-poi, curation, epcurate 等順序作排列。
-2. 微調 login.html 移除已過時的屬性及註解。
-issue 6423
-----
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/channel-poi.js
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/javascripts/curation.js
-異動 : /fakeapi/login.html
-
-版本: 1107
-作者: chihwen
-日期: 2013年6月4日 下午 04:08:56
-訊息:
-將 isMobileLimited 更名為 isSyndicateLimited 以避免誤解語意
-
-1. 將 isMobileLimited 更名為 isSyndicateLimited 以避免誤解語意。
-   syndicate 是代表是否可以把影片在非瀏覽器上 (例如手機或電視)，跟網站一起聯合發佈，指的不只是手機。
-2. 微調 channel-poi.js 避免從 event type 影音，快取回 preload DOM 時，誤漏出預載畫面。
-issue 6423
-----
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/javascripts/channel-poi.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1106
-作者: chihwen
-日期: 2013年6月4日 下午 12:21:31
-訊息:
-改良 Sub-ep POI 新增模式，比照 Channel POI 盡可能快取影音定格預覽
-issue 6367
-----
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1105
-作者: chihwen
-日期: 2013年6月4日 上午 01:19:03
-訊息:
-重構 channel.js, episode.js, epcurate.js 以便通過 JSLint 檢查
-
-1. 重構 channel.js, episode.js, epcurate.js 以便通過 JSLint 檢查。
-2. 統一在 html 加入 lang 屬性，以便未來語系 :lang(zh) 樣式的應用。
-3. 微調 login.html 腳本及結構，以便通過 JSLint 檢查。
-4. 比照正式機，加入 favicon.ico 站台圖示。
-issue 6423
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/epcurate-publish.html
-異動 : /fakeapi/episode-list.html
-已加入 : /fakeapi/favicon.ico
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/epcurate.js
-異動 : /fakeapi/javascripts/episode.js
-異動 : /fakeapi/login.html
-
-版本: 1104
-作者: chihwen
-日期: 2013年6月3日 下午 06:22:47
-訊息:
-微調 Channel POI 預載無影音提示邏輯，避免與 Episode POI 行為不一致
-
-1. 避免 Chrome 會閃一下"There is no valid video to preview."之後才看到預覽畫面。
-2. 比照 Channel POI 的調整，同步改良 Episode POI 的相關設計。
-3. 重構 curation.js 以便通過 JSLint 檢查。
-4. 微調 basic.js 程式碼撰寫風格，以一致化設計。
-5. 比照 curation.js 的調整，同步 channel-poi.js 以一致化設計。
-6. 微調 controller.js 程式碼撰寫風格，以一致化設計。
-issue 6423
-----
-異動 : /fakeapi/channel-poi.html
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/channel-poi.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1103
-作者: chihwen
-日期: 2013年6月3日 上午 10:54:14
-訊息:
-將 9x9 production SVN 版本 4781,4794 轉回 fakeapi 分支
-
-1. 將 9x9 production SVN 版本 4781,4794 轉回 fakeapi 分支。
-2. 同步 src 版本 1100,1101。
-   1. 移除已用不到的檔案
-   2. 從 teltel_ui 版本 1091,1095,1096 轉入 src 分支 (主要是 1091 這個版本)
-issue 5927
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-poi.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/episode-list.html
-已加入 : /fakeapi/images/bg_tip_l.png
-已加入 : /fakeapi/images/btn_func.png
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/controller.js
-已刪除 : /fakeapi/javascripts/library.js
-異動 : /fakeapi/javascripts/signin.js
-已刪除 : /fakeapi/javascripts/uploads.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-異動 : /fakeapi/signin.html
-異動 : /fakeapi/stylesheets/channel.css
-異動 : /fakeapi/stylesheets/episode.css
-已刪除 : /fakeapi/stylesheets/library.css
-異動 : /fakeapi/stylesheets/style.css
-
-版本: 1097
-作者: chihwen
-日期: 2013年6月2日 下午 08:23:45
-訊息:
-完成 Channel POI API 串接
-
-1. 完成 Channel POI template 模板設計。
-2. 完成 Channel POI 多國語系與未儲存提示設計。
-3. 完成 Channel POI 影片定格預載及快取設計。
-4. 完成 Channel POI 單筆 POI 維護管控設計。
-5. 完成 Channel POI API CRUD 串接設計。
-6. 將 Channel POI, Channel setting, Episode list 的左側選單，統一採用 template 改寫 (func-nav-tmpl)。
-7. 調整 POI fakeapi 以便模擬 Channel POI 及 Episode POI 資料新增行為。
-8. 調整 config.js 加入 YOUTUBE_PLAYER 以便存放全域的 YouTube 影片播放物件。
-9. 調整 controller.js 加入 buildChannelPoi() 以便負責 Channel POI 初始載入建構邏輯。
-10. 調整 controller.js 在 html 加入 lang 屬性，以便未來語系 :lang(zh) 樣式的應用。
-11. 調整 curation.js 比照 Channel POI 的校正，同步修正 curation.js 上的錯誤以及 iOS 截字邏輯。
-12. 重構 channel-poi.js 以便通過 JSLint 檢查。
-13. 重構 config.js 以便通過 JSLint 檢查。
-14. 重構 basic.js 以便通過 JSLint 檢查。
-15. 重構 controller.js 以便通過 JSLint 檢查。
-16. 同步 src 版本 1089,1090,1092,1094。
-
-TODO：
-比照 Channel POI 的調整，同步改良 Episode POI 的相關設計。
-issue 6423
-----
-異動 : /fakeapi/channel-poi.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/javascripts/channel-poi.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-異動 : /fakeapi/stylesheets/channel-poi.css
-異動 : /fakeapi/stylesheets/lightbox.css
-異動 : /fakeapi/stylesheets/style.css
-異動 : /fakeapi/javascripts/curation.js
-異動 : /fakeapi/fakeapi/poi_events.php
-異動 : /fakeapi/javascripts/config.js
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/fakeapi/poi_points.php
-異動 : /fakeapi/stylesheets/channel.css
-異動 : /fakeapi/stylesheets/ep-curation.css
-異動 : /fakeapi/stylesheets/epcurate.css
-異動 : /fakeapi/stylesheets/episode.css
-已加入 : /fakeapi/images/input_white_lg.png
-
-版本: 1088
-作者: chihwen
-日期: 2013年5月28日 下午 01:05:22
-訊息:
-完成初步 Channel POI 靜態修版整合
-
-同步 src 版本 1019~1021,1024,1025,1027,1032,1038,1051,1062,1068,1071 (注意1062尚未完全同步完成)
-
-除了上述同步之外的調整如下：
-在 index, episode-list, channel-setting 等頁面，加入 Channel POI 入口及相關語系設定。
-issue 6423
-----
-已加入 : /fakeapi/channel-poi.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-已加入 : /fakeapi/javascripts/channel-poi.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-已加入 : /fakeapi/stylesheets/channel-poi.css
-異動 : /fakeapi/stylesheets/lightbox.css
-異動 : /fakeapi/stylesheets/style.css
-
-版本: 1086
-作者: chihwen
-日期: 2013年5月27日 下午 01:00:28
-訊息:
-調整 curation.js 以解決從 unsave Back 或 POI point Next 後，無法正確定格影片的問題
-issue 6367
-----
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1084
-作者: chihwen
-日期: 2013年5月24日 下午 11:57:04
-訊息:
-調整字卡外掛，加入 JSLint 全域變數標記，以便未來品質檢查維護之用
-issue 5370
-----
-異動 : /fakeapi/javascripts/jquery.titlecard.js
-
-版本: 1083
-作者: chihwen
-日期: 2013年5月24日 下午 11:42:39
-訊息:
-調整 controller.js 加入 JSLint 全域變數標記，以便未來品質檢查維護之用
-
-/*global 全域變數1, 全域變數2, 全域變數3, .... */
-詳細說明可參考：http://www.jslint.com/lint.html
-issue 6367
-----
-異動 : /fakeapi/javascripts/controller.js
-
-版本: 1081
-作者: chihwen
-日期: 2013年5月24日 下午 11:03:49
-訊息:
-簡化排程通知功能中的 today 取值方式
-issue 6367
-----
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1079
-作者: chihwen
-日期: 2013年5月24日 下午 10:37:44
-訊息:
-當編輯 POI point 資料時，其資料不再從 API 作即時存取，改直接用 DOM 存取
-
-這樣可以加快資料呈現的效率，也可以拉進與靜態版本的同步差異
-issue 6367
-----
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1078
-作者: chihwen
-日期: 2013年5月24日 下午 09:54:12
-訊息:
-盡量避免重新定格影片，若曾經定格過而且還快取住，就不重新定格
-issue 6367
-----
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1077
-作者: chihwen
-日期: 2013年5月24日 下午 09:23:53
-訊息:
-當透過 POI overlay 第一個麵包屑關閉 overlay 後，再進入 overlay 時要重建先前的編輯內容
-issue 6367
-----
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1076
-作者: chihwen
-日期: 2013年5月24日 下午 03:11:01
-訊息:
-調整 curation.js 以解決點擊 POI overlay crumb 後，無法正確定格影片的問題
-
-1. 調整 curation.js 以解決點擊 POI overlay crumb 後，無法正確定格影片的問題。
-2. 調整 curation.js 增加及改良功能識別用註解，以利後續維護。
-3. 調整 curation.js 避免點擊 POI overlay crumb 後，網址最後方產生 #。
-4. 重構 controller.js 以改良程式編碼風格。
-issue 6367
-----
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1075
-作者: chihwen
-日期: 2013年5月22日 下午 06:45:13
-訊息:
-調整 controller.js 以便通過 JSLint 程式品質檢查
-issue 6423
-----
-異動 : /fakeapi/javascripts/controller.js
-
-版本: 1074
-作者: chihwen
-日期: 2013年5月22日 下午 06:01:21
-訊息:
-將 9x9 production SVN 版本 4751 轉回 fakeapi 分支
-issue 5927
-----
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-
-版本: 1069
-作者: chihwen
-日期: 2013年5月22日 下午 04:19:37
-訊息:
-修正在中文版時 POI 外掛預設文案 preview 仍呈現英文的問題
-issue 6367
-----
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1066
-作者: chihwen
-日期: 2013年5月22日 下午 02:14:34
-訊息:
-修正 9x9 加入 ep list 分頁功能時，所誤留下的全域變數
-issue 5927
-----
-異動 : /fakeapi/javascripts/episode.js
-
-版本: 1063
-作者: chihwen
-日期: 2013年5月22日 上午 11:47:26
-訊息:
-針對 POI 外掛 btnText 按鈕文字欄位，加入中文10個字，英數20個字的限制
-issue 6367
-----
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1060
-作者: chihwen
-日期: 2013年5月22日 上午 12:01:37
-訊息:
-調整多選日期邏輯，增加預設日期及時間功能
-
-1. 調整多選日期邏輯，增加預設日期及時間功能。
-   預設選定日期為當天，預設時間為19點00分 (若時間大於19點，則日期自動取明天)。
-2. 當點選 POI event overlay crumb 連結時，也同時重新清除必填欄位未填提示。
-issue 6367
-----
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1058
-作者: chihwen
-日期: 2013年5月21日 下午 10:31:20
-訊息:
-同步 src 版本 1049,1051 (注意1049尚未完全同步完成)
-issue 6367
-----
-異動 : /fakeapi/stylesheets/lightbox.css
-
-版本: 1056
-作者: chihwen
-日期: 2013年5月21日 下午 08:01:28
-訊息:
-修正無法取得 notifyMsg 欄位值的錯誤
-
-1. 修正無法取得 notifyMsg 欄位值的錯誤。
-   將表單資料存取，改以純 js 物件作指向，避免採 jQuery selector 不好切換 hidden input 及 textarea。
-2. 在操作多選日期及時間介面時，就重新清掉下方必填欄位未填寫的提示。
-issue 6367
-----
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1054
-作者: chihwen
-日期: 2013年5月21日 下午 07:16:06
-訊息:
-將 9x9 production SVN 版本 4736,4739,4742,4743 轉回 fakeapi 分支
-
-1. 在 index.html 加入 My Portal 入口。
-2. 在 controller.js 依 CMS_CONF.MSO 判斷是否移除 My Portal 入口。
-3. 調整 signin.html 加入隱私權政策與使用條款連結。
-issue 5927
-----
-異動 : /fakeapi/index.html
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-異動 : /fakeapi/signin.html
-
-版本: 1053
-作者: chihwen
-日期: 2013年5月21日 下午 05:29:43
-訊息:
-移除 POI event display 訊息文字長度限制
-issue 6367
-----
-異動 : /fakeapi/epcurate-curation.html
-
-版本: 1052
-作者: chihwen
-日期: 2013年5月21日 下午 05:07:02
-訊息:
-完成 Sub-ep Scheduled 及 Instant POI API 串接
-
-1. 完成 Sub-ep Scheduled 及 Instant POI API 串接。
-   1. 將 chkPoiData 更名為 chkPoiPointData。
-   2. 調整 POI overlay crumb 連結切換行為。
-   3. 調整 Scheduled 及 Instant 預覽影音及 POI 外掛頁下一步送出檢查行為。
-   4. 實作多選日期及時間設定功能。
-   5. 完成 POI API CRUD 操作。
-2. 調整 epcurate-curation.html DOM 結構。
-   1. 加入無法預覽影音提示結構。
-   2. 補齊所有型態下的欄位。
-   3. 校正 POI overlay crumb 結構及 hook。
-   4. 比照 channel POI overlay 結構作同步調整。
-   5. 調整行動裝置通知時間結構，以便實作多選日期及時間設定功能。
-3. 調整 config.js 加入 POI_ACTION_URL 基礎 POI action url 設定，指向 http://www.9x9.tv/poiAction?poiId=。
-4. 微調 iOS 及 Android 通知內容預覽定位。
-5. 微調 poi_events.php fakeapi 以便模擬及測試多選的行動裝置通知時間。
-issue 6367
-----
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/fakeapi/poi_events.php
-異動 : /fakeapi/javascripts/config.js
-異動 : /fakeapi/javascripts/curation.js
-異動 : /fakeapi/stylesheets/lightbox.css
-
-版本: 1048
-作者: chihwen
-日期: 2013年5月20日 下午 06:15:53
-訊息:
-將 9x9 production SVN 版本 4731~4733 轉回 fakeapi 分支
-issue 5927
-----
-異動 : /fakeapi/javascripts/config.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-異動 : /fakeapi/stylesheets/portal.css
-
-版本: 1047
-作者: chihwen
-日期: 2013年5月20日 下午 04:54:08
-訊息:
-加入依 POI 型態切換取值的架構
-
-1. 調整 config.js POI_TYPE_MAP 資料結構，埋設 POI 型態鍵值、以及對應的表單名稱等資訊，以便 POI 型態切換使用。
-2. 調整 epcurate-curation.html DOM 結構，以儲存 POI 型態鍵值，並統一 notifyMsg, notifyScheduler 等欄位名稱。
-3. 調整 curation.js 腳本，以因應 POI 型態切換取值。
-issue 6367
-----
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/javascripts/config.js
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1042
-作者: chihwen
-日期: 2013年5月19日 下午 08:11:20
-訊息:
-移除已用不到的語系設定
-
-1. 移除已用不到的語系設定。
-2. 修正 basic.js 遺漏的結尾分號。
-issue 6367
-----
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-
-版本: 1041
-作者: chihwen
-日期: 2013年5月19日 下午 06:28:31
-訊息:
-統一全站 刪除提示 與 未儲存提示 按鈕語系文案
-issue 6367
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/epcurate-publish.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-
-版本: 1040
-作者: chihwen
-日期: 2013年5月19日 下午 05:59:56
-訊息:
-統一 POI 列表英文翻譯
-
-1. 統一 POI 列表英文翻譯。
-2. 同步 src 版本 1038。
-issue 6367
-----
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/javascripts/perfect-scrollbar.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-
-版本: 1035
-作者: chihwen
-日期: 2013年5月17日 下午 02:54:09
-訊息:
-修補版本 1033 結構異動後，右上角關閉事件遺失問題
-issue 6367
-----
-異動 : /fakeapi/javascripts/curation.js
-
-版本: 1034
-作者: chihwen
-日期: 2013年5月17日 下午 02:49:37
-訊息:
-統一全站 刪除提示 與 未儲存提示 按鈕語系文案
-issue 6367
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/epcurate-publish.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-
-版本: 1033
-作者: chihwen
-日期: 2013年5月17日 下午 02:04:06
-訊息:
-修正 Sub-ep POI event overlay 右上角關閉按鈕跑版問題
-
-1. 同步 src 版本 1032 (注意1032尚未完全同步完成)。
-   1. 調整 episode poi overlay 右上角 close button class。
-   2. 調整 coming soon 區塊樣式。
-   3. mobile notification time 的 tooltip 改成箭頭在下。
-2. 修正 Sub-ep POI event overlay 右上角關閉按鈕跑版問題。
-3. 調整 POI display text 及 button text 輸入字數限制。
-issue 6367
-----
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/stylesheets/lightbox.css
-
-版本: 1031
-作者: chihwen
-日期: 2013年5月16日 下午 11:49:38
-訊息:
-調整 POI 刪除提示與未儲存提示按鈕中文語系文案
-issue 6367
-----
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-
-版本: 1029
-作者: chihwen
-日期: 2013年5月16日 下午 10:12:30
-訊息:
-避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=1026)
-
-1. 避免客戶端快取，更新 CSS 及 JS 引入檔的版本號 (?v=1026)
-2. 同步 src 版本 1027 (注意1027尚未完全同步完成)。
-issue 6367
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/epcurate-publish.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-異動 : /fakeapi/login.html
-異動 : /fakeapi/signin.html
-異動 : /fakeapi/stylesheets/lightbox.css
-異動 : /fakeapi/stylesheets/style.css
-
-版本: 1026
-作者: chihwen
-日期: 2013年5月16日 下午 04:01:14
-訊息:
-完成 Sub-ep Hyper Link POI API 串接
-
-1. 完成 Sub-ep Hyper Link POI API 串接。
-2. 同步 src 版本 1015~1017,1019,1022,1024,1025 (注意1019~1025尚未完全同步完成)。
-3. 因應新版 POI 結構及行為，重新命名結構及腳本，以符合新版 POI 語意。
-4. 移除已過時的 POI 結構及腳本。
-5. 調整 fakeapi 以模擬新版 POI API 操作邏輯。
-   1. 依型態切換 poiPointId 及 poiEventId 以便鎖定資料作模擬。
-   2. 修正 JSON 字串格式，以便可正確解析為 JSON 物件。
-   3. 加入特殊指定序號資料，以便模擬不同型態的 POI 新增及切換。
-6. 調整 basic.js 中的 showProcessingOverlay 處理中，
-   與 showSavingOverlay 儲存中的 overlay z-index 設定，避免被 POI event overlay 檔住。
-7. 調整 config.js 重新設計 POI_TYPE_MAP 結構，以整合 API 代碼及 plugin 型態名稱。
-8. 調整 controller.js 匯入影片連結提示文案，改用 placeholder 屬性實現。
-9. 調整 controller.js 改良 poi_campaign 的資料結構檢查。
-10. 加入 Sub-ep POI Scheduled 及 Instant 多國語系設定。
-issue 6367
-----
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/fakeapi/channels_poi_points.php
-異動 : /fakeapi/fakeapi/poi_events.php
-異動 : /fakeapi/fakeapi/poi_points.php
-異動 : /fakeapi/fakeapi/programs_poi_points.php
-異動 : /fakeapi/fakeapi/users_poi_events.php
-異動 : /fakeapi/images/bg_mobile.png
-異動 : /fakeapi/images/btn_gray.png
-異動 : /fakeapi/images/btns.png
-已加入 : /fakeapi/images/icon-add.png
-已加入 : /fakeapi/images/icon-minus.png
-已加入 : /fakeapi/images/icon_info.png
-異動 : /fakeapi/images/icon_nav.png
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/config.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/javascripts/curation.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-異動 : /fakeapi/stylesheets/channel.css
-異動 : /fakeapi/stylesheets/lightbox.css
-異動 : /fakeapi/stylesheets/style.css
-異動 : /fakeapi/thumbnail/list1.png
-
-版本: 1014
-作者: chihwen
-日期: 2013年5月15日 上午 12:40:03
-訊息:
-補強 Sub-ep Hyper Link POI 未儲存提示，並重構其相關 POI 操作行為及結構
-
-1. 將 video 往上讓出 2.5rem 給 POI 外掛的樣式改由 CSS 控制。
-2. 調整 DOM 結構，將 poi-event-overlay-tmpl 結構集中移到 POI template 區。
-3. 調整 POI video id 識別，以便腳本切換串接 (event-hyper-video, event-scheduled-video, event-instant-video)。
-4. 微調 POI 腳本，加入註解識別。
-5. 微調 POI 腳本，將 POI crumb root unblock 上移到 Cancel 區，以便集中類似的操作邏輯。
-6. 調整 POI type 選擇邏輯，加入 has change Hook，以及影音播放 hook。
-7. 調整 config.js 加入 POI_TYPE_MAP 對應表。
-8. 微調字卡背景色區塊位置，以遮掩因為 btns.png 最底下加圖所影響，而誤露出的其他背景圖片。
-9. 調整 basic.js 變更 showUnsavePoiMask() 讓 POI event overlay 與 POI unsave overlay 只能出現一個，不能 overlay 疊 overlay。
-10. 調整 epcurate-curation.html 加入 unsave-poi-mask-prompt 作為跳出 POI event overlay 時的 unsave 提示結構 (No 改為 Back)。
-11. 調整 epcurate-curation.html 移除 <div class="poi-mask"></div> 結構。
-12. 修補 curation.js 當按下 Esc 時，偵測是否有 POI event overlay 或 POI unsave overlay 以進行 cancel 或 close 流程。
-13. 調整 curation.js 將 POI unsave overlay 視有無出現 POI event overlay 結構，拆解成 2 種提示結構及行為。
-14. 調整 curation.js 視 POI 是否為編輯模式，新增及移除相關 edit hook，以便供程式判斷現行模式之用。
-15. 調整 curation.js 新增 playPoiAndVideo() 函式，可依所選型態播放對應的 POI 外掛，以及定格影音。
-16. 調整 curation.js 修正 Cancel 時，Mobile iOS 以及 Android 預覽介面會消失的問題。
-17. 調整 curation.js 修正 Mobile iOS 以及 Android 即時訊息入稿不同步的錯誤。
-18. 調整 curation.js 當通過 chkPoiData() 檢查後，就強制暫停影音，避免與 POI event overlay 上的影音重覆播放。
-19. 調整 curation.js 補強 loadYouTubeFlash() 確保不會重覆播放，一律先清除 POI event overlay 上的影音結構。
-20. 新增 from-poi-overlay-edit-mode 給 POI event overlay 上的影音識別使用，避免與其他 hook 衝突。
-21. 依新 POI 規格，調整 POI 資料結構。
-issue 6367
-----
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/config.js
-異動 : /fakeapi/javascripts/curation.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-異動 : /fakeapi/stylesheets/ep-curation.css
-異動 : /fakeapi/stylesheets/lightbox.css
-
-版本: 1009
-作者: chihwen
-日期: 2013年5月13日 下午 02:43:15
-訊息:
-完成 Sub-ep Hyper Link POI 多國語系切換以及未儲存提示雛型
-
-1. 完成 Sub-ep Hyper Link POI 多國語系切換以及未儲存提示雛型。
-2. 修正 has-trimtime-change 但進入 poi-list 未先提示儲存的錯誤。
-3. 由於取得 YouTube 資訊的作法已改為 jsonp，所有來自 YouTube 的回應皆為 200，
-   所有 400, 401, 403, 404 錯誤應由 callback 函式自行判斷處理，
-   所以移除 nn.on([400, 401, 403, 404] 的錯誤攔截處理方式。
-4. 由於 POI 刪除已移到 POI 列表頁，所以移動 POI 刪除處理的腳本區塊位置。
-5. 由於 POI 表單結構已有異動，移除已用不到的腳本行為及 DOM 結構。
-6. 將 POI event overlay 相關 DOM 改為 template 以便切換語系及置換資料 (poi-event-overlay-tmpl)。
-7. 新增 buildPoiEventOverlayTmpl() 建立 POI event overlay template 雛型。
-8. 將 POI event overlay 相關腳本，改用 on 註冊事件。
-9. 將 POI event overlay 特殊特效腳本，改移到 template 產生後再套用。
-10. 調整 basic.js 針對 overlay 上的未儲存提示 overlay 新增 showUnsavePoiMask() 作處理。
-11. 在 DOM 結構上，先標記待 TODO 移除的結構。
-issue 6367
-----
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/javascripts/basic.js
-異動 : /fakeapi/javascripts/curation.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-
-版本: 1008
-作者: chihwen
-日期: 2013年5月11日 下午 09:47:29
-訊息:
-完成初步 Sub-ep POI 靜態修版整合
-
-同步 src 版本 975,981,983,984,987,989~993,995~998,1001~1003
-
-除了上述同步之外的調整如下：
-1. 移除 poi-hide.css 樣式。
-2. 調整 config.js 新增 CAMPAIGN_ID 設定。
-3. 調整 config.js 加入 9x9 SDK 初始化、除錯等級、基本錯誤處理等套用 (從 controller.js 移入)。
-4. 調整 controller.js 移除 Facebook SDK 除錯模式引入，以避免出現 JS 錯誤。
-5. 調整 controller.js 加入新 POI API 路徑，以取得 POI list 清單資料。
-6. 調整 controller.js 新增 setupUserCampaignId() 函式，以取得使用者 cpmpaign id (進入 epcurate-curation.html 時)。
-7. 調整 controller.js 微調 footer 語系替換邏輯。
-8. 調整 curation.js 當 Esc 或刪除確認在解開 UI mask 時，確保移除 DOM 中的 POI 刪除記號。
-9. 調整 curation.js 移除已用不到的 YouTube tab 切換。
-10. 調整 curation.js 調整取得單一 POI point 資訊 API 路徑。
-11. 調整 curation.js 因應新版 POI 刪除異動，調整 POI 刪除邏輯。
-12. 調整 curation.js 修改單一 POI point 儲存 API 路徑及邏輯。
-13. 調整 curation.js 因應 9x9 SDK 改良，調整 program video 多筆刪除 API 路徑及參數帶法。
-issue 6367
-----
-異動 : /fakeapi/epcurate-curation.html
-異動 : /fakeapi/images/bg_calander.png
-異動 : /fakeapi/images/bg_calander_highlight.png
-已加入 : /fakeapi/images/bg_mask.png
-已加入 : /fakeapi/images/bg_mobile.png
-已加入 : /fakeapi/images/bg_popup_box_l.png
-已加入 : /fakeapi/images/input_gray_lg.png
-已加入 : /fakeapi/images/poi_type.png
-異動 : /fakeapi/javascripts/config.js
-異動 : /fakeapi/javascripts/controller.js
-異動 : /fakeapi/javascripts/curation.js
-已加入 : /fakeapi/javascripts/jquery.datepick.js
-已加入 : /fakeapi/javascripts/perfect-scrollbar.js
-異動 : /fakeapi/lang/en.json
-異動 : /fakeapi/lang/zh.json
-異動 : /fakeapi/stylesheets/channel.css
-異動 : /fakeapi/stylesheets/ep-curation.css
-異動 : /fakeapi/stylesheets/epcurate.css
-異動 : /fakeapi/stylesheets/jquery.datepick.css
-異動 : /fakeapi/stylesheets/lightbox.css
-已加入 : /fakeapi/stylesheets/perfect-scrollbar.css
-異動 : /fakeapi/stylesheets/style.css
-
-版本: 1007
-作者: chihwen
-日期: 2013年5月11日 下午 09:24:19
-訊息:
-同步更新 9x9 JS SDK 函式庫 2013-05-09 v0.0.6
-
-1. 推薦使用 nn.init() 取代舊 nn.initialize() 以簡化呼叫名稱。
-2. 改良 init() 函式，自動偵測 jQuery 有無存在，若無則自動載入相依元件。
-3. 新增 nn.load() 方法，用以動態載入 JS 及 CSS 檔，並可在載入後指定回呼函式。
-4. 避開 gdata.youtube.com 才支持跨域發送 cookies (withCredentials: true or false)。
-5. nn.api 針對 DELETE 方法，完成 workaound 相容設計。
-issue 6367
-----
-異動 : /fakeapi/javascripts/nn-sdk.js
-
-版本: 1006
-作者: chihwen
-日期: 2013年5月11日 下午 09:18:17
-訊息:
-當 Esc 或刪除確認在解開 UI mask 時，確保移除 DOM 中的刪除記號
-issue 6367
-----
-異動 : /fakeapi/javascripts/channel.js
-異動 : /fakeapi/javascripts/episode.js
-
-版本: 1005
-作者: chihwen
-日期: 2013年5月11日 下午 09:05:07
-訊息:
-交換 overlay 按鈕位置，讓主操作按鈕在最右邊
-issue 6367
-----
-異動 : /fakeapi/channel-add.html
-異動 : /fakeapi/channel-setting.html
-異動 : /fakeapi/epcurate-publish.html
-異動 : /fakeapi/episode-list.html
-異動 : /fakeapi/index.html
-
-版本: 982
-作者: chihwen
-日期: 2013年5月6日 下午 01:31:40
-訊息:
-依 New POI API 規格試作 fakeapi 雛型
-
-9x9 CMS API Reference - 4.0 POI
-https://docs.google.com/spreadsheet/ccc?key=0AvdPy8_8kin6dDR2ejE2QVNKLVd4U3ZqdmdLRUQ3RXc#gid=3
-/api/users/{userId}/poi_campaigns
-/api/users/{userId}/poi_events
-/api/channels/{channelId}/poi_points
-/api/programs/{programId}/poi_points
-/api/poi_campaigns/{poiCampaignId}/pois
-/api/poi_points/{poiPointId}
-/api/poi_events/{poiEventId}
-
-New POI 結構
-https://docs.google.com/spreadsheet/ccc?key=0AvdPy8_8kin6dDR2ejE2QVNKLVd4U3ZqdmdLRUQ3RXc#gid=1
-poi_campaign
-poi
-poi_point
-poi_event
-issue 6367
-----
-已加入 : /fakeapi/fakeapi/channels_poi_points.php
-已加入 : /fakeapi/fakeapi/poi_campaigns_pois.php
-已加入 : /fakeapi/fakeapi/poi_events.php
-已加入 : /fakeapi/fakeapi/poi_points.php
-已刪除 : /fakeapi/fakeapi/pois.php
-已加入 : /fakeapi/fakeapi/programs_poi_points.php
-已刪除 : /fakeapi/fakeapi/programs_pois.php
-已加入 : /fakeapi/fakeapi/users_poi_campaigns.php
-已加入 : /fakeapi/fakeapi/users_poi_events.php
-異動 : /fakeapi/javascripts/config.js
+已加入 : /api/brand-setting.html
+異動 : /api/channel-add.html
+已加入 : /api/channel-poi.html
+異動 : /api/channel-setting.html
+已加入 : /api/cms-settings.html
+異動 : /api/epcurate-curation.html
+異動 : /api/epcurate-publish.html
+異動 : /api/episode-list.html
+已加入 : /api/favicon.ico
+異動 : /api/images/bg_calander.png
+異動 : /api/images/bg_calander_highlight.png
+已加入 : /api/images/bg_load.png
+已加入 : /api/images/bg_mask.png
+已加入 : /api/images/bg_mobile.png
+已加入 : /api/images/bg_popup_box_l.png
+已加入 : /api/images/bg_tip_l.png
+已加入 : /api/images/btn-add.png
+已加入 : /api/images/btn-minus.png
+已加入 : /api/images/btn_fb_ok_left.png
+已加入 : /api/images/btn_fb_ok_middle.png
+已加入 : /api/images/btn_fb_ok_right.png
+已加入 : /api/images/btn_func.png
+已加入 : /api/images/btn_g_c.png
+已加入 : /api/images/btn_g_c_on.png
+已加入 : /api/images/btn_g_l.png
+已加入 : /api/images/btn_g_l_on.png
+已加入 : /api/images/btn_g_r.png
+已加入 : /api/images/btn_g_r_on.png
+異動 : /api/images/btn_gray.png
+已加入 : /api/images/btn_gray_top.png
+已加入 : /api/images/btn_remove.png
+已加入 : /api/images/btn_top.png
+已加入 : /api/images/btn_white.png
+異動 : /api/images/btns.png
+已加入 : /api/images/gradient-white.png
+已加入 : /api/images/icon-add.png
+已加入 : /api/images/icon-minus.png
+已加入 : /api/images/icon_checkbox.png
+已加入 : /api/images/icon_info.png
+已加入 : /api/images/icon_nav.png
+已加入 : /api/images/input_box_left_g.png
+已加入 : /api/images/input_box_middle_g.png
+已加入 : /api/images/input_box_right_g.png
+已加入 : /api/images/input_gray.png
+已加入 : /api/images/input_gray_lg.png
+已加入 : /api/images/input_white.png
+已加入 : /api/images/input_white_lg.png
+已加入 : /api/images/overlay_bg_c.png
+已加入 : /api/images/overlay_bg_l.png
+已加入 : /api/images/overlay_bg_l_c.png
+已加入 : /api/images/overlay_bg_l_l.png
+已加入 : /api/images/overlay_bg_l_r.png
+已加入 : /api/images/overlay_bg_m_c.png
+已加入 : /api/images/overlay_bg_m_l.png
+已加入 : /api/images/overlay_bg_m_r.png
+已加入 : /api/images/overlay_bg_r.png
+已加入 : /api/images/poi_type.png
+異動 : /api/images/text_studio_setup.png
+已加入 : /api/images/text_studio_setup_bak.png
+已加入 : /api/images/textfield_w_c.png
+已加入 : /api/images/textfield_w_l.png
+已加入 : /api/images/textfield_w_r.png
+異動 : /api/index.html
+異動 : /api/javascripts/basic.js
+已加入 : /api/javascripts/channel-poi.js
+異動 : /api/javascripts/channel.js
+已加入 : /api/javascripts/cms-settings.js
+異動 : /api/javascripts/config.js
+異動 : /api/javascripts/controller.js
+異動 : /api/javascripts/curation.js
+異動 : /api/javascripts/epcurate.js
+異動 : /api/javascripts/episode.js
+已加入 : /api/javascripts/get-url.js
+已刪除 : /api/javascripts/horizontal-slider.js
+已加入 : /api/javascripts/index.js
+已刪除 : /api/javascripts/jquery.autotab.min.js
+已刪除 : /api/javascripts/jquery.blockUI.js
+已刪除 : /api/javascripts/jquery.charcounter.min.js
+已刪除 : /api/javascripts/jquery.cookie.js
+已刪除 : /api/javascripts/jquery.corner.js
+已刪除 : /api/javascripts/jquery.countdown.min.js
+已刪除 : /api/javascripts/jquery.cycle.all.js
+已刪除 : /api/javascripts/jquery.ellipsis.js
+已刪除 : /api/javascripts/jquery.mousewheel.min.js
+已刪除 : /api/javascripts/jquery.swfobject.min.js
+已刪除 : /api/javascripts/jquery.titlecard.js
+已刪除 : /api/javascripts/jquery.tmpl.min.js
+已刪除 : /api/javascripts/jquery.toggleval.min.js
+已刪除 : /api/javascripts/jquery.ui.datepicker-en.js
+已刪除 : /api/javascripts/jquery.ui.datepicker-zh.js
+已刪除 : /api/javascripts/jquery.uniform.min.js
+已刪除 : /api/javascripts/json2.js
+已刪除 : /api/javascripts/library.js
+已加入 : /api/javascripts/libs
+已加入 : /api/javascripts/libs/horizontal-slider.js
+已加入 : /api/javascripts/libs/horizontal-slider.min.js
+已加入 : /api/javascripts/libs/jquery.autotab.js
+已加入 : /api/javascripts/libs/jquery.autotab.min.js
+已加入 : /api/javascripts/libs/jquery.blockUI.js
+已加入 : /api/javascripts/libs/jquery.blockUI.min.js
+已加入 : /api/javascripts/libs/jquery.charcounter.js
+已加入 : /api/javascripts/libs/jquery.charcounter.min.js
+已加入 : /api/javascripts/libs/jquery.cookie.js
+已加入 : /api/javascripts/libs/jquery.cookie.min.js
+已加入 : /api/javascripts/libs/jquery.countdown.js
+已加入 : /api/javascripts/libs/jquery.countdown.min.js
+已加入 : /api/javascripts/libs/jquery.cycle.all.js
+已加入 : /api/javascripts/libs/jquery.cycle.all.min.js
+已加入 : /api/javascripts/libs/jquery.datepick.js
+已加入 : /api/javascripts/libs/jquery.datepick.min.js
+已加入 : /api/javascripts/libs/jquery.ellipsis.js
+已加入 : /api/javascripts/libs/jquery.ellipsis.min.js
+已加入 : /api/javascripts/libs/jquery.mousewheel.js
+已加入 : /api/javascripts/libs/jquery.mousewheel.min.js
+已加入 : /api/javascripts/libs/jquery.swfobject.js
+已加入 : /api/javascripts/libs/jquery.swfobject.min.js
+已加入 : /api/javascripts/libs/jquery.titlecard.js
+已加入 : /api/javascripts/libs/jquery.titlecard.min.js
+已加入 : /api/javascripts/libs/jquery.tmpl.js
+已加入 : /api/javascripts/libs/jquery.tmpl.min.js
+已加入 : /api/javascripts/libs/jquery.toggleval.js
+已加入 : /api/javascripts/libs/jquery.toggleval.min.js
+已加入 : /api/javascripts/libs/jquery.ui.datepicker-en.js
+已加入 : /api/javascripts/libs/jquery.ui.datepicker-zh.js
+已加入 : /api/javascripts/libs/jquery.uniform.js
+已加入 : /api/javascripts/libs/jquery.uniform.min.js
+已加入 : /api/javascripts/libs/json2.js
+已加入 : /api/javascripts/libs/json2.min.js
+已加入 : /api/javascripts/libs/nn-sdk.js
+已加入 : /api/javascripts/libs/perfect-scrollbar.js
+已加入 : /api/javascripts/libs/perfect-scrollbar.min.js
+已加入 : /api/javascripts/libs/purl.js
+已加入 : /api/javascripts/libs/purl.min.js
+已加入 : /api/javascripts/libs/swfupload
+已加入 : /api/javascripts/libs/swfupload/swfupload.cookies.js
+已加入 : /api/javascripts/libs/swfupload/swfupload.js
+已加入 : /api/javascripts/libs/swfupload/swfupload.queue.js
+已加入 : /api/javascripts/libs/swfupload/swfupload.speed.js
+已加入 : /api/javascripts/libs/swfupload/swfupload.swf
+已加入 : /api/javascripts/libs/swfupload/swfupload.swfobject.js
+已加入 : /api/javascripts/libs/vertical.slider.js
+已加入 : /api/javascripts/libs/vertical.slider.min.js
+已刪除 : /api/javascripts/nn-sdk.js
+已加入 : /api/javascripts/portal.brand.js
+已加入 : /api/javascripts/portal.js
+已加入 : /api/javascripts/portal.store.js
+已刪除 : /api/javascripts/purl.js
+已加入 : /api/javascripts/signin.js
+已刪除 : /api/javascripts/swfupload
+已刪除 : /api/javascripts/uploads.js
+已刪除 : /api/javascripts/vertical.slider.js
+異動 : /api/lang/en.json
+異動 : /api/lang/zh.json
+異動 : /api/login.html
+已加入 : /api/portal-manage.html
+已加入 : /api/portal-set.html
+已加入 : /api/signin.html
+已加入 : /api/store-manage.html
+已加入 : /api/stylesheets/channel-poi.css
+異動 : /api/stylesheets/channel.css
+已加入 : /api/stylesheets/cms-settings.css
+異動 : /api/stylesheets/ellipsis.xml
+異動 : /api/stylesheets/ep-curation.css
+異動 : /api/stylesheets/epcurate.css
+異動 : /api/stylesheets/episode.css
+異動 : /api/stylesheets/jquery.datepick.css
+已刪除 : /api/stylesheets/library.css
+異動 : /api/stylesheets/lightbox.css
+已加入 : /api/stylesheets/perfect-scrollbar.css
+已加入 : /api/stylesheets/portal.css
+異動 : /api/stylesheets/style.css
+異動 : /api/stylesheets/uniform.css
+已加入 : /api/thumbnail/brand_default.png
+已加入 : /api/thumbnail/brand_loading.gif
+已加入 : /api/thumbnail/ch_default.png
+已加入 : /api/thumbnail/ep_default.png
+已加入 : /api/thumbnail/favorite_ch.png
+異動 : /api/thumbnail/list1.png
+異動 : /api/version.txt
