@@ -5,26 +5,10 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/uniform.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/portal.css?v=1135" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script src="javascripts/libs/nn-sdk.js?v=1135"></script>
-<script src="javascripts/libs/jquery.mousewheel.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.ellipsis.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.blockUI.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.charcounter.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.tmpl.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.cookie.min.js?v=1135"></script>
-<script src="javascripts/libs/json2.min.js?v=1135"></script>
-<script src="javascripts/libs/purl.min.js?v=1135"></script>
-<script src="javascripts/libs/vertical.slider.min.js?v=1135"></script>
-<script src="javascripts/config.js?v=1135"></script>
-<script src="javascripts/controller.js?v=1135"></script>
-<script src="javascripts/basic.js?v=1135"></script>
-<script src="javascripts/portal.js?v=1135"></script>
+<link rel="stylesheet" href="stylesheets/style.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/portal.css?v=1278" />
 <title>9x9.tv - My Portal</title>
 </head>
 <body>
@@ -32,19 +16,18 @@
 
 <!-- Header Layer Begin -->
 <div id="header">
-  <a href="http://www.9x9.tv/" target="_blank" id="logo"></a>
-  <ul id="nav">
-    <li id="home"><span><a href="http://www.9x9.tv" target="_blank">9x9.tv Official Web</a></span></li>
-    <li id="tv"><span><a href="http://www.9x9.tv/tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
-    <li id="login" style="display:none" ><span>Partner Sign-in</span></li>
-    <li id="profile">
-      <p id="btn-profile"></p>
-      <p id="selected-profile">Guest</p>
-      <ul id="profile-dropdown" class="dropdown">
-        <li><a id="profile-logout" href="signin.html">Log out</a></li>
-      </ul>
-    </li>
-  </ul>
+    <a href="http://www.9x9.tv/" target="_blank" id="logo"></a>
+    <ul id="nav">
+        <li id="home"><span><a href="http://www.9x9.tv/" target="_blank">9x9.tv Official Web</a></span></li>
+        <li id="tv"><span><a href="http://www.9x9.tv/tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
+        <li id="profile">
+            <p id="btn-profile"></p>
+            <p id="selected-profile">Guest</p>
+            <ul id="profile-dropdown" class="dropdown">
+                <li><a id="profile-logout" href="signin.html">Log out</a></li>
+            </ul>
+        </li>
+    </ul>
 </div>
 <!-- Header Layer End -->
 
@@ -54,10 +37,10 @@
         <h3><a href="index.html"><span class="cms-icon">CMS</span><span class="sub-title">Content Management System</span></a></h3>
         <ul>
             <li><span><a href="index.html">My Channels</a></span></li>
-            <li class="on"><span><a href="#">My Portal</a></span></li>
+            <li class="on"><span><a href="portal-set.html">My Portal</a></span></li>
         </ul>
-        <div class="studio-setup fb-connect">
-            <p style="display: none" class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="#"><img src="images/icon_studio_setup.png" alt="" />CMS Settings</a></span></span></p>
+        <div class="studio-setup">
+            <p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="cms-settings.html"><img src="images/icon_studio_setup.png" alt="" />CMS Settings</a></span></span></p>
             <div class="reconnect-notice hide">
                 <img src="images/icon_notification.png" alt="" />
                 <p class="notice-left"><span class="notice-right"><span class="notice-middle langkey">Connection is inactive, click to restart it.</span></span></p>
@@ -68,9 +51,8 @@
 <!-- Navigation Layer End -->
 
 <!-- Content Layer Begin -->
-<div id="content-wrap" >
-
-	<!-- Content Nav Layer Begin -->
+<div id="content-wrap">
+    <!-- Content Nav Layer Begin -->
     <div id="content-nav">
         <div id="func-nav">
             <ul>
@@ -81,114 +63,106 @@
         </div>
     </div>
     <!-- Content Nav Layer End -->
-    
-	<div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
-
-	<div id="content-main"> 
-
+    <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
+    <div id="content-main">
         <div id="title-func" class="clearfix portal-set">
-        	<h2 class="langkey" >My Portal</h2>
-    	</div>
-    
+            <h2 class="langkey">My Portal</h2>
+        </div>
         <div id="content-main-wrap">
             <div class="constrain">
-            
-            <!-- Portal Layer Begin -->
-            <div id="portal-layer">
-            	<ul id="portal-set">
-            		
-                </ul>
-            </div>
-            <!-- Portal Layer End -->
-            
+                <!-- Portal Layer Begin -->
+                <div id="portal-layer">
+                    <ul id="portal-set">
+                    </ul>
+                </div>
+                <!-- Portal Layer End -->
             </div>
         </div>
-   
-	</div>
-
+    </div>
 </div>
 <!-- Content Layer End -->
 
-<!--============================== footer start ==============================-->
+<!-- Footer Layer Begin -->
 <p id="footer-control"></p>
 <div id="footer">
-  <span>© 2013 9x9.tv. All rights reserved.</span>
-  <ul id="footer-list">
-    <li id="language-change">
-      <p class="select-txt"><a href="javascript:void(0);" id="language">Language</a></p>
-      <p class="select-btn"></p>
-      <ul class="select-list">
-        <li><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
-        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
-      </ul>
-    </li>
-  </ul>
+    <span>© 2013 9x9.tv. All rights reserved.</span>
+    <ul id="footer-list">
+        <li id="language-change">
+            <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
+            <p class="select-btn"></p>
+            <ul class="select-list">
+                <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+                <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
+            </ul>
+        </li>
+    </ul>
 </div>
-<!--============================== footer close ==============================-->
-
+<!-- Footer Layer End -->
 
 <!-- Loading Layer Begin -->
 <div id="overlay-s">
-	<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span></span></p>
+    <p class="overlay-content">
+        <span class="overlay-right">
+            <span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span>
+        </span>
+    </p>
 </div>
 <!-- Loading Layer End -->
 
-
-
+<!-- portal-sets-tmpl Begin -->
 <script id="portal-sets-tmpl" type="text/x-jquery-tmpl">
-
 {{if seq < 4}}
-	{{if channelCnt > 0}}
-	
-    	<li data-meta="${id}">
+    {{if channelCnt > 0}}
+        <li data-meta="${id}">
             <div class="thumb">
-                <img src="" class="ch" id="chset_${id}" />
-                <img src="" class="ep" id="epset_${id}" />
-            	<div class="bg white"></div>
+                <img src="" alt="" class="ch" id="chset_${id}" />
+                <img src="" alt="" class="ep" id="epset_${id}" />
+                <div class="bg white"></div>
                 <div class="bg gray"></div>
                 <div class="bg black"></div>
             </div>
-        	<h1>${name}</h1>
-        	<div class="btn-holder">
-            	<p class="number">(<span>${channelCnt}</span> / 27 ${nn._([CMS_CONF.PAGE_ID, 'sets-list', 'Channels'])})</p>
+            <h1>${name}</h1>
+            <div class="btn-holder">
+                <p class="number">(<span>${channelCnt}</span> / 27 ${nn._([cms.global.PAGE_ID, 'sets-list', 'Channels'])})</p>
                 <div class="btn-gray">
                     <p class="left"></p>
-                    <p class="center"><a href="portal-manage.html?id=${id}">${nn._([CMS_CONF.PAGE_ID, 'sets-list', 'Edit'])}</a></p>
+                    <p class="center"><a href="portal-manage.html?id=${id}">${nn._([cms.global.PAGE_ID, 'sets-list', 'Edit'])}</a></p>
                     <p class="right"></p>
                 </div>
-			</div>                    
+            </div>
         </li>
-                    
-	{{else}}
+    {{else}}
         <li class="empty" data-meta="${id}">
-        	<h1>${name}</h1>
-        	<div class="btn-holder">
-            	<p class="number">(<span>0</span> / 27 ${nn._([CMS_CONF.PAGE_ID, 'sets-list', 'Channels'])})</p>
+            <h1>${name}</h1>
+            <div class="btn-holder">
+                <p class="number">(<span>0</span> / 27 ${nn._([cms.global.PAGE_ID, 'sets-list', 'Channels'])})</p>
                 <div class="btn-gray">
                     <p class="left"></p>
-                    <p class="center"><a href="portal-manage.html?id=${id}">+ ${nn._([CMS_CONF.PAGE_ID, 'sets-list', 'Add Channels'])}</a></p>
+                    <p class="center"><a href="portal-manage.html?id=${id}">+ ${nn._([cms.global.PAGE_ID, 'sets-list', 'Add Channels'])}</a></p>
                     <p class="right"></p>
                 </div>
-			</div>                    
+            </div>
         </li>
-	{{/if}}
+    {{/if}}
 {{/if}}
-	
-	
-	
 </script>
+<!-- portal-sets-tmpl End -->
  
-<div id="system-error" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="btn-close">Close</a>
-<p class="content">You are not authorized to edit this episode.</p>
-<div class="overlay-btn">
-<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="javascripts/libs/nn-sdk.js?v=1278"></script>
+<script src="javascripts/libs/jquery.mousewheel.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.ellipsis.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.blockUI.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.charcounter.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.tmpl.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.cookie.min.js?v=1278"></script>
+<script src="javascripts/libs/json2.min.js?v=1278"></script>
+<script src="javascripts/libs/purl.min.js?v=1278"></script>
+<script src="javascripts/v2/config.js?v=1278"></script>
+<script src="javascripts/v2/func.common.js?v=1278"></script>
+<script src="javascripts/v2/func.portal.set.js?v=1278"></script>
+<script src="javascripts/v2/domready.common.js?v=1278"></script>
+<script src="javascripts/v2/domready.portal.set.js?v=1278"></script>
 </body>
 </html>

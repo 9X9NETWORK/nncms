@@ -868,6 +868,10 @@ body.mac #title-func h2 {
 
 #content-main-wrap form .fminput .fmfield .connected .share-item {
     height: 30px;
+    padding: 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connected.brand .share-item {
     padding: 0 0 0 17px;
 }
 

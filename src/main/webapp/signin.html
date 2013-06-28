@@ -5,284 +5,290 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/uniform.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/portal.css?v=1135" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script src="http://9x9ui-j.s3-website-ap-northeast-1.amazonaws.com/all.js" charset="utf-8"></script>
-<script src="javascripts/libs/nn-sdk.js?v=1135"></script>
-<script src="javascripts/libs/jquery.mousewheel.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.ellipsis.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.blockUI.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.charcounter.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.tmpl.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.cookie.min.js?v=1135"></script>
-<script src="javascripts/libs/json2.min.js?v=1135"></script>
-<script src="javascripts/libs/purl.min.js?v=1135"></script>
-<script src="javascripts/libs/vertical.slider.min.js?v=1135"></script>
-<script src="javascripts/config.js?v=1135"></script>
-<script src="javascripts/controller.js?v=1135"></script>
-<script src="javascripts/basic.js?v=1135"></script>
-<script src="javascripts/signin.js?v=1135"></script>
-<title>9x9.tv - SignIn</title>
+<link rel="stylesheet" href="stylesheets/style.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/portal.css?v=1278" />
+<title>9x9.tv - Sign In</title>
 </head>
 <body>
 <div id="fb-root"></div>
 
-<!--============================== header start ==============================-->
+<!-- Header Layer Begin -->
 <div id="header">
-  <a href="../" target="_blank" id="logo"></a>
-  <ul id="nav">
-    <li id="home"><span><a href="../" target="_blank">9x9.tv Official Web</a></span></li>
-    <li id="tv"><span><a href="../tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
-    <li id="profile">
-      <p id="btn-profile"></p>
-      <p id="selected-profile">Guest</p>
-      <ul id="profile-dropdown" class="dropdown">
-        
-      </ul>
-    </li>
-  </ul>
+    <a href="../" target="_blank" id="logo"></a>
+    <ul id="nav">
+        <li id="home"><span><a href="../" target="_blank">9x9.tv Official Web</a></span></li>
+        <li id="tv"><span><a href="../tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
+        <li id="profile">
+            <p id="btn-profile"></p>
+            <p id="selected-profile">Guest</p>
+            <ul id="profile-dropdown" class="dropdown">
+            </ul>
+        </li>
+    </ul>
 </div>
-<!--============================== header close ==============================-->
+<!-- Header Layer End -->
 
-<!--============================== content-wrap start ========================-->
 <!-- Login Layer Begin -->
 <div id="login-layer">
     <div id="login-holder">
-    <h1 class="langkey">Collect and Curate!</h1>
-    <h3 class="langkey">CMS is the management center for your 9x9.tv list-form channels!</h3>
-    <h2 class="langkey">Sign In</h2>
-    <div class="btn-fb">
-        <p class="btn-fb-left"></p>
-        <p class="btn-fb-middle langkey">Sign in with Facebook</p>
-        <p class="btn-fb-right"></p>
-    </div>    
-    <p class="langkey">Sign In with your E-mail and password</p>
-	<br/>
-	<div class="input-white">
-        <p class="left"></p> 
-        <img src="images/icon_email.png" class="icon-set">
-        <input id="si_email" value="E-mail" defvalue="E-mail" class="center flangkey" type="text">
-        <p class="right"></p>
-    </div>
-    <div class="input-white">
-        <p class="left"></p>
-        <img src="images/icon_password.png" class="icon-set">
-        <input id="si_passwordfak" value="Password" defvalue="Password" class="center flangkey" type="text">
-        <input id="si_password" value="" defvalue="Password" class="center" style="display: none" type="password">
-        <p class="right"></p>
-    </div>
-    <div class="btn-holder">
-        <span id="btn-forgot-password" class="langkey">Forgot password?</span> 
-        <div class="btn-gray">
-            <p class="left"></p>
-            <p class="center"><a href="#" id="btn_sign_in" onclick="return false;" class="langkey">Sign In</a></p>
-            <p class="right"></p>
-        </div>
-	</div>
-    <br/>
-    <p class="msg-error" class="langkey">Email and password do not match, please try again.<br/><br/></p>
-    <p ><b class="langkey">Need an account?</b> <span id="sign-up" class="langkey">Sign up Now!</span></p>
+        <h1 class="langkey">Collect and Curate!</h1>
+        <h3 class="langkey">CMS is the management center for your 9x9.tv list-form channels!</h3>
+        <h2 class="langkey">Sign In</h2>
+        <form id="login-form">
+            <div class="btn-fb">
+                <p class="btn-fb-left"></p>
+                <p class="btn-fb-middle langkey">Sign in with Facebook</p>
+                <p class="btn-fb-right"></p>
+            </div>    
+            <p class="langkey">Sign In with your E-mail and password</p>
+            <br />
+            <div class="input-white">
+                <p class="left"></p> 
+                <img src="images/icon_email.png" alt="" class="icon-set" />
+                <input id="si_email" value="" defvalue="E-mail" class="center flangkey" type="text" />
+                <p class="right"></p>
+            </div>
+            <div class="input-white">
+                <p class="left"></p>
+                <img src="images/icon_password.png" alt="" class="icon-set" />
+                <input id="si_passwordfak" value="" defvalue="Password" class="center flangkey" type="text" />
+                <input id="si_password" value="" defvalue="Password" class="center" style="display: none" type="password" />
+                <p class="right"></p>
+            </div>
+            <div class="btn-holder">
+                <span id="btn-forgot-password" class="langkey">Forgot password?</span> 
+                <div class="btn-gray">
+                    <p class="left"></p>
+                    <p class="center"><a href="#" id="btn_sign_in" class="langkey">Sign In</a></p>
+                    <p class="right"></p>
+                </div>
+            </div>
+            <br />
+            <p class="msg-error langkey">Email and password do not match, please try again.<br /><br /></p>
+            <p><b class="langkey">Need an account?</b> <span id="sign-up" class="langkey">Sign up Now!</span></p>
+            <input type="submit" value="Sign In" class="hide" />
+        </form>
     </div>
 </div>
 <!-- Login Layer End -->
+
 <!-- Sign Up Begin -->
 <div id="signup-layer">
-  <div id="signup-holder">
-    <p class="l"></p>
-    <div class="m">
-      <p id="btn-signup-close"></p>
-      <div id="signin-panel-signup"> 
-      	<h2  class="langkey">Sign Up</h2>
-        <div class="left">
-            <div class="input-gray">
-              <p class="left"></p>
-              <p class="center"> <img src="images/icon_email.png" class="icon-set">
-                <input id="su_email" value="E-mail" defvalue="E-mail" class="textfield flangkey" type="text">
-              </p>
-              <p class="right"></p>
-            </div>
-            <br/>
-            <div class="input-gray">
-              <p class="left"></p>
-              <p class="center"> <img src="images/icon_password.png" class="icon-set">
-		        <input id="su_passwordfak" value="Password" defvalue="Password" class="textfield flangkey" type="text">
-                <input id="su_password"    value="" defvalue="Password" class="textfield" style="display: none" type="password">
-              </p>
-              <p class="right"></p>
-            </div>
-            <br/>
-            <div class="input-gray">
-              <p class="left"></p>
-              <p class="center"> <img src="images/icon_password.png" class="icon-set">
-		        <input id="su_password_refak" value="Repeat Password" defvalue="Repeat Password" class="textfield flangkey" type="text">
-                <input id="su_password_re"    value="" defvalue="Password" class="textfield" style="display: none" type="password">
-              </p>
-              <p class="right"></p>
-            </div>
-            <br/>
-            <p class="note">
-            	<span id="signup-checkbox"></span>
-                <span id="signup-agree" class="langkeyH">I have read and accepted the User Agreement and Privacy Policy</span>
-            </p>
-            <br/>
-            <div id="signup-cancel" class="btn-white">
-              <p class="left"></p>
-              <p class="center langkey">Cancel</p>
-              <p class="right"></p>
-            </div>
-		</div>
-        <div class="right">
-            <div class="input-gray">
-              <p class="left"></p>
-              <p class="center"> <img src="images/icon_user.png" class="icon-set">
-              	<input id="su_user" value="User Name" defvalue="User Name" class="textfield flangkey" type="text">
-              </p>
-              <p class="right"></p>
-            </div>
-            <br/>
-            <p class="note langkey">Create a unique user name in 9x9 which composed of 6-16 English letters ,numbers or low line.</p>
-            <br/>
-            <p class="msg-error" class="langkey">
-            	This email has been used.<br/>
-            	Two passwords don't match, please retype.
-            </p>
-			<div id="signup-create" class="btn-white">
-              <p class="left"></p>
-              <p class="center"><a id="signup-create" href="javascript: void(0)" class="langkey">Create My Account</a></p>
-              <p class="right"></p>
+    <div id="signup-holder">
+        <p class="l"></p>
+        <div class="m">
+            <p id="btn-signup-close"></p>
+            <div id="signin-panel-signup"> 
+                <h2  class="langkey">Sign Up</h2>
+                <div class="left">
+                    <div class="input-gray">
+                        <p class="left"></p>
+                        <p class="center"> <img src="images/icon_email.png" alt="" class="icon-set" />
+                            <input id="su_email" value="" defvalue="E-mail" class="textfield flangkey" type="text" />
+                        </p>
+                        <p class="right"></p>
+                    </div>
+                    <br />
+                    <div class="input-gray">
+                        <p class="left"></p>
+                        <p class="center"> <img src="images/icon_password.png" alt="" class="icon-set" />
+                            <input id="su_passwordfak" value="" defvalue="Password" class="textfield flangkey" type="text" />
+                            <input id="su_password"    value="" defvalue="Password" class="textfield" style="display: none" type="password" />
+                        </p>
+                        <p class="right"></p>
+                    </div>
+                    <br />
+                    <div class="input-gray">
+                        <p class="left"></p>
+                        <p class="center"> <img src="images/icon_password.png" alt="" class="icon-set" />
+                            <input id="su_password_refak" value="" defvalue="Repeat Password" class="textfield flangkey" type="text" />
+                            <input id="su_password_re"    value="" defvalue="Password" class="textfield" style="display: none" type="password" />
+                        </p>
+                        <p class="right"></p>
+                    </div>
+                    <br />
+                    <p class="note">
+                        <span id="signup-checkbox"></span>
+                        <span id="signup-agree" class="langkeyH">I have read and accepted the User Agreement and Privacy Policy</span>
+                    </p>
+                    <br />
+                    <div id="signup-cancel" class="btn-white">
+                        <p class="left"></p>
+                        <p class="center langkey">Cancel</p>
+                        <p class="right"></p>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="input-gray">
+                        <p class="left"></p>
+                        <p class="center"> <img src="images/icon_user.png" alt="" class="icon-set" />
+                            <input id="su_user" value="" defvalue="User Name" class="textfield flangkey" type="text" />
+                        </p>
+                        <p class="right"></p>
+                    </div>
+                    <br />
+                    <p class="note langkey">Create a unique user name in 9x9 which composed of 6-16 English letters ,numbers or low line.</p>
+                    <br />
+                    <p class="msg-error langkey">
+                        This email has been used.<br />
+                        Two passwords don't match, please retype.
+                    </p>
+                    <div id="signup-create" class="btn-white">
+                        <p class="left"></p>
+                        <p class="center"><a href="javascript:void(0)" class="langkey">Create My Account</a></p>
+                        <p class="right"></p>
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
+        <p class="r"></p>
     </div>
-    <p class="r"></p>
-  </div>
 </div>
 <!-- Sign Up End -->
+
 <!-- Forgot Password Begin-->
 <div id="forgot-password-layer">
-  <div id="forgot-password-holder">
-    <div class="l"></div>
-    <div class="m">
-      <p id="btn-forgot-password-close"></p>
-      <h2 class="langkey">Forgot Password</h2>
-      <div id="forgot-password-form">
-        <div class="input-gray">
-          <p class="left"></p>
-          <p class="center"> <img src="images/icon_email.png" class="icon-set">
-            <input id="fg_email" value="E-mail" defvalue="E-mail" class="textfield flangkey" type="text">
-          </p>
-          <p class="right"></p>
-         </div>
-          <p class="msg note langkey">Enter your email address and we`ll send you instructions.</p>
-          <p class="msg-error langkey">The email you entered doesn`t have an associated user account. Please try again.</p>
-          <div id="btn-reset-password" class="btn-white">
-            <p class="left"></p>
-            <p class="center langkey">Reset</p>
-            <p class="right"></p>
-          </div>
-          <p class="back-to-sign langkey">Back to Sign In</p>
+    <div id="forgot-password-holder">
+        <div class="l"></div>
+        <div class="m">
+            <p id="btn-forgot-password-close"></p>
+            <h2 class="langkey">Forgot Password</h2>
+            <div id="forgot-password-form">
+                <div class="input-gray">
+                    <p class="left"></p>
+                    <p class="center"> <img src="images/icon_email.png" alt="" class="icon-set" />
+                        <input id="fg_email" value="" defvalue="E-mail" class="textfield flangkey" type="text" />
+                    </p>
+                    <p class="right"></p>
+                </div>
+                <p class="msg note langkey">Enter your email address and we`ll send you instructions.</p>
+                <p class="msg-error langkey">The email you entered doesn`t have an associated user account. Please try again.</p>
+                <div id="btn-reset-password" class="btn-white">
+                    <p class="left"></p>
+                    <p class="center langkey">Reset</p>
+                    <p class="right"></p>
+                </div>
+                <p class="back-to-sign langkey">Back to Sign In</p>
+            </div>
+            <div id="forgot-password-msg">
+                <p class="msg"><span class="langkey">Success!</span><br /><br />
+                <span class="langkey">You should receive an email shortly.</span><br />
+                <span class="langkey">If you still need assistance, please</span>
+                <a href="mailto:info@9x9.tv" class="langkey">contact us.</a></p>
+            </div>
         </div>
-        <div id="forgot-password-msg">
-       	   <p class="msg"><span class="langkey">Success!</span><br /><br />
-           <span class="langkey">You should receive an email shortly.</span><br />
-          <span class="langkey">If you still need assistance, please</span>
-           <a href="mailto:info@9x9.tv" class="langkey">contact us.</a></p>
-        </div>
+        <div class="r"></div>
     </div>
-    <div class="r"></div>
-  </div>
 </div>
 <!-- Forgot Password End-->
 
-
 <!--Reset Password Begin--> 
 <div id="reset-password-layer" class="msg-layer">
-  <div id="reset-password-holder">
-    <div class="l"></div>
-    <div class="m">
-      <p id="btn-reset-password-close"></p>
-      <h2 class="langkey">Reset Password</h2>
-      <form id="reset-password-form">
-        <div class="input-gray">
-          <p class="left"></p>
-          <p class="center"> 
-          <img src="images/icon_password.png" class="icon-set">
-            <input id="new_passfak" value="" defvalue="New Password" class="textfield flangkey" type="text">
-            <input id="new_pass"    value="" defvalue="New Password" class="textfield" style="display: none" type="password">
-          </p>
-          <p class="right"></p>
-         </div>
-         <br/>
-         <div class="input-gray">
-          <p class="left"></p>
-          <p class="center">
-          <img src="images/icon_password.png" class="icon-set">
-            <input id="new_pass_refak" value="" defvalue="Repeat New Password" class="textfield flangkey" type="text">
-            <input id="new_pass_re"    value="" defvalue="Repeat New Password" class="textfield" style="display: none" type="password">
-          </p>
-          <p class="right"></p>
-         </div>
-         <br/> <br/> 
-         <p class="msg-error langkey">Two passwords don't match, please retype.</p> 
-        </form>
-        <div class="msg-btn-holder">
-              <div class="btn-white" id="reset-password-cancel">
-                <p class="left"></p>
-                <p class="center langkey">Cancel</p>
-                <p class="right"></p>
-              </div>
-              <div class="btn-white" id="btn-new-password">
-                <p class="left"></p>
-                <p class="center langkey">Reset Password</p>
-                <p class="right"></p>
-              </div>
-         </div>
-
+    <div id="reset-password-holder">
+        <div class="l"></div>
+        <div class="m">
+            <p id="btn-reset-password-close"></p>
+            <h2 class="langkey">Reset Password</h2>
+            <form id="reset-password-form">
+                <div class="input-gray">
+                    <p class="left"></p>
+                    <p class="center"> 
+                        <img src="images/icon_password.png" alt="" class="icon-set" />
+                        <input id="new_passfak" value="" defvalue="New Password" class="textfield flangkey" type="text" />
+                        <input id="new_pass"    value="" defvalue="New Password" class="textfield" style="display: none" type="password" />
+                    </p>
+                    <p class="right"></p>
+                </div>
+                <br />
+                <div class="input-gray">
+                    <p class="left"></p>
+                    <p class="center">
+                        <img src="images/icon_password.png" alt="" class="icon-set" />
+                        <input id="new_pass_refak" value="" defvalue="Repeat New Password" class="textfield flangkey" type="text" />
+                        <input id="new_pass_re"    value="" defvalue="Repeat New Password" class="textfield" style="display: none" type="password" />
+                    </p>
+                    <p class="right"></p>
+                </div>
+                <br /><br />
+                <p class="msg-error langkey">Two passwords don't match, please retype.</p>
+            </form>
+            <div class="msg-btn-holder">
+                <div class="btn-white" id="reset-password-cancel">
+                    <p class="left"></p>
+                    <p class="center langkey">Cancel</p>
+                    <p class="right"></p>
+                </div>
+                <div class="btn-white" id="btn-new-password">
+                    <p class="left"></p>
+                    <p class="center langkey">Reset Password</p>
+                    <p class="right"></p>
+                </div>
+            </div>
         </div>
-    <div class="r"></div>
-  </div>
+        <div class="r"></div>
+    </div>
 </div>
 <!-- Reset Password End-->
 
-
-<!--============================== content-wrap close ========================-->
-
-<!--============================== footer start ==============================-->
+<!-- Footer Layer Begin -->
 <p id="footer-control"></p>
 <div id="footer">
-  <span>© 2013 9x9.tv. All rights reserved.</span>
-  <ul id="footer-list">
-    <li id="language-change">
-	  <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
-      <p class="select-btn"></p>
-      <ul class="select-list">
-        <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en" data-page="signin">English</a></li>
-        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh" data-page="signin">中文</a></li>
-      </ul>
-    </li>
-  </ul>
+    <span>© 2013 9x9.tv. All rights reserved.</span>
+    <ul id="footer-list">
+        <li id="language-change">
+            <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
+            <p class="select-btn"></p>
+            <ul class="select-list">
+                <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en" data-page="signin">English</a></li>
+                <li><a href="javascript:void(0);" id="language-zh" data-meta="zh" data-page="signin">中文</a></li>
+            </ul>
+        </li>
+    </ul>
 </div>
-<!--============================== footer close ==============================-->
+<!-- Footer Layer End -->
 
+<!-- Loading Layer Begin -->
 <div id="overlay-s">
-<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span></span></p>
+    <p class="overlay-content">
+        <span class="overlay-right">
+            <span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span>
+        </span>
+    </p>
 </div>
+<!-- Loading Layer End -->
 
-<div id="system-error" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="btn-close">Close</a>
-<p class="content">You are not authorized to edit this channel.</p>
-<div class="overlay-btn">
-<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+<!-- System Notice Layer Begin -->
+<div id="system-notice" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">Password reset success!</p>
+            <div class="overlay-btn">
+                <p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-</div>
-</div>
+<!-- System Notice Layer End -->
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="http://9x9ui-j.s3-website-ap-northeast-1.amazonaws.com/all.js" charset="utf-8"></script>
+<script src="javascripts/libs/nn-sdk.js?v=1278"></script>
+<script src="javascripts/libs/jquery.mousewheel.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.ellipsis.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.blockUI.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.charcounter.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.tmpl.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.cookie.min.js?v=1278"></script>
+<script src="javascripts/libs/json2.min.js?v=1278"></script>
+<script src="javascripts/libs/purl.min.js?v=1278"></script>
+<script src="javascripts/v2/config.js?v=1278"></script>
+<script src="javascripts/v2/func.common.js?v=1278"></script>
+<script src="javascripts/v2/func.signin.js?v=1278"></script>
+<script src="javascripts/v2/domready.common.js?v=1278"></script>
+<script src="javascripts/v2/domready.signin.js?v=1278"></script>
 </body>
 </html>

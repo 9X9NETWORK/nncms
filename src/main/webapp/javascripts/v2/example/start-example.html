@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="en" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<link rel="stylesheet" href="stylesheets/style.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
+<!--link rel="stylesheet" href="stylesheets/start-example.css?v=1278" /-->
+<title>9x9.tv - Start Example</title>
+</head>
+<body>
+<div id="fb-root"></div>
+
+<!-- Header Layer Begin -->
+<div id="header">
+    <a href="http://www.9x9.tv/" target="_blank" id="logo"></a>
+    <ul id="nav">
+        <li id="home"><span><a href="http://www.9x9.tv/" target="_blank">9x9.tv Official Web</a></span></li>
+        <li id="tv"><span><a href="http://www.9x9.tv/tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
+        <li id="profile">
+            <p id="btn-profile"></p>
+            <p id="selected-profile">Guest</p>
+            <ul id="profile-dropdown" class="dropdown">
+                <li><a id="profile-logout" href="signin.html">Log out</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!-- Header Layer End -->
+
+<!-- Navigation Layer Begin -->
+<div id="studio-nav">
+    <div class="studio-nav-wrap">
+        <h3><a href="index.html"><span class="cms-icon">CMS</span><span class="sub-title">Content Management System</span></a></h3>
+        <ul>
+            <li><span><a href="index.html">My Channels</a></span></li>
+            <li class="on"><span><a href="portal-set.html">My Portal</a></span></li>
+        </ul>
+        <div class="studio-setup">
+            <p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="cms-settings.html"><img src="images/icon_studio_setup.png" alt="" />CMS Settings</a></span></span></p>
+            <div class="reconnect-notice hide">
+                <img src="images/icon_notification.png" alt="" />
+                <p class="notice-left"><span class="notice-right"><span class="notice-middle langkey">Connection is inactive, click to restart it.</span></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navigation Layer End -->
+
+<!-- Content Layer Begin -->
+<div id="content-wrap">
+    <div id="content-nav">
+        <div id="func-nav">
+            <ul>
+                <li class="btns"><span><a href="#">Start Example Nav</a></span></li>
+            </ul>
+        </div>
+    </div>
+    <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
+    <div id="content-main">
+        <div id="title-func" class="clearfix">
+            <h2>Start Example Title</h2>
+        </div>
+        <div id="content-main-wrap">
+            <div class="constrain">
+                <p>Start Example Content</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content Layer End -->
+
+<!-- Footer Layer Begin -->
+<p id="footer-control"></p>
+<div id="footer">
+    <span>© 2013 9x9.tv. All rights reserved.</span>
+    <ul id="footer-list">
+        <li id="language-change">
+            <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
+            <p class="select-btn"></p>
+            <ul class="select-list">
+                <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+                <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!-- Footer Layer End -->
+
+<!-- Loading Layer Begin -->
+<div id="overlay-s">
+    <p class="overlay-content">
+        <span class="overlay-right">
+            <span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span>
+        </span>
+    </p>
+</div>
+<!-- Loading Layer End -->
+
+<!-- System Error Layer Begin -->
+<div id="system-error" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">You are not authorized to edit this channel.</p>
+            <div class="overlay-btn">
+                <p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- System Error Layer End -->
+
+<!-- System Notice Layer Begin -->
+<div id="system-notice" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">Some system notice here!</p>
+            <div class="overlay-btn">
+                <p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- System Notice Layer End -->
+
+<!-- Unsave Prompt Layer Begin -->
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+            <div class="overlay-btn">
+                <p class="btns btn-no"><span><a href="#">No</a></span></p>
+                <p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Unsave Prompt Layer End -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="javascripts/libs/nn-sdk.js?v=1278"></script>
+<script src="javascripts/libs/jquery.mousewheel.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.ellipsis.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.blockUI.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.charcounter.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.tmpl.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.cookie.min.js?v=1278"></script>
+<script src="javascripts/libs/json2.min.js?v=1278"></script>
+<script src="javascripts/libs/purl.min.js?v=1278"></script>
+<script src="javascripts/v2/config.js?v=1278"></script>
+<script src="javascripts/v2/func.common.js?v=1278"></script>
+<script src="javascripts/v2/example/func.start-example.js?v=1278"></script>
+<script src="javascripts/v2/domready.common.js?v=1278"></script>
+<script src="javascripts/v2/example/domready.start-example.js?v=1278"></script>
+</body>
+</html>

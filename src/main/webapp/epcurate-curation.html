@@ -5,291 +5,468 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/style.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/uniform.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/playback.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/jquery.datepick.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/perfect-scrollbar.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/epcurate.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/ep-curation.css?v=1135" />
+<link rel="stylesheet" href="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/style.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/playback.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/jquery.datepick.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/perfect-scrollbar.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/epcurate.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/ep-curation.css?v=1278" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script src="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.js?v=1135"></script>
-<script src="javascripts/libs/nn-sdk.js?v=1135"></script>
-<script src="javascripts/libs/jquery.mousewheel.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.ellipsis.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.blockUI.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.charcounter.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.uniform.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.swfobject.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.titlecard.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.tmpl.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.cookie.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.countdown.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.autotab.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.cycle.all.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.datepick.min.js?v=1135"></script>
-<script src="javascripts/libs/perfect-scrollbar.min.js?v=1135"></script>
-<script src="javascripts/libs/json2.min.js?v=1135"></script>
-<script src="javascripts/libs/purl.min.js?v=1135"></script>
-<script src="javascripts/libs/swfupload/swfupload.js?v=1135"></script>
-<script src="javascripts/libs/horizontal-slider.min.js?v=1135"></script>
-<script src="javascripts/config.js?v=1135"></script>
-<script src="javascripts/controller.js?v=1135"></script>
-<script src="javascripts/basic.js?v=1135"></script>
-<script src="javascripts/curation.js?v=1135"></script>
+<script src="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.js?v=1278"></script>
+<script src="javascripts/libs/nn-sdk.js?v=1278"></script>
+<script src="javascripts/libs/jquery.mousewheel.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.ellipsis.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.blockUI.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.charcounter.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.uniform.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.swfobject.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.titlecard.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.tmpl.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.cookie.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.countdown.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.autotab.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.cycle.all.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.datepick.min.js?v=1278"></script>
+<script src="javascripts/libs/perfect-scrollbar.min.js?v=1278"></script>
+<script src="javascripts/libs/json2.min.js?v=1278"></script>
+<script src="javascripts/libs/purl.min.js?v=1278"></script>
+<script src="javascripts/libs/swfupload/swfupload.js?v=1278"></script>
+<script src="javascripts/v2/config.js?v=1278"></script>
+<script src="javascripts/v2/func.common.js?v=1278"></script>
+<script src="javascripts/v2/func.curation.js?v=1278"></script>
+<script src="javascripts/v2/domready.common.js?v=1278"></script>
+<script src="javascripts/v2/domready.curation.js?v=1278"></script>
 <title>9x9.tv - Episode Curation - Curation</title>
 </head>
 <body>
 
-<!--============================== header start ==============================-->
+<!-- Header Layer Begin -->
 <div id="header" class="hide">
-  <a href="../" target="_blank" id="logo"></a>
-  <ul id="nav">
-    <li id="home"><span><a href="../" target="_blank">9x9.tv Official Web</a></span></li>
-    <li id="tv"><span><a href="../tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
-    <li id="profile">
-      <p id="btn-profile"></p>
-      <p id="selected-profile">Guest</p>
-      <ul id="profile-dropdown" class="dropdown">
-        <li><a id="profile-logout" href="signin.html">Log out</a></li>
-      </ul>
-    </li>
-  </ul>
+    <a href="../" target="_blank" id="logo"></a>
+    <ul id="nav">
+        <li id="home"><span><a href="../" target="_blank">9x9.tv Official Web</a></span></li>
+        <li id="tv"><span><a href="../tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
+        <li id="profile">
+            <p id="btn-profile"></p>
+            <p id="selected-profile">Guest</p>
+            <ul id="profile-dropdown" class="dropdown">
+                <li><a id="profile-logout" href="signin.html">Log out</a></li>
+            </ul>
+        </li>
+    </ul>
 </div>
-<!--============================== header close ==============================-->
+<!-- Header Layer End -->
 
+<!-- Navigation Layer Begin -->
 <div id="epcurate-nav">
-<div class="epcurate-nav-wrap">
-<h3><a href="episode-list.html" id="epcurate-nav-back" class="btn-back">Back<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle langkey">Leave</span></span></span></span></a><a href="javascript:void(0);" class="langkey">Episode Curation</a></h3>
-<ul>
-<li class="curation on"><a href="epcurate-curation.html" id="epcurate-nav-curation"><span class="nav-right"><span class="nav-middle langkey">Curation</span></span></a></li>
-<li class="publish off"><a href="epcurate-publish.html" id="epcurate-nav-publish"><span class="nav-right"><span class="nav-middle langkey">Publish</span></span></a></li>
-</ul>
+    <div class="epcurate-nav-wrap">
+        <h3><a href="episode-list.html" id="epcurate-nav-back" class="btn-back">Back<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle langkey">Leave</span></span></span></span></a><a href="javascript:void(0);" class="langkey">Episode Curation</a></h3>
+        <ul>
+            <li class="curation on"><a href="epcurate-curation.html" id="epcurate-nav-curation"><span class="nav-right"><span class="nav-middle langkey">Curation</span></span></a></li>
+            <li class="publish off"><a href="epcurate-publish.html" id="epcurate-nav-publish"><span class="nav-right"><span class="nav-middle langkey">Publish</span></span></a></li>
+        </ul>
+    </div>
 </div>
-</div>
+<!-- Navigation Layer End -->
 
-<!--============================== content-wrap start ========================-->
+<!-- Content Layer Begin -->
 <div id="content-wrap" class="epcurate-curation">
 <form name="epcurateForm" id="epcurateForm" method="get" action="" class="clearfix curation">
-<!-- template = #epcurate-info-tmpl -->
-<input type="hidden" name="id" id="id" value="" />
-<input type="hidden" name="channelId" id="channelId" value="" />
-<div id="content-main">
-<div id="content-main-wrap" class="curation">
-<div class="constrain">
-
-<div id="epcurate-curation" class="clearfix">
-<ul class="tabs">
-<li class="first last on"><span><a href="#cur-add" class="cur-add langkey">Add Video</a></span></li>
-<li class="edit-video hide on"><span><a href="#cur-edit" class="cur-edit langkey">Edit</a></span></li>
-<li class="poi last hide"><span><a href="#cur-poi" class="cur-poi langkey">POI & interactive event</a></span></li>
-<li class="edit-poi on last hide"><span><a href="#cur-edit-poi" class="cur-edit-poi"><img src="images/icon_edit.png" alt="" width="16" height="16" /></a></span></li>
-</ul>
-<div class="curation-content clearfix">
-<p class="auto-height"></p>
-<div id="video-player" data-width="400" data-height="269">
-<div class="video">
-<!-- template = #titlecard-tmpl -->
-</div>
-<div id="video-control">
-<p id="play-dragger"></p>
-<div id="progress-bar">
-<p id="loaded"></p>
-<p id="played"></p>
-</div>
-<ul>
-<li id="btn-play"></li>
-<li id="btn-pause" class="hide"></li>
-<li id="play-time" class="last"><span class="played">00:00</span>/<span class="duration">00:07</span></li>
-</ul>
-</div>
-</div>
-<div id="cur-add" class="tab-content clearfix">
-<p class="langkey">Add video by URL</p>
-<p class="textarea"><span><textarea name="videourl" id="videourl" cols="80" class="textarea" placeholder="Paste YouTube video URLs to add (separate with different lines)"></textarea></span></p>
-<p class="notice hide">You have reached the maximum amount of 50 videos.</p>
-<div class="func">
-<p class="btns btn-add"><span><a href="#" id="btn-add-videourl" class="langkey">Add</a></span></p>
-</div>
-</div>
-<div id="cur-edit" class="tab-content clearfix hide">
-<div id="video-info" class="edit-time hide">
-<!-- template = #video-info-tmpl -->
-</div>
-<div class="edit-title hide disable">
-<!-- template = #titlecard-edit-tmpl -->
-</div>
-</div>
-<div id="cur-poi" class="tab-content clearfix hide">
-<!-- template = #poi-info-tmpl -->
-</div>
-<div id="cur-poi-edit" class="tab-content clearfix hide">
-<!-- template = #poi-point-edit-tmpl -->
-</div>
-<p class="auto-height clear"></p>
-</div>
-</div>
-
-<div id="storyboard">
-<div class="storyboard-info">
-<!-- template = #storyboard-info-tmpl -->
-</div>
-<div id="storyboard-wrap" class="storyboard-list">
-<div id="storyboard-list">
-<p class="notice langkey">+ Add videos here</p>
-<ul id="storyboard-listing">
-<!-- template = #storyboard-listing-tmpl-item -->
-</ul>
-</div>
-</div>
-<p class="auto-height"></p>
-<div id="storyboard-slider"><div class="slider-h"></div></div>
-<p class="auto-height"></p>
-</div>
-
-<div class="form-btn">
-<div class="wrap">
-<p class="btns btn-leave"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-leave" value="Leave" class="langkey-val" /></span></span></p>
-<p class="btns btn-save"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-save" value="Save" class="langkey-val" /></span></span></p>
-<p class="next"><a href="epcurate-publish.html" id="form-btn-next" rel="publish" class="langkey">Next to Publish &gt;</a></p>
-</div>
-</div>
-
-</div>
-</div>
-</div>
+    <!-- template = #epcurate-info-tmpl -->
+    <input type="hidden" name="id" id="id" value="" />
+    <input type="hidden" name="channelId" id="channelId" value="" />
+    <div id="content-main">
+    <div id="content-main-wrap" class="curation">
+    <div class="constrain">
+        <div id="epcurate-curation" class="clearfix">
+            <ul class="tabs">
+                <li class="first last on"><span><a href="#cur-add" class="cur-add langkey">Add Video</a></span></li>
+                <li class="edit-video hide on"><span><a href="#cur-edit" class="cur-edit langkey">Edit</a></span></li>
+                <li class="poi last hide"><span><a href="#cur-poi" class="cur-poi langkey">POI & interactive event</a></span></li>
+                <li class="edit-poi on last hide"><span><a href="#cur-edit-poi" class="cur-edit-poi"><img src="images/icon_edit.png" alt="" width="16" height="16" /></a></span></li>
+            </ul>
+            <div class="curation-content clearfix">
+                <p class="auto-height"></p>
+                <div id="video-player" data-width="400" data-height="269">
+                    <div class="video">
+                        <!-- template = #titlecard-tmpl -->
+                    </div>
+                    <div id="video-control">
+                        <p id="play-dragger"></p>
+                        <div id="progress-bar">
+                            <p id="loaded"></p>
+                            <p id="played"></p>
+                        </div>
+                        <ul>
+                            <li id="btn-play"></li>
+                            <li id="btn-pause" class="hide"></li>
+                            <li id="play-time" class="last"><span class="played">00:00</span>/<span class="duration">00:07</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="cur-add" class="tab-content clearfix">
+                    <p class="langkey">Add video by URL</p>
+                    <p class="textarea"><span><textarea name="videourl" id="videourl" cols="80" class="textarea" placeholder="Paste YouTube video URLs to add (separate with different lines)"></textarea></span></p>
+                    <p class="notice hide">You have reached the maximum amount of 50 videos.</p>
+                    <div class="func">
+                        <p class="btns btn-add"><span><a href="#" id="btn-add-videourl" class="langkey">Add</a></span></p>
+                    </div>
+                </div>
+                <div id="cur-edit" class="tab-content clearfix hide">
+                    <div id="video-info" class="edit-time hide">
+                        <!-- template = #video-info-tmpl -->
+                    </div>
+                    <div class="edit-title hide disable">
+                        <!-- template = #titlecard-edit-tmpl -->
+                    </div>
+                </div>
+                <div id="cur-poi" class="tab-content clearfix hide">
+                    <!-- template = #poi-info-tmpl -->
+                </div>
+                <div id="cur-poi-edit" class="tab-content clearfix hide">
+                    <!-- template = #poi-point-edit-tmpl -->
+                </div>
+                <p class="auto-height clear"></p>
+            </div>
+        </div>
+        <div id="storyboard">
+            <div class="storyboard-info">
+                <!-- template = #storyboard-info-tmpl -->
+            </div>
+            <div id="storyboard-wrap" class="storyboard-list">
+                <div id="storyboard-list">
+                    <p class="notice langkey">+ Add videos here</p>
+                    <ul id="storyboard-listing">
+                        <!-- template = #storyboard-listing-tmpl-item -->
+                    </ul>
+                </div>
+            </div>
+            <p class="auto-height"></p>
+            <div id="storyboard-slider"><div class="slider-h"></div></div>
+            <p class="auto-height"></p>
+        </div>
+        <div class="form-btn">
+            <div class="wrap">
+                <p class="btns btn-leave"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-leave" value="Leave" class="langkey-val" /></span></span></p>
+                <p class="btns btn-save"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-save" value="Save" class="langkey-val" /></span></span></p>
+                <p class="next"><a href="epcurate-publish.html" id="form-btn-next" rel="publish" class="langkey">Next to Publish &gt;</a></p>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
 </form>
 </div>
-<!--============================== content-wrap close ========================-->
+<!-- Content Layer End -->
+
+<!-- Footer Layer Begin -->
+<p id="footer-control" class="hide"></p>
+<div id="footer" class="hide">
+    <span>© 2013 9x9.tv. All rights reserved.</span>
+    <ul id="footer-list">
+        <li id="language-change">
+            <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
+            <p class="select-btn"></p>
+            <ul class="select-list">
+                <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+                <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!-- Footer Layer End -->
+
+<!-- Loading Layer Begin -->
+<div id="overlay-s">
+    <p class="overlay-content">
+        <span class="overlay-right">
+            <span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span>
+        </span>
+    </p>
+</div>
+<!-- Loading Layer End -->
+
+<!-- System Error Layer Begin -->
+<div id="system-error" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">You are not authorized to edit this episode.</p>
+            <div class="overlay-btn">
+                <p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- System Error Layer End -->
+
+<!-- Delete Prompt Layer Begin -->
+<div id="delete-prompt" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">Are you sure you want to delete this title?</p>
+            <div class="overlay-btn">
+                <p class="btns btn-no"><span><a href="#">No</a></span></p>
+                <p class="btns btn-del"><span><a href="#">Yes</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delete Prompt Layer End -->
+
+<!-- Unsave Prompt Layer Begin -->
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+            <div class="overlay-btn">
+                <p class="btns btn-no"><span><a href="#">No</a></span></p>
+                <p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Unsave Prompt Layer End -->
+
+<!-- Unsave Trim Time Prompt Layer Begin -->
+<div id="unsave-trimtime-prompt" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+            <div class="overlay-btn">
+                <p class="btns btn-no"><span><a href="#">No</a></span></p>
+                <p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Unsave Trim Time Prompt Layer End -->
+
+<!-- Unsave Titlecard Prompt Layer Begin -->
+<div id="unsave-titlecard-prompt" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+            <div class="overlay-btn">
+                <p class="btns btn-no"><span><a href="#">No</a></span></p>
+                <p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Unsave Titlecard Prompt Layer End -->
+
+<!-- Draft Notice Layer Begin -->
+<div id="draft-notice" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <h4>New episode has been created as a draft!</h4>
+            <p class="content"><span>Publish this episode at the next step</span> whenever you finish editing.</p>
+            <div class="overlay-btn">
+                <p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Draft Notice Layer End -->
+
+<!-- Unsave POI Prompt Layer Begin -->
+<div id="unsave-poi-prompt" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="overlay-btn-close">Close</a>
+            <p class="content">Unsaved changes will be lost, are you sure you want to cancel editing?</p>
+            <div class="overlay-btn">
+                <p class="btns overlay-btn-no"><span><a href="#">No</a></span></p>
+                <p class="btns overlay-btn-yes"><span><a href="#">Yes</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Unsave POI Prompt Layer End -->
+
+<!-- Unsave POI Mask Prompt Layer Begin -->
+<div id="unsave-poi-mask-prompt" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="overlay-btn-close">Close</a>
+            <p class="content">Unsaved changes will be lost, are you sure you want to cancel editing?</p>
+            <div class="overlay-btn">
+                <p class="btns overlay-btn-no"><span><a href="#">Back</a></span></p>
+                <p class="btns overlay-btn-yes"><span><a href="#">Yes</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Unsave POI Mask Prompt Layer End -->
+
+<!-- Delete POI Notice Layer Begin -->
+<div id="del-poi-notice" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">Are you sure you want to delete this POI with interactive event?</p>
+            <div class="overlay-btn">
+                <p class="btns btn-no"><span><a href="#">No</a></span></p>
+                <p class="btns btn-del"><span><a href="#">Yes</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delete POI Notice Layer End -->
+
+<!-- POI Event Layer Begin -->
+<div id="poi-event-overlay" class="lightbox-content">
+    <div class="wrap">
+        <!-- template = #poi-event-overlay-tmpl -->
+    </div>
+</div>
+<!-- POI Event Layer End -->
+
+<!-- Preload Image Layer Begin -->
+<div id="preload-image" class="hide">
+    <!-- template = #preload-image-tmpl-item -->
+</div>
+<!-- Preload Image Layer End -->
 
 <script id="epcurate-info-tmpl" type="text/x-jquery-tmpl">
 <span id="epcurate-info">
-<input type="hidden" name="name" id="name" value="${name}" />
-<input type="hidden" name="intro" id="intro" value="${intro}" />
+    <input type="hidden" name="name" id="name" value="${name}" />
+    <input type="hidden" name="intro" id="intro" value="${intro}" />
 </span>
 </script>
 
 <script id="titlecard-tmpl" type="text/x-jquery-tmpl">
 <div id="titlecard-outer" class="titlecard-outer" style="display: block; position: relative; overflow: hidden; z-index: 50; width: auto; height: ${$item.outerHeight}px; background-color: ${bgColor};">
-<div class="titlecard-middle" style="display: block; position: absolute; width: 100%; height: 100%;">
-<div id="titlecard-inner" class="titlecard-inner" style="display: block; position: absolute; width: 98%; height: auto; text-align: ${align}; font-size: ${$item.fontSize}pt; color: ${color}; font-style: ${style}; font-weight: ${weight};">
-{{html $item.message}}
-</div>
-</div>
-{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
-<img src="${bgImage}" style="width: 100%; height: 100%; border: none;" />
-{{/if}}
+    <div class="titlecard-middle" style="display: block; position: absolute; width: 100%; height: 100%;">
+        <div id="titlecard-inner" class="titlecard-inner" style="display: block; position: absolute; width: 98%; height: auto; text-align: ${align}; font-size: ${$item.fontSize}pt; color: ${color}; font-style: ${style}; font-weight: ${weight};">
+            {{html $item.message}}
+        </div>
+    </div>
+    {{if $item.hasBgImage}}
+        <img src="${bgImage}" style="width: 100%; height: 100%; border: none;" />
+    {{/if}}
 </div>
 </script>
 
+<!-- video-info-tmpl Begin -->
 <script id="video-info-tmpl" type="text/x-jquery-tmpl">
 <div id="video-info-wrap">
-<h3><span class="title">${name}</span></h3>
-<p class="info">
-{{if ytDuration > duration}}
-${$item.startHMS} - ${$item.endHMS} 
-(${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Original'])} <span class="duration">${formatDuration(ytDuration)}</span>)
-{{else}}
-${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Original'])} <span class="duration">${formatDuration(ytDuration)}</span>
-{{/if}}
- | ${nn._([CMS_CONF.PAGE_ID, 'video-info', 'From'])} <a href="${fileUrl}" target="_blank">YouTube.com</a> | 
-${nn._([CMS_CONF.PAGE_ID, 'video-info', 'By'])} <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> ${nn._([CMS_CONF.PAGE_ID, 'video-info', 'on'])} <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span>
-</p>
-<p class="desc ellipsis multiline">${intro}</p>
-<div class="set-time" data-origin-duration="${ytDuration}">
-<h4>${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Playback time'])}</h4>
-<div class="time-wrap">
-<div class="start-time">
-<span>${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Start from:'])}</span>
-<p class="time disable" data-time="${$item.startH}"><input type="text" name="startH" id="startH" maxlength="2" value="${$item.startH}" class="time time-h" disabled="disabled" /> :</p>
-<p class="time disable" data-time="${$item.startM}"><input type="text" name="startM" id="startM" maxlength="2" value="${$item.startM}" class="time time-m" disabled="disabled" /> :</p>
-<p class="time disable" data-time="${$item.startS}"><input type="text" name="startS" id="startS" maxlength="2" value="${$item.startS}" class="time time-s" disabled="disabled" /></p>
-</div>
-<div class="end-time">
-<span>${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'To:'])}</span>
-<p class="time disable" data-time="${$item.endH}"><input type="text" name="endH" id="endH" maxlength="2" value="${$item.endH}" class="time time-h" disabled="disabled" /> :</p>
-<p class="time disable" data-time="${$item.endM}"><input type="text" name="endM" id="endM" maxlength="2" value="${$item.endM}" class="time time-m" disabled="disabled" /> :</p>
-<p class="time disable" data-time="${$item.endS}"><input type="text" name="endS" id="endS" maxlength="2" value="${$item.endS}" class="time time-s" disabled="disabled" /></p>
-</div>
-<div class="total-time">
-<span>${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Duration:'])}</span>
-<p class="time disable"><input type="text" name="totalH" id="totalH" maxlength="2" value="${$item.totalH}" class="time time-h" disabled="disabled" /> :</p>
-<p class="time disable"><input type="text" name="totalM" id="totalM" maxlength="2" value="${$item.totalM}" class="time time-m" disabled="disabled" /> :</p>
-<p class="time disable"><input type="text" name="totalS" id="totalS" maxlength="2" value="${$item.totalS}" class="time time-s" disabled="disabled" /></p>
-</div>
-</div>
-<div class="btn-wrap">
-<p class="notice">${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Invalid time, please try again.'])}</p>
-<div class="buttons">
-<p class="btns btn-edit"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Edit'])}</a></span></p>
-<p class="btns btn-cancel hide"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Cancel'])}</a></span></p>
-<p class="btns btn-done hide"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'trim-time', 'Done'])}</a></span></p>
-</div>
-</div>
-</div>
-{{if isEmbedLimited || isZoneLimited || isSyndicateLimited}}
-<ul class="play-notice">
-{{if isEmbedLimited}}
-<li class="outside">${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Not playable outside Youtube'])}</li>
-{{else}}
-{{if isZoneLimited}}
-<li class="region">${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Not playable in some regions'])}</li>
-{{/if}}
-{{if isSyndicateLimited}}
-<li class="device">${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Not playable on mobile device'])}</li>
-{{/if}}
-{{/if}}
-</ul>
-{{/if}}
+    <h3><span class="title">${name}</span></h3>
+    <p class="info">
+        {{if ytDuration > duration}}
+            ${$item.startHMS} - ${$item.endHMS} 
+            (${nn._([cms.global.PAGE_ID, 'video-info', 'Original'])} <span class="duration">${cms.common.formatDuration(ytDuration)}</span>)
+        {{else}}
+            ${nn._([cms.global.PAGE_ID, 'video-info', 'Original'])} <span class="duration">${cms.common.formatDuration(ytDuration)}</span>
+        {{/if}}
+         | ${nn._([cms.global.PAGE_ID, 'video-info', 'From'])} <a href="${fileUrl}" target="_blank">YouTube.com</a> | 
+        ${nn._([cms.global.PAGE_ID, 'video-info', 'By'])} <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> ${nn._([cms.global.PAGE_ID, 'video-info', 'on'])} <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span>
+    </p>
+    <p class="desc ellipsis multiline">${intro}</p>
+    <div class="set-time" data-origin-duration="${ytDuration}">
+        <h4>${nn._([cms.global.PAGE_ID, 'trim-time', 'Playback time'])}</h4>
+        <div class="time-wrap">
+            <div class="start-time">
+                <span>${nn._([cms.global.PAGE_ID, 'trim-time', 'Start from:'])}</span>
+                <p class="time disable" data-time="${$item.startH}"><input type="text" name="startH" id="startH" maxlength="2" value="${$item.startH}" class="time time-h" disabled="disabled" /> :</p>
+                <p class="time disable" data-time="${$item.startM}"><input type="text" name="startM" id="startM" maxlength="2" value="${$item.startM}" class="time time-m" disabled="disabled" /> :</p>
+                <p class="time disable" data-time="${$item.startS}"><input type="text" name="startS" id="startS" maxlength="2" value="${$item.startS}" class="time time-s" disabled="disabled" /></p>
+            </div>
+            <div class="end-time">
+                <span>${nn._([cms.global.PAGE_ID, 'trim-time', 'To:'])}</span>
+                <p class="time disable" data-time="${$item.endH}"><input type="text" name="endH" id="endH" maxlength="2" value="${$item.endH}" class="time time-h" disabled="disabled" /> :</p>
+                <p class="time disable" data-time="${$item.endM}"><input type="text" name="endM" id="endM" maxlength="2" value="${$item.endM}" class="time time-m" disabled="disabled" /> :</p>
+                <p class="time disable" data-time="${$item.endS}"><input type="text" name="endS" id="endS" maxlength="2" value="${$item.endS}" class="time time-s" disabled="disabled" /></p>
+            </div>
+            <div class="total-time">
+                <span>${nn._([cms.global.PAGE_ID, 'trim-time', 'Duration:'])}</span>
+                <p class="time disable"><input type="text" name="totalH" id="totalH" maxlength="2" value="${$item.totalH}" class="time time-h" disabled="disabled" /> :</p>
+                <p class="time disable"><input type="text" name="totalM" id="totalM" maxlength="2" value="${$item.totalM}" class="time time-m" disabled="disabled" /> :</p>
+                <p class="time disable"><input type="text" name="totalS" id="totalS" maxlength="2" value="${$item.totalS}" class="time time-s" disabled="disabled" /></p>
+            </div>
+        </div>
+        <div class="btn-wrap">
+            <p class="notice">${nn._([cms.global.PAGE_ID, 'trim-time', 'Invalid time, please try again.'])}</p>
+            <div class="buttons">
+                <p class="btns btn-edit"><span><a href="#">${nn._([cms.global.PAGE_ID, 'trim-time', 'Edit'])}</a></span></p>
+                <p class="btns btn-cancel hide"><span><a href="#">${nn._([cms.global.PAGE_ID, 'trim-time', 'Cancel'])}</a></span></p>
+                <p class="btns btn-done hide"><span><a href="#">${nn._([cms.global.PAGE_ID, 'trim-time', 'Done'])}</a></span></p>
+            </div>
+        </div>
+    </div>
+    {{if isEmbedLimited || isZoneLimited || isSyndicateLimited}}
+        <ul class="play-notice">
+            {{if isEmbedLimited}}
+                <li class="outside">${nn._([cms.global.PAGE_ID, 'video-info', 'Not playable outside Youtube'])}</li>
+            {{else}}
+                {{if isZoneLimited}}
+                    <li class="region">${nn._([cms.global.PAGE_ID, 'video-info', 'Not playable in some regions'])}</li>
+                {{/if}}
+                {{if isSyndicateLimited}}
+                    <li class="device">${nn._([cms.global.PAGE_ID, 'video-info', 'Not playable on mobile device'])}</li>
+                {{/if}}
+            {{/if}}
+        </ul>
+    {{/if}}
 </div>
 </script>
+<!-- video-info-tmpl End -->
 
+<!-- poi-info-tmpl Begin -->
 <script id="poi-info-tmpl" type="text/x-jquery-tmpl">
 <div id="poi-info">
-<h3><span class="title">${name}</span></h3>
-<p class="info">
-{{if ytDuration > duration}}
-${$item.startHMS} - ${$item.endHMS} 
-(${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Original'])} <span class="duration">${formatDuration(ytDuration)}</span>)
-{{else}}
-${nn._([CMS_CONF.PAGE_ID, 'video-info', 'Original'])} <span class="duration">${formatDuration(ytDuration)}</span>
-{{/if}}
- | ${nn._([CMS_CONF.PAGE_ID, 'video-info', 'From'])} <a href="${fileUrl}" target="_blank">YouTube.com</a> | 
-${nn._([CMS_CONF.PAGE_ID, 'video-info', 'By'])} <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> ${nn._([CMS_CONF.PAGE_ID, 'video-info', 'on'])} <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span>
-</p>
-<div class="add">
-<p class="btns btn-add-poi"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', '+ Create POI & interactive event'])}</a></span></p>
-<a class="add-notice" href="javascript:void(0);"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add an interactive event and call to action message at a point of interaction.'])}</span></span></span></a>
-</div>
-{{if poiList.length > 0}}
-<div class="poi-list">
-<h3>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI & interactive event list'])}</h3>
-<div class="poi-list-wrap">
-<a href="#" class="prev">prev</a>
-<a href="#" class="next">next</a>
-<ul id="poi-list-page" data-item="${$item.itemSize}">
-<!-- template = #poi-list-page-tmpl -->
-</ul>
-</div>
-</div>
-{{/if}}
+    <h3><span class="title">${name}</span></h3>
+    <p class="info">
+        {{if ytDuration > duration}}
+            ${$item.startHMS} - ${$item.endHMS} 
+            (${nn._([cms.global.PAGE_ID, 'video-info', 'Original'])} <span class="duration">${cms.common.formatDuration(ytDuration)}</span>)
+        {{else}}
+            ${nn._([cms.global.PAGE_ID, 'video-info', 'Original'])} <span class="duration">${cms.common.formatDuration(ytDuration)}</span>
+        {{/if}}
+         | ${nn._([cms.global.PAGE_ID, 'video-info', 'From'])} <a href="${fileUrl}" target="_blank">YouTube.com</a> | 
+        ${nn._([cms.global.PAGE_ID, 'video-info', 'By'])} <a href="http://www.youtube.com/user/${uploader}" class="uploader" target="_blank">${uploader}</a> ${nn._([cms.global.PAGE_ID, 'video-info', 'on'])} <span class="uploaded">${$item.uploadDateConverter(uploadDate)}</span>
+    </p>
+    <div class="add">
+        <p class="btns btn-add-poi"><span><a href="#">${nn._([cms.global.PAGE_ID, 'poi-event', '+ Create POI & interactive event'])}</a></span></p>
+        <a class="add-notice" href="javascript:void(0);"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'poi-event', 'Add an interactive event and call to action message at a point of interaction.'])}</span></span></span></a>
+    </div>
+    {{if poiList.length > 0}}
+        <div class="poi-list">
+            <h3>${nn._([cms.global.PAGE_ID, 'poi-event', 'POI & interactive event list'])}</h3>
+            <div class="poi-list-wrap">
+                <a href="#" class="prev">prev</a>
+                <a href="#" class="next">next</a>
+                <ul id="poi-list-page" data-item="${$item.itemSize}">
+                    <!-- template = #poi-list-page-tmpl -->
+                </ul>
+            </div>
+        </div>
+    {{/if}}
 </div>
 </script>
+<!-- poi-info-tmpl End -->
 
 <script id="poi-list-page-tmpl" type="text/x-jquery-tmpl">
 <li>
 <ol>
 {{each poiItem}}
-<li>
-<p>${name}</p>
-<p class="func">
-<a href="#!pid=${targetId}&id=${id}" data-program-id="${targetId}" data-poi-point-id="${id}" class="edit">Edit</a>
-<a href="#!pid=${targetId}&id=${id}" data-program-id="${targetId}" data-poi-point-id="${id}" class="btn-del">Delete</a>
-</p>
-</li>
+    <li>
+        <p>${name}</p>
+        <p class="func">
+            <a href="#!pid=${targetId}&id=${id}" data-program-id="${targetId}" data-poi-point-id="${id}" class="edit">Edit</a>
+            <a href="#!pid=${targetId}&id=${id}" data-program-id="${targetId}" data-poi-point-id="${id}" class="btn-del">Delete</a>
+        </p>
+    </li>
 {{/each}}
 </ol>
 </li>
@@ -297,799 +474,643 @@ ${nn._([CMS_CONF.PAGE_ID, 'video-info', 'By'])} <a href="http://www.youtube.com/
 
 <script id="poi-point-edit-tmpl" type="text/x-jquery-tmpl">
 <div id="poi-point-edit-wrap" class="content" data-program-id="${targetId}" data-poi-point-id="${id}" data-starttime="${startTime}">
-<h3>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI & interactive event'])}</h3>
-<h3 class="edit">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Edit POI & interactive event'])}</h3>
-<p class="title">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</p>
-<p class="title edit">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Edit POI'])}</p>
-<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
-<div id="poi-edit" class="edit-form">
-<!-- template = #poi-point-tmpl -->
-</div>
+    <h3>${nn._([cms.global.PAGE_ID, 'poi-event', 'Create POI & interactive event'])}</h3>
+    <h3 class="edit">${nn._([cms.global.PAGE_ID, 'poi-event', 'Edit POI & interactive event'])}</h3>
+    <p class="title">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create POI'])}</p>
+    <p class="title edit">${nn._([cms.global.PAGE_ID, 'poi-event', 'Edit POI'])}</p>
+    <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Required field'])}</p>
+    <div id="poi-edit" class="edit-form">
+        <!-- template = #poi-point-tmpl -->
+    </div>
 </div>
 </script>
 
+<!-- poi-point-tmpl Begin -->
 <script id="poi-point-tmpl" type="text/x-jquery-tmpl">
 <div id="poi-point-wrap">
-<div class="fminput clearfix">
-<label for="poiName"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Name'])}</label>
-<div class="fmfield">
-<p class="text"><span><input type="text" name="poiName" id="poiName" maxlength="500" value="${name}" class="text" /></span></p>
-</div>
-</div>
-<div class="fminput clearfix">
-<label for="poiStartH"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Duration'])}</label>
-<div class="fmfield duration">
-<div class="start-time">
-<span>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Start from:'])}</span>
-<p class="time"><input type="text" name="poiStartH" id="poiStartH" maxlength="2" value="${$item.poiStartH}" class="time time-h" /> :</p>
-<p class="time"><input type="text" name="poiStartM" id="poiStartM" maxlength="2" value="${$item.poiStartM}" class="time time-m" /> :</p>
-<p class="time"><input type="text" name="poiStartS" id="poiStartS" maxlength="2" value="${$item.poiStartS}" class="time time-s" /></p>
-<input type="hidden" name="poiStartTime" id="poiStartTime" value="" />
-</div>
-<div class="end-time">
-<span>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'To:'])}</span>
-<p class="time"><input type="text" name="poiEndH" id="poiEndH" maxlength="2" value="${$item.poiEndH}" class="time time-h" /> :</p>
-<p class="time"><input type="text" name="poiEndM" id="poiEndM" maxlength="2" value="${$item.poiEndM}" class="time time-m" /> :</p>
-<p class="time"><input type="text" name="poiEndS" id="poiEndS" maxlength="2" value="${$item.poiEndS}" class="time time-s" /></p>
-<input type="hidden" name="poiEndTime" id="poiEndTime" value="" />
-</div>
-<p class="btns btn-reset"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Reset'])}</a></span></p>
-<p class="notice invalid-notice hide">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Invalid time, please try again.'])}</p>
-<p class="notice playback-notice hide">
-${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Start time or end time is not in the video playback time:'])}<br />
-<span id="video-name">${$item.videoName}</span><span class="time">(${$item.startH}:${$item.startM}:${$item.startS} to ${$item.endH}:${$item.endM}:${$item.endS})</span>
-</p>
-<p class="notice overlap-notice hide">
-${nn._([CMS_CONF.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration:"])}<br />
-<span id="poi-name"></span><span class="time"></span>
-</p>
-</div>
-</div>
-<div class="fminput clearfix">
-<label for="poiTag">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Tags'])}</label>
-<div class="fmfield">
-<p class="text"><span><input type="text" name="poiTag" id="poiTag" maxlength="500" value="${tag}" class="text" /></span></p>
-<p class="tag-notice">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Separate with commas'])}</p>
-</div>
-</div>
-<div class="btn-container">
-<p class="notice hide">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</p>
-<p class="btns btn-cancel"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></p>
-<p class="btns btn-next"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Next'])}</a></span></p>
-</div>
+    <div class="fminput clearfix">
+        <label for="poiName"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Name'])}</label>
+        <div class="fmfield">
+            <p class="text"><span><input type="text" name="poiName" id="poiName" maxlength="500" value="${name}" class="text" /></span></p>
+        </div>
+    </div>
+    <div class="fminput clearfix">
+        <label for="poiStartH"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Duration'])}</label>
+        <div class="fmfield duration">
+            <div class="start-time">
+                <span>${nn._([cms.global.PAGE_ID, 'poi-event', 'Start from:'])}</span>
+                <p class="time"><input type="text" name="poiStartH" id="poiStartH" maxlength="2" value="${$item.poiStartH}" class="time time-h" /> :</p>
+                <p class="time"><input type="text" name="poiStartM" id="poiStartM" maxlength="2" value="${$item.poiStartM}" class="time time-m" /> :</p>
+                <p class="time"><input type="text" name="poiStartS" id="poiStartS" maxlength="2" value="${$item.poiStartS}" class="time time-s" /></p>
+                <input type="hidden" name="poiStartTime" id="poiStartTime" value="" />
+            </div>
+            <div class="end-time">
+                <span>${nn._([cms.global.PAGE_ID, 'poi-event', 'To:'])}</span>
+                <p class="time"><input type="text" name="poiEndH" id="poiEndH" maxlength="2" value="${$item.poiEndH}" class="time time-h" /> :</p>
+                <p class="time"><input type="text" name="poiEndM" id="poiEndM" maxlength="2" value="${$item.poiEndM}" class="time time-m" /> :</p>
+                <p class="time"><input type="text" name="poiEndS" id="poiEndS" maxlength="2" value="${$item.poiEndS}" class="time time-s" /></p>
+                <input type="hidden" name="poiEndTime" id="poiEndTime" value="" />
+            </div>
+            <p class="btns btn-reset"><span><a href="#">${nn._([cms.global.PAGE_ID, 'poi-event', 'Reset'])}</a></span></p>
+            <p class="notice invalid-notice hide">${nn._([cms.global.PAGE_ID, 'poi-event', 'Invalid time, please try again.'])}</p>
+            <p class="notice playback-notice hide">
+                ${nn._([cms.global.PAGE_ID, 'poi-event', 'Start time or end time is not in the video playback time:'])}<br />
+                <span id="video-name">${$item.videoName}</span>
+                <span class="time">(${$item.startH}:${$item.startM}:${$item.startS} to ${$item.endH}:${$item.endM}:${$item.endS})</span>
+            </p>
+            <p class="notice overlap-notice hide">
+                ${nn._([cms.global.PAGE_ID, 'poi-event', "Duration overlaps another POI's duration:"])}<br />
+                <span id="poi-name"></span>
+                <span class="time"></span>
+            </p>
+        </div>
+    </div>
+    <div class="fminput clearfix">
+        <label for="poiTag">${nn._([cms.global.PAGE_ID, 'poi-event', 'Tags'])}</label>
+        <div class="fmfield">
+            <p class="text"><span><input type="text" name="poiTag" id="poiTag" maxlength="500" value="${tag}" class="text" /></span></p>
+            <p class="tag-notice">${nn._([cms.global.PAGE_ID, 'poi-event', 'Separate with commas'])}</p>
+        </div>
+    </div>
+    <div class="btn-container">
+        <p class="notice hide">${nn._([cms.global.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</p>
+        <p class="btns btn-cancel"><span><a href="#">${nn._([cms.global.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></p>
+        <p class="btns btn-next"><span><a href="#">${nn._([cms.global.PAGE_ID, 'poi-event', 'Next'])}</a></span></p>
+    </div>
 </div>
 </script>
+<!-- poi-point-tmpl End -->
 
+<!-- poi-event-overlay-tmpl Begin -->
 <script id="poi-event-overlay-tmpl" type="text/x-jquery-tmpl">
-<div id="poi-event-overlay-wrap" class="content" data-program-id="${targetId}" data-poi-point-id="${id}" data-poi-event-id="${eventId}" data-poi-event-type="${eventType}" data-poi-event-type-key="${CMS_CONF.POI_TYPE_MAP[eventType]}">
-<a href="#" class="overlay-btn-close">Close</a>
-<h3 class="create">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI & interactive event'])}</h3>
-<h3 class="edit">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Edit POI & interactive event'])}</h3>
-<div id="event-select" class="event">
-<p class="crumb"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</p>
-<p class="action">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Choose a type'])}</p>
-<ul class="list">
-<li class="event-hyper">
-<div class="block">
-<div class="img hyper">
-<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Hyper Link'])}</h4>
-</div>
-<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'User can go to watch another 9x9.tv channel or episode.'])}</p>
-</div>
-</li>
-<li class="event-scheduled">
-<div class="block">
-<div class="img schedule">
-<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Scheduled Notification'])}</h4>
-</div>
-<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Send a scheduled notification to user to get more information.'])}</p>
-</div>
-</li>
-<li class="event-instant">
-<div class="block">
-<div class="img instant">
-<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Instant Notification'])}</h4>
-</div>
-<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Send an instant notification to user to get more information.'])}</p>
-</div>
-</li>
-</ul>
-<div class="func">
-<ul>
-<li class="btns"><span><a href="#" class="btn-cancel">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
-</ul>
-</div>
-</div>
-
-<div id="event-hyper" class="event hide">
-<form name="eventHyperForm" id="eventHyperForm" method="get" action="">
-<input type="hidden" name="notifyMsg" value="" />
-<input type="hidden" name="notifyScheduler" value="" />
-<p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Hyper Link'])}</p>
-<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Hyper Link'])}</p>
-<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
-<div class="video-wrap">
-<div id="event-hyper-video" class="video"></div>
-<div class="poi-display"></div>
-<div class="mask">
-<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
-<p class="no-video hide">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'There is no valid video to preview.'])}</p>
-</div>
-</div>
-<div class="event-input">
-<div class="fminput">
-<label for="hyper_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Display text'])}:</label>
-<p class="text"><span><input type="text" name="displayText" id="hyper_display_text" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
-</div>
-<div class="fminput even">
-<label for="hyper_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Button text'])}:</label>
-<p class="text"><span><input type="text" name="btnText" id="hyper_button_text" maxlength="20" value="${button}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
-</div>
-<div class="fminput">
-<label for="hyper_link"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Hyper link'])}:</label>
-<p class="text"><span><input type="text" name="channelUrl" id="hyper_link" maxlength="100" value="${link}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input 9x9 channel or episode URL'])}" class="text" /></span></p>
-<span class="notice">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Invalid 9x9 URL, please try again.'])}</span>
-</div>
-</div>
-<div class="func">
-<ul>
-<li class="notice">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
-<li class="btns"><span><a href="#" class="btn-cancel">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
-<li class="btns"><span><a href="#" class="btn-save">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Save'])}</a></span></li>
-</ul>
-</div>
-</form>
-</div>
-
-<div id="event-scheduled" class="event hide">
-<form name="eventScheduledForm" id="eventScheduledForm" method="get" action="">
-<input type="hidden" name="channelUrl" value="${link}" />
-<div id="schedule-notify" class="schedule">
-<p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Scheduled Notification'])} &gt; <span>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</span></p>
-<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Scheduled Notification'])} &gt; <a href="#" class="crumb-next">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</a></p>
-<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
-<div class="video-wrap">
-<div id="event-scheduled-video" class="video"></div>
-<div class="poi-display"></div>
-<div class="mask">
-<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
-<p class="no-video hide">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'There is no valid video to preview.'])}</p>
-</div>
-</div>
-<div class="event-input">
-<div class="fminput">
-<label for="schedule_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Display text'])}:</label>
-<p class="text"><span><input type="text" name="displayText" id="schedule_display_text" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
-</div>
-<div class="fminput even">
-<label for="schedule_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Button text'])}:</label>
-<p class="text"><span><input type="text" name="btnText" id="schedule_button_text" maxlength="20" value="${button}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
-</div>
-</div>
-<div class="func">
-<ul>
-<li class="notice">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
-<li class="btns"><span><a href="#" class="btn-cancel">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
-<li class="btns"><span><a href="#" class="btn-next">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Next'])}</a></span></li>
-</ul>
-</div>
-</div>
-
-<div id="schedule-mobile" class="schedule hide">
-<p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Scheduled Notification'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</p>
-<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Scheduled Notification'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</p>
-<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
-<div class="mobile-edit">
-<div class="mobile">
-<ul>
-<li class="ios on"><p><a href="#" class="ios">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS'])}</a></p></li>
-<li class="android"><p><a href="#" class="android">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Android'])}</a></p></li>
-</ul>
-<div id="schedule-ios" class="mobile-block mobile-active">
-<div class="wrap">
-<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Preview'])}</h4>
-<h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Notification'])}</h5>
-{{if '' != notifyMsg}}
-<p class="msg ellipsis multiline">${notifyMsg}</p>
-{{else}}
-<p class="msg ellipsis multiline">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
-{{/if}}
-<p class="button"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS-button', 'Cancel'])}</a><a href="#" class="last">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS-button', 'OK'])}</a></p>
-</div>
-</div>
-<div id="schedule-android" class="mobile-block hide">
-<div class="wrap">
-<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Preview'])}</h4>
-<h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Notification'])}</h5>
-{{if '' != notifyMsg}}
-<p class="msg">${notifyMsg}</p>
-{{else}}
-<p class="msg">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
-{{/if}}
-</div>
-</div>
-</div>
-
-<div class="notification">
-<div class="msg">
-<h4><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile notification message'])}</h4>
-<p class="textarea"><span><span><textarea name="notifyMsg" id="schedule_msg" cols="80" class="textarea" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}">${notifyMsg}</textarea></span></span></p>
-<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Recommend: less 34 bytes'])}</p>
-</div>
-
-<div class="time">
-<h4>
-<acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile notification time'])}
-<a href="#" class="mobile-tip"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add a mobile notification time to remind your viewers.'])}</span></span></span></a>
-</h4>
-<div class="datepicker"></div>
-<input type="hidden" name="datepicker" id="datepicker_selected" value="" />
-<input type="hidden" name="schedule" id="schedule_selected" value="" />
-<input type="hidden" name="notifyScheduler" id="timestamp_selected" value="${notifyScheduler}" />
-<div class="time-wrap">
-<h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Hour'])}:</h5>
-<div class="select enable">
-<p class="select-btn"></p>
-<p class="select-txt"><a href="#" id="time_hour">00</a></p>
-<div class="select-list hour">
-<div class="hour-wrap">
-<p>00</p>
-<p>01</p>
-<p>02</p>
-<p>03</p>
-<p>04</p>
-<p>05</p>
-<p>06</p>
-<p>07</p>
-<p>08</p>
-<p>09</p>
-<p>10</p>
-<p>11</p>
-<p>12</p>
-<p>13</p>
-<p>14</p>
-<p>15</p>
-<p>16</p>
-<p>17</p>
-<p>18</p>
-<p>19</p>
-<p>20</p>
-<p>21</p>
-<p>22</p>
-<p>23</p>
-</div>
-</div>
-</div>
-
-<h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Minute'])}:</h5>
-<div class="select enable">
-<p class="select-btn"></p>
-<p class="select-txt"><a href="#" id="time_min">00</a></p>
-<div class="select-list">
-<div class="min-wrap">
-<p>00</p>
-<p>30</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="func">
-<ul>
-<li class="notice">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
-<li class="btns"><span><a href="#" class="btn-cancel">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
-<li class="btns"><span><a href="#" class="btn-save">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Save'])}</a></span></li>
-</ul>
-</div>
-</div>
-</form>
-</div>
-
-<div id="event-instant" class="event hide">
-<form name="eventInstantForm" id="eventInstantForm" method="get" action="">
-<input type="hidden" name="channelUrl" value="${link}" />
-<input type="hidden" name="notifyScheduler" value="" />
-<div id="instant-notify" class="instant">
-<p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Instant Notification'])} &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
-<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Instant Notification'])} &gt; <a href="#" class="crumb-next">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</a></p>
-<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
-<div class="video-wrap">
-<div id="event-instant-video" class="video"></div>
-<div class="poi-display"></div>
-<div class="mask">
-<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
-<p class="no-video hide">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'There is no valid video to preview.'])}</p>
-</div>
-</div>
-<div class="event-input">
-<div class="fminput">
-<label for="instant_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Display text'])}:</label>
-<p class="text"><span><input type="text" name="displayText" id="instant_display_text" value="${message}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
-</div>
-<div class="fminput even">
-<label for="instant_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Button text'])}:</label>
-<p class="text"><span><input type="text" name="btnText" id="instant_button_text" maxlength="20" value="${button}" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
-</div>
-</div>
-<div class="func">
-<ul>
-<li class="notice">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
-<li class="btns"><span><a href="#" class="btn-cancel">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
-<li class="btns"><span><a href="#" class="btn-next">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Next'])}</a></span></li>
-</ul>
-</div>
-</div>
-
-<div id="instant-mobile" class="instant hide">
-<p class="crumb create"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Instant Notification'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
-<p class="crumb edit"><a href="#" class="unblock">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Interactive event : Instant Notification'])}</a> &gt; ${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
-<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Required field'])}</p>
-<div class="mobile-edit clearfix">
-<div class="mobile">
-<ul>
-<li class="ios on"><p><a href="#" class="ios">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS'])}</a></p></li>
-<li class="android"><p><a href="#" class="android">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Android'])}</a></p></li>
-</ul>
-<div id="instant-ios" class="mobile-block mobile-active">
-<div class="wrap">
-<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Preview'])}</h4>
-<h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Notification'])}</h5>
-{{if '' != notifyMsg}}
-<p class="msg ellipsis multiline">${notifyMsg}</p>
-{{else}}
-<p class="msg ellipsis multiline">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
-{{/if}}
-<p class="button"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS-button', 'Cancel'])}</a><a href="#" class="last">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'iOS-button', 'OK'])}</a></p>
-</div>
-</div>
-<div id="instant-android" class="mobile-block hide">
-<div class="wrap">
-<h4>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Preview'])}</h4>
-<h5>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Notification'])}</h5>
-{{if '' != notifyMsg}}
-<p class="msg">${notifyMsg}</p>
-{{else}}
-<p class="msg">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
-{{/if}}
-</div>
-</div>
-</div>
-
-<div class="notification">
-<div class="msg">
-<h4><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Mobile notification message'])}</h4>
-<p class="textarea"><span><span><textarea name="notifyMsg" id="instant_msg" cols="80" class="textarea" placeholder="${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}">${notifyMsg}</textarea></span></span></p>
-<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Recommend: less 34 bytes'])}</p>
-<p>${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'The mobile notification will instant send, when user pressed OK or Enter.'])}</p>
-</div>
-</div>
-</div>
-<div class="func">
-<ul>
-<li class="notice">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
-<li class="btns"><span><a href="#" class="btn-cancel">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
-<li class="btns"><span><a href="#" class="btn-save">${nn._([CMS_CONF.PAGE_ID, 'poi-event', 'Save'])}</a></span></li>
-</ul>
-</div>
-</div>
-</form>
-</div>
+<div id="poi-event-overlay-wrap" class="content" data-program-id="${targetId}" data-poi-point-id="${id}" data-poi-event-id="${eventId}" data-poi-event-type="${eventType}" data-poi-event-type-key="${cms.config.POI_TYPE_MAP[eventType]}">
+    <a href="#" class="overlay-btn-close">Close</a>
+    <h3 class="create">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create POI & interactive event'])}</h3>
+    <h3 class="edit">${nn._([cms.global.PAGE_ID, 'poi-event', 'Edit POI & interactive event'])}</h3>
+    <div id="event-select" class="event">
+        <p class="crumb"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Add interactive event'])}</p>
+        <p class="action">${nn._([cms.global.PAGE_ID, 'poi-event', 'Choose a type'])}</p>
+        <ul class="list">
+            <li class="event-hyper">
+                <div class="block">
+                    <div class="img hyper">
+                        <h4>${nn._([cms.global.PAGE_ID, 'poi-event', 'Hyper Link'])}</h4>
+                    </div>
+                    <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'User can go to watch another 9x9.tv channel or episode.'])}</p>
+                </div>
+            </li>
+            <li class="event-scheduled">
+                <div class="block">
+                    <div class="img schedule">
+                        <h4>${nn._([cms.global.PAGE_ID, 'poi-event', 'Scheduled Notification'])}</h4>
+                    </div>
+                    <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'Send a scheduled notification to user to get more information.'])}</p>
+                </div>
+            </li>
+            <li class="event-instant">
+                <div class="block">
+                    <div class="img instant">
+                        <h4>${nn._([cms.global.PAGE_ID, 'poi-event', 'Instant Notification'])}</h4>
+                    </div>
+                    <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'Send an instant notification to user to get more information.'])}</p>
+                </div>
+            </li>
+        </ul>
+        <div class="func">
+            <ul>
+                <li class="btns"><span><a href="#" class="btn-cancel">${nn._([cms.global.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
+            </ul>
+        </div>
+    </div>
+    <div id="event-hyper" class="event hide">
+        <form name="eventHyperForm" id="eventHyperForm" method="get" action="">
+            <input type="hidden" name="notifyMsg" value="" />
+            <input type="hidden" name="notifyScheduler" value="" />
+            <p class="crumb create"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([cms.global.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Hyper Link'])}</p>
+            <p class="crumb edit"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Interactive event : Hyper Link'])}</p>
+            <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Required field'])}</p>
+            <div class="video-wrap">
+                <div id="event-hyper-video" class="video"></div>
+                <div class="poi-display"></div>
+                <div class="mask">
+                    <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
+                    <p class="no-video hide">${nn._([cms.global.PAGE_ID, 'poi-event', 'There is no valid video to preview.'])}</p>
+                </div>
+            </div>
+            <div class="event-input">
+                <div class="fminput">
+                    <label for="hyper_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Display text'])}:</label>
+                    <p class="text"><span><input type="text" name="displayText" id="hyper_display_text" value="${message}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
+                </div>
+                <div class="fminput even">
+                    <label for="hyper_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Button text'])}:</label>
+                    <p class="text"><span><input type="text" name="btnText" id="hyper_button_text" maxlength="20" value="${button}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
+                </div>
+                <div class="fminput">
+                    <label for="hyper_link"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Hyper link'])}:</label>
+                    <p class="text"><span><input type="text" name="channelUrl" id="hyper_link" maxlength="100" value="${link}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input 9x9 channel or episode URL'])}" class="text" /></span></p>
+                    <span class="notice">${nn._([cms.global.PAGE_ID, 'poi-event', 'Invalid 9x9 URL, please try again.'])}</span>
+                </div>
+            </div>
+            <div class="func">
+                <ul>
+                    <li class="notice">${nn._([cms.global.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
+                    <li class="btns"><span><a href="#" class="btn-cancel">${nn._([cms.global.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
+                    <li class="btns"><span><a href="#" class="btn-save">${nn._([cms.global.PAGE_ID, 'poi-event', 'Save'])}</a></span></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <div id="event-scheduled" class="event hide">
+        <form name="eventScheduledForm" id="eventScheduledForm" method="get" action="">
+            <input type="hidden" name="channelUrl" value="${link}" />
+            <div id="schedule-notify" class="schedule">
+                <p class="crumb create"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([cms.global.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Scheduled Notification'])} &gt; <span>${nn._([cms.global.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</span></p>
+                <p class="crumb edit"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Interactive event : Scheduled Notification'])} &gt; <a href="#" class="crumb-next">${nn._([cms.global.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</a></p>
+                <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Required field'])}</p>
+                <div class="video-wrap">
+                    <div id="event-scheduled-video" class="video"></div>
+                    <div class="poi-display"></div>
+                    <div class="mask">
+                        <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
+                        <p class="no-video hide">${nn._([cms.global.PAGE_ID, 'poi-event', 'There is no valid video to preview.'])}</p>
+                    </div>
+                </div>
+                <div class="event-input">
+                    <div class="fminput">
+                        <label for="schedule_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Display text'])}:</label>
+                        <p class="text"><span><input type="text" name="displayText" id="schedule_display_text" value="${message}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
+                    </div>
+                    <div class="fminput even">
+                        <label for="schedule_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Button text'])}:</label>
+                        <p class="text"><span><input type="text" name="btnText" id="schedule_button_text" maxlength="20" value="${button}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
+                    </div>
+                </div>
+                <div class="func">
+                    <ul>
+                        <li class="notice">${nn._([cms.global.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
+                        <li class="btns"><span><a href="#" class="btn-cancel">${nn._([cms.global.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
+                        <li class="btns"><span><a href="#" class="btn-next">${nn._([cms.global.PAGE_ID, 'poi-event', 'Next'])}</a></span></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="schedule-mobile" class="schedule hide">
+                <p class="crumb create"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([cms.global.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([cms.global.PAGE_ID, 'poi-event', 'Scheduled Notification'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</p>
+                <p class="crumb edit"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([cms.global.PAGE_ID, 'poi-event', 'Interactive event : Scheduled Notification'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Mobile Notification and Time'])}</p>
+                <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Required field'])}</p>
+                <div class="mobile-edit">
+                    <div class="mobile">
+                        <ul>
+                            <li class="ios on"><p><a href="#" class="ios">${nn._([cms.global.PAGE_ID, 'poi-event', 'iOS'])}</a></p></li>
+                            <li class="android"><p><a href="#" class="android">${nn._([cms.global.PAGE_ID, 'poi-event', 'Android'])}</a></p></li>
+                        </ul>
+                        <div id="schedule-ios" class="mobile-block mobile-active">
+                            <div class="wrap">
+                                <h4>${nn._([cms.global.PAGE_ID, 'poi-event', 'Preview'])}</h4>
+                                <h5>${nn._([cms.global.PAGE_ID, 'poi-event', 'Notification'])}</h5>
+                                {{if '' != notifyMsg}}
+                                    <p class="msg ellipsis multiline">${notifyMsg}</p>
+                                {{else}}
+                                    <p class="msg ellipsis multiline">${nn._([cms.global.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
+                                {{/if}}
+                                <p class="button"><a href="#">${nn._([cms.global.PAGE_ID, 'poi-event', 'iOS-button', 'Cancel'])}</a><a href="#" class="last">${nn._([cms.global.PAGE_ID, 'poi-event', 'iOS-button', 'OK'])}</a></p>
+                            </div>
+                        </div>
+                        <div id="schedule-android" class="mobile-block hide">
+                            <div class="wrap">
+                                <h4>${nn._([cms.global.PAGE_ID, 'poi-event', 'Preview'])}</h4>
+                                <h5>${nn._([cms.global.PAGE_ID, 'poi-event', 'Notification'])}</h5>
+                                {{if '' != notifyMsg}}
+                                    <p class="msg">${notifyMsg}</p>
+                                {{else}}
+                                    <p class="msg">${nn._([cms.global.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification">
+                        <div class="msg">
+                            <h4><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Mobile notification message'])}</h4>
+                            <p class="textarea"><span><span><textarea name="notifyMsg" id="schedule_msg" cols="80" class="textarea" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}">${notifyMsg}</textarea></span></span></p>
+                            <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'Recommend: less 34 bytes'])}</p>
+                        </div>
+                        <div class="time">
+                            <h4>
+                                <acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Mobile notification time'])}
+                                <a href="#" class="mobile-tip"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'poi-event', 'Add a mobile notification time to remind your viewers.'])}</span></span></span></a>
+                            </h4>
+                            <div class="datepicker"></div>
+                            <input type="hidden" name="datepicker" id="datepicker_selected" value="" />
+                            <input type="hidden" name="schedule" id="schedule_selected" value="" />
+                            <input type="hidden" name="notifyScheduler" id="timestamp_selected" value="${notifyScheduler}" />
+                            <div class="time-wrap">
+                                <h5>${nn._([cms.global.PAGE_ID, 'poi-event', 'Hour'])}:</h5>
+                                <div class="select enable">
+                                    <p class="select-btn"></p>
+                                    <p class="select-txt"><a href="#" id="time_hour">00</a></p>
+                                    <div class="select-list hour">
+                                        <div class="hour-wrap">
+                                            <p>00</p>
+                                            <p>01</p>
+                                            <p>02</p>
+                                            <p>03</p>
+                                            <p>04</p>
+                                            <p>05</p>
+                                            <p>06</p>
+                                            <p>07</p>
+                                            <p>08</p>
+                                            <p>09</p>
+                                            <p>10</p>
+                                            <p>11</p>
+                                            <p>12</p>
+                                            <p>13</p>
+                                            <p>14</p>
+                                            <p>15</p>
+                                            <p>16</p>
+                                            <p>17</p>
+                                            <p>18</p>
+                                            <p>19</p>
+                                            <p>20</p>
+                                            <p>21</p>
+                                            <p>22</p>
+                                            <p>23</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h5>${nn._([cms.global.PAGE_ID, 'poi-event', 'Minute'])}:</h5>
+                                <div class="select enable">
+                                    <p class="select-btn"></p>
+                                    <p class="select-txt"><a href="#" id="time_min">00</a></p>
+                                    <div class="select-list">
+                                        <div class="min-wrap">
+                                            <p>00</p>
+                                            <p>30</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="func">
+                    <ul>
+                        <li class="notice">${nn._([cms.global.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
+                        <li class="btns"><span><a href="#" class="btn-cancel">${nn._([cms.global.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
+                        <li class="btns"><span><a href="#" class="btn-save">${nn._([cms.global.PAGE_ID, 'poi-event', 'Save'])}</a></span></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="event-instant" class="event hide">
+        <form name="eventInstantForm" id="eventInstantForm" method="get" action="">
+            <input type="hidden" name="channelUrl" value="${link}" />
+            <input type="hidden" name="notifyScheduler" value="" />
+            <div id="instant-notify" class="instant">
+                <p class="crumb create"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([cms.global.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Instant Notification'])} &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
+                <p class="crumb edit"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Interactive event : Instant Notification'])} &gt; <a href="#" class="crumb-next">${nn._([cms.global.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</a></p>
+                <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Required field'])}</p>
+                <div class="video-wrap">
+                    <div id="event-instant-video" class="video"></div>
+                    <div class="poi-display"></div>
+                    <div class="mask">
+                        <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'PREVIEW'])}</p>
+                        <p class="no-video hide">${nn._([cms.global.PAGE_ID, 'poi-event', 'There is no valid video to preview.'])}</p>
+                    </div>
+                </div>
+                <div class="event-input">
+                    <div class="fminput">
+                        <label for="instant_display_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Display text'])}:</label>
+                        <p class="text"><span><input type="text" name="displayText" id="instant_display_text" value="${message}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input display text'])}" class="text" /></span></p>
+                    </div>
+                    <div class="fminput even">
+                        <label for="instant_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Button text'])}:</label>
+                        <p class="text"><span><input type="text" name="btnText" id="instant_button_text" maxlength="20" value="${button}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text'])}" class="text" /></span></p>
+                    </div>
+                </div>
+                <div class="func">
+                    <ul>
+                        <li class="notice">${nn._([cms.global.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
+                        <li class="btns"><span><a href="#" class="btn-cancel">${nn._([cms.global.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
+                        <li class="btns"><span><a href="#" class="btn-next">${nn._([cms.global.PAGE_ID, 'poi-event', 'Next'])}</a></span></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="instant-mobile" class="instant hide">
+                <p class="crumb create"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([cms.global.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([cms.global.PAGE_ID, 'poi-event', 'Instant Notification'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
+                <p class="crumb edit"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'POI'])}</a> &gt; <a href="#" class="crumb-mobile">${nn._([cms.global.PAGE_ID, 'poi-event', 'Interactive event : Instant Notification'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Mobile Notification Message'])}</p>
+                <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Required field'])}</p>
+                <div class="mobile-edit clearfix">
+                    <div class="mobile">
+                        <ul>
+                            <li class="ios on"><p><a href="#" class="ios">${nn._([cms.global.PAGE_ID, 'poi-event', 'iOS'])}</a></p></li>
+                            <li class="android"><p><a href="#" class="android">${nn._([cms.global.PAGE_ID, 'poi-event', 'Android'])}</a></p></li>
+                        </ul>
+                        <div id="instant-ios" class="mobile-block mobile-active">
+                            <div class="wrap">
+                                <h4>${nn._([cms.global.PAGE_ID, 'poi-event', 'Preview'])}</h4>
+                                <h5>${nn._([cms.global.PAGE_ID, 'poi-event', 'Notification'])}</h5>
+                                {{if '' != notifyMsg}}
+                                    <p class="msg ellipsis multiline">${notifyMsg}</p>
+                                {{else}}
+                                    <p class="msg ellipsis multiline">${nn._([cms.global.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
+                                {{/if}}
+                                <p class="button"><a href="#">${nn._([cms.global.PAGE_ID, 'poi-event', 'iOS-button', 'Cancel'])}</a><a href="#" class="last">${nn._([cms.global.PAGE_ID, 'poi-event', 'iOS-button', 'OK'])}</a></p>
+                            </div>
+                        </div>
+                        <div id="instant-android" class="mobile-block hide">
+                            <div class="wrap">
+                                <h4>${nn._([cms.global.PAGE_ID, 'poi-event', 'Preview'])}</h4>
+                                <h5>${nn._([cms.global.PAGE_ID, 'poi-event', 'Notification'])}</h5>
+                                {{if '' != notifyMsg}}
+                                    <p class="msg">${notifyMsg}</p>
+                                {{else}}
+                                    <p class="msg">${nn._([cms.global.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}</p>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notification">
+                        <div class="msg">
+                            <h4><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Mobile notification message'])}</h4>
+                            <p class="textarea"><span><span><textarea name="notifyMsg" id="instant_msg" cols="80" class="textarea" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}">${notifyMsg}</textarea></span></span></p>
+                            <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'Recommend: less 34 bytes'])}</p>
+                            <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'The mobile notification will instant send, when user pressed OK or Enter.'])}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="func">
+                    <ul>
+                        <li class="notice">${nn._([cms.global.PAGE_ID, 'poi-event', 'Please fill in all required fields.'])}</li>
+                        <li class="btns"><span><a href="#" class="btn-cancel">${nn._([cms.global.PAGE_ID, 'poi-event', 'Cancel'])}</a></span></li>
+                        <li class="btns"><span><a href="#" class="btn-save">${nn._([cms.global.PAGE_ID, 'poi-event', 'Save'])}</a></span></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 </script>
+<!-- poi-event-overlay-tmpl End -->
 
+<!-- titlecard-edit-tmpl Begin -->
 <script id="titlecard-edit-tmpl" type="text/x-jquery-tmpl">
 <div class="wrap">
-<div class="text-container">
-<h5>${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Text'])}</h5>
-<p class="textarea"><span><span><textarea name="text" id="text" cols="80" class="textarea">{{if '' == message}}My video{{else}}${message}{{/if}}</textarea></span></span></p>
+    <div class="text-container">
+        <h5>${nn._([cms.global.PAGE_ID, 'title-card', 'Text'])}</h5>
+        <p class="textarea"><span><span><textarea name="text" id="text" cols="80" class="textarea">{{if '' == message}}My video{{else}}${message}{{/if}}</textarea></span></span></p>
+    </div>
+    <div class="font-container">
+        <h5>${nn._([cms.global.PAGE_ID, 'title-card', 'Font'])}</h5>
+        <div class="text-func clearfix">
+            <div class="func-wrap clearfix">
+                <ul>
+                    <li class="font-weight"><input type="checkbox" name="fontWeight" value="bold" id="fontWeight"{{if weight == 'bold'}} checked="checked"{{/if}} />Bold<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'title-card', 'Bold'])}</span></span></span></span></li>
+                    <li class="font-style"><input type="checkbox" name="fontStyle" value="italic" id="fontStyle"{{if style == 'italic'}} checked="checked"{{/if}} />Italics<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'title-card', 'Italics'])}</span></span></span></span></li>
+                    <li>
+                        <a href="#" class="font-color">Font color
+                            {{if '' == color}}
+                                <span class="color c-fff"></span>
+                            {{else}}
+                                <span class="color{{if cms.config.COLOR_MAP[color]}} ${cms.config.COLOR_MAP[color]}{{/if}}"></span>
+                            {{/if}}
+                            <ul class="color-list">
+                                <li class="c-fff" data-meta="#ffffff">#ffffff</li>
+                                <li class="c-eee" data-meta="#eeeeee">#eeeeee</li>
+                                <li class="c-bbb" data-meta="#bbbbbb">#bbbbbb</li>
+                                <li class="c-777" data-meta="#777777">#777777</li>
+                                <li class="c-333" data-meta="#333333">#333333</li>
+                                <li class="c-000" data-meta="#000000">#000000</li>
+                                <li class="c-f00" data-meta="#ff0000">#ff0000</li>
+                                <li class="c-f60" data-meta="#ff6600">#ff6600</li>
+                                <li class="c-ff0" data-meta="#ffff00">#ffff00</li>
+                                <li class="c-090" data-meta="#009900">#009900</li>
+                                <li class="c-03f" data-meta="#0033ff">#0033ff</li>
+                                <li class="c-60f" data-meta="#6600ff">#6600ff</li>
+                            </ul>
+                            <span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'title-card', 'Font color'])}</span></span></span></span>
+                        </a>
+                        {{if '' == color}}
+                            <input type="hidden" name="fontColor" id="fontColor" value="#ffffff" />
+                        {{else}}
+                            <input type="hidden" name="fontColor" id="fontColor" value="${color}" />
+                        {{/if}}
+                        {{if '' == size}}
+                            <input type="hidden" name="fontSize" id="fontSize" value="20" />
+                        {{else}}
+                            <input type="hidden" name="fontSize" id="fontSize" value="${size}" />
+                        {{/if}}
+                    </li>
+                    <li><a href="#" class="font-l">Font size +<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'title-card', 'Font size +'])}</span></span></span></span></a></li>
+                    <li><a href="#" class="font-s">Font size -<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'title-card', 'Font size -'])}</span></span></span></span></a></li>
+                    <li class="align-left"><input type="radio" name="align" value="left" id="align_left"{{if align == 'left'}} checked="checked"{{/if}} />Align left<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'title-card', 'Align left'])}</span></span></span></span></li>
+                    <li class="align-center"><input type="radio" name="align" value="center" id="align_center"{{if align == '' || align == 'center'}} checked="checked"{{/if}} />Align center<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'title-card', 'Align center'])}</span></span></span></span></li>
+                    <li class="align-right"><input type="radio" name="align" value="right" id="align_right"{{if align == 'right'}} checked="checked"{{/if}} />Align right<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'title-card', 'Align right'])}</span></span></span></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="effect-container">
+        <h5>${nn._([cms.global.PAGE_ID, 'title-card', 'Effect'])}</h5>
+        <p class="effect-demo"><span><em>9x9.tv</em></span></p>
+        <div class="select">
+            <p class="select-btn"></p>
+            {{if '' == effect}}
+                <div class="select-txt"><a href="#">${nn._([cms.global.PAGE_ID, 'title-card', 'None'])}</a></div>
+            {{else}}
+                <div class="select-txt"><a href="#">${nn._([cms.global.PAGE_ID, 'title-card', cms.config.EFFECT_MAP[effect]])}</a></div>
+            {{/if}}
+            <ul class="select-list">
+                <li data-meta="none">${nn._([cms.global.PAGE_ID, 'title-card', 'None'])}</li>
+                <li data-meta="fade">${nn._([cms.global.PAGE_ID, 'title-card', 'Fade'])}</li>
+                <li data-meta="blind">${nn._([cms.global.PAGE_ID, 'title-card', 'Blind'])}</li>
+                <li data-meta="clip">${nn._([cms.global.PAGE_ID, 'title-card', 'Clip'])}</li>
+                <li data-meta="drop">${nn._([cms.global.PAGE_ID, 'title-card', 'Drop'])}</li>
+            </ul>
+            {{if '' == effect}}
+                <input type="hidden" name="effect" id="effect" value="none" />
+            {{else}}
+                <input type="hidden" name="effect" id="effect" value="${effect}" />
+            {{/if}}
+        </div>
+    </div>
 </div>
-
-<div class="font-container">
-<h5>${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Font'])}</h5>
-<div class="text-func clearfix">
-<div class="func-wrap clearfix">
-<ul>
-<li class="font-weight"><input type="checkbox" name="fontWeight" value="bold" id="fontWeight"{{if weight == 'bold'}} checked="checked"{{/if}} />Bold<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Bold'])}</span></span></span></span></li>
-<li class="font-style"><input type="checkbox" name="fontStyle" value="italic" id="fontStyle"{{if style == 'italic'}} checked="checked"{{/if}} />Italics<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Italics'])}</span></span></span></span></li>
-{{if '' == color}}
-<li><a href="#" class="font-color">Font color<span class="color c-fff"></span>
-{{else}}
-<li><a href="#" class="font-color">Font color<span{{if CMS_CONF.COLOR_MAP[color]}} class="color ${CMS_CONF.COLOR_MAP[color]}"{{/if}}></span>
-{{/if}}
-<ul class="color-list">
-<li class="c-fff" data-meta="#ffffff">#ffffff</li>
-<li class="c-eee" data-meta="#eeeeee">#eeeeee</li>
-<li class="c-bbb" data-meta="#bbbbbb">#bbbbbb</li>
-<li class="c-777" data-meta="#777777">#777777</li>
-<li class="c-333" data-meta="#333333">#333333</li>
-<li class="c-000" data-meta="#000000">#000000</li>
-<li class="c-f00" data-meta="#ff0000">#ff0000</li>
-<li class="c-f60" data-meta="#ff6600">#ff6600</li>
-<li class="c-ff0" data-meta="#ffff00">#ffff00</li>
-<li class="c-090" data-meta="#009900">#009900</li>
-<li class="c-03f" data-meta="#0033ff">#0033ff</li>
-<li class="c-60f" data-meta="#6600ff">#6600ff</li>
-</ul>
-<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Font color'])}</span></span></span></span>
-</a>
-{{if '' == color}}
-<input type="hidden" name="fontColor" id="fontColor" value="#ffffff" />
-{{else}}
-<input type="hidden" name="fontColor" id="fontColor" value="${color}" />
-{{/if}}
-{{if '' == size}}
-<input type="hidden" name="fontSize" id="fontSize" value="20" />
-{{else}}
-<input type="hidden" name="fontSize" id="fontSize" value="${size}" />
-{{/if}}
-</li>
-<li><a href="#" class="font-l">Font size +<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Font size +'])}</span></span></span></span></a></li>
-<li><a href="#" class="font-s">Font size -<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Font size -'])}</span></span></span></span></a></li>
-<li class="align-left"><input type="radio" name="align" value="left" id="align_left"{{if align == 'left'}} checked="checked"{{/if}} />Align left<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Align left'])}</span></span></span></span></li>
-<li class="align-center"><input type="radio" name="align" value="center" id="align_center"{{if align == '' || align == 'center'}} checked="checked"{{/if}} />Align center<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Align center'])}</span></span></span></span></li>
-<li class="align-right"><input type="radio" name="align" value="right" id="align_right"{{if align == 'right'}} checked="checked"{{/if}} />Align right<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Align right'])}</span></span></span></span></li>
-</ul>
-</div>
-</div>
-</div>
-
-<div class="effect-container">
-<h5>${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Effect'])}</h5>
-<p class="effect-demo"><span><em>9x9.tv</em></span></p>
-<div class="select">
-<p class="select-btn"></p>
-{{if '' == effect}}
-<div class="select-txt"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'None'])}</a></div>
-{{else}}
-<div class="select-txt"><a href="#">${nn._([CMS_CONF.PAGE_ID, 'title-card', CMS_CONF.EFFECT_MAP[effect]])}</a></div>
-{{/if}}
-<ul class="select-list">
-<li data-meta="none">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'None'])}</li>
-<li data-meta="fade">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Fade'])}</li>
-<li data-meta="blind">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Blind'])}</li>
-<li data-meta="clip">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Clip'])}</li>
-<li data-meta="drop">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Drop'])}</li>
-</ul>
-{{if '' == effect}}
-<input type="hidden" name="effect" id="effect" value="none" />
-{{else}}
-<input type="hidden" name="effect" id="effect" value="${effect}" />
-{{/if}}
-</div>
-</div>
-</div>
-
 <div class="wrap last">
-<div class="background-container">
-<h5>${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Background'])}</h5>
-<p class="radio-list">
-{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
-<label for="bg_color" class="first"><input type="radio" name="bg" value="color" id="bg_color" />${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Color'])}</label>
-<label for="bg_image"><input type="radio" name="bg" value="image" id="bg_image" checked="checked" />${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Image'])}</label>
-{{else}}
-<label for="bg_color" class="first"><input type="radio" name="bg" value="color" id="bg_color" checked="checked" />${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Color'])}</label>
-<label for="bg_image"><input type="radio" name="bg" value="image" id="bg_image" />${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Image'])}</label>
-{{/if}}
-</p>
-{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
-<div class="bg-color hide">
-{{else}}
-<div class="bg-color">
-{{/if}}
-{{if '' == bgColor}}
-<a href="#">Background color<span class="c-000"></span>
-{{else}}
-<a href="#">Background color<span{{if CMS_CONF.COLOR_MAP[bgColor]}} class="${CMS_CONF.COLOR_MAP[bgColor]}"{{/if}}></span>
-{{/if}}
-<ul class="color-list">
-<li class="c-fff" data-meta="#ffffff">#ffffff</li>
-<li class="c-eee" data-meta="#eeeeee">#eeeeee</li>
-<li class="c-bbb" data-meta="#bbbbbb">#bbbbbb</li>
-<li class="c-777" data-meta="#777777">#777777</li>
-<li class="c-333" data-meta="#333333">#333333</li>
-<li class="c-000" data-meta="#000000">#000000</li>
-<li class="c-f00" data-meta="#ff0000">#ff0000</li>
-<li class="c-f60" data-meta="#ff6600">#ff6600</li>
-<li class="c-ff0" data-meta="#ffff00">#ffff00</li>
-<li class="c-090" data-meta="#009900">#009900</li>
-<li class="c-03f" data-meta="#0033ff">#0033ff</li>
-<li class="c-60f" data-meta="#6600ff">#6600ff</li>
-</ul>
-</a>
-{{if '' == bgColor}}
-<input type="hidden" name="backgroundColor" id="backgroundColor" value="#000000" />
-{{else}}
-<input type="hidden" name="backgroundColor" id="backgroundColor" value="${bgColor}" />
-{{/if}}
-</div>
-{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
-<div class="bg-img">
-{{else}}
-<div class="bg-img hide">
-{{/if}}
-<p class="img">
-{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
-<img id="thumbnail-backgroundImage" src="${bgImage}" alt="" width="95" height="59" class="thumbnail" />
-{{else}}
-<img id="thumbnail-backgroundImage" src="images/black_box.png" alt="" width="95" height="59" class="thumbnail" />
-{{/if}}
-<img src="images/black_box_loading.gif" alt="" class="loading" />
-</p>
-<p id="uploadThumbnail">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Upload'])}</p>
-<p class="notice">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Better results with 720x405 image.'])}</p>
-<p class="notice highlight hide">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Please upload jpeg, png, or gif file.'])}</p>
-{{if ('' != bgImage && '' == bgColor) || ('' != bgImage && '' != bgColor && CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM != bgImage)}}
-<input type="hidden" name="backgroundImage" id="backgroundImage" value="${bgImage}" />
-<input type="hidden" name="backgroundImageOld" id="backgroundImageOld" value="${bgImage}" />
-{{else}}
-<input type="hidden" name="backgroundImage" id="backgroundImage" value="${CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_UPLOAD}" />
-<input type="hidden" name="backgroundImageOld" id="backgroundImageOld" value="${CMS_CONF.TITLECARD_DEFAULT_IMAGE_BY_UPLOAD}" />
-{{/if}}
-</div>
-</div>
-
-<div class="duration-container">
-<h5>${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Duration'])}</h5>
-<div class="select">
-<p class="select-btn"></p>
-{{if '' == duration}}
-<div class="select-txt"><a href="#">7</a></div>
-{{else}}
-<div class="select-txt"><a href="#">${duration}</a></div>
-{{/if}}
-<ul class="select-list">
-<li data-meta="5">5</li>
-<li data-meta="6">6</li>
-<li data-meta="7">7</li>
-<li data-meta="8">8</li>
-<li data-meta="9">9</li>
-<li data-meta="10">10</li>
-<li data-meta="12">12</li>
-<li data-meta="14">14</li>
-<li data-meta="16">16</li>
-<li data-meta="18">18</li>
-</ul>
-{{if '' == duration}}
-<input type="hidden" name="duration" id="duration" value="7" />
-{{else}}
-<input type="hidden" name="duration" id="duration" value="${duration}" />
-{{/if}}
-</div>
-<p class="notice hide">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Invalid duration, please try again.'])}</p>
-</div>
-
-<div class="btn-container">
-{{if $item.isUpdateMode}}
-<p class="btn-del"><a href="#">Del</a></p>
-{{/if}}
-<p class="btns btn-cancel"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Cancel'])}</a></span></p>
-<p class="btns btn-done"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Done'])}</a></span></p>
-<p class="btns btn-edit"><span><a href="#">${nn._([CMS_CONF.PAGE_ID, 'title-card', 'Edit Title'])}</a></span></p>
-</div>
+    <div class="background-container">
+        <h5>${nn._([cms.global.PAGE_ID, 'title-card', 'Background'])}</h5>
+        <p class="radio-list">
+            {{if $item.hasBgImage}}
+                <label for="bg_color" class="first"><input type="radio" name="bg" value="color" id="bg_color" />${nn._([cms.global.PAGE_ID, 'title-card', 'Color'])}</label>
+                <label for="bg_image"><input type="radio" name="bg" value="image" id="bg_image" checked="checked" />${nn._([cms.global.PAGE_ID, 'title-card', 'Image'])}</label>
+            {{else}}
+                <label for="bg_color" class="first"><input type="radio" name="bg" value="color" id="bg_color" checked="checked" />${nn._([cms.global.PAGE_ID, 'title-card', 'Color'])}</label>
+                <label for="bg_image"><input type="radio" name="bg" value="image" id="bg_image" />${nn._([cms.global.PAGE_ID, 'title-card', 'Image'])}</label>
+            {{/if}}
+        </p>
+        <div class="bg-color{{if $item.hasBgImage}} hide{{/if}}">
+            <a href="#">Background color
+                {{if '' == bgColor}}
+                    <span class="c-000"></span>
+                {{else}}
+                    <span{{if cms.config.COLOR_MAP[bgColor]}} class="${cms.config.COLOR_MAP[bgColor]}"{{/if}}></span>
+                {{/if}}
+                <ul class="color-list">
+                    <li class="c-fff" data-meta="#ffffff">#ffffff</li>
+                    <li class="c-eee" data-meta="#eeeeee">#eeeeee</li>
+                    <li class="c-bbb" data-meta="#bbbbbb">#bbbbbb</li>
+                    <li class="c-777" data-meta="#777777">#777777</li>
+                    <li class="c-333" data-meta="#333333">#333333</li>
+                    <li class="c-000" data-meta="#000000">#000000</li>
+                    <li class="c-f00" data-meta="#ff0000">#ff0000</li>
+                    <li class="c-f60" data-meta="#ff6600">#ff6600</li>
+                    <li class="c-ff0" data-meta="#ffff00">#ffff00</li>
+                    <li class="c-090" data-meta="#009900">#009900</li>
+                    <li class="c-03f" data-meta="#0033ff">#0033ff</li>
+                    <li class="c-60f" data-meta="#6600ff">#6600ff</li>
+                </ul>
+            </a>
+            {{if '' == bgColor}}
+                <input type="hidden" name="backgroundColor" id="backgroundColor" value="#000000" />
+            {{else}}
+                <input type="hidden" name="backgroundColor" id="backgroundColor" value="${bgColor}" />
+            {{/if}}
+        </div>
+        <div class="{{if $item.hasBgImage}}bg-img{{else}}bg-img hide{{/if}}">
+            <p class="img">
+                {{if $item.hasBgImage}}
+                    <img id="thumbnail-backgroundImage" src="${bgImage}" alt="" width="95" height="59" class="thumbnail" />
+                {{else}}
+                    <img id="thumbnail-backgroundImage" src="images/black_box.png" alt="" width="95" height="59" class="thumbnail" />
+                {{/if}}
+                <img src="images/black_box_loading.gif" alt="" class="loading" />
+            </p>
+            <p id="uploadThumbnail">${nn._([cms.global.PAGE_ID, 'title-card', 'Upload'])}</p>
+            <p class="notice">${nn._([cms.global.PAGE_ID, 'title-card', 'Better results with 720x405 image.'])}</p>
+            <p class="notice highlight hide">${nn._([cms.global.PAGE_ID, 'title-card', 'Please upload jpeg, png, or gif file.'])}</p>
+            {{if $item.hasBgImage}}
+                <input type="hidden" name="backgroundImage" id="backgroundImage" value="${bgImage}" />
+                <input type="hidden" name="backgroundImageOld" id="backgroundImageOld" value="${bgImage}" />
+            {{else}}
+                <input type="hidden" name="backgroundImage" id="backgroundImage" value="${cms.config.TITLECARD_DEFAULT_IMAGE_BY_UPLOAD}" />
+                <input type="hidden" name="backgroundImageOld" id="backgroundImageOld" value="${cms.config.TITLECARD_DEFAULT_IMAGE_BY_UPLOAD}" />
+            {{/if}}
+        </div>
+    </div>
+    <div class="duration-container">
+        <h5>${nn._([cms.global.PAGE_ID, 'title-card', 'Duration'])}</h5>
+        <div class="select">
+            <p class="select-btn"></p>
+            {{if '' == duration}}
+                <div class="select-txt"><a href="#">7</a></div>
+            {{else}}
+                <div class="select-txt"><a href="#">${duration}</a></div>
+            {{/if}}
+            <ul class="select-list">
+                <li data-meta="5">5</li>
+                <li data-meta="6">6</li>
+                <li data-meta="7">7</li>
+                <li data-meta="8">8</li>
+                <li data-meta="9">9</li>
+                <li data-meta="10">10</li>
+                <li data-meta="12">12</li>
+                <li data-meta="14">14</li>
+                <li data-meta="16">16</li>
+                <li data-meta="18">18</li>
+            </ul>
+            {{if '' == duration}}
+                <input type="hidden" name="duration" id="duration" value="7" />
+            {{else}}
+                <input type="hidden" name="duration" id="duration" value="${duration}" />
+            {{/if}}
+        </div>
+        <p class="notice hide">${nn._([cms.global.PAGE_ID, 'title-card', 'Invalid duration, please try again.'])}</p>
+    </div>
+    <div class="btn-container">
+        {{if $item.isUpdateMode}}
+            <p class="btn-del"><a href="#">Del</a></p>
+        {{/if}}
+        <p class="btns btn-cancel"><span><a href="#">${nn._([cms.global.PAGE_ID, 'title-card', 'Cancel'])}</a></span></p>
+        <p class="btns btn-done"><span><a href="#">${nn._([cms.global.PAGE_ID, 'title-card', 'Done'])}</a></span></p>
+        <p class="btns btn-edit"><span><a href="#">${nn._([cms.global.PAGE_ID, 'title-card', 'Edit Title'])}</a></span></p>
+    </div>
 </div>
 </script>
+<!-- titlecard-edit-tmpl End -->
 
 <script id="storyboard-info-tmpl" type="text/x-jquery-tmpl">
 <div id="storyboard-info-wrap">
-<p class="episode-storyboard">
-${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id="storyboard-length">50</em> ${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'videos left'])})<span>${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Duration'])} <em id="storyboard-duration">00:00:00</em></span>
-</p>
-<div class="channel-name"><p class="title">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Channel:'])}</p><p id="channel-name" data-meta="${chName}">${chName}</p></div>
-<div class="episode-name"><p class="title">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Episode:'])}</p><p id="episode-name" data-meta="${epName}">${epName}</p></div>
+    <p class="episode-storyboard">
+        ${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id="storyboard-length">50</em> ${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'videos left'])})<span>${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Duration'])} <em id="storyboard-duration">00:00:00</em></span>
+    </p>
+    <div class="channel-name"><p class="title">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Channel:'])}</p><p id="channel-name" data-meta="${chName}">${chName}</p></div>
+    <div class="episode-name"><p class="title">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Episode:'])}</p><p id="episode-name" data-meta="${epName}">${epName}</p></div>
 </div>
 </script>
 
+<!-- storyboard-listing-tmpl-item Begin -->
 <script id="storyboard-listing-tmpl-item" type="text/x-jquery-tmpl">
 <li data-ytid="${ytId}" data-ytduration="${ytDuration}" data-starttime="${startTime}" data-endtime="${endTime}"{{if ytDuration == 0}} class="invalid"{{/if}}>
-{{if isZoneLimited || isSyndicateLimited}}
-{{if isZoneLimited && isSyndicateLimited}}
-<a href="#!pid=${id}&ytid=${ytId}" class="warning2"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Not playable in some regions & on mobile device'])}</span></span></span></span></a>
-{{else}}
-{{if isZoneLimited}}
-<a href="#!pid=${id}&ytid=${ytId}" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Not playable in some regions'])}</span></span></span></span></a>
-{{/if}}
-{{if isSyndicateLimited}}
-<a href="#!pid=${id}&ytid=${ytId}" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Not playable on mobile device'])}</span></span></span></span></a>
-{{/if}}
-{{/if}}
-{{/if}}
-<p class="order"><!-- dynamic rebuild video number after template render --></p>
-<p class="img">
-{{if ytDuration > 0}}
-<img src="${imageUrl}" alt="" width="80" height="45" />
-{{else}}
-<img src="images/thumbnail_box_empty.png" alt="" width="80" height="45" />
-{{/if}}
-{{if ytDuration > 0}}
-<span class="time"><span class="time-right"><span class="time-middle">${formatDuration(duration)}</span></span></span>
-{{/if}}
-</p>
-{{if ytDuration > 0}}
-<h4 class="ellipsis multiline">${name}</h4>
-{{else}}
-{{if isEmbedLimited}}
-<h4>[${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Non-embeddable video'])}]</h4>
-{{else isPrivateVideo}}
-<h4>[${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Private video'])}]</h4>
-{{else}}
-<h4>[${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Invalid video'])}]</h4>
-{{/if}}
-{{/if}}
-<p class="title">
-{{if beginTitleCard != null}}
-<a href="#!pid=${id}&ytid=${ytId}&tid=${beginTitleCard.id}" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Edit Title'])}</span></span></span></span></a>
-{{/if}}
-{{if endTitleCard != null}}
-<a href="#!pid=${id}&ytid=${ytId}&tid=${endTitleCard.id}" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Edit Title'])}</span></span></span></span></a>
-{{/if}}
-</p>
-<p class="hover-func">
-<a href="#!pid=${id}&ytid=${ytId}" class="video-del">Video Del</a>
-{{if ytDuration > 0}}
-<a href="#!pid=${id}&ytid=${ytId}" class="video-play">Video Play</a>
-{{/if}}
-{{if ytDuration > 0 && beginTitleCard == null}}
-<a href="#!pid=${id}&ytid=${ytId}" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Add Title'])}</span></span></span></span></a>
-{{/if}}
-{{if ytDuration > 0 && endTitleCard == null}}
-<a href="#!pid=${id}&ytid=${ytId}" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([CMS_CONF.PAGE_ID, 'episode-storyboard', 'Add Title'])}</span></span></span></span></a>
-{{/if}}
-</p>
+    {{if isZoneLimited || isSyndicateLimited}}
+        {{if isZoneLimited && isSyndicateLimited}}
+            <a href="#!pid=${id}&ytid=${ytId}" class="warning2"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Not playable in some regions & on mobile device'])}</span></span></span></span></a>
+        {{else}}
+            {{if isZoneLimited}}
+                <a href="#!pid=${id}&ytid=${ytId}" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Not playable in some regions'])}</span></span></span></span></a>
+            {{/if}}
+            {{if isSyndicateLimited}}
+                <a href="#!pid=${id}&ytid=${ytId}" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Not playable on mobile device'])}</span></span></span></span></a>
+            {{/if}}
+        {{/if}}
+    {{/if}}
+    <p class="order"><!-- dynamic rebuild video number after template render --></p>
+    <p class="img">
+        {{if ytDuration > 0}}
+            <img src="${imageUrl}" alt="" width="80" height="45" />
+        {{else}}
+            <img src="images/thumbnail_box_empty.png" alt="" width="80" height="45" />
+        {{/if}}
+        {{if ytDuration > 0}}
+            <span class="time"><span class="time-right"><span class="time-middle">${cms.common.formatDuration(duration)}</span></span></span>
+        {{/if}}
+    </p>
+    {{if ytDuration > 0}}
+        <h4 class="ellipsis multiline">${name}</h4>
+    {{else}}
+        {{if isEmbedLimited}}
+            <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Non-embeddable video'])}]</h4>
+        {{else isPrivateVideo}}
+            <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Private video'])}]</h4>
+        {{else}}
+            <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Invalid video'])}]</h4>
+        {{/if}}
+    {{/if}}
+    <p class="title">
+        {{if beginTitleCard != null}}
+            <a href="#!pid=${id}&ytid=${ytId}&tid=${beginTitleCard.id}" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Edit Title'])}</span></span></span></span></a>
+        {{/if}}
+        {{if endTitleCard != null}}
+            <a href="#!pid=${id}&ytid=${ytId}&tid=${endTitleCard.id}" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Edit Title'])}</span></span></span></span></a>
+        {{/if}}
+    </p>
+    <p class="hover-func">
+        <a href="#!pid=${id}&ytid=${ytId}" class="video-del">Video Del</a>
+        {{if ytDuration > 0}}
+            <a href="#!pid=${id}&ytid=${ytId}" class="video-play">Video Play</a>
+        {{/if}}
+        {{if ytDuration > 0 && beginTitleCard == null}}
+            <a href="#!pid=${id}&ytid=${ytId}" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Add Title'])}</span></span></span></span></a>
+        {{/if}}
+        {{if ytDuration > 0 && endTitleCard == null}}
+            <a href="#!pid=${id}&ytid=${ytId}" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Add Title'])}</span></span></span></span></a>
+        {{/if}}
+    </p>
 </li>
 </script>
+<!-- storyboard-listing-tmpl-item End -->
 
 <script id="preload-image-tmpl-item" type="text/x-jquery-tmpl">
 <img src="${image}" alt="" />
 </script>
-
-<!--============================== footer start ==============================-->
-<p id="footer-control" class="hide"></p>
-<div id="footer" class="hide">
-  <span>© 2013 9x9.tv. All rights reserved.</span>
-  <ul id="footer-list">
-    <li id="language-change">
-      <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
-      <p class="select-btn"></p>
-      <ul class="select-list">
-        <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
-        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
-      </ul>
-    </li>
-  </ul>
-</div>
-<!--============================== footer close ==============================-->
-
-<div id="overlay-s">
-<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span></span></p>
-</div>
-
-<div id="system-error" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="btn-close">Close</a>
-<p class="content">You are not authorized to edit this episode.</p>
-<div class="overlay-btn">
-<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="delete-prompt" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="btn-close">Close</a>
-<p class="content">Are you sure you want to delete this title?</p>
-<div class="overlay-btn">
-<p class="btns btn-no"><span><a href="#">No</a></span></p>
-<p class="btns btn-del"><span><a href="#">Yes</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="unsave-prompt" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="btn-close">Close</a>
-<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
-<div class="overlay-btn">
-<p class="btns btn-no"><span><a href="#">No</a></span></p>
-<p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="unsave-trimtime-prompt" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="btn-close">Close</a>
-<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
-<div class="overlay-btn">
-<p class="btns btn-no"><span><a href="#">No</a></span></p>
-<p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="unsave-titlecard-prompt" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="btn-close">Close</a>
-<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
-<div class="overlay-btn">
-<p class="btns btn-no"><span><a href="#">No</a></span></p>
-<p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="draft-notice" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="btn-close">Close</a>
-<h4>New episode has been created as a draft!</h4>
-<p class="content"><span>Publish this episode at the next step</span> whenever you finish editing.</p>
-<div class="overlay-btn">
-<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="unsave-poi-prompt" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="overlay-btn-close">Close</a>
-<p class="content">Unsaved changes will be lost, are you sure you want to cancel editing?</p>
-<div class="overlay-btn">
-<p class="btns overlay-btn-no"><span><a href="#">No</a></span></p>
-<p class="btns overlay-btn-yes"><span><a href="#">Yes</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="unsave-poi-mask-prompt" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="overlay-btn-close">Close</a>
-<p class="content">Unsaved changes will be lost, are you sure you want to cancel editing?</p>
-<div class="overlay-btn">
-<p class="btns overlay-btn-no"><span><a href="#">Back</a></span></p>
-<p class="btns overlay-btn-yes"><span><a href="#">Yes</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="del-poi-notice" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="btn-close">Close</a>
-<p class="content">Are you sure you want to delete this POI with interactive event?</p>
-<div class="overlay-btn">
-<p class="btns btn-no"><span><a href="#">No</a></span></p>
-<p class="btns btn-del"><span><a href="#">Yes</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="preload-image" class="hide">
-<!-- template = #preload-image-tmpl-item -->
-</div>
-
-<div id="poi-event-overlay" class="lightbox-content">
-<div class="wrap">
-<!-- template = #poi-event-overlay-tmpl -->
-</div>
-</div>
 
 </body>
 </html>

@@ -2,25 +2,41 @@
 <html class="en" lang="en">
 <head>
 <meta charset="utf-8" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script src="javascripts/libs/nn-sdk.js?v=1135"></script>
-<script src="javascripts/libs/purl.min.js?v=1135"></script>
-<script src="javascripts/config.js?v=1135"></script>
 <title>9x9.tv - Login</title>
 </head>
 <body>
 
+<form id="loginForm" name="loginForm" method="post" action="/api/login">
+<h1>9x9.tv Member Login</h1>
+<p>
+<label for="email">Email: <input type="text" name="email" id="email" value="" /></label>
+</p>
+<p>
+<label for="password">Password: <input type="password" name="password" id="password" value="" /></label>
+</p>
+<input type="submit" value="Login" class="btn-submit" />
+</form>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="javascripts/libs/nn-sdk.js?v=1278"></script>
+<script src="javascripts/libs/purl.min.js?v=1278"></script>
+<script src="javascripts/v2/config.js?v=1278"></script>
 <script>
-/*jslint browser: true, devel: true, sloppy: true */
-/*global $, nn, CMS_CONF */
+/*jslint browser: true, devel: true */
+/*global $, nn, cms */
+
 $(function () {
+    'use strict';
+
     $('#loginForm').submit(function () {
         var fm = this,
             pattern = /^[\w\-]+(\.[\w\-]+)*@([\w\-]+\.)+[a-zA-Z]{2,7}$/,
             qrystring = '',
             parameter = null;
+
         fm.email.value = $.trim(fm.email.value);
         fm.password.value = $.trim(fm.password.value);
+
         if ('' === fm.email.value) {
             alert('Please input email field!');
             fm.email.focus();
@@ -37,10 +53,11 @@ $(function () {
             fm.password.focus();
             return false;
         }
+
         $('.btn-submit').prop('disabled', true);
         qrystring = $(this).serialize();
         parameter = $.url('http://fake.url.dev.teltel.com/?' + qrystring).param();
-        nn.api('POST', CMS_CONF.API('/api/login'), parameter, function (user) {
+        nn.api('POST', cms.reapi('/api/login'), parameter, function (user) {
             $('.btn-submit').prop('disabled', false);
             if (!user || !user.id) {
                 alert('Login failed, please try again.');
@@ -53,17 +70,5 @@ $(function () {
     });
 });
 </script>
-
-<form id="loginForm" name="loginForm" method="post" action="/api/login">
-<h1>9x9.tv Member Login</h1>
-<p>
-<label for="email">Email: <input type="text" name="email" id="email" value="" /></label>
-</p>
-<p>
-<label for="password">Password: <input type="password" name="password" id="password" value="" /></label>
-</p>
-<input type="submit" value="Login" class="btn-submit" />
-</form>
-
 </body>
 </html>

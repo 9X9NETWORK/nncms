@@ -24,7 +24,6 @@
             "Processing...": "處理中..."
         },
         "system-error": {
-            "Password reset success!": "密碼重新設定成功!",
             "Unknown error.": "未知的錯誤。",
             "You are not authorized to PCS.": "你沒有授權使用PCS。",
             "You are not authorized to edit this channel.": "您沒有權限編輯此頻道。",
@@ -48,6 +47,7 @@
             "Unsaved changes will be lost, are you sure you want to cancel editing?": "未儲存資料將遺失，確定結束編輯？"
         },
         "notice": {
+            "Password reset success!": "密碼重新設定成功！",
             "New episode has been created as a draft!": "新建立節目已被存為草稿！",
             "<span>Publish this episode at the next step</span> whenever you finish editing.": "結束編輯後，<span>請於下一步發佈此節目</span>。",
             "This episode has been published.": "節目發佈成功！",
@@ -60,7 +60,6 @@
             "Not right now, thanks!": "現在不要，謝謝！"
         },
         "facebook": {
-            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.": "您將變更頻道排序至\"更新時間\"，系統將依頻道\"更新時間\"自動排序，除置頂頻道外，其餘您將無法手動進行變更順序。",
             "Connect to Facebook": "連結Facebook帳號",
             "Connect to": "連結帳號",
             "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.": "連結帳號後，您可至頻道設定頁面為每個頻道設置是否自動分享至Facebook。",
@@ -103,7 +102,7 @@
     },
     "signin": {
         "html-title": {
-            "9x9.tv - SignIn": "9x9.tv - 登入"
+            "9x9.tv - Sign In": "9x9.tv - 登入"
         },
         "login-holder": {
             "Collect and Curate!": "蒐集影片 策展頻道！",
@@ -269,6 +268,7 @@
         },
         "channel-list": {
             "Sorted by": "預設排序",
+            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.": "您將變更頻道排序至\"更新時間\"，系統將依頻道\"更新時間\"自動排序，除置頂頻道外，其餘您將無法手動進行變更順序。",
             "Updated time": "依更新時間 ",
             "Customized Order": "依指定排序",
             "Best within 20 characters": "建議長度不超過20個字元",

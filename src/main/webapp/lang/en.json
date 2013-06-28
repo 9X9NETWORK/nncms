@@ -24,7 +24,6 @@
             "Processing...": "Processing..."
         },
         "system-error": {
-            "Password reset success!": "Password reset success!",
             "Unknown error.": "Unknown error.",
             "You are not authorized to PCS.": "You are not authorized to PCS.",
             "You are not authorized to edit this channel.": "You are not authorized to edit this channel.",
@@ -48,6 +47,7 @@
             "Unsaved changes will be lost, are you sure you want to cancel editing?": "Unsaved changes will be lost, are you sure you want to cancel editing?"
         },
         "notice": {
+            "Password reset success!": "Password reset success!",
             "New episode has been created as a draft!": "New episode has been created as a draft!",
             "<span>Publish this episode at the next step</span> whenever you finish editing.": "<span>Publish this episode at the next step</span> whenever you finish editing.",
             "This episode has been published.": "This episode has been published.",
@@ -60,7 +60,6 @@
             "Not right now, thanks!": "Not right now, thanks!"
         },
         "facebook": {
-            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.": "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.",
             "Connect to Facebook": "Connect to Facebook",
             "Connect to": "Connect to",
             "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.": "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.",
@@ -103,7 +102,7 @@
     },
     "signin": {
         "html-title": {
-            "9x9.tv - SignIn": "9x9.tv - SignIn"
+            "9x9.tv - Sign In": "9x9.tv - Sign In"
         },
         "login-holder": {
             "Collect and Curate!": "Collect and Curate!",
@@ -269,6 +268,7 @@
         },
         "channel-list": {
             "Sorted by": "Sorted by",
+            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.": "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.",
             "Updated time": "Updated time ",
             "Customized Order": "Customized Order",
             "Best within 20 characters": "Best within 20 characters",

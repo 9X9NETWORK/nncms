@@ -5,265 +5,286 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/uniform.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/jquery.datepick.css?v=1135" />
-<link rel="stylesheet" href="stylesheets/epcurate.css?v=1135" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script src="javascripts/libs/nn-sdk.js?v=1135"></script>
-<script src="javascripts/libs/jquery.mousewheel.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.ellipsis.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.blockUI.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.uniform.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.cycle.all.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.tmpl.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.cookie.min.js?v=1135"></script>
-<script src="javascripts/libs/jquery.ui.datepicker-en.js?v=1135"></script>
-<script src="javascripts/libs/jquery.ui.datepicker-zh.js?v=1135"></script>
-<script src="javascripts/libs/json2.min.js?v=1135"></script>
-<script src="javascripts/libs/purl.min.js?v=1135"></script>
-<script src="javascripts/libs/swfupload/swfupload.js?v=1135"></script>
-<script src="javascripts/libs/vertical.slider.min.js?v=1135"></script>
-<script src="javascripts/config.js?v=1135"></script>
-<script src="javascripts/controller.js?v=1135"></script>
-<script src="javascripts/basic.js?v=1135"></script>
-<script src="javascripts/epcurate.js?v=1135"></script>
+<link rel="stylesheet" href="stylesheets/style.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/uniform.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/jquery.datepick.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/epcurate.css?v=1278" />
 <title>9x9.tv - Episode Curation - Publish</title>
 </head>
 <body>
 
-<!--============================== header start ==============================-->
+<!-- Header Layer Begin -->
 <div id="header" class="hide">
-  <a href="../" target="_blank" id="logo"></a>
-  <ul id="nav">
-    <li id="home"><span><a href="../" target="_blank">9x9.tv Official Web</a></span></li>
-    <li id="tv"><span><a href="../tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
-    <li id="profile">
-      <p id="btn-profile"></p>
-      <p id="selected-profile">Guest</p>
-      <ul id="profile-dropdown" class="dropdown">
-        <li><a id="profile-logout" href="signin.html">Log out</a></li>
-      </ul>
-    </li>
-  </ul>
+    <a href="../" target="_blank" id="logo"></a>
+    <ul id="nav">
+        <li id="home"><span><a href="../" target="_blank">9x9.tv Official Web</a></span></li>
+        <li id="tv"><span><a href="../tv" target="_blank">Watch 9x9.tv on the Web</a></span></li>
+        <li id="profile">
+            <p id="btn-profile"></p>
+            <p id="selected-profile">Guest</p>
+            <ul id="profile-dropdown" class="dropdown">
+                <li><a id="profile-logout" href="signin.html">Log out</a></li>
+            </ul>
+        </li>
+    </ul>
 </div>
-<!--============================== header close ==============================-->
+<!-- Header Layer End -->
 
+<!-- Navigation Layer Begin -->
 <div id="epcurate-nav" class="publish">
-<div class="epcurate-nav-wrap">
-<h3><a href="episode-list.html" id="epcurate-nav-back" class="btn-back">Back<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle langkey">Leave</span></span></span></span></a><a href="javascript:void(0);" class="langkey">Episode Curation</a></h3>
-<ul>
-<li class="curation off"><a href="epcurate-curation.html" id="epcurate-nav-curation"><span class="nav-right"><span class="nav-middle langkey">Curation</span></span></a></li>
-<li class="publish on"><a href="epcurate-publish.html" id="epcurate-nav-publish"><span class="nav-right"><span class="nav-middle langkey">Publish</span></span></a></li>
-</ul>
+    <div class="epcurate-nav-wrap">
+        <h3><a href="episode-list.html" id="epcurate-nav-back" class="btn-back">Back<span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle langkey">Leave</span></span></span></span></a><a href="javascript:void(0);" class="langkey">Episode Curation</a></h3>
+        <ul>
+            <li class="curation off"><a href="epcurate-curation.html" id="epcurate-nav-curation"><span class="nav-right"><span class="nav-middle langkey">Curation</span></span></a></li>
+            <li class="publish on"><a href="epcurate-publish.html" id="epcurate-nav-publish"><span class="nav-right"><span class="nav-middle langkey">Publish</span></span></a></li>
+        </ul>
+    </div>
 </div>
-</div>
+<!-- Navigation Layer End -->
 
-<!--============================== content-wrap start ========================-->
+<!-- Content Layer Begin -->
 <div id="content-wrap" class="epcurate-publish">
-<form name="epcurateForm" id="epcurateForm" method="get" action="" class="clearfix publish">
-<input type="hidden" name="id" id="id" value="" />
-<input type="hidden" name="channelId" id="channelId" value="" />
-<div id="content-nav">
-&nbsp;
+    <form name="epcurateForm" id="epcurateForm" method="get" action="" class="clearfix publish">
+        <input type="hidden" name="id" id="id" value="" />
+        <input type="hidden" name="channelId" id="channelId" value="" />
+        <div id="content-nav">&nbsp;</div>
+        <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
+        <div id="content-main">
+            <div id="content-main-wrap">
+                <div class="constrain">
+                    <!-- template = #epcurate-form-tmpl -->
+                </div>
+            </div>
+        </div>
+        <div class="form-btn">
+            <div class="btn-wrap">
+                <div class="wrap">
+                    <p class="back"><a href="epcurate-curation.html" id="form-btn-back" rel="curation" class="langkey">&lt; Back to Curation</a></p>
+                    <p class="btns btn-leave"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-leave" value="Leave" class="langkey-val" /></span></span></p>
+                    <p class="btns btn-save"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-save" value="Save" class="langkey-val" /></span></span></p>
+                    <p class="notice hide langkey">Please fill in all required fields.</p>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
-<div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
-<div id="content-main">
-<div id="content-main-wrap">
-<div class="constrain">
-<!-- template = #epcurate-form-tmpl -->
-</div>
-</div>
-</div>
-<div class="form-btn">
-<div class="btn-wrap">
-<div class="wrap">
-<p class="back"><a href="epcurate-curation.html" id="form-btn-back" rel="curation" class="langkey">&lt; Back to Curation</a></p>
-<p class="btns btn-leave"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-leave" value="Leave" class="langkey-val" /></span></span></p>
-<p class="btns btn-save"><span class="btn-right"><span class="btn-middle"><input type="button" id="form-btn-save" value="Save" class="langkey-val" /></span></span></p>
-<p class="notice hide langkey">Please fill in all required fields.</p>
-</div>
-</div>
-</div>
-</form>
-</div>
-<!--============================== content-wrap close ========================-->
+<!-- Content Layer End -->
 
+<!-- Footer Layer Begin -->
+<p id="footer-control" class="hide"></p>
+<div id="footer" class="hide">
+    <span>© 2013 9x9.tv. All rights reserved.</span>
+    <ul id="footer-list">
+        <li id="language-change">
+            <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
+            <p class="select-btn"></p>
+            <ul class="select-list">
+                <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
+                <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!-- Footer Layer End -->
+
+<!-- Loading Layer Begin -->
+<div id="overlay-s">
+    <p class="overlay-content">
+        <span class="overlay-right">
+            <span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span>
+        </span>
+    </p>
+</div>
+<!-- Loading Layer End -->
+
+<!-- System Error Layer Begin -->
+<div id="system-error" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">You are not authorized to edit this episode.</p>
+            <div class="overlay-btn">
+                <p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- System Error Layer End -->
+
+<!-- Unsave Prompt Layer Begin -->
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+            <div class="overlay-btn">
+                <p class="btns btn-no"><span><a href="#">No</a></span></p>
+                <p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Unsave Prompt Layer End -->
+
+<!-- Publish Notice Layer Begin -->
+<div id="publish-notice" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <p class="content">This episode has been published.</p>
+            <div class="overlay-btn">
+                <p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Publish Notice Layer End -->
+
+<!-- Unpublish Notice Layer Begin -->
+<div id="unpublish-notice" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <p class="content">This episode has been saved as an unpublished draft.</p>
+            <div class="overlay-btn">
+                <p class="btns btn-ok"><span><a href="#">OK</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Unpublish Notice Layer End -->
+
+<!-- epcurate-form-tmpl Begin -->
 <script id="epcurate-form-tmpl" type="text/x-jquery-tmpl">
 <div id="epcurate-publish">
-<p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Required field'])}</p>
-<div id="epcurate-info">
-<div class="fminput clearfix">
-<label for="name"><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Episode title'])}</label>
-<div class="fmfield">
-<p class="text"><span><input type="text" name="name" id="name" maxlength="100" value="${name}" class="text" /></span></p>
-</div>
-</div>
-<div class="fminput clearfix">
-<label for="intro">${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Episode description'])}</label>
-<div class="fmfield">
-<p class="textarea"><span><span><textarea name="intro" id="intro" cols="80" class="textarea">${intro}</textarea></span></span></p>
-</div>
-</div>
-</div>
-
-<div class="fminput clearfix">
-<label>${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Episode thumbnail'])}</label>
-<div class="fmfield">
-<div id="thumbnail-list" class="img-list">
-<a href="#" class="img-prev">Prev</a>
-<a href="#" class="img-next">Next</a>
-<img src="images/loading.gif" alt="" class="loading" />
-<ul id="img-list">
-<!-- template = #img-list-tmpl-item -->
-</ul>
-</div>
-<div class="img-upload-func">
-<p id="uploadThumbnail">${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Upload'])}</p>
-<p class="notice">${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Better results with 720x405 or higher resolution image'])}</p>
-<p class="upload-notice highlight hide">${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Please upload jpeg, png, or gif files.'])}</p>
-<input type="hidden" name="imageUrl" id="imageUrl" value="${imageUrl}" />
-<input type="hidden" name="imageUrlOld" id="imageUrlOld" value="${imageUrl}" />
-</div>
-</div>
-</div>
-
-<div class="fminput clearfix">
-<label><acronym title="Required field" class="mark-required">*</acronym>${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Publish status'])}</label>
-<div class="fmfield">
-<p class="radio-list draft">
-<label for="status_draft"><input type="radio" name="status" value="draft" id="status_draft" checked="checked" />${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Draft'])}</label>
-<span class="box-left">
-<span class="box-right">
-<span class="box-middle">
-<span class="glow-left"><span class="glow-right"><span class="glow-middle">
-<label for="status_published"><input type="radio" name="status" value="published" id="status_published" /><span id="publish-label">${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', $item.publishLabel])}</span></label>
-</span></span></span>
-<span class="last">
-<label id="schedule-publish-label" for="status_scheduled" class="last hide"><input type="radio" name="status" value="scheduled" id="status_scheduled" />${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Scheduled to publish'])}</label>
-<a id="schedule-publish" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-right"><span class="tip-middle">{{html nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'This episode will be published at<br />the scheduled time.'])}}</span></span></span></a>
-<label id="schedule-rerun-label" for="rerun_y" class="last hide"><input type="checkbox" name="rerun" value="y" id="rerun_y" />${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Scheduled to rerun'])}</label>
-<a id="schedule-rerun" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-right"><span class="tip-middle">{{html nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'This episode will be published again as the latest episode at the scheduled time.'])}}</span></span></span></a>
-</span>
-</span>
-</span>
-</span>
-</p>
-<div id="date-time" class="hide">
-<div class="datepicker"></div>
-<div class="time">
-<h5>${nn._([CMS_CONF.PAGE_ID, 'epcurate-form', 'Hour'])}</h5>
-<ul>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">00:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">01:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">02:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">03:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">04:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">05:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">06:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">07:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">08:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">09:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">10:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">11:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">12:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">13:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">14:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">15:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">16:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">17:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">18:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">19:00</span></span></a></li>
-<li class="enable active"><a href="#"><span class="time-right"><span class="time-middle">20:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">21:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">22:00</span></span></a></li>
-<li class="enable"><a href="#"><span class="time-right"><span class="time-middle">23:00</span></span></a></li>
-<li class="enable" style="display: none;"><a href="#"><span class="time-right"><span class="time-middle">24:00</span></span></a></li>
-</ul>
-</div>
-<input type="hidden" name="publishDate" id="publishDate" value="" />
-<input type="hidden" name="publishHour" id="publishHour" value="" />
-<input type="hidden" name="origin_status" id="origin_status" value="Draft" />
-</div>
-</div>
-</div>
-
+    <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Required field'])}</p>
+    <div id="epcurate-info">
+        <div class="fminput clearfix">
+            <label for="name"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Episode title'])}</label>
+            <div class="fmfield">
+                <p class="text"><span><input type="text" name="name" id="name" maxlength="100" value="${name}" class="text" /></span></p>
+            </div>
+        </div>
+        <div class="fminput clearfix">
+            <label for="intro">${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Episode description'])}</label>
+            <div class="fmfield">
+                <p class="textarea"><span><span><textarea name="intro" id="intro" cols="80" class="textarea">${intro}</textarea></span></span></p>
+            </div>
+        </div>
+    </div>
+    <div class="fminput clearfix">
+        <label>${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Episode thumbnail'])}</label>
+        <div class="fmfield">
+            <div id="thumbnail-list" class="img-list">
+                <a href="#" class="img-prev">Prev</a>
+                <a href="#" class="img-next">Next</a>
+                <img src="images/loading.gif" alt="" class="loading" />
+                <ul id="img-list">
+                    <!-- template = #img-list-tmpl-item or #img-list-new-tmpl-item -->
+                </ul>
+            </div>
+            <div class="img-upload-func">
+                <p id="uploadThumbnail">${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Upload'])}</p>
+                <p class="notice">${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Better results with 720x405 or higher resolution image'])}</p>
+                <p class="upload-notice highlight hide">${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Please upload jpeg, png, or gif files.'])}</p>
+                <input type="hidden" name="imageUrl" id="imageUrl" value="${imageUrl}" />
+                <input type="hidden" name="imageUrlOld" id="imageUrlOld" value="${imageUrl}" />
+            </div>
+        </div>
+    </div>
+    <div class="fminput clearfix">
+        <label><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Publish status'])}</label>
+        <div class="fmfield">
+            <p class="radio-list draft">
+                <label for="status_draft"><input type="radio" name="status" value="draft" id="status_draft" checked="checked" />${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Draft'])}</label>
+                <span class="box-left">
+                    <span class="box-right">
+                        <span class="box-middle">
+                            <span class="glow-left">
+                                <span class="glow-right">
+                                    <span class="glow-middle">
+                                        <label for="status_published"><input type="radio" name="status" value="published" id="status_published" /><span id="publish-label">${nn._([cms.global.PAGE_ID, 'epcurate-form', $item.publishLabel])}</span></label>
+                                    </span>
+                                </span>
+                            </span>
+                            <span class="last">
+                                <label id="schedule-publish-label" for="status_scheduled" class="last hide"><input type="radio" name="status" value="scheduled" id="status_scheduled" />${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Scheduled to publish'])}</label>
+                                <a id="schedule-publish" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-right"><span class="tip-middle">{{html nn._([cms.global.PAGE_ID, 'epcurate-form', 'This episode will be published at<br />the scheduled time.'])}}</span></span></span></a>
+                                <label id="schedule-rerun-label" for="rerun_y" class="last hide"><input type="checkbox" name="rerun" value="y" id="rerun_y" />${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Scheduled to rerun'])}</label>
+                                <a id="schedule-rerun" href="javascript:void(0);" class="hide"><img src="images/icon_question.png" alt="" /><span class="tip"><img src="images/bg_tip_top.png" alt="" /><span class="tip-right"><span class="tip-middle">{{html nn._([cms.global.PAGE_ID, 'epcurate-form', 'This episode will be published again as the latest episode at the scheduled time.'])}}</span></span></span></a>
+                            </span>
+                        </span>
+                    </span>
+                </span>
+            </p>
+            <div id="date-time" class="hide">
+                <div class="datepicker"></div>
+                <div class="time">
+                    <h5>${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Hour'])}</h5>
+                    <ul>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">00:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">01:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">02:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">03:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">04:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">05:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">06:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">07:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">08:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">09:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">10:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">11:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">12:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">13:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">14:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">15:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">16:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">17:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">18:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">19:00</span></span></a></li>
+                        <li class="enable active"><a href="#"><span class="time-right"><span class="time-middle">20:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">21:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">22:00</span></span></a></li>
+                        <li class="enable"><a href="#"><span class="time-right"><span class="time-middle">23:00</span></span></a></li>
+                        <li class="enable" style="display: none;"><a href="#"><span class="time-right"><span class="time-middle">24:00</span></span></a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="publishDate" id="publishDate" value="" />
+                <input type="hidden" name="publishHour" id="publishHour" value="" />
+                <input type="hidden" name="origin_status" id="origin_status" value="Draft" />
+            </div>
+        </div>
+    </div>
 </div>
 </script>
+<!-- epcurate-form-tmpl End -->
 
 <script id="img-list-tmpl-item" type="text/x-jquery-tmpl">
 <li><div class="img"><div class="img-wrap"><img src="${imageUrl}" alt="${name}" /></div></div></li>
 </script>
 
-<!--============================== footer start ==============================-->
-<p id="footer-control" class="hide"></p>
-<div id="footer" class="hide">
-  <span>© 2013 9x9.tv. All rights reserved.</span>
-  <ul id="footer-list">
-    <li id="language-change">
-      <p class="select-txt"><a href="javascript:void(0);" id="language">English</a></p>
-      <p class="select-btn"></p>
-      <ul class="select-list">
-        <li class="on"><a href="javascript:void(0);" id="language-en" data-meta="en">English</a></li>
-        <li><a href="javascript:void(0);" id="language-zh" data-meta="zh">中文</a></li>
-      </ul>
-    </li>
-  </ul>
-</div>
-<!--============================== footer close ==============================-->
+<script id="img-list-new-tmpl-item" type="text/x-jquery-tmpl">
+<li class="new"><div class="img"><div class="img-wrap"><img src="${imageUrl}" alt="${name}" /></div></div></li>
+</script>
 
-<div id="overlay-s">
-<p class="overlay-content"><span class="overlay-right"><span class="overlay-middle"><img src="images/icon_load_l.gif" alt="" />Saving...</span></span></p>
-</div>
-
-<div id="system-error" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="btn-close">Close</a>
-<p class="content">You are not authorized to edit this episode.</p>
-<div class="overlay-btn">
-<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="unsave-prompt" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<a href="#" class="btn-close">Close</a>
-<p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
-<div class="overlay-btn">
-<p class="btns btn-no"><span><a href="#">No</a></span></p>
-<p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="publish-notice" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<p class="content">This episode has been published.</p>
-<div class="overlay-btn">
-<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
-<div id="unpublish-notice" class="lightbox-content overlay-l">
-<div class="overlay-container">
-<div class="overlay-wrap">
-<p class="content">This episode has been saved as an unpublished draft.</p>
-<div class="overlay-btn">
-<p class="btns btn-ok"><span><a href="#">OK</a></span></p>
-</div>
-</div>
-</div>
-</div>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="javascripts/libs/nn-sdk.js?v=1278"></script>
+<script src="javascripts/libs/jquery.mousewheel.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.ellipsis.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.blockUI.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.uniform.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.cycle.all.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.tmpl.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.cookie.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.ui.datepicker-en.js?v=1278"></script>
+<script src="javascripts/libs/jquery.ui.datepicker-zh.js?v=1278"></script>
+<script src="javascripts/libs/json2.min.js?v=1278"></script>
+<script src="javascripts/libs/purl.min.js?v=1278"></script>
+<script src="javascripts/libs/swfupload/swfupload.js?v=1278"></script>
+<script src="javascripts/v2/config.js?v=1278"></script>
+<script src="javascripts/v2/func.common.js?v=1278"></script>
+<script src="javascripts/v2/func.epcurate.js?v=1278"></script>
+<script src="javascripts/v2/domready.common.js?v=1278"></script>
+<script src="javascripts/v2/domready.epcurate.js?v=1278"></script>
 </body>
 </html>
