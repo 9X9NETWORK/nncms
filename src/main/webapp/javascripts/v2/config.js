@@ -342,7 +342,7 @@ var cms = {};
         break;
     case 'testing':
         cms.config.IS_DEBUG = true;
-        cms.config.API_BASE = 'http://dev.teltel.com:8080';
+        cms.config.API_BASE = '';
         break;
     case 'production':
         cms.config.IS_DEBUG = false;
