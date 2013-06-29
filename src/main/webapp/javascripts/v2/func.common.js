@@ -527,7 +527,7 @@
                 js = d.createElement('script');
                 js.id = id;
                 js.async = true;
-                js.src = '//connect.facebook.net/' + cms.config.LC_MAP[lang] + '/all' + (debug ? '/debug' : '') + '.js';
+                js.src = location.protocol + '//connect.facebook.net/' + cms.config.LC_MAP[lang] + '/all' + (debug ? '/debug' : '') + '.js';
                 ref.parentNode.insertBefore(js, ref);
             }(document, /*debug*/ false));
 
@@ -727,7 +727,9 @@
         // setup user profile
         $('#selected-profile').text(cms.global.USER_DATA.name);
 
-        nn.api('GET', 'lang/' + lang + '.json', null, function (langPack) {
+        nn.api('GET', cms.reapi('lang/{lang}.json', {
+            lang: lang
+        }), null, function (langPack) {
             var msie = /MSIE/.test(navigator.userAgent),
                 userUrlFile = null,
                 $page = null;
@@ -871,7 +873,9 @@
         $('html').removeClass(cms.config.LANG_SUPPORT.join(' ')).addClass(lang);
         $('html').attr('lang', lang);
 
-        nn.api('GET', 'lang/' + lang + '.json', null, function (langPack) {
+        nn.api('GET', cms.reapi('lang/{lang}.json', {
+            lang: lang
+        }), null, function (langPack) {
             var msie = /MSIE/.test(navigator.userAgent),
                 tmpStr = '';
 

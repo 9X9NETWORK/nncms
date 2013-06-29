@@ -20,6 +20,7 @@ var cms = {};
         RESERVED_FUNC: ['common'],
         API_BASE: '',
         API_PACK: {
+            'lang/{lang}.json':                                     'lang/{lang}.json?api=true',
             '/api/login':                                           '/api/login',
             '/api/s3/attributes':                                   '/api/s3/attributes',
             '/api/categories':                                      '/api/categories',
@@ -59,6 +60,7 @@ var cms = {};
             '/api/store':                                           '/api/store'
         },
         FAKE_PACK: {
+            'lang/{lang}.json':                                     'lang/{lang}.json?fake=true',
             '/api/login':                                           'fakeapi/login.php',
             '/api/s3/attributes':                                   'fakeapi/s3_attributes.php',
             '/api/categories':                                      'fakeapi/categories.php',
@@ -98,6 +100,7 @@ var cms = {};
             '/api/store':                                           'fakeapi/store_search.php'
         },
         PROTOTYPE_PACK: {
+            'lang/{lang}.json':                                     'lang/{lang}.json?prototype=true',
             '/api/login':                                           'fakeapi/json/login.json',
             '/api/s3/attributes':                                   'fakeapi/json/s3_attributes.json',
             '/api/categories':                                      'fakeapi/json/categories.json',
@@ -119,7 +122,7 @@ var cms = {};
             '/api/channels/{channelId}/episodes':                   'fakeapi/json/channels_episodes_{channelId}.json',
             '/api/channels/{channelId}/episodes/sorting':           'fakeapi/json/channels_episodes_sorting.json?channelId={channelId}',
             '/api/channels/{channelId}/poi_points':                 'fakeapi/json/channels_poi_points.json?channelId={channelId}',
-            '/api/episodes/{episodeId}':                            'fakeapi/json/episodes.json?episodeId={episodeId}',
+            '/api/episodes/{episodeId}':                            'fakeapi/json/episodes_{episodeId}.json',
             '/api/episodes/{episodeId}/programs':                   'fakeapi/json/episodes_programs.json?episodeId={episodeId}',
             '/api/programs/{programId}':                            'fakeapi/json/programs.json?programId={programId}',
             '/api/programs/{programId}/title_cards':                'fakeapi/json/programs_title_cards.json?programId={programId}',
@@ -131,8 +134,8 @@ var cms = {};
             '/api/mso/{msoId}':                                     'fakeapi/json/mso.json?msoId={msoId}',
             '/api/mso/{msoId}/sets':                                'fakeapi/json/mso_sets.json?msoId={msoId}',
             '/api/mso/{msoId}/store':                               'fakeapi/json/mso_store.json?msoId={msoId}',
-            '/api/sets/{setId}':                                    'fakeapi/json/sets.json?setId={setId}',
-            '/api/sets/{setId}/channels':                           'fakeapi/json/sets_channels.json?setId={setId}',
+            '/api/sets/{setId}':                                    'fakeapi/json/sets_{setId}.json',
+            '/api/sets/{setId}/channels':                           'fakeapi/json/sets_channels_{setId}.json',
             '/api/sets/{setId}/channels/sorting':                   'fakeapi/json/sets_channels_sorting.json?setId={setId}',
             '/api/store':                                           'fakeapi/json/store_search.json'
         },
@@ -291,7 +294,7 @@ var cms = {};
             });
         }
 
-        return cms.config.API_BASE + api;
+        return (api.indexOf('.json?api=true') > 0) ? api : cms.config.API_BASE + api;
     };
 
     cms.namespace = function (ns) {

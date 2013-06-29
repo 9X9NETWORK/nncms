@@ -235,6 +235,9 @@ var nn = { };
             resourceURI = fakePreURI + method + '_' + fakePostURI;
             method = 'GET';
         }
+        if (fakeIdx >= 0 || resourceURI.indexOf('.json?prototype=true') > 0) {
+            withCredentials = false;
+        }
 
 		var _dfd = $.ajax({
 			'url':        resourceURI,

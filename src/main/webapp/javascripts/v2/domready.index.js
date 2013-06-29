@@ -19,6 +19,9 @@ $(function () {
             $('#channel-list li').removeClass('deleting').removeData('deleteId');
             return false;
         }
+        if (e.shiftKey && 191 === e.which) { // ? question mark
+            $page.showCreateChannelTutorial();
+        }
     });
     $(document).on('click', '.unblock, .btn-close, .btn-no', function () {
         $.unblockUI();

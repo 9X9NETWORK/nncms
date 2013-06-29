@@ -19,6 +19,16 @@
         $('#channel-list li .wrap .info').width(channelListWidth - imgsWidth - funcWidth - 58 - 15);
     };
 
+    $page.showCreateChannelTutorial = function () {
+        $('#lightbox-create-channel').remove();
+        $('#lightbox-create-channel-tmpl').tmpl().prependTo('body');
+        $('.blockOverlay').height($(window).height() - 45);
+        $.blockUI.defaults.overlayCSS.opacity = '0.9';
+        $.blockUI({
+            message: $('#lightbox-create-channel')
+        });
+    };
+
     // NOTE: page entry point (keep at the bottom of this file)
     $page.init = function (options) {
         nn.log({
@@ -90,13 +100,7 @@
                 if (cntChannel <= 0 || (1 === cntChannel && hasFavoriteChannel)) {
                     if (!$.cookie('cms-cct')) {
                         $.cookie('cms-cct', 'seen');
-                        $('#lightbox-create-channel').remove();
-                        $('#lightbox-create-channel-tmpl').tmpl().prependTo('body');
-                        $('.blockOverlay').height($(window).height() - 45);
-                        $.blockUI.defaults.overlayCSS.opacity = '0.9';
-                        $.blockUI({
-                            message: $('#lightbox-create-channel')
-                        });
+                        $page.showCreateChannelTutorial();
                     }
                 }
                 $page.setFormHeight();
