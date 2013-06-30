@@ -1,3 +1,264 @@
+版本: 1300
+作者: chihwen
+日期: 2013年6月30日 下午 12:06:08
+訊息:
+明確指定 connect.facebook.net 中的 HTTP protocol 避免誤採 Chrome 無法存取 file:// 本機檔案的限制
+issue 6594
+----
+異動 : /api/lang/fb/en/channel.html
+異動 : /api/lang/fb/zh/channel.html
+
+版本: 1294
+作者: chihwen
+日期: 2013年6月29日 下午 11:35:06
+訊息:
+從 teltel_ui2 版本 1289~1293 轉入 api
+1. 當點擊鍵盤的 ? question mark 時，就跳頻道建立導引 overlay。
+2. 調整靜態修版 JSON 版 fakeapi 以便 sample 不同的靜態情境。
+   本次異動可以讓靜態修版分支，可以模擬 portal-first 的狀態。
+   1. 調整 config.js 依 setId 組合 JSON 版 fakeapi 檔名。
+      1. 調整 PROTOTYPE_PACK 中 /api/sets/{setId} 對應 fakeapi/json/sets_{setId}.json
+      2. 調整 PROTOTYPE_PACK 中 /api/sets/{setId}/channels 對應 fakeapi/json/sets_channels_{setId}.json
+   2. 依 setId 建立 JSON 版 fakeapi 靜態 json 檔。
+      1. GET_sets_{setId}.json：模擬各 set 資料。
+      2. GET_sets_channels_{setId}.json：模擬各 set 下的頻道清單資料。
+   3. 刪除因上述異動，已用不到的 fakeapi 檔。
+3. 避開 Chrome 下無法透過 AJAX 存取 file:// 本機檔案的限制
+   1. 設定 DoubleService Demo Site /teltel_ui2/ 目錄下支援 CORS 機制。
+      1. Access-Control-Allow-Origin: *
+      2. Access-Control-Allow-Credentials: true
+   2. 調整 config.js 將語系檔也列入 API Pack 以便因應環境作變化。
+      在 prototype 環境下，設定 lang/{lang}.json 對應 lang/{lang}.json?prototype=true，
+      以便 nn-sdk.prototype.js 可以識別運用。
+   3. 調整 config.js 將 prototype 環境下的 API_BASE 指向 http://demo.doubleservice.com/9x9_CMS-1-0-teltel_ui2/ 以便使用 CORS 機制。
+      避免誤採 Chrome 無法透過 AJAX 存取 file:// 本機檔案的限制。
+   4. 調整 nn-sdk.prototype.js 當發現是 prototype 環境時，
+      則設定 withCredentials 為 false，因為 withCredentials 為 true 時，
+      網站伺服器的 Access-Control-Allow-Origin 要明確指定 domain，不能簡單設定為 *。
+   5. 調整 func.common.js 改以 cms.reapi 包裝對應語系檔載入，以便因應環境作變化。
+   6. 調整 func.common.js 明確指定 initFacebookJavaScriptSdk 中的 location.protocol
+      避免誤採 Chrome 無法透過 AJAX 存取 file:// 本機檔案的限制。
+   7. 修正 GET_tags.json 錯誤的 JSON 格式。
+4. 調整靜態修版 JSON 版 fakeapi 以便 sample 不同的靜態情境。
+   1. 補齊改以序號組合 fakeapi 檔名後，其下所有方法的對應檔，
+      以避免操作到該方法時，產生找不到對應檔名的錯誤。
+      1. /api/sets/{setId}/channels 對應 DELETE_sets_channels_{msoId}.json
+      2. /api/sets/{setId}/channels 對應 POST_sets_channels_{msoId}.json
+      3. /api/sets/{setId} 對應 PUT_sets_{msoId}.json
+      4. /api/channels/{channelId} 對應 PUT_channels_{頻道序號}.json
+      5. /api/channels/{channelId}/episodes 對應 POST_channels_episodes_{頻道序號}.json
+   2. 刪除因上述異動，已用不到的 fakeapi 檔。
+5. 調整靜態修版 JSON 版 fakeapi 以便 sample 不同的靜態情境。
+   本次異動可以讓靜態修版分支，可以模擬 Scheduled to rerun (epcurate-publish2.html) 狀態。
+   1. 調整 config.js 依 episodeId 組合 JSON 版 fakeapi 檔名。
+      1. 調整 PROTOTYPE_PACK 中 /api/episodes/{episodeId} 對應 fakeapi/json/episodes_{episodeId}.json
+      2. 在 API_PACK 下，設定 lang/{lang}.json 對應 lang/{lang}.json?api=true
+      3. 在 FAKE_PACK 下，設定 lang/{lang}.json 對應 lang/{lang}.json?fake=true
+      4. 調整 cms.reapi 函式，當發現是 API_PACK 下的 .json?api=true 時，不組合 API_BASE
+   2. 調整 nn-sdk.prototype.js 改良 prototype 環境判斷。
+   3. 依 episodeId 建立 JSON 版 fakeapi 靜態 json 檔。
+      1. GET_episodes_{episodeId}.json：模擬取得節目資料。
+      2. PUT_episodes_{episodeId}.json：模擬修改節目資料。
+      3. DELETE_episodes_{episodeId}.json：模擬刪除節目資料。
+   4. 刪除因上述異動，已用不到的 fakeapi 檔。
+issue 6594
+----
+已刪除 : /api/fakeapi/json/DELETE_episodes.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16389.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16391.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16396.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16397.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16398.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16399.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16400.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16401.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16402.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16403.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16404.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16405.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16406.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16407.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16408.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16409.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16410.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16411.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16412.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16413.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16416.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16417.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16418.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16419.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16420.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16427.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16428.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16429.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16430.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16432.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16433.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16434.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16435.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16436.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16439.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16440.json
+已加入 : /api/fakeapi/json/DELETE_episodes_16442.json
+已刪除 : /api/fakeapi/json/DELETE_sets_channels.json
+已加入 : /api/fakeapi/json/DELETE_sets_channels_33.json
+已加入 : /api/fakeapi/json/DELETE_sets_channels_34.json
+已加入 : /api/fakeapi/json/DELETE_sets_channels_35.json
+已刪除 : /api/fakeapi/json/GET_episodes.json
+已加入 : /api/fakeapi/json/GET_episodes_16389.json
+已加入 : /api/fakeapi/json/GET_episodes_16391.json
+已加入 : /api/fakeapi/json/GET_episodes_16396.json
+已加入 : /api/fakeapi/json/GET_episodes_16397.json
+已加入 : /api/fakeapi/json/GET_episodes_16398.json
+已加入 : /api/fakeapi/json/GET_episodes_16399.json
+已加入 : /api/fakeapi/json/GET_episodes_16400.json
+已加入 : /api/fakeapi/json/GET_episodes_16401.json
+已加入 : /api/fakeapi/json/GET_episodes_16402.json
+已加入 : /api/fakeapi/json/GET_episodes_16403.json
+已加入 : /api/fakeapi/json/GET_episodes_16404.json
+已加入 : /api/fakeapi/json/GET_episodes_16405.json
+已加入 : /api/fakeapi/json/GET_episodes_16406.json
+已加入 : /api/fakeapi/json/GET_episodes_16407.json
+已加入 : /api/fakeapi/json/GET_episodes_16408.json
+已加入 : /api/fakeapi/json/GET_episodes_16409.json
+已加入 : /api/fakeapi/json/GET_episodes_16410.json
+已加入 : /api/fakeapi/json/GET_episodes_16411.json
+已加入 : /api/fakeapi/json/GET_episodes_16412.json
+已加入 : /api/fakeapi/json/GET_episodes_16413.json
+已加入 : /api/fakeapi/json/GET_episodes_16416.json
+已加入 : /api/fakeapi/json/GET_episodes_16417.json
+已加入 : /api/fakeapi/json/GET_episodes_16418.json
+已加入 : /api/fakeapi/json/GET_episodes_16419.json
+已加入 : /api/fakeapi/json/GET_episodes_16420.json
+已加入 : /api/fakeapi/json/GET_episodes_16427.json
+已加入 : /api/fakeapi/json/GET_episodes_16428.json
+已加入 : /api/fakeapi/json/GET_episodes_16429.json
+已加入 : /api/fakeapi/json/GET_episodes_16430.json
+已加入 : /api/fakeapi/json/GET_episodes_16432.json
+已加入 : /api/fakeapi/json/GET_episodes_16433.json
+已加入 : /api/fakeapi/json/GET_episodes_16434.json
+已加入 : /api/fakeapi/json/GET_episodes_16435.json
+已加入 : /api/fakeapi/json/GET_episodes_16436.json
+已加入 : /api/fakeapi/json/GET_episodes_16439.json
+已加入 : /api/fakeapi/json/GET_episodes_16440.json
+已加入 : /api/fakeapi/json/GET_episodes_16442.json
+已刪除 : /api/fakeapi/json/GET_sets.json
+已加入 : /api/fakeapi/json/GET_sets_33.json
+已加入 : /api/fakeapi/json/GET_sets_34.json
+已加入 : /api/fakeapi/json/GET_sets_35.json
+已刪除 : /api/fakeapi/json/GET_sets_channels.json
+已加入 : /api/fakeapi/json/GET_sets_channels_33.json
+已加入 : /api/fakeapi/json/GET_sets_channels_34.json
+已加入 : /api/fakeapi/json/GET_sets_channels_35.json
+異動 : /api/fakeapi/json/GET_tags.json
+已刪除 : /api/fakeapi/json/POST_channels_episodes.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8758.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8759.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8764.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8765.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8769.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8770.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8771.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8774.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8775.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8776.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8777.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8778.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8779.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8780.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8784.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8786.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8787.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8788.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8789.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8790.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8794.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8795.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8797.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8798.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8810.json
+已加入 : /api/fakeapi/json/POST_channels_episodes_8814.json
+已刪除 : /api/fakeapi/json/POST_sets_channels.json
+已加入 : /api/fakeapi/json/POST_sets_channels_33.json
+已加入 : /api/fakeapi/json/POST_sets_channels_34.json
+已加入 : /api/fakeapi/json/POST_sets_channels_35.json
+已刪除 : /api/fakeapi/json/PUT_channels.json
+已加入 : /api/fakeapi/json/PUT_channels_8758.json
+已加入 : /api/fakeapi/json/PUT_channels_8759.json
+已加入 : /api/fakeapi/json/PUT_channels_8760.json
+已加入 : /api/fakeapi/json/PUT_channels_8764.json
+已加入 : /api/fakeapi/json/PUT_channels_8765.json
+已加入 : /api/fakeapi/json/PUT_channels_8769.json
+已加入 : /api/fakeapi/json/PUT_channels_8770.json
+已加入 : /api/fakeapi/json/PUT_channels_8771.json
+已加入 : /api/fakeapi/json/PUT_channels_8774.json
+已加入 : /api/fakeapi/json/PUT_channels_8775.json
+已加入 : /api/fakeapi/json/PUT_channels_8776.json
+已加入 : /api/fakeapi/json/PUT_channels_8777.json
+已加入 : /api/fakeapi/json/PUT_channels_8778.json
+已加入 : /api/fakeapi/json/PUT_channels_8779.json
+已加入 : /api/fakeapi/json/PUT_channels_8780.json
+已加入 : /api/fakeapi/json/PUT_channels_8784.json
+已加入 : /api/fakeapi/json/PUT_channels_8786.json
+已加入 : /api/fakeapi/json/PUT_channels_8787.json
+已加入 : /api/fakeapi/json/PUT_channels_8788.json
+已加入 : /api/fakeapi/json/PUT_channels_8789.json
+已加入 : /api/fakeapi/json/PUT_channels_8790.json
+已加入 : /api/fakeapi/json/PUT_channels_8794.json
+已加入 : /api/fakeapi/json/PUT_channels_8795.json
+已加入 : /api/fakeapi/json/PUT_channels_8797.json
+已加入 : /api/fakeapi/json/PUT_channels_8798.json
+已加入 : /api/fakeapi/json/PUT_channels_8810.json
+已加入 : /api/fakeapi/json/PUT_channels_8814.json
+已刪除 : /api/fakeapi/json/PUT_episodes.json
+已加入 : /api/fakeapi/json/PUT_episodes_16389.json
+已加入 : /api/fakeapi/json/PUT_episodes_16391.json
+已加入 : /api/fakeapi/json/PUT_episodes_16396.json
+已加入 : /api/fakeapi/json/PUT_episodes_16397.json
+已加入 : /api/fakeapi/json/PUT_episodes_16398.json
+已加入 : /api/fakeapi/json/PUT_episodes_16399.json
+已加入 : /api/fakeapi/json/PUT_episodes_16400.json
+已加入 : /api/fakeapi/json/PUT_episodes_16401.json
+已加入 : /api/fakeapi/json/PUT_episodes_16402.json
+已加入 : /api/fakeapi/json/PUT_episodes_16403.json
+已加入 : /api/fakeapi/json/PUT_episodes_16404.json
+已加入 : /api/fakeapi/json/PUT_episodes_16405.json
+已加入 : /api/fakeapi/json/PUT_episodes_16406.json
+已加入 : /api/fakeapi/json/PUT_episodes_16407.json
+已加入 : /api/fakeapi/json/PUT_episodes_16408.json
+已加入 : /api/fakeapi/json/PUT_episodes_16409.json
+已加入 : /api/fakeapi/json/PUT_episodes_16410.json
+已加入 : /api/fakeapi/json/PUT_episodes_16411.json
+已加入 : /api/fakeapi/json/PUT_episodes_16412.json
+已加入 : /api/fakeapi/json/PUT_episodes_16413.json
+已加入 : /api/fakeapi/json/PUT_episodes_16416.json
+已加入 : /api/fakeapi/json/PUT_episodes_16417.json
+已加入 : /api/fakeapi/json/PUT_episodes_16418.json
+已加入 : /api/fakeapi/json/PUT_episodes_16419.json
+已加入 : /api/fakeapi/json/PUT_episodes_16420.json
+已加入 : /api/fakeapi/json/PUT_episodes_16427.json
+已加入 : /api/fakeapi/json/PUT_episodes_16428.json
+已加入 : /api/fakeapi/json/PUT_episodes_16429.json
+已加入 : /api/fakeapi/json/PUT_episodes_16430.json
+已加入 : /api/fakeapi/json/PUT_episodes_16432.json
+已加入 : /api/fakeapi/json/PUT_episodes_16433.json
+已加入 : /api/fakeapi/json/PUT_episodes_16434.json
+已加入 : /api/fakeapi/json/PUT_episodes_16435.json
+已加入 : /api/fakeapi/json/PUT_episodes_16436.json
+已加入 : /api/fakeapi/json/PUT_episodes_16439.json
+已加入 : /api/fakeapi/json/PUT_episodes_16440.json
+已加入 : /api/fakeapi/json/PUT_episodes_16442.json
+已刪除 : /api/fakeapi/json/PUT_sets.json
+已加入 : /api/fakeapi/json/PUT_sets_33.json
+已加入 : /api/fakeapi/json/PUT_sets_34.json
+已加入 : /api/fakeapi/json/PUT_sets_35.json
+異動 : /api/javascripts/libs/nn-sdk.prototype.js
+異動 : /api/javascripts/v2/config.js
+異動 : /api/javascripts/v2/domready.index.js
+異動 : /api/javascripts/v2/func.common.js
+異動 : /api/javascripts/v2/func.index.js
+
 版本: 1285
 作者: chihwen
 日期: 2013年6月28日 下午 12:25:56
