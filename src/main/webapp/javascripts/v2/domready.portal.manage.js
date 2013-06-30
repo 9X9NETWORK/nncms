@@ -520,12 +520,10 @@ $(function () {
             channelId: this_id
         };
 
-        var api_fix = "?channelId=" + parameter.channelId;
         $common.showProcessingOverlay();
-        nn.api('DELETE', cms.reapi('/api/sets/{setId}/channels' + api_fix, {
+        nn.api('DELETE', cms.reapi('/api/sets/{setId}/channels', {
             setId: setId
         }), parameter, function (msg) {
-
             // put resource for update set count
             nn.api('PUT', cms.reapi('/api/sets/{setId}', {
                 setId: setId

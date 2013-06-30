@@ -1,3 +1,14 @@
+版本: 1305
+作者: chihwen
+日期: 2013年6月30日 下午 04:28:21
+訊息:
+交由 nn.api 去處理 DELETE 方法的 workarround
+移除 DELETE 方法的 QueryString 字串，以避免無法依環境切換 API
+issue 6594
+----
+異動 : /api/javascripts/v2/domready.portal.manage.js
+異動 : /api/javascripts/v2/domready.portal.store.js
+
 版本: 1300
 作者: chihwen
 日期: 2013年6月30日 下午 12:06:08

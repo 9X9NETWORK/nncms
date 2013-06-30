@@ -33,7 +33,7 @@ $(function () {
         } else {
             // remove channle
             $common.showProcessingOverlay();
-            nn.api('DELETE', cms.reapi('/api/mso/{msoId}/store?channels=' + channelId, {
+            nn.api('DELETE', cms.reapi('/api/mso/{msoId}/store', {
                 msoId: msoId
             }), {
                 channels: channelId
