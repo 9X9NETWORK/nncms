@@ -485,6 +485,7 @@ $(function () {
                     $('#datepicker_selected').val(dateList.join(','));
                     $('#schedule_selected').val(dateTimeList.join(','));
                     $('#poi-event-overlay .datepicker').datepick('setDate', dateList);
+                    $('#poi-event-overlay .datepicker').datepick('performAction', 'today');
                 } else {
                     // default schedule datetime
                     $('#time_hour').text(hour);
@@ -493,6 +494,7 @@ $(function () {
                     $('#schedule_selected').val(selectedDateTime);
                     $('#timestamp_selected').val(Date.parse(selectedDateTime));
                     $('#poi-event-overlay .datepicker').datepick('setDate', selectedDate);
+                    $('#poi-event-overlay .datepicker').datepick('performAction', 'today');
                 }
                 $('#event-scheduled .schedule').addClass('hide');
                 $('#schedule-mobile').removeClass('hide');

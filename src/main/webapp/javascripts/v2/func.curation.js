@@ -185,6 +185,9 @@
         fm.notifyScheduler.value = $.trim(fm.notifyScheduler.value);
 
         var poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey'),
+            todayTimestamp = Date.parse(new Date()),
+            notifySchedulerList = [],
+            validSchedulerList = [],
             url = $.url(fm.channelUrl.value),
             hash = '',
             param = '',
@@ -213,10 +216,18 @@
                     callback(false);
                     return false;
                 }
-                if ('event-scheduled' === poiEventTypeKey && '' === fm.notifyScheduler.value) {
-                    $('#poi-event-overlay .event .func ul li.notice').show();
-                    callback(false);
-                    return false;
+                if ('event-scheduled' === poiEventTypeKey) {
+                    if ('' !== fm.notifyScheduler.value) {
+                        notifySchedulerList = fm.notifyScheduler.value.split(',');
+                        validSchedulerList = $.grep(notifySchedulerList, function (n, i) {
+                            return n > todayTimestamp;
+                        });
+                    }
+                    if (validSchedulerList.length === 0) {
+                        $('#poi-event-overlay .event .func ul li.notice').show();
+                        callback(false);
+                        return false;
+                    }
                 }
             }
             // notice and url reset
@@ -1283,6 +1294,7 @@
         $.blockUI({
             message: $('#poi-event-overlay'),
             onBlock: function () {
+                var currentFrameMonth = '';
                 $('body').addClass('from-poi-overlay-edit-mode');
                 $('#poi-event-overlay .event').addClass('hide');
                 if ($('#cur-poi-edit').hasClass('edit')) {
@@ -1312,8 +1324,19 @@
                     dateFormat: 'yyyy/mm/dd',
                     monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-                    minDate: +0,
                     multiSelect: 999,
+                    onChangeMonthYear: function (year, month) {
+                        currentFrameMonth = month;
+                    },
+                    onDate: function (date) {
+                        var selectedList = $('#datepicker_selected').val().split(','),
+                            currentDate = $.datepick.formatDate('yyyy/mm/dd', date),
+                            currentMonth = date.getMonth() + 1;
+                        return (date >= $.datepick.today()) ? {} : {
+                            dateClass: ((-1 !== $.inArray(currentDate, selectedList) && currentMonth === currentFrameMonth) ? 'datepick-selected' : ''),
+                            selectable: false
+                        };
+                    },
                     onSelect: function (dates) {
                         $('body').addClass('has-poi-change');
                         $('body').addClass('has-change');

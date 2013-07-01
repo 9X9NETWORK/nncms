@@ -60,7 +60,12 @@
         fm.channelUrl.value = $.trim(fm.channelUrl.value);
         fm.notifyMsg.value = $.trim(fm.notifyMsg.value);
         fm.notifyScheduler.value = $.trim(fm.notifyScheduler.value);
-        var poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey');
+
+        var poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey'),
+            todayTimestamp = Date.parse(new Date()),
+            notifySchedulerList = [],
+            validSchedulerList = [];
+
         if ('' === fm.displayText.value || '' === fm.btnText.value) {
             $('#poi-event-overlay .event .func ul li.notice').show();
             callback(false);
@@ -72,12 +77,21 @@
                 callback(false);
                 return false;
             }
-            if ('event-scheduled' === poiEventTypeKey && '' === fm.notifyScheduler.value) {
-                $('#poi-event-overlay .event .func ul li.notice').show();
-                callback(false);
-                return false;
+            if ('event-scheduled' === poiEventTypeKey) {
+                if ('' !== fm.notifyScheduler.value) {
+                    notifySchedulerList = fm.notifyScheduler.value.split(',');
+                    validSchedulerList = $.grep(notifySchedulerList, function (n, i) {
+                        return n > todayTimestamp;
+                    });
+                }
+                if (validSchedulerList.length === 0) {
+                    $('#poi-event-overlay .event .func ul li.notice').show();
+                    callback(false);
+                    return false;
+                }
             }
         }
+
         // notice and url reset
         $('#poi-event-overlay .event .func ul li.notice').hide();
         callback(true);
@@ -332,6 +346,7 @@
         $.blockUI({
             message: $('#poi-event-overlay'),
             onBlock: function () {
+                var currentFrameMonth = '';
                 $('#poi-event-overlay .event').addClass('hide');
                 if ($('#poi-point-edit').hasClass('edit')) {
                     // update mode
@@ -360,8 +375,19 @@
                     dateFormat: 'yyyy/mm/dd',
                     monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-                    minDate: +0,
                     multiSelect: 999,
+                    onChangeMonthYear: function (year, month) {
+                        currentFrameMonth = month;
+                    },
+                    onDate: function (date) {
+                        var selectedList = $('#datepicker_selected').val().split(','),
+                            currentDate = $.datepick.formatDate('yyyy/mm/dd', date),
+                            currentMonth = date.getMonth() + 1;
+                        return (date >= $.datepick.today()) ? {} : {
+                            dateClass: ((-1 !== $.inArray(currentDate, selectedList) && currentMonth === currentFrameMonth) ? 'datepick-selected' : ''),
+                            selectable: false
+                        };
+                    },
                     onSelect: function (dates) {
                         $('body').addClass('has-poi-change');
                         $('body').addClass('has-change');
