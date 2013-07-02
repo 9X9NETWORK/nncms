@@ -11,39 +11,44 @@ $(function () {
     $(document).on("click", ".btn-minus", function (e) {
         var thisDiv = $(this);
         var upLi = $(this).parents("li");
-        var channelId = upLi.attr("id").replace("channel_", "");
-        var msoId = 0;
+        var channelId = parseInt(upLi.attr("id").replace("channel_", ""), 10);
 
-        msoId = cms.global.MSO;
-        // $(this).find("p").eq(1).html();
+        var inCurrent = false,
+            inAdd = false,
+            inRemove = false;
+
+        if (-1 !== $.inArray(channelId, cms.global.USER_DATA["msoCurrent"])) {
+            inCurrent = true;
+        }
+        if (-1 !== $.inArray(channelId, cms.global.USER_DATA["msoAdd"])) {
+            inAdd = true;
+        }
+        if (-1 !== $.inArray(channelId, cms.global.USER_DATA["msoRemove"])) {
+            inRemove = true;
+        }
 
         if ($(this).hasClass("on")) {
             // add channel
-            $common.showProcessingOverlay();
-            nn.api('POST', cms.reapi('/api/mso/{msoId}/store', {
-                msoId: msoId
-            }), {
-                channels: channelId
-            }, function (channelsMso) {
-                thisDiv.removeClass("on");
-                upLi.removeClass("minus");
-                thisDiv.find("p.center").text(nn._([cms.global.PAGE_ID, 'channel-list', 'Remove channel']));
-                $('#overlay-s').fadeOut("slow");
-            });
+            if (inCurrent === false && inRemove === false) {
+                cms.global.USER_DATA["msoAdd"].push(channelId);
+            } else if (inCurrent === true && inRemove === true) {
+                cms.global.USER_DATA["msoRemove"].splice($.inArray(channelId, cms.global.USER_DATA["msoRemove"]), 1);
+            }
+            thisDiv.removeClass("on");
+            upLi.removeClass("minus");
+            thisDiv.find("p.center").text(nn._([cms.global.PAGE_ID, 'channel-list', 'Remove channel']));
+            $('body').addClass('has-change');
         } else {
             // remove channle
-            $common.showProcessingOverlay();
-            nn.api('DELETE', cms.reapi('/api/mso/{msoId}/store', {
-                msoId: msoId
-            }), {
-                channels: channelId
-            }, function (channelsMso) {
-                thisDiv.addClass("on");
-                upLi.addClass("minus");
-                thisDiv.find("p.center").text(nn._([cms.global.PAGE_ID, 'channel-list', 'Add channel']));
-                $('#overlay-s').fadeOut("slow");
-                //console.log( thisDiv.text() );
-            });
+            if (inCurrent === true && inAdd === false) {
+                cms.global.USER_DATA["msoRemove"].push(channelId);
+            } else if (inCurrent === false && inAdd === true) {
+                cms.global.USER_DATA["msoAdd"].splice($.inArray(channelId, cms.global.USER_DATA["msoAdd"]), 1);
+            }
+            $('body').addClass('has-change');
+            thisDiv.addClass("on");
+            upLi.addClass("minus");
+            thisDiv.find("p.center").text(nn._([cms.global.PAGE_ID, 'channel-list', 'Add channel']));
         }
     });
 
@@ -63,29 +68,77 @@ $(function () {
     });
 
     $(document).on("click", "#set-save", function (event) {
+        var msoId = 0;
+        msoId = cms.global.MSO;
+        var tmpMsoAdd = cms.global.USER_DATA["msoAdd"],
+            tmpMsoRemove = cms.global.USER_DATA["msoRemove"];
         $common.showProcessingOverlay();
-        setTimeout(function () {
-            $("#overlay-s").fadeOut("slow");
-        }, 600);
+
+        if (tmpMsoAdd.length > 0) {
+            nn.api('POST', cms.reapi('/api/mso/{msoId}/store', {
+                msoId: msoId
+            }), {
+                channels: tmpMsoAdd.join(",")
+            }, function (channel) {
+                // Add AL to WL and empty AL
+                cms.global.USER_DATA["msoCurrent"] = cms.global.USER_DATA["msoCurrent"].concat(tmpMsoAdd);
+                cms.global.USER_DATA["msoAdd"] = [];
+            });
+        }
+
+        if (tmpMsoRemove.length > 0) {
+            nn.api('DELETE', cms.reapi('/api/mso/{msoId}/store', {
+                msoId: msoId
+            }), {
+                channels: tmpMsoRemove.join(",")
+            }, function (channel) {
+                // Remove RL from WL empty RL
+                $.each(tmpMsoRemove, function (eKey, eValue) {
+                    cms.global.USER_DATA["msoCurrent"].splice($.inArray(eValue, cms.global.USER_DATA["msoCurrent"]), 1);
+                });
+                cms.global.USER_DATA["msoRemove"] = [];
+
+            });
+        }
+        $('#overlay-s').fadeOut("slow");
+        $('body').removeClass('has-change');
     });
 
     $(document).on("click", ".catLi", function (event) {
-        var msoId = 0;
-
-        msoId = cms.global.MSO;
-        $common.showProcessingOverlay();
-        $(".catLi ").removeClass("on");
-        $(this).addClass("on");
-        $(".func_name").text($(this).text());
-        $('.channel-list li').remove();
-
-        if ('none' !== $('#store-slider').css('display')) {
-            $('#store-slider .slider-vertical').slider('value', 100);
-            $('#store-slider .slider-vertical').slider('destroy');
-            $common.autoHeight();
-            $common.scrollbar("#store-constrain", "#store-list", "#store-slider");
+        if ($('body').hasClass('has-change')) {
+            // Unsaved changes will be lost, are you sure you want to leave?
+            $(".btn-leave").data("meta", $(this).data("meta"));
+            $common.showUnsaveOverlay();
+        } else {
+            $page.catLiClick($(this).data("meta"));
         }
-        $page.listCatChannel(msoId, $(this).data("meta"), $page.channelPageSize);
+    });
+
+    $(document).on('click', '#unsave-prompt .btn-leave', function () {
+        $('body').removeClass('has-change');
+        $.unblockUI();
+        if (null !== $('body').data('leaveUrl') && $('body').data('leaveUrl') !== "") {
+            location.href = $('body').data('leaveUrl');
+        } else {
+            $page.catLiClick($(".btn-leave").data("meta"));
+        }
+        return false;
+    });
+
+    $('.unblock, .btn-close, .btn-no, .setup-notice .btn-ok').click(function () {
+        $.unblockUI();
+        $('body').data('leaveUrl', "");
+        return false;
+    });
+
+    $(document).on('click', '#content-nav a, .select-list li a, .studio-nav-wrap a, #profile-dropdown a', function (e) {
+        if ($('body').hasClass('has-change')) {
+            if (e && $(e.currentTarget).attr('href')) {
+                $('body').data('leaveUrl', $(e.currentTarget).attr('href'));
+            }
+            $common.showUnsaveOverlay();
+            return false;
+        }
     });
 
     $(document).on("click", "#store-category .btn-gray", function (event) {
@@ -106,7 +159,15 @@ $(function () {
         }
         return false;
     });
+    // leave and unsave
 
+    function confirmExit() {
+        if ($('body').hasClass('has-change')) {
+            // Unsaved changes will be lost, are you sure you want to leave?
+            return $('#unsave-prompt p.content').text();
+        }
+    }
+    window.onbeforeunload = confirmExit;
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
         $common.autoHeight();

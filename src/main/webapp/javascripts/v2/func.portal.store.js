@@ -52,7 +52,7 @@
                 tmpArr = [];
                 strMinus = "";
                 tmpArr = itemChannel[i];
-                if (-1 === $.inArray(tmpArr.id, cms.global.USER_DATA["mosCurrent"])) {
+                if (-1 === $.inArray(tmpArr.id, cms.global.USER_DATA["msoCurrent"])) {
                     strMinus = "on";
                 }
 
@@ -71,7 +71,6 @@
                 $('#store-slider .slider-vertical').slider('value', 0);
             }
             $('#overlay-s').fadeOut("slow");
-            //console.log("scrollbar**" + $('#store-slider .slider-vertical').slider('value'));
         });
     };
 
@@ -84,7 +83,6 @@
     };
 
     $page.listCatChannel = function (inMsoId, inCatId, inPageSize) {
-        console.log("inMsoId: " + inMsoId);
         // base
         nn.api('GET', cms.reapi('/api/store'), {
             categoryId: inCatId,
@@ -106,7 +104,8 @@
 
                 cms.global.USER_DATA["pageInfo"] = pageInfo;
                 cms.global.USER_DATA["msoSource"] = channels;
-                console.log("cntChannelSource: " + cntChannelSource);
+                cms.global.USER_DATA["msoAdd"] = [];
+                cms.global.USER_DATA["msoRemove"] = [];
                 nn.api('GET', cms.reapi('/api/mso/{msoId}/store', {
                     msoId: inMsoId
                 }), {
@@ -114,9 +113,9 @@
                 }, function (channelsMso) {
                     var cntChannelsMso = channelsMso.length;
                     if (cntChannelsMso > 0) {
-                        cms.global.USER_DATA["mosCurrent"] = channelsMso;
+                        cms.global.USER_DATA["msoCurrent"] = channelsMso;
                     } else {
-                        cms.global.USER_DATA["mosCurrent"] = [];
+                        cms.global.USER_DATA["msoCurrent"] = [];
                     }
                     $('.channel-list').html("");
                     $page._drawChannels(inPageSize, false);
@@ -126,6 +125,25 @@
                 $('#overlay-s').fadeOut("slow");
             }
         });
+    };
+
+    $page.catLiClick = function (inObj) {
+        var msoId = 0;
+        msoId = cms.global.MSO;
+        $common.showProcessingOverlay();
+        $(".catLi ").removeClass("on");
+        $("#catLi_" + inObj).addClass("on");
+        $(".func_name").text($("#catLi_" + inObj).text());
+        $('.channel-list li').remove();
+
+        if ('none' !== $('#store-slider').css('display')) {
+            $('#store-slider .slider-vertical').slider('value', 100);
+            $('#store-slider .slider-vertical').slider('destroy');
+            $common.autoHeight();
+            $common.scrollbar("#store-constrain", "#store-list", "#store-slider");
+        }
+        $page.listCatChannel(msoId, inObj, $page.channelPageSize);
+
     };
 
     // NOTE: page entry point (keep at the bottom of this file)
@@ -139,14 +157,14 @@
         $common.showProcessingOverlay();
         var pageInfo = [],
             msoSource = [],
-            mosCurrent = [],
+            msoCurrent = [],
             msoId = 0,
             catId = 0;
         pageInfo["pageTotal"] = pageInfo["pageCurrent"] = pageInfo["pageNext"] = 0;
 
         cms.global.USER_DATA["pageInfo"] = pageInfo;
         cms.global.USER_DATA["msoSource"] = msoSource;
-        cms.global.USER_DATA["mosCurrent"] = mosCurrent;
+        cms.global.USER_DATA["msoCurrent"] = msoCurrent;
 
         var lang = cms.global.USER_DATA.lang;
         // /api/mso/{msoId}/store
