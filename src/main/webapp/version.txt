@@ -1,3 +1,14 @@
+版本: 5027
+作者: Mars
+日期: 2013/7/8 14:38
+訊息:
+修改 portal-manage.html 不使用即時儲存，改用儲存鈕一次儲存所有資訊。
+修改 ivan 決定先將 preview button 拿掉
+----
+異動 : /portal-manage.html
+異動 : /javascripts/v2/func.portal.manage.js
+異動 : /javascripts/v2/domready.portal.manage.js
+
 版本: 5010
 作者: Mars
 日期: 2013/7/2 17:15

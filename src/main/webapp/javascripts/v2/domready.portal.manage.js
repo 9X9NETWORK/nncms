@@ -10,42 +10,45 @@ $(function () {
 
     $(document).on("click", "#set-preview", function (event) {
         // 2013/06/20 remove tv from URL
-        var setId = cms.global.USER_URL.param('id');
-        var preUrl = $.url().attr('host') + "/#/streaming/";
-        var msoId = cms.global.MSO;
-        var thisA = $(this);
+        var setId = cms.global.USER_URL.param('id'),
+            preUrl = $.url().attr('host') + "/#/streaming/",
+            msoId = cms.global.MSO,
+            thisA = $(this),
+            thisMeta = null;
 
-        nn.api('GET', cms.reapi('/api/sets/{setId}', {
-            setId: setId
-        })).then(function (ccSetInfo) {
-            nn.api('GET', cms.reapi('/api/mso/{msoId}', {
-                msoId: msoId
-            }), null, function (mso) {
-                var tmpMsoName = mso.name + ".";
-                preUrl += ccSetInfo.displayId + "-" + setId;
-                if (msoId === 1) {
-                    if (preUrl.indexOf("www.") === 0) {
-                        preUrl = preUrl.replace("www.", "player.");
+        thisMeta = thisA.data("meta");
+        if ("isLoad" !== thisMeta) {
+            nn.api('GET', cms.reapi('/api/sets/{setId}', {
+                setId: setId
+            })).then(function (ccSetInfo) {
+                nn.api('GET', cms.reapi('/api/mso/{msoId}', {
+                    msoId: msoId
+                }), null, function (mso) {
+                    var tmpMsoName = mso.name + ".";
+                    preUrl += ccSetInfo.displayId + "-" + setId;
+                    if (msoId === 1) {
+                        if (preUrl.indexOf("www.") === 0) {
+                            preUrl = preUrl.replace("www.", "player.");
+                        } else {
+                            preUrl = "player." + preUrl;
+                        }
                     } else {
-                        preUrl = "player." + preUrl;
+                        if (preUrl.indexOf("www.") === 0) {
+                            preUrl = preUrl.replace("www.", tmpMsoName);
+                        } else {
+                            preUrl = tmpMsoName + preUrl;
+                        }
                     }
-                } else {
-                    if (preUrl.indexOf("www.") === 0) {
-                        preUrl = preUrl.replace("www.", tmpMsoName);
-                    } else {
-                        preUrl = tmpMsoName + preUrl;
-                    }
-                }
-                preUrl = "http://" + preUrl;
-                thisA.attr("href", preUrl);
+                    preUrl = "http://" + preUrl;
+                    thisA.attr("href", preUrl);
+                    thisA.data("meta", "isLoad");
+                });
             });
-        });
-        return false;
+            return false;
+        }
     });
 
     $(document).on("click", "#set-save", function (event) {
-        // protal set save
-        //var btnOn = $("#sortingType").val();
         var setId = cms.global.USER_URL.param('id');
         $("#setName").val($.trim($("#setName").val()));
         var inSetName = $("#setName").val();
@@ -61,69 +64,60 @@ $(function () {
                 name: inSetName,
                 sortingType: inSortingType
             }, function (set) {
-                var channels = [],
-                    this_id = 0,
-                    channelOrder = "";
+                var actChannelCount = 0,
+                    actChannel = [];
 
-                if (inSortingType == 1) {
-                    $(".btn-top").hide();
-                    $("#channel-list  li.itemList").each(function () {
-                        //alert( channel.html() );
-                        this_id = $(this).attr("id").replace("set_", "");
-                        //cms.config.CATEGORY_MAP[list.id] = list.name;
-                        if (this_id > 0) {
-                            channels.push(this_id);
-                        }
-                    });
-                    channelOrder = channels.join(',');
-                    if ("" !== channelOrder) {
-                        // need reorder
-                        nn.api('PUT', cms.reapi('/api/sets/{setId}/channels/sorting', {
+                nn.log("actChannelsssCount : " + $page.removeList);
+                $.each($page.removeList, function (i, channel) {
+                    if (channel > 0) {
+                        actChannel.push({
+                            chAction: "DELETE",
+                            chId: channel
+                        });
+                    }
+                });
+
+                $.each($page.addList, function (i, channel) {
+                    if (channel > 0) {
+                        actChannel.push({
+                            chAction: "POST",
+                            chId: channel
+                        });
+                    }
+                });
+
+                $page.removeList = [];
+
+                actChannelCount = actChannel.length;
+
+                if (actChannelCount > 0) {
+                    $.each(actChannel, function (i, channel) {
+
+                        nn.log("actChannelCount : " + actChannelCount);
+
+                        nn.api(channel.chAction, cms.reapi('/api/sets/{setId}/channels', {
                             setId: setId
                         }), {
-                            channels: channelOrder
-                        }, function (set) {
-                            //alert("排序 ok!");
-                            $('#overlay-s').fadeOut("slow");
+                            channelId: channel.chId
+                        }, function (retValue) {
+                            actChannelCount = actChannelCount - 1;
+                            if (actChannelCount === 0) {
+                                $page._procSort(setId);
+                                nn.log("actChannelCount in API : " + actChannelCount);
+
+                            }
                         });
-                    } else {
-                        $('#overlay-s').fadeOut("slow");
-                    }
+
+                    });
                 } else {
-                    $("#channel-list li.itemList").each(function () {
-                        //alert( channel.html() );
-                        this_id = $(this).attr("id").replace("set_", "");
-                        //cms.config.CATEGORY_MAP[list.id] = list.name;
-                        if (this_id > 0) {
-                            channels.push(this_id);
-                        }
-                    });
-                    channelOrder = channels.join(',');
-                    //alert( channelOrder );
-                    if ("" !== channelOrder) {
-                        // need reorder
-                        nn.api('PUT', cms.reapi('/api/sets/{setId}/channels/sorting', {
-                            setId: setId
-                        }), {
-                            channels: channelOrder
-                        }, function (set) {
-                            //alert("排序 ok!");
-                            $page.init();
-                            //$('#overlay-s').fadeOut("slow");
-                        });
-                    } else {
-                        $page.init();
-                        //$('#overlay-s').fadeOut("slow");
-                    }
+                    $page._procSort(setId);
                 }
+
             });
             $("body").removeClass("has-change");
         } else {
-            // err msg
             $("#msg-portal").text(nn._([cms.global.PAGE_ID, 'channel-list', "Please fill in your set name."]));
             $("#msg-portal").show();
-            //$common.showSystemErrorOverlay(nn._([cms.global.PAGE_ID, 'channel-list', "Please fill in your set name."]));
-            //alert("頻道組名稱不可以是空白");
         }
         return false;
     });
@@ -131,7 +125,6 @@ $(function () {
     $(document).on("keyup", "#input-portal-ch", function (event) {
         if (event.which == 13) {
             $("#portal_search_channel").click();
-            //event.preventDefault();
         }
     });
 
@@ -145,8 +138,8 @@ $(function () {
         $('body').addClass('has-change');
     });
 
-    // search layout
     $(document).on("click", "#empty_channel", function (event) {
+        // search layout
         var cntChannel = $("#channelCnt").text();
         if (cntChannel < 27) {
             $("#search-title").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Add channels into your “<span>Set 2</span>”"], [$("#setName").val()]));
@@ -208,14 +201,13 @@ $(function () {
         }
     });
 
-    // button search
     $(document).on("click", "#portal_search_channel", function (event) {
+        // button search
         $("#input-portal-ch").val($.trim($("#input-portal-ch").val()));
         var strInput = $("#input-portal-ch").val(),
-            searchType = $("#dropdown-portal-ch").attr("kvale");
-        var msgErr = "";
+            searchType = $("#dropdown-portal-ch").attr("kvale"),
+            msgErr = "";
         $("#sRusult").data("canAdd", (27 - $("#channelCnt").text()));
-        //alert(searchType);
         $('#search-channel-list').html('');
         $("#searchNext").hide();
         $("#searchPrev").hide();
@@ -234,8 +226,6 @@ $(function () {
             }
 
             msgErr = nn._([cms.global.PAGE_ID, 'portal-add-layer', msgErr]);
-            //$("#msg-search").text(msgErr);
-            //$("#msg-search").show();
             $("#sRusult").text(msgErr);
         } else {
             $("#portal-add-layer").fadeOut();
@@ -249,11 +239,9 @@ $(function () {
                     nn.api('GET', cms.reapi('/api/channels'), {
                         channels: tmpChannel
                     }, function (channels) {
-                        var cntChannel = channels.length;
-                        var canChannel = 27 - $("#channelCnt").text();
-
-                        //alert($("#sRusult").data("canAdd"));
-                        var items = [],
+                        var cntChannel = channels.length,
+                            canChannel = 27 - $("#channelCnt").text(),
+                            items = [],
                             temp = [];
                         $.each(channels, function (i, channel) {
                             temp = [];
@@ -300,7 +288,6 @@ $(function () {
                         }
                     });
                 } else {
-                    //$("#msg-search").text(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Please fill in the correct url."])).show();
                     $("#sRusult").text(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Please fill in the correct url."])).show();
                 }
                 $("#portal-add-layer").fadeIn();
@@ -311,10 +298,9 @@ $(function () {
                     keyword: strInput,
                     mso: cms.global.MSOINFO.name
                 }, function (channels) {
-                    var cntChannel = channels.length;
-                    var canChannel = 27 - $("#channelCnt").text();
-
-                    var items = [],
+                    var cntChannel = channels.length,
+                        canChannel = 27 - $("#channelCnt").text(),
+                        items = [],
                         temp = [];
                     $.each(channels, function (i, channel) {
                         temp = [];
@@ -351,49 +337,58 @@ $(function () {
         }
     });
 
-    // add chanel
     $(document).on("click", "#portal_add_channel", function (event) {
-        var lis = $("#search-channel-list li .on");
-        var cntLis = lis.length;
-        var setId = cms.global.USER_URL.param('id');
-        //alert(lis.html());
+        // add chanel
+        var lis = $("#search-channel-list li .on"),
+            cntLis = lis.length,
+            tmpList = [];
 
         if (cntLis > 0) {
             $common.showProcessingOverlay();
-            var this_id = null,
-                committedCnt = 0;
+            var this_id = null;
             $.each(lis, function (idx, lisItem) {
+
                 this_id = $(lisItem).attr("id").replace("schk_", "");
-                nn.api('POST', cms.reapi('/api/sets/{setId}/channels', {
-                    setId: setId
-                }), {
-                    channelId: this_id
-                }, function (msg) {
-                    committedCnt += 1;
-                    if (committedCnt === cntLis) {
-                        committedCnt = -1;   // reset to avoid collision
-                        // put resource for update set count
-                        nn.api('PUT', cms.reapi('/api/sets/{setId}', {
-                            setId: setId
-                        }), null, function (set) {
-                            $page.init();
-                            $("#portal-add-layer").fadeOut("slow");
-                            $page._search_channel_clean();
-                            $('#overlay-s').fadeOut("slow");
-                        });
+
+                if (-1 === $.inArray(this_id, $page.currentList)) {
+
+                    if ($.inArray(this_id, $page.removeList) > -1) {
+                        $page.removeList.splice($.inArray(this_id, $page.removeList), 1);
+                    } else {
+                        $page.addList.push(this_id);
                     }
-                });
+
+                    tmpList.push(this_id);
+                }
+
             });
+
+            if (tmpList.length > 0) {
+                nn.api('GET', cms.reapi('/api/channels'), {
+                    channels: tmpList.join(',')
+                }, function (channels) {
+                    var tmpSeq = 0;
+
+                    tmpSeq -= channels.length;
+                    $.each(channels, function (idx, channel) {
+
+                        channel.seq = tmpSeq;
+                        tmpSeq += 1;
+                        $page.nomoList.push(channel);
+                        $page.currentList.push(channel.id);
+
+                    });
+                    $page._drawChannelLis();
+                    $("#portal-add-layer").fadeOut("slow");
+                    $page._search_channel_clean();
+                    $('#overlay-s').fadeOut("slow");
+                });
+            }
+
         }
-        //alert(lis.length);
     });
 
     $(document).on("click", "#search-channel-list .checkbox", function (event) {
-        /*
-         $(".sType").removeClass("on");
-         $(this).addClass("on");
-         $("#sortingType").val($(this).attr("tvalue"));
-         */
         var canAdd = $("#sRusult").data("canAdd");
         var li_on = 0;
         var this_li = $(this);
@@ -409,43 +404,72 @@ $(function () {
         }
 
         $("#sRusult").data("canAdd", canAdd);
-        //$("#searchCanChannel").text(canAdd);
         li_on = $("#search-channel-list li .on").length;
         if (li_on > 0) {
             $("#searchAdd").show();
         } else {
             $("#searchAdd").hide();
         }
-        //console.log("li on: " + li_on + "**** cnaAdd :" + canAdd);
     });
 
     $(document).on("click", ".sort-list .sType", function (event) {
-        //$("#channel-list").sortable("destroy");
-        var expSort = ".empty, .isSortable";
 
-        if ($("#sortingType").val() == 2) {
+        var tmpStrValue = "",
+            tmpValue = 0,
+            expSort = ".empty, .isSortable";
+
+        $common.showProcessingOverlay();
+        tmpStrValue = $(this).attr("tvalue");
+        tmpValue = parseInt(tmpStrValue, 10);
+
+        if (tmpValue !== $page.sortingType) {
+
             $("body").addClass("has-change");
             $(".sType").removeClass("on");
             $(this).addClass("on");
-            $("#sortingType").val($(this).attr("tvalue"));
+            $page.sortingType = tmpValue;
+            $("#sortingType").val(tmpValue);
 
-            expSort = ".empty";
-            $(".btn-top").hide();
-            $('body').addClass('has-change');
-            $(".isSortable").css("cursor", "move");
-            $('#channel-list').sortable({
-                cursor: 'move',
-                revert: true,
-                cancel: expSort,
-                change: function (event, ui) {
-                    $('body').addClass('has-change');
-                }
-            });
-        } else {
-            $.blockUI({
-                message: $('#yes-no-prompt')
-            });
+            if (1 === tmpValue) {
+                $page.nomoList = $page.onTopList.concat($page.nomoList);
+                $page.onTopList = [];
+                expSort = ".empty";
+                $(".btn-top").addClass("hide");
+                nn.log("btn-top on" + $(".btn-top").length);
+                $(".isSortable").css("cursor", "move");
+                $('#channel-list').sortable({
+                    cursor: 'move',
+                    revert: true,
+                    cancel: expSort,
+                    change: function (event, ui) {
+                        $('body').addClass('has-change');
+                    }
+                });
+            } else {
+                nn.log("nomoList" + $page.nomoList);
+                $page.onTopList = $page.procOnTopList($page.nomoList, $page.sortingType);
+                $page.nomoList = $page.procNomoList($page.nomoList, $page.sortingType);
+
+                nn.log("onTopList" + $page.onTopList);
+                nn.log("nomoList" + $page.nomoList);
+                $page._drawChannelLis();
+                $page._reListSeq();
+
+                $(".btn-top").removeClass("hide");
+
+                $(".isSortable").css("cursor", "pointer");
+                $('#channel-list').sortable({
+                    cursor: 'move',
+                    revert: true,
+                    cancel: expSort,
+                    change: function (event, ui) {
+                        $('body').addClass('has-change');
+                    }
+                });
+            }
+            $('#overlay-s').fadeOut("slow");
         }
+        return false;
     });
 
     $(document).on("click", "#yes-no-prompt .btn-yes", function (event) {
@@ -474,35 +498,21 @@ $(function () {
     $(document).on("click", ".btn-top", function (event) {
         // protal manage remove channel from channel set
         var btnOn = $("#channel-list div.on");
-        //alert(btnOn.length);
         var this_li = $(this);
         var up_li = this_li.parents("li");
-        var this_id = up_li.attr("id").replace("set_", "");
-        var setId = cms.global.USER_URL.param('id');
-        // /api/sets/{setId}/channels
-        var strTF = "true";
-        if (btnOn.length < 4 || this_li.hasClass("on")) {
+        var this_id = parseInt(up_li.attr("id").replace("set_", ""), 10);
+
+        if (btnOn.length < $page.onTopLimit || this_li.hasClass("on")) {
+            $common.showProcessingOverlay();
             if (this_li.hasClass("on")) {
-                strTF = "false";
+                this_li.removeClass("on");
+            } else {
+                this_li.addClass("on");
             }
 
-            var parameter = {
-                channelId: this_id,
-                alwaysOnTop: strTF
-            };
-
-            $common.showProcessingOverlay();
-            nn.api('POST', cms.reapi('/api/sets/{setId}/channels', {
-                setId: setId
-            }), parameter, function (msg) {
-                // put resource for update set count
-                nn.api('PUT', cms.reapi('/api/sets/{setId}', {
-                    setId: setId
-                }), null, function (set) {
-                    $page.init();
-                    //$('#overlay-s').fadeOut("slow");
-                });
-            });
+            $page._setOnTop(this_id);
+            $("body").addClass("has-change");
+            $('#overlay-s').fadeOut("slow");
         } else {
             $common.showSystemErrorOverlay(nn._([cms.global.PAGE_ID, 'channel-list', 'You can only set 4 channels on top']));
         }
@@ -512,31 +522,38 @@ $(function () {
         // protal manage remove channel from channel set
         var this_li = $(this);
         var up_li = this_li.parents("li");
-        var this_id = up_li.attr("id").replace("set_", "");
-        var setId = cms.global.USER_URL.param('id');
-        // /api/sets/{setId}/channels
+        var this_id = parseInt(up_li.attr("id").replace("set_", ""), 10);
 
-        var parameter = {
-            channelId: this_id
-        };
+        var inCurrent = false,
+            inAdd = false;
 
-        $common.showProcessingOverlay();
-        nn.api('DELETE', cms.reapi('/api/sets/{setId}/channels', {
-            setId: setId
-        }), parameter, function (msg) {
-            // put resource for update set count
-            nn.api('PUT', cms.reapi('/api/sets/{setId}', {
-                setId: setId
-            }), null, function (set) {
-                $("#channelCnt").text($("#channelCnt").text() - 1);
-                up_li.remove();
-                if ($("#channelCnt").text() == 0) {
-                    $("#cntChannelEmpty").show();
-                }
-                $("#empty_channel").removeClass("disable");
-                $('#overlay-s').fadeOut("slow");
-            });
-        });
+        $('body').addClass('has-change');
+
+        if (-1 !== $.inArray(this_id, $page.currentList)) {
+            inCurrent = true;
+        }
+        if (-1 !== $.inArray(this_id, $page.addList)) {
+            inAdd = true;
+        }
+
+        if (inCurrent === true && inAdd === false) {
+            $page.removeList.push(this_id);
+            $page.currentList.splice($.inArray(this_id, $page.currentList), 1);
+
+        } else if (inCurrent === false && inAdd === true) {
+            $page.addList.splice($.inArray(this_id, $page.addList), 1);
+        }
+        $page._removeChannelFromList(this_id);
+
+        $page.onTopAddList.splice($.inArray(this_id, $page.onTopAddList), 1);
+        $page.onTopRemoveList.splice($.inArray(this_id, $page.onTopRemoveList), 1);
+
+        $("#channelCnt").text($("#channelCnt").text() - 1);
+        up_li.remove();
+        if ($("#channelCnt").text() == 0) {
+            $("#cntChannelEmpty").show();
+        }
+        $("#empty_channel").removeClass("disable");
     });
 
     $(document).on('click', '#content-nav a, .select-list li a, .studio-nav-wrap a, #profile-dropdown a', function (e) {
@@ -621,12 +638,9 @@ $(function () {
     });
 
     $("#input-portal-ch").focus(function () {
-        //console.log($("#input-portal-ch").data("tmpIn")+"*****"+$(this).val());
         if ($("#input-portal-ch").data("tmpIn") == $(this).val()) {
             $(this).val("");
         }
-        //alert("in");
-        // $(this).next("span").css('display','inline').fadeOut(1000);
     });
 
     $("#input-portal-ch").focusout(function () {
@@ -651,12 +665,12 @@ $(function () {
         }
     }
     window.onbeforeunload = confirmExit;
-
+    /*
     setTimeout(function () {
         // set preview info
         $("#set-preview").click();
     }, 3000);
-
+    */
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
         $common.scrollbar("#portal-constrain", "#portal-list", "#portal-slider");
