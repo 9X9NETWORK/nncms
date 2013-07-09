@@ -53,103 +53,109 @@
 
     // for vertical.slider
     $common.scrollbar = function (outer, inner, sliderwrap, outerHeight, innerHeight) {
-        var difference = 0,
-            proportion = 0,
-            iRange = 0,
-            handleHeight = 0,
-            origSliderHeight = 0,
-            sliderHeight = 0,
-            sliderMargin = 0;
+        $(inner).perfectScrollbar();
+        // var difference = 0,
+        //     proportion = 0,
+        //     iRange = 0,
+        //     handleHeight = 0,
+        //     origSliderHeight = 0,
+        //     sliderHeight = 0,
+        //     sliderMargin = 0;
 
-        // To compensate the removing of evil autoHeight.
-        $(sliderwrap).height($(window).height()-134);
+        // // To compensate the removing of evil autoHeight.
+        // $(sliderwrap).height($(outer).height() - 70);
 
-        // compare the height of the scroll content to the scroll pane to see if we need a scrollbar
-        difference = innerHeight - outerHeight;
+        // // compare the height of the scroll content to the scroll pane to see if we need a scrollbar
+        // outerHeight = $(outer).height() - 70;
+        // innerHeight = $(inner).height();
+        // difference = innerHeight - outerHeight;
 
-        if (difference > 0) {
-            $(sliderwrap).show();
-            proportion = difference / innerHeight;
+        // if (difference > 0) {
+        //     $(sliderwrap).show();
+        //     proportion = difference / innerHeight;
 
-            // this value can fix epislode over 200 scroll problem
-            iRange = parseInt(innerHeight / outerHeight, 10) * 8;
-            if (iRange < 100) {
-                // before default slider max / value
-                iRange = 100;
-            }
+        //     // this value can fix epislode over 200 scroll problem
+        //     iRange = parseInt(innerHeight / outerHeight, 10) * 8;
+        //     if (iRange < 100) {
+        //         // before default slider max / value
+        //         iRange = 100;
+        //     }
 
-            // episode list has this global var and need it to paging
-            cms.global.SLIDER_MAX = iRange;
+        //     // episode list has this global var and need it to paging
+        //     cms.global.SLIDER_MAX = iRange;
 
-            // set the proportional height - round it to make sure everything adds up correctly later on
-            handleHeight = Math.round((1 - proportion) * outerHeight);
-            handleHeight -= handleHeight % 2;
+        //     // set the proportional height - round it to make sure everything adds up correctly later on
+        //     handleHeight = Math.round((1 - proportion) * outerHeight);
+        //     handleHeight -= handleHeight % 2;
 
-            // set up the slider
-            $(sliderwrap + ' .slider-vertical').slider({
-                orientation: 'vertical',
-                min: 0,
-                max: iRange,
-                value: iRange,
-                slide: function (event, ui) {
-                    // scroll content when slide is dragged
-                    var topValue = -((iRange - ui.value) * difference / iRange);
-                    // move the top up (negative value) by the percentage the slider has been moved times the difference in height
-                    $(inner).css({
-                        top: topValue
-                    });
-                },
-                change: function (event, ui) {
-                    // scroll content when the slider is changed by a click outside the handle or by the mousewheel
-                    var topValue = -((iRange - ui.value) * difference / iRange);
-                    // move the top up (negative value) by the percentage the slider has been moved times the difference in height
-                    $(inner).css({
-                        top: topValue
-                    });
-                }
-            });
+        //     // set up the slider
+        //     $(sliderwrap + ' .slider-vertical').slider({
+        //         orientation: 'vertical',
+        //         min: 0,
+        //         max: iRange,
+        //         value: iRange,
+        //         slide: function (event, ui) {
+        //             // scroll content when slide is dragged
+        //             var topValue = -((iRange - ui.value) * difference / iRange);
+        //             // move the top up (negative value) by the percentage the slider has been moved times the difference in height
+        //             $(inner).css({
+        //                 top: topValue
+        //             });
+        //         },
+        //         change: function (event, ui) {
+        //             // scroll content when the slider is changed by a click outside the handle or by the mousewheel
+        //             var topValue = -((iRange - ui.value) * difference / iRange);
+        //             // move the top up (negative value) by the percentage the slider has been moved times the difference in height
+        //             $(inner).css({
+        //                 top: topValue
+        //             });
+        //         }
+        //     });
 
-            // set the handle height and bottom margin so the middle of the handle is in line with the slider
-            $(sliderwrap + ' .ui-slider-handle').css({
-                height: handleHeight,
-                'margin-bottom': -0.5 * handleHeight
-            });
+        //     // set the handle height and bottom margin so the middle of the handle is in line with the slider
+        //     $(sliderwrap + ' .ui-slider-handle').css({
+        //         height: handleHeight,
+        //         'margin-bottom': -0.5 * handleHeight
+        //     });
 
-            // remember the original slider height ONCE, and always used the saved value
-            origSliderHeight = $(sliderwrap).attr('data-orig-slider-height');
-            if (!origSliderHeight) {
-                origSliderHeight = $(sliderwrap + ' .slider-vertical').height();
-                $(sliderwrap).attr('data-orig-slider-height', origSliderHeight);
-            }
+        //     // remember the original slider height ONCE, and always used the saved value
+        //     origSliderHeight = $(sliderwrap).attr('data-orig-slider-height');
+        //     if (!origSliderHeight) {
+        //         origSliderHeight = $(sliderwrap + ' .slider-vertical').height();
+        //         $(sliderwrap).attr('data-orig-slider-height', origSliderHeight);
+        //     }
 
-            // the height through which the handle can move needs to be the original height minus the handle height
-            sliderHeight = origSliderHeight - handleHeight;
+        //     // the height through which the handle can move needs to be the original height minus the handle height
+        //     sliderHeight = origSliderHeight - handleHeight;
 
-            // so the slider needs to have both top and bottom margins equal to half the difference
-            sliderMargin = (origSliderHeight - sliderHeight) * 0.5;
+        //     // so the slider needs to have both top and bottom margins equal to half the difference
+        //     sliderMargin = (origSliderHeight - sliderHeight) * 0.5;
 
-            $(sliderwrap + ' .ui-slider').css({
-                height: sliderHeight,
-                'margin-top': sliderMargin
-            });
-        } else {
-            $(sliderwrap + ' .slider-vertical').slider();
-            $(sliderwrap).hide();
-        }
+        //     $(sliderwrap + ' .ui-slider').css({
+        //         height: sliderHeight,
+        //         'margin-top': sliderMargin
+        //     });
 
-        $(sliderwrap + ' .ui-slider').unbind('click');
-        $(sliderwrap + ' .ui-slider').click(function (event) {
-            event.stopPropagation();
-        });
-        $(outer + ', ' + sliderwrap + ' .slider-vertical').unbind('mousewheel');
-        $(outer + ', ' + sliderwrap + ' .slider-vertical').mousewheel(function (event, delta) {
-            var speed = 2,
-                sliderVal = $(sliderwrap + ' .slider-vertical').slider('value');
-            console.debug(sliderVal);
-            sliderVal += (delta * speed);
-            $(sliderwrap + ' .slider-vertical').slider('value', sliderVal);
-            event.preventDefault();
-        });
+        //     // $('#content-main-wrap').removeClass('fixed');
+        // } else {
+        //     $(sliderwrap + ' .slider-vertical').slider();
+        //     $(sliderwrap).hide();
+        //     // $('#content-main-wrap').addClass('fixed');
+        // }
+
+        // $(sliderwrap + ' .ui-slider').unbind('click');
+        // $(sliderwrap + ' .ui-slider').click(function (event) {
+        //     event.stopPropagation();
+        // });
+        // $(outer + ', ' + sliderwrap + ' .slider-vertical').unbind('mousewheel');
+        // $(outer + ', ' + sliderwrap + ' .slider-vertical').mousewheel(function (event, delta) {
+        //     var speed = 2,
+        //         sliderVal = $(sliderwrap + ' .slider-vertical').slider('value');
+        //     console.debug(sliderVal);
+        //     sliderVal += (delta * speed);
+        //     $(sliderwrap + ' .slider-vertical').slider('value', sliderVal);
+        //     event.preventDefault();
+        // });
     };
 
     // for horizontal-slider

@@ -115,25 +115,25 @@
     };
 
     $page.ellipsisPage = function () {
-        var windowWidth = $(window).width();
-        if (windowWidth > 1220) {
-            $('ul#fb-page-list').width(windowWidth - 838);
-            $('ul#fb-page-list li').width((windowWidth - 838) / 2);
-        } else {
-            $('ul#fb-page-list').width(329);
-            $('ul#fb-page-list li').width(164.5);
-        }
+        // var windowWidth = $(window).width();
+        // if (windowWidth > 1220) {
+        //     $('ul#fb-page-list').width(windowWidth - 838);
+        //     $('ul#fb-page-list li').width((windowWidth - 838) / 2);
+        // } else {
+        //     $('ul#fb-page-list').width(329);
+        //     $('ul#fb-page-list li').width(164.5);
+        // }
     };
 
     $page.scrollToBottom = function () {
-        var sliderPos = $('#main-wrap-slider .slider-vertical').slider('value');
+    //     var sliderPos = $('#main-wrap-slider .slider-vertical').slider('value');
 
-    $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
+    // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
 
-        $('#main-wrap-slider .slider-vertical').slider('value', sliderPos);
-        $common.hideFbPageList({
-            hidePageList: false
-        });
+        // $('#main-wrap-slider .slider-vertical').slider('value', sliderPos);
+        // $common.hideFbPageList({
+        //     hidePageList: false
+        // });
     };
 
     $page.uploadImage = function () {
@@ -359,8 +359,8 @@
                     $page.setFormHeight();
                     $page.setTaglistWidth();
 
-    $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
-
+                    // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
+                    $('#content-main-wrap').perfectScrollbar();
                     $common.hideFbPageList();
                 }
             });
@@ -368,9 +368,9 @@
             $common.autoHeight();
             $page.setFormHeight();
             $page.setTaglistWidth();
-            
-    $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
 
+            // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
+            $('#content-main-wrap').perfectScrollbar();
             $common.hideFbPageList();
         }
     };
@@ -528,8 +528,8 @@
                             $page.setFormHeight();
                             $page.setTaglistWidth();
 
-    $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
-
+                            // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
+                            $('#content-main-wrap').perfectScrollbar();
                             $common.hideFbPageList();
                             $('#settingForm .btn-save').removeClass('disable').addClass('enable');
                         });
@@ -575,12 +575,14 @@
                 $page.setFormHeight();
                 $page.setTaglistWidth();
 
-    $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
-
+                // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
+                $('#content-main-wrap').perfectScrollbar();
                 $common.hideFbPageList();
                 $('#settingForm .btn-cancel, #settingForm .btn-create').removeClass('disable').addClass('enable');
             });
         }
+
+        $('#content-main-wrap').addClass('footer-on');
     };
 
     // NOTE: remember to change page-key to match file-name
