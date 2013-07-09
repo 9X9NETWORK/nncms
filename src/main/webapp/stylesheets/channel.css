@@ -703,7 +703,7 @@ body.mac #title-func h2 {
 }
 
 #content-main-wrap form .fminput .fmfield .category {
-    width: 439px;
+    width: 446px;
 }
 
 #content-main-wrap form .fminput .fmfield .select .select-btn,
@@ -1269,6 +1269,29 @@ body.mac #title-func h2 {
 
 #content-main-wrap form .form-btn .form-btn-wrap .btn-cancel {
     margin-right: 15px;
+}
+
+/* */
+#content-main-wrap.fixed {
+    /*height: 100%;*/
+}
+
+#content-main-wrap.fixed .constrain {
+    /*height: 100%;*/
+}
+
+#content-main-wrap.fixed form {
+    /*height: 100%;*/
+}
+
+#content-main-wrap.fixed form .form-btn {
+    bottom: 8px;
+    right: 35px;
+    position: fixed;
+}
+
+#content-main-wrap.fixed.footer-on form .form-btn {
+    bottom: 48px;
 }
 
 /* Get URL */

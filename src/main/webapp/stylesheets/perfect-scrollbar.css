@@ -45,6 +45,10 @@
     transition: opacity .2s linear;
 }
 
+/*#content-main-wrap.ps-container .ps-scrollbar-y {
+    right: 3px;
+}*/
+
 .ps-container:hover .ps-scrollbar-y {
     opacity: 0.6;
     filter: alpha(opacity = 60);

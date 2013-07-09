@@ -885,25 +885,38 @@ abbr, acronym {
 }
 
 #content-main {
-    position: relative;
+    position: absolute;
     min-width: 776px;
-	margin: 0px 35px 0px 200px;
-    min-width: 776px;
-	height: 100%;
-	overflow: hidden;
+    overflow: hidden;
+    left: 200px;
+    /*right: 35px;*/
+    right: 0px;
+    top: 0;
+    bottom: 105px;
 }
 
 /* content-main */
 #content-main-wrap {
-    position: relative;
-    top: 0;
-    left: 0;
+    /*position: relative;*/
+    position: absolute;
     width: 100%;
+    top: 70px;
+    bottom: 0;
+    overflow: hidden;
+}
+
+#content-main-wrap.footer-on {
+    bottom: 48px;
+}
+
+div.constrain {
+    margin-right: 35px;
 }
 
 /* title-func */
 #title-func {
     position: relative;
+    margin-right: 35px;
     z-index: 56;
     padding: 26px 0 17px;
     background: url(../images/bg_main.png) repeat -210px 0;
