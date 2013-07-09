@@ -149,7 +149,7 @@ $(function () {
         $('.dropdown').hide();
         $('.dropdown').parents('li').removeClass('on').children('.on').removeClass('on');
         $('.select-list').hide();
-        $('.select-list').parents().removeClass('on').children('.on').removeClass('on');
+        $('.select-list').parents().removeClass('on').children('.on:not(#footer-control)').removeClass('on');
         $common.hideFbPageList();
     });
 
@@ -169,10 +169,13 @@ $(function () {
         if ($(this).hasClass('on')) {
             $(this).removeClass('on');
             $('#footer').slideToggle();
+            $('#content-main-wrap').removeClass('footer-on');
         } else {
             $(this).addClass('on');
             $('#footer').slideToggle();
+            $('#content-main-wrap').addClass('footer-on');
         }
+        $('#content-main-wrap').perfectScrollbar('update');
     });
 
     // footer dropdown
