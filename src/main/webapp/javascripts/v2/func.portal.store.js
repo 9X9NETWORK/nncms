@@ -74,17 +74,18 @@
             $('#overlay-s').fadeOut("slow");
             //console.log("scrollbar**" + $('#store-slider .slider-vertical').slider('value'));
 
-            if (cms.global.USER_DATA["pageInfo"].pageCurrent == cms.global.USER_DATA["pageInfo"].pageTotal) {
+            // if (cms.global.USER_DATA["pageInfo"].pageCurrent == cms.global.USER_DATA["pageInfo"].pageTotal) {
                 $(".load").hide();
-            } else {
-                $(".load").show();
-            }
+            // } else {
+            //     $(".load").show();
+            // }
 
             if (typeof callback === 'function') {
                 callback();
             }
             // If the page isn't filled with channels (no scrollbar && pageCurrent < pageTotal)
-            if ($('#store-list').height() === $('#store-list')[0].scrollHeight && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
+            if ($('#store-list').height() >= $('#store-list')[0].scrollHeight - $('#store-list .load').height() && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
+                $('#store-list .load').fadeIn('slow');
                 $page.getMoreChannels();
             }
         });

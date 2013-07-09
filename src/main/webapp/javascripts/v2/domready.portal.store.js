@@ -71,6 +71,7 @@ $(function () {
         var $storeList = $('#store-list');
 
         if ($storeList.scrollTop() + $storeList.height() >= $storeList[0].scrollHeight && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
+            $storeList.find('.load').fadeIn('slow');
             $page.getMoreChannels();
         }
     });
@@ -183,6 +184,7 @@ $(function () {
         var $storeList = $('#store-list');
 
         if ($storeList.scrollTop() + $storeList.height() >= $storeList[0].scrollHeight && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
+            $storeList.find('.load').fadeIn('slow');
             $page.getMoreChannels();
         }
 
