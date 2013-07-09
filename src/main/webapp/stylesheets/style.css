@@ -886,7 +886,8 @@ abbr, acronym {
 
 #content-main {
     position: absolute;
-    min-width: 776px;
+   /* min-width: 776px;*/
+    min-width: 820px;
     overflow: hidden;
     left: 200px;
     /*right: 35px;*/

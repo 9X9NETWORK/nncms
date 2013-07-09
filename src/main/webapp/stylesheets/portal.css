@@ -881,14 +881,13 @@
 }
 /* Channel List */
 .channel-list {
-    width: 100%;
     position: relative;
     margin: 5px 0 0 10px;
     overflow:auto;
-    padding: 50px 0 50px 20px;
 }
 #store-layer .channel-list {
-    padding: 50px 0 230px 20px;
+    padding: 20px 0 0 20px;
+    left: -20px;
 }
 .channel-list li {
     display: block;
@@ -1526,22 +1525,29 @@
 /* Store */
 #store-layer {
     font-size: 13px;
-    height: 100%;
+    position: absolute;
+    top: 58px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    overflow: hidden;
 }
 #store-constrain {
     overflow: hidden;
-    height: 100%;
     width: 100%;
-    position: relative;
-    top: 0;
-    left: -20px;
-    padding: 0 20px 0 0;
+    position: absolute;
+    top: 178px;
+    bottom: 0;
 }
+/*#store-layer.collapse #store-constrain {
+    top: 78px;
+}*/
 #store-list {
     width: 100%;
-    height: auto;
-    position: relative;
-    margin: -35px 0 0 0;
+    position: absolute;
+    top: 0;
+    bottom: 48px;
+    overflow: hidden;
 }
 #store-slider {
     height: 500px;
@@ -1553,10 +1559,9 @@
     top: 160px;
 }
 #store-category {
-    margin: 0 0 10px 0;
+    margin: 0 35px 10px 0;
 }
 #store-layer.collapse #store-category {
-    margin: 0 0 0 0;
 }
 #store-category ul {
     margin: 9px 0 0 10px;
@@ -1594,6 +1599,8 @@
 }
 #store-layer.collapse #store-category .btn-gray.expand {
     display: inline-block;
+    position: relative;
+    width: 100%;
 }
 .btn-gray.collapse .center .icon {
     background: url(../images/icon_expand_collapse.png) no-repeat 0 -16px;
@@ -1642,8 +1649,9 @@
 #store-category .info {
     position: absolute;
     display: block;
-    width: 100%;
-    margin: 13px 0 10px 0;
+    margin: 13px 35px 10px 0;
+    left: 0;
+    right: 0;
 }
 #store-layer.collapse #store-category .info {
     position: relative;
@@ -1656,10 +1664,8 @@
     background-image: url(../images/btn_gray.png);
 }
 #store-layer.collapse .channel-list {
-    padding: 50px 0 150px 20px;
 }
 #store-layer.collapse .load {
-    margin: -160px auto 0 auto;
 }
 /* Load More */
 .load {
@@ -1701,8 +1707,9 @@
     float: left;
 }
 #store-layer .load {
-    margin: -240px auto 0 auto;
+    margin: 0 auto;
     width: 200px;
+    right: 35px;
 }
 /* Brand */
 #brand-constrain {
@@ -1801,9 +1808,10 @@
     top: 220px;
 }
 #store-layer .channel-list {
-    padding: 50px 0 200px 20px;
 }
 #store-layer .load {
-    margin: -210px auto 0 auto;
+    margin: 0 auto;
+    right: 35px;
+    width: 200px;
 }
 }
