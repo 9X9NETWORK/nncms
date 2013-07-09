@@ -52,19 +52,27 @@ $(function () {
         }
     });
 
-    $(document).on("click", ".load", function (event) {
-        var pageTotal = 0,
-            pageNext = 0;
-        pageTotal = cms.global.USER_DATA["pageInfo"].pageTotal;
-        pageNext = cms.global.USER_DATA["pageInfo"].pageNext;
+    // $(document).on("click", ".load", function (event) {
+    //     var pageTotal = 0,
+    //         pageNext = 0;
+    //     pageTotal = cms.global.USER_DATA["pageInfo"].pageTotal;
+    //     pageNext = cms.global.USER_DATA["pageInfo"].pageNext;
 
-        if (pageNext == pageTotal) {
-            $(".load").hide();
+    //     if (pageNext == pageTotal) {
+    //         $(".load").hide();
+    //     }
+    //     $common.showProcessingOverlay();
+    //     cms.global.USER_DATA["pageInfo"].pageCurrent = cms.global.USER_DATA["pageInfo"].pageNext;
+    //     cms.global.USER_DATA["pageInfo"].pageNext += 1;
+    //     $page._drawChannels($page.channelPageSize, true);
+    // });
+
+    $('#store-list').scroll(function (event) {
+        var $storeList = $('#store-list');
+
+        if ($storeList.scrollTop() + $storeList.height() >= $storeList[0].scrollHeight && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
+            $page.getMoreChannels();
         }
-        $common.showProcessingOverlay();
-        cms.global.USER_DATA["pageInfo"].pageCurrent = cms.global.USER_DATA["pageInfo"].pageNext;
-        cms.global.USER_DATA["pageInfo"].pageNext += 1;
-        $page._drawChannels($page.channelPageSize, true);
     });
 
     $(document).on("click", "#set-save", function (event) {
@@ -172,8 +180,12 @@ $(function () {
     window.onbeforeunload = confirmExit;
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
-        // $common.autoHeight();
-        // $common.scrollbar("#store-constrain", "#store-list", "#store-slider");
+        var $storeList = $('#store-list');
+
+        if ($storeList.scrollTop() + $storeList.height() >= $storeList[0].scrollHeight && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
+            $page.getMoreChannels();
+        }
+
         $('#store-list').perfectScrollbar('update');
     });
 });

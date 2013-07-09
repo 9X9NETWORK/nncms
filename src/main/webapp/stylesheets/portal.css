@@ -1710,6 +1710,7 @@
     margin: 0 auto;
     width: 200px;
     right: 35px;
+    overflow: hidden;
 }
 /* Brand */
 #brand-constrain {

@@ -8,7 +8,7 @@
 
     $page.channelPageSize = 28;
 
-    $page._drawChannels = function (inPageSize, isEnd) {
+    $page._drawChannels = function (inPageSize, isEnd, callback) {
         // /api/channels
         var cntStart = 0,
             cntEnd = 0,
@@ -34,11 +34,11 @@
         }
 
         strChannels = tmpArr2.join(',');
-        if (cms.global.USER_DATA["pageInfo"].pageCurrent == cms.global.USER_DATA["pageInfo"].pageTotal) {
-            $(".load").hide();
-        } else {
-            $(".load").show();
-        }
+        // if (cms.global.USER_DATA["pageInfo"].pageCurrent == cms.global.USER_DATA["pageInfo"].pageTotal) {
+        //     $(".load").hide();
+        // } else {
+        //     $(".load").show();
+        // }
 
         nn.api('GET', cms.reapi('/api/channels'), {
             channels: strChannels
@@ -72,7 +72,34 @@
             //     $('#store-slider .slider-vertical').slider('value', 0);
             // }
             $('#overlay-s').fadeOut("slow");
+            //console.log("scrollbar**" + $('#store-slider .slider-vertical').slider('value'));
+
+            if (cms.global.USER_DATA["pageInfo"].pageCurrent == cms.global.USER_DATA["pageInfo"].pageTotal) {
+                $(".load").hide();
+            } else {
+                $(".load").show();
+            }
+
+            if (typeof callback === 'function') {
+                callback();
+            }
+            // If the page isn't filled with channels (no scrollbar && pageCurrent < pageTotal)
+            if ($('#store-list').height() === $('#store-list')[0].scrollHeight && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
+                $page.getMoreChannels();
+            }
         });
+    };
+
+    $page.getMoreChannels = function () {
+        var pageTotal = 0,
+            pageNext = 0;
+        pageTotal = cms.global.USER_DATA["pageInfo"].pageTotal;
+        pageNext = cms.global.USER_DATA["pageInfo"].pageNext;
+
+        // $common.showProcessingOverlay();
+        cms.global.USER_DATA["pageInfo"].pageCurrent = cms.global.USER_DATA["pageInfo"].pageNext;
+        cms.global.USER_DATA["pageInfo"].pageNext += 1;
+        $page._drawChannels($page.channelPageSize, true);
     };
 
     $page.listCategory = function (inCategory, inCatId) {
