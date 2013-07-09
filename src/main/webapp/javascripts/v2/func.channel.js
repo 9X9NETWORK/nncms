@@ -586,6 +586,13 @@
         }
 
         $('#content-main-wrap').addClass('footer-on');
+
+        // Handle cancel/create buttons position according to scollbar displayed or not.
+        if ($('#content-main-wrap').height()>=$('div.constrain').height()) {
+            $('#content-main-wrap').addClass('fixed');
+        } else {
+            $('#content-main-wrap').removeClass('fixed');
+        }
     };
 
     // NOTE: remember to change page-key to match file-name
