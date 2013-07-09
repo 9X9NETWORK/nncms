@@ -9,50 +9,50 @@
     //-------------------------------------------------------------------------
 
     $common.autoWidth = function () {
-        var contentNavWidth = 200,  // $('#content-nav')
-            scrollbarWidth = 35;    // padding15 + slider5 + padding15
+        // var contentNavWidth = 200,  // $('#content-nav')
+        //     scrollbarWidth = 35;    // padding15 + slider5 + padding15
 
-        $('#content-main').width($(window).width() - contentNavWidth - scrollbarWidth);
-        $('.epcurate-curation #content-main').width($(window).width());
-        $('#epcurate-curation .tab-content .result-list ul').width($(window).width() - $('#epcurate-curation #video-player .video').width() - 60);  // 60: previous:30 + next:30
-        //$('#epcurate-curation .tab-content .result-list a.video-next').css('left', $(window).width() - 35 + 'px');
+        // $('#content-main').width($(window).width() - contentNavWidth - scrollbarWidth);
+        // $('.epcurate-curation #content-main').width($(window).width());
+        // $('#epcurate-curation .tab-content .result-list ul').width($(window).width() - $('#epcurate-curation #video-player .video').width() - 60);  // 60: previous:30 + next:30
+        // //$('#epcurate-curation .tab-content .result-list a.video-next').css('left', $(window).width() - 35 + 'px');
     };
 
     $common.autoHeight = function () {
-        var windowHeight = $(window).height(),
-            footerHeight = $('#footer').height(),
-            titleFuncContentHeight = $('#title-func').height(),
-            titleFuncPaddingTop = parseInt($('#title-func').css('padding-top'), 10),
-            titleFuncPaddingBottom = parseInt($('#title-func').css('padding-bottom'), 10),
-            titleFuncHeight = parseInt(titleFuncContentHeight + titleFuncPaddingTop + titleFuncPaddingBottom, 10),
-            headerHeight = $('#header').height(),
-            navHeight = $('#studio-nav').height(),
-            sliderHeight = windowHeight - titleFuncHeight - headerHeight - navHeight - 58;                                  // 58: footer48 + space15 - (header and studio-nav overlap)5
+        // var windowHeight = $(window).height(),
+        //     footerHeight = $('#footer').height(),
+        //     titleFuncContentHeight = $('#title-func').height(),
+        //     titleFuncPaddingTop = parseInt($('#title-func').css('padding-top'), 10),
+        //     titleFuncPaddingBottom = parseInt($('#title-func').css('padding-bottom'), 10),
+        //     titleFuncHeight = parseInt(titleFuncContentHeight + titleFuncPaddingTop + titleFuncPaddingBottom, 10),
+        //     headerHeight = $('#header').height(),
+        //     navHeight = $('#studio-nav').height(),
+        //     sliderHeight = windowHeight - titleFuncHeight - headerHeight - navHeight - 58;                                  // 58: footer48 + space15 - (header and studio-nav overlap)5
 
-        $('#content-wrap').height($(window).height() - headerHeight - navHeight + 5);                                       // 5: header and studio-nav overlap;
-        $('#content-main').height($(window).height() - footerHeight - headerHeight - navHeight + 5);                        // 5: header and studio-nav overlap;
-        $('.epcurate-curation#content-wrap, .epcurate-publish#content-wrap').height($(window).height() - 46);               // $('#epcurate-nav .epcurate-nav-wrap')
-        $('.epcurate-curation #content-main, .epcurate-publish #content-main').height($(window).height() - 94);             // 94: epcurate-nav46 + form-btn48  
-        $('#content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + titleFuncHeight + 15);     // 15: space between footer and content
-        $('.epcurate-publish #content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + 270);    // 270: datepicker height + form-btn48 + space15
-        $('.epcurate-curation #content-main-wrap').height($('#content-main-wrap').children('.constrain').height());
-        $('#content-main-wrap:not(.curation)').css('margin-top', titleFuncHeight + 'px');
-        $('#main-wrap-slider').css('top', titleFuncHeight + 'px');
-        $('#main-wrap-slider').height(sliderHeight);
-        $('#main-wrap-slider').attr('data-orig-slider-height', sliderHeight);
+        // $('#content-wrap').height($(window).height() - headerHeight - navHeight + 5);                                       // 5: header and studio-nav overlap;
+        // $('#content-main').height($(window).height() - footerHeight - headerHeight - navHeight + 5);                        // 5: header and studio-nav overlap;
+        // $('.epcurate-curation#content-wrap, .epcurate-publish#content-wrap').height($(window).height() - 46);               // $('#epcurate-nav .epcurate-nav-wrap')
+        // $('.epcurate-curation #content-main, .epcurate-publish #content-main').height($(window).height() - 94);             // 94: epcurate-nav46 + form-btn48  
+        // $('#content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + titleFuncHeight + 15);     // 15: space between footer and content
+        // $('.epcurate-publish #content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + 270);    // 270: datepicker height + form-btn48 + space15
+        // $('.epcurate-curation #content-main-wrap').height($('#content-main-wrap').children('.constrain').height());
+        // $('#content-main-wrap:not(.curation)').css('margin-top', titleFuncHeight + 'px');
+        // $('#main-wrap-slider').css('top', titleFuncHeight + 'px');
+        // $('#main-wrap-slider').height(sliderHeight);
+        // $('#main-wrap-slider').attr('data-orig-slider-height', sliderHeight);
 
-        if ($('#epcurate-nav.publish').length > 0) {
-            $('#main-wrap-slider').height(windowHeight - 134);  // 134: epcurate-nav46 + content-main-wrap margin25 + form-btn48 + space between footer and content15
-            $('#main-wrap-slider').attr('data-orig-slider-height', windowHeight - 134);
-        }
-        if ($('#store-slider').length > 0) {
-            $('#store-slider').height(sliderHeight - $('#store-category').height());
-            $('#store-slider').attr('data-orig-slider-height', sliderHeight - $('#store-category').height());
-        }
+        // if ($('#epcurate-nav.publish').length > 0) {
+        //     $('#main-wrap-slider').height(windowHeight - 134);  // 134: epcurate-nav46 + content-main-wrap margin25 + form-btn48 + space between footer and content15
+        //     $('#main-wrap-slider').attr('data-orig-slider-height', windowHeight - 134);
+        // }
+        // if ($('#store-slider').length > 0) {
+        //     $('#store-slider').height(sliderHeight - $('#store-category').height());
+        //     $('#store-slider').attr('data-orig-slider-height', sliderHeight - $('#store-category').height());
+        // }
     };
 
     // for vertical.slider
-    $common.scrollbar = function (outer, inner, sliderwrap) {
+    $common.scrollbar = function (outer, inner, sliderwrap, outerHeight, innerHeight) {
         var difference = 0,
             proportion = 0,
             iRange = 0,
@@ -61,15 +61,18 @@
             sliderHeight = 0,
             sliderMargin = 0;
 
+        // To compensate the removing of evil autoHeight.
+        $(sliderwrap).height($(window).height()-134);
+
         // compare the height of the scroll content to the scroll pane to see if we need a scrollbar
-        difference = $(inner).height() - $(outer).height();
+        difference = innerHeight - outerHeight;
 
         if (difference > 0) {
             $(sliderwrap).show();
-            proportion = difference / $(inner).height();
+            proportion = difference / innerHeight;
 
             // this value can fix epislode over 200 scroll problem
-            iRange = parseInt($(inner).height() / $(outer).height(), 10) * 8;
+            iRange = parseInt(innerHeight / outerHeight, 10) * 8;
             if (iRange < 100) {
                 // before default slider max / value
                 iRange = 100;
@@ -79,7 +82,7 @@
             cms.global.SLIDER_MAX = iRange;
 
             // set the proportional height - round it to make sure everything adds up correctly later on
-            handleHeight = Math.round((1 - proportion) * $(outer).height());
+            handleHeight = Math.round((1 - proportion) * outerHeight);
             handleHeight -= handleHeight % 2;
 
             // set up the slider
@@ -142,6 +145,7 @@
         $(outer + ', ' + sliderwrap + ' .slider-vertical').mousewheel(function (event, delta) {
             var speed = 2,
                 sliderVal = $(sliderwrap + ' .slider-vertical').slider('value');
+            console.debug(sliderVal);
             sliderVal += (delta * speed);
             $(sliderwrap + ' .slider-vertical').slider('value', sliderVal);
             event.preventDefault();
@@ -222,37 +226,37 @@
     };
 
     $common.hideFbPageList = function (options) {
-        if ($('#settingForm').length > 0 && ($('#content-wrap').hasClass('channel-add') || $('#content-wrap').hasClass('channel-setting'))) {
-            var $page = cms.global.PAGE_OBJECT,
-                hasHideFbPageList = false,
-                sliderPos = $('#main-wrap-slider .slider-vertical').slider('value');
-            if (!options || !options.hidePageList || true === options.hidePageList) {
-                $('#fb-page-list').hide();
-                if ($('.page-list').hasClass('on')) {
-                    $('.page-list').removeClass('on');
-                    hasHideFbPageList = true;
-                }
-            }
-            if ('none' !== $('#main-wrap-slider').css('display')) {
-                $('#content-main-wrap form').height($('#content-main-wrap form').data('height'));
-                $('#content-main-wrap').height($('#content-main-wrap form').height() + 137);
-                $('#main-wrap-slider .slider-vertical').slider('destroy');
-                $('#main-wrap-slider .slider-vertical').slider();
-                $('#main-wrap-slider').hide();
-                if (hasHideFbPageList) {
-                    $common.autoHeight();
-                    if ($page && typeof $page.setFormHeight === 'function') {
-                        $page.setFormHeight();
-                    }
-                    $('#content-main-wrap').css('top', '0');
-                    setTimeout(function () {
-                        $common.hideFbPageList();
-                    }, 200);
-                }
-                $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-                $('#main-wrap-slider .slider-vertical').slider('value', sliderPos);
-            }
-        }
+        // if ($('#settingForm').length > 0 && ($('#content-wrap').hasClass('channel-add') || $('#content-wrap').hasClass('channel-setting'))) {
+        //     var $page = cms.global.PAGE_OBJECT,
+        //         hasHideFbPageList = false,
+        //         sliderPos = $('#main-wrap-slider .slider-vertical').slider('value');
+        //     if (!options || !options.hidePageList || true === options.hidePageList) {
+        //         $('#fb-page-list').hide();
+        //         if ($('.page-list').hasClass('on')) {
+        //             $('.page-list').removeClass('on');
+        //             hasHideFbPageList = true;
+        //         }
+        //     }
+        //     if ('none' !== $('#main-wrap-slider').css('display')) {
+        //         $('#content-main-wrap form').height($('#content-main-wrap form').data('height'));
+        //         $('#content-main-wrap').height($('#content-main-wrap form').height() + 137);
+        //         $('#main-wrap-slider .slider-vertical').slider('destroy');
+        //         $('#main-wrap-slider .slider-vertical').slider();
+        //         $('#main-wrap-slider').hide();
+        //         if (hasHideFbPageList) {
+        //             $common.autoHeight();
+        //             if ($page && typeof $page.setFormHeight === 'function') {
+        //                 $page.setFormHeight();
+        //             }
+        //             $('#content-main-wrap').css('top', '0');
+        //             setTimeout(function () {
+        //                 $common.hideFbPageList();
+        //             }, 200);
+        //         }
+        //         $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+        //         $('#main-wrap-slider .slider-vertical').slider('value', sliderPos);
+        //     }
+        // }
     };
 
     //-------------------------------------------------------------------------
