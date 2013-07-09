@@ -1536,7 +1536,7 @@
     overflow: hidden;
     width: 100%;
     position: absolute;
-    top: 178px;
+    top: 158px;
     bottom: 0;
 }
 /*#store-layer.collapse #store-constrain {
@@ -1814,5 +1814,6 @@
     margin: 0 auto;
     right: 35px;
     width: 200px;
+    padding-bottom: 10px;
 }
 }

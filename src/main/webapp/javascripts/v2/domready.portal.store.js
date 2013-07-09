@@ -153,10 +153,10 @@ $(function () {
     $(document).on("click", "#store-category .btn-gray", function (event) {
         if ($("#store-layer").hasClass("collapse")) {
             $("#store-category ul").slideDown(400);
-            $('#store-constrain').animate({top:'+=100'}, 400);
+            $('#store-constrain').animate({top:'+=90'}, 400);
         } else {
             $("#store-category ul").slideUp(400);
-            $('#store-constrain').animate({top:'-=100'}, 400);
+            $('#store-constrain').animate({top:'-=90'}, 400);
         }
         $("#store-layer").toggleClass("collapse");
         // $common.autoHeight();
