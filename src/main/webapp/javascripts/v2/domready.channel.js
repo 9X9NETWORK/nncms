@@ -526,9 +526,11 @@ $(function () {
         $page.setFormHeight();
         $page.setTaglistWidth();
         // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
+        
+        // Update perfect scrollbar.
         $('#content-main-wrap').perfectScrollbar('update');
 
-        $common.hideFbPageList();
+        // $common.hideFbPageList();
         // if ('none' === $('#main-wrap-slider').css('display')) {
         //     $('#main-wrap-slider .slider-vertical').slider('destroy');
         //     $('#main-wrap-slider .slider-vertical').slider();
@@ -536,6 +538,7 @@ $(function () {
         //     $('#content-main-wrap').css('top', '0');
         // }
 
+        // Handle cancel/create buttons position according to scollbar displayed or not.
         if ($('#content-main-wrap').height()>=$('div.constrain').height()) {
             $('#content-main-wrap').addClass('fixed');
         } else {

@@ -232,37 +232,37 @@
     };
 
     $common.hideFbPageList = function (options) {
-        // if ($('#settingForm').length > 0 && ($('#content-wrap').hasClass('channel-add') || $('#content-wrap').hasClass('channel-setting'))) {
-        //     var $page = cms.global.PAGE_OBJECT,
-        //         hasHideFbPageList = false,
-        //         sliderPos = $('#main-wrap-slider .slider-vertical').slider('value');
-        //     if (!options || !options.hidePageList || true === options.hidePageList) {
-        //         $('#fb-page-list').hide();
-        //         if ($('.page-list').hasClass('on')) {
-        //             $('.page-list').removeClass('on');
-        //             hasHideFbPageList = true;
-        //         }
-        //     }
-        //     if ('none' !== $('#main-wrap-slider').css('display')) {
-        //         $('#content-main-wrap form').height($('#content-main-wrap form').data('height'));
-        //         $('#content-main-wrap').height($('#content-main-wrap form').height() + 137);
-        //         $('#main-wrap-slider .slider-vertical').slider('destroy');
-        //         $('#main-wrap-slider .slider-vertical').slider();
-        //         $('#main-wrap-slider').hide();
-        //         if (hasHideFbPageList) {
-        //             $common.autoHeight();
-        //             if ($page && typeof $page.setFormHeight === 'function') {
-        //                 $page.setFormHeight();
-        //             }
-        //             $('#content-main-wrap').css('top', '0');
-        //             setTimeout(function () {
-        //                 $common.hideFbPageList();
-        //             }, 200);
-        //         }
-        //         $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-        //         $('#main-wrap-slider .slider-vertical').slider('value', sliderPos);
-        //     }
-        // }
+        if ($('#settingForm').length > 0 && ($('#content-wrap').hasClass('channel-add') || $('#content-wrap').hasClass('channel-setting'))) {
+            var $page = cms.global.PAGE_OBJECT,
+                hasHideFbPageList = false;
+                // sliderPos = $('#main-wrap-slider .slider-vertical').slider('value');
+            if (!options || !options.hidePageList || true === options.hidePageList) {
+                $('#fb-page-list').hide();
+                if ($('.page-list').hasClass('on')) {
+                    $('.page-list').removeClass('on');
+                    hasHideFbPageList = true;
+                }
+            }
+            // if ('none' !== $('#main-wrap-slider').css('display')) {
+            //     $('#content-main-wrap form').height($('#content-main-wrap form').data('height'));
+            //     $('#content-main-wrap').height($('#content-main-wrap form').height() + 137);
+            //     $('#main-wrap-slider .slider-vertical').slider('destroy');
+            //     $('#main-wrap-slider .slider-vertical').slider();
+            //     $('#main-wrap-slider').hide();
+            //     if (hasHideFbPageList) {
+            //         $common.autoHeight();
+            //         if ($page && typeof $page.setFormHeight === 'function') {
+            //             $page.setFormHeight();
+            //         }
+            //         $('#content-main-wrap').css('top', '0');
+            //         setTimeout(function () {
+            //             $common.hideFbPageList();
+            //         }, 200);
+            //     }
+            //     $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+            //     $('#main-wrap-slider .slider-vertical').slider('value', sliderPos);
+            // }
+        }
     };
 
     //-------------------------------------------------------------------------
