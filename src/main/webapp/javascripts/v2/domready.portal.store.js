@@ -156,7 +156,16 @@ $(function () {
             $('#store-constrain').animate({top:'+=90'}, 400);
         } else {
             $("#store-category ul").slideUp(400);
-            $('#store-constrain').animate({top:'-=90'}, 400);
+            $('#store-constrain').animate({top:'-=90'}, {
+                complete: function() {
+                    // If the page isn't filled with channels (no scrollbar && pageCurrent < pageTotal)
+                    if ($('#store-list').height() >= $('#store-list')[0].scrollHeight - $('#store-list .load').height() && 
+                        cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
+                        $('#store-list .load').fadeIn('slow');
+                        $page.getMoreChannels();
+                    }                    
+                }
+            });
         }
         $("#store-layer").toggleClass("collapse");
         // $common.autoHeight();
