@@ -7,16 +7,16 @@
     var $common = cms.common;
 
     $page.setFormHeight = function () {
-        $('#content-main-wrap').height('auto');
+        // $('#content-main-wrap').height('auto');
 
-        var channelListWidth = $('#channel-list').width(),
-            imgsWidth = $('#channel-list li .wrap .photo-list').width(),
-            funcWidth = $('#channel-list li .wrap .func-wrap').width(),
-            titleFuncHeight = $('#title-func').height();
+        // var channelListWidth = $('#channel-list').width(),
+        //     imgsWidth = $('#channel-list li .wrap .photo-list').width(),
+        //     funcWidth = $('#channel-list li .wrap .func-wrap').width(),
+        //     titleFuncHeight = $('#title-func').height();
 
-        $('#content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + titleFuncHeight + 38); // 38: title-func padding
-        $('#channel-list li .wrap').width(channelListWidth - 36);
-        $('#channel-list li .wrap .info').width(channelListWidth - imgsWidth - funcWidth - 58 - 15);
+        // $('#content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + titleFuncHeight + 38); // 38: title-func padding
+        // $('#channel-list li .wrap').width(channelListWidth - 36);
+        // $('#channel-list li .wrap .info').width(channelListWidth - imgsWidth - funcWidth - 58 - 15);
     };
 
     $page.showCreateChannelTutorial = function () {
