@@ -134,6 +134,9 @@
         // $common.hideFbPageList({
         //     hidePageList: false
         // });
+    
+        var objDiv = document.getElementById("content-main-wrap");
+        objDiv.scrollTop = objDiv.scrollHeight;
     };
 
     $page.uploadImage = function () {
