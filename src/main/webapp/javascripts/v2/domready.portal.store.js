@@ -144,12 +144,14 @@ $(function () {
     $(document).on("click", "#store-category .btn-gray", function (event) {
         if ($("#store-layer").hasClass("collapse")) {
             $("#store-category ul").slideDown(400);
+            $('#store-constrain').animate({top:'+=100'}, 400);
         } else {
             $("#store-category ul").slideUp(400);
+            $('#store-constrain').animate({top:'-=100'}, 400);
         }
         $("#store-layer").toggleClass("collapse");
-        $common.autoHeight();
-        $common.scrollbar("#store-constrain", "#store-list", "#store-slider");
+        // $common.autoHeight();
+        // $common.scrollbar("#store-constrain", "#store-list", "#store-slider");
     });
 
     $('#system-error .btn-ok, #system-error .btn-close').click(function () {
@@ -170,7 +172,8 @@ $(function () {
     window.onbeforeunload = confirmExit;
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
-        $common.autoHeight();
-        $common.scrollbar("#store-constrain", "#store-list", "#store-slider");
+        // $common.autoHeight();
+        // $common.scrollbar("#store-constrain", "#store-list", "#store-slider");
+        $('#store-list').perfectScrollbar('update');
     });
 });
