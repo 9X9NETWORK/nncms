@@ -165,14 +165,15 @@
         $(".func_name").text($("#catLi_" + inObj).text());
         $('.channel-list li').remove();
 
-        if ('none' !== $('#store-slider').css('display')) {
-            $('#store-slider .slider-vertical').slider('value', 100);
-            $('#store-slider .slider-vertical').slider('destroy');
-            $common.autoHeight();
-            $common.scrollbar("#store-constrain", "#store-list", "#store-slider");
-        }
+        // if ('none' !== $('#store-slider').css('display')) {
+        //     $('#store-slider .slider-vertical').slider('value', 100);
+        //     $('#store-slider .slider-vertical').slider('destroy');
+        //     $common.autoHeight();
+        //     $common.scrollbar("#store-constrain", "#store-list", "#store-slider");
+        // }
         $page.listCatChannel(msoId, inObj, $page.channelPageSize);
-
+        $('#store-list').scrollTop(0);
+        $('#store-list').perfectScrollbar('update');
     };
 
     // NOTE: page entry point (keep at the bottom of this file)

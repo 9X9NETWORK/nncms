@@ -192,11 +192,16 @@ $(function () {
     $(window).resize(function () {
         var $storeList = $('#store-list');
 
+        // Scroll to the exact bottom of the new window size.
+        if ($storeList.scrollTop() + $storeList.height() > $storeList.find('.channel-list').height()) {
+            $storeList.scrollTop($storeList.find('.channel-list').height() - $storeList.height());
+        }
+
+        $('#store-list').perfectScrollbar('update');
+
         if ($storeList.scrollTop() + $storeList.height() >= $storeList[0].scrollHeight && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
             $storeList.find('.load').fadeIn('slow');
             $page.getMoreChannels();
         }
-
-        $('#store-list').perfectScrollbar('update');
     });
 });
