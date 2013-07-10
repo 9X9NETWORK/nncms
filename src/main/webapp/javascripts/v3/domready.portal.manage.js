@@ -673,7 +673,7 @@ $(function () {
     */
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
-        $('#store-list').perfectScrollbar('update');
+        $('#portal-list').perfectScrollbar('update');
         // $common.scrollbar("#portal-constrain", "#portal-list", "#portal-slider");
         // $('#portal-slider .slider-vertical').slider('value', 100);
     });

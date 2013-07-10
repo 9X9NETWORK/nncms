@@ -823,6 +823,7 @@
     display: block;
     top: 55px;
     z-index: 2;
+    margin-right: 35px;
 }
 #portal-manage #name-charcounter, #brand-setting #name-charcounter {
     margin: 0 13px 0 0;
@@ -886,6 +887,10 @@
     overflow:auto;
 }
 #store-layer .channel-list {
+    padding: 20px 0 0 20px;
+    left: -20px;
+}
+#portal-list .channel-list {
     padding: 20px 0 0 20px;
     left: -20px;
 }
@@ -1504,17 +1509,20 @@
 /* Slider */
 #portal-constrain {
     overflow: hidden;
-    height: 90%;
-    position: relative;
-    top: 35px;
-    left: -20px;
-    padding: 0 10px 0 0;
+    /*width: 100%;*/
+    position: absolute;
+    top: 130px;
+    right: 4px;
+    bottom: 0;
+    left: 0;
+   /* padding: 0 10px 0 0;*/
 }
 #portal-list {
+    position: absolute;
+    top: 0;
+    bottom: 48px;
     width: 100%;
-    height: auto;
-    position: relative;
-    margin: -35px 0 0 0;
+    overflow: hidden;
 }
 #portal-slider {
     height: 500px;
