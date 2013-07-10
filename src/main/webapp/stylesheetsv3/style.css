@@ -886,11 +886,9 @@ abbr, acronym {
 
 #content-main {
     position: absolute;
-   /* min-width: 776px;*/
     min-width: 820px;
     overflow: hidden;
     left: 200px;
-    /*right: 35px;*/
     right: 0px;
     top: 0;
     bottom: 105px;
@@ -898,7 +896,6 @@ abbr, acronym {
 
 /* content-main */
 #content-main-wrap {
-    /*position: relative;*/
     position: absolute;
     width: 100%;
     top: 70px;
