@@ -1,0 +1,121 @@
+#content-wrap .btns, .lightbox-content .btns
+  height: 32px
+  padding: 0 0 0 3px
+  background: url(../images/btn_gray.png) no-repeat 0 0
+
+#content-wrap .btns span, .lightbox-content .btns span
+  display: block
+  height: 32px
+  padding: 0 3px 0 0
+  background: url(../images/btn_gray.png) no-repeat right -32px
+
+#content-wrap .btns span
+  a, input
+    display: block
+    height: 27px
+    padding: 5px 0 0 0
+    border: none
+    background: url(../images/btn_gray.png) repeat-x 0 -64px
+    color: #555
+    font-family: Arial, Helvetica
+    font-weight: 500
+    font-size: 15px
+    text-decoration: none
+    text-align: center
+    cursor: pointer
+
+.lightbox-content .btns span
+  a, input
+    display: block
+    height: 27px
+    padding: 5px 0 0 0
+    border: none
+    background: url(../images/btn_gray.png) repeat-x 0 -64px
+    color: #555
+    font-family: Arial, Helvetica
+    font-weight: 500
+    font-size: 15px
+    text-decoration: none
+    text-align: center
+    cursor: pointer
+
+#content-wrap .btns
+  &:hover
+    background-position: 0 -96px
+    span
+      background-position: right -128px
+      a, input
+        background-position: 0 -160px
+        color: #999
+  &.disable
+    background: url(../images/bg_btn_left_disable.png) no-repeat 0 0
+    span
+      background: url(../images/bg_btn_right_disable.png) no-repeat right 0
+      a, input
+        background: url(../images/bg_btn_middle_disable.png) repeat 0 0
+        color: #999
+
+.lightbox-content .btns:hover
+  background: url(../images/popup_btn_left_press.png) no-repeat 0 0 !important
+  span
+    background: url(../images/popup_btn_right_press.png) no-repeat right 0 !important
+    a
+      background: url(../images/popup_btn_middle_press.png) repeat-x !important
+
+#content-wrap .btns
+  span input, &:hover span input, &.disable span input
+    background: none
+
+.lightbox-content .btns
+  span input, &:hover span input
+    background: none
+
+#content-wrap
+  .btns
+    span.btn-middle
+      background: url(../images/btn_gray.png) repeat-x 0 -64px
+    &:hover span
+      &.btn-right
+        background: url(../images/btn_gray.png) no-repeat right -128px
+      &.btn-middle
+        background: url(../images/btn_gray.png) repeat-x 0 -160px
+  position: absolute
+  top: 103px
+  left: 0
+  z-index: 49
+  overflow: hidden
+  width: 100%
+  min-width: 1010px
+  height: 100%
+  background: url(../images/bg_main.png) repeat
+  &.hidden
+    visibility: hidden
+
+/* content-wrap */
+
+#content-nav
+  float: left
+  width: 200px
+
+#content-main
+  position: absolute
+  min-width: 820px
+  overflow: hidden
+  left: 200px
+  right: 0px
+  top: 0
+  bottom: 105px
+
+/* content-main */
+
+#content-main-wrap
+  position: absolute
+  width: 100%
+  top: 70px
+  bottom: 0
+  overflow: hidden
+  &.footer-on
+    bottom: 48px
+
+div.constrain
+  margin-right: 35px
