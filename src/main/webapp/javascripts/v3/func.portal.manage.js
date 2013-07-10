@@ -218,12 +218,12 @@
 
                         $.each(dbTopList, function (i, chId) {
                             tmpId = parseInt(chId, 10);
-                            if (tmpId > 0) {
-                                procList.push({
-                                    onTop: false,
-                                    chId: tmpId
-                                });
-                            }
+
+                            procList.push({
+                                onTop: false,
+                                chId: tmpId
+                            });
+
                         });
 
                         actChannelCount2 = procList.length;
