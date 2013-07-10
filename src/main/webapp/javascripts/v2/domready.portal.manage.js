@@ -418,12 +418,12 @@ $(function () {
             tmpValue = 0,
             expSort = ".empty, .isSortable";
 
-        $common.showProcessingOverlay();
+        
         tmpStrValue = $(this).attr("tvalue");
         tmpValue = parseInt(tmpStrValue, 10);
 
         if (tmpValue !== $page.sortingType) {
-
+            $common.showProcessingOverlay();
             $("body").addClass("has-change");
             $(".sType").removeClass("on");
             $(this).addClass("on");

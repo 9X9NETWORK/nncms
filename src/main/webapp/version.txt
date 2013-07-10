@@ -1,3 +1,14 @@
+版本: 5077
+作者: Mars
+日期: 2013/7/10 14:30
+訊息:
+修改 portal-manage.html 套用 profect scrollbar  bug fix 
+----
+異動 : /javascripts/v2/func.portal.manage.js
+異動 : /javascripts/v2/domready.portal.manage.js
+異動 : /javascripts/v3/func.portal.manage.js
+異動 : /javascripts/v3/domready.portal.manage.js
+
 版本: 5063
 作者: Mars
 日期: 2013/7/9 17:38

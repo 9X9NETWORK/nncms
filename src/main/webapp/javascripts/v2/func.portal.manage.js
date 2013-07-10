@@ -218,11 +218,12 @@
 
                         $.each(dbTopList, function (i, chId) {
                             tmpId = parseInt(chId, 10);
-
-                            procList.push({
-                                onTop: false,
-                                chId: tmpId
-                            });
+                            if( tmpId > 0 ){
+                                procList.push({
+                                    onTop: false,
+                                    chId: tmpId
+                                });
+                            }
 
                         });
 

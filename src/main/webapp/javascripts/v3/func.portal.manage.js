@@ -218,14 +218,13 @@
 
                         $.each(dbTopList, function (i, chId) {
                             tmpId = parseInt(chId, 10);
-
-                            procList.push({
-                                onTop: false,
-                                chId: tmpId
-                            });
-
+                            if (tmpId > 0) {
+                                procList.push({
+                                    onTop: false,
+                                    chId: tmpId
+                                });
+                            }
                         });
-
                         actChannelCount2 = procList.length;
 
                         if (actChannelCount2 > 0) {
@@ -250,6 +249,10 @@
 
                     });
 
+                }
+                else
+                {
+                    $('#overlay-s').fadeOut("slow");
                 }
 
             });
@@ -364,8 +367,6 @@
                             $page._drawChannelLis();
                         }
 
-                        nn.log("onTopList : " + $page.onTopList);
-                        nn.log("nomoList : " + $page.nomoList);
                         var expSort = ".empty, .isSortable";
                         if (set.sortingType === 1) {
                             expSort = ".empty";
