@@ -1513,18 +1513,12 @@ $(function () {
     $('#poi-event-overlay').on('change keyup keydown', '#schedule_msg', function () {
         var val = $common.strip_tags($(this).val().replace(/\n/g, ''));
         $(this).val(val);
-        $('#schedule-mobile .mobile-block p.msg').text(val);
+        $('#schedule-mobile .mobile-block p.msg').text($common.mb_strimwidth(val, 34, '...'));
     });
     $('#poi-event-overlay').on('change keyup keydown', '#instant_msg', function () {
         var val = $common.strip_tags($(this).val().replace(/\n/g, ''));
         $(this).val(val);
-        $('#instant-mobile .mobile-block p.msg').text(val);
-    });
-    $('#poi-event-overlay').on('blur', '#schedule_msg', function () {
-        $('#schedule-ios p.msg').ellipsis();
-    });
-    $('#poi-event-overlay').on('blur', '#instant_msg', function () {
-        $('#instant-ios p.msg').ellipsis();
+        $('#instant-mobile .mobile-block p.msg').text($common.mb_strimwidth(val, 34, '...'));
     });
 
     // POI overlay - Scheduled Hour and Minute

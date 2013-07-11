@@ -1,5 +1,5 @@
 /*jslint browser: true, nomen: true, regexp: true, unparam: true */
-/*global $, nn, cms, FB */
+/*global $, nn, cms, FB, escape */
 
 (function ($common) {
     'use strict';
@@ -449,6 +449,65 @@
         return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
             return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
         });
+    };
+
+    $common.mb_strwidth = function (str) {
+        var strlen = str.length,
+            rtnlen = 0,
+            revcnt = 0,
+            strmap = [],
+            c = '',
+            cc = '',
+            i = 0;
+
+        if (strlen > 0) {
+            for (i = 0; i < strlen; i += 1) {
+                c = escape(str.charAt(i));
+                if ('%' === c.charAt(0)) {
+                    cc = c.charAt(1);
+                    if ('A' === cc || 'u' === cc) {
+                        rtnlen += 2;
+                        revcnt += 1;
+                        strmap.push(2);
+                    } else {
+                        rtnlen += 1;
+                        strmap.push(1);
+                    }
+                } else {
+                    rtnlen += 1;
+                    strmap.push(1);
+                }
+            }
+        }
+
+        return {
+            rtnlen: rtnlen,
+            revcnt: revcnt,
+            strmap: strmap
+        };
+    };
+
+    $common.mb_strimwidth = function (str, max, marker) {
+        var info = $common.mb_strwidth(str),
+            len = str.length,
+            map = info.strmap,
+            to = 0,
+            cnt = 0;
+
+        $.each(map, function (i, n) {
+            cnt += n;
+            if (cnt > max) {
+                to = i;
+                // NOTE: return false here is break the $.each() loop
+                return false;
+            }
+            to = i;
+        });
+
+        if (len > 0 && (to + 1) < len) {
+            return str.substring(0, to) + marker;
+        }
+        return str;
     };
 
     //-------------------------------------------------------------------------

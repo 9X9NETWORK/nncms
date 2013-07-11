@@ -1286,7 +1286,7 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     padding: 0 10px;
     color: #fff;
     font-size: 12px;
-    text-align: center;
+    text-align: left;
     line-height: 16px;
 }
 
