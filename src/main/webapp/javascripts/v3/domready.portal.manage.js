@@ -64,6 +64,8 @@ $(function () {
                 name: inSetName,
                 sortingType: inSortingType
             }, function (set) {
+                $('#title-func .set_name').html(inSetName);
+                $('.sub-nav .active a').html(inSetName);
                 var actChannelCount = 0,
                     actChannel = [];
 
