@@ -1,3 +1,26 @@
+版本: 5092
+作者: Mars
+日期: 2013/7/10 14:30
+訊息:
+修改 iven change requirement 
+1. PCS landing page change portal-set.html to portal-mange.html 
+2. PCS only has one SET can be set , and channels in SET is unlimited
+----
+異動 : /javascripts/v2/func.portal.set.js
+異動 : /javascripts/v2/func.portal.manage.js
+異動 : /javascripts/v3/func.portal.manage.js
+異動 : /javascripts/v3/domready.portal.manage.js
+異動 : /brand-setting.html
+異動 : /channel-add.html
+異動 : /channel-poi.html
+異動 : /channel-setting.html
+異動 : /cms-settings.html
+異動 : /episode-list.html
+異動 : /index.html
+異動 : /portal-manage.html
+異動 : /portal-set.html
+異動 : /store-manage.html
+
 版本: 5077
 作者: Mars
 日期: 2013/7/10 14:30

@@ -394,7 +394,7 @@
                 $('#overlay-s').fadeOut("slow");
             });
         } else {
-            location.href = 'portal-set.html';
+            location.href = './';
         }
 
         // portal manage

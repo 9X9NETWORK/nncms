@@ -37,7 +37,7 @@
         <h3><a href="index.html"><span class="cms-icon">CMS</span><span class="sub-title">Content Management System</span></a></h3>
         <ul>
             <li><span><a href="index.html">My Channels</a></span></li>
-            <li class="on"><span><a href="portal-set.html">My Portal</a></span></li>
+            <li class="on"><span><a href="portal-manage.html">My Portal</a></span></li>
         </ul>
         <div class="studio-setup">
             <p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="cms-settings.html"><img src="images/icon_studio_setup.png" alt="" />CMS Settings</a></span></span></p>
@@ -111,7 +111,6 @@
 
 <!-- portal-sets-tmpl Begin -->
 <script id="portal-sets-tmpl" type="text/x-jquery-tmpl">
-{{if seq < 4}}
     {{if channelCnt > 0}}
         <li data-meta="${id}">
             <div class="thumb">
@@ -144,7 +143,6 @@
             </div>
         </li>
     {{/if}}
-{{/if}}
 </script>
 <!-- portal-sets-tmpl End -->
  

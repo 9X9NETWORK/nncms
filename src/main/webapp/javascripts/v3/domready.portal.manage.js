@@ -49,7 +49,7 @@ $(function () {
     });
 
     $(document).on("click", "#set-save", function (event) {
-        var setId = cms.global.USER_URL.param('id');
+        var setId = $page.setId;
         $("#setName").val($.trim($("#setName").val()));
         var inSetName = $("#setName").val();
         var inSortingType = $("#sortingType").val();
@@ -102,9 +102,12 @@ $(function () {
                         }, function (retValue) {
                             actChannelCount = actChannelCount - 1;
                             if (actChannelCount === 0) {
+                                // update channelCnt
+                                nn.api('PUT', cms.reapi('/api/sets/{setId}', {
+                                    setId: setId
+                                }), null, null);
                                 $page._procSort(setId);
                                 nn.log("actChannelCount in API : " + actChannelCount);
-
                             }
                         });
 
@@ -141,7 +144,7 @@ $(function () {
     $(document).on("click", "#empty_channel", function (event) {
         // search layout
         var cntChannel = $("#channelCnt").text();
-        if (cntChannel < 27) {
+        if (cntChannel < $page.setCanChannel) {
             $("#search-title").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Add channels into your “<span>Set 2</span>”"], [$("#setName").val()]));
             $("#portal-add-layer").fadeIn();
         }
@@ -207,7 +210,8 @@ $(function () {
         var strInput = $("#input-portal-ch").val(),
             searchType = $("#dropdown-portal-ch").attr("kvale"),
             msgErr = "";
-        $("#sRusult").data("canAdd", (27 - $("#channelCnt").text()));
+        //$("#sRusult").data("canAdd", (27 - $("#channelCnt").text()));
+        $("#sRusult").data("canAdd", $page.setCanChannel);
         $('#search-channel-list').html('');
         $("#searchNext").hide();
         $("#searchPrev").hide();
@@ -240,7 +244,6 @@ $(function () {
                         channels: tmpChannel
                     }, function (channels) {
                         var cntChannel = channels.length,
-                            canChannel = 27 - $("#channelCnt").text(),
                             items = [],
                             temp = [];
                         $.each(channels, function (i, channel) {
@@ -272,7 +275,7 @@ $(function () {
                                     }
                                 }
                                 if (isValid === true) {
-                                    $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel, canChannel]));
+                                    $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel]));
                                     $('#portal-search-item-tmpl').tmpl(items).appendTo('#search-channel-list');
                                 } else {
                                     $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any channels."], [strInput]));
@@ -299,8 +302,8 @@ $(function () {
                     mso: cms.global.MSOINFO.name
                 }, function (channels) {
                     var cntChannel = channels.length,
-                        canChannel = 27 - $("#channelCnt").text(),
                         items = [],
+                        tmpId = 0,
                         temp = [];
                     $.each(channels, function (i, channel) {
                         temp = [];
@@ -313,12 +316,19 @@ $(function () {
                                 }
                             }
                         }
+                        tmpId = parseInt(channel.id, 10);
+                        if (-1 === $.inArray(tmpId, $page.currentList)) {
+                            channel.alreadyAdd = false;
+                        } else {
+                            channel.alreadyAdd = true;
+                        }
+
                         items.push(channel);
                     });
 
                     cntChannel = items.length;
                     if (cntChannel > 0) {
-                        $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel, canChannel]));
+                        $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel]));
                     } else {
                         $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any channels."], [strInput]));
                     }
@@ -348,10 +358,8 @@ $(function () {
             var this_id = null;
             $.each(lis, function (idx, lisItem) {
 
-                this_id = $(lisItem).attr("id").replace("schk_", "");
-
+                this_id =  parseInt($(lisItem).attr("id").replace("schk_", ""), 10);
                 if (-1 === $.inArray(this_id, $page.currentList)) {
-
                     if ($.inArray(this_id, $page.removeList) > -1) {
                         $page.removeList.splice($.inArray(this_id, $page.removeList), 1);
                     } else {
@@ -378,6 +386,7 @@ $(function () {
                         $page.currentList.push(channel.id);
 
                     });
+                    $("#channelCnt").text(parseInt($("#channelCnt").text(), 10) + tmpList.length);
                     $page._drawChannelLis();
                     $("#portal-add-layer").fadeOut("slow");
                     $page._search_channel_clean();
@@ -389,7 +398,7 @@ $(function () {
     });
 
     $(document).on("click", "#search-channel-list .checkbox", function (event) {
-        var canAdd = $("#sRusult").data("canAdd");
+        var canAdd = $page.setCanChannel;//$("#sRusult").data("canAdd");
         var li_on = 0;
         var this_li = $(this);
 
@@ -473,7 +482,7 @@ $(function () {
 
     $(document).on("click", "#yes-no-prompt .btn-yes", function (event) {
         $("body").removeClass("has-change");
-        var setId = cms.global.USER_URL.param('id');
+        var setId = $page.setId;
 
         //$("#channel-list").sortable("destroy");
         $(".sType").removeClass("on");
