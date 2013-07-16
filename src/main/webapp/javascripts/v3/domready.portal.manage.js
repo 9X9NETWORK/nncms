@@ -69,6 +69,7 @@ $(function () {
                 var actChannelCount = 0,
                     actChannel = [];
 
+                nn.log("actChannelsssCount : " + $page.removeList);
                 $.each($page.removeList, function (i, channel) {
                     if (channel > 0) {
                         actChannel.push({
@@ -94,6 +95,8 @@ $(function () {
                 if (actChannelCount > 0) {
                     $.each(actChannel, function (i, channel) {
 
+                        nn.log("actChannelCount : " + actChannelCount);
+
                         nn.api(channel.chAction, cms.reapi('/api/sets/{setId}/channels', {
                             setId: setId
                         }), {
@@ -106,6 +109,7 @@ $(function () {
                                     setId: setId
                                 }), null, null);
                                 $page._procSort(setId);
+                                nn.log("actChannelCount in API : " + actChannelCount);
                             }
                         });
 
@@ -441,6 +445,7 @@ $(function () {
                 $page.onTopList = [];
                 expSort = ".empty";
                 $(".btn-top").addClass("hide");
+                nn.log("btn-top on" + $(".btn-top").length);
                 $(".isSortable").css("cursor", "move");
                 $('#channel-list').sortable({
                     cursor: 'move',
@@ -451,9 +456,12 @@ $(function () {
                     }
                 });
             } else {
+                nn.log("nomoList" + $page.nomoList);
                 $page.onTopList = $page.procOnTopList($page.nomoList, $page.sortingType);
                 $page.nomoList = $page.procNomoList($page.nomoList, $page.sortingType);
 
+                nn.log("onTopList" + $page.onTopList);
+                nn.log("nomoList" + $page.nomoList);
                 $page._drawChannelLis();
                 $page._reListSeq();
 
