@@ -152,7 +152,9 @@
     <li>&nbsp;</li>
 {{else}}
     <li class="active"><a href="episode-list.html?id=${id}" class="episode">${nn._([cms.global.PAGE_ID, 'func-nav', 'Episode list'])}</a></li>
+    {{if !cms.global.IS_REMARK}}
     <li><a href="channel-poi.html?id=${id}" class="poi">${nn._([cms.global.PAGE_ID, 'func-nav', 'Channel POI'])}</a></li>
+    {{/if}}
     <li><a href="channel-setting.html?id=${id}" class="setting">${nn._([cms.global.PAGE_ID, 'func-nav', 'Settings'])}</a></li>
 {{/if}}
 </script>

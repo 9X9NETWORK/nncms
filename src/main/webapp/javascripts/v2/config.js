@@ -275,7 +275,8 @@ var cms = {};
         SLIDER_MAX: 100,
         MSO: 0,
         MSOINFO: null,
-        YOUTUBE_PLAYER: null
+        YOUTUBE_PLAYER: null,
+        IS_REMARK: true
     };
 
     //-------------------------------------------------------------------------
@@ -347,6 +348,19 @@ var cms = {};
     case 'production':
         cms.config.IS_DEBUG = false;
         cms.config.API_BASE = '';
+        break;
+    }
+
+    switch (location.host) {
+    case 'dev6.9x9.tv':
+    case 'beagle.9x9.tv':
+        cms.global.IS_REMARK = false;
+        break;
+    case 'www.9x9.tv':
+        cms.global.IS_REMARK = true;
+        break;
+    default :
+        cms.global.IS_REMARK = true;
         break;
     }
 

@@ -1,3 +1,16 @@
+版本: 5108
+作者: Mars
+日期: 2013/7/17 17:12
+訊息:
+修改 for 7/20 4.0 release , play only support Hyper Channel POI , disable other POI edit in CCS.
+1. add a var cms.global.IS_REMARK to switch something or function enable/disable. 
+----
+異動 : /channel-setting.html
+異動 : /epcurate-curation.html
+異動 : /episode-list.html
+異動 : /index.html
+異動 : /javascripts/v2/config.js
+
 版本: 5104
 作者: Mars
 日期: 2013/7/17 11:31

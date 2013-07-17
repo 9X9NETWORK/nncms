@@ -262,7 +262,9 @@
                 <div class="btn-wrap disable">
                     <ul>
                         <li><a href="javascript:void(0);" class="add disable">Add</a></li>
+                        {{if !cms.global.IS_REMARK}}
                         <li><a href="javascript:void(0);" class="channel-poi disable">Channel POI</a></li>
+                        {{/if}}
                         <li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
                         <li><a href="javascript:void(0);" class="setting disable">Setting</a></li>
                         <li><a href="javascript:void(0);" class="del disable">Del</a></li>
@@ -273,7 +275,9 @@
                 <div class="btn-wrap enable">
                     <ul>
                         <li><a href="epcurate-curation.html?cid=${id}" class="add">Add<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Curate a new episode'])}</span></span></span></span></a></li>
+                        {{if !cms.global.IS_REMARK}}
                         <li><a href="channel-poi.html?id=${id}" class="channel-poi">Channel POI<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Channel POI'])}</span></span></span></span></a></li>
+                        {{/if}}
                         <li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
                         <li><a href="channel-setting.html?id=${id}" class="setting">Setting<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Channel settings'])}</span></span></span></span></a></li>
                         <li><a href="/api/users/${$item.userId}/channels/${id}" rel="${id}" class="del">Del<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Delete this channel'])}</span></span></span></span></a></li>
