@@ -1,3 +1,11 @@
+版本: 5104
+作者: Mars
+日期: 2013/7/17 11:31
+訊息:
+修改 change requirement by 8585 willan / lili / louis / mars , PCS Sets list all by API result 
+----
+異動 : /javascripts/v3/domready.portal.manage.js
+
 版本: 5102
 作者: Mars
 日期: 2013/7/17 10:00

@@ -8,7 +8,6 @@
     $page.sortingType = 1;
     $page.onTopLimit = 4;
     $page.setId = 0;
-    $page.setManage = 3;
     $page.setCanChannel = 999999;
     $page.onTopList = [];
     $page.nomoList = [];
@@ -334,16 +333,12 @@
                 }
                 setId = $page.setId;
                 var setItems = [];
-                $.each(sets, function(i, channel) {
-                    if (i < $page.setManage) {
-                        channel.isActive = 0;
-                        if (channel.id == setId) {
-                            channel.isActive = 1;
-                        }
-                        setItems.push(channel);
-                    } else {
-                        return false;
+                $.each(sets, function (i, channel) {
+                    channel.isActive = 0;
+                    if (channel.id == setId) {
+                        channel.isActive = 1;
                     }
+                    setItems.push(channel);
                 });
                 $('#func-nav .sub-nav').html('');
                 $('#portal-func-nav-sub-tmpl').tmpl(setItems).appendTo('#func-nav .sub-nav');
