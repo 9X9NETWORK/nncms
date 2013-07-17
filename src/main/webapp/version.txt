@@ -1,3 +1,14 @@
+版本: 5102
+作者: Mars
+日期: 2013/7/17 10:00
+訊息:
+修改 iven change requirement 
+1. PCS revert to have 3 sets. 
+2. needn't revert portal-set.html, the PCS landing page will be the first set portal-manage.
+3. keep 5092 fix .
+----
+異動 : /javascripts/v3/domready.portal.manage.js
+
 版本: 5093
 作者: Mars
 日期: 2013/7/15 15:46

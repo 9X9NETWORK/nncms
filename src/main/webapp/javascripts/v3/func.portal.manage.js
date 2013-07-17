@@ -8,6 +8,7 @@
     $page.sortingType = 1;
     $page.onTopLimit = 4;
     $page.setId = 0;
+    $page.setManage = 3;
     $page.setCanChannel = 999999;
     $page.onTopList = [];
     $page.nomoList = [];
@@ -307,8 +308,12 @@
             $common.showProcessingOverlay();
             $('#yes-no-prompt .content').text(nn._([cms.global.PAGE_ID, 'channel-list', "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels."]));
         }
-        var setId = 0;//cms.global.USER_URL.param('id');
-        var msoId = cms.global.MSO;
+        var setId = 0,
+            msoId = cms.global.MSO;
+
+        if (!isNaN(parseInt(cms.global.USER_URL.param('id'), 10))) {
+            setId = parseInt(cms.global.USER_URL.param('id'), 10);
+        }
 
         nn.on(404, function (jqXHR, textStatus) {
             var tmpTxt = $.trim(jqXHR.responseText);
@@ -323,16 +328,21 @@
         }, function (sets) {
             var cntSetsItem = sets.length;
             if (cntSetsItem > 0) {
-                $page.setId = sets[0].id;
+                $page.setId = setId;
+                if (setId < 1) {
+                    $page.setId = sets[0].id;
+                }
                 setId = $page.setId;
                 var setItems = [];
-                $.each(sets, function (i, channel) {
-                    channel.isActive = 0;
-                    if (channel.id == setId) {
-                        channel.isActive = 1;
-                    }
-                    if (i < 1) {
+                $.each(sets, function(i, channel) {
+                    if (i < $page.setManage) {
+                        channel.isActive = 0;
+                        if (channel.id == setId) {
+                            channel.isActive = 1;
+                        }
                         setItems.push(channel);
+                    } else {
+                        return false;
                     }
                 });
                 $('#func-nav .sub-nav').html('');
