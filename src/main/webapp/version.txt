@@ -1,3 +1,21 @@
+版本: 5117
+作者: Mars
+日期: 2013/7/19 14:30
+訊息:
+修改 cms 4.0 優化列表 row 25 / 26 / 27 
+1. Channel "Thumbnail"文字改為"Channel logo"
+2. Channel title 文字欄下方提示文："Best within 10 characters" 
+   文字欄右邊會有計算的數字提示，預設0，會隨著文字輸入數由小到大，例如1, 2, 3, 4, 5 ....... 
+3. Channel description 文字欄下方提示文："Best within 52 characters" 
+   文字欄右邊會有計算的數字提示，預設0，會隨著文字輸入數由小到大，例如1, 2, 3, 4, 5 .......
+----
+異動 : /channel-setting.html
+異動 : /channel-add.html
+異動 : /javascripts/v2/func.channel.js
+異動 : /javascripts/v3/func.channel.js
+異動 : /lang/en.json
+異動 : /lang/zh.json
+
 版本: 5116
 作者: Mars
 日期: 2013/7/19 14:00

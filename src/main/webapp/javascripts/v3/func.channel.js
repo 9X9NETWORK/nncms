@@ -436,13 +436,15 @@
                             container: '#name-charcounter',
                             format: '%1',
                             delay: 0,
-                            clear: false
+                            clear: false,
+                            countDown: false
                         });
-                        $('#intro').charCounter(70, {
+                        $('#intro').charCounter(200, {
                             container: '#intro-charcounter',
                             format: '%1',
                             delay: 0,
-                            clear: false
+                            clear: true,
+                            countDown: false
                         });
                         if ($('#uploadThumbnail').length > 0) {
                             $page.uploadImage();
@@ -557,13 +559,15 @@
                 container: '#name-charcounter',
                 format: '%1',
                 delay: 0,
-                clear: false
+                clear: false,
+                countDown: false
             });
-            $('#intro').charCounter(70, {
+            $('#intro').charCounter(200, {
                 container: '#intro-charcounter',
                 format: '%1',
                 delay: 0,
-                clear: false
+                clear: true,
+                countDown: false
             });
             if ($('#uploadThumbnail').length > 0) {
                 $page.uploadImage();
