@@ -1,3 +1,12 @@
+版本: 5118
+作者: Mars
+日期: 2013/7/19 14:57
+訊息:
+修改 cms 4.0 優化列表 row 25 / 26 / 27 
+1. Channel list   移除Favorite channel
+----
+異動 : /javascripts/v2/index.js
+
 版本: 5117
 作者: Mars
 日期: 2013/7/19 14:30
