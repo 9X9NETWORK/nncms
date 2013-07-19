@@ -1,3 +1,12 @@
+版本: 5116
+作者: Mars
+日期: 2013/7/19 14:00
+訊息:
+修改 jquery.charcounter.js added countDown flag for count down and count up default is count down
+----
+異動 : /javascripts/libs/jquery.charcounter.js
+異動 : /javascripts/libs/jquery.charcounter.min.js
+
 版本: 5114
 作者: Mars
 日期: 2013/7/19 10:57

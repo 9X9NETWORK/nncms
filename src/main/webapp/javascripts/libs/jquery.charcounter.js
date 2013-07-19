@@ -1,5 +1,6 @@
 /*!
  *
+ * Revised by marshsu@gmail.com added countDown flag for count down and count up at 2013/07/19
  * Revised by chihwen@doubleservice.com added multibyte counter and clear feature.
  * jquery.charcounter.js version 1.3
  * requires jQuery version 1.2 or higher
@@ -28,7 +29,8 @@
             delay: 0,
             multibyte: false,
             cntdivide: false,
-            clear: true
+            clear: true,
+            countDown: true
         }, settings);
         settings.cntdivide = (settings.multibyte && settings.cntdivide) ? true : false;
         var p, timeout;
@@ -74,7 +76,7 @@
 
         function count(el, container) {
             el = $(el);
-            var tmp, len, rev, to;
+            var tmp, len, rev, to, retLen;
             tmp = mb_strwidth(el.val());
             len = (settings.multibyte) ? tmp[0] : el.val().length;
             rev = (settings.multibyte) ? tmp[1] : 0;
@@ -85,15 +87,20 @@
                     pulse(container, true);
                 }
             }
+            if (settings.countDown) {
+                retLen = max - len;
+            } else {
+                retLen = len;
+            }
             if (settings.delay > 0) {
                 if (timeout) {
                     window.clearTimeout(timeout);
                 }
                 timeout = window.setTimeout(function () {
-                    container.html(settings.format.replace(/%1/, (max - len)));
+                    container.html(settings.format.replace(/%1/, retLen));
                 }, settings.delay);
             } else {
-                container.html(settings.format.replace(/%1/, (max - len)));
+                container.html(settings.format.replace(/%1/, retLen));
             }
         }
 
