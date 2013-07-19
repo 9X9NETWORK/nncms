@@ -57,21 +57,19 @@
                         channel.moreImageUrl_1 = cms.config.CHANNEL_DEFAULT_IMAGE;
                         channel.moreImageUrl_2 = cms.config.CHANNEL_DEFAULT_IMAGE2;
                         channel.moreImageUrl_3 = cms.config.CHANNEL_DEFAULT_IMAGE2;
-                        if (channel.contentType !== cms.config.YOUR_FAVORITE) {
-                            if (channel.imageUrl && '' !== $.trim(channel.imageUrl) && channel.imageUrl !== cms.config.EPISODE_DEFAULT_IMAGE) {
-                                channel.moreImageUrl_1 = channel.imageUrl;
-                            }
-                            if (cms.config.CHANNEL_DEFAULT_IMAGE === channel.moreImageUrl_1) {
-                                channel.moreImageUrl_1 = 'images/ch_default.png';
-                            }
-                            if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
-                                temp = channel.moreImageUrl.split('|');
-                                if (temp[0] && temp[0] !== cms.config.EPISODE_DEFAULT_IMAGE) {
-                                    channel.moreImageUrl_2 = temp[0];
-                                }
-                            }
-                            items.push(channel);
+                        if (channel.imageUrl && '' !== $.trim(channel.imageUrl) && channel.imageUrl !== cms.config.EPISODE_DEFAULT_IMAGE) {
+                            channel.moreImageUrl_1 = channel.imageUrl;
                         }
+                        if (cms.config.CHANNEL_DEFAULT_IMAGE === channel.moreImageUrl_1) {
+                            channel.moreImageUrl_1 = 'images/ch_default.png';
+                        }
+                        if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
+                            temp = channel.moreImageUrl.split('|');
+                            if (temp[0] && temp[0] !== cms.config.EPISODE_DEFAULT_IMAGE) {
+                                channel.moreImageUrl_2 = temp[0];
+                            }
+                        }
+                        items.push(channel);
                     });
                     $('#channel-list').html('');
                     $('#channel-list-tmpl-item').tmpl(items, {

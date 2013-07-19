@@ -1,8 +1,19 @@
+版本: 5123
+作者: Mars
+日期: 2013/7/19 18:28
+訊息:
+修改 fix channel list reorder bug ( Favorite channel )
+1. remove html from index.html about Favorite channel
+2. Dependencies cms API version 5122
+----
+異動 : /index.html
+異動 : /javascripts/v2/index.js
+
 版本: 5118
 作者: Mars
 日期: 2013/7/19 14:57
 訊息:
-修改 cms 4.0 優化列表 row 25 / 26 / 27 
+修改 cms 4.0 優化列表 row 24 
 1. Channel list   移除Favorite channel
 ----
 異動 : /javascripts/v2/index.js
