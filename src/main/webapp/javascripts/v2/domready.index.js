@@ -109,6 +109,12 @@ $(function () {
         $common.showDeletePromptOverlay('Are you sure you want to delete this channel? All data will be removed permanently.');
         return false;
     });
+
+    $('#channel-list').on('click', '#empty-item', function () {
+        location.href = "channel-add.html";
+        return false;
+    });
+
     $('#delete-prompt .btn-del').click(function () {
         $.unblockUI();
         if ($('#channel-list li.deleting').length > 0 && $('#channel-list li.deleting').data('deleteId')) {

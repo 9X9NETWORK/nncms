@@ -1,3 +1,14 @@
+版本: 5137
+作者: Mars
+日期: 2013/7/19 18:28
+訊息:
+修改 add requirement from Janet , channel list empty add an add new button 
+----
+異動 : /index.html
+異動 : /javascripts/v2/func.index.js
+異動 : /javascripts/v2/domready.index.js
+異動 : /stylesheets/channel.css
+
 版本: 5123
 作者: Mars
 日期: 2013/7/19 18:28

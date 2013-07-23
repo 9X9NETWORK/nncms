@@ -37,7 +37,6 @@
             options: options
         }, 'debug');
 
-        var pageId = cms.global.PAGE_ID;
         if (cms.global.USER_DATA.id) {
             $common.showProcessingOverlay();
             nn.api('GET', cms.reapi('/api/users/{userId}/channels', {
@@ -84,6 +83,9 @@
                         }
                     });
                     $('#channel-list').sortable('disable');
+                } else {
+                    $("p.order").hide();
+                    $('#channel-list-empty-tmpl').tmpl().appendTo('#channel-list');
                 }
                 if (cntChannel <= 0 || (1 === cntChannel && hasFavoriteChannel)) {
                     if (!$.cookie('cms-cct')) {

@@ -201,6 +201,16 @@
 </script>
 <!-- get-url-tmpl End -->
 
+<!-- channel-list-empty-tmpl Begin -->
+<script id="channel-list-empty-tmpl" type="text/x-jquery-tmpl">
+<li class="clearfix" id="empty-item" >
+    
+        <h2>{{html nn._([cms.global.PAGE_ID, 'episode-list', "You don't have any channel yet"])}}</h2>
+    
+</li>
+</script>
+<!-- channel-list-empty-tmpl End -->
+
 <!-- channel-list-tmpl-item Begin -->
 <script id="channel-list-tmpl-item" type="text/x-jquery-tmpl">
 <li class="clearfix" data-meta="${id}">
