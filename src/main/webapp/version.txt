@@ -1,6 +1,20 @@
+版本: 5138
+作者: Mars
+日期: 2013/7/23 16:29
+訊息:
+修改 episode list invaild and us v3(prefect-scrollbar) prepare 
+----
+異動 : /images/btn_func.png
+異動 : /images/icon_check.png
+新增 : /javascripts/v3/domready.episode.js
+新增 : /javascripts/v3/func.episode.js
+新增 : /javascripts/v3/domready.get-url.js
+新增 : /javascripts/v3/func.get-url.js
+新增 : /stylesheetsv3/episode.css
+
 版本: 5137
 作者: Mars
-日期: 2013/7/19 18:28
+日期: 2013/7/23 16:08
 訊息:
 修改 add requirement from Janet , channel list empty add an add new button 
 ----
