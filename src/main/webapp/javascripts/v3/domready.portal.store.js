@@ -70,7 +70,7 @@ $(function () {
     $('#store-list').scroll(function (event) {
         var $storeList = $('#store-list');
 
-        if ($storeList.scrollTop() + $storeList.height() >= $storeList[0].scrollHeight && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
+        if ($storeList.scrollTop() + $storeList.outerHeight() >= $storeList[0].scrollHeight && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
             $storeList.find('.load').fadeIn('slow');
             $page.getMoreChannels();
         }
@@ -199,7 +199,7 @@ $(function () {
 
         $('#store-list').perfectScrollbar('update');
 
-        if ($storeList.scrollTop() + $storeList.height() >= $storeList[0].scrollHeight && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
+        if ($storeList.scrollTop() + $storeList.outerHeight() >= $storeList[0].scrollHeight && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
             $storeList.find('.load').fadeIn('slow');
             $page.getMoreChannels();
         }

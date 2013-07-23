@@ -1042,6 +1042,7 @@
 /* Empty */
 #portal-layer .channel-list li.empty {
     cursor: pointer;
+    height: 112px;
 }
 #portal-layer .channel-list li.empty p {
     line-height: 17px;
@@ -1160,56 +1161,8 @@
 .channel-list .thumb:hover .watermark, #portal-layer .channel-list .thumb:hover .btn-remove, #portal-layer .channel-list .thumb:hover .btn-top, #store-layer .channel-list .thumb:hover .btn-minus {
     display: block;
 }
+
 /* Tip */
-.tip-white {
-    position: relative;
-    top: -11px;
-    left: -1px;
-    display: none;
-    z-index: 9;
-    min-width: 60px;
-}
-.tip-white .left {
-    position: relative;
-    float: left;
-    width: 7px;
-    height: 28px;
-    background: url(../images/bg_tip.png) no-repeat 0 0;
-}
-.tip-white .right {
-    position: relative;
-    float: left;
-    width: 7px;
-    height: 28px;
-    background: url(../images/bg_tip.png) no-repeat 0 -28px;
-}
-.tip-white .center {
-    position: relative;
-    float: left;
-    height: 28px;
-    white-space: nowrap;
-    background: url(../images/bg_tip.png) repeat-x 0 -56px;
-    padding: 7px 0 0;
-    text-align: center;
-}
-.tip-bottom {
-    width: 22px;
-    height: 9px;
-    margin: -31px 0 0 1px;
-    position: relative;
-    z-index: 6;
-    display: none;
-    background: url(../images/bg_tip_bottom.png) no-repeat center bottom;
-}
-.tip-top {
-    width: 22px;
-    height: 9px;
-    margin: -2px 0 0 1px;
-    position: relative;
-    z-index: 6;
-    display: none;
-    background: url(../images/bg_tip_top.png) no-repeat center top;
-}
 .btn-top:hover .tip-white, .btn-minus:hover .tip-white, .btn-remove:hover .tip-white {
     display: block;
     top: -33px;
@@ -1235,6 +1188,7 @@
     float: right;
     background: url(../images/bg_tip.png) repeat-x 0 0;
 }
+
 /* First */
 #portal-layer h2 {
     font-size: 30px;
@@ -1520,10 +1474,14 @@
 #portal-list {
     position: absolute;
     top: 0;
-    bottom: 48px;
+    bottom: 0;
     width: 100%;
     overflow: hidden;
+    padding-bottom: 48px;
 }
+/*#portal-list.footer-off {
+    bottom: 0;
+}*/
 #portal-slider {
     height: 500px;
     top: 155px;
@@ -1554,9 +1512,11 @@
     width: 100%;
     position: absolute;
     top: 0;
-    bottom: 48px;
+    bottom: 0;
     overflow: hidden;
+    padding-bottom: 48px;
 }
+
 #store-slider {
     height: 500px;
     top: 240px;

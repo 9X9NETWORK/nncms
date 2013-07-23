@@ -84,7 +84,7 @@
                 callback();
             }
             // If the page isn't filled with channels (no scrollbar && pageCurrent < pageTotal)
-            if ($('#store-list').height() >= $('#store-list')[0].scrollHeight - $('#store-list .load').height() && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
+            if ($('#store-list').outerHeight() >= $('#store-list')[0].scrollHeight - $('#store-list .load').height() && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
                 $('#store-list .load').fadeIn('slow');
                 $page.getMoreChannels();
             }
@@ -178,13 +178,14 @@
 
     // NOTE: page entry point (keep at the bottom of this file)
     $page.init = function (options) {
+
+        $common.showProcessingOverlay();
+        
         nn.log({
             // NOTE: remember to change page-key to match file-name
             subject: 'CMS.PAGE.INITIALIZED: store-manage',
             options: options
         }, 'debug');
-
-        $common.showProcessingOverlay();
         var pageInfo = [],
             msoSource = [],
             msoCurrent = [],
@@ -229,7 +230,7 @@
             });
             // $common.autoHeight();
             // $common.scrollbar("#store-constrain", "#store-list", "#store-slider");
-            $('#store-list').perfectScrollbar();
+            $('#store-list').perfectScrollbar({ marginTop: 25, marginBottom: 0 });
         }
     };
 

@@ -28,6 +28,7 @@ div.radio span input {
     filter: alpha(opacity=0);
     -moz-opacity: 0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    cursor: pointer;
 }
 
 div.radio.focus span, 

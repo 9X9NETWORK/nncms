@@ -6,18 +6,19 @@
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
 <link rel="stylesheet" href="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/style.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/style.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/uniform.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/playback.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/jquery.datepick.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/perfect-scrollbar.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/epcurate.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/ep-curation.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/perfect-scrollbar.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/epcurate.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/ep-curation.css?v=1278" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script src="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.js?v=1278"></script>
 <script src="javascripts/libs/nn-sdk.js?v=1278"></script>
+<script src="javascripts/libs/respond.min.js"></script>
 <script src="javascripts/libs/jquery.mousewheel.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.ellipsis.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.blockUI.min.js?v=1278"></script>
@@ -27,7 +28,7 @@
 <script src="javascripts/libs/jquery.titlecard.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.tmpl.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.cookie.min.js?v=1278"></script>
-<script src="javascripts/libs/jquery.countdown.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.countdown.js?v=1278"></script>
 <script src="javascripts/libs/jquery.autotab.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.cycle.all.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.datepick.min.js?v=1278"></script>
@@ -36,13 +37,13 @@
 <script src="javascripts/libs/purl.min.js?v=1278"></script>
 <script src="javascripts/libs/swfupload/swfupload.js?v=1278"></script>
 <script src="javascripts/v2/config.js?v=1278"></script>
-<script src="javascripts/v2/func.common.js?v=1278"></script>
-<script src="javascripts/v2/func.curation.js?v=1278"></script>
-<script src="javascripts/v2/domready.common.js?v=1278"></script>
-<script src="javascripts/v2/domready.curation.js?v=1278"></script>
+<script src="javascripts/v3/func.common.js?v=1278"></script>
+<script src="javascripts/v3/func.curation.js?v=1278"></script>
+<script src="javascripts/v3/domready.common.js?v=1278"></script>
+<script src="javascripts/v3/domready.curation.js?v=1278"></script>
 <title>9x9.tv - Episode Curation - Curation</title>
 </head>
-<body>
+<body class="scrollable">
 
 <!-- Header Layer Begin -->
 <div id="header" class="hide">
@@ -82,38 +83,32 @@
     <div id="content-main">
     <div id="content-main-wrap" class="curation">
     <div class="constrain">
-        <div id="epcurate-curation" class="clearfix">
-            <ul class="tabs">
-                <li class="first last on"><span><a href="#cur-add" class="cur-add langkey">Add Video</a></span></li>
-                <li class="edit-video hide on"><span><a href="#cur-edit" class="cur-edit langkey">Edit</a></span></li>
-                <li class="poi last hide"><span><a href="#cur-poi" class="cur-poi langkey">POI & interactive event</a></span></li>
-                <li class="edit-poi on last hide"><span><a href="#cur-edit-poi" class="cur-edit-poi"><img src="images/icon_edit.png" alt="" width="16" height="16" /></a></span></li>
-            </ul>
+    <div id="epcurate-curation" class="clearfix">
             <div class="curation-content clearfix">
-                <p class="auto-height"></p>
-                <div id="video-player" data-width="400" data-height="269">
-                    <div class="video">
-                        <!-- template = #titlecard-tmpl -->
-                    </div>
-                    <div id="video-control">
-                        <p id="play-dragger"></p>
-                        <div id="progress-bar">
-                            <p id="loaded"></p>
-                            <p id="played"></p>
-                        </div>
-                        <ul>
-                            <li id="btn-play"></li>
-                            <li id="btn-pause" class="hide"></li>
-                            <li id="play-time" class="last"><span class="played">00:00</span>/<span class="duration">00:07</span></li>
-                        </ul>
-                    </div>
-                </div>
+                <!-- <p class="auto-height"></p> -->
+                <ul class="tabs">
+                    <li class="first last on"><span><a href="#cur-add" class="cur-add langkey">Add Video</a></span></li>
+                    <li class="edit-video hide on"><span><a href="#cur-edit" class="cur-edit langkey">Edit</a></span></li>
+                    <li class="poi last hide"><span><a href="#cur-poi" class="cur-poi langkey">POI & interactive event</a></span></li>
+                    <li class="edit-poi on last hide"><span><a href="#cur-edit-poi" class="cur-edit-poi"><img src="images/icon_edit.png" alt="" width="16" height="16" /></a></span></li>
+                </ul>
                 <div id="cur-add" class="tab-content clearfix">
                     <p class="langkey">Add video by URL</p>
-                    <p class="textarea"><span><textarea name="videourl" id="videourl" cols="80" class="textarea" placeholder="Paste YouTube video URLs to add (separate with different lines)"></textarea></span></p>
+                    <div class="textarea-container">
+                    <p class="textarea">
+                        <span>
+                            <textarea name="videourl" id="videourl" cols="80" class="textarea" placeholder="Paste YouTube video URLs to add (separate with different lines)"></textarea>
+                        </span>
+                    </p>
+                    </div>
                     <p class="notice hide">You have reached the maximum amount of 50 videos.</p>
                     <div class="func">
-                        <p class="btns btn-add"><span><a href="#" id="btn-add-videourl" class="langkey">Add</a></span></p>
+                        <div class="btn-gray">
+                            <p class="left"></p>
+                            <p class="center"><a href="#" id="btn-add-videourl" class="langkey">Add</a></p>
+                            <p class="right"></p>
+                        </div>
+                        <!-- <p class="btns btn-add"><span><a href="#" id="btn-add-videourl" class="langkey">Add</a></span></p> -->
                     </div>
                 </div>
                 <div id="cur-edit" class="tab-content clearfix hide">
@@ -130,7 +125,26 @@
                 <div id="cur-poi-edit" class="tab-content clearfix hide">
                     <!-- template = #poi-point-edit-tmpl -->
                 </div>
-                <p class="auto-height clear"></p>
+                <!-- <p class="auto-height clear"></p> -->
+            </div>
+            <div id="video-player" data-width="400" data-height="269">
+                <!-- <div id="video-container"> -->
+                    <div class="video">
+                        <!-- template = #titlecard-tmpl -->
+                    </div>
+                    <div id="video-control">
+                        <p id="play-dragger"></p>
+                        <div id="progress-bar">
+                            <p id="loaded"></p>
+                            <p id="played"></p>
+                        </div>
+                        <ul>
+                            <li id="btn-play"></li>
+                            <li id="btn-pause" class="hide"></li>
+                            <li id="play-time" class="last"><span class="played">00:00</span>/<span class="duration">00:07</span></li>
+                        </ul>
+                    </div>
+                <!-- </div> -->
             </div>
         </div>
         <div id="storyboard">
@@ -346,11 +360,13 @@
 </script>
 
 <script id="titlecard-tmpl" type="text/x-jquery-tmpl">
-<div id="titlecard-outer" class="titlecard-outer" style="display: block; position: relative; overflow: hidden; z-index: 50; width: auto; height: ${$item.outerHeight}px; background-color: ${bgColor};">
-    <div class="titlecard-middle" style="display: block; position: absolute; width: 100%; height: 100%;">
-        <div id="titlecard-inner" class="titlecard-inner" style="display: block; position: absolute; width: 98%; height: auto; text-align: ${align}; font-size: ${$item.fontSize}pt; color: ${color}; font-style: ${style}; font-weight: ${weight};">
-            {{html $item.message}}
-        </div>
+<div id="titlecard-outer" class="titlecard-outer" style="background-color: ${bgColor};">
+    <div class="titlecard-middle">
+        <div id="titlecard-text-container">
+            <div id="titlecard-inner" class="titlecard-inner" style="text-align: ${align}; font-size: ${$item.fontSize}pt; color: ${color}; font-style: ${style}; font-weight: ${weight};">
+                {{html $item.message}}
+            </div>
+        </div>  
     </div>
     {{if $item.hasBgImage}}
         <img src="${bgImage}" style="width: 100%; height: 100%; border: none;" />

@@ -6,7 +6,9 @@
   // The default settings for the plugin
   var defaultSettings = {
     wheelSpeed: 10,
-    wheelPropagation: false
+    wheelPropagation: false,
+    marginTop: 0,
+    marginBottom: 0
   };
 
   $.fn.perfectScrollbar = function (suppliedSettings, option) {
@@ -52,7 +54,10 @@
           scrollbarXBottom = parseInt($scrollbarX.css('bottom'), 10),
           scrollbarYHeight,
           scrollbarYTop,
-          scrollbarYRight = parseInt($scrollbarY.css('right'), 10);
+          scrollbarYRight = parseInt($scrollbarY.css('right'), 10),
+          marginTop = settings.marginTop,
+          marginBottom = settings.marginBottom,
+          scrollbarYRatio;  // The ratio of "scrollbar top / container top"
 
       var updateContentScrollTop = function () {
         var scrollTop = parseInt(scrollbarYTop * contentHeight / containerHeight, 10);
@@ -74,8 +79,11 @@
       var updateBarSizeAndPosition = function () {
         containerWidth = $this.width();
         containerHeight = $this.height();
+        containerOuterHeight = $this.outerHeight();
         contentWidth = $this.prop('scrollWidth');
         contentHeight = $this.prop('scrollHeight');
+        // scrollbarYRatio = (containerHeight - marginTop - marginBottom) / containerHeight;
+        // console.debug('scrollbar ratio ' + scrollbarYRatio);
         if (containerWidth < contentWidth) {
           scrollbarXWidth = parseInt(containerWidth * containerWidth / contentWidth, 10);
           scrollbarXLeft = parseInt($this.scrollLeft() * containerWidth / contentWidth, 10);
@@ -85,9 +93,10 @@
           scrollbarXLeft = 0;
           $this.scrollLeft(0);
         }
-        if (containerHeight < contentHeight) {
+        if (containerOuterHeight < contentHeight) {
           scrollbarYHeight = parseInt(containerHeight * containerHeight / contentHeight, 10);
-          scrollbarYTop = parseInt($this.scrollTop() * containerHeight / contentHeight, 10);
+          scrollbarYTop = parseInt(($this.scrollTop()-marginTop) * containerHeight / contentHeight, 10) + marginTop;
+          scrollbarYTop = scrollbarYTop > marginTop ? scrollbarYTop : marginTop;
         }
         else {
           scrollbarYHeight = 0;
@@ -352,7 +361,7 @@
         }
       };
 
-      var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+      var supportsTouch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof window.DocumentTouch);
 
       var initialize = function () {
         var ieMatch = navigator.userAgent.toLowerCase().match(/(msie) ([\w.]+)/);
@@ -364,7 +373,7 @@
         updateBarSizeAndPosition();
         bindMouseScrollXHandler();
         bindMouseScrollYHandler();
-        if (isMobile) {
+        if (supportsTouch) {
           bindMobileTouchHandler();
         }
         if ($this.mousewheel) {

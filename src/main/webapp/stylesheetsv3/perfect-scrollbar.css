@@ -2,27 +2,28 @@
 .ps-container .ps-scrollbar-x {
     position: absolute; /* please don't change 'position' */
     bottom: 3px; /* there must be 'bottom' for ps-scrollbar-x */
-    height: 8px;
+    height: 5px;
     background-color: #aaa;
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
-    opacity: 0;
-    filter: alpha(opacity = 0);
+    /*opacity: 0;*/
+    opacity: 0.9;
+    filter: alpha(opacity = 0.9);
     -webkit-transition: opacity.2s linear;
     -moz-transition: opacity .2s linear;
     transition: opacity .2s linear;
 }
 
 .ps-container:hover .ps-scrollbar-x {
-    opacity: 0.6;
-    filter: alpha(opacity = 60);
+    opacity: 0.9;
+    filter: alpha(opacity = 90);
 }
 
 .ps-container .ps-scrollbar-x:hover {
     opacity: 0.9;
     filter: alpha(opacity = 90);
-    cursor:default;
+    cursor:pointer;
 }
 
 .ps-container .ps-scrollbar-x.in-scrolling {
@@ -66,4 +67,8 @@
 #content-main-wrap.ps-container .ps-scrollbar-y {
     right: 15px;
     opacity: 0.9;
+}
+
+.episode-list.ps-container .ps-scrollbar-y {
+   margin: 45px 0 200px 0;	
 }

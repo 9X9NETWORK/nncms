@@ -160,75 +160,75 @@
 
     // for horizontal-slider
     $common.scrollbarX = function (outer, inner, sliderwrap) {
-        var difference = 0,
-            handleWidth = 50,
-            origSliderWidth = 0,
-            sliderWidth = 0;
+        // var difference = 0,
+        //     handleWidth = 50,
+        //     origSliderWidth = 0,
+        //     sliderWidth = 0;
 
-        // compare the height of the scroll content to the scroll pane to see if we need a scrollbar
-        difference = $(inner).width() - $(outer).width();
+        // // compare the height of the scroll content to the scroll pane to see if we need a scrollbar
+        // difference = $(inner).width() - $(outer).width();
 
-        if (difference > 0) {
-            $(sliderwrap).show();
+        // if (difference > 0) {
+        //     $(sliderwrap).show();
 
-            // set up the slider
-            $(sliderwrap + ' .slider-h').slider({
-                orientation: 'horizontal',
-                min: 0,
-                max: 100,
-                value: 0,
-                slide: function (event, ui) {
-                    // scroll content when slide is dragged
-                    var leftValue = -(ui.value / 100 * difference);
-                    // move the top up (negative value) by the percentage the slider has been moved times the difference in height
-                    $(inner).css({
-                        left: leftValue
-                    });
-                },
-                change: function (event, ui) {
-                    // scroll content when the slider is changed by a click outside the handle or by the mousewheel
-                    var leftValue = -(ui.value / 100 * difference);
-                    // move the top up (negative value) by the percentage the slider has been moved times the difference in height
-                    $(inner).css({
-                        left: leftValue
-                    });
-                }
-            });
+        //     // set up the slider
+        //     $(sliderwrap + ' .slider-h').slider({
+        //         orientation: 'horizontal',
+        //         min: 0,
+        //         max: 100,
+        //         value: 0,
+        //         slide: function (event, ui) {
+        //             // scroll content when slide is dragged
+        //             var leftValue = -(ui.value / 100 * difference);
+        //             // move the top up (negative value) by the percentage the slider has been moved times the difference in height
+        //             $(inner).css({
+        //                 left: leftValue
+        //             });
+        //         },
+        //         change: function (event, ui) {
+        //             // scroll content when the slider is changed by a click outside the handle or by the mousewheel
+        //             var leftValue = -(ui.value / 100 * difference);
+        //             // move the top up (negative value) by the percentage the slider has been moved times the difference in height
+        //             $(inner).css({
+        //                 left: leftValue
+        //             });
+        //         }
+        //     });
 
-            // set the handle height and bottom margin so the middle of the handle is in line with the slider
-            $(sliderwrap + ' .ui-slider-handle').css({
-                width: handleWidth
-            });
+        //     // set the handle height and bottom margin so the middle of the handle is in line with the slider
+        //     $(sliderwrap + ' .ui-slider-handle').css({
+        //         width: handleWidth
+        //     });
 
-            // remember the original slider height ONCE, and always used the saved value
-            origSliderWidth = $(sliderwrap).attr('data-orig-slider-width');
-            if (!origSliderWidth) {
-                origSliderWidth = $(sliderwrap + ' .slider-h').width();
-                $(sliderwrap).attr('data-orig-slider-width', origSliderWidth);
-            }
+        //     // remember the original slider height ONCE, and always used the saved value
+        //     origSliderWidth = $(sliderwrap).attr('data-orig-slider-width');
+        //     if (!origSliderWidth) {
+        //         origSliderWidth = $(sliderwrap + ' .slider-h').width();
+        //         $(sliderwrap).attr('data-orig-slider-width', origSliderWidth);
+        //     }
 
-            // the height through which the handle can move needs to be the original height minus the handle height
-            sliderWidth = origSliderWidth - handleWidth;
-            $(sliderwrap + ' .ui-slider').css({
-                width: sliderWidth
-            });
-        } else {
-            $(sliderwrap + ' .slider-h').slider();
-            $(sliderwrap).hide();
-        }
+        //     // the height through which the handle can move needs to be the original height minus the handle height
+        //     sliderWidth = origSliderWidth - handleWidth;
+        //     $(sliderwrap + ' .ui-slider').css({
+        //         width: sliderWidth
+        //     });
+        // } else {
+        //     $(sliderwrap + ' .slider-h').slider();
+        //     $(sliderwrap).hide();
+        // }
 
-        $(sliderwrap + ' .ui-slider').unbind('click');
-        $(sliderwrap + ' .ui-slider').click(function (event) {
-            event.stopPropagation();
-        });
-        $(outer + ', ' + sliderwrap + ' .slider-h').unbind('mousewheel');
-        $(outer + ', ' + sliderwrap + ' .slider-h').mousewheel(function (event, delta) {
-            var speed = 5,
-                sliderVal = $(sliderwrap + ' .slider-h').slider('value');
-            sliderVal += (delta * speed);
-            $(sliderwrap + ' .slider-h').slider('value', sliderVal);
-            event.preventDefault();
-        });
+        // $(sliderwrap + ' .ui-slider').unbind('click');
+        // $(sliderwrap + ' .ui-slider').click(function (event) {
+        //     event.stopPropagation();
+        // });
+        // $(outer + ', ' + sliderwrap + ' .slider-h').unbind('mousewheel');
+        // $(outer + ', ' + sliderwrap + ' .slider-h').mousewheel(function (event, delta) {
+        //     var speed = 5,
+        //         sliderVal = $(sliderwrap + ' .slider-h').slider('value');
+        //     sliderVal += (delta * speed);
+        //     $(sliderwrap + ' .slider-h').slider('value', sliderVal);
+        //     event.preventDefault();
+        // });
     };
 
     $common.hideFbPageList = function (options) {

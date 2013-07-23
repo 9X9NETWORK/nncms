@@ -1,0 +1,886 @@
+/* epcurate */
+#epcurate-nav {
+    top: 0 !important;
+}
+
+#content-wrap {
+    top: 46px !important;
+    bottom: 0;
+    height: auto;
+    /*min-height: 598px;*/
+}
+
+.epcurate-curation #content-main-wrap {
+    margin-top: 0;
+    top: 0;
+}
+
+.epcurate-curation #content-main-wrap.curation .constrain {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.epcurate-publish #content-main-wrap {
+    margin-top: 25px;
+}
+
+.epcurate-shopping #content-main-wrap {
+    margin-top: 65px !important;
+}
+
+.blockOverlay {
+    height: 100% !important;
+}
+
+#main-wrap-slider {
+    top: 25px !important;
+}
+
+/* epcurateForm */
+#content-wrap form {
+    position: relative;
+    height: 100%;
+}
+
+#container-wrap.publish-setting form {
+    margin: 19px 0 53px;
+}
+
+#main-container.epcurate-shopping #title-func {
+    min-height: 53px;
+}
+
+#container-wrap.epcurate-shopping form {
+    margin: 57px 0 53px;
+}
+
+#epcurate-publish {
+    position: relative;
+}
+
+#epcurate-publish .required {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    font-size: 13px;
+}
+
+#content-wrap form .fminput {
+    margin-bottom: 3px;
+}
+
+#content-wrap form .fminput label {
+    position: relative;
+    float: left;
+    width: 170px;
+    padding: 0 0 0 10px;
+    color: #555;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#content-wrap form .fminput label img {
+    margin-left: 3px;
+    vertical-align: middle;
+}
+
+#content-wrap form .fminput label img.notice {
+    display: none;
+    position: absolute;
+    top: -10px;
+    left: 170px;
+    z-index: 50;
+}
+
+#content-wrap form .fminput label a:hover img.notice {
+    display: block;
+}
+
+#content-wrap form .fminput label acronym {
+    margin-left: -10px;
+}
+
+#content-wrap form .fminput .fmfield {
+    position: relative;
+    margin: 0 0 3px 0;
+    color: #555;
+    font-size: 13px;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list label {
+    width: auto;
+    margin: 4px 36px 0 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list label.checked {
+    font-weight: bold;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft label {
+    margin-right: 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list label.last {
+    margin-right: 10px;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list span.box-left {
+    float: left;
+    height: 27px;
+    padding-left: 4px;
+    background: url(../images/popup_input_box_left_s.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list span.box-right {
+    display: block;
+    height: 27px;
+    padding-right: 4px;
+    background: url(../images/popup_input_box_right_s.png) no-repeat right 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list span.box-middle {
+    display: block;
+    position: relative;
+    width: auto;
+    height: 27px;
+    padding: 0 6px;
+    background: url(../images/popup_input_box_middle_s.png) repeat-x;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft span.box-left,
+#content-wrap form .fminput .fmfield p.radio-list.draft span.box-right,
+#content-wrap form .fminput .fmfield p.radio-list.draft span.box-middle {
+    width: 335px;
+    padding: 0 0 0 3px;
+    background: none;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft span.last {
+    float: right;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft span.glow-left {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    z-index: 10000;
+    float: left;
+    height: 66px;
+    padding-left: 23px;
+    background: url(../images/bg_radio_light_left.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft span.glow-right {
+    display: block;
+    height: 66px;
+    padding-right: 23px;
+    background: url(../images/bg_radio_light_right.png) no-repeat right 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft span.glow-middle {
+    display: block;
+    width: 110px;
+    height: 24px;
+    line-height: 24px;
+    padding: 21px 0 21px 6px;
+    background: url(../images/bg_radio_light_middle.png) repeat-x;
+}
+
+.zh #content-wrap form .fminput .fmfield p.radio-list.draft span.box-middle {
+    width: 232px;
+}
+
+.zh #content-wrap form .fminput .fmfield p.radio-list.draft span.glow-middle {
+    width: 85px;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft span.glow-middle label {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft span.glow-middle label.checked {
+    font-weight: bold;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list.draft span.glow-middle label .radio {
+    padding-top: 3px;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list .checker {
+    width: 14px;
+    height: 15px;
+    margin: 2px 5px 0 0;
+    cursor: pointer;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list .checker span,
+#content-wrap form .fminput .fmfield .checkbox,
+#content-wrap form .fminput .fmfield .checkbox a.on,
+#content-wrap form .fminput .fmfield .checkbox a:hover {
+    background: url(../images/bg_checkbox.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list .checker span {
+    display: block;
+    width: 14px;
+    height: 15px;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list .checker input {
+    width: 14px;
+    height: 15px;
+    cursor: pointer;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list .checker span:hover,
+#content-wrap form .fminput .fmfield p.radio-list .checker span.checked {
+    background: url(../images/check_box_check.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a {
+    float: left;
+    position: relative;
+    margin: 5px 0 0;
+    text-decoration: none;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a img {
+    border: none;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a span {
+    display: block;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a .tip {
+    display: none;
+    position: absolute;
+    top: 23px;
+    left: -7px;
+    height: 45px;
+    padding-left: 4px;
+    background: url(../images/bg_bubble_left_m.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a .tip img {
+    position: absolute;
+    top: -7px;
+    left: 8px;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a .tip .tip-right {
+    padding-right: 4px;
+    background: url(../images/bg_bubble_right_m.png) no-repeat right 0;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a .tip .tip-middle {
+    width: 247px;
+    height: 57px;
+    padding: 3px 5px 0;
+    background: url(../images/bg_bubble_middle_m.png) repeat-x;
+    color: #555;
+    font: 13px/17px Arial, Helvetica;
+    text-align: justify;
+}
+
+.zh #content-wrap form .fminput .fmfield p.radio-list a .tip .tip-middle,
+#content-wrap form .fminput .fmfield p.radio-list.draft a .tip .tip-middle {
+    width: auto;
+    white-space: nowrap;
+}
+
+#content-wrap form .fminput .fmfield p.radio-list a:hover .tip {
+    display: block;
+}
+
+#content-wrap form .fminput .fmfield #date-time {
+    clear: both;
+    float: left;
+    width: 440px;
+    margin: 10px 0 0 180px;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time {
+    float: left;
+    width: 210px;
+    height: 212px;
+    margin: 0;
+    background: url(../images/bg_calander.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time h5 {
+    height: 33px;
+    margin-bottom: 2px;
+    font: 500 15px/30px Arial, Helvetica;
+    text-align: center;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul {
+    overflow: hidden;
+    padding-left: 20px;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul li {
+    float: left;
+    width: 40px;
+    height: 21px;
+    line-height: 21px;
+    margin: 0 3px 4px 0;
+    text-align: center;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul li a {
+    display: block;
+    color: #555;
+    text-decoration: none;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul li.disable a {
+    color: #ddd;
+    cursor: default;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul li.active a,
+#content-wrap form .fminput .fmfield #date-time .time ul li.enable a:hover {
+    padding-left: 2px;
+    background: url(../images/bg_calander_highlight_left.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul li.active a .time-right,
+#content-wrap form .fminput .fmfield #date-time .time ul li.enable a:hover .time-right {
+    display: block;
+    padding-right: 2px;
+    background: url(../images/bg_calander_highlight_right.png) no-repeat right 0;
+}
+
+#content-wrap form .fminput .fmfield #date-time .time ul li.active a .time-middle,
+#content-wrap form .fminput .fmfield #date-time .time ul li.enable a:hover .time-middle {
+    display: block;
+    height: 21px;
+    background: url(../images/bg_calander_highlight_middle.png) repeat-x;
+    color: #fff;
+    font: 13px Arial, Helvetica;
+    line-height: 21px;
+}
+
+#content-wrap form .fminput .fmfield a.switch-on {
+    display: none;
+    float: left;
+    width: 63px;
+    height: 25px;
+    margin-bottom: 8px;
+    background: url(../images/btn_on.png) no-repeat 0 0;
+    color: #555;
+    line-height: 25px;
+    text-decoration: none;
+    text-indent: 5px;
+}
+
+#content-wrap form .fminput .fmfield a.switch-off {
+    float: left;
+    width: 63px;
+    height: 25px;
+    margin-bottom: 8px;
+    background: url(../images/btn_off.png) no-repeat 0 0;
+    color: #555;
+    line-height: 25px;
+    text-decoration: none;
+    text-indent: 33px;
+}
+
+#content-wrap form .fminput .fmfield .character {
+    float: left;
+    height: 29px;
+    line-height: 29px;
+}
+
+#content-wrap form .fminput .fmfield .notice {
+    clear: both;
+    margin: 11px 0 10px 0;
+    padding: 0 0 0 185px;
+    color: #f00;
+}
+
+/* disable */
+#content-wrap form .disable label,
+#content-wrap form .disable label acronym {
+    color: #999;
+}
+
+/* text */
+#content-wrap form .fminput .fmfield p.text,
+#content-wrap form .fminput .fmfield p.text span,
+#content-wrap form .fminput .fmfield p.text span .text,
+#content-wrap form .fminput .fmfield .select,
+#content-wrap form .fminput .fmfield .select .select-txt,
+#content-wrap form .fminput .fmfield .select .select-txt a {
+    background: url(../images/input_white.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield p.text {
+    float: left;
+    height: 30px;
+    margin: 0 10px 10px 0;
+    padding-left: 3px;
+}
+
+#content-wrap form .fminput .fmfield p.text span {
+    display: block;
+    padding-right: 3px;
+    background-position: right -30px;
+}
+
+#content-wrap form .fminput .fmfield p.text span .text {
+    width: 437px;
+    height: 30px;
+    padding-left: 2px;
+    border: none;
+    background-repeat: repeat-x;
+    background-position: 0 -60px;
+    color: #555;
+    font-family: Arial, Helvetica;
+    font-size: 13px;
+    line-height: 30px;
+}
+
+#content-wrap form .disable .fmfield p.text {
+    background-position: 0 -90px;
+}
+
+#content-wrap form .disable .fmfield p.text span {
+    background-position: right -120px;
+}
+
+#content-wrap form .disable .fmfield p.text span .text {
+    background-position: 0 -150px;
+    color: #bbb;
+}
+
+#content-wrap form .fminput .fmfield p.text span .tag {
+    width: 485px;
+}
+
+/* textarea */
+#content-wrap form .fminput .fmfield p.textarea,
+#content-wrap form .fminput .fmfield p.textarea span {
+    background: url(../images/input_white_lg.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield p.textarea {
+    overflow: hidden;
+    float: left;
+    height: 92px;
+    margin: 0 10px 10px 0;
+    padding-left: 3px;
+}
+
+#content-wrap form .fminput .fmfield p.textarea span {
+    display: block;
+    padding-right: 3px;
+    background-position: right -92px;
+}
+
+#content-wrap form .fminput .fmfield p.textarea span span {
+    height: 92px;
+    padding: 0;
+    background-repeat: repeat-x;
+    background-position: 0 -184px;
+}
+
+#content-wrap form .fminput .fmfield p.textarea span .textarea {
+    overflow: auto;
+    height: 53px;
+    margin-top: 2px;
+    padding: 3px;
+    border: none;
+    background-color: transparent;
+    color: #555;
+    font-family: Arial, Helvetica;
+    font-size: 13px;
+    resize: none;
+}
+
+#content-wrap form .disable .fmfield p.textarea {
+    background-position: 0 -276px;
+}
+
+#content-wrap form .disable .fmfield p.textarea span {
+    background-position: right -368px;
+}
+
+#content-wrap form .disable .fmfield p.textarea span span {
+    background-position: 0 -460px;
+}
+
+/* thumbnail */
+#content-wrap form .fminput .fmfield .img-list {
+    position: relative;
+    float: left;
+    width: 183px;
+    height: 82px;
+    margin: 0 20px 10px 0;
+}
+
+#content-wrap form .fminput .fmfield .img-list a.img-next,
+#content-wrap form .fminput .fmfield .img-list a.img-prev {
+    display: block;
+    position: absolute;
+    top: 23px;
+    width: 17px;
+    height: 28px;
+    text-indent: -100000px;
+}
+
+#content-wrap form .fminput .fmfield .img-list a.img-prev {
+    left: 0;
+    background: url(../images/btn_switch_left.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield .img-list a.img-next {
+    right: 0;
+    background: url(../images/btn_switch_right.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield .img-list a.img-prev:hover {
+    background: url(../images/btn_switch_left_press.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield .img-list a.img-next:hover {
+    background: url(../images/btn_switch_right_press.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield .img-list img.loading {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 37px;
+    z-index: 10;
+}
+
+#content-wrap form .fminput .fmfield .img-list ul {
+    overflow: hidden;
+    width: 126px;
+    height: 77px;
+    margin-left: 27px;
+    padding: 3px;
+}
+
+#content-wrap form .fminput .fmfield .img-list ul li {
+    position: relative;
+    overflow: hidden;
+    width: 126px;
+    height: 77px;
+    margin: 3px 0 0 3px;
+    background-color: #fff;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3), 0 0 4px rgba(255, 255, 255,0.3) inset;
+}
+
+#content-wrap form .fminput .fmfield .img-list ul li .img {
+    position: absolute;
+    width: 320px;
+    height: 63px;
+    top: 7px;
+    left: 50%;
+    margin: 0 0 0 -160px;
+}
+
+#content-wrap form .fminput .fmfield .img-list ul li .img .img-wrap {
+    overflow: hidden;
+    width: 112px;
+    height: 63px;
+    margin: 0 auto;
+}
+
+#content-wrap form .fminput .fmfield .img-list ul li .img img {
+    display: block;
+    width: auto !important;
+    max-width: 144px !important;
+    min-width: 112px !important;
+    height: 63px !important;
+    margin: 0 auto;
+}
+
+#content-wrap form .fminput .fmfield .img-upload-func {
+    float: left;
+    margin-top: 3px;
+}
+
+#content-wrap form .fminput .fmfield .img-upload-func .notice {
+    margin: 8px 0;
+    padding: 0;
+    color: #555;
+}
+
+#content-wrap form .fminput .fmfield .img-upload-func .highlight {
+    color: #f00;
+}
+
+/* checkbox */
+#content-wrap form .fminput .fmfield .checkbox {
+    float: left;
+    height: 19px;
+    color: #555;
+    line-height: 18px;
+    text-decoration: none;
+}
+
+#content-wrap form .fminput .fmfield .checkbox a {
+    display: block;
+    padding-left: 22px;
+    color: #555;
+    text-decoration: none;
+}
+
+#content-wrap form .fminput .fmfield .checkbox a.on,
+#content-wrap form .fminput .fmfield .checkbox a:hover {
+    background-position: 4px center;
+}
+
+/* radio */
+#content-wrap form .fminput .fmfield .radio {
+    overflow: hidden;
+}
+
+#content-wrap form .fminput .fmfield .radio li {
+    float: left;
+    margin-right: 27px;
+}
+
+#content-wrap form .fminput .fmfield .radio li a {
+    float: left;
+    height: 19px;
+    padding-left: 22px;
+    background: url(../images/btn_radio.png) no-repeat 0 0;
+    color: #555;
+    line-height: 18px;
+    text-decoration: none;
+}
+
+#content-wrap form .fminput .fmfield .radio li.on a,
+#content-wrap form .fminput .fmfield .radio li    a:hover {
+    background-position: 0 -38px;
+}
+
+#content-wrap form .disable .fmfield .radio li a,
+#content-wrap form .disable .fmfield .radio li a:hover {
+    background-position: 0 -18px;
+    color: #bbb;
+}
+
+#content-wrap form .disable .fmfield .radio li.on a,
+#content-wrap form .disable .fmfield .radio li.on a:hover {
+    background-position: 0 -56px;
+}
+
+/* select */
+#content-wrap form .fminput .fmfield .select {
+    position: relative;
+    float: left;
+    width: 180px;
+    height: 30px;
+    margin-right: 10px;
+    padding-left: 3px;
+}
+
+#content-wrap form .fminput .fmfield .select.disable {
+    background-position: 0 -90px;
+}
+
+#content-wrap form .fminput .fmfield .select .select-btn,
+#content-wrap form .fminput .fmfield .select.disable .select-btn,
+#content-wrap form .fminput .fmfield .select .select-btn:hover {
+    background: url(../images/btns.png) no-repeat 0 0;
+}
+
+#content-wrap form .fminput .fmfield .select .select-btn {
+    padding: 0;
+    width: 22px;
+    height: 23px;
+    background-position: 0 -400px;
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    z-index: 55;
+    cursor: pointer;
+}
+
+#content-wrap form .fminput .fmfield .select.disable .select-btn,
+#content-wrap form .fminput .fmfield .select .select-btn:hover {
+    background-position: 0 -501px;
+}
+
+#content-wrap form .fminput .fmfield .select .select-txt {
+    overflow: hidden;
+    height: 30px;
+    padding: 0 3px 0 0;
+    background-position: right -30px;
+    font-size: 13px;
+    line-height: 30px;
+    white-space: nowrap;
+    text-indent: 5px;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
+}
+
+#content-wrap form .fminput .fmfield .select.disable .select-txt {
+    background-position: right -120px;
+}
+
+#content-wrap form .fminput .fmfield .select .select-txt a {
+    display: block;
+    height: 30px;
+    padding-right: 4px;
+    background-repeat: repeat-x;
+    background-position: 0 -60px;
+    color: #555;
+    text-decoration: none;
+}
+
+#content-wrap form .fminput .fmfield .select.disable .select-txt a {
+    background-position: 0 -150px;
+}
+
+#content-wrap form .fminput .fmfield .select .select-list {
+    display: none;
+    position: absolute;
+    top: 27px;
+    left: 2px;
+    z-index: 60;
+    width: 198px;
+    border: 1px solid #b2b2b2;
+    border-bottom: none;
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    border-radius:  0 0 5px 5px;
+    filter: alpha(Opacity=90);
+    opacity: 0.9;
+}
+
+#content-wrap form .fminput .fmfield .select .select-list li {
+    width: 180px;
+    height: 28px;
+    margin: 0;
+    padding: 0 9px;
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #c9c9c9;
+    background: none;
+    background-color: #d2d2d2;
+    color: #555;
+    font-size: 13px;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+#content-wrap form .fminput .fmfield .select .select-list li:hover {
+    background-color: #e4e4e4;
+    color: #999;
+}
+
+#content-wrap form .fminput .fmfield .select .select-list li:first-child {
+    border-top: none;
+}
+
+#content-wrap form .fminput .fmfield .select .select-list li:last-child {
+    -moz-border-radius:  0 0 5px 5px;
+    -webkit-border-radius:  0 0 5px 5px;
+    border-radius:  0 0 5px 5px;
+}
+
+/* form-btn */
+#content-wrap form .form-btn {
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 100001;
+    width: 96%;
+    min-width: 969px;
+    height: 48px;
+    margin-left: -48%;
+    padding: 0 0 0;
+    background: url(../images/bg_divider.png) repeat-x 0 top;
+    text-align: center;
+}
+
+#content-wrap form .form-btn .btn-wrap {
+    height: 46px;
+    margin-top: 2px;
+    background: url(../images/bg_main.png) repeat -2% 0;
+}
+
+#content-wrap form .form-btn .wrap {
+    position: relative;
+    width: 157px;
+    height: 27px;
+    padding: 10px 0 0;
+    margin: 0 auto;
+}
+
+#content-wrap form .form-btn .wrap p.btn-leave {
+    float: left;
+}
+
+#content-wrap form .form-btn .wrap p.btn-save {
+    float: right;
+}
+
+#content-wrap form .form-btn .wrap p.back,
+#content-wrap form .form-btn .wrap p.next {
+    position: absolute;
+    top: 15px;
+    width: 150px;
+}
+
+#content-wrap form .form-btn .wrap p.back {
+    right: 167px;
+    text-align: right;
+}
+
+#content-wrap form .form-btn .wrap p.next {
+    left: 167px;
+    text-align: left;
+}
+
+#content-wrap.epcurate-publish   form .form-btn .wrap p.notice {
+    position: absolute;
+    top: 15px;
+    left: 167px;
+    width: auto;
+    color: #f00;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+#content-wrap form .form-btn .wrap p.back a:hover,
+#content-wrap form .form-btn .wrap p.next a:hover {
+    color: #999;
+}
+
+#content-wrap form .form-btn .btns span input {
+    /*width: 65px;*/
+    width: 68px;
+    /*padding: 0 10px;*/
+    padding: 0;
+}
+
+#content-wrap form .form-btn .wrap a {
+    color: #555;
+    font-family: Arial, Helvetica;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.epcurate-curation#content-wrap form .form-btn {
+    width: 100%;
+    left: 0;
+    margin: 0;
+}
+

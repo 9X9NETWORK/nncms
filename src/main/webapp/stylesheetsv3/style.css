@@ -273,7 +273,7 @@ abbr, acronym {
     position: relative;
     z-index: 98;
     width: 100%;
-    min-width: 1010px;
+    min-width: 1001px;
     height: 50px;
     background: url(../images/bg_header.png) repeat-x;
 }
@@ -476,7 +476,7 @@ abbr, acronym {
     left: 0;
     z-index: 50;
     width: 100%;
-    min-width: 1010px;
+    min-width: 1001px;
     background: #fff url(../images/header_line.png) repeat-x 0 bottom;
 }
 
@@ -724,14 +724,18 @@ abbr, acronym {
 #epcurate-nav .epcurate-nav-wrap ul {
     position: relative;
     overflow: hidden;
-    width: 256px;
     margin: 0 auto;
     padding: 9px 0 0;
+    width: 30%;
+    min-width: 256px;
+    max-width: 484px;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li {
     float: left;
-    width: 128px;
+    width: 50%;
+    min-width: 128px;
+    max-width: 242px;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li.curation {
@@ -870,7 +874,7 @@ abbr, acronym {
     z-index: 49;
     overflow: hidden;
     width: 100%;
-    min-width: 1010px;
+    min-width: 1001px;
     height: 100%;
     background: url(../images/bg_main.png) repeat;
 }
@@ -901,10 +905,11 @@ abbr, acronym {
     top: 70px;
     bottom: 0;
     overflow: hidden;
+    padding-bottom: 48px;
 }
 
 #content-main-wrap.footer-on {
-    bottom: 48px;
+    /*bottom: 48px;*/
 }
 
 div.constrain {
@@ -1180,7 +1185,7 @@ div.constrain {
 /* footer */
 #footer {
     width: 100%;
-    min-width: 1010px;
+    min-width: 1001px;
     height: 48px;
     background: url(../images/bg_footer.png) repeat-x;
     position: absolute;
@@ -1329,6 +1334,62 @@ div.constrain {
 }
 
 /* Tip White */
+.tip-white {
+    position: relative;
+    top: -11px;
+    left: -1px;
+    display: none;
+    z-index: 5;
+    min-width: 60px;
+	font-size: 13px;
+}
+
+.tip-white .left {
+    position: relative;
+    float: left;
+    width: 7px;
+    height: 28px;
+    background: url(../images/bg_tip.png) no-repeat 0 0;
+}
+
+.tip-white .right {
+    position: relative;
+    float: left;
+    width: 7px;
+    height: 28px;
+    background: url(../images/bg_tip.png) no-repeat 0 -28px;
+}
+
+.tip-white .center {
+    position: relative;
+    float: left;
+    height: 28px;
+    white-space: nowrap;
+    background: url(../images/bg_tip.png) repeat-x 0 -56px;
+    padding: 7px 0 0;
+    text-align: center;
+}
+
+.tip-bottom {
+    width: 22px;
+    height: 9px;
+    margin: -30px 0 0 1px;
+    position: relative;
+    z-index: 6;
+    display: none;
+    background: url(../images/bg_tip_bottom.png) no-repeat center bottom;
+}
+
+.tip-top {
+    width: 22px;
+    height: 9px;
+    margin: -2px 0 0 1px;
+    position: relative;
+    z-index: 6;
+    display: none;
+    background: url(../images/bg_tip_top.png) no-repeat center top;
+}
+
 .tip-white-l {
     font-size: 13px;
 }
@@ -1542,4 +1603,100 @@ div.constrain {
 
 .get-url .input-gray .center {
     height: 25px;
+}
+
+/* Btn Gray */
+.btn-gray {
+    cursor: pointer;
+    font-size: 15px;
+    color: #555;
+    display: inline-block;
+}
+.btn-gray .left {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 32px;
+    background: url(../images/btn_gray.png) no-repeat;
+}
+.btn-gray .right {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 32px;
+    background: url(../images/btn_gray.png) no-repeat 0 -32px;
+}
+.btn-gray .center {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    height: 26px;
+    white-space: nowrap;
+    background: url(../images/btn_gray.png) repeat-x 0 -64px;
+    padding: 5px 0 0;
+    text-align: center;
+}
+.btn-gray:hover .left {
+    background: url(../images/btn_gray.png) no-repeat 0 -96px;
+}
+.btn-gray:hover .right {
+    background: url(../images/btn_gray.png) no-repeat 0 -128px;
+}
+.btn-gray:hover .center {
+    color: #999;
+    background: url(../images/btn_gray.png) repeat-x 0 -160px;
+}
+.center a, .center a {
+    text-decoration: none;
+    padding: 2px 24px 2px 24px;
+    color: #555;
+}
+.center a:hover, .center a:hover, .center:hover a, .center:hover a {
+    text-decoration: none;
+    color: #999;
+}
+/* Btn White */
+.btn-white {
+    cursor: pointer;
+    font-size: 15px;
+    display: inline-block;
+}
+.btn-white .left {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 32px;
+    background: url(../images/btn_white.png) no-repeat;
+}
+.btn-white .right {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 32px;
+    background: url(../images/btn_white.png) no-repeat 0 -32px;
+}
+.btn-white .center {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    height: 26px;
+    white-space: nowrap;
+    background: url(../images/btn_white.png) repeat-x 0 -64px;
+    padding: 5px 0 0;
+    text-align: center;
+    min-width: 64px;
+}
+.btn-white:hover .left {
+    background: url(../images/btn_white.png) no-repeat 0 -96px;
+}
+.btn-white:hover .right {
+    background: url(../images/btn_white.png) no-repeat 0 -128px;
+}
+.btn-white:hover .center {
+    background: url(../images/btn_white.png) repeat-x 0 -160px;
+    color: #999;
 }
