@@ -60,7 +60,7 @@
           scrollbarYRatio;  // The ratio of "scrollbar top / container top"
 
       var updateContentScrollTop = function () {
-        var scrollTop = parseInt(scrollbarYTop * contentHeight / containerHeight, 10);
+        var scrollTop = parseInt( (scrollbarYTop - marginTop) * (contentHeight / containerHeight) / scrollbarYRatio, 10);
         $this.scrollTop(scrollTop);
         $scrollbarX.css({bottom: scrollbarXBottom - scrollTop});
       };
@@ -83,7 +83,7 @@
         contentWidth = $this.prop('scrollWidth');
         contentHeight = $this.prop('scrollHeight');
         scrollbarYRatio = (containerHeight - marginTop - marginBottom) / containerHeight;
-        // console.debug('scrollbar ratio ' + scrollbarYRatio);
+        
         if (containerWidth < contentWidth) {
           scrollbarXWidth = parseInt(containerWidth * containerWidth / contentWidth, 10);
           scrollbarXLeft = parseInt($this.scrollLeft() * containerWidth / contentWidth, 10);
@@ -101,12 +101,9 @@
             scrollbarYTop = containerHeight - scrollbarYHeight;
           }
 
-          scrollbarYTop *= scrollbarYRatio;
-          scrollbarYHeight *= scrollbarYRatio;
+          scrollbarYTop = parseInt( scrollbarYTop * scrollbarYRatio, 10);
+          scrollbarYHeight = parseInt( scrollbarYHeight * scrollbarYRatio, 10);
           scrollbarYTop += marginTop;
-          // scrollbarYHeight -= marginBottom;
-          // scrollbarYHeight = scrollbarYHeight > 0 ? scrollbarYHeight : 10;
-          // scrollbarYHeight = parseInt((containerHeight-marginTop-marginBottom) * (containerHeight-marginTop-marginBottom) / contentHeight, 10);
         }
         else {
           scrollbarYHeight = 0;
@@ -138,10 +135,11 @@
 
       var moveBarY = function (currentTop, deltaY) {
         var newTop = currentTop + deltaY,
-            maxTop = containerHeight - scrollbarYHeight;
+            minTop = marginTop,
+            maxTop = containerHeight - scrollbarYHeight - marginBottom;
 
-        if (newTop < 0) {
-          scrollbarYTop = 0;
+        if (newTop < minTop) {
+          scrollbarYTop = minTop;
         }
         else if (newTop > maxTop) {
           scrollbarYTop = maxTop;
