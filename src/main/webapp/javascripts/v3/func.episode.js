@@ -7,29 +7,29 @@
     var $common = cms.common;
 
     $page.setEpisodeWidth = function () {
-        var wrapWidth = $('#content-main-wrap').width(),
-            contentmainWidth = $('#content-main').width(),
-            crumbWidth = $('#title-func .title-crumb').width(),
-            titleBtnsWidth = $('#title-func ul').width(),
-            scheduledWidth = $('#ep-list ul li .scheduled-time').width(),
-            publishWidth = $('#ep-list ul li .publish-time').width(),
-            viewsWidth = $('#ep-list ul li .views').width(),
-            numberWidth = $('#ep-list ul li .number').width() + 20; // 20 ix padding
+        //var wrapWidth = $('#content-main-wrap').width(),
+        //    contentmainWidth = $('#content-main').width(),
+        //    crumbWidth = $('#title-func .title-crumb').width(),
+        //    titleBtnsWidth = $('#title-func ul').width(),
+        //    scheduledWidth = $('#ep-list ul li .scheduled-time').width(),
+        //    publishWidth = $('#ep-list ul li .publish-time').width(),
+        //    viewsWidth = $('#ep-list ul li .views').width(),
+        //    numberWidth = $('#ep-list ul li .number').width() + 20; // 20 ix padding
 
         // set min size
-        if (numberWidth < 50) {
-            numberWidth = 50;
-        }
-        $('#ep-list ul li .wrap, #title-func .caption').width(wrapWidth - 31 - 1);  // 1:border
-        $('#ep-list ul li .episode, #title-func .caption  p.episode').width(wrapWidth - 31 - numberWidth - scheduledWidth - publishWidth - viewsWidth - 1);   // 1:border
-        $('#ep-list ul li .number').width(numberWidth - 20);    // 20 is padding
-        if ($('#ep-list ul li .episode').length > 0 && $('#channel-name').data('width') + crumbWidth + 10 > contentmainWidth - titleBtnsWidth) {  // 10: title-func padding
-            $('#title-func h2').width(contentmainWidth - titleBtnsWidth - 10 - 15);  // 10: title-func padding, 15: channel name and btns space
-            $('#channel-name').width($('#title-func h2').width() - crumbWidth - 6);  // 6: channel name margin
-        } else {
-            $('#title-func h2').width('auto');
-            $('#channel-name').width('auto');
-        }
+        //if (numberWidth < 50) {
+        //    numberWidth = 50;
+        //}
+        //$('#ep-list ul li .wrap, #title-func .caption').width(wrapWidth - 31 - 1);  // 1:border
+        //$('#ep-list ul li .episode, #title-func .caption  p.episode').width(wrapWidth - 31 - numberWidth - scheduledWidth - publishWidth - viewsWidth - 1);   // 1:border
+        //$('#ep-list ul li .number').width(numberWidth - 20);    // 20 is padding
+        //if ($('#ep-list ul li .episode').length > 0 && $('#channel-name').data('width') + crumbWidth + 10 > contentmainWidth - titleBtnsWidth) {  // 10: title-func padding
+        //    $('#title-func h2').width(contentmainWidth - titleBtnsWidth - 10 - 15);  // 10: title-func padding, 15: channel name and btns space
+        //    $('#channel-name').width($('#title-func h2').width() - crumbWidth - 6);  // 6: channel name margin
+        //} else {
+        //    $('#title-func h2').width('auto');
+        //    $('#channel-name').width('auto');
+        //}
     };
 
     $page.setPageScroll = function (isDown) {
@@ -47,7 +47,8 @@
         iPos = eplHeightBefore * (sliderValue / cms.global.SLIDER_MAX);
         $common.autoHeight();   // after this run the height will be update
         eplHeightAfter = $('#content-main-wrap').height();
-        $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+        $('#content-main-wrap').perfectScrollbar('update');
+        // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
         if ('none' === $('#main-wrap-slider').css('display')) {
             $('#main-wrap-slider .slider-vertical').slider('destroy');
             $('#main-wrap-slider .slider-vertical').slider();
@@ -132,8 +133,9 @@
                                 $('#episode-favorite-first-tmpl').tmpl().appendTo('#content-main-wrap .constrain');
                             }
                             $page.setEpisodeWidth();
-                            $common.autoHeight();
-                            $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+                            $('#content-main-wrap').perfectScrollbar('update');
+                            //$common.autoHeight();
+                            //$common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
                             $('#overlay-s').fadeOut();
                         });
                     } else {
@@ -238,8 +240,9 @@
                                 });
                             }
                             $page.setEpisodeWidth();
-                            $common.autoHeight();
-                            $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+                            $('#content-main-wrap').perfectScrollbar('update');
+                            //$common.autoHeight();
+                            //$common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
                             $('#overlay-s').fadeOut();
 
                             // sharing url
@@ -293,8 +296,9 @@
                     $('#episode-favorite-first-tmpl').tmpl().appendTo('#content-main-wrap .constrain');
                 }
                 $page.setEpisodeWidth();
-                $common.autoHeight();
-                $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+                $('#content-main-wrap').perfectScrollbar('update');
+                //$common.autoHeight();
+                //$common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
                 $('#overlay-s').fadeOut();
             });
         } else {

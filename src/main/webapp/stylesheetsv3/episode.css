@@ -1,12 +1,23 @@
 /* Episode */
+#content-main-wrap {
+	top: 46px;
+	padding: 50px 0 0 0;
+}
+
+div.constrain {
+	padding: 0 0 60px 0;	
+}
+
 #title-func {
     padding-bottom: 0;
 }
 
 #title-func h2 {
-    float: left;
+    position: absolute;
     height: 27px;
     line-height: 27px;
+    left: 0;
+    right: 350px;
 }
 
 #title-func h2 span{
@@ -21,6 +32,7 @@
 #channel-name {
     float: left;
     margin-right: 5px;
+	max-width: 68%;
 }
 
 #title-func h2 .title-crumb {
@@ -334,13 +346,18 @@ body.mac #title-func ul li p span a {
 }
 
 #ep-list ul li .wrap {
-    float: left;
-    padding: 7px 0 10px;
+    position: absolute;
+    left: 0px;
+    right: 31px;
+    top: 0;
+	bottom: 0;
+	padding: 7px 0 10px;
 }
 
 #ep-list ul li .episode {
-    position: relative;
-    float: left;
+    position: absolute;
+    left: 51px;
+    right: 330px;
 }
 
 #ep-list ul li .episode .img {
@@ -476,9 +493,11 @@ body.mac #title-func ul li p span a {
 }
 
 #ep-list ul li .episode .btns {
-    float: left;
+    position: absolute;
     padding: 0 0 0 4px;
     background: url(../images/edit_box_left.png) no-repeat 0 0;
+	bottom: -2px;
+    left: 116px;
 }
 
 #ep-list.ui-sortable ul li .episode .btns {
@@ -579,17 +598,43 @@ body.mac #title-func ul li p span a {
     cursor: default;
 }
 
-#ep-list ul li .scheduled-time,
 #ep-list ul li .publish-time,
 #ep-list ul li .views {
-    float: left;
+    position: absolute;
+	right: 50px;
     width: 140px;
     color: #555;
     font: 13px Arial, Helvetica;
 }
 
-#title-func .caption .views, #ep-list ul li .views {
-    width: 50px;
+#ep-list ul li .scheduled-time {
+    position: absolute;
+	right: 190px;
+    width: 140px;
+    color: #555;
+    font: 13px Arial, Helvetica;
+}
+
+#title-func .caption .views {
+    position: absolute;
+	width: 50px;
+	right: 33px;
+}
+
+#ep-list ul li .views {
+    position: absolute;
+	width: 50px;
+	right: 0;
+}
+
+#title-func .caption .publish-time {
+	position: absolute;
+	right: 83px;
+}
+
+#title-func .caption p.scheduled-time {
+	position: absolute;
+	right: 223px;
 }
 
 #ep-list ul li .scheduled-time  p,
@@ -678,6 +723,7 @@ body.mac #title-func ul li p span a {
     font-weight: bold;
     line-height: 1;
     padding: 24px 10px 0 10px;
+	width: 32px;
 }
 
 /* Disable */
@@ -1087,11 +1133,67 @@ body.mac #title-func ul li p span a {
 }
 
 .episode-list .get-url .tip-bottom {
-    width: 22px;
-    height: 9px;
-    margin: -31px 0 0 1px;
     position: absolute;
-    background: url(../images/bg_tip_bottom.png) no-repeat center bottom;
     bottom: 3px;
     left: 2px;
+	display: block;
+}
+
+/* Invalid Video */
+#ep-list ul li .episode .check {
+	position: absolute;
+
+    height: 25px;
+	cursor: pointer;
+	left: 8px;
+	top: 3px;
+}
+#ep-list ul li .episode .check .btn {
+	width: 22px;
+	height: 22px;
+	background: url(../images/btn_func.png) no-repeat 0 -175px;
+}
+
+#ep-list ul li .episode .check .btn:hover {
+	background: url(../images/btn_func.png) no-repeat -23px -175px;
+}
+
+#ep-list ul li .episode .check .ok {
+	width: 22px;
+	height: 22px;
+	background: url(../images/icon_check.png) no-repeat 0 -1px;
+}
+
+#ep-list ul li .episode .check .error {
+	margin: 1px 0 0 0;
+	width: 22px;
+	height: 22px;
+	background: url(../images/icon_check.png) no-repeat 0 -27px;
+}
+
+#ep-list ul li .episode .check .warn {
+	margin: 1px 0 0 0;
+    width: 22px;
+	height: 22px;
+	background: url(../images/icon_check.png) no-repeat 0 -53px;
+}
+
+#ep-list ul li .episode .check:hover .tip-white {
+	display: block;
+	top: -53px;
+	z-index: 57;
+}
+
+#ep-list ul li .episode .check:hover .tip-bottom {
+	display: block;
+	z-index: 58;
+}
+
+
+/* 1358 */
+@media only screen and (min-width: 1358px) {
+#channel-name {
+    float: left;
+    margin-right: 5px;
+	max-width: 82%;
 }

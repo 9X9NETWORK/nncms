@@ -58,6 +58,10 @@ $(function () {
         $('.get-url').hide();
     });
 
+    $('#content-main-wrap').scroll(function () {
+        $('.get-url').hide();
+    });
+
     $(document).on('click', '.get-url, .url', function (event) {
         event.stopPropagation();
     });

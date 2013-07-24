@@ -1,3 +1,16 @@
+版本: 5140
+作者: Mars
+日期: 2013/7/24 13:57
+訊息:
+修改 episode list use v3(prefect-scrollbar) layout fix 
+----
+異動 : /episode-list.html
+異動 : /javascripts/v3/func.episode.js
+異動 : /javascripts/v3/domready.episode.js
+異動 : /javascripts/v3/domready.get-url.js
+異動 : /stylesheetsv3/episode.css
+異動 : /stylesheetsv3/perfect-scrollbar.css
+
 版本: 5138
 作者: Mars
 日期: 2013/7/23 16:29
