@@ -1,11 +1,11 @@
 /* Episode */
 #content-main-wrap {
 	top: 46px;
-	padding: 50px 0 0 0;
+	/*padding: 50px 0 0 0;*/
 }
 
 div.constrain {
-	padding: 0 0 60px 0;	
+	padding: 50px 0 60px 0;	
 }
 
 #title-func {
