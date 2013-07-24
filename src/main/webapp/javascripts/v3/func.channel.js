@@ -363,7 +363,7 @@
                     $page.setTaglistWidth();
 
                     // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
-                    $('#content-main-wrap').perfectScrollbar();
+                    $('#content-main-wrap').perfectScrollbar({marginBottom:48});
                     $common.hideFbPageList();
                 }
             });
@@ -373,7 +373,7 @@
             $page.setTaglistWidth();
 
             // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
-            $('#content-main-wrap').perfectScrollbar();
+            $('#content-main-wrap').perfectScrollbar({marginBottom:48});
             $common.hideFbPageList();
         }
     };
@@ -534,7 +534,7 @@
                             $page.setTaglistWidth();
 
                             // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
-                            $('#content-main-wrap').perfectScrollbar();
+                            $('#content-main-wrap').perfectScrollbar({marginBottom:48});
                             $common.hideFbPageList();
                             $('#settingForm .btn-save').removeClass('disable').addClass('enable');
                         });
@@ -583,7 +583,7 @@
                 $page.setTaglistWidth();
 
                 // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
-                $('#content-main-wrap').perfectScrollbar();
+                $('#content-main-wrap').perfectScrollbar({marginBottom:48});
                 $common.hideFbPageList();
                 $('#settingForm .btn-cancel, #settingForm .btn-create').removeClass('disable').addClass('enable');
             });
@@ -592,7 +592,7 @@
         $('#content-main-wrap').addClass('footer-on');
 
         // Handle cancel/create buttons position according to scollbar displayed or not.
-        if ($('#content-main-wrap').height()>=$('div.constrain').height()) {
+        if ($('#content-main-wrap').height()>=$('div.constrain').outerHeight()) {
             $('#content-main-wrap').addClass('fixed');
         } else {
             $('#content-main-wrap').removeClass('fixed');

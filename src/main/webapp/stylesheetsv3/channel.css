@@ -1305,7 +1305,7 @@ body.mac #title-func h2 {
 }
 
 #content-main-wrap.fixed form .form-btn {
-    bottom: 8px;
+    bottom: 1px;
     right: 35px;
     position: fixed;
 }

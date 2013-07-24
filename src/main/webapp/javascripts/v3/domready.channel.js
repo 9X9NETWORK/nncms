@@ -533,7 +533,7 @@ $(function () {
         // }
 
         // Handle cancel/create buttons position according to scollbar displayed or not.
-        if ($('#content-main-wrap').height()>=$('div.constrain').height()) {
+        if ($('#content-main-wrap').height()>=$('div.constrain').outerHeight()) {
             $('#content-main-wrap').addClass('fixed');
         } else {
             $('#content-main-wrap').removeClass('fixed');
