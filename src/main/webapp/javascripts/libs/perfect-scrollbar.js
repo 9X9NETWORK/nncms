@@ -82,7 +82,7 @@
         containerOuterHeight = $this.outerHeight();
         contentWidth = $this.prop('scrollWidth');
         contentHeight = $this.prop('scrollHeight');
-        // scrollbarYRatio = (contentHeight - containerHeight - marginTop - marginBottom) / ( contentHeight - containerHeight);
+        scrollbarYRatio = (containerHeight - marginTop - marginBottom) / containerHeight;
         // console.debug('scrollbar ratio ' + scrollbarYRatio);
         if (containerWidth < contentWidth) {
           scrollbarXWidth = parseInt(containerWidth * containerWidth / contentWidth, 10);
@@ -95,16 +95,17 @@
         }
         if (containerOuterHeight < contentHeight) {
           scrollbarYHeight = parseInt(containerHeight * containerHeight / contentHeight, 10);
-          scrollbarYTop = parseInt(($this.scrollTop()-marginTop) * containerHeight / contentHeight, 10) + marginTop;
-          scrollbarYTop = scrollbarYTop > marginTop ? scrollbarYTop : marginTop;
+          scrollbarYTop = parseInt($this.scrollTop() * containerHeight / contentHeight, 10);
 
           if (scrollbarYTop >= containerHeight - scrollbarYHeight) {
             scrollbarYTop = containerHeight - scrollbarYHeight;
           }
 
-          // scrollbarYTop *= scrollbarYRatio;
-          scrollbarYHeight -= marginBottom;
-          scrollbarYHeight = scrollbarYHeight > 0 ? scrollbarYHeight : 10;
+          scrollbarYTop *= scrollbarYRatio;
+          scrollbarYHeight *= scrollbarYRatio;
+          scrollbarYTop += marginTop;
+          // scrollbarYHeight -= marginBottom;
+          // scrollbarYHeight = scrollbarYHeight > 0 ? scrollbarYHeight : 10;
           // scrollbarYHeight = parseInt((containerHeight-marginTop-marginBottom) * (containerHeight-marginTop-marginBottom) / contentHeight, 10);
         }
         else {
