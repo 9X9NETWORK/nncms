@@ -884,7 +884,7 @@
     };
 
     $page.countPoiItem = function () {
-        // $('#cur-poi .poi-list ul').data('item', $page.getPoiItemSize());
+        $('#cur-poi .poi-list ul').data('item', $page.getPoiItemSize());
         // $('#cur-poi .poi-list ul').height($('#cur-poi .poi-list ul').data('item') * 33);
     };
 
@@ -1557,304 +1557,224 @@
                 return;
             }
         } else {
-            // Refactor with jquery deferred object
-            var episode, data, channel, programs;   // Not ideal, temp workaround.
-            getEpisode($('#id').val())
-                .then(getChannels)
-                .then(getChannel)
-                .then(getPrograms)
-                .then(setPrograms);
-        }
-        
-        // merge 9x9 api and youtube api (ytId, ytDuration, uploader, uploadDate, isZoneLimited, isSyndicateLimited, isEmbedLimited, isUnplayableVideo)
-        var normalPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
-            preloadImage = [],
-            programList = [],
-            invalidList = [],
-            committedCnt = 0,
-            ytData = null,
-            ytItem = {},
-            ytList = [],
-            beginTitleCard = null,
-            endTitleCard = null,
-            isPrivateVideo = null,
-            isZoneLimited = null,
-            hasSyndicateDenied = null,
-            hasLimitedSyndication = null,
-            isSyndicateLimited = null,
-            isEmbedLimited = null,
-            isUnplayableVideo = null;
-
-        function getEpisode(episodeId) {
-            var deferred = $.Deferred();
-
+            // update mode: data from api
             nn.api('GET', cms.reapi('/api/episodes/{episodeId}', {
                 episodeId: $('#id').val()
-            }), null, function (response) {
-                episode = response;
-                deferred.resolve(response);
-            });
-
-            return deferred.promise();
-        }
-
-        function getChannels(episode) {
-            var deferred = $.Deferred();
-
-            if (cid > 0 && parseInt(cid, 10) !== episode.channelId) {
-                $common.showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
-                // return;
-                deferred.reject();
-            } else {
+            }), null, function (episode) {
+                if (cid > 0 && parseInt(cid, 10) !== episode.channelId) {
+                    $common.showSystemErrorOverlayAndHookError('You are not authorized to edit this episode.');
+                    return;
+                }
                 nn.api('GET', cms.reapi('/api/users/{userId}/channels', {
                     userId: cms.global.USER_DATA.id
-                }), null, function (response) {
-                    data = response;
-                    deferred.resolve(response);
-                });
-            }
-
-            return deferred.promise();
-        }
-
-        function getChannel(data) {
-            var deferred = $.Deferred();
-
-            var channelIds = [];
-
-            if (data.length > 0) {
-                $.each(data, function (i, list) {
-                    channelIds.push(list.id);
-                });
-            }
-
-            if (-1 === $.inArray(parseInt(episode.channelId, 10), channelIds)) {
-                $common.showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
-                // return;
-                deferred.reject();
-            } else {
-                nn.api('GET', cms.reapi('/api/channels/{channelId}', {
-                    channelId: episode.channelId
-                }), null, function (response) {
-                    channel = response;
-                    deferred.resolve(response);
-                });
-            }
-
-            return deferred.promise();
-        }
-
-        function getPrograms(channel) {
-            var deferred = $.Deferred();
-
-            if (channel.contentType === cms.config.YOUR_FAVORITE) {
-                $common.showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
-                // return;
-                deferred.reject();
-            } else {
-                $common.showProcessingOverlay();
-                crumb = $.extend({}, crumb, episode);
-                $('#epcurate-info').remove();
-                $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
-                $('.storyboard-info').html($('#storyboard-info-tmpl').tmpl({
-                    chName: channel.name,
-                    epName: episode.name
-                }));
-                // // merge 9x9 api and youtube api (ytId, ytDuration, uploader, uploadDate, isZoneLimited, isSyndicateLimited, isEmbedLimited, isUnplayableVideo)
-                // var normalPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
-                //     preloadImage = [],
-                //     programList = [],
-                //     invalidList = [],
-                //     committedCnt = 0,
-                //     ytData = null,
-                //     ytItem = {},
-                //     ytList = [],
-                //     beginTitleCard = null,
-                //     endTitleCard = null,
-                //     isPrivateVideo = null,
-                //     isZoneLimited = null,
-                //     hasSyndicateDenied = null,
-                //     hasLimitedSyndication = null,
-                //     isSyndicateLimited = null,
-                //     isEmbedLimited = null,
-                //     isUnplayableVideo = null;
-
-                nn.api('GET', cms.reapi('/api/episodes/{episodeId}/programs', {
-                    episodeId: $('#id').val()
-                }), null, function (response) {
-                    programs = response;
-                    deferred.resolve(response);
-                });       
-
-                $('#epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function (e) {
-                    $(fm).trigger('submit', e);
-                    return false;
-                });
-
-                $page.autoHidePlaceholder();
-                $('#storyboard-wrap').perfectScrollbar();                     
-            }
-
-            return deferred.promise();
-        }
-
-        function setPrograms(programs) {
-            $.each(programs, function (idx, programItem) {
-                if (normalPattern.test(programItem.fileUrl)) {
-                    programList.push(programItem);
-                }
-            });
-            $.each(programList, function (idx, programItem) {
-                nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
-                    committedCnt += 1;
-                    invalidList.push(programItem.fileUrl);
-                    nn.log(textStatus + ': ' + jqXHR.responseText, 'warning');
-                    nn.log(programItem.fileUrl, 'debug');
-                    $('#videourl').val(invalidList.join('\n'));
-                    $('#cur-add .notice').text(nn._([cms.global.PAGE_ID, 'add-video', 'Invalid URL, please try again!'])).removeClass('hide').show();
-                    if (committedCnt === programList.length) {
-                        committedCnt = -1;   // reset to avoid collision
-                        if (preloadImage.length > 0) {
-                            $('#preload-image').html('');
-                            $('#preload-image-tmpl-item').tmpl(preloadImage).prependTo('#preload-image');
-                        }
-                        $('#storyboard-listing').html('');
-                        $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
-                        $page.sumStoryboardInfo();
-                        $page.rebuildVideoNumber();
-                        $('.ellipsis').ellipsis();
-                        $('#overlay-s').fadeOut();
+                }), null, function (data) {
+                    var channelIds = [];
+                    if (data.length > 0) {
+                        $.each(data, function (i, list) {
+                            channelIds.push(list.id);
+                        });
                     }
-                });
-
-                // $.when(getYoutubes(programItem), getTitleCard(programItem), getPoiPoints(programItem))
-                $.when(getYoutubes(programItem), 
-                        nn.api('GET', cms.reapi('/api/programs/{programId}/title_cards', { programId: programItem.id })), 
-                        nn.api('GET', cms.reapi('/api/programs/{programId}/poi_points', { programId: programItem.id })))
-                .then(function(youtubes, title_card, poi_points){
-                    committedCnt += 1;
-                    beginTitleCard = null;
-                    endTitleCard = null;
-                    if (title_card.length > 0) {
-                        if (title_card[1]) {
-                            if (1 === title_card[1].type) {
-                                beginTitleCard = title_card[0];
-                                endTitleCard = title_card[1];
-                            } else {
-                                beginTitleCard = title_card[1];
-                                endTitleCard = title_card[0];
-                            }
-                        } else {
-                            if (title_card[0]) {
-                                if (0 === title_card[0].type) {
-                                    beginTitleCard = title_card[0];
-                                } else {
-                                    endTitleCard = title_card[0];
+                    if (-1 === $.inArray(parseInt(episode.channelId, 10), channelIds)) {
+                        $common.showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
+                        return;
+                    }
+                    nn.api('GET', cms.reapi('/api/channels/{channelId}', {
+                        channelId: episode.channelId
+                    }), null, function (channel) {
+                        if (channel.contentType === cms.config.YOUR_FAVORITE) {
+                            $common.showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
+                            return;
+                        }
+                        $common.showProcessingOverlay();
+                        crumb = $.extend({}, crumb, episode);
+                        $('#epcurate-info').remove();
+                        $('#epcurate-info-tmpl').tmpl(crumb).prependTo('#epcurateForm');
+                        $('.storyboard-info').html($('#storyboard-info-tmpl').tmpl({
+                            chName: channel.name,
+                            epName: episode.name
+                        }));
+                        // merge 9x9 api and youtube api (ytId, ytDuration, uploader, uploadDate, isZoneLimited, isSyndicateLimited, isEmbedLimited, isUnplayableVideo)
+                        var normalPattern = /^http(?:s)?:\/\/www.youtube.com\/watch\?v=([^&]{11})/,
+                            preloadImage = [],
+                            programList = [],
+                            invalidList = [],
+                            committedCnt = 0,
+                            ytData = null,
+                            ytItem = {},
+                            ytList = [],
+                            beginTitleCard = null,
+                            endTitleCard = null,
+                            isPrivateVideo = null,
+                            isZoneLimited = null,
+                            hasSyndicateDenied = null,
+                            hasLimitedSyndication = null,
+                            isSyndicateLimited = null,
+                            isEmbedLimited = null,
+                            isUnplayableVideo = null;
+                        nn.api('GET', cms.reapi('/api/episodes/{episodeId}/programs', {
+                            episodeId: $('#id').val()
+                        }), null, function (programs) {
+                            $.each(programs, function (idx, programItem) {
+                                if (normalPattern.test(programItem.fileUrl)) {
+                                    programList.push(programItem);
                                 }
-                            }
-                        }
-                    }
-                    if (beginTitleCard && beginTitleCard.message && '' !== $.trim(beginTitleCard.message)) {
-                        beginTitleCard.message = $.trim(beginTitleCard.message).replace(/\{BR\}/g, '\n');
-                        if (beginTitleCard.bgImage && '' !== $.trim(beginTitleCard.bgImage)) {
-                            preloadImage.push({
-                                image: beginTitleCard.bgImage
                             });
-                        }
-                    } else {
-                        beginTitleCard = null;
-                    }
-                    if (endTitleCard && endTitleCard.message && '' !== $.trim(endTitleCard.message)) {
-                        endTitleCard.message = $.trim(endTitleCard.message).replace(/\{BR\}/g, '\n');
-                        if (endTitleCard.bgImage && '' !== $.trim(endTitleCard.bgImage)) {
-                            preloadImage.push({
-                                image: endTitleCard.bgImage
+                            $.each(programList, function (idx, programItem) {
+                                nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
+                                    committedCnt += 1;
+                                    invalidList.push(programItem.fileUrl);
+                                    nn.log(textStatus + ': ' + jqXHR.responseText, 'warning');
+                                    nn.log(programItem.fileUrl, 'debug');
+                                    $('#videourl').val(invalidList.join('\n'));
+                                    $('#cur-add .notice').text(nn._([cms.global.PAGE_ID, 'add-video', 'Invalid URL, please try again!'])).removeClass('hide').show();
+                                    if (committedCnt === programList.length) {
+                                        committedCnt = -1;   // reset to avoid collision
+                                        if (preloadImage.length > 0) {
+                                            $('#preload-image').html('');
+                                            $('#preload-image-tmpl-item').tmpl(preloadImage).prependTo('#preload-image');
+                                        }
+                                        $('#storyboard-listing').html('');
+                                        $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
+                                        $page.sumStoryboardInfo();
+                                        $page.rebuildVideoNumber();
+                                        $('.ellipsis').ellipsis();
+                                        $('#overlay-s').fadeOut();
+                                    }
+                                });
+                                nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.slice(-11) + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
+                                    nn.api('GET', cms.reapi('/api/programs/{programId}/title_cards', {
+                                        programId: programItem.id
+                                    }), null, function (title_card) {
+                                        nn.api('GET', cms.reapi('/api/programs/{programId}/poi_points', {
+                                            programId: programItem.id
+                                        }), null, function (poi_points) {
+                                            committedCnt += 1;
+                                            beginTitleCard = null;
+                                            endTitleCard = null;
+                                            if (title_card.length > 0) {
+                                                if (title_card[1]) {
+                                                    if (1 === title_card[1].type) {
+                                                        beginTitleCard = title_card[0];
+                                                        endTitleCard = title_card[1];
+                                                    } else {
+                                                        beginTitleCard = title_card[1];
+                                                        endTitleCard = title_card[0];
+                                                    }
+                                                } else {
+                                                    if (title_card[0]) {
+                                                        if (0 === title_card[0].type) {
+                                                            beginTitleCard = title_card[0];
+                                                        } else {
+                                                            endTitleCard = title_card[0];
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (beginTitleCard && beginTitleCard.message && '' !== $.trim(beginTitleCard.message)) {
+                                                beginTitleCard.message = $.trim(beginTitleCard.message).replace(/\{BR\}/g, '\n');
+                                                if (beginTitleCard.bgImage && '' !== $.trim(beginTitleCard.bgImage)) {
+                                                    preloadImage.push({
+                                                        image: beginTitleCard.bgImage
+                                                    });
+                                                }
+                                            } else {
+                                                beginTitleCard = null;
+                                            }
+                                            if (endTitleCard && endTitleCard.message && '' !== $.trim(endTitleCard.message)) {
+                                                endTitleCard.message = $.trim(endTitleCard.message).replace(/\{BR\}/g, '\n');
+                                                if (endTitleCard.bgImage && '' !== $.trim(endTitleCard.bgImage)) {
+                                                    preloadImage.push({
+                                                        image: endTitleCard.bgImage
+                                                    });
+                                                }
+                                            } else {
+                                                endTitleCard = null;
+                                            }
+                                            if (youtubes.data) {
+                                                ytData = youtubes.data;
+                                                isPrivateVideo = false;
+                                                isZoneLimited = (ytData.restrictions) ? true : false;
+                                                hasSyndicateDenied = (ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false;
+                                                hasLimitedSyndication = (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason) ? true : false;
+                                                isSyndicateLimited = (hasSyndicateDenied || hasLimitedSyndication) ? true : false;
+                                                isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
+                                                isUnplayableVideo = (isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication)) ? true : false;
+                                            } else {
+                                                ytData = null;
+                                                isPrivateVideo = (youtubes.error && youtubes.error.code && 403 === youtubes.error.code) ? true : false;
+                                                isZoneLimited = null;
+                                                isSyndicateLimited = null;
+                                                isEmbedLimited = null;
+                                                isUnplayableVideo = null;
+                                            }
+                                            if (ytData && false === isEmbedLimited) {
+                                                ytItem = {
+                                                    poiList: poi_points,
+                                                    beginTitleCard: beginTitleCard,
+                                                    endTitleCard: endTitleCard,
+                                                    ytId: ytData.id,
+                                                    fileUrl: programItem.fileUrl,
+                                                    imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
+                                                    //duration: ytData.duration,      // ON PURPOSE to mark this line to keep trimmed duration from 9x9 API
+                                                    ytDuration: ytData.duration,    // keep original duration from YouTube
+                                                    name: ytData.title,
+                                                    intro: ytData.description,
+                                                    uploader: ytData.uploader,
+                                                    uploadDate: ytData.uploaded,
+                                                    isPrivateVideo: isPrivateVideo,
+                                                    isZoneLimited: isZoneLimited,
+                                                    isSyndicateLimited: isSyndicateLimited,
+                                                    isEmbedLimited: isEmbedLimited,
+                                                    isUnplayableVideo: isUnplayableVideo
+                                                };
+                                            } else {
+                                                ytItem = {
+                                                    poiList: poi_points,
+                                                    beginTitleCard: beginTitleCard,
+                                                    endTitleCard: endTitleCard,
+                                                    ytId: programItem.fileUrl.slice(-11),
+                                                    ytDuration: 0,                                                                      // fake origin duration (invalid video)
+                                                    uploader: ((youtubes.error) ? youtubes.error.message : 'Unplayable-Video'),         // fake uploader (error message)
+                                                    uploadDate: ((youtubes.error) ? (youtubes.error.code + 'T') : 'Unplayable-VideoT'), // fake uploadDate (error code)
+                                                    isPrivateVideo: isPrivateVideo,
+                                                    isZoneLimited: isZoneLimited,
+                                                    isSyndicateLimited: isSyndicateLimited,
+                                                    isEmbedLimited: isEmbedLimited,
+                                                    isUnplayableVideo: isUnplayableVideo
+                                                };
+                                            }
+                                            ytItem = $.extend(programItem, ytItem);
+                                            ytList[idx] = ytItem;
+                                            if (committedCnt === programList.length) {
+                                                committedCnt = -1;   // reset to avoid collision
+                                                if (preloadImage.length > 0) {
+                                                    $('#preload-image').html('');
+                                                    $('#preload-image-tmpl-item').tmpl(preloadImage).prependTo('#preload-image');
+                                                }
+                                                $('#storyboard-listing').html('');
+                                                $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
+                                                $page.sumStoryboardInfo();
+                                                $page.rebuildVideoNumber();
+                                                $('.ellipsis').ellipsis();
+                                                $('#overlay-s').fadeOut();
+                                            }
+                                        });
+                                    });
+                                }, 'jsonp');
                             });
-                        }
-                    } else {
-                        endTitleCard = null;
-                    }
-                    if (youtubes.data) {
-                        ytData = youtubes.data;
-                        isPrivateVideo = false;
-                        isZoneLimited = (ytData.restrictions) ? true : false;
-                        hasSyndicateDenied = (ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false;
-                        hasLimitedSyndication = (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason) ? true : false;
-                        isSyndicateLimited = (hasSyndicateDenied || hasLimitedSyndication) ? true : false;
-                        isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
-                        isUnplayableVideo = (isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication)) ? true : false;
-                    } else {
-                        ytData = null;
-                        isPrivateVideo = (youtubes.error && youtubes.error.code && 403 === youtubes.error.code) ? true : false;
-                        isZoneLimited = null;
-                        isSyndicateLimited = null;
-                        isEmbedLimited = null;
-                        isUnplayableVideo = null;
-                    }
-                    if (ytData && false === isEmbedLimited) {
-                        ytItem = {
-                            poiList: poi_points,
-                            beginTitleCard: beginTitleCard,
-                            endTitleCard: endTitleCard,
-                            ytId: ytData.id,
-                            fileUrl: programItem.fileUrl,
-                            imageUrl: 'http://i.ytimg.com/vi/' + ytData.id + '/mqdefault.jpg',
-                            //duration: ytData.duration,      // ON PURPOSE to mark this line to keep trimmed duration from 9x9 API
-                            ytDuration: ytData.duration,    // keep original duration from YouTube
-                            name: ytData.title,
-                            intro: ytData.description,
-                            uploader: ytData.uploader,
-                            uploadDate: ytData.uploaded,
-                            isPrivateVideo: isPrivateVideo,
-                            isZoneLimited: isZoneLimited,
-                            isSyndicateLimited: isSyndicateLimited,
-                            isEmbedLimited: isEmbedLimited,
-                            isUnplayableVideo: isUnplayableVideo
-                        };
-                    } else {
-                        ytItem = {
-                            poiList: poi_points,
-                            beginTitleCard: beginTitleCard,
-                            endTitleCard: endTitleCard,
-                            ytId: programItem.fileUrl.slice(-11),
-                            ytDuration: 0,                                                                      // fake origin duration (invalid video)
-                            uploader: ((youtubes.error) ? youtubes.error.message : 'Unplayable-Video'),         // fake uploader (error message)
-                            uploadDate: ((youtubes.error) ? (youtubes.error.code + 'T') : 'Unplayable-VideoT'), // fake uploadDate (error code)
-                            isPrivateVideo: isPrivateVideo,
-                            isZoneLimited: isZoneLimited,
-                            isSyndicateLimited: isSyndicateLimited,
-                            isEmbedLimited: isEmbedLimited,
-                            isUnplayableVideo: isUnplayableVideo
-                        };
-                    }
-                    ytItem = $.extend(programItem, ytItem);
-                    ytList[idx] = ytItem;
-                    if (committedCnt === programList.length) {
-                        committedCnt = -1;   // reset to avoid collision
-                        if (preloadImage.length > 0) {
-                            $('#preload-image').html('');
-                            $('#preload-image-tmpl-item').tmpl(preloadImage).prependTo('#preload-image');
-                        }
-                        $('#storyboard-listing').html('');
-                        $('#storyboard-listing-tmpl-item').tmpl(ytList).prependTo('#storyboard-listing');
-                        $page.sumStoryboardInfo();
-                        $page.rebuildVideoNumber();
-                        $('.ellipsis').ellipsis();
-                        $('#overlay-s').fadeOut();
-                    }
+                        });
+                        $('#epcurate-nav-publish, #form-btn-save, #form-btn-next').click(function (e) {
+                            $(fm).trigger('submit', e);
+                            return false;
+                        });
+                        $page.setVideoMeasure();
+                        // $page.setSpace();
+                        // $common.scrollbarX('#storyboard-wrap', '#storyboard-list', '#storyboard-slider');
+                        $page.autoHidePlaceholder();
+                        $('#storyboard-wrap').perfectScrollbar();
+                    });
                 });
-
             });
-        }
-
-        function getYoutubes(programItem) {
-            var deferred = $.Deferred();
-
-            nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + programItem.fileUrl.slice(-11) + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
-                deferred.resolve(youtubes);
-            }, 'jsonp');
-
-            return deferred.promise();
         }
     };
 
