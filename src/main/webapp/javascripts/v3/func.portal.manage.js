@@ -390,7 +390,7 @@
                                 }
                             });
                             //$common.scrollbar("#portal-constrain", "#portal-list", "#portal-slider");
-                            $('#portal-list').perfectScrollbar({ marginTop: 25, marginBottom: 0 });
+                            $('#portal-list').perfectScrollbar({ marginTop: 25, marginBottom: 48 });
                             $('#overlay-s').fadeOut("slow");
                         });
                     } else {
