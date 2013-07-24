@@ -230,7 +230,7 @@
             });
             // $common.autoHeight();
             // $common.scrollbar("#store-constrain", "#store-list", "#store-slider");
-            $('#store-list').perfectScrollbar({ marginTop: 25, marginBottom: 48 });
+            $('#store-list').perfectScrollbar({ marginTop: 25, marginBottom: 63 });
         }
     };
 
