@@ -65,8 +65,6 @@ $(function () {
     if (navigator.userAgent.indexOf('Mac') > 0) {
         $('body').addClass('mac');
     }
-    $common.autoWidth();
-    $common.autoHeight();
 
     // checkbox checked highlight (but radio customize by page)
     $(document).on('click', 'input[type=checkbox]', function () {
@@ -166,15 +164,9 @@ $(function () {
 
     // footer control
     $('#footer-control').click(function () {
-        if ($(this).hasClass('on')) {
-            $(this).removeClass('on');
-            $('#footer').slideToggle();
-            $('#content-main-wrap').removeClass('footer-on');
-        } else {
-            $(this).addClass('on');
-            $('#footer').slideToggle();
-            $('#content-main-wrap').addClass('footer-on');
-        }
+        $(this).toggleClass('on');
+        $('#footer').slideToggle();
+        $('#content-main-wrap').toggleClass('footer-on');
         $('#content-main-wrap').perfectScrollbar('update');
     });
 
@@ -205,8 +197,6 @@ $(function () {
 
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
-        $common.autoWidth();
-        $common.autoHeight();
         setEllipsis();
     });
 });

@@ -52,89 +52,7 @@
         }
     };
 
-    $page.setFormHeight = function () {
-        // $('#content-main-wrap, #content-main-wrap form').height('auto');
-        // var i = 0,
-        //     rowNum = ($(window).width() > 1356) ? 4 : 3,
-        //     realCateCnt = $('#browse-category').data('realCateCnt'),
-        //     modCatLen = realCateCnt % rowNum,
-        //     windowHeight = $(window).height(),
-        //     windowWidth = $(window).width(),
-        //     titleFuncHeight = $('#title-func').height(),
-        //     formHeight = $('#content-main-wrap form').height(),
-        //     headerHeight = $('#header').height(),
-        //     navHeight = $('#studio-nav').height(),
-        //     contentHeight = windowHeight - titleFuncHeight - headerHeight - navHeight + 5 - 48 - 38 - 10;   // 5:header and studio-nav overlap 48:footer 38:title-func-padding
-        // if (windowWidth > 1220) {
-        //     $('input.text').width(windowWidth - 734);
-        //     $('textarea.textarea').width(windowWidth - 735);
-        //     $('.connected .share-item .page-list').width(windowWidth - 837);
-        //     $('.reconnected .reconnect-notice').width(windowWidth - 734);
-        // } else {
-        //     $('input.text').width(433);
-        //     $('textarea.textarea').width(432);
-        //     $('.connected .share-item .page-list').width(330);
-        //     $('.reconnected .reconnect-notice').width(445);
-        // }
-        // $('#browse-category li[data-meta=0]').remove();
-        // if (modCatLen > 0) {
-        //     modCatLen = rowNum - modCatLen;
-        //     for (i = 0; i < modCatLen; i += 1) {
-        //         $('<li data-meta="0" class="none"></li>').appendTo('#browse-category');
-        //     }
-        // }
-        // if (1220 > windowWidth) {
-        //     $('#content-main-wrap form .fminput .fmfield .category, #browse-category').width(441);
-        //     $('#browse-category li').width(139);
-        //     $('#browse-category li').eq(3).removeClass('first-row');
-        // }
-        // if (1220 <= windowWidth && windowWidth <= 1356) {
-        //     $('#content-main-wrap form .fminput .fmfield .category, #browse-category').width(windowWidth - 726);
-        //     $('#browse-category li').width(((windowWidth - 726) / 3) - 8);
-        //     $('#browse-category li').eq(3).removeClass('first-row');
-        // }
-        // if (windowWidth > 1356) {
-        //     $('#content-main-wrap form .fminput .fmfield .category, #browse-category').width(632);
-        //     $('#browse-category li').width(150);
-        //     $('#browse-category li').eq(3).addClass('first-row');
-        // }
-        // $page.truncateFormTitle();
-        // if (contentHeight <= formHeight) {
-        //     $('#content-main-wrap form').height('auto');
-        // } else {
-        //     $('#content-main-wrap form').height(contentHeight - 56);
-        // }
-        // $('#content-main-wrap').height($('#content-main-wrap').children('.constrain').height() + titleFuncHeight + 38); // 38: title-func padding
-        // $('#content-main-wrap form').data('height', $('#content-main-wrap form').height());
-    };
-
-    $page.setTaglistWidth = function () {
-        // var tagTitleWidth = $('.tag-list h4').width(),
-        //     inputWidth = $('input.text').width();
-        // $('#tag-list').width(inputWidth - tagTitleWidth);
-    };
-
-    $page.ellipsisPage = function () {
-        // var windowWidth = $(window).width();
-        // if (windowWidth > 1220) {
-        //     $('ul#fb-page-list').width(windowWidth - 838);
-        //     $('ul#fb-page-list li').width((windowWidth - 838) / 2);
-        // } else {
-        //     $('ul#fb-page-list').width(329);
-        //     $('ul#fb-page-list li').width(164.5);
-        // }
-    };
-
     $page.scrollToBottom = function () {
-    //     var sliderPos = $('#main-wrap-slider .slider-vertical').slider('value');
-
-    // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
-
-        // $('#main-wrap-slider .slider-vertical').slider('value', sliderPos);
-        // $common.hideFbPageList({
-        //     hidePageList: false
-        // });
-    
         var objDiv = document.getElementById("content-main-wrap");
         objDiv.scrollTop = objDiv.scrollHeight;
     };
@@ -311,7 +229,6 @@
                 cntPage: pages.length
             }).appendTo('div.page-list-middle');
             $('#fb-page-list-tmpl-item').tmpl(pages).appendTo('#fb-page-list');
-            $page.ellipsisPage();
         }
         // checked default fadebook page
         if ('channel-setting.html' === cms.global.USER_URL.attr('file') && cms.global.USER_URL.param('id') > 0) {
@@ -358,23 +275,23 @@
                             $('#page-selected').text(pageNames.join(', '));
                         }
                     }
-                    $common.autoHeight();
-                    $page.setFormHeight();
-                    $page.setTaglistWidth();
-
-                    // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
+                    
                     $('#content-main-wrap').perfectScrollbar({marginBottom:63});
                     $common.hideFbPageList();
                 }
             });
         } else {
-            $common.autoHeight();
-            $page.setFormHeight();
-            $page.setTaglistWidth();
-
-            // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
             $('#content-main-wrap').perfectScrollbar({marginBottom:63});
             $common.hideFbPageList();
+        }
+    };
+
+    $page.handleButtonPosition = function() {
+        // Handle cancel/create buttons position according to scollbar displayed or not.
+        if ($('#content-main-wrap').height()>=$('div.constrain').outerHeight()) {
+            $('#content-main-wrap').addClass('fixed');
+        } else {
+            $('#content-main-wrap').removeClass('fixed');
         }
     };
 
@@ -529,14 +446,10 @@
                         $page.truncateFormTitle();
                         // ON PURPOSE to wait api (async)
                         $('#overlay-s').fadeOut(5000, function () {
-                            $common.autoHeight();
-                            $page.setFormHeight();
-                            $page.setTaglistWidth();
-
-                            // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
                             $('#content-main-wrap').perfectScrollbar({marginBottom:63});
                             $common.hideFbPageList();
                             $('#settingForm .btn-save').removeClass('disable').addClass('enable');
+                            $page.handleButtonPosition();
                         });
                     });
                 });
@@ -578,25 +491,14 @@
             $common.initFacebookJavaScriptSdk();
             // ON PURPOSE to wait api (async)
             $('#overlay-s').fadeOut(3000, function () {
-                $common.autoHeight();
-                $page.setFormHeight();
-                $page.setTaglistWidth();
-
-                // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
                 $('#content-main-wrap').perfectScrollbar({marginBottom:63});
                 $common.hideFbPageList();
                 $('#settingForm .btn-cancel, #settingForm .btn-create').removeClass('disable').addClass('enable');
             });
+
+            $page.handleButtonPosition();
         }
 
-        $('#content-main-wrap').addClass('footer-on');
-
-        // Handle cancel/create buttons position according to scollbar displayed or not.
-        if ($('#content-main-wrap').height()>=$('div.constrain').outerHeight()) {
-            $('#content-main-wrap').addClass('fixed');
-        } else {
-            $('#content-main-wrap').removeClass('fixed');
-        }
     };
 
     // NOTE: remember to change page-key to match file-name

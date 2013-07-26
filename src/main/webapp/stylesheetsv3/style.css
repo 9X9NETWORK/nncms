@@ -1701,3 +1701,80 @@ div.constrain {
     background: url(../images/btn_white.png) repeat-x 0 -160px;
     color: #999;
 }
+
+/* Input White */
+.input-white {
+    height: 30px;
+    position: relative;
+    margin: 0 8px 0 0;
+}
+.input-white .left {
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 30px;
+    background: url(../images/input_white.png) no-repeat;
+}
+.input-white .right {
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 30px;
+    background: url(../images/input_white.png) no-repeat 0 -30px;
+}
+.input-white .center {
+    position: relative;
+    float: left;
+    width: 230px;
+    height: 30px;
+    line-height: 30px;
+    text-indent:6px;
+    background: url(../images/input_white.png) repeat-x 0 -60px;
+    text-align:left;
+    border: 0;
+    color: #555;
+}
+.icon-set {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 8px;
+    left: 7px;
+    z-index: 2;
+}
+.input-m-g .icon-set {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 8px;
+    left: 3px;
+    z-index: 2;
+}
+
+/* Input Gray */
+#portal-add-layer .input-gray .center .textfield {
+    left: 30px;
+}
+.msg-error {
+    color: #ed1a1b;
+    display: none;
+}
+.required-field {
+    color: #ed1a1b;
+    left: 0;
+    position: absolute;
+    line-height: 50px;
+}
+.notice {
+    color: #555;
+}
+.left {
+    width: 50%;
+    float: left;
+    position: relative;
+}
+.right {
+    width: 50%;
+    float: right;
+    position: relative;
+}

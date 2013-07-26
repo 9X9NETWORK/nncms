@@ -2465,8 +2465,8 @@ p.auto-height {
 #storyboard .storyboard-list ul li a.error {
     display: block;
     position: absolute;
-    top: -5px;
-    left: -5px;
+    /*top: -5px;
+    left: -5px;*/
     z-index: 40;
     width: 19px;
     height: 18px;
@@ -2474,7 +2474,9 @@ p.auto-height {
 }
 
 #storyboard .storyboard-list ul li a.warning,
-#storyboard .storyboard-list ul li a.warning2,
+#storyboard .storyboard-list ul li a.warning2 {
+    background: url(../images/icon_yellow_warning.png) no-repeat 0 0;
+}
 #storyboard .storyboard-list ul li a.error {
     background: url(../images/icon_red_warning.png) no-repeat 0 0;
 }

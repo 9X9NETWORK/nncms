@@ -1,3 +1,36 @@
+版本: 5150
+作者: yifan
+日期: 2013/7/26 11:18
+訊息:
+Updated UI changes from UI repo.
+----
+#  modified:   brand-setting.html
+#  modified:   channel-add.html
+#  modified:   channel-setting.html
+#  modified:   epcurate-curation.html
+#  modified:   episode-list.html
+#  new file:   images/ep_invalid.png
+#  modified:   index.html
+#  modified:   javascripts/v3/domready.channel.js
+#  modified:   javascripts/v3/domready.common.js
+#  modified:   javascripts/v3/domready.episode.js
+#  modified:   javascripts/v3/domready.get-url.js
+#  new file:   javascripts/v3/domready.portal.brand.js
+#  new file:   javascripts/v3/domready.signin.js
+#  modified:   javascripts/v3/func.channel.js
+#  modified:   javascripts/v3/func.common.js
+#  modified:   javascripts/v3/func.episode.js
+#  modified:   javascripts/v3/func.index.js
+#  new file:   javascripts/v3/func.portal.brand.js
+#  new file:   javascripts/v3/func.signin.js
+#  modified:   signin.html
+#  modified:   stylesheetsv3/channel.css
+#  modified:   stylesheetsv3/ep-curation.css
+#  modified:   stylesheetsv3/episode.css
+#  modified:   stylesheetsv3/portal.css
+#  new file:   stylesheetsv3/signin.css
+#  modified:   stylesheetsv3/style.css
+
 版本: 5140
 作者: Mars
 日期: 2013/7/24 13:57

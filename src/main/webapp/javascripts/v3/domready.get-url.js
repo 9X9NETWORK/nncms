@@ -57,8 +57,8 @@ $(function () {
     $(document).on('click', 'html', function (event) {
         $('.get-url').hide();
     });
-
-    $('#content-main-wrap').scroll(function () {
+	
+	$('#content-main-wrap').scroll(function() {
         $('.get-url').hide();
     });
 

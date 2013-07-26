@@ -8,11 +8,6 @@ $(function () {
     var $page = cms.channel,
         $common = cms.common;
 
-    $common.autoHeight();
-    $page.setFormHeight();
-    $page.setTaglistWidth();
-    // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
-
     // common unblock
     $('body').keyup(function (e) {
         if (27 === e.which) { // Esc
@@ -157,8 +152,6 @@ $(function () {
                         }
                     }).appendTo('#browse-category');
                     $('#browse-category li[data-meta=0]').addClass('none');
-                    $common.autoHeight();
-                    $page.setFormHeight();
                     $page.scrollToBottom();
                     $('.category').removeClass('disable').addClass('enable');
                     $('#categoryId-select-txt').text(nn._([cms.global.PAGE_ID, 'setting-form', 'Select a category']));
@@ -192,9 +185,7 @@ $(function () {
                 } else {
                     $('.tag-list').addClass('hide');
                 }
-                $common.autoHeight();
-                $page.setFormHeight();
-                $page.setTaglistWidth();
+
                 $page.scrollToBottom();
             });
         }
@@ -264,10 +255,7 @@ $(function () {
                                 var isAutoCheckedTimeline = true;
                                 $page.renderAutoShareUI(facebook, isAutoCheckedTimeline);
                                 setTimeout(function () {
-                                    $common.autoHeight();
-                                    $page.setFormHeight();
                                     $page.scrollToBottom();
-                                    $('#main-wrap-slider .slider-vertical').slider('value', 0);
                                 }, 1000);
                             }
                         });
@@ -322,28 +310,16 @@ $(function () {
         $('.dropdown').parents('li').removeClass('on').children('.on').removeClass('on');
         $('.select-list').hide();
         $('.select-list').parents().removeClass('on').children('.on').removeClass('on');
-        // var formHeight = $('#content-main-wrap form').height(),
-        //     formRealHeight = 0,
-        //     list = $('#fb-page-list').data('list'),
-        //     buttonSpace = 70,
-        //     footerSpace = 65,
-        //     expandHeight = parseInt(Math.round(list / 2) * 30, 10);
-        // $('#settingForm > .fminput').each(function () {
-        //     formRealHeight += $(this).outerHeight();
-        // });
+
         $(this).next('ul').slideToggle({
             complete: function() {
 
                 if ($('.connected .share-item .page-list').hasClass('on')) {
-
                     $page.scrollToBottom();
-                    $('#content-main-wrap').perfectScrollbar('update');
                 } else {
-
                     $('#content-main-wrap').scrollTop( $('#content-main-wrap').scrollTop()-fbPageListHeight );
-                    $('#content-main-wrap').perfectScrollbar('update');
                 }
-
+                $('#content-main-wrap').perfectScrollbar('update');
             }
         });
 
@@ -515,29 +491,9 @@ $(function () {
 
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
-        $page.ellipsisPage();
-        $common.autoHeight();
-        $page.setFormHeight();
-        $page.setTaglistWidth();
-        // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider', $('#footer').offset().top - ( $('#title-func').offset().top + $('#title-func').outerHeight(true) ), $('#content-main-wrap').height());
-        
-        // Update perfect scrollbar.
         $('#content-main-wrap').perfectScrollbar('update');
 
-        // $common.hideFbPageList();
-        // if ('none' === $('#main-wrap-slider').css('display')) {
-        //     $('#main-wrap-slider .slider-vertical').slider('destroy');
-        //     $('#main-wrap-slider .slider-vertical').slider();
-        //     $('#main-wrap-slider').hide();
-        //     $('#content-main-wrap').css('top', '0');
-        // }
-
-        // Handle cancel/create buttons position according to scollbar displayed or not.
-        if ($('#content-main-wrap').height()>=$('div.constrain').outerHeight()) {
-            $('#content-main-wrap').addClass('fixed');
-        } else {
-            $('#content-main-wrap').removeClass('fixed');
-        }
+        $page.handleButtonPosition();
 
         // Handle category list items layout.
         var categoryList = $('#browse-category');

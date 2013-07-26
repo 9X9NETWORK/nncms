@@ -5,10 +5,11 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/perfect-scrollbar.css" />
+<link rel="stylesheet" href="stylesheetsv3/style.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/uniform.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/channel.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/channel.css?v=1278" />
 <title>9x9.tv - Channel settings</title>
 </head>
 <body>
@@ -67,7 +68,7 @@
 <!-- Content Layer End -->
 
 <!-- Footer Layer Begin -->
-<p id="footer-control"></p>
+<p id="footer-control" class="on"></p>
 <div id="footer">
     <span>© 2013 9x9.tv. All rights reserved.</span>
     <ul id="footer-list">
@@ -151,7 +152,7 @@
     <h2><span id="channel-name" data-width="">${name}</span><span class="title-crumb">&gt; ${nn._([cms.global.PAGE_ID, 'title-func', 'Settings'])}</span></h2>
     <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'title-func', 'Required field'])}</p>
 </div>
-<div id="content-main-wrap">
+<div id="content-main-wrap" class="footer-on">
 <div class="constrain">
 <form name="settingForm" id="settingForm" method="get" action="" data-height="400">
     <div class="fminput clearfix">
@@ -345,10 +346,11 @@
 <script src="javascripts/libs/json2.min.js?v=1278"></script>
 <script src="javascripts/libs/purl.min.js?v=1278"></script>
 <script src="javascripts/libs/swfupload/swfupload.js?v=1278"></script>
+<script src="javascripts/libs/perfect-scrollbar.js"></script>
 <script src="javascripts/v2/config.js?v=1278"></script>
-<script src="javascripts/v2/func.common.js?v=1278"></script>
-<script src="javascripts/v2/func.channel.js?v=1278"></script>
-<script src="javascripts/v2/domready.common.js?v=1278"></script>
-<script src="javascripts/v2/domready.channel.js?v=1278"></script>
+<script src="javascripts/v3/func.common.js?v=1278"></script>
+<script src="javascripts/v3/func.channel.js?v=1278"></script>
+<script src="javascripts/v3/domready.common.js?v=1278"></script>
+<script src="javascripts/v3/domready.channel.js?v=1278"></script>
 </body>
 </html>

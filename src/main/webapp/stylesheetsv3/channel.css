@@ -1165,7 +1165,8 @@ body.mac #title-func h2 {
 /* Channel settingForm tag list */
 #content-main-wrap form .fminput .fmfield .tag-list {
     overflow: hidden;
-    padding: 5px 0 0 150px;
+    padding: 5px 0 0 0;
+    width: 84%;
 }
 
 #content-main-wrap form .fminput .fmfield .tag-list h4,
@@ -1175,7 +1176,7 @@ body.mac #title-func h2 {
 }
 
 #content-main-wrap form .fminput .fmfield .tag-list ul {
-    width: 450px;
+    width: 74%;
     margin-top: -1px;
 }
 
@@ -1255,7 +1256,7 @@ body.mac #title-func h2 {
 #content-main-wrap form .form-btn {
     overflow: hidden;
     position: absolute;
-    bottom: 0;
+    bottom: 15px;
     right: 0;
 }
 
@@ -1305,13 +1306,13 @@ body.mac #title-func h2 {
 }
 
 #content-main-wrap.fixed form .form-btn {
-    bottom: 1px;
+    bottom: 15px;
     right: 35px;
     position: fixed;
 }
 
 #content-main-wrap.fixed.footer-on form .form-btn {
-    bottom: 48px;
+    bottom: 63px;
 }
 
 /* Get URL */

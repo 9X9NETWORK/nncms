@@ -5,10 +5,10 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheetsv3/perfect-scrollbar.css?v=1238" />
-<link rel="stylesheet" href="stylesheetsv3/style.css?v=1238" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=1238" />
-<link rel="stylesheet" href="stylesheetsv3/episode.css?v=1238" />
+<link rel="stylesheet" href="stylesheetsv3/perfect-scrollbar.css" />
+<link rel="stylesheet" href="stylesheetsv3/style.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/episode.css?v=1278" />
 <title>9x9.tv - Episode list</title>
 </head>
 <body>
@@ -66,7 +66,6 @@
         </div>
         <div id="content-main-wrap" class="episode-list">
             <div class="constrain">
-                <!-- template = #episode-favorite-first-tmpl or #episode-favorite-list-tmpl -->
                 <!-- template = #episode-first-tmpl or #episode-list-tmpl -->
             </div>
         </div>
@@ -220,60 +219,6 @@
 </script>
 <!-- get-url-tmpl End -->
 
-<script id="episode-favorite-first-tmpl" type="text/x-jquery-tmpl">
-<div id="ep-no">
-    <h3>{{html nn._([cms.global.PAGE_ID, 'episode-list', "You don't have any episodes yet"])}}</h3>
-    <p class="desc">{{html nn._([cms.global.PAGE_ID, 'episode-list', 'Click on <span>Favorite</span> button when watching channels to collect more episodes'])}}</p>
-    <img src="images/graphic_mockup.png" alt="" />
-</div>
-</script>
-
-<script id="episode-favorite-list-tmpl" type="text/x-jquery-tmpl">
-<div id="ep-list" class="favorite">
-    <ul id="episode-list">
-        <!-- template = #episode-favorite-list-tmpl-item -->
-    </ul>
-</div>
-</script>
-
-<!-- episode-favorite-list-tmpl-item Begin -->
-<script id="episode-favorite-list-tmpl-item" type="text/x-jquery-tmpl">
-<li class="clearfix">
-<div class="container">
-    <div class="episode">
-        <div class="img">
-            <div class="img-container">
-                <div class="img-wrap">
-                    <a href="${playbackUrl}" target="_blank">
-                        <img src="images/icon_playlist.png" alt="" class="watermark" />
-                        <img src="${imageUrl}" alt="" class="photo" />
-                    </a>
-                    <span class="duration"><span class="time-right"><span class="time-middle">${cms.common.formatDuration(duration)}</span></span></span>
-                </div>
-            </div>
-        </div>
-        <h3><a href="${playbackUrl}" target="_blank">${name}</a></h3>
-        <div class="btns">
-            <div class="btn-wrap disable">
-                <ul>
-                    <li><a href="javascript:void(0);" class="edit disable"><span></span>${nn._([cms.global.PAGE_ID, 'episode-list', 'Edit'])}</a></li>
-                    <li><a href="javascript:void(0);" class="del disable"><span></span>${nn._([cms.global.PAGE_ID, 'episode-list', 'Delete'])}</a></li>
-                    <li><a href="javascript:void(0);" class="url disable"><span></span>${nn._([cms.global.PAGE_ID, 'episode-list', 'Get URL'])}</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="publish-time">
-        <p>${cms.common.formatTimestamp(publishDate)}</p>
-    </div>
-    <div class="views">
-        <p>${cntView}</p>
-    </div>
-</div>
-</li>
-</script>
-<!-- episode-favorite-list-tmpl-item End -->
-
 <!-- episode-first-tmpl Begin -->
 <script id="episode-first-tmpl" type="text/x-jquery-tmpl">
 <div id="ep-time-list">
@@ -415,7 +360,7 @@
                 </div>
             </div>
 			<div class="check">
-				<div class="btn"></div>
+				<div class="ok"></div>
 			    <div class="tip-white">
                     <p class="left"></p>
                     <p class="center">No video have problem</p>

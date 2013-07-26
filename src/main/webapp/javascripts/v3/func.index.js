@@ -81,7 +81,7 @@
                                 }
                             }
                         }
-                        items.push(channel);
+                            items.push(channel);
                     });
                     $('#channel-list').html('');
                     $('#channel-list-tmpl-item').tmpl(items, {

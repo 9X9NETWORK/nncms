@@ -8,11 +8,6 @@ $(function () {
     var $page = cms['episode-list'],
         $common = cms.common;
 
-    // $page.setEpisodeWidth();
-    // $common.autoHeight();
-    // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-    // $('#content-main-wrap').perfectScrollbar({marginBottom: 20});
-
     // common unblock
     $('body').keyup(function (e) {
         if (27 === e.which) { // Esc
@@ -103,7 +98,7 @@ $(function () {
             $('#folder_' + folderID).replaceWith(tmpOut);
             // paging scroll
             $page.setPageScroll('');
-            // $page.setEpisodeWidth();
+
             $('.itemFolder_' + folderID).hide();
             $('.itemFolder_' + folderID).slideDown('slow');
         }
@@ -236,8 +231,7 @@ $(function () {
                         }
                         $page.afterDelete($('#ep-list li.deleting').data('deleteId'));
                         $('#ep-list ul li.deleting').remove();
-                        // $('#content-main-wrap').height($('#content-main-wrap').height() - 82);  // 82: li height
-                        // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+
                         $page.afterDelete($('#ep-list li.deleting').data('deleteId'));
                     });
                 } else {
@@ -254,15 +248,6 @@ $(function () {
 
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
-        // $page.setEpisodeWidth();
-        // $common.autoHeight();
-        // $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-        // if ('none' === $('#main-wrap-slider').css('display')) {
-        //     $('#main-wrap-slider .slider-vertical').slider('destroy');
-        //     $('#main-wrap-slider .slider-vertical').slider();
-        //     $('#main-wrap-slider').hide();
-        //     $('#content-main-wrap').css('top', '0');
-        // }
         $('#content-main-wrap').perfectScrollbar('update');
     });
 });
