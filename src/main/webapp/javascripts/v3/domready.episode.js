@@ -8,7 +8,8 @@ $(function () {
     var $page = cms['episode-list'],
         $common = cms.common;
 
-    // common unblock
+    $('#content-main-wrap').perfectScrollbar({marginBottom: 20});
+
     $('body').keyup(function (e) {
         if (27 === e.which) { // Esc
             $.unblockUI();
@@ -17,6 +18,15 @@ $(function () {
                 location.replace('index.html');
             }
             return false;
+        }
+    });
+    $(document).on('click', '.check', function () {
+        var this_id = parseInt($(this).data("meta"), 10),
+            this_btn = "#yuchk-btn-" + this_id;
+
+        if ($(this_btn).hasClass("btn")) {
+            $common.showProcessingOverlay();
+            $page.epYoutubeCheck(this_id);
         }
     });
     $(document).on('click', '.unblock, .btn-close, .btn-no', function () {
@@ -98,7 +108,6 @@ $(function () {
             $('#folder_' + folderID).replaceWith(tmpOut);
             // paging scroll
             $page.setPageScroll('');
-
             $('.itemFolder_' + folderID).hide();
             $('.itemFolder_' + folderID).slideDown('slow');
         }

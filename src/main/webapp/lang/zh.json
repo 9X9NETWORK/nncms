@@ -524,7 +524,11 @@
             "<strong>Curate online videos</strong> into each single episode.": "在一集節目中<strong>輕鬆策展多個影片</strong>。",
             "Tell your story by <strong>arranging the video sequence.</strong>": "<strong>編排影片播放順序</strong>，說一個獨一無二的故事。",
             "<strong>Trim the videos and add titles</strong> to make your episodes more intriguing.": "<strong>剪輯影片與加入字卡</strong>，讓您的節目更引人入勝。",
-            "<strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically.": "<strong>設定節目自動排程發佈</strong>，讓粉絲定時享受最新節目。"
+            "<strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically.": "<strong>設定節目自動排程發佈</strong>，讓粉絲定時享受最新節目。",
+            "Video check": "失效影片檢查",
+            "No video has problem": "無問題影片",
+            "Find ? video has problem.": "找到 {0} 個問題影片",
+            "Find ? videos have problem.": "找到 {0} 個問題影片"
         }
     },
     "epcurate-publish": {

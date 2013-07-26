@@ -6,8 +6,143 @@
 
     var $common = cms.common;
 
-    // $page.setEpisodeWidth = function () {
-    // };
+    $page.epYoutubeCheck = function (inID) {
+
+        function _getEpisodeProgram(episodeId) {
+            var deferred = $.Deferred();
+
+            nn.api('GET', cms.reapi('/api/episodes/{episodeId}/programs', {
+                episodeId: episodeId
+            }), null, function (programs) {
+                deferred.resolve(programs);
+            });
+            return deferred.promise();
+        }
+
+        function _getYoutubes(ytVideo) {
+            var deferred = $.Deferred();
+
+            nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + ytVideo.slice(-11) + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
+                deferred.resolve(youtubes);
+            }, 'jsonp');
+            return deferred.promise();
+        }
+
+        function _showResult(showData) {
+            var errMsg = "",
+                errIcon = "ok",
+                errCount = showData.err + showData.warn;
+
+            if (errCount > 0) {
+                if (showData.err === 0 && showData.warn > 0) {
+                    errIcon = "warn";
+                } else {
+                    errIcon = "error";
+                }
+                if (1 === errCount) {
+                    errMsg += nn._([cms.global.PAGE_ID, 'episode-list', "Find ? video has problem."], [errCount]);
+                } else {
+                    errMsg += nn._([cms.global.PAGE_ID, 'episode-list', "Find ? videos have problem."], [errCount]);
+                }
+            }
+            if ("ok" === errIcon) {
+                errMsg += nn._([cms.global.PAGE_ID, 'episode-list', "No video has problem"]);
+            }
+
+            $("#yuchk-btn-" + inID).removeClass().addClass(errIcon);
+            $("#yuchk-msg-" + inID).text(errMsg);
+
+            $('#overlay-s').fadeOut();
+        }
+
+        function _chkProgramVideo(programs) {
+            var deferred = $.Deferred(),
+                videoList = [],
+                chkResoult = {
+                    cntList: 0,
+                    nnCount: 0,
+                    isOk: 0,
+                    warn: 0,
+                    err: 0
+                },
+                // isPrivateVideo = null,
+                isZoneLimited = null,
+                // hasSyndicateDenied = null,
+                // hasLimitedSyndication = null,
+                // isSyndicateLimited = null,
+                // isEmbedLimited = null,
+                // isUnplayableVideo = null,
+                invalidList = [],
+                // committedCnt = 0,
+                ytData = null;
+
+            $.each(programs, function (eKey, eValue) {
+                videoList.push(eValue.fileUrl);
+            });
+
+            chkResoult.cntList = videoList.length;
+
+            $.each(videoList, function (idx, itemVideo) {
+                nn.on([400, 401, 403, 404], function (jqXHR, textStatus) {
+                    // committedCnt += 1;
+                    invalidList.push(itemVideo);
+                });
+                // if (idx === 0) { // 測試用
+                //     itemVideo = "http://www.youtube.com/watch?v=WwY15T5EEpG";
+                // }
+                $.when(_getYoutubes(itemVideo))
+                    .then(function (youtubes) {
+                        if (youtubes.data) {
+                            ytData = youtubes.data;
+                            // isPrivateVideo = false;
+                            // http://www.youtube.com/watch?v=WwY15T5EEpo
+                            // 'restrictions' ...
+                            //                    '0' ...
+                            //                        'type' => "country"
+                            //                        'relationship' => "deny"
+                            //                        'countries' => "DE"
+                            // restrictions 問題待討論
+                            isZoneLimited = (ytData.restrictions) ? true : false;
+                            // hasSyndicateDenied = (ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false;
+                            // hasLimitedSyndication = (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason) ? true : false;
+                            // isSyndicateLimited = (hasSyndicateDenied || hasLimitedSyndication) ? true : false;
+                            // isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
+
+                            // isUnplayableVideo = (isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication)) ? true : false;
+
+                            if (isZoneLimited || ytData.accessControl.embed === 'denied' || ytData.accessControl.syndicate === 'denied' || (ytData.status && !(ytData.status.reason && ytData.status.reason === 'limitedSyndication'))) {
+                                // unplayable = true;
+                                chkResoult.warn += 1;
+                            } else {
+                                // unplayable = false;
+                                chkResoult.isOk += 1;
+                            }
+
+                        } else {
+                            chkResoult.err += 1;
+                            ytData = null;
+                            // isPrivateVideo = (youtubes.error && youtubes.error.code && 403 === youtubes.error.code) ? true : false;
+                            isZoneLimited = null;
+                            // isSyndicateLimited = null;
+                            // isEmbedLimited = null;
+                            // isUnplayableVideo = null;
+                        }
+                        chkResoult.nnCount += 1;
+                        if (chkResoult.nnCount === chkResoult.cntList) {
+                            deferred.resolve(chkResoult);
+                        }
+
+                    });
+
+            });
+            return deferred.promise();
+        }
+
+        _getEpisodeProgram(inID)
+            .then(_chkProgramVideo)
+            .then(_showResult);
+
+    };
 
     $page.setPageScroll = function (isDown) {
         $('#content-main-wrap').perfectScrollbar('update');
@@ -32,8 +167,7 @@
             options: options
         }, 'debug');
 
-        var pageId = cms.global.PAGE_ID,
-            id = cms.global.USER_URL.param('id');
+        var id = cms.global.USER_URL.param('id');
         if (id > 0 && !isNaN(id) && cms.global.USER_DATA.id) {
             nn.api('GET', cms.reapi('/api/users/{userId}/channels', {
                 userId: cms.global.USER_DATA.id
@@ -56,8 +190,7 @@
                 }), null, function (channel) {
                     $('#func-nav ul').html('');
                     $('#func-nav-tmpl').tmpl(channel).appendTo('#func-nav ul');
-                    if (channel.contentType === cms.config.YOUR_FAVORITE) {
-                    } else {
+                    if (channel.contentType !== cms.config.YOUR_FAVORITE) {
                         nn.api('GET', cms.reapi('/api/channels/{channelId}/episodes', {
                             channelId: id
                         }), null, function (episodes) {
@@ -189,7 +322,6 @@
                     }
                 });
             });
-        } else if ('' !== id && parseInt(id, 10) === 0 && cms.global.USER_DATA.id) {
         } else {
             $common.showSystemErrorOverlayAndHookError('Invalid channel ID, please try again.');
             return;

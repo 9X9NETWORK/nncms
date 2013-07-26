@@ -524,8 +524,11 @@
             "<strong>Curate online videos</strong> into each single episode.": "<strong>Curate online videos</strong> into each single episode.",
             "Tell your story by <strong>arranging the video sequence.</strong>": "Tell your story by <strong>arranging the video sequence.</strong>",
             "<strong>Trim the videos and add titles</strong> to make your episodes more intriguing.": "<strong>Trim the videos and add titles</strong> to make your episodes more intriguing.",
-            "<strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically.": "<strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically."
-        }
+            "<strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically.": "<strong>Schedule your episodes,</strong> and 9x9 will publish the episodes automatically.",
+            "Video check": "Video check",
+            "No video has problem": "No video has problem",
+            "Find ? video has problem.": "Find {0} video has problem.",
+            "Find ? videos have problem.": "Find {0} videos have problem."        }
     },
     "epcurate-publish": {
         "html-title": {
