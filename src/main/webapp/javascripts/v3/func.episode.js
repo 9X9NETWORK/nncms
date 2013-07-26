@@ -66,7 +66,7 @@
                     err: 0
                 },
                 // isPrivateVideo = null,
-                isZoneLimited = null,
+                // isZoneLimited = null,
                 // hasSyndicateDenied = null,
                 // hasLimitedSyndication = null,
                 // isSyndicateLimited = null,
@@ -92,25 +92,11 @@
                 // }
                 $.when(_getYoutubes(itemVideo))
                     .then(function (youtubes) {
+                        var ytCheck = null;
+
                         if (youtubes.data) {
-                            ytData = youtubes.data;
-                            // isPrivateVideo = false;
-                            // http://www.youtube.com/watch?v=WwY15T5EEpo
-                            // 'restrictions' ...
-                            //                    '0' ...
-                            //                        'type' => "country"
-                            //                        'relationship' => "deny"
-                            //                        'countries' => "DE"
-                            // restrictions 問題待討論
-                            isZoneLimited = (ytData.restrictions) ? true : false;
-                            // hasSyndicateDenied = (ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false;
-                            // hasLimitedSyndication = (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason) ? true : false;
-                            // isSyndicateLimited = (hasSyndicateDenied || hasLimitedSyndication) ? true : false;
-                            // isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
-
-                            // isUnplayableVideo = (isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication)) ? true : false;
-
-                            if (isZoneLimited || ytData.accessControl.embed === 'denied' || ytData.accessControl.syndicate === 'denied' || (ytData.status && !(ytData.status.reason && ytData.status.reason === 'limitedSyndication'))) {
+                             ytCheck = cms.youtubeUtility.checkVideoValidity(youtubes);
+                            if (ytCheck.isZoneLimited || ytCheck.isEmbedLimited || ytCheck.isSyndicateLimited || ytCheck.isUnplayableVideo) {
                                 // unplayable = true;
                                 chkResoult.warn += 1;
                             } else {
@@ -120,12 +106,6 @@
 
                         } else {
                             chkResoult.err += 1;
-                            ytData = null;
-                            // isPrivateVideo = (youtubes.error && youtubes.error.code && 403 === youtubes.error.code) ? true : false;
-                            isZoneLimited = null;
-                            // isSyndicateLimited = null;
-                            // isEmbedLimited = null;
-                            // isUnplayableVideo = null;
                         }
                         chkResoult.nnCount += 1;
                         if (chkResoult.nnCount === chkResoult.cntList) {
