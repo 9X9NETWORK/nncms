@@ -1,7 +1,16 @@
+/**
+ * @file YouTube relative utility.
+ * @author Yi-Fan Liao <yifan.9x9@gmail.com>
+ */
 (function(cms) {
 
 	cms.youtubeUtility = cms.youtubeUtility || {
 
+        /**
+         * Check youtube video validity.
+         * @param {object} youtube - The youtube data API response.
+         * @returns {object} Checked validity result.
+         */
 		checkVideoValidity: function (youtube) {
 
 			var checkResult = {
@@ -13,6 +22,9 @@
                 isSyndicateLimited: false,
                 // Non-embeddable video?
                 isEmbedLimited: false,
+                // Deleted or not found?
+                isInvalid: false,
+                // Unplayable video?
                 isUnplayableVideo: false
 			};
 
@@ -29,6 +41,7 @@
                 checkResult.isUnplayableVideo = (checkResult.isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication)) ? true : false;
             } else {
                 checkResult.isPrivateVideo = (youtube.error && youtube.error.code && 403 === youtube.error.code) ? true : false;
+                checkResult.isInvalid = checkResult.isPrivateVideo? false : true;
             }
 
 			return checkResult;

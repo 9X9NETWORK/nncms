@@ -593,7 +593,8 @@
             "Invalid URL, please try again!": "Invalid URL, please try again!",
             "Fail to add this video, please try another one.<br />[This video is not playable outside Youtube]": "Fail to add this video, please try another one.<br />[This video is not playable outside Youtube]",
             "Fail to add this video, please try another one.<br />[This video is not playable on mobile device]": "Fail to add this video, please try another one.<br />[This video is not playable on mobile device]",
-            "Fail to add this video, please try another one.<br />[This is a private video]": "Fail to add this video, please try another one.<br />[This is a private video]"
+            "Fail to add this video, please try another one.<br />[This is a private video]": "Fail to add this video, please try another one.<br />[This is a private video]",
+            "Unplayable video, please try again!": "Unplayable video, please try again!"
         },
         "video-info": {
             "Original": "Original",
@@ -721,7 +722,8 @@
             "Add Title": "Add Title",
             "Invalid video": "Invalid video",
             "Non-embeddable video": "Non-embeddable video",
-            "Private video": "Private video"
+            "Private video": "Private video",
+            "Unplayable video": "Unplayable video"
         }
     }
 }

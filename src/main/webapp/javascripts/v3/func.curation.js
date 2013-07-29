@@ -666,12 +666,8 @@
             windowWidth = $(window).width(),
             storyboardMove = distance / 100 * (5700 - windowWidth + 17);
         if ((list + add) > 8) {
-            $('.ui-slider-handle').animate({
-                'left': '+' + distance + '%'
-            }, 'slow');
-            $('#storyboard-list').animate({
-                'left': '-' + storyboardMove + 'px'
-            }, 'slow');
+            $("#storyboard-wrap").scrollLeft(storyboardMove);
+            $("#storyboard-wrap").perfectScrollbar('update');
         }
     };
 
@@ -1558,7 +1554,7 @@
             }
         } else {
             // Refactor with jquery deferred object
-            var episode, data, channel, programs;   // Not ideal, temp workaround.
+            // var episode, data, channel, programs;   // Not ideal, temp workaround.
             getEpisode($('#id').val())
                 .then(getChannels)
                 .then(getChannel)

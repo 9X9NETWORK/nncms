@@ -594,7 +594,8 @@
             "Invalid URL, please try again!": "連結有誤，請重新嘗試！",
             "Fail to add this video, please try another one.<br />[This video is not playable outside Youtube]": "無法加入此影片，請嘗試其他影片。<br />[此影片無法在YouTube以外的網站播放]",
             "Fail to add this video, please try another one.<br />[This video is not playable on mobile device]": "無法加入此影片，請嘗試其他影片。<br />[此影片無法於行動裝置播放]",
-            "Fail to add this video, please try another one.<br />[This is a private video]": "無法加入此影片，請嘗試其他影片。<br />[此影片為私人影片]"
+            "Fail to add this video, please try another one.<br />[This is a private video]": "無法加入此影片，請嘗試其他影片。<br />[此影片為私人影片]",
+            "Unplayable video, please try again!": "無法播放的影片，請重新嘗試。"
         },
         "video-info": {
             "Original": "原長度",
@@ -722,7 +723,8 @@
             "Add Title": "新增字卡",
             "Invalid video": "失效的影片",
             "Non-embeddable video": "外站禁播的影片",
-            "Private video": "私人的影片"
+            "Private video": "私人的影片",
+            "Unplayable video": "無法播放的影片"
         }
     }
 }

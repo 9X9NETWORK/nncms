@@ -1,3 +1,20 @@
+版本: 5172
+作者: yifan
+日期: 2013/7/29 11:11
+訊息:
+* Revised html template for invalid video.
+* Revised invalid video checking module comments and logic.
+* Refactored video adding validity check with cms.youtube-utility.js module.
+* Implemented horizontal scrollbar adding video behavior using perfect scrollbar plugin.
+* Added multi-lang text.
+----
+#  modified:   epcurate-curation.html
+#  modified:   javascripts/v3/cms.youtube-utility.js
+#  modified:   javascripts/v3/domready.curation.js
+#  modified:   javascripts/v3/func.curation.js
+#  modified:   lang/en.json
+#  modified:   lang/zh.json
+
 版本: 5171
 作者: mars
 日期: 2013/7/29 11:04

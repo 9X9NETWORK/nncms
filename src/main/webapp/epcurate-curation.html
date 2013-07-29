@@ -1088,9 +1088,10 @@
             {{if isSyndicateLimited}}
                 <a href="#!pid=${id}&ytid=${ytId}" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Not playable on mobile device'])}</span></span></span></span></a>
             {{/if}}
-            {{if ytDuration <= 0}}
-                <a href="#!pid=${id}&ytid=${ytId}" class="error"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /></span></a>
-            {{/if}}
+        {{/if}}
+    {{else}}
+        {{if isInvalid || isUnplayableVideo || isEmbedLimited || isPrivateVideo}}
+            <a href="#!pid=${id}&ytid=${ytId}" class="error"></a>
         {{/if}}
     {{/if}}
     <p class="order"><!-- dynamic rebuild video number after template render --></p>
@@ -1111,8 +1112,10 @@
             <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Non-embeddable video'])}]</h4>
         {{else isPrivateVideo}}
             <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Private video'])}]</h4>
-        {{else}}
+        {{else isInvalid}}
             <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Invalid video'])}]</h4>
+        {{else isUnplayableVideo}}
+            <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Unplayable video'])}]</h4>
         {{/if}}
     {{/if}}
     <p class="title">
