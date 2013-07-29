@@ -1,3 +1,13 @@
+版本: 5171
+作者: mars
+日期: 2013/7/29 11:04
+訊息:
+1. fix ep-list first row show problem
+2. fix chnnel-setting / channel-add Description textarea height problem
+----
+異動 : /stylesheetsv3/style.css
+異動 : /stylesheetsv3/channel.css
+
 版本: 5168
 作者: mars
 日期: 2013/7/26 17:56
