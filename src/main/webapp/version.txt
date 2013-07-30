@@ -1,3 +1,18 @@
+版本: 5187
+作者: yifan
+日期: 2013/7/30 14:39
+訊息:
+Added processing / uploading youtube video check.
+Fixed channel-add and channel-settings layout fail bug.
+Fixed epcurate-curation.html loading with empty video bug.
+Fixed Facebook logo and drop down menu spacing bug.
+----
+M       javascripts/v3/cms.youtube-utility.js
+M       javascripts/v3/domready.curation.js
+M       javascripts/v3/func.curation.js
+M       stylesheetsv3/style.
+M       channel-setting.html
+
 版本: 5183
 作者: mars
 日期: 2013/7/30 14:28
