@@ -1542,9 +1542,8 @@
                             $(fm).trigger('submit', e);
                             return false;
                         });
-                        $page.setVideoMeasure();
-                        $page.setSpace();
-                        $common.scrollbarX('#storyboard-wrap', '#storyboard-list', '#storyboard-slider');
+
+                        $('#storyboard-wrap').perfectScrollbar(); 
                         $('#overlay-s').fadeOut();
                     });
                 });

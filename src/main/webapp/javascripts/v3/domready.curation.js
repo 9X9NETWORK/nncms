@@ -9,7 +9,7 @@ $(function () {
         $common = cms.common,
         videoDeleteIdList = [];
 
-    $page.setVideoMeasure();
+    // $page.setVideoMeasure();
     // $page.setSpace();
     // $common.scrollbarX('#storyboard-wrap', '#storyboard-list', '#storyboard-slider');
     $('#epcurate-nav ul li.curation').click(function () {
@@ -2214,7 +2214,7 @@ $(function () {
 
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
-        $page.setVideoMeasure();
+        // $page.setVideoMeasure();
         // $page.setSpace();
         if ($('#poi-list-page').length > 0 && $('#storyboard-list li.playing').length > 0) {
             $page.buildPoiInfoTmpl($('#storyboard-list li.playing'));
