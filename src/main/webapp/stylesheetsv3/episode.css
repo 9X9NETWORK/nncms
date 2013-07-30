@@ -439,8 +439,8 @@ body.mac #title-func ul li p span a {
 #ep-list ul li .episode p.no-img span.duration {
     display: block;
     position: absolute;
-    bottom: 7px;
-    right: 7px;
+    bottom: 0px;
+    right: 0px;
     float: right;
     height: 14px;
     padding: 0 0 0 2px;
@@ -540,6 +540,7 @@ body.mac #title-func ul li p span a {
     text-decoration: none;
 }
 
+#ep-list ul li .episode .btns .btn-wrap ul li a.url.selected,
 #ep-list ul li .episode .btns .btn-wrap ul li a.disable,
 #ep-list ul li .episode .btns .btn-wrap ul li a:hover {
     color: #999;
@@ -591,6 +592,7 @@ body.mac #title-func ul li p span a {
    background-position: -46px -122px;
 }
 
+#ep-list ul li .episode .btns .btn-wrap ul li a.url.selected span,
 #ep-list ul li .episode .btns .btn-wrap ul li a.url:hover span {
     background-position: -23px -122px;
 }

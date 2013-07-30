@@ -16,8 +16,9 @@ $(function () {
             userUrlFile = 'index.html';
         }
         if (!$(this).hasClass('disable')) {
+            $('.url').removeClass("selected");
             obj_get_url = $(this).parents('li').find('.get-url');
-
+            $(this).addClass("selected");
             if (userUrlFile === 'index.html') {
                 strMetaCh = obj_get_url.data('metach');
                 strMetaIn = obj_get_url.data('metain');
@@ -56,10 +57,12 @@ $(function () {
 
     $(document).on('click', 'html', function (event) {
         $('.get-url').hide();
+        $('.url').removeClass("selected");
     });
-	
-	$('#content-main-wrap').scroll(function() {
+
+    $('#content-main-wrap').scroll(function () {
         $('.get-url').hide();
+        $('.url').removeClass("selected");
     });
 
     $(document).on('click', '.get-url, .url', function (event) {

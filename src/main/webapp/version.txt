@@ -1,3 +1,14 @@
+版本: 5183
+作者: mars
+日期: 2013/7/30 14:28
+訊息:
+1. fix bug ep-list time duration display
+2. fix ep-list Get Url when click with hover style
+----
+異動 : /episode-list.html
+異動 : /stylesheetsv3/episode.css
+異動 : /javascripts/v3/domready.get-url.js
+
 版本: 5181
 作者: yifan
 日期: 2013/7/29 11:31
