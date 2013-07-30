@@ -360,29 +360,13 @@ $(function () {
             $.each(matchList, function (idx, key) {
                 nn.api('GET', 'http://gdata.youtube.com/feeds/api/videos/' + key + '?alt=jsonc&v=2&callback=?', null, function (youtubes) {
                     committedCnt += 1;
-                    // if (youtubes.data) {
-                    //     ytData = youtubes.data;
-                    //     isPrivateVideo = false;
-                    //     isZoneLimited = (ytData.restrictions) ? true : false;
-                    //     hasSyndicateDenied = (ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate) ? true : false;
-                    //     hasLimitedSyndication = (ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason) ? true : false;
-                    //     isSyndicateLimited = (hasSyndicateDenied || hasLimitedSyndication) ? true : false;
-                    //     isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
-                    //     isUnplayableVideo = (isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication)) ? true : false;
-                    // } else {
-                    //     ytData = null;
-                    //     isPrivateVideo = (youtubes.error && youtubes.error.code && 403 === youtubes.error.code) ? true : false;
-                    //     isZoneLimited = null;
-                    //     isSyndicateLimited = null;
-                    //     isEmbedLimited = null;
-                    //     isUnplayableVideo = null;
-                    // }
+
                     var checkResult = cms.youtubeUtility.checkVideoValidity(youtubes);
 
                     if (true === checkResult.isEmbedLimited) {
                         embedLimitedList.push(normalList[idx]);
                     }
-                    if (youtubes.data && false === checkResult.isEmbedLimited) {
+                    if (youtubes.data && false === checkResult.isEmbedLimited && checkResult.isProcessing === false) {
                         ytData = youtubes.data;
                         ytItem = {
                             poiList: [],
@@ -400,11 +384,6 @@ $(function () {
                             intro: ytData.description,
                             uploader: ytData.uploader,
                             uploadDate: ytData.uploaded
-                            // isPrivateVideo: isPrivateVideo,
-                            // isZoneLimited: isZoneLimited,
-                            // isSyndicateLimited: isSyndicateLimited,
-                            // isEmbedLimited: isEmbedLimited,
-                            // isUnplayableVideo: isUnplayableVideo
                         };
                         ytItem = $.extend(ytItem, checkResult);
                         ytList[idx] = ytItem;
@@ -422,7 +401,7 @@ $(function () {
                             $('#cur-add .notice').html(nn._([cms.global.PAGE_ID, 'add-video', 'Fail to add this video, please try another one.<br />[This video is not playable outside Youtube]'])).removeClass('hide').show();
                         } else if (true === checkResult.isPrivateVideo && 0 === embedLimitedList.length && invalidList.length === privateVideoList.length) {
                             $('#cur-add .notice').html(nn._([cms.global.PAGE_ID, 'add-video', 'Fail to add this video, please try another one.<br />[This is a private video]'])).removeClass('hide').show();
-                        } else if (checkResult.isUnplayableVideo === true) {
+                        } else if (checkResult.isUnplayableVideo === true || checkResult.isProcessing === true) {
                             $('#cur-add .notice').html(nn._([cms.global.PAGE_ID, 'add-video', 'Unplayable video, please try again!'])).removeClass('hide').show();
                         } else {
                             $('#cur-add .notice').text(nn._([cms.global.PAGE_ID, 'add-video', 'Invalid URL, please try again!'])).removeClass('hide').show();

@@ -25,7 +25,9 @@
                 // Deleted or not found?
                 isInvalid: false,
                 // Unplayable video?
-                isUnplayableVideo: false
+                isUnplayableVideo: false,
+                // Is the video still processing/uploading?
+                isProcessing: false
 			};
 
             var ytData, hasSyndicateDenied, hasLimitedSyndication;
@@ -39,6 +41,7 @@
                 checkResult.isSyndicateLimited = (hasSyndicateDenied || hasLimitedSyndication) ? true : false;
                 checkResult.isEmbedLimited = (ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed) ? true : false;
                 checkResult.isUnplayableVideo = (checkResult.isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication)) ? true : false;
+                checkResult.isProcessing = (ytData.status && ytData.status.value === 'processing') ? true : false;
             } else {
                 checkResult.isPrivateVideo = (youtube.error && youtube.error.code && 403 === youtube.error.code) ? true : false;
                 checkResult.isInvalid = checkResult.isPrivateVideo? false : true;
