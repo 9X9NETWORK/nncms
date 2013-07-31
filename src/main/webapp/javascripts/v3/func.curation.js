@@ -1488,6 +1488,9 @@
 
     // NOTE: page entry point (keep at the bottom of this file)
     $page.init = function (options) {
+        // fetch and set user locale info
+        var localePromise = cms.localeUtility.getLocale();
+
         nn.log({
             // NOTE: remember to change page-key to match file-name
             subject: 'CMS.PAGE.INITIALIZED: epcurate-curation',
