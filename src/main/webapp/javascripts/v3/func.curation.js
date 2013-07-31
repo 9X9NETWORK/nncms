@@ -1705,6 +1705,7 @@
                 .then(getTitleCard)
                 .then(getPoiPoints)
                 .then(function(programItem, youtubes, title_card, poi_points){
+                    // $.when(localePromise).then(function() {
                     committedCnt += 1;
                     beginTitleCard = null;
                     endTitleCard = null;
@@ -1797,6 +1798,7 @@
                         $('#overlay-s').fadeOut();
                     }
                 });
+                // });
 
             });
         }
