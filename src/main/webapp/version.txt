@@ -1,3 +1,18 @@
+版本: 5201
+作者: yifan
+日期: 2013/7/31 17:09
+訊息:
+Revised curator region check for youtube video in epcurate-curation.html.
+Added user locale loop up in epcurate-curation.html.
+Added locale look up plugin.
+Added curator region check in youtube utility.
+----
+M       javascripts/v3/domready.curation.js
+M       epcurate-curation.html
+A       javascripts/v3/cms.locale-utility.js
+M       javascripts/v3/func.curation.js
+M       javascripts/v3/cms.youtube-utility.js
+
 版本: 5198
 作者: mars
 日期: 2013/7/10 10:26
