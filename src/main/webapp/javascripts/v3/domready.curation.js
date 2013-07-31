@@ -366,7 +366,7 @@ $(function () {
                     if (true === checkResult.isEmbedLimited) {
                         embedLimitedList.push(normalList[idx]);
                     }
-                    if (youtubes.data && !checkResult.isEmbedLimited && !checkResult.isProcessing && !checkResult.isCuratorRegionRestricted) {
+                    if (youtubes.data && !checkResult.isEmbedLimited && !checkResult.isProcessing && !checkResult.isRequesterRegionRestricted) {
                         ytData = youtubes.data;
                         ytItem = {
                             poiList: [],
@@ -401,7 +401,7 @@ $(function () {
                             $('#cur-add .notice').html(nn._([cms.global.PAGE_ID, 'add-video', 'Fail to add this video, please try another one.<br />[This video is not playable outside Youtube]'])).removeClass('hide').show();
                         } else if (true === checkResult.isPrivateVideo && 0 === embedLimitedList.length && invalidList.length === privateVideoList.length) {
                             $('#cur-add .notice').html(nn._([cms.global.PAGE_ID, 'add-video', 'Fail to add this video, please try another one.<br />[This is a private video]'])).removeClass('hide').show();
-                        } else if (checkResult.isUnplayableVideo || checkResult.isProcessing || checkResult.isCuratorRegionRestricted) {
+                        } else if (checkResult.isUnplayableVideo || checkResult.isProcessing || checkResult.isRequesterRegionRestricted) {
                             $('#cur-add .notice').html(nn._([cms.global.PAGE_ID, 'add-video', 'Unplayable video, please try again!'])).removeClass('hide').show();
                         } else {
                             $('#cur-add .notice').text(nn._([cms.global.PAGE_ID, 'add-video', 'Invalid URL, please try again!'])).removeClass('hide').show();

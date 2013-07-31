@@ -29,7 +29,7 @@
                 // Is the video still processing/uploading?
                 isProcessing: false,
                 // Is the video not available in the curator's region?
-                isCuratorRegionRestricted: false
+                isRequesterRegionRestricted: false
 			};
 
             var ytData, hasSyndicateDenied, hasLimitedSyndication;
@@ -44,11 +44,11 @@
                 checkResult.isEmbedLimited = ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed;
                 checkResult.isUnplayableVideo = !!(checkResult.isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication));
                 checkResult.isProcessing = ytData.status && ytData.status.value === 'processing';
-                checkResult.isCuratorRegionRestricted = checkResult.isZoneLimited && ytData.status && ytData.status.reason === 'requesterRegion' && ytData.status.value === 'restricted';
+                checkResult.isRequesterRegionRestricted = checkResult.isZoneLimited && ytData.status && ytData.status.reason === 'requesterRegion' && ytData.status.value === 'restricted';
                 // if (checkResult.isZoneLimited) {
                     // for (var i = ytData.restrictions.length - 1; i >= 0; i--) {
                     //     if (ytData.restrictions[i].countries.indexOf(cms.global.USER_DATA.locale.country_code) === -1 && ytData.restrictions[i].relationship === "deny") {
-                    //         checkResult.isCuratorRegionRestricted = true;
+                    //         checkResult.isRequesterRegionRestricted = true;
                     //     }
                     // }
                 // }

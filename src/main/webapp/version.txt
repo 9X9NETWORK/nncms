@@ -1,3 +1,15 @@
+版本: 5215
+作者: yifan
+日期: 2013/7/31 17:23
+訊息:
+Revised youtube video check utility return property name.
+Fixed unplayable text color bug.
+----
+M       javascripts/v3/domready.curation.js
+M       epcurate-curation.html
+M       javascripts/v3/func.curation.js
+M       javascripts/v3/cms.youtube-utility.js
+
 版本: 5201
 作者: yifan
 日期: 2013/7/31 17:09

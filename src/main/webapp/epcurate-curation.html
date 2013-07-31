@@ -1078,8 +1078,8 @@
 
 <!-- storyboard-listing-tmpl-item Begin -->
 <script id="storyboard-listing-tmpl-item" type="text/x-jquery-tmpl">
-<li data-ytid="${ytId}" data-ytduration="${ytDuration}" data-starttime="${startTime}" data-endtime="${endTime}"{{if ytDuration == 0}} class="invalid"{{/if}}>
-    {{if (isZoneLimited || isSyndicateLimited) && !isCuratorRegionRestricted}}
+<li data-ytid="${ytId}" data-ytduration="${ytDuration}" data-starttime="${startTime}" data-endtime="${endTime}"{{if ytDuration === 0 || isRequesterRegionRestricted}} class="invalid"{{/if}}>
+    {{if (isZoneLimited || isSyndicateLimited) && !isRequesterRegionRestricted}}
         {{if isZoneLimited && isSyndicateLimited}}
             <a href="#!pid=${id}&ytid=${ytId}" class="warning2"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Not playable in some regions & on mobile device'])}</span></span></span></span></a>
         {{else}}
@@ -1091,22 +1091,22 @@
             {{/if}}
         {{/if}}
     {{else}}
-        {{if isInvalid || isUnplayableVideo || isEmbedLimited || isPrivateVideo || isCuratorRegionRestricted}}
+        {{if isInvalid || isUnplayableVideo || isEmbedLimited || isPrivateVideo || isRequesterRegionRestricted}}
             <a href="#!pid=${id}&ytid=${ytId}" class="error"></a>
         {{/if}}
     {{/if}}
     <p class="order"><!-- dynamic rebuild video number after template render --></p>
     <p class="img">
-        {{if ytDuration > 0 && !isCuratorRegionRestricted}}
+        {{if ytDuration > 0 && !isRequesterRegionRestricted}}
             <img src="${imageUrl}" alt="" width="80" height="45" />
         {{else}}
             <img src="images/ep_invalid.png" alt="" width="80" height="45" />
         {{/if}}
-        {{if ytDuration > 0 && !isCuratorRegionRestricted}}
+        {{if ytDuration > 0 && !isRequesterRegionRestricted}}
             <span class="time"><span class="time-right"><span class="time-middle">${cms.common.formatDuration(duration)}</span></span></span>
         {{/if}}
     </p>
-    {{if ytDuration > 0 && !isCuratorRegionRestricted}}
+    {{if ytDuration > 0 && !isRequesterRegionRestricted}}
         <h4 class="ellipsis multiline">${name}</h4>
     {{else}}
         {{if isEmbedLimited}}
@@ -1115,7 +1115,7 @@
             <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Private video'])}]</h4>
         {{else isInvalid}}
             <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Invalid video'])}]</h4>
-        {{else isUnplayableVideo || isCuratorRegionRestricted}}
+        {{else isUnplayableVideo || isRequesterRegionRestricted}}
             <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Unplayable video'])}]</h4>
         {{/if}}
     {{/if}}
@@ -1129,13 +1129,13 @@
     </p>
     <p class="hover-func">
         <a href="#!pid=${id}&ytid=${ytId}" class="video-del">Video Del</a>
-        {{if ytDuration > 0 && !isCuratorRegionRestricted}}
+        {{if ytDuration > 0 && !isRequesterRegionRestricted}}
             <a href="#!pid=${id}&ytid=${ytId}" class="video-play">Video Play</a>
         {{/if}}
-        {{if ytDuration > 0 && !isCuratorRegionRestricted && beginTitleCard == null}}
+        {{if ytDuration > 0 && !isRequesterRegionRestricted && beginTitleCard == null}}
             <a href="#!pid=${id}&ytid=${ytId}" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Add Title'])}</span></span></span></span></a>
         {{/if}}
-        {{if ytDuration > 0 && !isCuratorRegionRestricted && endTitleCard == null}}
+        {{if ytDuration > 0 && !isRequesterRegionRestricted && endTitleCard == null}}
             <a href="#!pid=${id}&ytid=${ytId}" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Add Title'])}</span></span></span></span></a>
         {{/if}}
     </p>
