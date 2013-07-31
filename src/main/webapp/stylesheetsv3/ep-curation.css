@@ -2613,6 +2613,7 @@ p.auto-height {
     color: #999;
     font: bold 17px Microsoft JhengHei;
     text-align: center;
+    cursor: move;
 }
 
 #storyboard .storyboard-list ul li p.img {
@@ -2677,6 +2678,7 @@ p.auto-height {
     font-weight: normal;
     font-size: 13px;
     line-height: 18px;
+    cursor: move;
 }
 
 #storyboard .storyboard-list ul li.invalid h4 {

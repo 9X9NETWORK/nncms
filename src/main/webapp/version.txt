@@ -1,3 +1,11 @@
+版本: 5198
+作者: mars
+日期: 2013/7/10 10:26
+訊息:
+1. ep-curation Storyboard mouse over all area with cursor: move
+----
+異動 : \stylesheetsv3\ep-curation.css
+
 版本: 5191
 作者: mars
 日期: 2013/7/30 16:54
