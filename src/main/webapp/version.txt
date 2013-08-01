@@ -1,4 +1,16 @@
-版本: 5129
+版本: 5221
+作者: mars
+日期: 2013/8/1 11:35
+訊息:
+1. epcurate-publish.html prepare to move v3 
+----
+新增 : /javascripts/v3/domready.epcurate.js
+新增 : /javascripts/v3/func.epcurate.js
+新增 : /stylesheetsv3/jquery.datepick.css
+新增 : /stylesheetsv3/lightbox.css
+新增 : /stylesheetsv3/uniform.css
+
+版本: 5220
 作者: mars
 日期: 2013/8/1 10:01
 訊息:
