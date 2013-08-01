@@ -487,7 +487,7 @@
             "Hour": "Hour",
             "Minute": "Minute",
             "Mobile Notification Message": "Mobile Notification Message",
-            "The mobile notification will instant send, when user pressed OK or Enter.": "The mobile notification will instant send, when user pressed OK or Enter."
+            "If users press OK or Enter, the mobile notification will be send immediately.": "If users press OK or Enter, the mobile notification will be send immediately."
         }
     },
     "episode-list": {
@@ -676,7 +676,7 @@
             "Hour": "Hour",
             "Minute": "Minute",
             "Mobile Notification Message": "Mobile Notification Message",
-            "The mobile notification will instant send, when user pressed OK or Enter.": "The mobile notification will instant send, when user pressed OK or Enter."
+            "If users press OK or Enter, the mobile notification will be send immediately.": "If users press OK or Enter, the mobile notification will be send immediately."
         },
         "title-card": {
             "Text": "Text",

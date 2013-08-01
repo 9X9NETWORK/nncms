@@ -487,7 +487,7 @@
             "Hour": "時",
             "Minute": "分",
             "Mobile Notification Message": "行動裝置通知內容",
-            "The mobile notification will instant send, when user pressed OK or Enter.": "當使用者按下OK或Enter時，通知會即時送出。"
+            "If users press OK or Enter, the mobile notification will be send immediately.": "當使用者按下OK或Enter時，通知會即時送出。"
         }
     },
     "episode-list": {
@@ -677,7 +677,7 @@
             "Hour": "時",
             "Minute": "分",
             "Mobile Notification Message": "行動裝置通知內容",
-            "The mobile notification will instant send, when user pressed OK or Enter.": "當使用者按下OK或Enter時，通知會即時送出。"
+            "If users press OK or Enter, the mobile notification will be send immediately.": "當使用者按下OK或Enter時，通知會即時送出。"
         },
         "title-card": {
             "Text": "字卡內文",

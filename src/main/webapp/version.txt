@@ -1,3 +1,15 @@
+版本: 5129
+作者: mars
+日期: 2013/8/1 10:01
+訊息:
+1. PCS 4.0 優化列表 4
+提示文字"The mobile notification will instant send, when user pressed OK or Enter."改成"If users press OK or Enter, the mobile notification will be send immediately."
+----
+異動 : /channel-poi.html
+異動 : /epcurate-curation.html
+異動 : /lang/en.json
+異動 : /lang/zj.json
+
 版本: 5215
 作者: yifan
 日期: 2013/7/31 17:23
