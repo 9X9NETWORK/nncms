@@ -1,3 +1,16 @@
+版本: 5245
+作者: mars
+日期: 2013/8/5 11:01
+訊息:
+1. get-url url format fix , brand >> mso ( request from janet )
+2. channel list get url popup location problem
+----
+異動 : /episode-list.html
+異動 : /javascripts/v2/domready.get-url.js
+異動 : /javascripts/v2/func.get-url.js
+異動 : /javascripts/v3/domready.get-url.js
+異動 : /javascripts/v3/func.get-url.js
+
 版本: 5221
 作者: mars
 日期: 2013/8/1 11:35

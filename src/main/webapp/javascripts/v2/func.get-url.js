@@ -1,5 +1,5 @@
 /*global cms */
-
+/*global $, nn, cms */
 (function ($geturl) {
     'use strict';
 
@@ -18,11 +18,13 @@
         strCid = inObj.data('metach');
         strEid = inObj.data('metaep');
         if (userUrlFile === 'index.html') {
-            strSurl = strBaseURL + ['brand=' + strBrand, 'ch=' + strCid].join('&');
+            strSurl = strBaseURL + ['mso=' + strBrand, 'ch=' + strCid].join('&');
         } else {
-            strSurl = strBaseURL + ['brand=' + strBrand, 'ch=' + strCid, 'ep=e' + strEid].join('&');
+            strSurl = strBaseURL + ['mso=' + strBrand, 'ch=' + strCid, 'ep=e' + strEid].join('&');
         }
-
+        if (cms.global.IS_REMARK) {
+            $(".tip-bottom").css("right", 42);
+        }
         return strSurl;
     };
 

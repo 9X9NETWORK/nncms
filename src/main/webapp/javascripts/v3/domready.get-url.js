@@ -49,8 +49,7 @@ $(function () {
 
             $('.get-url').hide();
             obj_get_url.find('input.srul-text').val($geturl.iniSharingList(obj_get_url));
-
-            $(this).parents('li').find('.tip').hide();
+            $(this).parents('li').find('.tip').addClass("hide");
             obj_get_url.fadeIn(400);
         }
     });
@@ -58,11 +57,13 @@ $(function () {
     $(document).on('click', 'html', function (event) {
         $('.get-url').hide();
         $('.url').removeClass("selected");
+        $(".tip").removeClass("hide");
     });
 
     $('#content-main-wrap').scroll(function () {
         $('.get-url').hide();
         $('.url').removeClass("selected");
+        $(".tip").removeClass("hide");
     });
 
     $(document).on('click', '.get-url, .url', function (event) {

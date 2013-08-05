@@ -16,8 +16,9 @@ $(function () {
             userUrlFile = 'index.html';
         }
         if (!$(this).hasClass('disable')) {
+            $('.url').removeClass("selected");
             obj_get_url = $(this).parents('li').find('.get-url');
-
+            $(this).addClass("selected");
             if (userUrlFile === 'index.html') {
                 strMetaCh = obj_get_url.data('metach');
                 strMetaIn = obj_get_url.data('metain');
@@ -48,14 +49,15 @@ $(function () {
 
             $('.get-url').hide();
             obj_get_url.find('input.srul-text').val($geturl.iniSharingList(obj_get_url));
-
-            $(this).parents('li').find('.tip').hide();
+            $(this).parents('li').find('.tip').addClass("hide");
             obj_get_url.fadeIn(400);
         }
     });
 
     $(document).on('click', 'html', function (event) {
         $('.get-url').hide();
+        $('.url').removeClass("selected");
+        $(".tip").removeClass("hide");
     });
 
     $(document).on('click', '.get-url, .url', function (event) {
