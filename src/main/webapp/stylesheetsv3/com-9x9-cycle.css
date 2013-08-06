@@ -1,0 +1,123 @@
+/* Channel list common */
+
+/* ep time list */
+#com-9x9-cycle-list,
+#ep-no {
+    position: relative;
+    width: 781px;
+    margin: 4px auto 0;
+    text-align: center;
+}
+
+#com-9x9-cycle-list h3,
+#ep-no        h3 {
+    margin: 10px 0 10px 0;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    color: #b4b4b4;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+#com-9x9-cycle-list .btns {
+    width: 300px;
+    margin: 0 auto 20px;
+}
+ 
+
+/* selected item */
+#com-9x9-cycle {
+    position: relative;
+    clear: both;
+    width: 781px;
+    margin: 0;
+    padding-bottom: 30px;
+}
+
+#com-9x9-cycle .cycle-pager {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    width: 780px;
+    height: 9px;
+    line-height: 9px;
+}
+
+#com-9x9-cycle .cycle-pager a {
+    display: inline-block;
+    width: 8px;
+    height: 9px;
+    margin: 0 7px;
+    background: url(../images/icon_dot_off.png) no-repeat 0 0;
+    text-indent: -100000px;
+}
+
+#com-9x9-cycle .cycle-pager a.active,
+#com-9x9-cycle .cycle-pager a:hover {
+    background: url(../images/icon_dot_on.png) no-repeat 0 0;
+}
+
+#com-9x9-cycle .wrapper {
+    position: relative;
+}
+
+#com-9x9-cycle .wrapper ul {
+    overflow: hidden;
+    width: 781px;
+    height: 275px;
+    margin: 0 auto;
+}
+
+#com-9x9-cycle .wrapper ul li {
+    height: 275px;
+}
+
+#com-9x9-cycle .wrapper ul li img {
+    display: block;
+    border: none;
+}
+
+#com-9x9-cycle .wrapper ul li .img {
+    height: 211px;
+    padding: 0 0 0 2px;
+    background: url(../images/banner_border_left.png) no-repeat 0 0;
+}
+
+#com-9x9-cycle .wrapper ul li .img img {
+    margin-left: -2px;
+}
+
+#com-9x9-cycle .wrapper ul li .desc a {
+    display: block;
+    padding: 0 2px 0 0;
+    background: url(../images/banner_border_right.png) no-repeat right 0;
+}
+
+#com-9x9-cycle .wrapper ul li .desc a img {
+    display: block;
+    overflow: hidden;
+    width: 781px;
+    height: 211px;
+    border: none;
+    background: url(../images/banner_border_middle.png) repeat-x 0 top;
+}
+
+#com-9x9-cycle .wrapper ul li .desc {
+    height: 64px;
+    padding: 0 0 0 5px;
+    background: url(../images/banner_white_left.png) no-repeat 0 0;
+}
+
+#com-9x9-cycle .wrapper ul li .desc p {
+    padding: 0 5px 0 0;
+    background: url(../images/banner_white_right.png) no-repeat right 0;
+}
+
+#com-9x9-cycle .wrapper ul li .desc p span {
+    display: block;
+    height: 63px;
+    background: url(../images/banner_white_middle.png) repeat-x;
+    font-size: 22px;
+    line-height: 63px;
+}

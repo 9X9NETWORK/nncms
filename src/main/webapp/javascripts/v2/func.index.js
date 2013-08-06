@@ -85,7 +85,22 @@
                     $('#channel-list').sortable('disable');
                 } else {
                     $("p.order").hide();
-                    $('#channel-list-empty-tmpl').tmpl().appendTo('#channel-list');
+                    $('#content-main-wrap .constrain').empty();
+                    $('#channel-list-empty-tmpl').tmpl({
+                        id: cms.global.USER_DATA.id
+                    }).appendTo('#content-main-wrap .constrain');
+                    $('#com-9x9-cycle p.cycle-pager').html('');
+                    $('#com-9x9-cycle .wrapper ul.content').cycle({
+                        pager: '.cycle-pager',
+                        activePagerClass: 'active',
+                        updateActivePagerLink: null,
+                        fx: 'scrollHorz',
+                        speed: 1000,
+                        timeout: 6000,
+                        pagerEvent: 'mouseover',
+                        pause: 1,
+                        cleartypeNoBg: true
+                    });
                 }
                 if (cntChannel <= 0 || (1 === cntChannel && hasFavoriteChannel)) {
                     if (!$.cookie('cms-cct')) {

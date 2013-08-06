@@ -332,7 +332,11 @@
             "Channel settings": "Channel settings",
             "Delete this channel": "Delete this channel",
             "No Episodes": "No Episodes",
-            "'s Favorite": "'s Favorite"
+            "'s Favorite": "'s Favorite",
+            "You don't have any channels yet": "You don't have any channels yet",
+            "Create a new channel": "Create a new channel",
+            "Create your own <strong>personal and unique</strong> channel.": "Create your own <strong>personal and unique</strong> channel.",
+            "And online videos into episode and start to <strong>curate your own channel.</strong>": "And online videos into episode and start to <strong>curate your own channel.</strong>"
         }
     },
     "cms-settings": {

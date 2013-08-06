@@ -332,7 +332,11 @@
             "Channel settings": "頻道設定",
             "Delete this channel": "刪除頻道",
             "No Episodes": "無節目",
-            "'s Favorite": "的最愛"
+            "'s Favorite": "的最愛",
+            "You don't have any channels yet": "你尚無任何頻道",
+            "Create a new channel": "創建頻道",
+            "Create your own <strong>personal and unique</strong> channel.": "創建屬於你<strong>個人且獨特</strong>的頻道。",
+            "And online videos into episode and start to <strong>curate your own channel.</strong>": "在一集節目中策展多個影片，開始<strong>策展你的專屬頻道</strong>"
         }
     },
     "cms-settings": {
