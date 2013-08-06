@@ -101,6 +101,7 @@
                         pause: 1,
                         cleartypeNoBg: true
                     });
+                    $('#func-nav ul li.btns').addClass("hide");
                 }
                 if (cntChannel <= 0 || (1 === cntChannel && hasFavoriteChannel)) {
                     if (!$.cookie('cms-cct')) {
