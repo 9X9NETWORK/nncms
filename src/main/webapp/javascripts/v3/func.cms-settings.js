@@ -6,15 +6,6 @@
 
     var $common = cms.common;
 
-    $page.setFormHeight = function () {
-        var windowHeight = $(window).height(),
-            titleFuncHeight = $('#title-func').height(),
-            headerHeight = $('#header').height(),
-            navHeight = $('#studio-nav').height(),
-            contentHeight = windowHeight - titleFuncHeight - headerHeight - navHeight - 48 - 38 - 10 + 5;   // 5:header and studio-nav overlap 48:footer 38:title-func-padding
-        $('#cms-setting form').height(contentHeight - 56);  // 56: form padding-bottom
-    };
-
     $page.chkData = function (fm) {
         var username = '',
             srclen = 0,
@@ -165,6 +156,7 @@
         $('#content-main-tmpl').tmpl().appendTo('#content-main');
         $('#change-pwd-overlay .overlay-container').html('');
         $('#change-pwd-overlay-tmpl').tmpl().appendTo('#change-pwd-overlay .overlay-container');
+        $('#content-main-wrap').perfectScrollbar({marginTop: 0, marginBottom: 50});
         $('#overlay-s').fadeOut('fast', function () {
             $('#username').charCounter(16, {
                 container: '<span class="hide"><\/span>',
@@ -172,7 +164,6 @@
                 delay: 0,
                 multibyte: true
             });
-            $page.setFormHeight();
             $(window).trigger('resize');
         });
     };

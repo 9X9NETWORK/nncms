@@ -254,6 +254,6 @@ $(function () {
 
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
-        $page.setFormHeight();
+        $('#content-main-wrap').perfectScrollbar('update');
     });
 });

@@ -1,3 +1,18 @@
+版本: 5265
+作者: mars
+日期: 2013/8/7 18:37
+訊息:
+1. cms-setting.html move to v3
+2. epcurate-publish scrollbar fix 
+3. perfect-scrollbar.min.js update
+----
+異動 : /cms-settings.html
+異動 : /javascripts/v3/domready.cms-settings.js
+異動 : /javascripts/v3/func.cms-settings.js
+異動 : /javascripts/v3/domready.epcurate.js
+異動 : /javascripts/libs/perfect-scrollbar.min.js
+
+
 版本: 5263
 作者: mars
 日期: 2013/8/7 18:02
