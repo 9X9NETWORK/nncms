@@ -5,11 +5,12 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/style.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/uniform.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/jquery.datepick.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/epcurate.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/style.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/lightbox.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/uniform.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/jquery.datepick.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/epcurate-publish.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/perfect-scrollbar.css?v=1278" />
 <title>9x9.tv - Episode Curation - Publish</title>
 </head>
 <body>
@@ -162,12 +163,14 @@
             <label for="name"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Episode title'])}</label>
             <div class="fmfield">
                 <p class="text"><span><input type="text" name="name" id="name" maxlength="100" value="${name}" class="text" /></span></p>
+                <span class="notice charcount"><span id="name-charcounter">0</span>&#12288;${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Best within 20 characters.'])}</span>
             </div>
         </div>
         <div class="fminput clearfix">
             <label for="intro">${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Episode description'])}</label>
             <div class="fmfield">
                 <p class="textarea"><span><span><textarea name="intro" id="intro" cols="80" class="textarea">${intro}</textarea></span></span></p>
+                <span class="notice charcount"><span id="intro-charcounter">0</span>&#12288;${nn._([cms.global.PAGE_ID, 'epcurate-form', 'Best within 52 characters.'])}</span>
             </div>
         </div>
     </div>
@@ -272,19 +275,21 @@
 <script src="javascripts/libs/jquery.mousewheel.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.ellipsis.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.blockUI.min.js?v=1278"></script>
+<script src="javascripts/libs/jquery.charcounter.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.uniform.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.cycle.all.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.tmpl.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.cookie.min.js?v=1278"></script>
 <script src="javascripts/libs/jquery.ui.datepicker-en.js?v=1278"></script>
 <script src="javascripts/libs/jquery.ui.datepicker-zh.js?v=1278"></script>
+<script src="javascripts/libs/perfect-scrollbar.min.js?v=1278"></script>
 <script src="javascripts/libs/json2.min.js?v=1278"></script>
 <script src="javascripts/libs/purl.min.js?v=1278"></script>
 <script src="javascripts/libs/swfupload/swfupload.js?v=1278"></script>
 <script src="javascripts/v2/config.js?v=1278"></script>
-<script src="javascripts/v2/func.common.js?v=1278"></script>
-<script src="javascripts/v2/func.epcurate.js?v=1278"></script>
-<script src="javascripts/v2/domready.common.js?v=1278"></script>
-<script src="javascripts/v2/domready.epcurate.js?v=1278"></script>
+<script src="javascripts/v3/func.common.js?v=1278"></script>
+<script src="javascripts/v3/func.epcurate.js?v=1278"></script>
+<script src="javascripts/v3/domready.common.js?v=1278"></script>
+<script src="javascripts/v3/domready.epcurate.js?v=1278"></script>
 </body>
 </html>

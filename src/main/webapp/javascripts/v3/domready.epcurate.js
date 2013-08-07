@@ -8,8 +8,7 @@ $(function () {
     var $page = cms['epcurate-publish'],
         $common = cms.common;
 
-    $page.setFormWidth();
-    $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+    $('#content-main-wrap').perfectScrollbar({marginTop: 0, marginBottom: 60});
     $('#epcurate-nav ul li.publish').click(function () {
         return false;
     });
@@ -135,6 +134,11 @@ $(function () {
                     origin_status = $('#origin_status').val(),
                     params = null;
                 $common.showSavingOverlay();
+                nn.api('PUT', cms.reapi('/api/channels/{channelId}', {
+                    channelId: $('#channelId').val()
+                }), {
+                    updateDate: new Date().getTime()
+                }, null);
                 // save to api
                 if (!$('body').hasClass('has-change')) {
                     $('#overlay-s').fadeOut('fast', function () {
@@ -273,13 +277,6 @@ $(function () {
 
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
-        $page.setFormWidth();
-        $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-        if ('none' === $('#main-wrap-slider').css('display')) {
-            $('#main-wrap-slider .slider-vertical').slider('destroy');
-            $('#main-wrap-slider .slider-vertical').slider();
-            $('#main-wrap-slider').hide();
-            $('#content-main-wrap').css('top', '0');
-        }
+        $('#content-main-wrap').perfectScrollbar('update');
     });
 });

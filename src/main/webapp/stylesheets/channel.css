@@ -59,28 +59,6 @@ body.mac #title-func h2 {
     margin-top: -2px;
 }
 
-#empty-item {
-    border-style: dashed;
-    border-color: white;
-    cursor: pointer;
-}
-
-#empty-item:hover{
-    box-shadow: 0px 0px 15px 3px rgb(255, 255, 255), 0px 0px 15px 1px rgb(255, 255, 255) inset;
-    background: #fff;
-}
-
-#empty-item h2 {
-    color: #B4B4B4;
-    font-size: 30px;
-    font-weight: bold;
-    margin: 0 auto 20px;
-    text-align: center;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
-    width: 100%;
-    margin-top:16px
-}
-
 #channel-list.ui-sortable li.clearfix:hover {
     background: url(../images/bg_main2.png) repeat 2px 0;
     cursor: move;
@@ -203,6 +181,7 @@ body.mac #title-func h2 {
     left: 5px;
     width: 32px;
     height: 32px;
+	overflow: hidden;
 }
 
 #channel-list li .photo-list .ch .img {

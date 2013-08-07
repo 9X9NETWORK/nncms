@@ -22,31 +22,6 @@
         return true;
     };
 
-    $page.setFormWidth = function () {
-        var windowWidth = $(window).width();
-        if (windowWidth > 1024) {
-            $('input.text').width(windowWidth - 600);
-            $('textarea.textarea').width(windowWidth - 605);
-        }
-        if (windowWidth <= 1024) {
-            $('input.text').width(480);
-            $('textarea.textarea').width(475);
-        }
-        // curation nav width
-        if (windowWidth < 1024) {
-            $('#epcurate-nav ul').css('width', '256px');
-            $('#epcurate-nav ul li').css('width', '128px');
-        }
-        if (windowWidth >= 1024 && windowWidth <= 1252) {
-            $('#epcurate-nav ul').css('width', (windowWidth - 768) + 'px');
-            $('#epcurate-nav ul li').css('width', (windowWidth - 768) / 2 + 'px');
-        }
-        if (windowWidth > 1252) {
-            $('#epcurate-nav ul').css('width', '484px');
-            $('#epcurate-nav ul li').css('width', '242px');
-        }
-    };
-
     $page.uploadImage = function () {
         var parameter = {
             'prefix': 'cms',
@@ -328,7 +303,7 @@
                     $('#epcurate-form-tmpl').tmpl(episode, {
                         publishLabel: (true === episode.isPublic) ? 'Published' : 'Publish Now'
                     }).appendTo('#epcurateForm .constrain');
-                    $page.setFormWidth();
+                    $('#content-main-wrap').perfectScrollbar('update');
                     if ($('#uploadThumbnail').length > 0) {
                         $page.uploadImage();
                     }
@@ -408,6 +383,20 @@
                         $('#epcurate-nav-curation, #form-btn-save, #form-btn-back').click(function (e) {
                             $(fm).trigger('submit', e);
                             return false;
+                        });
+                        $('#name').charCounter(100, {
+                            container: '#name-charcounter',
+                            format: '%1',
+                            delay: 0,
+                            clear: true,
+                            countDown: false
+                        });
+                        $('#intro').charCounter(200, {
+                            container: '#intro-charcounter',
+                            format: '%1',
+                            delay: 0,
+                            clear: true,
+                            countDown: false
                         });
                         $('body').removeClass('has-change');                        // NOTE: remove change hook after first load
                         $('#overlay-s').fadeOut();

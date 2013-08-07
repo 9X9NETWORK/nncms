@@ -566,7 +566,9 @@
             "< Back to Curation": "< 回策展編輯",
             "Leave": "離開",
             "Save": "儲存",
-            "Please fill in all required fields.": "請輸入必填項目。"
+            "Please fill in all required fields.": "請輸入必填項目。",
+            "Best within 20 characters.": "建議長度不超過20個字元",
+            "Best within 52 characters.": "建議長度不超過52個字元"
         }
     },
     "epcurate-curation": {

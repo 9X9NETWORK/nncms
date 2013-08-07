@@ -565,7 +565,9 @@
             "< Back to Curation": "< Back to Curation",
             "Leave": "Leave",
             "Save": "Save",
-            "Please fill in all required fields.": "Please fill in all required fields."
+            "Please fill in all required fields.": "Please fill in all required fields.",
+            "Best within 20 characters.": "Best within 20 characters.",
+            "Best within 52 characters.": "Best within 52 characters."
         }
     },
     "epcurate-curation": {
