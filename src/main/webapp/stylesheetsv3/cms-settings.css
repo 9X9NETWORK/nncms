@@ -1,0 +1,191 @@
+/* CMS setting form */
+#content-main-wrap form {
+    position: relative;
+    padding: 0 0 56px 0;
+}
+
+#content-main-wrap form .login-notice {
+    margin-bottom: 16px;
+    padding: 0 0 0 10px;
+    color: #555;
+    font-size: 13px;
+}
+
+#content-main-wrap form .fminput {
+    margin-bottom: 10px;
+}
+
+#content-main-wrap form .fminput label {
+    float: left;
+    width: 130px;
+    padding: 7px 10px 0 10px;
+    color: #555;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#content-main-wrap form .fminput .fmfield {
+    position: relative;
+    color: #555;
+    font-size: 13px;
+}
+
+/* text */
+#content-main-wrap form .fminput .fmfield p.text,
+#content-main-wrap form .fminput .fmfield p.text span,
+#content-main-wrap form .fminput .fmfield p.text span .text {
+    background: url(../images/input_white.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield p.text {
+    float: left;
+    height: 30px;
+    margin-bottom: 7px;
+    padding-left: 3px;
+}
+
+#content-main-wrap form .fminput .fmfield p.text span {
+    display: block;
+    padding-right: 3px;
+    background-position: right -30px;
+}
+
+#content-main-wrap form .fminput .fmfield p.text span .text {
+    width: 224px;
+    height: 30px;
+    padding-left: 4px;
+    border: none;
+    background-repeat: repeat-x;
+    background-position: 0 -60px;
+    color: #555;
+    font: 13px/30px Arial, Helvetica;
+}
+
+#content-main-wrap form .fminput .fmfield p.text.disable {
+    background-position: 0 -90px;
+}
+
+#content-main-wrap form .fminput .fmfield p.text.disable span {
+    background-position: right -120px;
+}
+
+#content-main-wrap form .fminput .fmfield p.text.disable span .text {
+    background-position: 0 -150px;
+    color: #999;
+}
+
+#content-main-wrap form .fminput .fmfield p.email {
+    float: left;
+    padding: 5px 0 0 9px;
+    color: #555;
+    font-size: 13px;
+}
+
+/* btns */
+#content-main-wrap form .fminput .fmfield p.btns {
+    float: left;
+}
+
+#content-main-wrap form .fminput .fmfield p.btns.disable,
+#content-main-wrap form .fminput .fmfield p.btns.disable span,
+#content-main-wrap form .fminput .fmfield p.btns.disable span a,
+#content-main-wrap form .fminput .fmfield p.btns.disable span input {
+    background: url(../images/btn_gray.png) no-repeat 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield p.btns.disable {
+    background-position: 0 -193px;
+}
+
+#content-main-wrap form .fminput .fmfield p.btns.disable span {
+    background-position: right -225px;
+}
+
+#content-main-wrap form .fminput .fmfield p.btns.disable span a,
+#content-main-wrap form .fminput .fmfield p.btns.disable span input {
+    background-repeat: repeat;
+    background-position: 0 -257px;
+    color: #999;
+}
+
+#content-main-wrap form .fminput .fmfield p.btns span a {
+    padding: 5px 7px 0;
+}
+
+#content-main-wrap form .fminput .fmfield p.btn-reconnect span a {
+    background: none;
+}
+
+#content-main-wrap form .fminput .fmfield p.btns.disable span a {
+    cursor: default;
+}
+
+#content-main-wrap form .fminput .fmfield p.btn-connect-fb span a,
+#content-main-wrap form .fminput .fmfield p.btn-connect-yt span a {
+    width: 152px;
+    height: 22px;
+    padding: 5px 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connect .btns {
+    position: relative;
+	margin: 0 0 7px 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connect img {
+    float: left;
+    margin: 5px 11px 0 0;
+}
+
+#content-main-wrap form .fminput .fmfield .connect .btns img.notify {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+}
+
+#content-main-wrap form .fminput .fmfield .username-notice,
+#content-main-wrap form .fminput .fmfield .connect .notice {
+    clear: both;
+    float: left;
+    margin-left: 150px;
+    padding: 0 0 0 8px;
+    color: #f00;
+    line-height: 17px;
+}
+
+#content-main-wrap form .fminput .fmfield .notice {
+    clear: both;
+    float: left;
+    padding: 0 0 0 158px;
+    color: #f00;
+}
+
+#content-main-wrap form .fminput .fmfield .username-notice {
+    color: #555;
+}
+
+#content-main-wrap form .fminput .fmfield .notice {
+    line-height: 20px;
+}
+
+#content-main-wrap form .form-btn .form-btn-wrap .notice,
+#content-main-wrap form .form-btn .form-btn-wrap .btns {
+    float: left;
+}
+
+#content-main-wrap form .form-btn .form-btn-wrap .notice {
+    height: 31px;
+    line-height: 31px;
+    margin-right: 10px;
+    color: #f00;
+    font-size: 13px;
+}
+
+#content-main-wrap form .form-btn .form-btn-wrap .btns span input {
+    padding: 0 10px;
+    font-family: Arial, Helvetica, clean, Microsoft JhengHei, Apple LiGothic, PMingLiU, sans-serif;
+    font-size: 15px;
+}
