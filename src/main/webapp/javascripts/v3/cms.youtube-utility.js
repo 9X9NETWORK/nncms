@@ -38,13 +38,13 @@
                 ytData = youtube.data;
                 checkResult.isPrivateVideo = false;
                 checkResult.isZoneLimited = !!ytData.restrictions;
-                hasSyndicateDenied = ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate;
-                hasLimitedSyndication = ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason;
+                hasSyndicateDenied = !!(ytData.accessControl && ytData.accessControl.syndicate && 'denied' === ytData.accessControl.syndicate);
+                hasLimitedSyndication = !!(ytData.status && ytData.status.reason && 'limitedSyndication' === ytData.status.reason);
                 checkResult.isSyndicateLimited = !!(hasSyndicateDenied || hasLimitedSyndication);
-                checkResult.isEmbedLimited = ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed;
+                checkResult.isEmbedLimited = !!(ytData.accessControl && ytData.accessControl.embed && 'denied' === ytData.accessControl.embed);
                 checkResult.isUnplayableVideo = !!(checkResult.isEmbedLimited || hasSyndicateDenied || (ytData.status && !hasLimitedSyndication));
-                checkResult.isProcessing = ytData.status && ytData.status.value === 'processing';
-                checkResult.isRequesterRegionRestricted = checkResult.isZoneLimited && ytData.status && ytData.status.reason === 'requesterRegion' && ytData.status.value === 'restricted';
+                checkResult.isProcessing = !!(ytData.status && ytData.status.value === 'processing');
+                checkResult.isRequesterRegionRestricted = !!(checkResult.isZoneLimited && ytData.status && ytData.status.reason === 'requesterRegion' && ytData.status.value === 'restricted');
                 // if (checkResult.isZoneLimited) {
                     // for (var i = ytData.restrictions.length - 1; i >= 0; i--) {
                     //     if (ytData.restrictions[i].countries.indexOf(cms.global.USER_DATA.locale.country_code) === -1 && ytData.restrictions[i].relationship === "deny") {
@@ -53,7 +53,7 @@
                     // }
                 // }
             } else {
-                checkResult.isPrivateVideo = youtube.error && youtube.error.code && 403 === youtube.error.code;
+                checkResult.isPrivateVideo = !!(youtube.error && youtube.error.code && 403 === youtube.error.code);
                 checkResult.isInvalid = !checkResult.isPrivateVideo;
             }
 
