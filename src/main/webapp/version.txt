@@ -1,3 +1,20 @@
+版本: 5277
+作者: yifan
+日期: 2013/8/8 11:57
+訊息:
+Updated UI repo style changes for epcurate-curation.html poll event.
+Corrected POI poll buttons initial add/delete state.
+Added POI poll event save/update/delete functionality.
+Added POI poll item buttons handler for add & delete button items.
+Added poi poll event input check.
+Added HTML template for POI poll event.
+Refined overlay timing.
+Fixed check result syntax bug.
+Added comments.
+Updated style from ui repo.
+----
+
+
 版本: 5265
 作者: mars
 日期: 2013/8/7 18:37
