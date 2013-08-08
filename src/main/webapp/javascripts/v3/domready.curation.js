@@ -1557,6 +1557,7 @@ $(function () {
             fm = document.forms[formId];
         $page.chkPoiEventData(fm, function (result) {
             if (result) {
+                $common.showSavingOverlay();
                 var displayText = $.trim(fm.displayText.value),
                     btnText = $.trim(fm.btnText.value),
                     channelUrl = $.trim(fm.channelUrl.value),
@@ -1605,7 +1606,6 @@ $(function () {
                     };
                 if ($('#cur-poi-edit').hasClass('edit') && poiPointId) {
                     // update mode
-                    $common.showSavingOverlay();
                     if (poiPointId > 0 && !isNaN(poiPointId)) {
                         nn.api('PUT', cms.reapi('/api/poi_events/{poiEventId}', {
                             poiEventId: poiEventId
@@ -1628,7 +1628,6 @@ $(function () {
                     $('#epcurate-curation ul.tabs li a.cur-poi').trigger('click');
                 } else {
                     // insert mode
-                    $common.showSavingOverlay();
                     if (programId > 0 && !isNaN(programId)) {
                         nn.api('POST', cms.reapi('/api/programs/{programId}/poi_points', {
                             programId: programId
