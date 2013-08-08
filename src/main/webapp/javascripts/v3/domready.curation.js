@@ -1129,6 +1129,71 @@ $(function () {
         return false;
     });
 
+    // POI event poll : add poll item button.
+    $('#poi-event-overlay').on('click', '#btn-add-poll-item', function (event) {
+        var pollItemList = $('#eventPollForm input.poll-button');
+
+        if (pollItemList.length < 4) {
+            if (pollItemList.length === 3) {
+                $('#btn-add-poll-item').addClass('disabled');
+            }
+            // Add a poll item.
+            $('#btn-add-poll-item').before($('#poi-poll-button-tmpl-item').tmpl({btnName: pollItemList.length + 1}));
+            // Add input char counter
+            // $('input.poll-button').charCounter(8, {
+            //     // container: '',
+            //     // format: '',
+            //     delay: 0,
+            //     clear: true,
+            //     countDown: false,
+            //     multibyte: true
+            // });
+        }
+
+        $('.poll-button-del').addClass('deletable');
+    });
+
+    // POI event poll : delete poll item button.
+    $('#poi-event-overlay').on('click', '.poll-button-del', function (event) {
+        var pollItemList;
+        
+        $(this).parent().remove();
+
+        pollItemList = $('#eventPollForm input.poll-button');
+        if (pollItemList.length < 3) {
+            $('.poll-button-del').removeClass('deletable');
+        }
+        if (pollItemList.length < 4 ) {
+            $('#btn-add-poll-item').removeClass('disabled');
+        }
+    });
+
+    // // POI event poll : check input char length, chars with utf-8 char code < 128 (English and punchuations) are regarded as 1, others 2
+    // $('#poi-event-overlay').on('keydown', 'input.poll-button', function (event) {
+    //     var charLength = 0, totalLength = 0, value;
+
+    //     // If not control input
+    //     if (event.keyCode > 19) {
+    //         charLength = event.keyCode > 128 ? 2 : 1;
+    //         value = this.value;
+    //         for (var i = value.length - 1; i >= 0; i--) {
+    //             if (value.charCodeAt(i) > 128) {
+    //                 totalLength += 2;
+    //             } else {
+    //                 totalLength += 1;
+    //             }
+    //         }
+    //         // totalLength = $(this).data('char-length');
+            
+    //         if (totalLength + charLength > 8) {
+    //             event.preventDefault();
+    //         }
+    //         // } else {
+    //         //     $(this).data('char-length', totalLength + charLength);
+    //         // }
+    //     }
+    // });
+
     // Reset POI duration
     $('#cur-poi-edit').on('click', '.btn-reset', function () {
         $('body').addClass('has-poi-change');
