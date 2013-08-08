@@ -176,7 +176,7 @@
         $('#cur-poi-edit .edit-form .notice').addClass('hide');
         return true;
     };
-
+    // POI event edit form data validation.
     $page.chkPoiEventData = function (fm, callback) {
         fm.displayText.value = $.trim(fm.displayText.value);
         fm.btnText.value = $.trim(fm.btnText.value);
@@ -203,7 +203,7 @@
                 'demo.doubleservice.com',
                 'localhost'
             ];
-
+        // Check if any input field is empty.
         if ('' === fm.displayText.value || '' === fm.btnText.value) {
             $('#poi-event-overlay .event .func ul li.notice').show();
             callback(false);
@@ -241,24 +241,29 @@
             callback(false);
             return false;
         }
+        // Check if channel or episode url field is unmodified.
         if (nn._([cms.global.PAGE_ID, 'poi-event', 'Input 9x9 channel or episode URL']) === fm.channelUrl.value) {
             $('#poi-event-overlay .event .event-input .fminput .notice').show();
             callback(false);
             return false;
         }
+        // Push current window.location.origin to the hostAllow array if it isn't in the array.
         if (cms.global.USER_URL && -1 === $.inArray(cms.global.USER_URL.attr('host'), hostAllow)) {
             hostAllow.push(cms.global.USER_URL.attr('host'));
         }
+        // Check if the host domain of the channel url field is in the hostAllow array.
         if (-1 === $.inArray(url.attr('host'), hostAllow)) {
             $('#poi-event-overlay .event .event-input .fminput .notice').show();
             callback(false);
             return false;
         }
+        // Check if the file path of the channel url field is in the hostAllow array.
         if (-1 === $.inArray(url.attr('path'), pathAllow)) {
             $('#poi-event-overlay .event .event-input .fminput .notice').show();
             callback(false);
             return false;
         }
+        // CHeck if the file path of the channel url is '/' and it is empty after the # tag.
         if ('/' === url.attr('path') && !url.attr('fragment')) {
             $('#poi-event-overlay .event .event-input .fminput .notice').show();
             callback(false);
