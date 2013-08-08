@@ -1623,15 +1623,21 @@ $(function () {
         $page.chkPoiEventData(fm, function (result) {
             if (result) {
                 $common.showSavingOverlay();
+                var programId = $('#poi-event-overlay-wrap').data('programId'),
+                    poiPointId = $('#poi-event-overlay-wrap').data('poiPointId'),
+                    poiEventId = $('#poi-event-overlay-wrap').data('poiEventId'),
+                    poiEventType = $('#poi-event-overlay-wrap').data('poiEventType');
+
+                if (poiEventType ===  4) {
+                    handlePollEvent(fm);
+                    return;
+                }
+
                 var displayText = $.trim(fm.displayText.value),
                     btnText = $.trim(fm.btnText.value),
                     channelUrl = $.trim(fm.channelUrl.value),
                     notifyMsg = $.trim(fm.notifyMsg.value),
                     notifyScheduler = $.trim(fm.notifyScheduler.value),
-                    programId = $('#poi-event-overlay-wrap').data('programId'),
-                    poiPointId = $('#poi-event-overlay-wrap').data('poiPointId'),
-                    poiEventId = $('#poi-event-overlay-wrap').data('poiEventId'),
-                    poiEventType = $('#poi-event-overlay-wrap').data('poiEventType'),
                     tmplItem = $('#storyboard-listing li.playing').tmplItem(),
                     tmplItemData = tmplItem.data,
                     poiList = tmplItemData.poiList,
@@ -1768,6 +1774,211 @@ $(function () {
         });
         return false;
     });
+    // Get new/updated poi data for poll event.
+    function getPollEventData (form) {
+        var programId = $('#poi-event-overlay-wrap').data('programId'),
+            poiPointId = $('#poi-event-overlay-wrap').data('poiPointId'),
+            poiEventId = $('#poi-event-overlay-wrap').data('poiEventId');
+            // poiEventType = $('#poi-event-overlay-wrap').data('poiEventType');
+
+        // POI point
+        var poiPoint = {
+            // id: null,
+            targetId: programId,
+            type: 5,
+            name: $('#poiName').val(),
+            startTime: $('#poiStartTime').val(),
+            endTime: $('#poiEndTime').val(),
+            tag: $('#poiTag').val()
+            // active: null
+        };
+
+        // POI event
+        var eventContext = {
+            message: $.trim(form.displayText.value),
+            button: []
+        };
+        $(form).find('input.poll-button').each(function (index, element) {
+            eventContext.button.push({
+                text: $.trim(element.value),
+                actionUrl: 'http://' + cms.global.USER_URL.attr('host') + '/poiAction?poiId='
+            });
+        });
+
+        var poiEvent = {
+            // id: null,
+            name: $('#poiName').val(),
+            type: 4     // For poll only.
+            // context: 
+        };
+
+        return {
+            poiPoint: poiPoint,
+            poiEvent: poiEvent,
+            eventContext: eventContext
+        };
+    }
+    // Handle poll event insert/update to the server and refresh poi list on the page.
+    function handlePollEvent (form) {
+        var programId = $('#poi-event-overlay-wrap').data('programId'),
+            poiPointId = $('#poi-event-overlay-wrap').data('poiPointId'),
+            poiEventId = $('#poi-event-overlay-wrap').data('poiEventId'),
+            poiEventType = $('#poi-event-overlay-wrap').data('poiEventType');
+
+        var data = getPollEventData(form);
+
+        var poiPoint = data.poiPoint,
+            poiEvent = data.poiEvent,
+            eventContext = data.eventContext;
+        // Data for poi HTML template.
+        var poiItem = {
+                endTime: poiPoint.endTime,
+                // eventId: 34,
+                eventType: poiEvent.type,
+                // id: 37,
+                link: "",
+                message: eventContext.message,
+                pollButtons: [],
+                name: poiPoint.name,
+                // notifyMsg: "aergaerf"
+                // notifyScheduler: "1375786800000"
+                startTime: poiPoint.startTime,
+                tag: poiPoint.tag,
+                targetId: poiPoint.targetId,
+                type: poiPoint.type
+            };
+        $.each(eventContext.button, function (i, item) {
+            poiItem.pollButtons[i] = item.text;
+        });
+
+        if ($('#cur-poi-edit').hasClass('edit') && poiPointId) {
+            // update mode
+            if (!isNaN(poiPointId) && poiPointId > 0) {
+                poiEvent.id = poiEventId;
+                $.each(eventContext.button, function (i, item) {
+                    item.actionUrl += poiPointId.id;
+                });
+                poiEvent.context = JSON.stringify(eventContext);
+                poiItem.eventId = poiEventId;
+                poiItem.id = poiPointId;
+
+                updatePollEvent(poiEvent).then(function (poi_event) {
+                    updatePoiInfo(poiItem);
+                    $('#overlay-s').fadeOut(0);
+                }, function () {
+                    $('#overlay-s').fadeOut(0);
+                });
+            }
+
+        } else {
+            // insert mode
+            if (!isNaN(programId) && programId > 0) {
+                insertPoi(data, poiItem);
+            } else {
+                // Uncertain expressions removed.
+            }
+        }            
+    }
+    // Insert new poll event data to the server.
+    function insertPoi (data, poiItem) {
+        var poiPoint = data.poiPoint,
+            poiEvent = data.poiEvent,
+            eventContext = data.eventContext;
+
+        nn.api('POST', cms.reapi('/api/programs/{programId}/poi_points', {
+            programId: poiPoint.targetId
+        }), poiPoint, function (poi_point) {
+
+            $.each(eventContext.button, function (i, item) {
+                item.actionUrl += poi_point.id;
+            });
+            poiEvent.context = JSON.stringify(eventContext);
+            poiItem.link = eventContext.button[0].actionUrl;
+
+            nn.api('POST', cms.reapi('/api/users/{userId}/poi_events', {
+                userId: cms.global.USER_DATA.id
+            }), poiEvent, function (poi_event) {
+
+                var poi = {
+                    pointId: poi_point.id,
+                    eventId: poi_event.id
+                };
+
+                nn.api('POST', cms.reapi('/api/poi_campaigns/{poiCampaignId}/pois', {
+                    poiCampaignId: cms.global.CAMPAIGN_ID
+                }), poi, function (poi) {
+
+                    nn.api('PUT', cms.reapi('/api/poi_events/{poiEventId}', {
+                        poiEventId: poi_event.id
+                    }), poiEvent, function (poi_event) {
+                        // update id
+                        poiItem.id = poi_point.id;
+                        poiItem.targetId = poi_point.targetId;
+                        poiItem.type = poi_point.type;
+                        poiItem.eventId = poi_event.id;
+                        // poiPointData = $.extend(poiPointData, poiEventDataExtend);
+
+                        updatePoiInfo(poiItem, true);
+                        $('#overlay-s').fadeOut(0);
+                    });
+                });
+            });
+        });          
+    }
+    // Update poll event data to the server.
+    function updatePollEvent (poiEvent) {
+        return nn.api('PUT', cms.reapi('/api/poi_events/{poiEventId}', {
+            poiEventId: poiEvent.id
+        }), poiEvent, function (poi_event) {
+            // $.each(poiList, function (i, poiItem) {
+            //     if (poiItem.id === poiPointId) {
+            //         $.extend(poiItem, poiPointData, poiEventDataExtend);
+            //     }
+            //     poiTemp.push(poiItem);
+            // });
+            // tmplItemData.poiList = poiTemp;
+
+            // $('#overlay-s').fadeOut(0);
+        });
+    }
+    // Update poi info on the page.
+    function updatePoiInfo (poiItem, isNewPoi) {
+
+        var tmplItem = $('#storyboard-listing li.playing').tmplItem(),
+            tmplItemData = tmplItem.data,
+            poiList = tmplItemData.poiList,
+            isNewPoiUpdated = false;
+
+        if (isNewPoi) {
+            // Add new poi
+            // if (poiList.length > 0) {
+            $.each(poiList, function (i, item) {
+                if (parseInt(item.startTime, 10) > parseInt(poiItem.startTime, 10)) {
+                    poiList.splice(i, 0, poiItem);
+                    isNewPoiUpdated = true;
+                    return false;
+                }
+            });
+
+            // } else {
+            if (!isNewPoiUpdated) {
+                poiList.push(poiItem);
+            }
+            // }
+        } else {
+            // Update poi
+            $.each(poiList, function (i, item) {
+                if (item.id === poiItem.id) {
+                    $.extend(item, poiItem);
+                }
+            });
+        }
+
+        $page.buildPoiInfoTmpl($('#storyboard-listing li.playing'));
+        $('body').removeClass('has-poi-change');
+        $('#poi-event-overlay .wrap').html('');
+        $('#epcurate-curation ul.tabs li a.cur-poi').trigger('click');
+    }
 
     // Scroll storyboard horizontal video list with mouse wheel.
     $("#storyboard-wrap").mousewheel(function(event, delta) {
