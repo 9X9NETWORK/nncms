@@ -178,14 +178,15 @@
     };
     // POI event edit form data validation.
     $page.chkPoiEventData = function (fm, callback) {
+        var poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey');
+
         fm.displayText.value = $.trim(fm.displayText.value);
-        fm.btnText.value = $.trim(fm.btnText.value);
         fm.channelUrl.value = $.trim(fm.channelUrl.value);
         fm.notifyMsg.value = $.trim(fm.notifyMsg.value);
         fm.notifyScheduler.value = $.trim(fm.notifyScheduler.value);
 
-        var poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey'),
-            todayTimestamp = Date.parse(new Date()),
+        // var poiEventTypeKey = $('#poi-event-overlay-wrap').data('poiEventTypeKey'),
+        var todayTimestamp = Date.parse(new Date()),
             notifySchedulerList = [],
             validSchedulerList = [],
             url = $.url(fm.channelUrl.value),
@@ -204,11 +205,40 @@
                 'localhost'
             ];
         // Check if any input field is empty.
-        if ('' === fm.displayText.value || '' === fm.btnText.value) {
+        if ('' === fm.displayText.value) {
             $('#poi-event-overlay .event .func ul li.notice').show();
             callback(false);
             return false;
         }
+
+        if (poiEventTypeKey === 'event-poll') {
+            var isAllButtonFilled = true;
+            $(fm).find('input.poll-button').each(function (index, element) {
+                if ($.trim(element.value) === '') {     
+                    isAllButtonFilled = false;               
+                    $('#poi-event-overlay .event .func ul li.notice').show();
+                    callback(false);
+                    return false;
+                }
+            });
+            
+            // notice and url reset
+            if (isAllButtonFilled) {
+                $('#poi-event-overlay .event .func ul li.notice').hide();
+                callback(true);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            fm.btnText.value = $.trim(fm.btnText.value);
+            if ('' === fm.btnText.value) {
+            $('#poi-event-overlay .event .func ul li.notice').show();
+            callback(false);
+            return false;
+        }
+        }
+
         if (-1 !== $.inArray(poiEventTypeKey, ['event-scheduled', 'event-instant'])) {
             if (!$('#schedule-mobile').hasClass('hide') || !$('#instant-mobile').hasClass('hide')) {
                 if ('' === fm.notifyMsg.value) {
