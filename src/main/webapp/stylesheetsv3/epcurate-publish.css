@@ -3,11 +3,14 @@
     top: 0 !important;
 }
 
+#content-main {
+	left: 35px;	
+}
+
 #content-wrap {
     top: 46px !important;
     bottom: 0;
     height: auto;
-    min-height: 598px;
 }
 
 .epcurate-curation #content-main-wrap {
@@ -23,7 +26,7 @@
 }
 
 .epcurate-publish #content-main-wrap {
-    margin-top: 25px;
+    top: 20px;
 }
 
 .epcurate-shopping #content-main-wrap {
@@ -62,13 +65,14 @@
 
 #epcurate-publish .required {
     position: absolute;
-    top: 5px;
+    top: 0;
     right: 0;
     font-size: 13px;
+	line-height: 29px;
 }
 
 #content-wrap form .fminput {
-    margin-bottom: 3px;
+    margin: 0 0 3px 0;
 }
 
 #content-wrap form .fminput label {
@@ -79,6 +83,7 @@
     color: #555;
     font-weight: bold;
     font-size: 13px;
+	line-height: 29px;
 }
 
 #content-wrap form .fminput label img {
@@ -122,6 +127,7 @@
 
 #content-wrap form .fminput .fmfield p.radio-list.draft label {
     margin-right: 0;
+	line-height: 19px;
 }
 
 #content-wrap form .fminput .fmfield p.radio-list label.last {
@@ -202,6 +208,7 @@
     margin: 0;
     padding: 0;
     font-weight: normal;
+	line-height: 25px;
 }
 
 #content-wrap form .fminput .fmfield p.radio-list.draft span.glow-middle label.checked {
@@ -303,7 +310,7 @@
     clear: both;
     float: left;
     width: 440px;
-    margin: 10px 0 0 180px;
+    margin: 15px 0 0 180px;
 }
 
 #content-wrap form .fminput .fmfield #date-time .time {
@@ -407,8 +414,8 @@
 #content-wrap form .fminput .fmfield .notice {
     clear: both;
     margin: 11px 0 10px 0;
-    padding: 0 0 0 185px;
-    color: #f00;
+    color: #555;
+	line-height: 29px;
 }
 
 /* disable */
@@ -432,6 +439,7 @@
     height: 30px;
     margin: 0 10px 10px 0;
     padding-left: 3px;
+	width: 50%;
 }
 
 #content-wrap form .fminput .fmfield p.text span {
@@ -441,7 +449,7 @@
 }
 
 #content-wrap form .fminput .fmfield p.text span .text {
-    width: 437px;
+    width: 99.85%;
     height: 30px;
     padding-left: 2px;
     border: none;
@@ -482,6 +490,7 @@
     height: 92px;
     margin: 0 10px 10px 0;
     padding-left: 3px;
+	width: 50%;
 }
 
 #content-wrap form .fminput .fmfield p.textarea span {
@@ -886,5 +895,15 @@
     width: 100%;
     left: 0;
     margin: 0;
+}
+
+
+@media all and (min-width: 1358px) {
+#content-wrap form .fminput .fmfield p.text {
+	width: 63%;
+}
+#content-wrap form .fminput .fmfield p.textarea {
+	width: 63%;
+}
 }
 

@@ -1,9 +1,4 @@
 /* CMS setting form */
-#content-main-wrap form {
-    position: relative;
-    padding: 0 0 56px 0;
-}
-
 #content-main-wrap form .login-notice {
     margin-bottom: 16px;
     padding: 0 0 0 10px;
