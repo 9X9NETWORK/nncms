@@ -233,10 +233,10 @@
         } else {
             fm.btnText.value = $.trim(fm.btnText.value);
             if ('' === fm.btnText.value) {
-            $('#poi-event-overlay .event .func ul li.notice').show();
-            callback(false);
-            return false;
-        }
+                $('#poi-event-overlay .event .func ul li.notice').show();
+                callback(false);
+                return false;
+            }
         }
 
         if (-1 !== $.inArray(poiEventTypeKey, ['event-scheduled', 'event-instant'])) {
@@ -1340,6 +1340,7 @@
             eventType: 0,
             message: '',
             button: '',
+            pollButtons: ['',''],
             link: '',
             notifyMsg: '',
             notifyScheduler: ''

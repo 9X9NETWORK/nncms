@@ -1235,7 +1235,7 @@ $(function () {
         return false;
     });
 
-    // POI point Next
+    // POI point Next - click next to edit poi event data
     $('#cur-poi-edit').on('click', '#poi-edit .btn-next', function () {
         if ($page.chkPoiPointData(document.epcurateForm)) {
             var poiPointId = 0,
@@ -1280,6 +1280,14 @@ $(function () {
                                     tmplItemData.poiList = poiTemp;
                                     $page.buildPoiInfoTmpl($('#storyboard-listing li.playing'));
                                     $page.buildPoiEventOverlayTmpl(poiPointEventData);
+
+                                    // For poll event buttons
+                                    if (poiPointEventData.pollButtons.length > 2) {                                                    
+                                        $('.poll-button-del').addClass('deletable');
+                                        if (poiPointEventData.pollButtons.length > 3) {
+                                            $('#btn-add-poll-item').addClass('disabled');
+                                        }
+                                    }
                                 });
                             });
                         } else {
@@ -1310,6 +1318,13 @@ $(function () {
                                                 notifyMsg: poi_event.notifyMsg,
                                                 notifyScheduler: poi_event.notifyScheduler
                                             };
+
+                                            // For poll event
+                                            poiEventData.pollButtons = [];
+                                            $.each(poiEventContext.button, function (i, item) {
+                                                poiEventData.pollButtons.push(item.text);
+                                            });
+
                                             $('#overlay-s').fadeOut(0, function () {
                                                 $.each(poiList, function (i, poiItem) {
                                                     if (poiItem.id === poiPointId) {
@@ -1321,6 +1336,14 @@ $(function () {
                                                 tmplItemData.poiList = poiTemp;
                                                 $page.buildPoiInfoTmpl($('#storyboard-listing li.playing'));
                                                 $page.buildPoiEventOverlayTmpl(poiPointEventData);
+
+                                                // For poll event buttons
+                                                if (poiEventData.pollButtons.length > 2) {                                                    
+                                                    $('.poll-button-del').addClass('deletable');
+                                                    if (poiEventData.pollButtons.length > 3) {
+                                                        $('#btn-add-poll-item').addClass('disabled');
+                                                    }
+                                                }
                                             });
                                         });
                                     } else {
