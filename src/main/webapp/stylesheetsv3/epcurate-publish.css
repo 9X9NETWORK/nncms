@@ -116,6 +116,7 @@
 
 #content-wrap form .fminput .fmfield p.radio-list label {
     width: auto;
+    line-height: 19px;
     margin: 4px 36px 0 0;
     padding: 0;
     font-weight: normal;
@@ -123,6 +124,7 @@
 
 #content-wrap form .fminput .fmfield p.radio-list label.checked {
     font-weight: bold;
+    line-height: 19px;
 }
 
 #content-wrap form .fminput .fmfield p.radio-list.draft label {
@@ -132,6 +134,7 @@
 
 #content-wrap form .fminput .fmfield p.radio-list label.last {
     margin-right: 10px;
+    line-height: 19px;
 }
 
 #content-wrap form .fminput .fmfield p.radio-list span.box-left {
@@ -508,7 +511,8 @@
 
 #content-wrap form .fminput .fmfield p.textarea span .textarea {
     overflow: auto;
-    height: 53px;
+    height: 90%;
+    width: 100%;
     margin-top: 2px;
     padding: 3px;
     border: none;

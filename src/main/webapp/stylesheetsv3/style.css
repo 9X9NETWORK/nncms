@@ -40,7 +40,7 @@ abbr, acronym {
     margin: -300px 0 0 -424px;
     border-radius: 10px;
     background-color: #000;
-    opacity: 0.6;
+    opacity: 0.9;
 }
 
 /* loading overlay */
@@ -711,7 +711,7 @@ abbr, acronym {
     text-decoration: none;
 }
 
-#studio-nav .studio-nav-wrap .studio-setup .btn-middle a:hover {
+#studio-nav .studio-nav-wrap .studio-setup .btn-middle a:hover, #studio-nav .studio-nav-wrap .studio-setup.click .btn-middle a {
     color: #999;
 }
 
@@ -909,9 +909,43 @@ abbr, acronym {
     /*padding-bottom: 48px;*/
 }
 
-#content-main-wrap.footer-on {
-    /*bottom: 48px;*/
+#content-main-wrap form {
+    position: relative;
+    padding: 0 0 56px 0;
 }
+
+#content-main-wrap form .form-btn {
+    overflow: hidden;
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+}
+
+#content-main-wrap form .form-btn .form-btn-wrap {
+    float: right;
+}
+
+/* Fixed Position for form-btn */
+#content-main-wrap.fixed {
+}
+
+#content-main-wrap.fixed .constrain {
+}
+
+#content-main-wrap.fixed form {
+}
+
+#content-main-wrap.fixed form .form-btn {
+    bottom: 15px;
+    right: 35px;
+    position: fixed;
+}
+
+#content-main-wrap.fixed form .form-btn {
+    bottom: 63px;
+	right: 31px;
+}
+
 
 div.constrain {
     margin-right: 35px;
@@ -1003,8 +1037,8 @@ div.constrain {
 }
 
 #title-func .required {
-    margin: 5px 0 0;
     font-size: 13px;
+	line-height: 27px;
 }
 
 #title-func .btns span a {
@@ -1311,7 +1345,7 @@ div.constrain {
 }
 
 .cms-setup {
-    color: #c4c4c4;
+    color: #b4b4b4;
     font-size: 32px;
     font-weight: bold;
     text-align: center;
