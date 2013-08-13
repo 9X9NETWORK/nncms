@@ -1,3 +1,11 @@
+版本: 5304
+作者: mars
+日期: 2013/8/13 11:01
+訊息:
+1. janet request CMS header 中文介面的 "9x9.tv應用程式" 改為 "9x9.tv app"
+----
+異動 : /lang/zh.json
+
 版本: 5294
 作者: mars
 日期: 2013/8/9 11:11
