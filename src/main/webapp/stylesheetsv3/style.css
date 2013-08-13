@@ -177,6 +177,7 @@ abbr, acronym {
 
 .lightbox-content .btns:hover span a {
     background: url(../images/popup_btn_middle_press.png) repeat-x !important;
+	color: #999;
 }
 
 #content-wrap     .btns         span input,
@@ -943,7 +944,7 @@ abbr, acronym {
 
 #content-main-wrap.fixed form .form-btn {
     bottom: 63px;
-	right: 31px;
+	right: 35px;
 }
 
 
@@ -1684,22 +1685,12 @@ div.constrain {
     color: #999;
     background: url(../images/btn_gray.png) repeat-x 0 -160px;
 }
-.btn-gray.disabled .left {
-    background: url(../images/btn_gray.png) no-repeat 0 -192px;
-}
-.btn-gray.disabled .right {
-    background: url(../images/btn_gray.png) no-repeat 0 -224px;
-}
-.btn-gray.disabled .center {
-    color: #999;
-    background: url(../images/btn_gray.png) repeat-x 0 -256px;
-}
 .center a, .center a {
     text-decoration: none;
     padding: 2px 24px 2px 24px;
     color: #555;
 }
-.center a:hover, .center a:hover, .center:hover a, .center:hover a, .btn-gray.disabled .center a {
+.center a:hover, .center a:hover, .center:hover a, .center:hover a {
     text-decoration: none;
     color: #999;
 }
@@ -1822,4 +1813,87 @@ div.constrain {
     width: 50%;
     float: right;
     position: relative;
+}
+
+/* POI List */
+#epcurate-curation #cur-poi .poi-list ul li ol li, #poi-list .poi-info ul li ol li {
+	height: 33px;
+    background: url(../images/bg_divider.png) repeat-x bottom;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon, #poi-list .poi-info ul li ol li .icon {
+    float: left;
+	padding: 0 0 0 25px;
+	margin: 5px 0 4px 0;
+	cursor: pointer;
+	height: 24px;
+	background: url(../images/icon_check.png) no-repeat;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon:hover span a, #poi-list .poi-info ul li ol li .icon:hover span a {
+	color: #999;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon span a, #poi-list .poi-info ul li ol li .icon span a {
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
+	height: 24px;
+	line-height: 24px;
+	display: inline-block;
+	text-decoration: none;
+	color: #555;
+	font-size: 13px;
+	background: none;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon:hover .tip-white, #poi-list .poi-info ul li ol li .icon:hover .tip-white, #epcurate-curation #cur-poi .poi-list ul li .icon:hover .tip-bottom, #poi-list .poi-info ul li ol li .icon:hover .tip-bottom  {
+	display: block;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon.hyper, #poi-list .poi-info ul li ol li .icon.hyper {
+	background-position: 0 -72px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon.schedule, #poi-list .poi-info ul li ol li .icon.schedule {
+	background-position: 0 -96px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon.poll, #poi-list .poi-info ul li ol li .icon.poll {
+	background-position: 0 -120px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon.instant, #poi-list .poi-info ul li ol li .icon.instant {
+	background-position: 0 -144px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon.error, #poi-list .poi-info ul li ol li .icon.error {
+	background-position: 0 -24px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .func, #poi-list .poi-info p.func  {
+    float: right;
+    width: auto;
+    padding: 0;
+	margin: 0 5px 0 10px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .btn-del, #poi-list .poi-info p.func .btn-del {
+    float: right;
+    width: 22px;
+    height: 25px;
+    margin: 3px 0 0 0;
+	background: url(../images/btns.png) no-repeat 0 -1060px;
+    text-indent: -100000px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .btn-del, #poi-list .poi-info p.func .btn-del {
+    background-position: 0 -856px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .btn-del:hover, #poi-list .poi-info p.func .btn-del:hover  {
+    background-position: -23px -856px;
 }

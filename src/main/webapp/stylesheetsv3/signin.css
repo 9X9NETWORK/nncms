@@ -83,6 +83,10 @@
     width: 212px;
     padding: 0 0 0 20px;
 }
+#login-layer .msg-error {
+    margin: 0 0 17px 0;
+}
+
 /* Sign Up */
 #signup-layer {
     width: 100%;
@@ -206,7 +210,7 @@
 }
 #signup-layer .textfield, #forgot-password-layer .textfield, #reset-password-layer .textfield {
     width: 84.5%;
-    padding: 0 0 0 25px;
+    padding: 2px 0 0 30px;
 }
 
 /* Forgot Password Layer */
@@ -218,7 +222,7 @@
     background: url(../images/bg_b70.png);
     overflow: hidden;
     font-size: 13px;
-    z-index: 60;
+    z-index: 99;
     display: none;
     top: 0;
 }
@@ -327,17 +331,25 @@
 }
 
 /* Reset Password Layer */
-#reset-password-layer .btn-white .center {
-    width: 113px;
+#reset-password-cancel.btn-white .center {
+    width: 75px;
+}
+#reset-password-cancel.btn-white {
+    margin: 0 25px 0 0;
+}
+#btn-new-password.btn-white .center {
+    width: 130px;
 }
 #reset-password-layer .msg-btn-holder {
     bottom: 15px;
+	left: 44px;
+	position: absolute;
 }
 #reset-password-form {
     line-height: 8px;
 }
 #reset-password-form .msg-error {
-    margin: -5px 0 0 0;
+    margin: -5px 0 0 7px;
 }
 
 /* Btn FB */
