@@ -579,6 +579,7 @@
 }
 
 .setup-notice .overlay-container .overlay-wrap p.content {
+    padding-left: 16px;
     line-height: 17px;
 }
 
@@ -645,40 +646,38 @@
 
 /* change password overlay */
 #change-pwd-overlay {
-    height: 303px;
-	width: 348px;
-    margin: -151px 0 0 -178px;
-    background: url(../images/overlay_bg_l.png) no-repeat 0 0;
+    width: 427px;
+    height: 316px;
+    margin: -158px 0 0 -219px;
+    background: url(../images/overlay_bg_m_l.png) no-repeat 0 0;
 }
 
 #change-pwd-overlay .overlay-container {
-    height: 303px;
-    background: url(../images/overlay_bg_r.png) no-repeat right 0;
+    height: 316px;
+    background: url(../images/overlay_bg_m_r.png) no-repeat right 0;
 }
 
 #change-pwd-overlay .overlay-container .overlay-wrap {
-    height: 274px;
-    padding: 24px 0 0 0;
-    background: url(../images/overlay_bg_c.png) repeat-x;
+    height: 297px;
+    padding: 19px 0 0;
+    background: url(../images/overlay_bg_m_c.png) repeat-x;
 }
 
 #change-pwd-overlay h4 {
-    margin-bottom: 20px;
+    margin-bottom: 23px;
 }
 
 #change-pwd-overlay .overlay-btn {
-    bottom: 15px;
-	left: 47px;
-	position: absolute;
-	width: 243px;
+    width: 246px;
+    margin: 0 auto;
 }
 
 #change-pwd-overlay .change-pwd p.text {
     width: 243px;
-    height: 30px;
-    margin: 0 auto 16px auto;
+    height: 31px;
+    margin: 0 auto 10px;
     padding-left: 3px;
-    background: url(../images/input_gray.png) no-repeat 0 0;
+    background: url(../images/input_box_left_g.png) no-repeat 0 0;
 }
 
 #change-pwd-overlay .change-pwd p.text.last {
@@ -691,42 +690,46 @@
 
 #change-pwd-overlay .change-pwd p.text span.input-right {
     padding-right: 3px;
-    background: url(../images/input_gray.png) no-repeat right -30px;
+    background: url(../images/input_box_right_g.png) no-repeat right 0;
 }
 
 #change-pwd-overlay .change-pwd p.text span.input-middle {
-    background: url(../images/input_gray.png) repeat-x 0 -60px;
+    background: url(../images/input_box_middle_g.png) repeat-x;
 }
 
 #change-pwd-overlay .change-pwd span .text {
     width: 216px;
-    height: 30px;
-    padding-left: 30px;
+    height: 31px;
+    padding-left: 24px;
     border: none;
-    background: url(../images/icon_password.png) no-repeat 7px 8px;
+    background: url(../images/icon_password.png) no-repeat 3px 8px;
+    color: #555;
     font: 13px/30px Arial, Helvetica;
-	color: #555;
 }
 
 #change-pwd-overlay .change-pwd .notice {
-    padding-left: 47px;
+    padding-left: 92px;
     color: #f00;
     font-size: 13px;
     text-align: left;
 }
 
+#change-pwd-overlay .overlay-btn {
+    left: 50%;
+    margin-left: -123px;
+}
+
 #change-pwd-overlay .overlay-btn .btn-cancel {
     float: left;
-	width: 75px;
 }
 
 #change-pwd-overlay .overlay-btn .btn-chg-pwd {
     float: right;
-    width: 130px;
+    width: 135px;
 }
 
 #change-pwd-overlay .overlay-btn .btn-chg-pwd a {
-    width: 127px;
+    width: 132px;
 }
 
 /* poi zoom overlay */
@@ -884,7 +887,7 @@
 }
 
 #poi-event-overlay .wrap .content ul.list li .block {
-    width: 239px;
+    width: 259px;
     height: 173px;
     padding-bottom: 16px;
     cursor: pointer;
@@ -896,7 +899,7 @@
 }
 
 #poi-event-overlay .wrap .content ul.list li:hover .block {
-    width: 237px;
+    width: 257px;
     height: 171px;
     border: 1px solid #b2b2b2;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#dbdbdb), to(#fbfbfb));
@@ -908,20 +911,19 @@
     -pie-background: linear-gradient(#dbdbdb, #fbfbfb);
     box-shadow: 0 0 3px rgba(100, 100, 100, 0.5) inset;
     behavior: url(PIE.htc);
-	border-radius: 3px;
 }
 
 #poi-event-overlay .wrap .content ul.list li .block .img {
-    width: 205px;
-    height: 104px;
-    margin: 15px auto 14px auto;
-    border-radius: 6px;
+    width: 237px;
+    height: 113px;
+    margin: 9px 0 14px 10px;
+    border-radius: 3px;
     background: url(../images/poi_type.png) no-repeat 0 0;
     cursor: pointer;
 }
 
 #poi-event-overlay .wrap .content ul.list li:hover .block .img {
-    margin: 14px auto 14px auto;
+    margin: 8px 0 14px 9px;
 }
 
 #poi-event-overlay .wrap .content ul.list li .block .img.hyper {
@@ -936,7 +938,7 @@
     box-shadow: 0 1px 10px rgba(231, 244, 196, 0.75) inset, 0 0 10px rgba(255, 255, 227, 0.9) inset, 0 0 2px rgba(255, 255, 255, 0.9) inset, 0 0 20px rgba(163, 207, 80, 0.5);
     border: 1px solid #6cc042;
     background-color: #c1dca7;
-    background-position: 0 -106px;
+    background-position: 0 -116px;
     behavior: url(PIE.htc);
 }
 
@@ -944,18 +946,7 @@
     box-shadow: 0 1px 10px rgba(238, 126, 125, 0.1) inset, 0 0 10px rgba(255, 255, 255, 0.9) inset, 0 0 2px rgba(255, 143, 149, 0.9) inset, 0 0 20px rgba(237, 28, 36, 0.1);
     border: 1px solid #bb3d3c;
     background-color: #ddbaba;
-    background-position: 0 -212px;
-    behavior: url(PIE.htc);
-}
-
-#poi-event-overlay .wrap .content ul.list li .block .img.poll {
-    /*box-shadow: 0 1px 10px rgba(231, 244, 196, 0.75) inset, 0 0 10px rgba(255, 255, 227, 0.9) inset, 0 0 2px rgba(255, 255, 255, 0.9) inset, 0 0 20px rgba(163, 207, 80, 0.5);
-    border: 1px solid #ffc13e;
-    background-color: #fff3b1;*/
-    box-shadow: 0 1px 10px rgba(246, 215, 68, 0.75) inset, 0 0 10px rgba(255, 255, 118, 0.9) inset, 0 0 2px rgba(252, 208, 0, 0.9) inset, 0 0 20px rgba(246, 215, 68, 0.5);
-    border: 1px solid #a96c1e;
-    background-color: #e6d7ab;
-    background-position: 0 -318px;
+    background-position: 0 -231px;
     behavior: url(PIE.htc);
 }
 
@@ -972,7 +963,7 @@
     position: absolute;
     top: 23px;
     left: 0;
-    width: 237px;
+    width: 257px;
     color: #555;
     font-weight: bold;
     font-size: 15px;
@@ -1024,7 +1015,7 @@
 
 #poi-event-overlay .wrap .content .func ul {
     float: right;
-    padding: 14px 0 0;
+    padding: 12px 0 0;
 }
 
 #poi-event-overlay .wrap .content .func ul li {
@@ -1050,6 +1041,7 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
 
 #poi-event-overlay .wrap .content .func ul li a {
     padding: 6px 11px 0;
+    color: #555;
     font-size: 15px;
 }
 
@@ -1125,17 +1117,12 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     color: #555;
     font-weight: bold;
     font-size: 13px;
-    text-align: left;
 }
 
 #poi-event-overlay .wrap .content .event-input .fminput p.text {
     float: left;
     height: 30px;
     padding: 0 0 0 3px;
-}
-
-#poi-event-overlay .wrap .content .event-input .fminput p.text.poll {
-    margin-right: 8px;
 }
 
 #poi-event-overlay .wrap .content .event-input .fminput p.text span {
@@ -1152,38 +1139,8 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     border: none;
     background-repeat: repeat-x;
     background-position: 0 -60px;
+    color: #555;
     font: 13px/30px Arial, Helvetica;
-	color: #555;
-}
-
-#poi-event-overlay .wrap .content .event-input .fminput p.text span .text.poll-text {
-    width: 580px;
-}
-
-#poi-event-overlay .wrap .content .event-input .fminput p.text span .text.poll-button {
-    width: 108px;
-}
-
-#poi-event-overlay .wrap .content .event-input .fminput p.text a.poll-button-del {
-    display: none;
-    position: relative;
-    background: url(../images/btn_close.png) no-repeat 0 0;
-    width: 15px;
-    height: 16px;
-    top: -28px;
-    left: 100px;
-}
-
-#poi-event-overlay .wrap .content .event-input .fminput p.text a.poll-button-del:hover {
-    background: url(../images/btn_close.png) no-repeat 0 -16px;
-}
-
-#poi-event-overlay .wrap .content .event-input .fminput p.text .poll-button-del.deletable {
-    display: block;
-}
-
-#poi-event-overlay .wrap .content .event-input .fminput .btn-gray .center a {
-    padding: 2px 4px;
 }
 
 #poi-event-overlay .wrap .content .event-input .fminput .notice {
@@ -1455,10 +1412,10 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     padding: 3px;
     border: none;
     background-color: transparent;
+    color: #555;
     font-family: Arial, Helvetica;
     font-size: 13px;
     resize: none;
-	color: #555;
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification h4 a .tip {
@@ -1585,9 +1542,9 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     display: none;
     position: absolute;
     top: 27px;
-    left: 0;
+    left: 1px;
     z-index: 60;
-    width: 81px;
+    width: 80px;
     border: 1px solid #b2b2b2;
     -moz-border-radius: 0 0 5px 5px;
     -webkit-border-radius: 0 0 5px 5px;
@@ -1611,7 +1568,7 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
 }
 
 #poi-event-overlay .wrap .content .event .mobile-edit .notification .time-wrap .select .select-list p {
-    width: 63px;
+    width: 62px;
     height: 28px;
     margin: 0;
     padding: 0 9px;
@@ -1632,22 +1589,4 @@ body.from-poi-edit-mode #poi-event-overlay .wrap .content .func ul li.notice {
     background-color: #d2d2d2;
     color: #999;
     cursor: default;
-}
-
-/* Place holder */
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-    color: #555;
-	opacity: 1;
-}
-input:-moz-placeholder, textarea:-moz-placeholder { 
-    color: #555;
-	opacity: 1;
-}
-input::-moz-placeholder, textarea::-moz-placeholder {
-    color: #555;
-	opacity: 1;
-}
-input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
-    color: #555;
-	opacity: 1;
 }

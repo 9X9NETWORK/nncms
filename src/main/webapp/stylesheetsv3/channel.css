@@ -7,12 +7,10 @@
     position: relative;
 }
 
-#title-func h2 {
-    position: absolute;
-	height: 27px;
-	line-height: 27px;
-	left: 0px;
-	right: 100px;
+#title-func h2,
+#channel-name {
+    height: 27px;
+    line-height: 27px;
 }
 
 #channel-name {
@@ -23,9 +21,6 @@
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
     -moz-binding: url('ellipsis.xml#ellipsis');
-	max-width: 85%;
-	float: left;
-	margin-right: 5px;
 }
 
 body.mac #title-func h2 {
@@ -33,7 +28,13 @@ body.mac #title-func h2 {
 }
 
 #title-func h2 .title-crumb {
-    float: left;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 77px;
+    height: 27px;
+    line-height: 27px;
+    text-align: right;
 }
 
 .zh #title-func h2 .title-crumb {
@@ -180,7 +181,6 @@ body.mac #title-func h2 {
     left: 5px;
     width: 32px;
     height: 32px;
-	overflow: hidden;
 }
 
 #channel-list li .photo-list .ch .img {
@@ -511,6 +511,11 @@ body.mac #title-func h2 {
 }
 
 /* Channel settingForm */
+#content-main-wrap form {
+    position: relative;
+    padding: 0 0 56px 0;
+}
+
 #content-main-wrap form .fminput {
     margin-bottom: 10px;
 }
@@ -1232,7 +1237,6 @@ body.mac #title-func h2 {
     line-height: 25px;
 	white-space: nowrap;
 	position: absolute;
-	line-height: 29px;
 }
 
 #content-main-wrap form .fminput .fmfield .notice.img-upload {
@@ -1249,6 +1253,17 @@ body.mac #title-func h2 {
 }
 
 /* Channel settingForm form button */
+#content-main-wrap form .form-btn {
+    overflow: hidden;
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+}
+
+#content-main-wrap form .form-btn .form-btn-wrap {
+    float: right;
+}
+
 #content-main-wrap form .form-btn .form-btn-wrap .notice,
 #content-main-wrap form .form-btn .form-btn-wrap .btns {
     float: left;
@@ -1277,6 +1292,28 @@ body.mac #title-func h2 {
     margin-right: 15px;
 }
 
+/* */
+#content-main-wrap.fixed {
+    /*height: 100%;*/
+}
+
+#content-main-wrap.fixed .constrain {
+    /*height: 100%;*/
+}
+
+#content-main-wrap.fixed form {
+    /*height: 100%;*/
+}
+
+#content-main-wrap.fixed form .form-btn {
+    bottom: 15px;
+    right: 35px;
+    position: fixed;
+}
+
+#content-main-wrap.fixed.footer-on form .form-btn {
+    bottom: 63px;
+}
 
 /* Get URL */
 #channel-list .get-url {
