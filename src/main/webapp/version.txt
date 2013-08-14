@@ -1,3 +1,20 @@
+版本: 5325
+作者: mars
+日期: 2013/8/14 18:21
+訊息:
+https://docs.google.com/spreadsheet/ccc?key=0AjDDP--2Cg6AdHJKYkRkUW56cVBYS25kZ1l4Q0RFdWc#gid=2
+1. Episdoe curation  Overlay  
+   a.在創建episode時，於Curation步驟，點擊上方"Publish"或下方"Next to publish"，出現 overlay "Saving..."，儲存完成後直接去到Publish頁面。
+   b.在創建episode時，於Curation步驟，點擊 "Save" ，出現 overlay "Saving..."，儲存完成後overlay消失。
+2.Video reorder and choose 在 Storyboard mouse over video thumbnail 範圍，游標會變成手形，點擊後 highlight video。
+3.mouse over video title 則會變成方向遊標，拖拉video，可以編排video的位置
+----
+異動 : /epcurate-curation.html
+異動 : /javascripts/v3/func.curation.js
+異動 : /javascripts/v3/domready.curation.js
+異動 : /javascripts/lib/jquery.cycle.all.min.js
+異動 : /stylesheetsv3/ep-curation.css
+
 版本: 5313
 作者: mars
 日期: 2013/8/13 18:11

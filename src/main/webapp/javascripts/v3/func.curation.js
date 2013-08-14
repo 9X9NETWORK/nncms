@@ -636,12 +636,12 @@
     };
 
     $page.addVideoPlayingHook = function (element) {
-        element.addClass('playing');
+        element.addClass('playing').addClass('on');
         element.next().addClass('next-playing');
     };
 
     $page.removeVideoPlayingHook = function () {
-        $('#storyboard li').removeClass('playing').removeClass('next-playing');
+        $('#storyboard li').removeClass('playing').removeClass('next-playing').removeClass('on');
     };
 
     $page.addTrimTimeEditHook = function () {
@@ -746,7 +746,7 @@
         }
         $('#storyboard-length').text(leftLength);
         $('#storyboard-duration').text(durationHou + ':' + durationMin + ':' + durationSec);
-        $('#storyboard-list .notice').css('left', parseInt((114 * length) + 9, 10) + 'px');
+        $('#storyboard-list .notice').css('left', parseInt((123 * length) + 9, 10) + 'px');
         $('#storyboard-listing li').removeClass('last last2');
         $('#storyboard-listing li').eq(48).addClass('last2');
         $('#storyboard-listing li').eq(49).addClass('last');
