@@ -1,3 +1,22 @@
+版本: 5336
+作者: mars
+日期: 2013/8/15 18:15
+訊息:
+https://docs.google.com/spreadsheet/ccc?key=0AjDDP--2Cg6AdHJKYkRkUW56cVBYS25kZ1l4Q0RFdWc#gid=2
+1.Episdoe curation / Edit episode
+   a.Landing in 在第一順位的有效影片上
+   b.左邊YouTube player 不自動播放
+   c.右邊的區域顯示"Add video", "Edit", "POI & interactive event" 三個tab，畫面Landing in "Edit" tab
+   d.Storyboard highlight editing video
+   e.若episode內皆為失效影片，則Landing in "Add video" tab，不highlight任何影片
+2.Episdoe curation / Video reorder and choose
+   a.mouse over video title 則會變成方向遊標，拖拉video，可以編排video的位置
+----
+異動 : /epcurate-curation.html
+異動 : /javascripts/v3/func.curation.js
+異動 : /stylesheetsv3/ep-curation.css
+異動 : /images/icon_play.png
+
 版本: 5325
 作者: mars
 日期: 2013/8/14 18:21

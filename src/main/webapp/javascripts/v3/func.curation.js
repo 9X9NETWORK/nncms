@@ -1469,7 +1469,8 @@
         if (-1 === newState) {
             cms.global.YOUTUBE_PLAYER.playVideo();
         }
-        if (1 === newState && ($('body').hasClass('from-trim-time-edit') || $('body').hasClass('from-trim-time-edit-ending') || $('body').hasClass('from-poi-edit-mode') || $('body').hasClass('from-poi-overlay-edit-mode'))) {
+        if (1 === newState && ($('body').hasClass('is_landing') || $('body').hasClass('from-trim-time-edit') || $('body').hasClass('from-trim-time-edit-ending') || $('body').hasClass('from-poi-edit-mode') || $('body').hasClass('from-poi-overlay-edit-mode'))) {
+            $('body').removeClass('is_landing');
             $('body').removeClass('from-trim-time-edit');
             $('body').removeClass('from-trim-time-edit-ending');
             $('body').removeClass('from-poi-edit-mode');
@@ -1593,6 +1594,7 @@
         } else {
             // Refactor with jquery deferred object
             // var episode, data, channel, programs;   // Not ideal, temp workaround.
+            $('body').addClass('is_landing');
             getEpisode($('#id').val())
                 .then(getChannels)
                 .then(getChannel)
@@ -1831,6 +1833,14 @@
                         $page.sumStoryboardInfo();
                         $page.rebuildVideoNumber();
                         $('.ellipsis').ellipsis();
+
+                        var videoOkCnt = $('#storyboard-list li a.video_ok').length;
+                        if (videoOkCnt > 0) {
+                            var liIndex = $('#storyboard-list li a.video_ok').parent("li").index();
+                            $('#storyboard-list li .hover-func a.video-play').eq(liIndex).trigger("click");
+                            $("#storyboard-wrap").scrollLeft(123 * liIndex);
+                        }
+
                         $('#overlay-s').fadeOut();
                     }
                 });

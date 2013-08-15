@@ -2857,8 +2857,8 @@ p.auto-height {
 #storyboard .storyboard-list ul li .hover-func a.video-play {
     display: block;
     position: absolute;
-    top: 10px;
-    left: 27px;
+    padding-left: 54px;
+    padding-top: 20px;
     width: 24px;
     height: 25px;
     background: url(../images/icon_play.png) no-repeat 0 0;

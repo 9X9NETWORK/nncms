@@ -1174,6 +1174,8 @@
     {{else}}
         {{if isInvalid || isUnplayableVideo || isEmbedLimited || isPrivateVideo}}
             <a href="#!pid=${id}&ytid=${ytId}" class="error"></a>
+        {{else}}
+            <a href="#!pid=${id}&ytid=${ytId}" class="video_ok"></a>
         {{/if}}
     {{/if}}
     <p class="order"><!-- dynamic rebuild video number after template render --></p>
