@@ -1836,9 +1836,13 @@
 
                         var videoOkCnt = $('#storyboard-list li a.video_ok').length;
                         if (videoOkCnt > 0) {
-                            var liIndex = $('#storyboard-list li a.video_ok').parent("li").index();
-                            $('#storyboard-list li .hover-func a.video-play').eq(liIndex).trigger("click");
-                            $("#storyboard-wrap").scrollLeft(123 * liIndex);
+                            var liIndex = $('#storyboard-list li a.video_ok').parent("li").index(), liShift = 0 ;
+                            $('#storyboard-list li').eq(liIndex).find(".hover-func a.video-play").trigger("click");
+                            $("#storyboard-wrap").scrollLeft('update');
+                            if( liIndex > 0 ){
+                                liShift = 123 * liIndex - 61 ;
+                            }
+                            $("#storyboard-wrap").scrollLeft(liShift);
                         }
 
                         $('#overlay-s').fadeOut();
