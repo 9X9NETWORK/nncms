@@ -408,12 +408,27 @@ $(function () {
                         }
                     }
                     if (committedCnt === matchList.length) {
+                        var videoOkCnt, oriLiCnt = $('#storyboard-list li').length;
                         committedCnt = -1;   // reset to avoid collision
                         $page.animateStoryboard(ytList.length);
                         $('#storyboard-listing-tmpl-item').tmpl(ytList).hide().appendTo('#storyboard-listing').fadeIn(2000);
                         $page.sumStoryboardInfo();
                         $page.rebuildVideoNumber(videoNumberBase);
                         $('.ellipsis').ellipsis();
+
+                        videoOkCnt = $('#storyboard-list li a.video_ok').length ;
+                        if (videoOkCnt > 0) {
+                            var liIndex = $('#storyboard-list li a.video_ok').eq(videoOkCnt-1).parent("li").index(), liShift = 0 ;
+                            if( liIndex >= oriLiCnt ){
+                                $('#storyboard-list li').eq(liIndex).find(".hover-func a.video-play").trigger("click");
+                                $("#storyboard-wrap").scrollLeft('update');
+                                if( liIndex > 0 ){
+                                    liShift = 123 * liIndex - 61 ;
+                                }
+                                $("#storyboard-wrap").scrollLeft(liShift);
+                            }
+                        }
+                        
                         $('#overlay-s').fadeOut();
                     }
                 }, 'jsonp');

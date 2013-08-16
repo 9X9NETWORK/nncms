@@ -1,3 +1,14 @@
+版本: 5346
+作者: mars
+日期: 2013/8/16 15:57
+訊息:
+https://docs.google.com/spreadsheet/ccc?key=0AjDDP--2Cg6AdHJKYkRkUW56cVBYS25kZ1l4Q0RFdWc#gid=2
+1. Episdoe curation / Edit episode  
+   a.新增影片後，Storyboard highlight 新增的 video ，同時也鎖定此video
+   b."新增多個videos時，會highkight並鎖定在最後一個add的video。若只新增一個，則會highlight並鎖定這一個video。"
+----
+異動 : /javascripts/v3/domready.curation.js
+
 版本: 5344
 作者: mars
 日期: 2013/8/16 11:19
