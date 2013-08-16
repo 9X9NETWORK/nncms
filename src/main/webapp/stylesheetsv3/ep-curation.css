@@ -2448,6 +2448,8 @@ p.auto-height {
     font-weight: normal;
     line-height: 18px;
     text-indent: -13px;
+    z-index: 1000;
+    cursor: pointer;
 }
 
 #storyboard .storyboard-list ul {

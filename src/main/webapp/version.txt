@@ -1,3 +1,15 @@
+版本: 5347
+作者: mars
+日期: 2013/8/16 19:10
+訊息:
+https://docs.google.com/spreadsheet/ccc?key=0AjDDP--2Cg6AdHJKYkRkUW56cVBYS25kZ1l4Q0RFdWc#gid=2
+1. Episdoe curation / Edit episode  
+   a.點擊"Add video" tab，去到"Add video"tab，不關閉 "Edit" and "POI & interactive event" 兩個tab
+   b.需求跟 janet 確認後有變更，變成 add video 的動作還是不變，而是在 Storyboard 讓 +在此加入影片 有 add video 的功能
+----
+異動 : /javascripts/v3/domready.curation.js
+異動 : /stylesheetsv3/ep-curation.css
+
 版本: 5346
 作者: mars
 日期: 2013/8/16 15:57

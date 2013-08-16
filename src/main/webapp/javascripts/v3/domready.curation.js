@@ -224,7 +224,10 @@ $(function () {
         return false;
     });
     // main tabs - Add Video
-    $('#epcurate-curation ul.tabs li a.cur-add').click(function (e) {
+    $('#storyboard .storyboard-list p.notice').click(function(e) {
+        $('#epcurate-curation ul.tabs li a.cur-add').trigger("click");
+    });
+    $('#epcurate-curation ul.tabs li a.cur-add').click(function(e) {
         if ($('body').hasClass('has-trimtime-change')) {
             $common.showUnsaveTrimTimeOverlay(e);
             return false;
@@ -428,7 +431,7 @@ $(function () {
                                 $("#storyboard-wrap").scrollLeft(liShift);
                             }
                         }
-                        
+
                         $('#overlay-s').fadeOut();
                     }
                 }, 'jsonp');
