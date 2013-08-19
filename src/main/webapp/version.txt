@@ -1,3 +1,14 @@
+版本: 5362
+作者: mars
+日期: 2013/8/19 16:21
+訊息:
+1. prepare move channel-poi.html to v3
+----
+異動 : /channnel-poi.html
+新增 : /javascripts/v3/domready.channel-poi.js
+新增 : /javascripts/v3/func.channel-poi.js
+新增 : /stylesheetsv3/channnel-poi.css
+
 版本: 5361
 作者: mars
 日期: 2013/8/19 15:59
