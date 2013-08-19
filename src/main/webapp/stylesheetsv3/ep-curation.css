@@ -2645,6 +2645,7 @@ p.auto-height {
 #storyboard .storyboard-list ul li p.img img {
     display: block;
     margin: 7px 0 0 7px;
+	cursor: pointer;
 }
 
 #storyboard .storyboard-list ul li:hover p.img img {
@@ -2837,7 +2838,7 @@ p.auto-height {
     z-index: 52;
     width: 74px;
     height: 45px;
-    cursor: move;
+    cursor: pointer;
 }
 
 #storyboard .storyboard-list ul li .hover-func a.video-del {
