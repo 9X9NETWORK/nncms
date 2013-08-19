@@ -1,3 +1,18 @@
+版本: 5360
+作者: mars
+日期: 2013/8/19 15:13
+訊息:
+1. index.html move to v3 version
+----
+異動 : /index.html
+異動 : /javascripts/v3/domready.index.js
+異動 : /javascripts/v3/func.index.js
+異動 : /lang/zh.json
+異動 : /stylesheetsv3/channnel.css
+異動 : /stylesheetsv3/epcurate-publish.css
+異動 : /stylesheetsv3/episode.css
+異動 : /stylesheetsv3/style.css
+
 版本: 5357
 作者: mars
 日期: 2013/8/19 11:30

@@ -316,7 +316,8 @@
         "title-func": {
             "My Channels": "我的頻道",
             "Reorder channels": "排序頻道",
-            "Save order": "儲存排序"
+            "Save order": "儲存排序",
+            "Create a new channel": "創建頻道"
         },
         "channel-list": {
             "Get URL": "網址",

@@ -904,7 +904,7 @@ abbr, acronym {
 #content-main-wrap {
     position: absolute;
     width: 100%;
-    top: 70px;
+    top: 75px;
     bottom: 0;
     overflow: hidden;
     /*padding-bottom: 48px;*/
@@ -949,15 +949,15 @@ abbr, acronym {
 
 
 div.constrain {
-    margin-right: 35px;
-    padding-bottom: 48px;
+    margin: 0 35px 0 0;
+    padding: 0 0 63px 0;
 }
 
 /* title-func */
 #title-func {
     position: relative;
     margin-right: 35px;
-    z-index: 56;
+    z-index: 99;
     padding: 26px 0 17px;
     background: url(../images/bg_main.png) repeat -210px 0;
 }
@@ -1032,6 +1032,32 @@ div.constrain {
     background-position: 0 -1010px;
 }
 
+#title-func ul {
+    float: right;
+    overflow: hidden;
+}
+
+#title-func ul li {
+    float: left;
+    margin-right: 10px;
+}
+
+#title-func ul li.last {
+    margin: 0;
+}
+
+#title-func ul li p span a {
+    padding: 4px 5px 0 !important;
+}
+
+body.mac #title-func ul li p span a {
+    font-weight: 300;
+}
+
+#title-func .btns p {
+    width: 167px;
+}
+
 #title-func .btns,
 #title-func .required {
     float: right;
@@ -1050,6 +1076,7 @@ div.constrain {
     overflow: hidden;
     clear: both;
     padding-top: 15px;
+	height: 15px;
 }
 
 #title-func .caption p.episode,
@@ -1427,6 +1454,16 @@ div.constrain {
     background: url(../images/bg_tip_top.png) no-repeat center top;
 }
 
+.tip-arrow-left {
+    width: 9px;
+    height: 22px;
+    margin: -30px 0 0 1px;
+    position: relative;
+    z-index: 6;
+    display: none;
+    background: url(../images/bg_tip_left.png) no-repeat center bottom;
+}
+
 .tip-white-l {
     font-size: 13px;
 }
@@ -1616,7 +1653,7 @@ div.constrain {
 
 .get-url .tip-white-l .title {
     width: 45px;
-    margin: 5px 0 0 5px;
+	margin: 5px 0 0 5px;
 }
 
 .get-url .input-gray {

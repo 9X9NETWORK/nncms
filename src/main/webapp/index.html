@@ -5,10 +5,10 @@
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
-<link rel="stylesheet" href="stylesheets/perfect-scrollbar.css" />
-<link rel="stylesheet" href="stylesheets/style.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/channel.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/perfect-scrollbar.css" />
+<link rel="stylesheet" href="stylesheetsv3/style.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/lightbox.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/channel.css?v=1278" />
 <link rel="stylesheet" href="stylesheetsv3/com-9x9-cycle.css?v=1278" />
 <title>9x9.tv - My Channels</title>
 </head>
@@ -57,7 +57,7 @@
     <div id="content-nav">
         <div id="func-nav">
             <ul>
-                <li class="btns"><span><a href="channel-add.html">Create a new channel</a></span></li>
+               <li></li>
             </ul>
         </div>
     </div>
@@ -167,7 +167,10 @@
 
 <script id="title-func-tmpl" type="text/x-jquery-tmpl">
 <h2>${nn._([cms.global.PAGE_ID, 'title-func', 'My Channels'])} (<span id="channel-counter">${$item.cntChannel}</span>)</h2>
-<p class="order btns"><span><a href="javascript:void(0);" class="reorder">${nn._([cms.global.PAGE_ID, 'title-func', 'Reorder channels'])}</a></span></p>
+<ul>
+	<li><p class="curate btns"><span><a href="channel-add.html">${nn._([cms.global.PAGE_ID, 'title-func', 'Create a new channel'])}</a></span></p></li>
+	<li class="last"><p class="order btns"><span><a href="javascript:void(0);" class="reorder">${nn._([cms.global.PAGE_ID, 'title-func', 'Reorder channels'])}</a></span></p></li>
+</ul>
 </script>
 
 <script id="get-url-part-tmpl" type="text/x-jquery-tmpl">
@@ -324,11 +327,11 @@
 <script src="javascripts/libs/json2.min.js?v=1278"></script>
 <script src="javascripts/libs/purl.min.js?v=1278"></script>
 <script src="javascripts/v2/config.js?v=1278"></script>
-<script src="javascripts/v2/func.common.js?v=1278"></script>
-<script src="javascripts/v2/func.get-url.js?v=1278"></script>
-<script src="javascripts/v2/func.index.js?v=1278"></script>
-<script src="javascripts/v2/domready.common.js?v=1278"></script>
-<script src="javascripts/v2/domready.get-url.js?v=1278"></script>
-<script src="javascripts/v2/domready.index.js?v=1278"></script>
+<script src="javascripts/v3/func.common.js?v=1278"></script>
+<script src="javascripts/v3/func.get-url.js?v=1278"></script>
+<script src="javascripts/v3/func.index.js?v=1278"></script>
+<script src="javascripts/v3/domready.common.js?v=1278"></script>
+<script src="javascripts/v3/domready.get-url.js?v=1278"></script>
+<script src="javascripts/v3/domready.index.js?v=1278"></script>
 </body>
 </html>

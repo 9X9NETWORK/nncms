@@ -8,9 +8,7 @@ $(function () {
     var $page = cms.index,
         $common = cms.common;
 
-    $page.setFormHeight();
-    $common.autoHeight();
-    $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+    $('#content-main-wrap').perfectScrollbar({marginTop: 10, marginBottom: 60});
 
     // common unblock
     $('body').keyup(function (e) {
@@ -141,14 +139,6 @@ $(function () {
 
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
-        $page.setFormHeight();
-        $common.autoHeight();
-        $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
-        if ('none' === $('#main-wrap-slider').css('display')) {
-            $('#main-wrap-slider .slider-vertical').slider('destroy');
-            $('#main-wrap-slider .slider-vertical').slider();
-            $('#main-wrap-slider').hide();
-            $('#content-main-wrap').css('top', '0');
-        }
+        $('#content-main-wrap').perfectScrollbar("update");
     });
 });
