@@ -1,3 +1,12 @@
+版本: 5361
+作者: mars
+日期: 2013/8/19 15:59
+訊息:
+1. fix get-url locateion top to right
+----
+異動 : /episode-list.html
+異動 : /images/bg_tip_left.png
+
 版本: 5360
 作者: mars
 日期: 2013/8/19 15:13
