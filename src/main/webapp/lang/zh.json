@@ -582,12 +582,12 @@
             "Publish": "發佈設定"
         },
         "epcurate-form": {
-            "Add Video": "匯入影片",
+            "Add Video": "新增影片",
             "Edit": "編輯",
             "POI & interactive event": "互動時間點與事件",
-            "Add video by URL": "匯入影片連結",
+            "Add video by URL": "新增影片連結",
             "Add": "匯入",
-            "+ Add videos here": "+ 在此加入<br />影片",
+            "+ Add videos here": "+ 在此新增<br />影片",
             "Leave": "離開",
             "Save": "儲存",
             "Next to Publish >": "前往發佈設定 >"
