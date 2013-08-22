@@ -8,7 +8,7 @@ $(function () {
     var $page = cms['episode-list'],
         $common = cms.common;
 
-    $('#content-main-wrap').perfectScrollbar({marginTop: 50, marginBottom: 60});
+    $('#content-main-wrap').perfectScrollbar({marginTop: 30, marginBottom: 60});
 
     $('body').keyup(function (e) {
         if (27 === e.which) { // Esc

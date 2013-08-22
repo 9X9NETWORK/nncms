@@ -1,3 +1,17 @@
+版本: 5376
+作者: mars
+日期: 2013/8/22 10:34
+訊息:
+1. channel-poi.html move to v3
+2. episode scrollerbar fix
+----
+異動 : /channnel-poi.html
+異動 : /javascripts/v3/func.channel-poi.js
+異動 : /javascripts/v3/func.episode.js
+異動 : /javascripts/v3/domready.episode.js
+異動 : /stylesheetsv3/style.css
+異動 : /stylesheetsv3/channnel-poi.css
+
 版本: 5362
 作者: mars
 日期: 2013/8/19 16:21

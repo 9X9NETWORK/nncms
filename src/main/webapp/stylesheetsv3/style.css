@@ -1904,7 +1904,11 @@ body.mac #title-func ul li p span a {
 }
 
 #epcurate-curation #cur-poi .poi-list ul li .icon.instant, #poi-list .poi-info ul li ol li .icon.instant {
-	background-position: 0 -144px;
+    background-position: 0 -144px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon.null-icon, #poi-list .poi-info ul li ol li .icon.null-icon {
+    background-position: 0 -10000px;
 }
 
 #epcurate-curation #cur-poi .poi-list ul li .icon.error, #poi-list .poi-info ul li ol li .icon.error {

@@ -295,6 +295,7 @@
         }
         $('#poi-list-page').html('');
         $('#poi-list-page-tmpl').tmpl(poiPage).prependTo('#poi-list-page');
+        $page.setPoiIcon(poiPage[0].poiItem[0].id, poiPage[0].poiItem[0].eventId);
     };
 
     $page.buildPoiPointEditTmpl = function (poi_point) {
@@ -445,6 +446,31 @@
         }
         $page.setFormHeight();
         $page.preloadChannelVideo();
+
+    };
+
+    $page.setPoiIcon = function (pointId, eventId) {
+        nn.api('GET', cms.reapi('/api/poi_events/{poiEventId}', {
+            poiEventId: eventId
+        }), null, function (poi_event) {
+            var setClass = "",
+                setText = "",
+                modifyTargetDiv = "#poi_point_" + pointId,
+                modifyTargetText = "#poi_point_" + pointId + " div.tip-white p.center";
+            switch (poi_event.type) {
+            case 2:
+                setClass = "instant";
+                setText = nn._([cms.global.PAGE_ID, 'poi-event', 'Instant Notification']);
+                break;
+            case 3:
+                setClass = "schedule";
+                setText = nn._([cms.global.PAGE_ID, 'poi-event', 'Scheduled Notification']);
+                break;
+            }
+            $(modifyTargetDiv).removeClass("null-icon").addClass(setClass);
+            $(modifyTargetText).text(setText);
+            $(modifyTargetDiv).data("poi-event-id", eventId);
+        });
     };
 
     // NOTE: page entry point (keep at the bottom of this file)
@@ -515,6 +541,20 @@
                             }
                             $('#poi-list-page').html('');
                             $('#poi-list-page-tmpl').tmpl(poiPage).prependTo('#poi-list-page');
+                            $.each(poiList, function (i, item) {
+                                nn.api('GET', cms.reapi('/api/poi_campaigns/{poiCampaignId}/pois', {
+                                    poiCampaignId: cms.global.CAMPAIGN_ID
+                                }), {
+                                    poiPointId: item.id
+                                }, function (pois) {
+                                    if (pois && pois.length > 0 && pois[0] && pois[0].eventId && !isNaN(pois[0].eventId)) {
+                                        $page.setPoiIcon(pois[0].pointId, pois[0].eventId);
+                                    } else {
+                                        $('#overlay-s').fadeOut(0);
+                                    }
+                                });
+                            });
+
                             $('#overlay-s').fadeOut('fast', function () {
                                 $('#title-func h2.poi-list em').data('width', $('#title-func h2.poi-list em').width());
                                 $('#title-func h2.poi-create em').data('width', $('#title-func h2.poi-create em').width());

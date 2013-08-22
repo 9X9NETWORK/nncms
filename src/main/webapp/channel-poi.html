@@ -226,9 +226,17 @@
 <ol>
 {{each poiItem}}
     <li>
-        <p class="poi-title">${name}</p>
+		<div id="poi_point_${id}" class="icon null-icon">
+			<span><a href="#!cid=${targetId}&id=${id}" data-channel-id="${targetId}" data-poi-point-id="${id}" class="edit">${name}</a></span>
+			<div class="tip-white">
+				<p class="left"></p>
+				<p class="center">Event Type</p>
+				<p class="right"></p>
+			</div>
+			<div class="tip-bottom"></div>
+		</div>
         <p class="func">
-            <a href="#!cid=${targetId}&id=${id}" data-channel-id="${targetId}" data-poi-point-id="${id}" class="edit">Edit</a>
+            
             <a href="#!cid=${targetId}&id=${id}" data-channel-id="${targetId}" data-poi-point-id="${id}" class="btn-del">Delete</a>
         </p>
     </li>

@@ -95,7 +95,7 @@
                         var ytCheck = null;
 
                         if (youtubes.data) {
-                             ytCheck = cms.youtubeUtility.checkVideoValidity(youtubes);
+                            ytCheck = cms.youtubeUtility.checkVideoValidity(youtubes);
                             if (ytCheck.isZoneLimited || ytCheck.isEmbedLimited || ytCheck.isSyndicateLimited || ytCheck.isUnplayableVideo) {
                                 // unplayable = true;
                                 chkResoult.warn += 1;
@@ -254,7 +254,7 @@
                                 });
                                 $('#episode-list').sortable('disable');
 
-                                $('#content-main-wrap').perfectScrollbar({marginTop: 50, marginBottom: 60});
+                                $('#content-main-wrap').perfectScrollbar("update");
 
                             } else {
                                 $('#episode-first-tmpl').tmpl({
