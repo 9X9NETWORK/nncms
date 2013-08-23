@@ -7,38 +7,18 @@
     var $common = cms.common;
 
     $page.setFormHeight = function () {
-        var windowHeight    = $(window).height(),
-            windowWidth     = $(window).width(),
-            titleFuncHeight = $('#title-func').height(),
-            listSpanWidth   = $('#title-func h2.poi-list span').width(),
-            createSpanWidth = $('#title-func h2.poi-create span').width(),
-            editSpanWidth   = $('#title-func h2.poi-edit span').width(),
-            headerHeight = $('#header').height(),
-            navHeight = $('#studio-nav').height(),
-            contentHeight = windowHeight - titleFuncHeight - headerHeight - navHeight + 5 - 48 - 38 - 10;   // 5:header and studio-nav overlap 48:footer 38:title-func-padding
-        if (windowWidth > 1220) {
-            $('#channel-poi input.text').width(windowWidth - 734);
-            $('#title-func h2').width(windowWidth - 584);
+        $('#content-main-wrap').perfectScrollbar({marginBottom:63});
+        $page.handleButtonPosition();
+    };
+
+    $page.handleButtonPosition = function() {
+        // Handle cancel/create buttons position according to scollbar displayed or not.
+        if ($('#content-main-wrap').height()>=$('div.constrain').outerHeight()) {
+            $('#content-main-wrap').addClass('fixed');
         } else {
-            $('#channel-poi input.text').width(433);
-            $('#title-func h2').width(583);
+            $('#content-main-wrap').removeClass('fixed');
         }
-        if ($('#title-func h2.poi-list em').data('width') > $('#title-func h2.poi-list').width() - listSpanWidth) {
-            $('#title-func h2.poi-list em').width($('#title-func h2.poi-list').width() - listSpanWidth - 1);
-        } else {
-            $('#title-func h2.poi-list em').width('auto');
-        }
-        if ($('#title-func h2.poi-create em').data('width') > $('#title-func h2.poi-create').width() - createSpanWidth) {
-            $('#title-func h2.poi-create em').width($('#title-func h2.poi-create').width() - createSpanWidth - 1);
-        } else {
-            $('#title-func h2.poi-create em').width('auto');
-        }
-        if ($('#title-func h2.poi-edit em').data('width') > $('#title-func h2.poi-edit').width() - editSpanWidth) {
-            $('#title-func h2.poi-edit em').width($('#title-func h2.poi-edit').width() - editSpanWidth - 1);
-        } else {
-            $('#title-func h2.poi-edit em').width('auto');
-        }
-        $('#channel-poi .edit-block').height(contentHeight);
+
     };
 
     $page.chkPoiPointData = function (fm) {

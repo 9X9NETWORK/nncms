@@ -1,3 +1,16 @@
+版本: 5389
+作者: mars
+日期: 2013/8/23 15:27
+訊息:
+1. channel poi input text area fix 
+2. episode curation's poi list locate problem 
+3. index performance tune
+----
+異動 : /index.html
+異動 : /epcurate-curation.html
+異動 : /javascripts/v3/func.channel-poi.js
+異動 : /stylesheetsv3/ep-curation.css
+
 版本: 5378
 作者: mars
 日期: 2013/8/22 16:02

@@ -1743,6 +1743,16 @@ p.auto-height {
     width: 550px;
 }
 
+#poi-list-page {
+    position: relative;
+}
+
+#poi-list-page li.pages {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
 #epcurate-curation #cur-poi .poi-list .poi-list-wrap {
     position: relative;
 }
