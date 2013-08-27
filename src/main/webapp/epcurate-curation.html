@@ -1162,13 +1162,13 @@
 <li data-ytid="${ytId}" data-ytduration="${ytDuration}" data-starttime="${startTime}" data-endtime="${endTime}"{{if ytDuration == 0}} class="invalid"{{/if}}>
     {{if isZoneLimited || isSyndicateLimited}}
         {{if isZoneLimited && isSyndicateLimited}}
-            <a href="#!pid=${id}&ytid=${ytId}" class="warning2"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Not playable in some regions & on mobile device'])}</span></span></span></span></a>
+            <a href="#!pid=${id}&ytid=${ytId}" class="warning2 video_ok"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Not playable in some regions & on mobile device'])}</span></span></span></span></a>
         {{else}}
             {{if isZoneLimited}}
-                <a href="#!pid=${id}&ytid=${ytId}" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Not playable in some regions'])}</span></span></span></span></a>
+                <a href="#!pid=${id}&ytid=${ytId}" class="warning video_ok"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Not playable in some regions'])}</span></span></span></span></a>
             {{/if}}
             {{if isSyndicateLimited}}
-                <a href="#!pid=${id}&ytid=${ytId}" class="warning"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Not playable on mobile device'])}</span></span></span></span></a>
+                <a href="#!pid=${id}&ytid=${ytId}" class="warning video_ok"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Not playable on mobile device'])}</span></span></span></span></a>
             {{/if}}
         {{/if}}
     {{else}}
