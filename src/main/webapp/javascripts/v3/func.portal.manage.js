@@ -49,6 +49,15 @@
         return retValue;
     };
 
+    $page._getItemIdArray = function (inList) {
+        var retValue = [];
+
+        $.each(inList, function (i, channel) {
+            retValue.push(channel.id);
+        });
+        return retValue;
+    };
+
     $page.procNomoList = function (inList, sortingType) {
         // 
         var retValue = [];
@@ -59,12 +68,37 @@
         }
         return retValue;
     };
+
     $page.procOnTopList = function (inList, sortingType) {
         var retValue = [];
         if (2 === sortingType) {
-
             retValue = $page.procPartList(inList, "onTop");
         }
+        return retValue;
+    };
+
+    $page.prepareChannels = function (inList) {
+        var retValue = [], temp = [], tmpId = 0;
+
+        $.each(inList, function (i, channel) {
+            temp = [];
+            if (channel.imageUrl == '') {
+                channel.imageUrl = 'images/ch_default.png';
+                if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
+                    temp = channel.moreImageUrl.split('|');
+                    if (temp[0] && temp[0] !== cms.config.EPISODE_DEFAULT_IMAGE) {
+                        channel.imageUrl = temp[0];
+                    }
+                }
+            }
+            tmpId = parseInt(channel.id, 10);
+            if (-1 === $.inArray(tmpId, $page.currentList)) {
+                channel.alreadyAdd = false;
+            } else {
+                channel.alreadyAdd = true;
+            }
+            retValue.push(channel);
+        });
         return retValue;
     };
 
@@ -183,6 +217,8 @@
             }
         });
 
+
+
         if (channels.length > 0) {
             nn.api('PUT', cms.reapi('/api/sets/{setId}/channels/sorting', {
                 setId: inObj
@@ -201,8 +237,7 @@
                             actChannelCount2 = 0;
 
                         if (cntChanels > 0) {
-
-                            dbTopList = $page.procOnTopList(chanels, $page.sortingType);
+                            dbTopList = $page._getItemIdArray($page.procOnTopList(chanels, $page.sortingType));
                         }
 
                         $.each(nowTopList, function (i, chId) {

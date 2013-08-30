@@ -1,3 +1,13 @@
+版本: 5422
+作者: mars
+日期: 2013/8/30 10:53
+訊息:
+1. portal manage set on top function can't work 
+2. portal manage channel search can't search by url
+----
+異動 : /javascripts/v3/func.portal.manage.js
+異動 : /javascripts/v3/domready.portal.manage.js
+
 版本: 5398
 作者: mars
 日期: 2013/8/27 14:25

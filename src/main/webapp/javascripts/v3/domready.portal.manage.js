@@ -246,22 +246,9 @@ $(function () {
                         channels: tmpChannel
                     }, function (channels) {
                         var cntChannel = channels.length,
-                            items = [],
-                            temp = [];
-                        $.each(channels, function (i, channel) {
-                            temp = [];
+                            items = [];
 
-                            if (channel.imageUrl == '') {
-                                channel.imageUrl = 'images/ch_default.png';
-                                if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
-                                    temp = channel.moreImageUrl.split('|');
-                                    if (temp[0] && temp[0] !== cms.config.EPISODE_DEFAULT_IMAGE) {
-                                        channel.imageUrl = temp[0];
-                                    }
-                                }
-                            }
-                            items.push(channel);
-                        });
+                        items = $page.prepareChannels(channels);
                         cntChannel = items.length;
                         if (cntChannel > 0) {
                             nn.api('GET', cms.reapi('/api/channels/{channelId}/autosharing/validBrands', {
@@ -276,6 +263,7 @@ $(function () {
                                         break;
                                     }
                                 }
+
                                 if (isValid === true) {
                                     $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel]));
                                     $('#portal-search-item-tmpl').tmpl(items).appendTo('#search-channel-list');
@@ -304,30 +292,9 @@ $(function () {
                     mso: cms.global.MSOINFO.name
                 }, function (channels) {
                     var cntChannel = channels.length,
-                        items = [],
-                        tmpId = 0,
-                        temp = [];
-                    $.each(channels, function (i, channel) {
-                        temp = [];
-                        if (channel.imageUrl == '') {
-                            channel.imageUrl = 'images/ch_default.png';
-                            if (channel.moreImageUrl && '' !== $.trim(channel.moreImageUrl)) {
-                                temp = channel.moreImageUrl.split('|');
-                                if (temp[0] && temp[0] !== cms.config.EPISODE_DEFAULT_IMAGE) {
-                                    channel.imageUrl = temp[0];
-                                }
-                            }
-                        }
-                        tmpId = parseInt(channel.id, 10);
-                        if (-1 === $.inArray(tmpId, $page.currentList)) {
-                            channel.alreadyAdd = false;
-                        } else {
-                            channel.alreadyAdd = true;
-                        }
+                        items = [];
 
-                        items.push(channel);
-                    });
-
+                    items = $page.prepareChannels(channels);
                     cntChannel = items.length;
                     if (cntChannel > 0) {
                         $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel]));
