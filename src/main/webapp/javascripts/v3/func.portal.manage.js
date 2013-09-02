@@ -78,7 +78,7 @@
     };
 
     $page.prepareChannels = function (inList) {
-        var retValue = [], temp = [], tmpId = 0;
+        var retValue = [], temp = [], tmpId = 0, tmpMsoName = cms.global.MSOINFO.name || "9x9";
 
         $.each(inList, function (i, channel) {
             temp = [];
@@ -97,6 +97,7 @@
             } else {
                 channel.alreadyAdd = true;
             }
+            channel.msoName = tmpMsoName;
             retValue.push(channel);
         });
         return retValue;
@@ -398,10 +399,12 @@
                             var cntChanels = chanels.length;
                             $('#channel-list').empty();
                             if (cntChanels > 0) {
+                                var tmpMsoName = tmpMsoName = cms.global.MSOINFO.name || "9x9";
                                 $.each(chanels, function (i, channel) {
                                     if ('' === channel.imageUrl) {
                                         channel.imageUrl = "images/ch_default.png";
                                     }
+                                    channel.msoName = tmpMsoName;
                                     $page.currentList.push(channel.id);
                                 });
 

@@ -47,7 +47,7 @@
             var outChannels = [],
                 tmpArr = [],
                 strMinus = "";
-            var i = 0;
+            var i = 0, tmpMsoName = tmpMsoName = cms.global.MSOINFO.name || "9x9";
             for (i = 0; i < cntitemChannel; i += 1) {
                 tmpArr = [];
                 strMinus = "";
@@ -62,6 +62,7 @@
                 tmpArr.imageUrl = tmpArr.imageUrl.split('|')[0];
 
                 tmpArr.msoMinus = strMinus;
+                tmpArr.msoName = tmpMsoName;
                 outChannels.push(tmpArr);
             }
             $('#store-chanels-li-tmpl').tmpl(outChannels).appendTo('.channel-list');
