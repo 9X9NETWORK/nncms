@@ -107,6 +107,12 @@ $(function () {
         $common.showDeletePromptOverlay('Are you sure you want to delete this channel? All data will be removed permanently.');
         return false;
     });
+
+    $('#channel-list').on('click', '#empty-item', function () {
+        location.href = "channel-add.html";
+        return false;
+    });
+
     $('#delete-prompt .btn-del').click(function () {
         $.unblockUI();
         if ($('#channel-list li.deleting').length > 0 && $('#channel-list li.deleting').data('deleteId')) {
@@ -123,7 +129,26 @@ $(function () {
                         }
                         $('#channel-list li.deleting').remove();
                         $('#content-main-wrap').height($('#content-main-wrap').height() - 105); // 105: li height
-                        $common.scrollbar('#content-main', '#content-main-wrap', '#main-wrap-slider');
+                        $('#content-main-wrap').perfectScrollbar("update");
+                        if (0 === $("#channel-list li.clearfix").length) {
+                            $('#content-main-wrap .constrain').empty();
+                            $('#channel-list-empty-tmpl').tmpl({
+                                id: cms.global.USER_DATA.id
+                            }).appendTo('#content-main-wrap .constrain');
+                            $('#com-9x9-cycle p.cycle-pager').html('');
+                            $('#com-9x9-cycle .wrapper ul.content').cycle({
+                                pager: '.cycle-pager',
+                                activePagerClass: 'active',
+                                updateActivePagerLink: null,
+                                fx: 'scrollHorz',
+                                speed: 1000,
+                                timeout: 6000,
+                                pagerEvent: 'mouseover',
+                                pause: 1,
+                                cleartypeNoBg: true
+                            });
+                            $('#func-nav ul li.btns').addClass("hide");
+                        }
                     });
                 } else {
                     $('#overlay-s').fadeOut(0, function () {

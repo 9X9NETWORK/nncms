@@ -1,3 +1,12 @@
+版本: 5461
+作者: mars
+日期: 2013/9/9 11:36
+訊息:
+1. bug fix : 發現當 channel list 沒有頻道時，應該出現的 turorial 沒有出現。(janet) 
+----
+異動 : /javascripts/v3/domready.index.js
+異動 : /javascripts/v3/func.index.js
+
 版本: 5460
 作者: mars
 日期: 2013/9/9 11:10
