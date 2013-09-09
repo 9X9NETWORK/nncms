@@ -175,7 +175,7 @@ var cms = {};
         },
         // NOTE: The naming is 9x9 API convention, not jquery.titlecard plugin convention
         TITLECARD_DEFAULT_OPTION: {
-            message: 'My video',
+            message: ' ',
             align: 'center',
             effect: 'fade',
             duration: 7,

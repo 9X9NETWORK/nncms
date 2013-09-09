@@ -657,7 +657,7 @@ $(function () {
             opts = $('#storyboard-list li:eq(' + index + ')').tmplItem().data[hook],
             isUpdateMode = true,
             isDisableEdit = false;
-        if (opts && opts.message) {
+        if (opts) {
             $page.buildTitleCardEditTmpl(opts, isUpdateMode, isDisableEdit);
             $page.enableTitleCardEdit();
 
@@ -760,7 +760,7 @@ $(function () {
         } else {
             opts = $page.computeTitleCardEditOption();
         }
-        if (opts && opts.message) {
+        if (opts) {
             $page.buildTitleCardTmpl(opts);
         }
     });
@@ -806,8 +806,7 @@ $(function () {
             isUpdateMode = true,
             isDisableEdit = true;
         if ('' === message) {
-            $common.showSystemErrorOverlay("Title text can't be empty!");
-            return false;
+            message = " ";
         }
         isInsertMode = ($('#storyboard-list li.edit p.hover-func a.edit').length > 0) ? true : false;
         if (isInsertMode) {
@@ -920,6 +919,7 @@ $(function () {
     $('#cur-edit').on('click change', '.text-container textarea', function () {
         $('body').addClass('has-titlecard-change');
         var text = $common.strip_tags($.trim($(this).val()));
+        if(text === ''){text = ' ';}
         $(this).val(text);
         $('#titlecard-inner').html($common.nl2br(text));
         $page.verticalAlignTitleCard();
@@ -2191,9 +2191,9 @@ $(function () {
                             }
 
                             // insert titlecard
-                            if (null !== tmplItemData.beginTitleCard && tmplItemData.beginTitleCard.message && '' !== $.trim(tmplItemData.beginTitleCard.message)) {
+                            if (null !== tmplItemData.beginTitleCard && tmplItemData.beginTitleCard.message && '' !== tmplItemData.beginTitleCard.message) {
                                 parameter = $.extend({}, tmplItemData.beginTitleCard, {
-                                    message: $.trim(tmplItemData.beginTitleCard.message).replace(/\n/g, '{BR}'),
+                                    message: tmplItemData.beginTitleCard.message.replace(/\n/g, '{BR}'),
                                     type: 0
                                 });
                                 nn.api('POST', cms.reapi('/api/programs/{programId}/title_cards', {
@@ -2206,9 +2206,9 @@ $(function () {
                                     //tmplItem.update();
                                 });
                             }
-                            if (null !== tmplItemData.endTitleCard && tmplItemData.endTitleCard.message && '' !== $.trim(tmplItemData.endTitleCard.message)) {
+                            if (null !== tmplItemData.endTitleCard && tmplItemData.endTitleCard.message && '' !== tmplItemData.endTitleCard.message) {
                                 parameter = $.extend({}, tmplItemData.endTitleCard, {
-                                    message: $.trim(tmplItemData.endTitleCard.message).replace(/\n/g, '{BR}'),
+                                    message: tmplItemData.endTitleCard.message.replace(/\n/g, '{BR}'),
                                     type: 1
                                 });
                                 nn.api('POST', cms.reapi('/api/programs/{programId}/title_cards', {
@@ -2284,9 +2284,9 @@ $(function () {
                             // insert titlecard
                             tmplItem = $('#storyboard-list li:eq(' + idx + ')').tmplItem();
                             tmplItemData = tmplItem.data;
-                            if (null !== tmplItemData.beginTitleCard && tmplItemData.beginTitleCard.message && '' !== $.trim(tmplItemData.beginTitleCard.message)) {
+                            if (null !== tmplItemData.beginTitleCard && tmplItemData.beginTitleCard.message && '' !== tmplItemData.beginTitleCard.message) {
                                 parameter = $.extend({}, tmplItemData.beginTitleCard, {
-                                    message: $.trim(tmplItemData.beginTitleCard.message).replace(/\n/g, '{BR}'),
+                                    message: tmplItemData.beginTitleCard.message.replace(/\n/g, '{BR}'),
                                     type: 0
                                 });
                                 nn.api('POST', cms.reapi('/api/programs/{programId}/title_cards', {
@@ -2299,9 +2299,9 @@ $(function () {
                                     //tmplItem.update();
                                 });
                             }
-                            if (null !== tmplItemData.endTitleCard && tmplItemData.endTitleCard.message && '' !== $.trim(tmplItemData.endTitleCard.message)) {
+                            if (null !== tmplItemData.endTitleCard && tmplItemData.endTitleCard.message && '' !== tmplItemData.endTitleCard.message) {
                                 parameter = $.extend({}, tmplItemData.endTitleCard, {
-                                    message: $.trim(tmplItemData.endTitleCard.message).replace(/\n/g, '{BR}'),
+                                    message: tmplItemData.endTitleCard.message.replace(/\n/g, '{BR}'),
                                     type: 1
                                 });
                                 nn.api('POST', cms.reapi('/api/programs/{programId}/title_cards', {
@@ -2413,9 +2413,9 @@ $(function () {
                             }
 
                             // insert titlecard
-                            if (null !== tmplItemData.beginTitleCard && tmplItemData.beginTitleCard.message && '' !== $.trim(tmplItemData.beginTitleCard.message)) {
+                            if (null !== tmplItemData.beginTitleCard && tmplItemData.beginTitleCard.message && '' !==  tmplItemData.beginTitleCard.message) {
                                 parameter = $.extend({}, tmplItemData.beginTitleCard, {
-                                    message: $.trim(tmplItemData.beginTitleCard.message).replace(/\n/g, '{BR}'),
+                                    message: tmplItemData.beginTitleCard.message.replace(/\n/g, '{BR}'),
                                     type: 0
                                 });
                                 nn.api('POST', cms.reapi('/api/programs/{programId}/title_cards', {
@@ -2428,9 +2428,9 @@ $(function () {
                                     //tmplItem.update();
                                 });
                             }
-                            if (null !== tmplItemData.endTitleCard && tmplItemData.endTitleCard.message && '' !== $.trim(tmplItemData.endTitleCard.message)) {
+                            if (null !== tmplItemData.endTitleCard && tmplItemData.endTitleCard.message && '' !== tmplItemData.endTitleCard.message) {
                                 parameter = $.extend({}, tmplItemData.endTitleCard, {
-                                    message: $.trim(tmplItemData.endTitleCard.message).replace(/\n/g, '{BR}'),
+                                    message: tmplItemData.endTitleCard.message.replace(/\n/g, '{BR}'),
                                     type: 1
                                 });
                                 nn.api('POST', cms.reapi('/api/programs/{programId}/title_cards', {

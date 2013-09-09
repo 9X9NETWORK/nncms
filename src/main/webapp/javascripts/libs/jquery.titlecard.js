@@ -7,9 +7,10 @@
  * @requires    jQuery UI v1.8.23 or later
  * @requires    9x9 SDK (nn-sdk.js)
  * @author      Chih-Wen Yang <chihwen@doubleservice.com>
- * @version     1.6.2
+ * @version     1.6.3
  *
  * - Change Log:
+ *      1.6.3:  2013/09/06 - add new requirement text can be empty by Mars.
  *      1.6.2:  2013/06/11 - Some minor cleanup to pass JSLint coding quality tool check (http://www.jslint.com/).
  *      1.6.1:  2013/05/24 - Some minor cleanup to pass JSLint coding quality tool check (http://www.jslint.com/).
  *      1.6.0:  2012/10/24 - 1. Detect both width and height then decide calculate title card size according to width or to height.
@@ -118,9 +119,9 @@
         };
 
         var destroy = function (element, func) {
-            var callback = null;
+            var callbackFucn = null;
             if ('function' === typeof func) {
-                callback = func;
+                callbackFucn = func;
             }
             element
                 .clearQueue()
@@ -136,7 +137,7 @@
                             .stop()
                         .end()                              // wrapper-outer
                     .end()                                  // wrapper-canvas
-                    .hide('fast', callback);
+                    .hide('fast', callbackFucn);
         };
 
         // param overloading check
@@ -196,7 +197,7 @@
                 heightTemp = 0,
                 outerFloat = 'none',
                 outerMarginTop = 0,
-                text = strip_tags($.trim(opts.text)).replace(/(\n|\{BR\})/g, '<br />'),
+                text = strip_tags($.trim(opts.text)).replace(/(\n|\{BR\})/g, '<br />') || "<br />",
                 align = opts.align,
                 fontRadix = parseInt(opts.fontSize, 10),
                 fontSize = 0,
@@ -208,7 +209,9 @@
                 wrapperMiddle = wrapperId + 'wrapper-middle',
                 wrapperInner = wrapperId + 'wrapper-inner',
                 wrapperHtml = '';
-
+            if ('' !== opts.backgroundImage) {
+                opts.backgroundColor = "";
+            }
             if (opts.widescreen) {
                 heightTemp = Math.round((width / 16) * 9);
                 if (heightTemp > height) {
@@ -400,7 +403,7 @@
         widescreen: true,           // easter egg option
         width: null,                // easter egg option
         height: null,               // easter egg option
-        text: 'My video',
+        text: ' ',
         align: 'center',
         effect: 'none',
         duration: 7,

@@ -1,3 +1,15 @@
+版本: 5460
+作者: mars
+日期: 2013/9/9 11:10
+訊息:
+1. janet requirement allow titlecard with empty message 
+----
+異動 : /javascripts/libs/jquery.titlecard.js
+異動 : /javascripts/libs/jquery.titlecard.min.js
+異動 : /javascripts/v2/config.js
+異動 : /javascripts/v3/domready.curation.js
+異動 : /javascripts/v3/func.curation.js
+
 版本: 5430
 作者: mars
 日期: 2013/9/2 17:23

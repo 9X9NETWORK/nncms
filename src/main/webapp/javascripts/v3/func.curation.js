@@ -585,7 +585,7 @@
     };
 
     $page.adaptTitleCardOption = function (opts) {
-        if (!opts || !opts.message) {
+        if (!opts) {
             opts = cms.config.TITLECARD_DEFAULT_OPTION;
         }
         var option = {
@@ -600,6 +600,7 @@
             backgroundColor: opts.bgColor,
             backgroundImage: opts.bgImage
         };
+        
         return option;
     };
 
@@ -1040,7 +1041,7 @@
     $page.buildTitleCardEditTmpl = function (opts, isUpdateMode, isDisableEdit) {
         $('.edit-title').html($('#titlecard-edit-tmpl').tmpl(opts, {
             isUpdateMode: isUpdateMode,
-            hasBgImage: (('' !== opts.bgImage && '' === opts.bgColor) || ('' !== opts.bgImage && '' !== opts.bgColor && cms.config.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM !== opts.bgImage))
+            hasBgImage: (('' !== opts.bgImage ) || ('' !== opts.bgImage && '' !== opts.bgColor && cms.config.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM !== opts.bgImage))
         }));
         $page.uploadImage(isDisableEdit);
         $('#cur-edit input, #cur-edit textarea, #cur-edit select').uniform();
@@ -1050,12 +1051,12 @@
     };
 
     $page.buildTitleCardTmpl = function (opts) {
-        if (opts && opts.message) {
+        if (opts) {
             $('#video-player .video').html($('#titlecard-tmpl').tmpl(opts, {
                 message: $common.nl2br($common.strip_tags($.trim(opts.message))),
                 outerHeight: ($('#epcurate-curation #video-player .video').height() - 44),  // 44: $('#video-control')
                 fontSize: Math.round($('#epcurate-curation #video-player .video').width() / opts.size),
-                hasBgImage: (('' !== opts.bgImage && '' === opts.bgColor) || ('' !== opts.bgImage && '' !== opts.bgColor && cms.config.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM !== opts.bgImage))
+                hasBgImage: (('' !== opts.bgImage ) || ('' !== opts.bgImage && '' !== opts.bgColor && cms.config.TITLECARD_DEFAULT_IMAGE_BY_SYSTEM !== opts.bgImage))
             }));
             $('#play-time .played').text('00:00');
             $('#play-time .duration').text($common.formatDuration(opts.duration));
@@ -1318,7 +1319,7 @@
     $page.playTitleCardAndVideo = function (element) {
         if (element && element.children('.title').children('a.begin-title').length > 0) {
             var opts = element.tmplItem().data.beginTitleCard;
-            if (opts && opts.message) {
+            if (opts) {
                 $page.removeTitleCardPlayingHook();
                 $page.addTitleCardPlayingHook(element, 'begin');
                 $page.cancelTitleCard();
@@ -1813,8 +1814,8 @@
                             }
                         }
                     }
-                    if (beginTitleCard && beginTitleCard.message && '' !== $.trim(beginTitleCard.message)) {
-                        beginTitleCard.message = $.trim(beginTitleCard.message).replace(/\{BR\}/g, '\n');
+                    if (beginTitleCard && beginTitleCard.message && '' !== beginTitleCard.message) {
+                        beginTitleCard.message = beginTitleCard.message.replace(/\{BR\}/g, '\n');
                         if (beginTitleCard.bgImage && '' !== $.trim(beginTitleCard.bgImage)) {
                             preloadImage.push({
                                 image: beginTitleCard.bgImage
@@ -1823,8 +1824,8 @@
                     } else {
                         beginTitleCard = null;
                     }
-                    if (endTitleCard && endTitleCard.message && '' !== $.trim(endTitleCard.message)) {
-                        endTitleCard.message = $.trim(endTitleCard.message).replace(/\{BR\}/g, '\n');
+                    if (endTitleCard && endTitleCard.message && '' !== endTitleCard.message) {
+                        endTitleCard.message = endTitleCard.message.replace(/\{BR\}/g, '\n');
                         if (endTitleCard.bgImage && '' !== $.trim(endTitleCard.bgImage)) {
                             preloadImage.push({
                                 image: endTitleCard.bgImage
