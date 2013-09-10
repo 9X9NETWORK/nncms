@@ -357,6 +357,8 @@ $(function () {
                 $('#videourl').val(normalList.join('\n'));
                 $('#cur-add .notice').text(nn._([cms.global.PAGE_ID, 'add-video', 'You have reached the maximum amount of 50 videos.'])).removeClass('hide').show();
                 return false;
+            } else if ((existList.length + matchList.length) === cms.config.PROGRAM_MAX) {
+                $('#storyboard-list > p.notice:eq(0)').hide();
             }
             $('body').addClass('has-change');
             $common.showProcessingOverlay();
@@ -522,6 +524,7 @@ $(function () {
                 videoDeleteIdList.push(tmplItemData.id);
             }
             deleting.remove();
+            $('#storyboard-list > p.notice:eq(0)').show();
         } else {
             if (length > 1) {
                 if (deleting.hasClass('playing') && (length - eq - 1) === 0) {
@@ -534,6 +537,7 @@ $(function () {
                     videoDeleteIdList.push(tmplItemData.id);
                 }
                 deleting.remove();
+                $('#storyboard-list > p.notice:eq(0)').show();
             } else {
                 $common.showSystemErrorOverlay('There must be at least one video in this episode.');
             }

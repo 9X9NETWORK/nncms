@@ -1,3 +1,9 @@
+版本: 5467
+作者: yifan
+日期: 2013/9/10 17:09
+訊息:
+1. bug fix : Episode curation加入50個影片以後，storyboard的"Add videos"提示依然存在
+
 版本: 5466
 作者: yifan
 日期: 2013/9/10 17:02
