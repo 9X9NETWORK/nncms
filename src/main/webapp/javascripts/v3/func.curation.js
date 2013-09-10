@@ -1132,6 +1132,20 @@
             $('.ellipsis').ellipsis();
             if (poiList && poiList.length > 0) {
                 $.each(poiList, function (i, item) {
+                    switch (item.eventType) {
+                        case 1:
+                            item.eventTypeName = 'Hyper Link';
+                            break;
+                        case 2:
+                            item.eventTypeName = 'Scheduled Notification';
+                            break;
+                        case 3:
+                            item.eventTypeName = 'Poll';
+                            break;
+                        case 4:
+                            item.eventTypeName = 'Instant Notification';
+                            break;
+                    }
                     if (poiItem.length > 0 && i % itemSize === 0) {
                         poiPage.push({
                             poiItem: poiItem

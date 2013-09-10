@@ -1,3 +1,9 @@
+版本: 5462
+作者: yifan
+日期: 2013/9/10 15:42
+訊息:
+1. bug fix : Episode level list 顯示 POI type name & icon異常
+
 版本: 5461
 作者: mars
 日期: 2013/9/9 11:36
