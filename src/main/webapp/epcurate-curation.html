@@ -479,7 +479,17 @@
 <ol>
 {{each poiItem}}
     <li>
+        {{if eventType === 1}}
+        <div class="icon hyper" id="poi_point_${id}">
+        {{else eventType === 2}}
+        <div class="icon schedule" id="poi_point_${id}">
+        {{else eventType === 3}}
+        <div class="icon poll" id="poi_point_${id}">
+        {{else eventType === 4}}
+        <div class="icon instant" id="poi_point_${id}">
+        {{else}}
         <div class="icon null-icon" id="poi_point_${id}">
+        {{/if}}
 			<span><a href="#!pid=${targetId}&id=${id}" data-program-id="${targetId}" data-poi-point-id="${id}" class="edit">${name}</a></span>
 			<div class="tip-white">
 				<p class="left"></p>
