@@ -910,6 +910,7 @@ $(function () {
             }
             $('body').removeClass('has-titlecard-change');
             $page.sumStoryboardInfo();
+            $page.rebuildVideoNumber();
         }
         return false;
     });
