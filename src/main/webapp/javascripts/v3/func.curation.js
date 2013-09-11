@@ -1145,6 +1145,10 @@
                         case 4:
                             item.eventTypeName = 'Instant Notification';
                             break;
+                        default:
+                            item.eventType = 0;
+                            item.eventTypeName = null;
+                            break;
                     }
                     if (poiItem.length > 0 && i % itemSize === 0) {
                         poiPage.push({

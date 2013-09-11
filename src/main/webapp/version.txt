@@ -1,3 +1,9 @@
+版本: 5468
+作者: yifan
+日期: 2013/9/11 09:50
+訊息:
+1. bug fix : Episode level list 顯示 POI type name language異常
+
 版本: 5467
 作者: yifan
 日期: 2013/9/10 17:09
