@@ -1085,7 +1085,7 @@
                 setClass = "schedule";
                 setText = nn._([cms.global.PAGE_ID, 'poi-event', 'Scheduled Notification']);
                 break;
-            case 2:
+            case 4:
                 setClass = "poll";
                 setText = nn._([cms.global.PAGE_ID, 'poi-event', 'Poll']);
                 break;

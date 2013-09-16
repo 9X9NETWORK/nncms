@@ -1925,7 +1925,12 @@ $(function () {
             if (!isNaN(programId) && programId > 0) {
                 insertPoi(data, poiItem);
             } else {
-                // Uncertain expressions removed.
+                // build timestamp id and update poi info in the browser
+                poiItem.id = 'temp-poi-point-id-' + $.now();
+                poiItem.eventId = 'temp-poi-event-id-' + $.now();
+                
+                updatePoiInfo(poiItem, true);
+                $('#overlay-s').fadeOut(0);
             }
         }            
     }
