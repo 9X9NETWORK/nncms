@@ -483,11 +483,11 @@
         {{if eventType === 1}}
         <div class="icon hyper" id="poi_point_${id}">
         {{else eventType === 2}}
-        <div class="icon schedule" id="poi_point_${id}">
-        {{else eventType === 3}}
-        <div class="icon poll" id="poi_point_${id}">
-        {{else eventType === 4}}
         <div class="icon instant" id="poi_point_${id}">
+        {{else eventType === 3}}
+        <div class="icon schedule" id="poi_point_${id}">
+        {{else eventType === 4}}
+        <div class="icon poll" id="poi_point_${id}">
         {{else}}
         <div class="icon null-icon" id="poi_point_${id}">
         {{/if}}
@@ -825,7 +825,8 @@
         </form>
     </div>
     <div id="event-poll" class="event hide">
-        <form name="eventPollForm" id="eventPollForm" method="get" action="">
+        <form id="eventPollForm" name="eventPollForm" method="get" action="">
+            <input type="hidden" name="channelUrl" value="${link}" />
             <input type="hidden" name="notifyMsg" value="" />
             <input type="hidden" name="notifyScheduler" value="" />
             <p class="crumb create"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; <a href="#" class="crumb-event event-select">${nn._([cms.global.PAGE_ID, 'poi-event', 'Add interactive event'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Poll'])}</p>
@@ -846,31 +847,15 @@
                 </div>
                 <div class="fminput">
                     <label for="poll_button_text"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Button text'])}:</label>
+                    {{each pollButtons}}
                     <p class="text poll">
                         <span>
-                            <input type="text" name="btnText" id="poll_button_text" maxlength="20" value="${button}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text'])}" class="text poll-button" />
+                            <input type="text" name="btnText1" maxlength="8" value="${$value}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text'])}" class="text poll-button" />
                         </span>
-						<a class="poll-button-del" href="#"></a>
+                        <a href="#" class="poll-button-del"></a>
                     </p>
-                    <p class="text poll">
-                        <span>
-                            <input type="text" name="btnText" id="poll_button_text" maxlength="20" value="${button}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text'])}" class="text poll-button" />
-                        </span>
-						<a class="poll-button-del" href="#"></a>
-                    </p>
-                    <p class="text poll">
-                        <span>
-                            <input type="text" name="btnText" id="poll_button_text" maxlength="20" value="${button}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text'])}" class="text poll-button" />
-                        </span>
-						<a class="poll-button-del" href="#"></a>
-                    </p>
-                    <p class="text poll">
-                        <span>
-                            <input type="text" name="btnText" id="poll_button_text" maxlength="20" value="${button}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text'])}" class="text poll-button" />
-                        </span>
-						<a class="poll-button-del" href="#"></a>
-                    </p>
-                    <div class="btn-gray">
+                    {{/each}}
+                    <div id="btn-add-poll-item" class="btn-gray">
                         <p class="left"></p>
                         <p class="center">
                             <a href="#" class="langkey">Add Button</a>
@@ -961,7 +946,7 @@
                             <h4><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Mobile notification message'])}</h4>
                             <p class="textarea"><span><span><textarea name="notifyMsg" id="instant_msg" cols="80" class="textarea" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input Mobile notification message'])}">${notifyMsg}</textarea></span></span></p>
                             <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'Recommend: less 34 bytes'])}</p>
-                            <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'The mobile notification will instant send, when user pressed OK or Enter.'])}</p>
+                            <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'If users press OK or Enter, the mobile notification will be send immediately.'])}</p>
                         </div>
                     </div>
                 </div>
@@ -1177,8 +1162,8 @@
 
 <!-- storyboard-listing-tmpl-item Begin -->
 <script id="storyboard-listing-tmpl-item" type="text/x-jquery-tmpl">
-<li data-ytid="${ytId}" data-ytduration="${ytDuration}" data-starttime="${startTime}" data-endtime="${endTime}"{{if ytDuration == 0}} class="invalid"{{/if}}>
-    {{if isZoneLimited || isSyndicateLimited}}
+<li data-ytid="${ytId}" data-ytduration="${ytDuration}" data-starttime="${startTime}" data-endtime="${endTime}"{{if ytDuration === 0 || isRequesterRegionRestricted}} class="invalid"{{/if}}>
+    {{if (isZoneLimited || isSyndicateLimited) && !isRequesterRegionRestricted}}
         {{if isZoneLimited && isSyndicateLimited}}
             <a href="#!pid=${id}&ytid=${ytId}" class="warning2 video_ok"><span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Not playable in some regions & on mobile device'])}</span></span></span></span></a>
         {{else}}
@@ -1190,7 +1175,7 @@
             {{/if}}
         {{/if}}
     {{else}}
-        {{if isInvalid || isUnplayableVideo || isEmbedLimited || isPrivateVideo}}
+        {{if isInvalid || isUnplayableVideo || isEmbedLimited || isPrivateVideo || isRequesterRegionRestricted}}
             <a href="#!pid=${id}&ytid=${ytId}" class="error"></a>
         {{else}}
             <a href="#!pid=${id}&ytid=${ytId}" class="video_ok"></a>
@@ -1198,26 +1183,26 @@
     {{/if}}
     <p class="order"><!-- dynamic rebuild video number after template render --></p>
     <p class="img">
-        {{if ytDuration > 0}}
+        {{if ytDuration > 0 && !isRequesterRegionRestricted}}
             <img src="${imageUrl}" alt="" width="80" height="45" />
         {{else}}
             <img src="images/ep_invalid.png" alt="" width="80" height="45" />
         {{/if}}
-        {{if ytDuration > 0}}
+        {{if ytDuration > 0 && !isRequesterRegionRestricted}}
             <span class="time"><span class="time-right"><span class="time-middle">${cms.common.formatDuration(duration)}</span></span></span>
         {{/if}}
     </p>
-    {{if ytDuration > 0}}
+    {{if ytDuration > 0 && !isRequesterRegionRestricted}}
         <h4 class="ellipsis multiline">${name}</h4>
     {{else}}
         {{if isEmbedLimited}}
-            <h4 class="ellipsis multiline">[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Non-embeddable video'])}]</h4>
+            <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Non-embeddable video'])}]</h4>
         {{else isPrivateVideo}}
-            <h4 class="ellipsis multiline">[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Private video'])}]</h4>
+            <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Private video'])}]</h4>
         {{else isInvalid}}
-            <h4 class="ellipsis multiline">[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Invalid video'])}]</h4>
-        {{else isUnplayableVideo}}
-            <h4 class="ellipsis multiline">[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Unplayable video'])}]</h4>
+            <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Invalid video'])}]</h4>
+        {{else isUnplayableVideo || isRequesterRegionRestricted}}
+            <h4>[${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Unplayable video'])}]</h4>
         {{/if}}
     {{/if}}
     <p class="title">
@@ -1230,13 +1215,13 @@
     </p>
     <p class="hover-func">
         <a href="#!pid=${id}&ytid=${ytId}" class="video-del">Video Del</a>
-        {{if ytDuration > 0}}
+        {{if ytDuration > 0 && !isRequesterRegionRestricted}}
             <a href="#!pid=${id}&ytid=${ytId}" class="video-play">Video Play</a>
         {{/if}}
-        {{if ytDuration > 0 && beginTitleCard == null}}
+        {{if ytDuration > 0 && !isRequesterRegionRestricted && beginTitleCard == null}}
             <a href="#!pid=${id}&ytid=${ytId}" class="begin-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Add Title'])}</span></span></span></span></a>
         {{/if}}
-        {{if ytDuration > 0 && endTitleCard == null}}
+        {{if ytDuration > 0 && !isRequesterRegionRestricted && endTitleCard == null}}
             <a href="#!pid=${id}&ytid=${ytId}" class="end-title">Edit<span class="tip"><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Add Title'])}</span></span></span></span></a>
         {{/if}}
     </p>
@@ -1246,6 +1231,15 @@
 
 <script id="preload-image-tmpl-item" type="text/x-jquery-tmpl">
 <img src="${image}" alt="" />
+</script>
+
+<script id="poi-poll-button-tmpl-item" type="text/x-jquery-tmpl">
+    <p class="text poll">
+        <span>
+            <input type="text" name="${btnName}" maxlength="8" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text'])}" class="text poll-button" />
+        </span>
+        <a href="#" class="poll-button-del"></a>
+    </p>
 </script>
 
 </body>

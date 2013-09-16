@@ -1137,13 +1137,13 @@
                             item.eventTypeName = 'Hyper Link';
                             break;
                         case 2:
-                            item.eventTypeName = 'Scheduled Notification';
+                            item.eventTypeName = 'Instant Notification';
                             break;
                         case 3:
-                            item.eventTypeName = 'Poll';
+                            item.eventTypeName = 'Scheduled Notification';
                             break;
                         case 4:
-                            item.eventTypeName = 'Instant Notification';
+                            item.eventTypeName = 'Poll';
                             break;
                         default:
                             item.eventType = 0;
@@ -1590,8 +1590,8 @@
 
     // NOTE: page entry point (keep at the bottom of this file)
     $page.init = function (options) {
-        // fetch and set user locale info
-        var localePromise = cms.localeUtility.getLocale();
+        // // fetch and set user locale info
+        // var localePromise = cms.localeUtility.getLocale();
 
         nn.log({
             // NOTE: remember to change page-key to match file-name
