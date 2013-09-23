@@ -553,6 +553,30 @@
     line-height: 28px;
 }
 
+/* Switch */
+a.switch-on,
+a.switch-off {
+    width: 63px;
+    height: 24px;
+    background: url(../images/setting_btn_control.png) no-repeat 0 0;
+    color: #555;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 26px;
+    text-decoration: none;
+}
+
+a.switch-on {
+    color: #fff;
+    text-indent: -29px;
+    text-shadow: 0 0 10px #fff;
+}
+
+a.switch-off {
+    background-position: 0 -24px;
+    text-indent: 29px;
+}
+
 .setup-notice p.fb-connect a.switch-on,
 .setup-notice p.fb-connect a.switch-off {
     float: left;
@@ -643,37 +667,42 @@
     text-align: left;
 }
 
-/* change password overlay */
-#change-pwd-overlay {
+/* change password & category overlay */
+#change-pwd-overlay, #change-category-overlay {
     height: 303px;
 	width: 348px;
     margin: -151px 0 0 -178px;
     background: url(../images/overlay_bg_l.png) no-repeat 0 0;
 }
 
-#change-pwd-overlay .overlay-container {
+#change-pwd-overlay .overlay-container, #change-category-overlay .overlay-container {
     height: 303px;
     background: url(../images/overlay_bg_r.png) no-repeat right 0;
 }
 
-#change-pwd-overlay .overlay-container .overlay-wrap {
+#change-pwd-overlay .overlay-container .overlay-wrap, #change-category-overlay .overlay-container .overlay-wrap  {
     height: 274px;
     padding: 24px 0 0 0;
     background: url(../images/overlay_bg_c.png) repeat-x;
 }
 
-#change-pwd-overlay h4 {
+#change-pwd-overlay h4, #change-category-overlay h4 {
     margin-bottom: 20px;
+    color: #b4b4b4;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
-#change-pwd-overlay .overlay-btn {
+#change-pwd-overlay .overlay-btn, #change-category-overlay .overlay-btn {
     bottom: 15px;
 	left: 47px;
 	position: absolute;
 	width: 243px;
 }
 
-#change-pwd-overlay .change-pwd p.text {
+#change-pwd-overlay .change-pwd p.text, #change-category-overlay .change-category p.text {
     width: 243px;
     height: 30px;
     margin: 0 auto 16px auto;
@@ -681,24 +710,24 @@
     background: url(../images/input_gray.png) no-repeat 0 0;
 }
 
-#change-pwd-overlay .change-pwd p.text.last {
+#change-pwd-overlay .change-pwd p.text.last, #change-category-overlay .change-category p.text.last {
     margin-bottom: 12px;
 }
 
-#change-pwd-overlay .change-pwd p.text span {
+#change-pwd-overlay .change-pwd p.text span, #change-category-overlay .change-category p.text span {
     display: block;
 }
 
-#change-pwd-overlay .change-pwd p.text span.input-right {
+#change-pwd-overlay .change-pwd p.text span.input-right, #change-category-overlay .change-category p.text span.input-right {
     padding-right: 3px;
     background: url(../images/input_gray.png) no-repeat right -30px;
 }
 
-#change-pwd-overlay .change-pwd p.text span.input-middle {
+#change-pwd-overlay .change-pwd p.text span.input-middle, #change-category-overlay .change-category p.text span.input-middle {
     background: url(../images/input_gray.png) repeat-x 0 -60px;
 }
 
-#change-pwd-overlay .change-pwd span .text {
+#change-pwd-overlay .change-pwd span .text, #change-category-overlay .change-category span .text {
     width: 216px;
     height: 30px;
     padding-left: 30px;
@@ -708,24 +737,36 @@
 	color: #555;
 }
 
-#change-pwd-overlay .change-pwd .notice {
+#change-category-overlay .change-category span .text {
+    background: url(../images/icon_translation.png) no-repeat 7px 8px;
+}
+
+#change-pwd-overlay .change-pwd .notice  {
     padding-left: 47px;
     color: #f00;
     font-size: 13px;
     text-align: left;
 }
 
-#change-pwd-overlay .overlay-btn .btn-cancel {
+#change-category-overlay .change-category .notice  {
+    padding-left: 47px;
+    color: #555;
+    font-size: 13px;
+    text-align: left;
+	margin: -13px 0 13px 0;
+}
+
+#change-pwd-overlay .overlay-btn .btn-cancel, #change-category-overlay .overlay-btn .btn-cancel {
     float: left;
 	width: 75px;
 }
 
-#change-pwd-overlay .overlay-btn .btn-chg-pwd {
+#change-pwd-overlay .overlay-btn .btn-chg-pwd, #change-category-overlay .overlay-btn .btn-chg-category {
     float: right;
     width: 130px;
 }
 
-#change-pwd-overlay .overlay-btn .btn-chg-pwd a {
+#change-pwd-overlay .overlay-btn .btn-chg-pwd a, #change-category-overlay .overlay-btn .btn-chg-category a {
     width: 127px;
 }
 
@@ -1651,3 +1692,4 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     color: #555;
 	opacity: 1;
 }
+
