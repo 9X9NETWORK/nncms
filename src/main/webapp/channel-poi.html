@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="stylesheetsv3/jquery.datepick.css?v=1278" />
 <link rel="stylesheet" href="stylesheetsv3/perfect-scrollbar.css?v=1278" />
 <link rel="stylesheet" href="stylesheetsv3/channel-poi.css?v=1278" />
-<title>9x9.tv - Channel POI</title>
+<title>9x9.tv - Program POI</title>
 </head>
 <body>
 <div id="fb-root"></div>
@@ -39,7 +39,7 @@
     <div class="studio-nav-wrap">
         <h3><a href="index.html"><span class="cms-icon">CMS</span><span class="sub-title">Content Management System</span></a></h3>
         <ul>
-            <li class="on"><span><a href="index.html">My Channels</a></span></li>
+            <li class="on"><span><a href="index.html">My Programs</a></span></li>
             <li id="my-portal" class="hide"><span><a href="portal-manage.html">My Portal</a></span></li>
         </ul>
         <div class="studio-setup">
@@ -101,7 +101,7 @@
     <div class="overlay-container">
         <div class="overlay-wrap">
             <a href="#" class="btn-close">Close</a>
-            <p class="content">You are not authorized to edit this channel.</p>
+            <p class="content">You are not authorized to edit this program.</p>
             <div class="overlay-btn">
                 <p class="btns btn-ok"><span><a href="#">OK</a></span></p>
             </div>
@@ -180,7 +180,7 @@
 
 <script id="func-nav-tmpl" type="text/x-jquery-tmpl">
 <li><a href="episode-list.html?id=${id}" class="episode">${nn._([cms.global.PAGE_ID, 'func-nav', 'Episode list'])}</a></li>
-<li class="active"><a href="channel-poi.html?id=${id}" class="poi">${nn._([cms.global.PAGE_ID, 'func-nav', 'Channel POI'])}</a></li>
+<li class="active"><a href="channel-poi.html?id=${id}" class="poi">${nn._([cms.global.PAGE_ID, 'func-nav', 'Program POI'])}</a></li>
 <li><a href="channel-setting.html?id=${id}" class="setting">${nn._([cms.global.PAGE_ID, 'func-nav', 'Settings'])}</a></li>
 </script>
 
@@ -188,9 +188,9 @@
 <script id="content-main-tmpl" type="text/x-jquery-tmpl">
 <div id="channel-poi-wrap">
     <div id="title-func" data-width="" class="clearfix">
-        <h2 class="poi-list"><em>${name}</em><span>&gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Channel POI & interactive event list'])}</span></h2>
-        <h2 class="poi-create"><em>${name}</em><span>&gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Create Channel POI & interactive event'])}</span></h2>
-        <h2 class="poi-edit"><em>${name}</em><span>&gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Edit Channel POI & interactive event'])}</span></h2>
+        <h2 class="poi-list"><em>${name}</em><span>&gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Program POI & interactive event list'])}</span></h2>
+        <h2 class="poi-create"><em>${name}</em><span>&gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Create Program POI & interactive event'])}</span></h2>
+        <h2 class="poi-edit"><em>${name}</em><span>&gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Edit Program POI & interactive event'])}</span></h2>
         <p class="required"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Required field'])}</p>
     </div>
     <div id="content-main-wrap">
@@ -198,13 +198,13 @@
             <div id="channel-poi" data-ytid="" data-starttime="">
                 <div id="poi-list" class="edit-block">
                     <div class="add clearfix">
-                        <p class="btns btn-create-poi enable"><span><a href="#">${nn._([cms.global.PAGE_ID, 'poi-event', '+ Create Channel POI & interactive event'])}</a></span></p>
-                        <a href="javascript:void(0);" class="create-notice"><img alt="" src="images/icon_question.png"><span class="tip"><img alt="" src="images/bg_tip_top.png"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create a channel interactive event and call to action message at a point of interaction.'])}</span></span></span></a>
+                        <p class="btns btn-create-poi enable"><span><a href="#">${nn._([cms.global.PAGE_ID, 'poi-event', '+ Create Program POI & interactive event'])}</a></span></p>
+                        <a href="javascript:void(0);" class="create-notice"><img alt="" src="images/icon_question.png"><span class="tip"><img alt="" src="images/bg_tip_top.png"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create a program interactive event and call to action message at a point of interaction.'])}</span></span></span></a>
                     </div>
-                    <p class="no-episode hide">${nn._([cms.global.PAGE_ID, 'poi-event', 'Please create an episode at least in the channel.'])}</p>
-                    <p class="has-poi hide">${nn._([cms.global.PAGE_ID, 'poi-event', 'You cannot have more than one Channel POI & interactive event.'])}</p>
+                    <p class="no-episode hide">${nn._([cms.global.PAGE_ID, 'poi-event', 'Please create an episode at least in the program.'])}</p>
+                    <p class="has-poi hide">${nn._([cms.global.PAGE_ID, 'poi-event', 'You cannot have more than one Program POI & interactive event.'])}</p>
                     <div class="poi-info hide">
-                        <h3>${nn._([cms.global.PAGE_ID, 'poi-event', 'Channel POI & interactive event list'])}</h3>
+                        <h3>${nn._([cms.global.PAGE_ID, 'poi-event', 'Program POI & interactive event list'])}</h3>
                         <ul id="poi-list-page">
                             <!-- template = #poi-list-page-tmpl -->
                         </ul>
@@ -226,15 +226,15 @@
 <ol>
 {{each poiItem}}
     <li>
-		<div id="poi_point_${id}" class="icon null-icon">
-			<span><a href="#!cid=${targetId}&id=${id}" data-channel-id="${targetId}" data-poi-point-id="${id}" class="edit">${name}</a></span>
-			<div class="tip-white">
-				<p class="left"></p>
-				<p class="center">Event Type</p>
-				<p class="right"></p>
-			</div>
-			<div class="tip-bottom"></div>
-		</div>
+        <div id="poi_point_${id}" class="icon null-icon">
+            <span><a href="#!cid=${targetId}&id=${id}" data-channel-id="${targetId}" data-poi-point-id="${id}" class="edit">${name}</a></span>
+            <div class="tip-white">
+                <p class="left"></p>
+                <p class="center">Event Type</p>
+                <p class="right"></p>
+            </div>
+            <div class="tip-bottom"></div>
+        </div>
         <p class="func">
             
             <a href="#!cid=${targetId}&id=${id}" data-channel-id="${targetId}" data-poi-point-id="${id}" class="btn-del">Delete</a>
@@ -283,8 +283,8 @@
 <script id="poi-event-overlay-tmpl" type="text/x-jquery-tmpl">
 <div id="poi-event-overlay-wrap" class="content" data-channel-id="${targetId}" data-poi-point-id="${id}" data-poi-event-id="${eventId}" data-poi-event-type="${eventType}" data-poi-event-type-key="${cms.config.POI_TYPE_MAP[eventType]}">
     <a href="#" class="overlay-btn-close">Close</a>
-    <h3 class="create">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create Channel POI & interactive event'])}</h3>
-    <h3 class="edit">${nn._([cms.global.PAGE_ID, 'poi-event', 'Edit Channel POI & interactive event'])}</h3>
+    <h3 class="create">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create Program POI & interactive event'])}</h3>
+    <h3 class="edit">${nn._([cms.global.PAGE_ID, 'poi-event', 'Edit Program POI & interactive event'])}</h3>
     <div id="event-select" class="event">
         <p class="crumb"><a href="#" class="unblock">${nn._([cms.global.PAGE_ID, 'poi-event', 'Create POI'])}</a> &gt; ${nn._([cms.global.PAGE_ID, 'poi-event', 'Add interactive event'])}</p>
         <p class="action">${nn._([cms.global.PAGE_ID, 'poi-event', 'Choose a type'])}</p>

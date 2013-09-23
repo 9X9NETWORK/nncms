@@ -288,14 +288,14 @@
                     });
                 }
                 if (-1 === $.inArray(parseInt(episode.channelId, 10), channelIds)) {
-                    $common.showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
+                    $common.showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this program.');
                     return;
                 }
                 nn.api('GET', cms.reapi('/api/channels/{channelId}', {
                     channelId: episode.channelId
                 }), null, function (channel) {
                     if (channel.contentType === cms.config.YOUR_FAVORITE) {
-                        $common.showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
+                        $common.showSystemErrorOverlayAndHookError('The favorites program can not be edited.');
                         return;
                     }
                     $common.showProcessingOverlay();

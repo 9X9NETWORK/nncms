@@ -88,13 +88,13 @@ $(function () {
                 userId: cms.global.USER_DATA.id
             }), parameter, function (data) {
                 $('#overlay-s').fadeOut(1000, function () {
-                    $this.text(nn._([cms.global.PAGE_ID, 'title-func', 'Reorder channels'])).removeClass('save').addClass('reorder');
+                    $this.text(nn._([cms.global.PAGE_ID, 'title-func', 'Reorder programs'])).removeClass('save').addClass('reorder');
                     $('#channel-list').sortable('disable');
                     $('body').removeClass('has-change');
                 });
             });
         } else {
-            $this.text(nn._([cms.global.PAGE_ID, 'title-func', 'Reorder channels'])).removeClass('save').addClass('reorder');
+            $this.text(nn._([cms.global.PAGE_ID, 'title-func', 'Reorder programs'])).removeClass('save').addClass('reorder');
             $('#channel-list').sortable('disable');
             $('body').removeClass('has-change');
         }
@@ -104,7 +104,7 @@ $(function () {
     // channel list delete
     $('#channel-list').on('click', '.enable a.del', function () {
         $(this).parents('li').addClass('deleting').data('deleteId', $(this).attr('rel'));
-        $common.showDeletePromptOverlay('Are you sure you want to delete this channel? All data will be removed permanently.');
+        $common.showDeletePromptOverlay('Are you sure you want to delete this program? All data will be removed permanently.');
         return false;
     });
 

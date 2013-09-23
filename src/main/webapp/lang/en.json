@@ -8,7 +8,7 @@
     "studio-nav": {
         "CMS": "<span class=\"cms-icon\">CMS</span><span class=\"sub-title\">Content Management System</span>",
         "CMSContent Management System": "<span class=\"cms-icon\">CMS</span><span class=\"sub-title\">Content Management System</span>",
-        "My Channels": "My Channels",
+        "My Programs": "My Programs",
         "My Portal": "My Portal",
         "CMS Settings": "<img src=\"images/icon_studio_setup.png\" alt=\"\" />CMS Settings",
         "Connection is inactive, click to restart it.": "Connection is inactive, click to restart it."
@@ -26,20 +26,20 @@
         "system-error": {
             "Unknown error.": "Unknown error.",
             "You are not authorized to PCS.": "You are not authorized to PCS.",
-            "You are not authorized to edit this channel.": "You are not authorized to edit this channel.",
+            "You are not authorized to edit this program.": "You are not authorized to edit this program.",
             "You are not authorized to edit this episode.": "You are not authorized to edit this episode.",
-            "You are not authorized to edit episodes in this channel.": "You are not authorized to edit episodes in this channel.",
-            "Invalid channel ID, please try again.": "Invalid channel ID, please try again.",
+            "You are not authorized to edit episodes in this program.": "You are not authorized to edit episodes in this program.",
+            "Invalid program ID, please try again.": "Invalid program ID, please try again.",
             "Invalid episode ID, please try again.": "Invalid episode ID, please try again.",
-            "Invalid channel ID and episode ID, please try again.": "Invalid channel ID and episode ID, please try again.",
-            "The favorites channel can not be edited.": "The favorites channel can not be edited.",
+            "Invalid program ID and episode ID, please try again.": "Invalid program ID and episode ID, please try again.",
+            "The favorites program can not be edited.": "The favorites program can not be edited.",
             "Title text can't be empty!": "Title text can't be empty!",
             "There must be at least one video in this episode.": "There must be at least one video in this episode.",
             "Please curate at least one valid video.": "Please curate at least one valid video.",
             "You have reached the maximum amount of 50 videos.": "You have reached the maximum amount of 50 videos."
         },
         "prompt": {
-            "Are you sure you want to delete this channel? All data will be removed permanently.": "Are you sure you want to delete this channel? All data will be removed permanently.",
+            "Are you sure you want to delete this program? All data will be removed permanently.": "Are you sure you want to delete this program? All data will be removed permanently.",
             "Are you sure you want to delete this episode?": "Are you sure you want to delete this episode?",
             "Are you sure you want to delete this title?": "Are you sure you want to delete this title?",
             "Are you sure you want to delete this POI with interactive event?": "Are you sure you want to delete this POI with interactive event?",
@@ -55,20 +55,20 @@
         },
         "channel-tutorial": {
             "Collect and Curate!": "Collect and Curate!",
-            "CMS is the management center for your 9x9.tv list-form channels!": "CMS is the management center for your 9x9.tv list-form channels!",
-            "Create a<br />new channel": "Create a<br />new channel",
+            "CMS is the management center for your 9x9.tv list-form programs!": "CMS is the management center for your 9x9.tv list-form programs!",
+            "Create a<br />new program": "Create a<br />new program",
             "Not right now, thanks!": "Not right now, thanks!"
         },
         "facebook": {
             "Connect to Facebook": "Connect to Facebook",
             "Connect to": "Connect to",
-            "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.": "After connecting, you can enable Facebook auto sharing for each channel in Channel settings.",
+            "After connecting, you can enable Facebook auto sharing for each program in Program settings.": "After connecting, you can enable Facebook auto sharing for each program in Program settings.",
             "Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.": "Auto sharing is disabled because permission to your connected account has been revoked, please click to restart the connection.",
             "Can not connect to Facebook correctly!": "Can not connect to Facebook correctly!",
             "Please try again and make sure you agree on all permissions.": "Please try again and make sure you agree on all permissions.",
             "Account disconnected!": "Account disconnected!",
             "{If you want to enable auto sharing again, please:}": "If you want to enable auto sharing again, please:<br /><br />1. Connect to account<br />2. Enable auto sharing for each channel in Channel settings<br />3. Publish a new episode, 9x9.tv will automatically share it<br />",
-            "Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?": "Disconnecting account will also disable auto sharing for every channel. Are you sure you want to disconnect?"
+            "Disconnecting account will also disable auto sharing for every program. Are you sure you want to disconnect?": "Disconnecting account will also disable auto sharing for every program. Are you sure you want to disconnect?"
         },
         "button": {
             "OK": "OK",
@@ -106,7 +106,7 @@
         },
         "login-holder": {
             "Collect and Curate!": "Collect and Curate!",
-            "CMS is the management center for your 9x9.tv list-form channels!": "CMS is the management center for your 9x9.tv list-form channels!",
+            "CMS is the management center for your 9x9.tv list-form programs!": "CMS is the management center for your 9x9.tv list-form programs!",
             "Sign In": "Sign In",
             "Sign in with Facebook": "Sign in with Facebook",
             "Sign In with your E-mail and password": "Sign In with your E-mail and password",
@@ -164,7 +164,7 @@
         },
         "func-nav": {
             "My Portal": "My Portal",
-            "Channel Store": "Channel Store",
+            "Program Store": "Program Store",
             "Brand Settings": "Brand Settings"
         },
         "title-func": {
@@ -188,19 +188,19 @@
         },
         "func-nav": {
             "My Portal": "My Portal",
-            "Channel Store": "Channel Store",
+            "Program Store": "Program Store",
             "Brand Settings": "Brand Settings"
         },
         "title-func": {
-            "Channel Store": "Channel Store",
+            "Program Store": "Program Store",
             "Portal": "Preview",
             "Preview": "Preview",
             "Save": "Save",
             "Set Name": "Set Name"
         },
         "store-layer": {
-            "xxx channels in category:": "{0} channels in category:",
-            "You can manage your channel store manually.": "You can manage your channel store manually.",
+            "xxx programs in category:": "{0} programs in category:",
+            "You can manage your program store manually.": "You can manage your program store manually.",
             "Collapse": "Collapse",
             "Expand Category": "Expand Category",
             "Load More": "Load More",
@@ -211,19 +211,19 @@
             "Updated time": "Updated time ",
             "Customized Order": "Customized Order",
             "Best within 20 characters": "Best within 20 characters",
-            "Set Name": "Set Name ",
-            "Channel List": "Channel List ",
-            "Channels": "Channels",
-            "Add channels": "Add channels",
-            "Add channels sub": "",
-            "Please input channel URL": "Please input channel URL",
-            "Please input channel name or curator name": "Please input channel name or curator name",
+            "Channel Name": "Channel Name ",
+            "Program List": "Program List ",
+            "Programs": "Programs",
+            "Add programs": "Add programs",
+            "Add programs sub": "",
+            "Please input program URL": "Please input program URL",
+            "Please input program name or curator name": "Please input program name or curator name",
             "Set on top": "Set on top",
             "Remove from top": "Remove from top",
-            "Remove channel": "Remove channel",
-            "Add channel": "Add channel",
-            "You can only set 4 channels on top": "You can only set 4 channels on top",
-            "Set name can't be empty": "Set name can't be empty"
+            "Remove program": "Remove program",
+            "Add program": "Add program",
+            "You can only set 4 programs on top": "You can only set 4 programs on top",
+            "Channel name can't be empty": "Channel name can't be empty"
         }
     },
     "portal-manage": {
@@ -232,12 +232,12 @@
         },
         "func-nav": {
             "My Portal": "My Portal",
-            "Channel Store": "Channel Store",
+            "Program Store": "Program Store",
             "Brand": "Brand"
         },
         "sets-list": {
-            "Channels": "Channels",
-            "Add Channels": "Add Channels",
+            "Programs": "Programs",
+            "Add Programs": "Add Programs",
             "Edit": "Edit"
         },
         "title-func": {
@@ -245,45 +245,45 @@
             "Portal": "Portal",
             "Preview": "Preview",
             "Save": "Save",
-            "Set Name": "Set Name"
+            "Channel Name": "Channel Name"
         },
         "portal-add-layer": {
-            "Channel URL": "Channel URL",
+            "Program URL": "Program URL",
             "Keywords": "Keywords",
             "Search": "Search",
             "Add": "Add",
-            "Find [<span>?</span>] channels.": "Find [<span>{0}</span>] channels.",
-            "Your search - [xxx] didn't match any channels.": "Your search - [<span>{0}</span>] didn't match any channels.",
-            "Set Name:": "Set Name:",
+            "Find [<span>?</span>] programs.": "Find [<span>{0}</span>] programs.",
+            "Your search - [xxx] didn't match any programs.": "Your search - [<span>{0}</span>] didn't match any programs.",
+            "Channel Name:": "Channel Name:",
             "Results:": "Results:",
-            "Add channels into your “<span>Set 2</span>”": "Add channels into your “<span>{0}</span>”",
-            "Please fill in the channel url to search.": "Please fill in the channel url to search.",
+            "Add programs into your “<span>Set 2</span>”": "Add programs into your “<span>{0}</span>”",
+            "Please fill in the program url to search.": "Please fill in the program url to search.",
             "Please fill in the correct url.": "Please fill in the correct url.",
             "Please fill in the keywords to search.": "Please fill in the keywords to search.",
             "Processing...": "Processing..."
         },
         "portal-layer": {
-            "You can add 27 channels into your channel set.": "You can add 27 channels into your channel set.",
+            "You can add 27 programs into your channel.": "You can add 27 programs into your channel.",
             "Processing...": "Processing..."
         },
         "channel-list": {
             "Sorted by": "Sorted by",
-            "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.": "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels.",
+            "You will change the order of program list to \"update time\", it will sort by update time of programs automatically so you can't change the order manually except set on top programs.": "You will change the order of program list to \"update time\", it will sort by update time of programs automatically so you can't change the order manually except set on top programs.",
             "Updated time": "Updated time ",
             "Customized Order": "Customized Order",
             "Best within 20 characters": "Best within 20 characters",
-            "Set Name": "Set Name ",
-            "Channel List": "Channel List ",
-            "Channels": "Channels",
-            "Add channels": "Add",
-            "Add channels sub": "&nbsp;&nbsp;&nbsp;channels",
-            "Please input channel URL": "Please input channel URL",
-            "Please input channel name or curator name": "Please input channel name or curator name",
+            "Channel Name": "Channel Name ",
+            "Program List": "Program List ",
+            "Programs": "Programs",
+            "Add programs": "Add",
+            "Add programs sub": "&nbsp;&nbsp;&nbsp;programs",
+            "Please input program URL": "Please input program URL",
+            "Please input program name or curator name": "Please input program name or curator name",
             "Set on top": "Set on top",
             "Remove from top": "Remove from top",
-            "Remove channel": "Remove channel",
-            "You can only set 4 channels on top": "You can only set 4 channels on top",
-            "Please fill in your set name.": "Please fill in your set name."
+            "Remove program": "Remove program",
+            "You can only set 4 programs on top": "You can only set 4 programs on top",
+            "Please fill in your channel name.": "Please fill in your channel name."
         }
     },
     "portal-set": {
@@ -292,13 +292,13 @@
         },
         "func-nav": {
             "Portal": "Portal",
-            "Channel Store": "Channel Store",
+            "Program Store": "Program Store",
             "My Portal": "My Portal",
             "Brand Settings": "Brand Settings"
         },
         "sets-list": {
-            "Channels": "Channels",
-            "Add Channels": "Add channels",
+            "Programs": "Programs",
+            "Add Programs": "Add Programs",
             "Edit": "Edit"
         },
         "title-func": {
@@ -308,14 +308,14 @@
     },
     "index": {
         "html-title": {
-            "9x9.tv - My Channels": "9x9.tv - My Channels"
+            "9x9.tv - My Programs": "9x9.tv - My Programs"
         },
         "func-nav": {
-            "Create a new channel": "Create a new channel"
+            "Create a new program": "Create a new program"
         },
         "title-func": {
-            "My Channels": "My Channels",
-            "Reorder channels": "Reorder channels",
+            "My Programs": "My Programs",
+            "Reorder programs": "Reorder programs",
             "Save order": "Save order"
         },
         "channel-list": {
@@ -327,16 +327,16 @@
             "Views": "Views",
             "Update:": "Update:",
             "Curate a new episode": "Curate a new episode",
-            "Channel POI": "Channel POI",
+            "Program POI": "Program POI",
             "Episode list": "Episode list",
-            "Channel settings": "Channel settings",
-            "Delete this channel": "Delete this channel",
+            "Program settings": "Program settings",
+            "Delete this program": "Delete this program",
             "No Episodes": "No Episodes",
             "'s Favorite": "'s Favorite",
-            "You don't have any channels yet": "You don't have any channels yet",
-            "Create a new channel": "Create a new channel",
-            "Create your own <strong>personal and unique</strong> channel.": "Create your own <strong>personal and unique</strong> channel.",
-            "And online videos into episode and start to <strong>curate your own channel.</strong>": "And online videos into episode and start to <strong>curate your own channel.</strong>"
+            "You don't have any programs yet": "You don't have any programs yet",
+            "Create a new program": "Create a new program",
+            "Create your own <strong>personal and unique</strong> program.": "Create your own <strong>personal and unique</strong> program.",
+            "And online videos into episode and start to <strong>curate your own program.</strong>": "And online videos into episode and start to <strong>curate your own program.</strong>"
         }
     },
     "cms-settings": {
@@ -380,30 +380,30 @@
     },
     "channel": {
         "html-title": {
-            "9x9.tv - Create a new channel": "9x9.tv - Create a new channel",
-            "9x9.tv - Channel settings": "9x9.tv - Channel settings"
+            "9x9.tv - Create a new program": "9x9.tv - Create a new program",
+            "9x9.tv - Program settings": "9x9.tv - Program settings"
         },
         "func-nav": {
             "Episode list": "Episode list",
-            "Channel POI": "Channel POI",
+            "Program POI": "Program POI",
             "Settings": "Settings"
         },
         "title-func": {
-            "My Channels &gt; Create a new channel": "My Channels &gt; Create a new channel",
+            "My Programs &gt; Create a new program": "My Programs &gt; Create a new program",
             "Settings": "Settings",
             "Required field": "Required field"
         },
         "setting-form": {
             "Title": "Title",
             "Best within 10 characters": "Best within 10 characters",
-            "Channel logo": "Channel logo",
+            "Program logo": "Program logo",
             "Upload": "Upload",
             "Uploading...": "Uploading...",
             "Better results with 300x300 or higher resolution image": "Better results with 300x300 or higher resolution image",
             "Please upload jpeg, png, or gif files.": "Please upload jpeg, png, or gif files.",
             "Description": "Description",
             "Best within 52 characters": "Best within 52 characters",
-            "Channel language": "Channel language",
+            "Program language": "Program language",
             "Select a language": "Select a language",
             "English": "English",
             "Chinese": "Chinese",
@@ -433,21 +433,21 @@
     },
     "channel-poi": {
         "html-title": {
-            "9x9.tv - Channel POI": "9x9.tv - Channel POI"
+            "9x9.tv - Program POI": "9x9.tv - Program POI"
         },
         "func-nav": {
             "Episode list": "Episode list",
-            "Channel POI": "Channel POI",
+            "Program POI": "Program POI",
             "Settings": "Settings"
         },
         "poi-event": {
-            "+ Create Channel POI & interactive event": "+ Create Channel POI & interactive event",
-            "Channel POI & interactive event list": "Channel POI & interactive event list",
-            "Create a channel interactive event and call to action message at a point of interaction.": "Create a channel interactive event and call to action message at a point of interaction.",
-            "Please create an episode at least in the channel.": "Please create an episode at least in the channel.",
-            "You cannot have more than one Channel POI & interactive event.": "You cannot have more than one Channel POI & interactive event.",
-            "Create Channel POI & interactive event": "Create Channel POI & interactive event",
-            "Edit Channel POI & interactive event": "Edit Channel POI & interactive event",
+            "+ Create Program POI & interactive event": "+ Create Program POI & interactive event",
+            "Program POI & interactive event list": "Program POI & interactive event list",
+            "Create a program interactive event and call to action message at a point of interaction.": "Create a program interactive event and call to action message at a point of interaction.",
+            "Please create an episode at least in the program.": "Please create an episode at least in the program.",
+            "You cannot have more than one Program POI & interactive event.": "You cannot have more than one Program POI & interactive event.",
+            "Create Program POI & interactive event": "Create Program POI & interactive event",
+            "Edit Program POI & interactive event": "Edit Program POI & interactive event",
             "Create POI": "Create POI",
             "Edit POI": "Edit POI",
             "Required field": "Required field",
@@ -500,7 +500,7 @@
         },
         "func-nav": {
             "Episode list": "Episode list",
-            "Channel POI": "Channel POI",
+            "Program POI": "Program POI",
             "Settings": "Settings"
         },
         "title-func": {
@@ -517,7 +517,7 @@
         },
         "episode-list": {
             "You don't have any episodes yet": "You don't have any episodes yet",
-            "Click on <span>Favorite</span> button when watching channels to collect more episodes": "Click on <span>Favorite</span> button when watching channels to collect more episodes",
+            "Click on <span>Favorite</span> button when watching programs to collect more episodes": "Click on <span>Favorite</span> button when watching programs to collect more episodes",
             "Edit": "Edit",
             "Delete": "Delete",
             "Get URL": "Get URL",
@@ -648,7 +648,7 @@
             "Choose a type": "Choose a type",
             "Hyper Link": "Hyper Link",
             "Poll": "Poll",
-            "User can go to watch another 9x9.tv channel or episode.": "User can go to watch another 9x9.tv channel or episode.",
+            "User can go to watch another 9x9.tv program or episode.": "User can go to watch another 9x9.tv program or episode.",
             "Scheduled Notification": "Scheduled Notification",
             "Send a scheduled notification to user to get more information.": "Send a scheduled notification to user to get more information.",
             "Instant Notification": "Instant Notification",
@@ -664,7 +664,7 @@
             "Button text": "Button text",
             "Input button text": "Input button text",
             "Hyper link": "Hyper link",
-            "Input 9x9 channel or episode URL": "Input 9x9 channel or episode URL",
+            "Input 9x9 program or episode URL": "Input 9x9 program or episode URL",
             "Invalid 9x9 URL, please try again.": "Invalid 9x9 URL, please try again.",
             "Mobile Notification and Time": "Mobile Notification and Time",
             "iOS": "iOS",

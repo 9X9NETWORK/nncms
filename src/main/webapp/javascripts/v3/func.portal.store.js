@@ -122,7 +122,7 @@
             var cntChannelSource = channels.length;
             $('#portal-manage').html('');
             if (cntChannelSource > 0) {
-                $(".form-title").text(nn._([cms.global.PAGE_ID, 'store-layer', "xxx channels in category:"], [cntChannelSource]));
+                $(".form-title").text(nn._([cms.global.PAGE_ID, 'store-layer', "xxx programs in category:"], [cntChannelSource]));
 
                 pageInfo["pageTotal"] = Math.ceil(cntChannelSource / inPageSize);
                 pageInfo["pageCurrent"] = 1;

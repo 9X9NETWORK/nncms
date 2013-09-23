@@ -159,7 +159,7 @@
                     });
                 }
                 if (-1 === $.inArray(parseInt(id, 10), channelIds)) {
-                    $common.showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
+                    $common.showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this program.');
                     return;
                 }
                 if (options && options.init) {
@@ -303,7 +303,7 @@
                 });
             });
         } else {
-            $common.showSystemErrorOverlayAndHookError('Invalid channel ID, please try again.');
+            $common.showSystemErrorOverlayAndHookError('Invalid program ID, please try again.');
             return;
         }
     };

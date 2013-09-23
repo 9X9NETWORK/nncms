@@ -317,14 +317,14 @@
                         });
                     }
                     if (-1 === $.inArray(parseInt(id, 10), channelIds)) {
-                        $common.showSystemErrorOverlayAndHookError('You are not authorized to edit this channel.');
+                        $common.showSystemErrorOverlayAndHookError('You are not authorized to edit this program.');
                         return;
                     }
                     nn.api('GET', cms.reapi('/api/channels/{channelId}', {
                         channelId: id
                     }), null, function (channel) {
                         if (channel.contentType === cms.config.YOUR_FAVORITE) {
-                            $common.showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
+                            $common.showSystemErrorOverlayAndHookError('The favorites program can not be edited.');
                             return;
                         }
                         $common.showProcessingOverlay();
@@ -454,7 +454,7 @@
                     });
                 });
             } else {
-                $common.showSystemErrorOverlayAndHookError('Invalid channel ID, please try again.');
+                $common.showSystemErrorOverlayAndHookError('Invalid program ID, please try again.');
                 return;
             }
         } else {

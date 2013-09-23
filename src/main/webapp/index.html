@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="stylesheetsv3/lightbox.css?v=1278" />
 <link rel="stylesheet" href="stylesheetsv3/channel.css?v=1278" />
 <link rel="stylesheet" href="stylesheetsv3/com-9x9-cycle.css?v=1278" />
-<title>9x9.tv - My Channels</title>
+<title>9x9.tv - My Programs</title>
 </head>
 <body>
 <div id="fb-root"></div>
@@ -38,7 +38,7 @@
     <div class="studio-nav-wrap">
         <h3><a href="index.html"><span class="cms-icon">CMS</span><span class="sub-title">Content Management System</span></a></h3>
         <ul>
-            <li class="on"><span><a href="index.html">My Channels</a></span></li>
+            <li class="on"><span><a href="index.html">My Programs</a></span></li>
             <li id="my-portal" class="hide"><span><a href="portal-manage.html">My Portal</a></span></li>
         </ul>
         <div class="studio-setup">
@@ -169,7 +169,7 @@
     <div class="overlay-container">
         <div class="overlay-wrap">
             <a href="#" class="btn-close">Close</a>
-            <p class="content">You are not authorized to edit this channel.</p>
+            <p class="content">You are not authorized to edit this program.</p>
             <div class="overlay-btn">
                 <p class="btns btn-ok"><span><a href="#">OK</a></span></p>
             </div>
@@ -183,7 +183,7 @@
     <div class="overlay-container">
         <div class="overlay-wrap">
             <a href="#" class="btn-close">Close</a>
-            <p class="content">Are you sure you want to delete this channel? All data will be removed permanently.</p>
+            <p class="content">Are you sure you want to delete this program? All data will be removed permanently.</p>
             <div class="overlay-btn">
                 <p class="btns btn-no"><span><a href="#">No</a></span></p>
                 <p class="btns btn-del"><span><a href="#">Yes</a></span></p>
@@ -214,11 +214,11 @@
 <script id="lightbox-create-channel-tmpl" type="text/x-jquery-tmpl">
 <div id="lightbox-create-channel" class="lightbox-content">
     <h3 class="index-collect-title">${nn._(['overlay', 'channel-tutorial', 'Collect and Curate!'])}</h3>
-    <p class="desc">${nn._(['overlay', 'channel-tutorial', 'CMS is the management center for your 9x9.tv list-form channels!'])}</p>
+    <p class="desc">${nn._(['overlay', 'channel-tutorial', 'CMS is the management center for your 9x9.tv list-form programs!'])}</p>
     <p class="create">
         <a href="channel-add.html">create
             <img src="images/icon_add.png" alt="" />
-            <span>{{html nn._(['overlay', 'channel-tutorial', 'Create a<br />new channel'])}}</span>
+            <span>{{html nn._(['overlay', 'channel-tutorial', 'Create a<br />new program'])}}</span>
         </a>
     </p>
     <p class="btns unblock"><span><a href="index.html">${nn._(['overlay', 'channel-tutorial', 'Not right now, thanks!'])}</a></span></p>
@@ -226,10 +226,10 @@
 </script>
 
 <script id="title-func-tmpl" type="text/x-jquery-tmpl">
-<h2>${nn._([cms.global.PAGE_ID, 'title-func', 'My Channels'])} (<span id="channel-counter">${$item.cntChannel}</span>)</h2>
+<h2>${nn._([cms.global.PAGE_ID, 'title-func', 'My Programs'])} (<span id="channel-counter">${$item.cntChannel}</span>)</h2>
 <ul>
-	<li><p class="curate btns"><span><a href="channel-add.html">${nn._([cms.global.PAGE_ID, 'title-func', 'Create a new channel'])}</a></span></p></li>
-	<li class="last"><p class="order btns"><span><a href="javascript:void(0);" class="reorder">${nn._([cms.global.PAGE_ID, 'title-func', 'Reorder channels'])}</a></span></p></li>
+    <li><p class="curate btns"><span><a href="channel-add.html">${nn._([cms.global.PAGE_ID, 'title-func', 'Create a new program'])}</a></span></p></li>
+    <li class="last"><p class="order btns"><span><a href="javascript:void(0);" class="reorder">${nn._([cms.global.PAGE_ID, 'title-func', 'Reorder programs'])}</a></span></p></li>
 </ul>
 </script>
 
@@ -268,7 +268,7 @@
 <!-- channel-list-empty-tmpl Begin -->
 <script id="channel-list-empty-tmpl" type="text/x-jquery-tmpl">
 <div id="com-9x9-cycle-list">
-    <h3>{{html nn._([cms.global.PAGE_ID, 'channel-list', "You don't have any channels yet"])}}</h3>
+    <h3>{{html nn._([cms.global.PAGE_ID, 'channel-list', "You don't have any programs yet"])}}</h3>
     <p class="btns"><span><a href="channel-add.html">${nn._([cms.global.PAGE_ID, 'channel-list', 'Create a new channel'])}</a></span></p>
     <div id="com-9x9-cycle">
         <p class="cycle-pager">
@@ -279,11 +279,11 @@
             <ul class="content">
                 <li>
                     <div class="img"><a href="epcurate-curation.html?cid=${id}"><img src="images/banner_ch_01.png" alt="" width="781" height="274" /></a></div>
-                    <div class="desc"><p><span>{{html nn._([cms.global.PAGE_ID, 'channel-list', 'Create your own <strong>personal and unique</strong> channel.'])}}</span></p></div>
+                    <div class="desc"><p><span>{{html nn._([cms.global.PAGE_ID, 'channel-list', 'Create your own <strong>personal and unique</strong> program.'])}}</span></p></div>
                 </li>
                 <li>
                     <div class="img"><a href="epcurate-curation.html?cid=${id}"><img src="images/banner_ch_02.png" alt="" width="781" height="274" /></a></div>
-                    <div class="desc"><p><span>{{html nn._([cms.global.PAGE_ID, 'channel-list', 'And online videos into episode and start to <strong>curate your own channel.</strong>'])}}</span></p></div>
+                    <div class="desc"><p><span>{{html nn._([cms.global.PAGE_ID, 'channel-list', 'And online videos into episode and start to <strong>curate your own program.</strong>'])}}</span></p></div>
                 </li>
             </ul>
         </div>
@@ -353,11 +353,11 @@
                     <ul>
                         <li><a href="epcurate-curation.html?cid=${id}" class="add">Add<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Curate a new episode'])}</span></span></span></span></a></li>
                         {{if !cms.global.IS_REMARK}}
-                        <li><a href="channel-poi.html?id=${id}" class="channel-poi">Channel POI<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Channel POI'])}</span></span></span></span></a></li>
+                        <li><a href="channel-poi.html?id=${id}" class="channel-poi">Program POI<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Program POI'])}</span></span></span></span></a></li>
                         {{/if}}
                         <li><a href="episode-list.html?id=${id}" class="detail">Detail<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Episode list'])}</span></span></span></span></a></li>
-                        <li><a href="channel-setting.html?id=${id}" class="setting">Setting<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Channel settings'])}</span></span></span></span></a></li>
-                        <li><a href="/api/users/${$item.userId}/channels/${id}" rel="${id}" class="del">Del<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Delete this channel'])}</span></span></span></span></a></li>
+                        <li><a href="channel-setting.html?id=${id}" class="setting">Setting<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Program settings'])}</span></span></span></span></a></li>
+                        <li><a href="/api/users/${$item.userId}/channels/${id}" rel="${id}" class="del">Del<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Delete this program'])}</span></span></span></span></a></li>
                         <li><a href="javascript:void(0);" class="url{{if 1 > cntEpisode}} disable{{/if}}">${nn._([cms.global.PAGE_ID, 'channel-list', 'Get URL'])}<span class="tip"><img src="images/bg_tip_bottom.png" alt="" /><span class="tip-left"><span class="tip-right"><span class="tip-middle">${nn._([cms.global.PAGE_ID, 'channel-list', 'Get URL'])}</span></span></span></span></a></li>
                     </ul>
                 </div>

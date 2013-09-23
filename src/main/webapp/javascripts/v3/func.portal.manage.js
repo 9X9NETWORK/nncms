@@ -341,7 +341,7 @@
 
         if (options && options.init) {
             $common.showProcessingOverlay();
-            $('#yes-no-prompt .content').text(nn._([cms.global.PAGE_ID, 'channel-list', "You will change the order of channel list to \"update time\", it will sort by update time of channels automatically so you can't change the order manually except set on top channels."]));
+            $('#yes-no-prompt .content').text(nn._([cms.global.PAGE_ID, 'channel-list', "You will change the order of program list to \"update time\", it will sort by update time of programs automatically so you can't change the order manually except set on top programs."]));
         }
         var setId = 0,
             msoId = cms.global.MSO;

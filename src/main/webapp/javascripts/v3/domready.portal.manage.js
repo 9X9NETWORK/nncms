@@ -121,7 +121,7 @@ $(function () {
             });
             $("body").removeClass("has-change");
         } else {
-            $("#msg-portal").text(nn._([cms.global.PAGE_ID, 'channel-list', "Please fill in your set name."]));
+            $("#msg-portal").text(nn._([cms.global.PAGE_ID, 'channel-list', "Please fill in your channel name."]));
             $("#msg-portal").show();
         }
         return false;
@@ -147,7 +147,7 @@ $(function () {
         // search layout
         var cntChannel = $("#channelCnt").text();
         if (cntChannel < $page.setCanChannel) {
-            $("#search-title").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Add channels into your “<span>Set 2</span>”"], [$("#setName").val()]));
+            $("#search-title").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Add programs into your “<span>Set 2</span>”"], [$("#setName").val()]));
             $("#portal-add-layer").fadeIn();
         }
     });
@@ -224,7 +224,7 @@ $(function () {
         if ($("#input-portal-ch").data("tmpIn") == strInput) {
             switch (searchType) {
             case "url":
-                msgErr = "Please fill in the channel url to search.";
+                msgErr = "Please fill in the program url to search.";
                 break;
             case "keywords":
                 msgErr = "Please fill in the keywords to search.";
@@ -265,14 +265,14 @@ $(function () {
                                 }
 
                                 if (isValid === true) {
-                                    $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel]));
+                                    $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] programs."], [cntChannel]));
                                     $('#portal-search-item-tmpl').tmpl(items).appendTo('#search-channel-list');
                                 } else {
-                                    $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any channels."], [strInput]));
+                                    $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any programs."], [strInput]));
                                 }
                             });
                         } else {
-                            $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any channels."], [strInput]));
+                            $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any programs."], [strInput]));
                         }
 
                         var pageChannel = Math.floor($(".list-holder").width() / 117) * 2;
@@ -297,9 +297,9 @@ $(function () {
                     items = $page.prepareChannels(channels);
                     cntChannel = items.length;
                     if (cntChannel > 0) {
-                        $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] channels."], [cntChannel]));
+                        $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Find [<span>?</span>] programs."], [cntChannel]));
                     } else {
-                        $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any channels."], [strInput]));
+                        $("#sRusult").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Your search - [xxx] didn't match any programs."], [strInput]));
                     }
 
                     $('#portal-search-item-tmpl').tmpl(items).appendTo('#search-channel-list');
@@ -491,7 +491,7 @@ $(function () {
             $("body").addClass("has-change");
             $('#overlay-s').fadeOut("slow");
         } else {
-            $common.showSystemErrorOverlay(nn._([cms.global.PAGE_ID, 'channel-list', 'You can only set 4 channels on top']));
+            $common.showSystemErrorOverlay(nn._([cms.global.PAGE_ID, 'channel-list', 'You can only set 4 programs on top']));
         }
     });
 

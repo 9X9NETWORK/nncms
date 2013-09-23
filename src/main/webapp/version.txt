@@ -1,3 +1,38 @@
+版本: 5539
+作者: mars
+日期: 2013/9/23 18:18
+訊息:
+1. 改名
+Set => Channel
+頻道組 => 頻道
+Channel => Program
+頻道 => 節目
+Episode and Sub-episode remains the same,
+----
+異動 : /lang/zh.json
+異動 : /lang/en.json
+異動 : /javascripts/v3/func.curation.js
+異動 : /javascripts/v3/func.channel-poi.js
+異動 : /javascripts/v3/func.channel.js
+異動 : /javascripts/v3/func.epcurate.js
+異動 : /javascripts/v3/func.episode.js
+異動 : /javascripts/v3/func.portal.store.js
+異動 : /javascripts/v3/domready.portal.store.js
+異動 : /javascripts/v3/domready.portal.manage.js
+異動 : /javascripts/v3/func.portal.manage.js
+異動 : /javascripts/v3/domready.index.js
+異動 : /epcurate-curation.html
+異動 : /signin.html
+異動 : /store-manage.html
+異動 : /brand-setting.html
+異動 : /portal-manage.html
+異動 : /cms-settings.html
+異動 : /channel-add.html
+異動 : /channel-setting.html
+異動 : /channel-poi.html
+異動 : /episode-list.html
+異動 : /index.html
+
 版本: 5492
 作者: yifan
 日期: 2013/9/16 10:00

@@ -494,18 +494,18 @@
     {{else}}
         <div class="icon null-icon" id="poi_point_${id}">
     {{/if}}
-			<span><a href="#!pid=${targetId}&id=${id}" data-program-id="${targetId}" data-poi-point-id="${id}" class="edit">${name}</a></span>
-			<div class="tip-white">
-				<p class="left"></p>
+            <span><a href="#!pid=${targetId}&id=${id}" data-program-id="${targetId}" data-poi-point-id="${id}" class="edit">${name}</a></span>
+            <div class="tip-white">
+                <p class="left"></p>
                 {{if !!eventTypeName}}
-				<p class="center">${nn._([cms.global.PAGE_ID, 'poi-event', eventTypeName])}</p>
+                <p class="center">${nn._([cms.global.PAGE_ID, 'poi-event', eventTypeName])}</p>
                 {{else}}
                 <p class="center">Event Type</p>
                 {{/if}}
-				<p class="right"></p>
-			</div>
-			<div class="tip-bottom"></div>
-		</div>
+                <p class="right"></p>
+            </div>
+            <div class="tip-bottom"></div>
+        </div>
         <p class="func">
             <a href="#!pid=${targetId}&id=${id}" data-program-id="${targetId}" data-poi-point-id="${id}" class="btn-del">Delete</a>
         </p>
@@ -599,7 +599,7 @@
                     <div class="img hyper">
                         <h4>${nn._([cms.global.PAGE_ID, 'poi-event', 'Hyper Link'])}</h4>
                     </div>
-                    <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'User can go to watch another 9x9.tv channel or episode.'])}</p>
+                    <p>${nn._([cms.global.PAGE_ID, 'poi-event', 'User can go to watch another 9x9.tv program or episode.'])}</p>
                 </div>
             </li>
             {{if !cms.global.IS_REMARK}}
@@ -670,7 +670,7 @@
                 </div>
                 <div class="fminput">
                     <label for="hyper_link"><acronym title="Required field" class="mark-required">*</acronym>${nn._([cms.global.PAGE_ID, 'poi-event', 'Hyper link'])}:</label>
-                    <p class="text"><span><input type="text" name="channelUrl" id="hyper_link" maxlength="100" value="${link}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input 9x9 channel or episode URL'])}" class="text" /></span></p>
+                    <p class="text"><span><input type="text" name="channelUrl" id="hyper_link" maxlength="100" value="${link}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input 9x9 program or episode URL'])}" class="text" /></span></p>
                     <span class="notice">${nn._([cms.global.PAGE_ID, 'poi-event', 'Invalid 9x9 URL, please try again.'])}</span>
                 </div>
             </div>
@@ -985,7 +985,7 @@
                             {{else}}
                                 <span class="color{{if cms.config.COLOR_MAP[color]}} ${cms.config.COLOR_MAP[color]}{{/if}}"></span>
                             {{/if}}
-							<span class="bg"></span>
+                            <span class="bg"></span>
                             <ul class="color-list">
                                 <li class="c-fff" data-meta="#ffffff">#ffffff</li>
                                 <li class="c-eee" data-meta="#eeeeee">#eeeeee</li>
@@ -1066,7 +1066,7 @@
                 {{else}}
                     <span{{if cms.config.COLOR_MAP[bgColor]}} class="${cms.config.COLOR_MAP[bgColor]}"{{/if}}></span>
                 {{/if}}
-				<span class="bg"></span>
+                <span class="bg"></span>
                 <ul class="color-list">
                     <li class="c-fff" data-meta="#ffffff">#ffffff</li>
                     <li class="c-eee" data-meta="#eeeeee">#eeeeee</li>
@@ -1155,7 +1155,7 @@
     <p class="episode-storyboard">
         ${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Episode storyboard'])} (<em id="storyboard-length">50</em> ${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'videos left'])})<span>${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Duration'])} <em id="storyboard-duration">00:00:00</em></span>
     </p>
-    <div class="channel-name"><span class="title">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Channel:'])}</span><span id="channel-name" data-meta="${chName}">${chName}</span></div>
+    <div class="channel-name"><span class="title">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Program:'])}</span><span id="channel-name" data-meta="${chName}">${chName}</span></div>
     <div class="episode-name"><span class="title">${nn._([cms.global.PAGE_ID, 'episode-storyboard', 'Episode:'])}</span><span id="episode-name" data-meta="${epName}">${epName}</span></div>
 </div>
 </script>

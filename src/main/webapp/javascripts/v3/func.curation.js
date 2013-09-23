@@ -1607,7 +1607,7 @@
         $('#epcurate-curation ul.tabs li a.cur-add').trigger('click');
         $('#cur-add textarea').attr('placeholder', nn._([cms.global.PAGE_ID, 'add-video', 'Paste YouTube video URLs to add (separate with different lines)']));
         if (!eid && !cid) {
-            $common.showSystemErrorOverlayAndHookError('Invalid channel ID and episode ID, please try again.');
+            $common.showSystemErrorOverlayAndHookError('Invalid program ID and episode ID, please try again.');
             return;
         }
         if (!eid) {
@@ -1626,14 +1626,14 @@
                         });
                     }
                     if (-1 === $.inArray(parseInt(cid, 10), channelIds)) {
-                        $common.showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
+                        $common.showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this program.');
                         return;
                     }
                     nn.api('GET', cms.reapi('/api/channels/{channelId}', {
                         channelId: cid
                     }), null, function (channel) {
                         if (channel.contentType === cms.config.YOUR_FAVORITE) {
-                            $common.showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
+                            $common.showSystemErrorOverlayAndHookError('The favorites program can not be edited.');
                             return;
                         }
                         $common.showProcessingOverlay();
@@ -1653,7 +1653,7 @@
                     });
                 });
             } else {
-                $common.showSystemErrorOverlayAndHookError('Invalid channel ID, please try again.');
+                $common.showSystemErrorOverlayAndHookError('Invalid program ID, please try again.');
                 return;
             }
         } else {
@@ -1711,7 +1711,7 @@
             }
 
             if (-1 === $.inArray(parseInt(episode.channelId, 10), channelIds)) {
-                $common.showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this channel.');
+                $common.showSystemErrorOverlayAndHookError('You are not authorized to edit episodes in this program.');
                 // return;
                 deferred.reject();
             } else {
@@ -1730,7 +1730,7 @@
             var deferred = $.Deferred();
 
             if (channel.contentType === cms.config.YOUR_FAVORITE) {
-                $common.showSystemErrorOverlayAndHookError('The favorites channel can not be edited.');
+                $common.showSystemErrorOverlayAndHookError('The favorites program can not be edited.');
                 // return;
                 deferred.reject();
             } else {
