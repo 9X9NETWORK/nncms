@@ -32,7 +32,7 @@
             "Invalid program ID, please try again.": "節目ID有誤，請重試。",
             "Invalid episode ID, please try again.": "劇集ID有誤，請重試。",
             "Invalid program ID and episode ID, please try again.": "節目或劇集ID有誤，請重試。",
-            "The favorites program can not be edited.": "您無法編輯此頻道。",
+            "The favorites program can not be edited.": "您無法編輯此節目。",
             "Title text can't be empty!": "字卡內文不可空白！",
             "There must be at least one video in this episode.": "請至少加入一部影片。",
             "Please curate at least one valid video.": "請加入至少一個有效的影片。",
@@ -54,7 +54,7 @@
             "This episode has been saved as an unpublished draft.": "劇集已儲存為未發佈的草稿。"
         },
         "channel-tutorial": {
-            "Collect and Curate!": "蒐集影片 策展頻道！",
+            "Collect and Curate!": "蒐集影片 策展節目！",
             "CMS is the management center for your 9x9.tv list-form programs!": "後台管理系統是您策展9x9.tv節目的管理中心！",
             "Create a<br />new program": "創建<br />新節目",
             "Not right now, thanks!": "現在不要，謝謝！"
@@ -67,7 +67,7 @@
             "Can not connect to Facebook correctly!": "無法正確連結至Facebook！",
             "Please try again and make sure you agree on all permissions.": "請再試一次，並確保您已同意所有授權項目。",
             "Account disconnected!": "帳號連結已取消！",
-            "{If you want to enable auto sharing again, please:}": "若您想要重新開啟自動分享功能，請：<br /><br />1. 連結帳號<br />2. 至頻道設定頁面，為每個頻道設定自動分享功能<br />3. 發佈新節目，9x9.tv將自動完成分享<br />",
+            "{If you want to enable auto sharing again, please:}": "若您想要重新開啟自動分享功能，請：<br /><br />1. 連結帳號<br />2. 至節目設定頁面，為每個節目設定自動分享功能<br />3. 發佈新節目，9x9.tv將自動完成分享<br />",
             "Disconnecting account will also disable auto sharing for every program. Are you sure you want to disconnect?": "取消帳號連結將會同時取消所有節目的自動分享設定，確定取消連結？"
         },
         "button": {
@@ -105,7 +105,7 @@
             "9x9.tv - Sign In": "9x9.tv - 登入"
         },
         "login-holder": {
-            "Collect and Curate!": "蒐集影片 策展頻道！",
+            "Collect and Curate!": "蒐集影片 策展節目！",
             "CMS is the management center for your 9x9.tv list-form programs!": "後台管理系統是您策展9x9.tv節目的管理中心！",
             "Sign In": "登入",
             "Sign in with Facebook": "使用Facebook登入",
@@ -184,7 +184,7 @@
     },
     "store-manage": {
         "html-title": {
-            "9x9.tv - Store Manage": "9x9.tv - 頻道商店 "
+            "9x9.tv - Store Manage": "9x9.tv - 節目商店 "
         },
         "func-nav": {
             "My Portal": "我的入口",
@@ -648,7 +648,7 @@
             "Duration overlaps another POI's duration:": "設定時間與另一個互動時間點重疊:",
             "Add interactive event": "設定互動事件",
             "Choose a type": "選擇事件類型",
-            "Hyper Link": "超連結頻道",
+            "Hyper Link": "超連結節目",
             "Poll": "投票",
             "User can go to watch another 9x9.tv program or episode.": "使用者可前往觀賞另一個9x9.tv節目或劇集。",
             "Scheduled Notification": "排程通知",
@@ -656,7 +656,7 @@
             "Instant Notification": "即時通知",
             "Send an instant notification to user to get more information.": "設定即時通知，使用者可即時獲得更多資訊。",
             "POI": "互動時間點",
-            "Interactive event : Hyper Link": "互動事件 : 超連結頻道",
+            "Interactive event : Hyper Link": "互動事件 : 超連結節目",
             "Interactive event : Scheduled Notification": "互動事件 : 排程通知",
             "Interactive event : Instant Notification": "互動事件 : 即時通知",
             "PREVIEW": "預覽畫面",
