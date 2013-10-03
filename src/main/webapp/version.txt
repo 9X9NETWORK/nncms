@@ -1,3 +1,16 @@
+版本: 5598
+作者: mars
+日期: 2013/10/03 10:51
+訊息:
+bug fix
+12070	maj	P1	Wind	marshsu.9x9@gmail.com	NEW		Program list tutorial 文字錯誤
+12102	maj	P1	Wind	marshsu.9x9@gmail.com	NEW		PCS My portal選項跑版
+12103	maj	P2	Wind	marshsu.9x9@gmail.com	NEW		名詞需要修改
+----
+異動 : /stylesheetsv3/portal.css
+異動 : /lang/en.json
+異動 : /lang/zh.json
+
 版本: 5594
 作者: mars
 日期: 2013/10/02 17:10
