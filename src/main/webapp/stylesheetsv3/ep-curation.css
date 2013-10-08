@@ -923,6 +923,10 @@ p.auto-height {
     background-position: -40px -1413px;	
 }
 
+#epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li.disabled a.font-color .bg {
+    background-position: 0px -1413px; 
+}
+
 #epcurate-curation #cur-edit .font-container .text-func .func-wrap ul li a.font-color span.color {
     display: block;
     position: absolute;
@@ -1221,8 +1225,8 @@ p.auto-height {
 	z-index: 62;
 }
 
-#epcurate-curation #cur-edit .edit-title.disable .background-container .bg-color a span {
-    background-color: #000 !important;
+#epcurate-curation #cur-edit .edit-title.disable .background-container .bg-color a span.bg {
+    background: url("../images/btns.png") no-repeat scroll 0 -2024px rgba(0, 0, 0, 0);
 }
 
 #epcurate-curation #cur-edit .edit-title.disable .background-container .bg-color a {

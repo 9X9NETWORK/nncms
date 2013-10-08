@@ -1020,7 +1020,7 @@ $(function () {
     $('#cur-edit').on('click', '.edit-title .color-list li', function () {
         var colorCode = $(this).attr('class'),
             parent = $(this).parent();
-        parent.prev('span').attr('class', 'color ' + colorCode);
+        parent.prev('span').prev('span').attr('class', 'color ' + colorCode);
         parent.parent().next('input').val($(this).data('meta'));
         return false;
     });

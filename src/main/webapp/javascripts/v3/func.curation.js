@@ -634,6 +634,7 @@
         $('#cur-edit input, #cur-edit textarea').prop('disabled', true);
         $.uniform.update('#cur-edit input, #cur-edit textarea');
         $('#cur-edit .font-container .font-l, #cur-edit .font-container .font-s').removeClass('enable').addClass('disabled');
+        $('.font-container .font-color').parent().addClass('disabled');
     };
 
     $page.addVideoPlayingHook = function (element) {

@@ -1,3 +1,18 @@
+版本: 5609
+作者: mars
+日期: 2013/10/08 16:41
+訊息:
+bug fix
+12049	maj	P2	Wind	marshsu.9x9@gmail.com	NEW		字卡的Font color按鈕與Background color 下拉式選單不是disable樣式
+12070	maj	P1	Wind	marshsu.9x9@gmail.com	REOP	Program list tutorial 文字錯誤
+----
+異動 : /stylesheetsv3/ep-curation.css
+異動 : /lang/en.json
+異動 : /javascripts/v3/domready.curation.js
+異動 : /javascripts/v3/func.curation.js
+異動 : /epcurate-curation.html
+異動 : /index.html
+
 版本: 5598
 作者: mars
 日期: 2013/10/03 10:51
