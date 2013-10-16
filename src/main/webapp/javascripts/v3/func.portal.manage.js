@@ -186,14 +186,14 @@
                 $page.onTopAddList[i].seq = $.inArray(channel.id, arrChannels) + 1;
             });
             $page.nomoList.sort(function (a, b) {
-                return a.seq > b.seq;
+                return a.seq - b.seq;
             });
         } else if (2 === $page.sortingType) {
             $.each($page.onTopList, function (i, channel) {
                 $page.onTopList[i].seq = $.inArray(channel.id, arrChannelOnTop) + 1;
             });
             $page.onTopList.sort(function (a, b) {
-                return a.seq > b.seq;
+                return a.seq - b.seq;
             });
         }
 
@@ -306,14 +306,16 @@
 
         if (1 === $page.sortingType) {
             $page.nomoList.sort(function (a, b) {
-                return a.seq > b.seq;
+                return a.seq - b.seq;
             });
         } else if (2 === $page.sortingType) {
             $page.onTopList.sort(function (a, b) {
-                return a.seq > b.seq;
+                return a.seq - b.seq;
             });
             $page.nomoList.sort(function (a, b) {
-                return a.updateDate < b.updateDate;
+                // return parseInt(a.updateDate, 10) < parseInt(b.updateDate, 10);
+                // return a.updateDate.toString() < b.updateDate.toString();
+                return b.updateDate - a.updateDate;
             });
         }
         $('#portal-set-chanels-tmpl').tmpl($page.onTopList).appendTo('#channel-list');
@@ -328,7 +330,7 @@
         if (a.alwaysOnTop !== true && b.alwaysOnTop !== true) {
             return a.updateDate < b.updateDate;
         }
-        return a.seq > b.seq;
+        return a.seq - b.seq;
     };
 
     // NOTE: page entry point (keep at the bottom of this file)

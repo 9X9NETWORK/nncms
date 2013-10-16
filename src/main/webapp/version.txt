@@ -1,3 +1,37 @@
+版本: 5652
+日期: 2013/10/16 15:52
+訊息:
+new future release
+PCS 4.1
+1. promotion category management
+2. system category management, system category show/hide
+----
+新增 : /store-promotion.html
+新增 : /javascripts/v3/domready.portal.store.promotion.js
+新增 : /javascripts/v3/func.portal.store.promotion.js
+新增 : /javascripts/v3/cms.poi-utility.js
+新增 : /javascripts/lib/jquery.poi.js
+異動 : /favicon.ico
+異動 : /store-manage.html
+異動 : /portal-set.html
+異動 : /portal-manage.html
+異動 : /epcurate-curation.html
+異動 : /brand-setting.html
+異動 : /lang/en.json
+異動 : /lang/zh.json
+異動 : /images/icon_nav.png
+異動 : /stylesheetsv3/channel.css
+異動 : /stylesheetsv3/ep-curation.css
+異動 : /stylesheetsv3/portal.css
+異動 : /stylesheetsv3/style.css
+異動 : /javascripts/v3/domready.common.js
+異動 : /javascripts/v3/domready.curation.js
+異動 : /javascripts/v3/domready.portal.store.js
+異動 : /javascripts/v3/func.common.js
+異動 : /javascripts/v3/func.curation.js
+異動 : /javascripts/v3/func.portal.manage.js
+異動 : /javascripts/v3/func.portal.store.js
+
 版本: 5609
 作者: mars
 日期: 2013/10/08 16:41

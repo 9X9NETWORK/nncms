@@ -7,11 +7,11 @@
 <meta http-equiv="expires" content="0" />
 <link rel="stylesheet" href="stylesheetsv3/perfect-scrollbar.css" />
 <link rel="stylesheet" href="stylesheetsv3/style.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/lightbox.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/uniform.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/episode.css?v=1278" />
 <link rel="stylesheet" href="stylesheetsv3/portal.css?v=1278" />
-<title>9x9.tv - My Portal</title>
+<title>9x9.tv - Store Manage</title>
 </head>
 <body>
 <div id="fb-root"></div>
@@ -58,35 +58,66 @@
     <div id="content-nav">
         <div id="func-nav">
             <ul>
+                <li><a href="portal-manage.html" class="portal langkey">My Portal</a></li>
                 <li>
-                    <a href="portal-manage.html" class="portal langkey">My Portal</a>
+                    <a href="store-promotion.html" class="store langkey">Program Store</a>
                     <ul class="sub-nav">
+                        <li class="active"><a href="store-promotion.html" class="langkey">Promotion Category</a></li>
+                        <li><a href="store-manage.html" class="langkey">System Category</a></li>
                     </ul>
                 </li>
-                <li><a href="store-promotion.html" class="store langkey">Program Store</a></li>
                 <li><a href="brand-setting.html" class="brand langkey">Brand Settings</a></li>
             </ul>
         </div>
     </div>
     <!-- Content Nav Layer End -->
-    <div id="portal-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
+    <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
     <div id="content-main">
         <div id="title-func" class="clearfix">
-            <h2><span class="langkey">My Portal</span> &gt; <span class="set_name"></span></h2>
+            <h2><span class="langkey">Program Store</span> &gt; <span class="categry-type langkey">Promotion Category</span></h2>
             <ul>
-                <li class="hide"><p class="btns"><span><a href="javascript:void(0)" id="set-preview" target="_blank" class="langkey">Preview</a></span></p></li>
-                <li id="set-save" class="last"><p class="btns"><span><a href="javascript:void(0)" class="langkey">Save</a></span></p></li>
+                <li id="set-save" class="last"><p class="btns disableBB"><span><a href="javascript:void(0)" class="langkey">Save</a></span></p></li>
             </ul>
         </div>
+        <div class="intro clearfix">
+            <p>
+                <span class="langkey">Promotion category provides the best program impression in program store.</span>
+                <a href="#" class="switch-on hide">ON</a>
+                <a href="#" class="switch-off hide">OFF</a>
+            </p>
+            <p class="msg-error langkey">You have turnned off system category, your viewers will not see these categories and programs in store.</p>
+        </div>
         <!-- Portal Layer Begin -->
-        <div id="portal-layer">
-            <form id="portal-manage" onsubmit="return false;">
-            </form>
-            <h2 id="cntChannelEmpty" style="display:none" class="langkey">You can add 27 programs into your channel.</h2>
-            <div id="portal-constrain">
-                <div id="portal-list">
-                    <ul id="channel-list" class="channel-list">
+        <div id="store-layer" class="collapse">
+            <div id="store-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
+            <div id="store-category" class="clearfix">
+                <ul id="store-category-ul">
+                </ul>
+                <div class="btn-gray collapse">
+                    <p class="left"></p>
+                    <p class="center"><span class="icon langkey">Collapse</span></p>
+                    <p class="right"></p>
+                </div>
+                <div class="btn-gray expand">
+                    <p class="left"></p>
+                    <p class="center"><span class="icon cat_name"></span></p>
+                    <p class="right"></p>
+                </div>
+                <div class="clear info">
+                    <span class="form-title"></span>
+                    <span class="form-content langkey">Sorted by: Updated time</span>
+                </div>
+            </div>
+            <h2 id="cntChannelEmpty" class="langkey hide">You can add 6 prmotion categories.</h2>
+            <div id="store-constrain">
+                <div id="store-list">
+                    <ul class="channel-list">
                     </ul>
+                    <div class="load" style="display: none;">
+                        <p class="left"></p>
+                        <p class="center"><span><img src="images/icon_load.gif" alt="" /><span class="langkey">Load More</span></span></p>
+                        <p class="right"></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,21 +153,6 @@
 </div>
 <!-- Loading Layer End -->
 
-<!-- Yes No Prompt Layer Begin -->
-<div id="yes-no-prompt" class="prompt lightbox-content overlay-l" style="width: 500px;">
-    <div class="overlay-container">
-        <div class="overlay-wrap">
-            <a href="#" class="btn-close">Close</a>
-            <p class="content">You will change the order of program list to "update time", it will sort by update time of programs automatically so you can't change the order manually except set on top programs.</p>
-            <div class="overlay-btn">
-                <p class="btns btn-no"><span><a href="#">No</a></span></p>
-                <p class="btns btn-yes"><span><a href="#">Yes</a></span></p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Yes No Prompt Layer End -->
-
 <!-- System Error Layer Begin -->
 <div id="system-error" class="lightbox-content overlay-l">
     <div class="overlay-container">
@@ -151,30 +167,15 @@
 </div>
 <!-- System Error Layer End -->
 
-<!-- Unsave Prompt Layer Begin -->
-<div id="unsave-prompt" class="lightbox-content overlay-l">
-    <div class="overlay-container">
-        <div class="overlay-wrap">
-            <a href="#" class="btn-close">Close</a>
-            <p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
-            <div class="overlay-btn">
-                <p class="btns btn-no"><span><a href="#">No</a></span></p>
-                <p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Unsave Prompt Layer End -->
-
 <!-- Poratl Add Layer Begin -->
-<div class="msg-layer" id="portal-add-layer">
+<div class="msg-layer store" id="portal-add-layer">
     <div class="msg-holder">
         <div class="msg-left"></div>
         <div class="msg-center">
             <p class="btn-msg-close"></p>
-            <h2 id="search-title">Add programs into your “<span>Set 2</span>”</h2>
+            <h2 id="search-title">Add programs into your “<span>Promotion 1</span>”</h2>
             <form onsubmit="return false;">
-                <span class="form-title langkey">Channel Name:</span>
+                <span class="form-title langkey">Find Programs:</span>
                 <div class="select-gray" id="select-portal-ch">
                     <div class="select-content-gray">
                         <p id="btn-portal-ch" class="select-btn"></p>
@@ -242,45 +243,129 @@
 </script>
 <!-- portal-search-item-tmpl End -->
 
-<script id="portal-func-nav-sub-tmpl" type="text/x-jquery-tmpl">
-<li class="{{if isActive == 1}}active{{/if}}"><a href="portal-manage.html?id=${id}">${name}</a></li>
-</script>
-
-<!-- portal-set-form-tmpl Begin -->
-<script id="portal-set-form-tmpl" type="text/x-jquery-tmpl">
-<input type="hidden" name="id" value="${id}" />
-<input type="hidden" id="sortingType" name="sortingType" value="${sortingType}" />
-<div class="clearfix">
-    <span class="required-field">*</span>
-    <span class="form-title">${nn._([cms.global.PAGE_ID, 'channel-list', 'Channel Name'])}:</span>
-    <div class="input-white" id="set-title">
-        <p class="left"></p>
-        <input id="setName" name="name" value="${name}" class="center" />
-        <p class="right"></p>
+<!-- Change Category Layer Begin -->
+<div id="change-category-overlay" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <!-- template = #change-category-overlay-tmpl -->
     </div>
-    <span class="notice"><span id="name-charcounter">${name.length}</span>${nn._([cms.global.PAGE_ID, 'channel-list', 'Best within 20 characters'])}</span>
-    <span id="msg-portal" class="msg-error"></span>
 </div>
-<div class="clearfix sort">
-    <span class="form-title">${nn._([cms.global.PAGE_ID, 'channel-list', 'Program List'])}: </span> <p class="number"><span id="channelCnt">${channelCnt}</span> ${nn._([cms.global.PAGE_ID, 'channel-list', 'Programs'])}</p>
-    <ul class="sort-list">
-        <li class="head">${nn._([cms.global.PAGE_ID, 'channel-list', 'Sorted by'])}: </li>
-        <li tvalue="2" class="sType {{if sortingType == 2}}on{{/if}}">${nn._([cms.global.PAGE_ID, 'channel-list', 'Updated time'])}</li>
-        <li tvalue="1" class="sType {{if sortingType == 1}}on{{/if}}">${nn._([cms.global.PAGE_ID, 'channel-list', 'Customized Order'])}</li>
-    </ul>
-</div>
-</script>
-<!-- portal-set-form-tmpl End -->
+<!-- Change Category Layer End -->
 
-<!-- portal-set-empty-chanels-tmpl Begin -->
-<script id="portal-set-empty-chanels-tmpl" type="text/x-jquery-tmpl">
-<li id="empty_channel" class="empty{{if cntChanels >=27}} disable{{/if}}">
+<!-- Unsave Prompt Layer Begin -->
+<div id="unsave-prompt" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+            <div class="overlay-btn">
+                <p class="btns btn-no"><span><a href="#">No</a></span></p>
+                <p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Unsave Prompt Layer End -->
+
+<!-- confirm Prompt Layer Begin -->
+<div id="confirm-prompt" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <div class="overlay-wrap">
+            <a href="#" class="btn-close">Close</a>
+            <p class="content">Unsaved changes will be lost, are you sure you want to leave?</p>
+            <div class="overlay-btn">
+                <p class="btns btn-no"><span><a href="#">No</a></span></p>
+                <p class="btns btn-leave"><span><a href="#">Yes</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- confirm Prompt Layer End -->
+
+<!-- store-empty-category-li-tmpl Begin -->
+<script id="store-empty-category-li-tmpl" type="text/x-jquery-tmpl">
+<li class="empty addPromotionCategory disable">
+    <span>
+        <a href="#">+ ${nn._([cms.global.PAGE_ID, 'channel-list', 'Add Category'])}</a>
+    </span>
+</li>
+</script>
+<!-- store-empty-category-li-tmpl End -->
+
+<!-- store-category-li-tmpl Begin -->
+<script id="store-category-li-tmpl" type="text/x-jquery-tmpl">
+<li id="catLi_${id}" data-meta="${id}" data-seq="${seq}" data-zhname="${zhName}" data-enname="${enName}" class="catLi{{if $item.actCat == id }} on{{/if}}{{if $item.isNew === "new" }} newCat{{/if}}">
+    <span>
+        <a href="javascript:void(0);">${zhName}</a>
+    </span>
+    <div class="btn-remove"></div>
+    <div class="btn-edit"></div>
+</li>
+</script>
+<!-- store-category-li-tmpl End -->
+
+<!-- store-chanels-li-tmpl Begin -->
+<script id="store-chanels-li-tmpl" type="text/x-jquery-tmpl">
+    <li id="channel_${id}" class="channelItem{{if alwaysOnTop == true}} Sortable{{else}} notSortable{{/if}}">
+        <div class="thumb">
+            <div class="btn-top{{if alwaysOnTop == true}} on{{/if}}">
+                <div class="icon-holder"></div>
+                <div class="tip-white">
+                    <p class="left"></p>
+                    <p class="center">{{if alwaysOnTop == true}}${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove from top'])}{{else}}${nn._([cms.global.PAGE_ID, 'channel-list', 'Set on top'])}{{/if}}</p>
+                    <p class="right"></p>
+                </div>
+                <div class="tip-top"></div>
+            </div>
+            <div class="btn-minus">
+                <div class="icon-holder"></div>
+                <div class="tip-white">
+                    <p class="left"></p>
+                    <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove program'])}</p>
+                    <p class="right"></p>
+                </div>
+                <div class="tip-top"></div>
+            </div>
+            <div class="btn-remove">
+                <div class="icon-holder"></div>
+                <div class="tip-white">
+                    <p class="left"></p>
+                    <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove program'])}</p>
+                    <p class="right"></p>
+                </div>
+                <div class="tip-top"></div>
+            </div>
+            <a href="/view?mso=${msoName}&ch=${id}" target="_blank">
+                <img class="watermark" alt="" src="images/icon_playlist.png" />
+            </a>
+            <div class="ch">
+                <div class="img">
+                    <img src="${imageUrl}" alt="" />
+                </div>
+            </div>
+        </div>
+        <p class="ch-title">${name}</p>
+    </li>
+</script>
+<!-- store-chanels-li-tmpl End -->
+
+<!-- store-empty-chanels-tmpl Begin -->
+<script id="store-empty-chanels-tmpl" type="text/x-jquery-tmpl">
+<li id="empty_channel" class="empty on">
     <div class="thumb">
         <div class="btn-top">
             <div class="icon-holder"></div>
             <div class="tip-white">
                 <p class="left"></p>
-                <p class="center">Set on top</p>
+                <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Set on top'])}</p>
+                <p class="right"></p>
+            </div>
+            <div class="tip-top"></div>
+        </div>
+        <div class="btn-minus">
+            <div class="icon-holder"></div>
+            <div class="tip-white">
+                <p class="left"></p>
+                <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove program'])}</p>
                 <p class="right"></p>
             </div>
             <div class="tip-top"></div>
@@ -289,7 +374,7 @@
             <div class="icon-holder"></div>
             <div class="tip-white">
                 <p class="left"></p>
-                <p class="center">Remove</p>
+                <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove program'])}</p>
                 <p class="right"></p>
             </div>
             <div class="tip-top"></div>
@@ -302,77 +387,29 @@
     <p class="ch-title addChanel">+ ${nn._([cms.global.PAGE_ID, 'channel-list', 'Add programs'])}<br />${nn._([cms.global.PAGE_ID, 'channel-list', 'Add programs sub'])}</p>
 </li>
 </script>
-<!-- portal-set-empty-chanels-tmpl End -->
+<!-- store-empty-chanels-tmpl End -->
 
-<!-- portal-set-chanels-tmpl Begin -->
-<script id="portal-set-chanels-tmpl" type="text/x-jquery-tmpl">
-{{if alwaysOnTop == true}}
-    <li id="set_${id}" class="itemList notSortable">
-        <div class="thumb">
-            <div class="btn-top on">
-                <div class="icon-holder"></div>
-                <div class="tip-white">
-                    <p class="left"></p>
-                    <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove from top'])}</p>
-                    <p class="right"></p>
-                </div>
-                <div class="tip-top"></div>
-            </div>
-            <div class="btn-remove">
-                <div class="icon-holder"></div>
-                <div class="tip-white">
-                    <p class="left"></p>
-                    <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove program'])}</p>
-                    <p class="right"></p>
-                </div>
-                <div class="tip-top"></div>
-            </div>
-            <a href="/view?mso=${msoName}&ch=${id}" target="_blank">
-                <img class="watermark" alt="" src="images/icon_playlist.png" />
-            </a>
-            <div class="ch">
-                <div class="img">
-                    <img src="${imageUrl}" alt="" />
-                </div>
-            </div>
-        </div>
-        <p class="ch-title">${name}</p>
-    </li>
-{{else}}
-    <li gg="${updateDate}" id="set_${id}" class="itemList isSortable">
-        <div class="thumb">
-            <div class="btn-top">
-                <div class="icon-holder"></div>
-                <div class="tip-white">
-                    <p class="left"></p>
-                    <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Set on top'])}</p>
-                    <p class="right"></p>
-                </div>
-                <div class="tip-top"></div>
-            </div>
-            <div class="btn-remove">
-                <div class="icon-holder"></div>
-                <div class="tip-white">
-                    <p class="left"></p>
-                    <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove program'])}</p>
-                    <p class="right"></p>
-                </div>
-                <div class="tip-top"></div>
-            </div>
-            <a href="/view?mso=${msoName}&ch=${id}" target="_blank">
-                <img class="watermark" alt="" src="images/icon_playlist.png" />
-            </a>
-            <div class="ch">
-                <div class="img">
-                    <img src="${imageUrl}" alt="" />
-                </div>
-            </div>
-        </div>
-        <p class="ch-title">${name}</p>
-    </li>
-{{/if}}
+<!-- change-category-overlay-tmpl Begin -->
+<script id="change-category-overlay-tmpl" type="text/x-jquery-tmpl">
+<div id="change-category-overlay-wrap" class="overlay-wrap">
+    <a href="#" class="btn-close">Close</a>
+    <h4>${overLayTitle}</h4>
+    <div class="change-category">
+        <form method="post" action="">
+            <p class="text"><span class="input-right"><span class="input-middle"><input type="text" id="proCatEnName" maxlength="16" value="${valEnName}" placeholder="${nn._([cms.global.PAGE_ID, 'overlay', 'English Name'])}" class="text" /></span></span></p>
+            <p class="notice">${nn._([cms.global.PAGE_ID, 'overlay', 'Max length is 14 characters'])}</p>
+            <p class="text"><span class="input-right"><span class="input-middle"><input type="text" id="proCatZhName" maxlength="16" value="${valZhName}" placeholder="${nn._([cms.global.PAGE_ID, 'overlay', 'Chinese Name'])}" class="text" /></span></span></p>
+            <p class="notice">${nn._([cms.global.PAGE_ID, 'overlay', 'Max length is 8 chinese characters'])}</p>
+        </form>
+    </div>
+    <div class="overlay-btn">
+        <p class="btns btn-cancel"><span><a href="#">${nn._([cms.global.PAGE_ID, 'overlay', 'Cancel'])}</a></span></p>
+        <p class="btns btn-chg-category" data-acttype="${actType}" data-catid="{{if catId}}${catId}{{/if}}"><span><a href="#">${actButton}</a></span></p>
+    </div>
+</div>
 </script>
-<!-- portal-set-chanels-tmpl End -->
+<!-- change-category-overlay-tmpl End -->
+
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
@@ -388,8 +425,8 @@
 <script src="javascripts/libs/perfect-scrollbar.js"></script>
 <script src="javascripts/v2/config.js?v=1278"></script>
 <script src="javascripts/v3/func.common.js?v=1278"></script>
-<script src="javascripts/v3/func.portal.manage.js?v=1278"></script>
+<script src="javascripts/v3/func.portal.store.promotion.js?v=1278"></script>
 <script src="javascripts/v3/domready.common.js?v=1278"></script>
-<script src="javascripts/v3/domready.portal.manage.js?v=1278"></script>
+<script src="javascripts/v3/domready.portal.store.promotion.js?v=1278"></script>
 </body>
 </html>

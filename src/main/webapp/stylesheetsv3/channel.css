@@ -1310,3 +1310,9 @@ body.mac #title-func h2 {
     right: 12px;
 	display: block;
 }
+
+@media only screen and (max-width: 1016px) {
+#content-main-wrap form .fminput .fmfield p.text span .text {
+    width: 99.4%;
+}
+}

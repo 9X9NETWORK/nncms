@@ -613,7 +613,7 @@
                     $(this).data('langkey', $(this).val());
                 });
                 // portal manage
-                $('#portal-layer .langkey, #portal-add-layer .langkey, #store-layer .langkey, #brand-layer .langkey').each(function () {
+                $('#portal-layer .langkey, #portal-add-layer .langkey, #store-layer .langkey, #brand-layer .langkey, .intro .langkey').each(function () {
                     $(this).data('langkey', $(this).text());
                 });
                 $('#portal-add-layer .langkeyVal').each(function () {

@@ -7,7 +7,7 @@
 <meta http-equiv="expires" content="0" />
 <link rel="stylesheet" href="stylesheetsv3/perfect-scrollbar.css" />
 <link rel="stylesheet" href="stylesheetsv3/style.css?v=1278" />
-<link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
+<link rel="stylesheet" href="stylesheetsv3/lightbox.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/uniform.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/episode.css?v=1278" />
 <link rel="stylesheet" href="stylesheetsv3/portal.css?v=1278" />
@@ -59,7 +59,13 @@
         <div id="func-nav">
             <ul>
                 <li><a href="portal-manage.html" class="portal langkey">My Portal</a></li>
-                <li class="active"><a href="store-manage.html" class="store langkey">Program Store</a></li>
+                <li>
+                    <a href="store-promotion.html" class="store langkey">Program Store</a>
+                    <ul class="sub-nav">
+                        <li><a href="store-promotion.html" class="langkey">Promotion Category</a></li>
+                        <li class="active"><a href="store-manage.html" class="langkey">System Category</a></li>
+                    </ul>
+                </li>
                 <li><a href="brand-setting.html" class="brand langkey">Brand Settings</a></li>
             </ul>
         </div>
@@ -68,13 +74,21 @@
     <div id="main-wrap-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
     <div id="content-main">
         <div id="title-func" class="clearfix">
-            <h2><span class="langkey">Program Store</span> &gt; <span class="func_name"></span></h2>
+            <h2><span class="langkey">Program Store</span> &gt; <span class="categry-type langkey">System Category</span></h2>
             <ul>
-                <li id="set-save" class="last"><p class="btns"><span><a href="javascript:void(0)" class="langkey">Save</a></span></p></li>
+                <li id="set-save" class="last"><p class="btns disableBB"><span><a href="javascript:void(0)" class="langkey">Save</a></span></p></li>
             </ul>
         </div>
+        <div class="intro clearfix">
+            <p>
+                <span class="langkey">There are over 1000 FREE programs for your selection, you can activate system categories to enrich your program store.</span>
+                <a href="#" class="switch-on langkey hide">ON</a>
+                <a href="#" class="switch-off langkey hide">OFF</a>
+            </p>
+            <p class="msg-error langkey">You have turnned off system category, your viewers will not see these categories and programs in store.</p>
+        </div>
         <!-- Portal Layer Begin -->
-        <div id="store-layer">
+        <div id="store-layer" class="collapse">
             <div id="store-slider" class="slider-wrap"><div class="slider-vertical"></div></div>
             <div id="store-category" class="clearfix">
                 <ul id="store-category-ul">
@@ -86,14 +100,15 @@
                 </div>
                 <div class="btn-gray expand">
                     <p class="left"></p>
-                    <p class="center"><span class="icon langkey">Expand Category</span></p>
+                    <p class="center"><span class="icon cat_name"></span></p>
                     <p class="right"></p>
                 </div>
                 <div class="clear info">
                     <span class="form-title"></span>
-                    <span class="form-content langkey">You can manage your program store manually.</span>
+                    <span class="form-content langkey">Sorted by: Updated time</span>
                 </div>
             </div>
+            <h2 id="cntChannelEmpty" class="langkey hide">You can add 6 prmotion categories.</h2>
             <div id="store-constrain">
                 <div id="store-list">
                     <ul class="channel-list">
@@ -152,6 +167,71 @@
 </div>
 <!-- System Error Layer End -->
 
+<!-- Poratl Add Layer Begin -->
+<div class="msg-layer store" id="portal-add-layer">
+    <div class="msg-holder">
+        <div class="msg-left"></div>
+        <div class="msg-center">
+            <p class="btn-msg-close"></p>
+            <h2 id="search-title">Add programs into your “<span>Promotion 1</span>”</h2>
+            <form onsubmit="return false;">
+                <span class="form-title langkey">Find Programs:</span>
+                <div class="select-gray" id="select-portal-ch">
+                    <div class="select-content-gray">
+                        <p id="btn-portal-ch" class="select-btn"></p>
+                        <p id="txt-portal-ch" class="select-txt-gray langkey">Program URL</p>
+                        <ul id="dropdown-portal-ch" class="select-dropdown" kvale="url">
+                            <li kvale="url" data-tvalue="Please input program URL" class="on langkey">Program URL</li>
+                            <li kvale="keywords" data-tvalue="Please input program name or curator name" class="langkey">Keywords</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="input-gray">
+                    <p class="left"></p>
+                    <p class="center">
+                        <input id="input-portal-ch" class="textfield langkeyVal" value="Please input program URL" style="width: 100%" />
+                    </p>
+                    <p class="right"></p>
+                </div>
+                <div class="btn-white">
+                    <p class="left"></p>
+                    <p id="portal_search_channel" class="center langkey">Search</p>
+                    <p class="right"></p>
+                </div> 
+                <br />
+                <p>
+                    <b class="langkeyH">Results:</b> <tit id="sRusult" data-canAdd="0" class="langkeyH"></tit>
+                    <span id="msg-search" class="msg-error"></span>
+                </p>
+                <br />
+            </form>
+            <a href="#" id="searchPrev" class="prev" style="display: none">prev</a>
+            <a href="#" id="searchNext" class="next" style="display: none">next</a>
+            <div class="list-holder">
+                <ul id="search-channel-list" class="channel-list">
+                </ul>
+            </div>
+            <div class="msg-btn-holder">
+                <div id="searchAdd" class="btn-white" style="display: none">
+                    <p class="left"></p>
+                    <p id="portal_add_channel" class="center langkey">Add</p>
+                    <p class="right"></p>
+                </div> 
+            </div>
+        </div>
+        <div class="msg-right"></div>
+    </div>
+</div>
+<!-- Poratl Add Layer End -->
+
+<!-- Change Category Layer Begin -->
+<div id="change-category-overlay" class="lightbox-content overlay-l">
+    <div class="overlay-container">
+        <!-- template = #change-category-overlay-tmpl -->
+    </div>
+</div>
+<!-- Change Category Layer End -->
+
 <!-- Unsave Prompt Layer Begin -->
 <div id="unsave-prompt" class="lightbox-content overlay-l">
     <div class="overlay-container">
@@ -167,20 +247,60 @@
 </div>
 <!-- Unsave Prompt Layer End -->
 
-<script id="store-category-li-tmpl" type="text/x-jquery-tmpl">
-<li id="catLi_${id}" data-meta="${id}" class="catLi {{if $item.actCat == id }}on{{/if}}">${name}</li>
+<!-- store-empty-category-li-tmpl Begin -->
+<script id="store-empty-category-li-tmpl" type="text/x-jquery-tmpl">
+<li class="catLi empty">
+    <span>
+        <a href="#">+ Add Category</a>
+    </span>
+    <div class="btn-remove"></div>
+    <div class="btn-edit"></div>
+    <div class="btn-minus"></div>
+</li>
 </script>
+<!-- store-empty-category-li-tmpl End -->
+
+<!-- store-category-li-tmpl Begin -->
+<script id="store-category-li-tmpl" type="text/x-jquery-tmpl">
+<li id="catLi_${id}" data-meta="${id}" class="catLi{{if $item.actCat == id }} on{{/if}}{{if msoMinus == 'on' }} minus{{/if}}">
+    <span>
+        <a href="javascript:void(0);">${name}</a>
+    </span>
+    <div class="btn-remove"></div>
+    <div class="btn-edit"></div>
+    <div class="btn-minus{{if msoMinus == 'on' }} on{{/if}}"></div>
+</li>
+</script>
+<!-- store-category-li-tmpl End -->
 
 <!-- store-chanels-li-tmpl Begin -->
 <script id="store-chanels-li-tmpl" type="text/x-jquery-tmpl">
 {{if msoMinus === "on"}}
     <li id="channel_${id}" class="channelItem minus">
         <div class="thumb">
+            <div class="btn-top">
+                <div class="icon-holder"></div>
+                <div class="tip-white">
+                    <p class="left"></p>
+                    <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove from top'])}</p>
+                    <p class="right"></p>
+                </div>
+                <div class="tip-top"></div>
+            </div>
             <div class="btn-minus on">
                 <div class="icon-holder"></div>
                 <div class="tip-white">
                     <p class="left"></p>
                     <p id="" class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Add program'])}</p>
+                    <p class="right"></p>
+                </div>
+                <div class="tip-top"></div>
+            </div>
+            <div class="btn-remove">
+                <div class="icon-holder"></div>
+                <div class="tip-white">
+                    <p class="left"></p>
+                    <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove program'])}</p>
                     <p class="right"></p>
                 </div>
                 <div class="tip-top"></div>
@@ -199,7 +319,25 @@
 {{else}}
     <li id="channel_${id}" class="channelItem">
         <div class="thumb">
+            <div class="btn-top">
+                <div class="icon-holder"></div>
+                <div class="tip-white">
+                    <p class="left"></p>
+                    <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Set on top'])}</p>
+                    <p class="right"></p>
+                </div>
+                <div class="tip-top"></div>
+            </div>
             <div class="btn-minus">
+                <div class="icon-holder"></div>
+                <div class="tip-white">
+                    <p class="left"></p>
+                    <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove program'])}</p>
+                    <p class="right"></p>
+                </div>
+                <div class="tip-top"></div>
+            </div>
+            <div class="btn-remove">
                 <div class="icon-holder"></div>
                 <div class="tip-white">
                     <p class="left"></p>
@@ -222,6 +360,69 @@
 {{/if}}
 </script>
 <!-- store-chanels-li-tmpl End -->
+
+<!-- store-empty-chanels-tmpl Begin -->
+<script id="store-empty-chanels-tmpl" type="text/x-jquery-tmpl">
+<li id="empty_channel" class="empty on">
+    <div class="thumb">
+        <div class="btn-top">
+            <div class="icon-holder"></div>
+            <div class="tip-white">
+                <p class="left"></p>
+                <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Set on top'])}</p>
+                <p class="right"></p>
+            </div>
+            <div class="tip-top"></div>
+        </div>
+        <div class="btn-minus">
+            <div class="icon-holder"></div>
+            <div class="tip-white">
+                <p class="left"></p>
+                <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove program'])}</p>
+                <p class="right"></p>
+            </div>
+            <div class="tip-top"></div>
+        </div>
+        <div class="btn-remove">
+            <div class="icon-holder"></div>
+            <div class="tip-white">
+                <p class="left"></p>
+                <p class="center">${nn._([cms.global.PAGE_ID, 'channel-list', 'Remove program'])}</p>
+                <p class="right"></p>
+            </div>
+            <div class="tip-top"></div>
+        </div>
+        <img src="images/icon_playlist.png" alt="" class="watermark" />
+        <div class="ch">
+            <img src="thumbnail/ch_default.png" alt="" />
+        </div>
+    </div>
+    <p class="ch-title addChanel">+ Add<br />&nbsp;&nbsp;&nbsp;Programs</p>
+</li>
+</script>
+<!-- store-empty-chanels-tmpl End -->
+
+<!-- change-category-overlay-tmpl Begin -->
+<script id="change-category-overlay-tmpl" type="text/x-jquery-tmpl">
+<div id="change-category-overlay-wrap" class="overlay-wrap">
+    <a href="#" class="btn-close">Close</a>
+    <h4>${nn._([cms.global.PAGE_ID, 'overlay', 'Add Category'])}</h4>
+    <div class="change-category">
+        <form method="post" action="">
+            <p class="text"><span class="input-right"><span class="input-middle"><input type="text"  maxlength="16" value="" placeholder="${nn._([cms.global.PAGE_ID, 'overlay', 'English Name'])}" class="text" /></span></span></p>
+            <p class="notice">Max length is 14 characters</p>
+            <p class="text"><span class="input-right"><span class="input-middle"><input type="text"  maxlength="16" value="" placeholder="${nn._([cms.global.PAGE_ID, 'overlay', 'Chinese Name'])}" class="text" /></span></span></p>
+            <p class="notice">Max length is 8 chinese characters</p>
+        </form>
+    </div>
+    <div class="overlay-btn">
+        <p class="btns btn-cancel"><span><a href="#">${nn._([cms.global.PAGE_ID, 'overlay', 'Cancel'])}</a></span></p>
+        <p class="btns btn-chg-category"><span><a href="#">${nn._([cms.global.PAGE_ID, 'overlay', 'Add Category'])}</a></span></p>
+    </div>
+</div>
+</script>
+<!-- change-category-overlay-tmpl End -->
+
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>

@@ -1359,7 +1359,11 @@
         }
     };
 
-    $page.playPoiEventAndVideo = function (type) {
+    $page.playPoiEventAndVideo = function (type, poiPointEventData) {
+        // POI buttons.
+        var buttons = [];
+        var displayText, buttonsText;
+
         if (type && isNaN(type) && cms.config.POI_TYPE_MAP[type]) {
             // load video
             $('#poi-event-overlay-wrap').data('poiEventType', cms.config.POI_TYPE_MAP[type].code);
@@ -1372,21 +1376,39 @@
             } else {
                 $page.loadYouTubeChrome($('#storyboard-listing li.playing').data('ytid'), '#' + type + '-video');
             }
+            // Get poi data.
+            // poiPointEventData = poiPointEventData || $('#poi-event-overlay-wrap').tmplItem().data;
             // load POI plugin
             $('#poi-event-overlay .event .video-wrap .poi-display').empty();
-            var displayText = $common.strip_tags($.trim($('#poi-event-overlay #' + type + ' input[name=displayText]').val())),
-                buttonsText = $common.strip_tags($.trim($('#poi-event-overlay #' + type + ' input[name=btnText]').val()));
+            displayText = $common.strip_tags($.trim($('#poi-event-overlay #' + type + ' input[name=displayText]').val()));
+            buttonsText = $common.strip_tags($.trim($('#poi-event-overlay #' + type + ' input[name=btnText]').val()));
             if ('' === displayText) {
                 displayText = nn._([cms.global.PAGE_ID, 'poi-event', 'Input display text']);
             }
             if ('' === buttonsText) {
                 buttonsText = nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text']);
             }
+            if (type !== 'event-poll') {
+                button.push(buttonsText);
+            } else if (type === 'event-poll') {
+                $('input.poll-button').each(function(index, element) {
+                    var text = $.trim($(this).val());
+                    if (text !== '') {
+                        buttons.push(text);
+                    } else {
+                        buttons.push(nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text']));
+                    }
+                });
+            }
             $('#poi-event-overlay #' + type + ' .video-wrap .poi-display').poi({
                 type: cms.config.POI_TYPE_MAP[type].plugin,
                 displayText: displayText,
-                buttons: [buttonsText],
-                duration: -1
+                // buttons: [buttonsText],
+                buttons: buttons,
+                duration: -1,
+                onSelected: function(index) {
+
+                }
             });
         } else {
             nn.log('POI type error!', 'error');
@@ -1431,7 +1453,7 @@
                     $('#poi-event-overlay').addClass('edit');
                     $('#' + poiEventTypeKey).removeClass('hide');
                     if (false === hasPoiEventCache) {
-                        $page.playPoiEventAndVideo(poiEventTypeKey);
+                        $page.playPoiEventAndVideo(poiEventTypeKey, poiPointEventData);
                     }
                 } else {
                     // insert mode

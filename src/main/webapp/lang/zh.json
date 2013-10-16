@@ -182,6 +182,82 @@
             "your upload file is large than 500KB, please reupload file.": "您上傳的檔案超過500KB，請重新上傳較小檔案。"
         }
     },
+    "store-promotion": {
+        "html-title": {
+            "9x9.tv - Store Manage": "9x9.tv - 頻道商店 "
+        },
+        "func-nav": {
+            "My Portal": "我的入口",
+            "Program Store": "節目商店",
+            "Promotion Category": "推薦類別",
+            "System Category": "系統類別",
+            "Brand Settings": "品牌設定"
+        },
+        "title-func": {
+            "Program Store": "節目商店",
+            "Promotion Category": "推薦類別",
+            "Portal": "我的入口",
+            "Preview": "預覽",
+            "Save": "儲存",
+            "Channel Name": "頻道名稱",
+            "Promotion category provides the best program impression in program store.": "您可將愈推薦的節目都收錄於\"推薦目錄\"內，推薦目錄將可優先曝光於節目商店中。",
+            "You can add 6 prmotion categories": "您可新增6個推薦目錄"
+        },
+        "store-layer": {
+            "Sorted by: Updated time": "預設排序: 依更新時間",
+            "xxx programs in category:": "{0} 個節目在這個類別:",
+            "You can manage your program store manually.": "你可以手動管理節目商店",
+            "Collapse": "收合類別",
+            "Expand Category": "展開類別",
+            "Load More": "載入更多",
+            "Processing...": "處理中..."
+        },
+        "overlay": {
+            "Add Category": "增加類別",
+            "Edit Category": "編輯類別",
+            "Cancel": "取消",
+            "Yes": "確定",
+            "English Name": "英文名稱",
+            "Chinese Name": "中文名稱",
+            "Max length is 14 characters": "最多14個英文字母",
+            "Max length is 8 chinese characters": "最多8個中文字",
+            "Are you sure to remove this promotion Category?": "你確定要刪除這個推薦類別?",
+            "Unsaved changes will be lost, are you sure you want to leave?": "所有的變更還沒有存檔，你確定要離開?"
+        },
+        "portal-add-layer": {
+            "Program URL": "節目網址",
+            "Keywords": "關鍵字",
+            "Search": "搜尋",
+            "Add": "增加",
+            "Find [<span>?</span>] programs.": "找到 [<span>{0}</span>] 個節目。",
+            "Your search - [xxx] didn't match any programs.": "找不到符合 [<span>{0}</span>] 的節目。",
+            "Find Programs:": "搜尋依:",
+            "Results:": "搜尋結果:",
+            "Add programs into your “<span>Set 2</span>”": "增加節目到你的 “<span>{0}</span>”推薦類別",
+            "Please fill in the program url to search.": "請輸入節目網址搜尋",
+            "Please fill in the correct url.": "請輸入正確網址搜尋",
+            "Please fill in the keywords to search.": "請輸入關鍵字搜尋",
+            "Processing...": "處理中..."
+        },
+        "channel-list": {
+            "Program List : ? Programs": "節目列表 : {0} 節目",
+            "Best within 20 characters": "建議長度不超過20個字元",
+            "Program Name": "節目名稱 ",
+            "Program List": "節目列表 ",
+            "Programs": "節目",
+            "Add programs": "新增節目",
+            "Add programs sub": "",
+            "Please input program URL": "請輸入節目網址",
+            "Please input program name or curator name": "請輸入節目名稱或 Curator 名稱",
+            "Set on top": "置頂",
+            "Remove from top": "取消置頂",
+            "Remove program": "移除此節目",
+            "Add program": "增加此節目",
+            "You can only set 4 programs on top": "只能設定4個置頂節目",
+            "Channel name can't be empty": "頻道名稱不可空白",
+            "Add Category": "增加推薦類別"
+        }
+    },
     "store-manage": {
         "html-title": {
             "9x9.tv - Store Manage": "9x9.tv - 節目商店 "
@@ -189,27 +265,32 @@
         "func-nav": {
             "My Portal": "我的入口",
             "Program Store": "節目商店",
+            "Promotion Category": "推薦類別",
+            "System Category": "系統類別",
             "Brand Settings": "品牌設定"
         },
         "title-func": {
             "Program Store": "節目商店",
+            "System Category": "系統類別",
             "Portal": "我的入口",
             "Preview": "預覽",
             "Save": "儲存",
-            "Channel Name": "頻道名稱"
+            "Channel Name": "頻道名稱",
+            "ON": "開",
+            "OFF": "關",
+            "There are over 1000 FREE programs for your selection, you can activate system categories to enrich your program store.": "我們提供超過1000個免費節目供您選擇、豐富您的節目商店，所有系統頻道將由自動更新，讓您可輕鬆管理這些節目。",
+            "You have turnned off system category, your viewers will not see these categories and programs in store.": ""
         },
         "store-layer": {
-            "xxx programs in category:": "{0} 個節目在這個分類:",
+            "xxx programs in category:": "{0} 個節目在這個類別:",
+            "Sorted by: Updated time": "預設排序: 依更新時間",
             "You can manage your program store manually.": "你可以手動管理節目商店",
-            "Collapse": "收合分類",
-            "Expand Category": "展開分類",
+            "Collapse": "收合類別",
+            "Expand Category": "展開類別",
             "Load More": "載入更多",
             "Processing...": "處理中..."
         },
         "channel-list": {
-            "Sorted by": "預設排序",
-            "Updated time": "依更新時間 ",
-            "Customized Order": "依指定排序",
             "Best within 20 characters": "建議長度不超過20個字元",
             "Channel Name": "頻道名稱 ",
             "Program List": "節目列表 ",
@@ -223,7 +304,8 @@
             "Remove program": "移除此節目",
             "Add program": "增加此節目",
             "You can only set 4 programs on top": "只能設定4個置頂節目",
-            "Channel name can't be empty": "頻道名稱不可空白"
+            "Channel name can't be empty": "頻道名稱不可空白",
+            "Sorted by: Updated time": "預設排序: 依更新時間"
         }
     },
     "portal-manage": {

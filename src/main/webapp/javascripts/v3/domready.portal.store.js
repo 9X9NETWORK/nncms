@@ -8,12 +8,25 @@ $(function () {
     var $page = cms['store-manage'],
         $common = cms.common;
 
-    $(document).on("click", ".btn-minus", function (e) {
-        var thisDiv = $(this);
+    $(document).on("click", ".catLi .btn-minus", function (e) {
         var upLi = $(this).parents("li");
-        var channelId = parseInt(upLi.attr("id").replace("channel_", ""), 10);
 
-        var inCurrent = false,
+        if ($(upLi).hasClass("minus")) {
+            // add channel
+            $(upLi).removeClass("minus");
+        } else {
+            // remove channle
+            $(upLi).hasClass("minus");
+        }
+        e.stopPropagation();
+    });
+
+    $(document).on("click", ".btn-minus", function (e) {
+        var thisDiv = $(this),
+            upLi = $(this).parents("li"),
+            channelId = parseInt(upLi.attr("id").replace("channel_", ""), 10),
+
+            inCurrent = false,
             inAdd = false,
             inRemove = false;
 
@@ -37,7 +50,9 @@ $(function () {
             thisDiv.removeClass("on");
             upLi.removeClass("minus");
             thisDiv.find("p.center").text(nn._([cms.global.PAGE_ID, 'channel-list', 'Remove program']));
-            $('body').addClass('has-change');
+            // $('body').addClass('has-change');
+            // $("#set-save p.btns").removeClass("disable");
+            $page.setSaveButton("on");
         } else {
             // remove channle
             if (inCurrent === true && inAdd === false) {
@@ -45,27 +60,57 @@ $(function () {
             } else if (inCurrent === false && inAdd === true) {
                 cms.global.USER_DATA["msoAdd"].splice($.inArray(channelId, cms.global.USER_DATA["msoAdd"]), 1);
             }
-            $('body').addClass('has-change');
+            // $('body').addClass('has-change');
+            // $("#set-save p.btns").removeClass("disable");
+            $page.setSaveButton("on");
             thisDiv.addClass("on");
             upLi.addClass("minus");
             thisDiv.find("p.center").text(nn._([cms.global.PAGE_ID, 'channel-list', 'Add program']));
         }
     });
 
-    // $(document).on("click", ".load", function (event) {
-    //     var pageTotal = 0,
-    //         pageNext = 0;
-    //     pageTotal = cms.global.USER_DATA["pageInfo"].pageTotal;
-    //     pageNext = cms.global.USER_DATA["pageInfo"].pageNext;
+    // system catetory on to off
+    $(document).on("click", ".intro a.switch-on", function (event) {
+        if (!$("#store-layer").hasClass("collapse")) {
+            $page._categoryBlockSlide("up");
+        }
+        if ($('body').hasClass('has-change')) {
+            $("#unsave-prompt .btn-leave").addClass("switch-on-off");
+            $common.showUnsaveOverlay();
+        } else {
+            cms.global.USER_DATA["pageInfo"] = [];
+            cms.global.USER_DATA["msoSource"] = [];
+            cms.global.USER_DATA["msoCurrent"] = [];
+            // $('body').addClass('has-change');
+            // $("#set-save p.btns").removeClass("disable");
+            $common.showProcessingOverlay();
+            $('#store-layer').hide();
+            $('.intro a.switch-off').removeClass("hide");
+            $('.intro a.switch-on').addClass("hide");
+            $('.intro .msg-error').removeClass("hide");
+            $('.intro .msg-error').show();
+            $('#overlay-s').fadeOut("slow");
+            $("#store-list .channel-list").empty();
+        }
+        // $("#set-save p.btns").removeClass("disable");
+        $page.setSaveButton("on");
+    });
 
-    //     if (pageNext == pageTotal) {
-    //         $(".load").hide();
-    //     }
-    //     $common.showProcessingOverlay();
-    //     cms.global.USER_DATA["pageInfo"].pageCurrent = cms.global.USER_DATA["pageInfo"].pageNext;
-    //     cms.global.USER_DATA["pageInfo"].pageNext += 1;
-    //     $page._drawChannels($page.channelPageSize, true);
-    // });
+    // system catetory off to on 
+    $(document).on("click", ".intro a.switch-off", function (event) {
+        var lang = cms.global.USER_DATA.lang,
+            msoId = cms.global.MSO;
+
+        $common.showProcessingOverlay();
+        $('#store-layer').show();
+        $('.intro a.switch-off').addClass("hide");
+        $('.intro a.switch-on').removeClass("hide");
+        $('.intro .msg-error').addClass("hide");
+
+        $page.drawCategory(msoId, lang);
+        // $("#set-save p.btns").removeClass("disable");
+        $page.setSaveButton("on");
+    });
 
     $('#store-list').scroll(function (event) {
         var $storeList = $('#store-list');
@@ -77,59 +122,126 @@ $(function () {
     });
 
     $(document).on("click", "#set-save", function (event) {
-        var msoId = 0;
-        msoId = cms.global.MSO;
-        var tmpMsoAdd = cms.global.USER_DATA["msoAdd"],
-            tmpMsoRemove = cms.global.USER_DATA["msoRemove"];
-        $common.showProcessingOverlay();
+        if (!$("#set-save p.btns").hasClass("disableBB")) {
+            var msoId = cms.global.MSO,
+                stSwitchOn = !$(".switch-on").hasClass("hide"),
+                stSwitchOff = !$(".switch-off").hasClass("hide"),
+                catMinus = $("#store-category-ul li.minus"),
+                catMinusList = [],
+                tmpMsoAdd = cms.global.USER_DATA["msoAdd"],
+                tmpMsoRemove = cms.global.USER_DATA["msoRemove"];
+            $common.showProcessingOverlay();
+            if (stSwitchOff && !stSwitchOn) {
+                // system category off
+                nn.api('GET', cms.reapi('/api/mso/{msoId}/store/categoryLocks', {
+                    msoId: msoId
+                }), null, function (categoryLocks) {
+                    if ($.inArray('ALL', categoryLocks) === -1) {
+                        categoryLocks.push('ALL');
+                        nn.api('PUT', cms.reapi('/api/mso/{msoId}/store/categoryLocks', {
+                            msoId: msoId
+                        }), {categories: categoryLocks.join(",")}, null);
+                    }
 
-        if (tmpMsoAdd.length > 0) {
-            nn.api('POST', cms.reapi('/api/mso/{msoId}/store', {
-                msoId: msoId
-            }), {
-                channels: tmpMsoAdd.join(",")
-            }, function (channel) {
-                // Add AL to WL and empty AL
-                cms.global.USER_DATA["msoCurrent"] = cms.global.USER_DATA["msoCurrent"].concat(tmpMsoAdd);
-                cms.global.USER_DATA["msoAdd"] = [];
-            });
-        }
-
-        if (tmpMsoRemove.length > 0) {
-            nn.api('DELETE', cms.reapi('/api/mso/{msoId}/store', {
-                msoId: msoId
-            }), {
-                channels: tmpMsoRemove.join(",")
-            }, function (channel) {
-                // Remove RL from WL empty RL
-                $.each(tmpMsoRemove, function (eKey, eValue) {
-                    cms.global.USER_DATA["msoCurrent"].splice($.inArray(eValue, cms.global.USER_DATA["msoCurrent"]), 1);
                 });
-                cms.global.USER_DATA["msoRemove"] = [];
+            } else {
+                var tmpStr = "";
+                $.each(catMinus, function (eKey, eValue) {
+                    catMinusList.push($(eValue).data("meta"));
+                });
+                if (catMinusList.length > 0) {
+                    tmpStr = catMinusList.join(",");
+                }
+                nn.api('PUT', cms.reapi('/api/mso/{msoId}/store/categoryLocks', {
+                    msoId: msoId
+                }), {
+                    categories: tmpStr
+                }, null);
+                if (tmpMsoAdd.length > 0) {
+                    nn.api('POST', cms.reapi('/api/mso/{msoId}/store', {
+                        msoId: msoId
+                    }), {
+                        channels: tmpMsoAdd.join(",")
+                    }, function (channel) {
+                        // Add AL to WL and empty AL
+                        cms.global.USER_DATA["msoCurrent"] = cms.global.USER_DATA["msoCurrent"].concat(tmpMsoAdd);
+                        cms.global.USER_DATA["msoAdd"] = [];
+                    });
+                }
 
-            });
+                if (tmpMsoRemove.length > 0) {
+                    nn.api('DELETE', cms.reapi('/api/mso/{msoId}/store', {
+                        msoId: msoId
+                    }), {
+                        channels: tmpMsoRemove.join(",")
+                    }, function (channel) {
+                        // Remove RL from WL empty RL
+                        $.each(tmpMsoRemove, function (eKey, eValue) {
+                            cms.global.USER_DATA["msoCurrent"].splice($.inArray(eValue, cms.global.USER_DATA["msoCurrent"]), 1);
+                        });
+                        cms.global.USER_DATA["msoRemove"] = [];
+
+                    });
+                }
+
+            }
+            $('#overlay-s').fadeOut("slow");
+            // $('body').removeClass('has-change');
+            // $("#set-save p.btns").addClass("disable");
+            $page.setSaveButton("off");
         }
-        $('#overlay-s').fadeOut("slow");
-        $('body').removeClass('has-change');
     });
+    $(document).on("click", ".catLi, .catLi a", function (event) {
+        var thisMeta = $(this).data("meta") || $(this).parent().parent().data("meta");
+        cms.global.USER_DATA["pageInfo"] = [];
+        cms.global.USER_DATA["msoSource"] = [];
+        cms.global.USER_DATA["msoCurrent"] = [];
 
-    $(document).on("click", ".catLi", function (event) {
+        nn.log("catLi id is :[" + thisMeta + "]");
         if ($('body').hasClass('has-change')) {
             // Unsaved changes will be lost, are you sure you want to leave?
-            $(".btn-leave").data("meta", $(this).data("meta"));
+            $(".btn-leave").data("meta", thisMeta);
             $common.showUnsaveOverlay();
         } else {
-            $page.catLiClick($(this).data("meta"));
+            if (!$("#store-layer").hasClass("collapse")) {
+                $page._categoryBlockSlide("up");
+            }
+            $page.catLiClick(thisMeta);
         }
+        event.stopPropagation();
     });
 
     $(document).on('click', '#unsave-prompt .btn-leave', function () {
-        $('body').removeClass('has-change');
-        $.unblockUI();
-        if (null !== $('body').data('leaveUrl') && $('body').data('leaveUrl') !== "") {
-            location.href = $('body').data('leaveUrl');
+        if ($("#unsave-prompt .btn-leave").hasClass("switch-on-off")) {
+            cms.global.USER_DATA["pageInfo"] = [];
+            cms.global.USER_DATA["msoSource"] = [];
+            cms.global.USER_DATA["msoCurrent"] = [];
+            $("#unsave-prompt .btn-leave").removeClass("switch-on-off");
+            $('body').removeClass('has-change');
+            $.unblockUI();
+            $common.showProcessingOverlay();
+            $('#store-layer').hide();
+            $('.intro a.switch-off').removeClass("hide");
+            $('.intro a.switch-on').addClass("hide");
+            $('.intro .msg-error').removeClass("hide");
+            $(".channel-list").html("");
+            if (!$("#store-layer").hasClass("collapse")) {
+                $page._categoryBlockSlide("up");
+            }
+            $('#overlay-s').fadeOut("slow");
         } else {
-            $page.catLiClick($(".btn-leave").data("meta"));
+            var tmpLeaveUrl = $('body').data('leaveUrl');
+            if (undefined === tmpLeaveUrl) {
+                tmpLeaveUrl = "";
+            }
+            $('body').removeClass('has-change');
+            $.unblockUI();
+            if (null !== tmpLeaveUrl && tmpLeaveUrl !== "") {
+                location.href = $('body').data('leaveUrl');
+            } else {
+                $page._categoryBlockSlide("up");
+                $page.catLiClick($(".btn-leave").data("meta"));
+            }
         }
         return false;
     });
@@ -137,6 +249,7 @@ $(function () {
     $('.unblock, .btn-close, .btn-no, .setup-notice .btn-ok').click(function () {
         $.unblockUI();
         $('body').data('leaveUrl', "");
+        $("#unsave-prompt .btn-leave").removeClass("switch-on-off");
         return false;
     });
 
@@ -151,25 +264,12 @@ $(function () {
     });
 
     $(document).on("click", "#store-category .btn-gray", function (event) {
+        // alert("test");
         if ($("#store-layer").hasClass("collapse")) {
-            $("#store-category ul").slideDown(400);
-            $('#store-constrain').animate({top:'+=90'}, 400);
+            $page._categoryBlockSlide("down");
         } else {
-            $("#store-category ul").slideUp(400);
-            $('#store-constrain').animate({top:'-=90'}, {
-                complete: function() {
-                    // If the page isn't filled with channels (no scrollbar && pageCurrent < pageTotal)
-                    if ($('#store-list').height() >= $('#store-list')[0].scrollHeight - $('#store-list .load').height() && 
-                        cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
-                        $('#store-list .load').fadeIn('slow');
-                        $page.getMoreChannels();
-                    }                    
-                }
-            });
+            $page._categoryBlockSlide("up");
         }
-        $("#store-layer").toggleClass("collapse");
-        // $common.autoHeight();
-        // $common.scrollbar("#store-constrain", "#store-list", "#store-slider");
     });
 
     $('#system-error .btn-ok, #system-error .btn-close').click(function () {

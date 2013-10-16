@@ -182,6 +182,51 @@
             "your upload file is large than 500KB, please reupload file.": "your upload file is large than 500KB, please reupload file."
         }
     },
+    "store-promotion": {
+        "html-title": {
+            "9x9.tv - Store Manage": "9x9.tv - Store Manage Promotion"
+        },
+        "func-nav": {
+            "My Portal": "My Portal",
+            "Program Store": "Program Store",
+            "Brand Settings": "Brand Settings"
+        },
+        "title-func": {
+            "Program Store": "Program Store",
+            "Portal": "Preview",
+            "Preview": "Preview",
+            "Save": "Save",
+            "Channel Name": "Channel Name"
+        },
+        "store-layer": {
+            "xxx programs in category:": "{0} programs in category:",
+            "You can manage your program store manually.": "You can manage your program store manually.",
+            "Collapse": "Collapse",
+            "Expand Category": "Expand Category",
+            "Load More": "Load More",
+            "Processing...": "Processing..."
+        },
+        "portal-add-layer": {
+          "Add programs into your “<span>Set 2</span>”": "Add programs into your \"<span>{0}</span>\" promotion category"
+        },
+        "channel-list": {
+            "Program List : ? Programs": "Program List : {0} Programs",
+            "Best within 20 characters": "Best within 20 characters",
+            "Channel Name": "Channel Name ",
+            "Program List": "Program List ",
+            "Programs": "Programs",
+            "Add programs": "Add",
+            "Add programs sub": "　Program",
+            "Please input program URL": "Please input program URL",
+            "Please input program name or curator name": "Please input program name or curator name",
+            "Set on top": "Set on top",
+            "Remove from top": "Remove from top",
+            "Remove program": "Remove program",
+            "Add program": "Add program",
+            "You can only set 4 programs on top": "You can only set 4 programs on top",
+            "Channel name can't be empty": "Channel name can't be empty"
+        }
+    },
     "store-manage": {
         "html-title": {
             "9x9.tv - Store Manage": "9x9.tv - Store Manage"
@@ -272,7 +317,7 @@
             "Updated time": "Updated time ",
             "Customized Order": "Customized Order",
             "Best within 20 characters": "Best within 20 characters",
-            "Channel Name": "Channel Name ",
+            "Channel Name": "Channel Name",
             "Program List": "Program List ",
             "Programs": "Programs",
             "Add programs": "Add",

@@ -16,7 +16,8 @@
 <link rel="stylesheet" href="stylesheetsv3/ep-curation.css?v=1278" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<script src="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.js?v=1278"></script>
+<!--<script src="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.js?v=1278"></script>-->
+<script src="javascripts/libs/jquery.poi.js"></script>
 <script src="javascripts/libs/nn-sdk.js?v=1278"></script>
 <script src="javascripts/libs/respond.min.js"></script>
 <script src="javascripts/libs/jquery.mousewheel.min.js?v=1278"></script>
@@ -43,6 +44,7 @@
 <script src="javascripts/v3/domready.common.js?v=1278"></script>
 <script src="javascripts/v3/domready.curation.js?v=1278"></script>
 <script src="javascripts/v3/cms.youtube-utility.js"></script>
+<script src="javascripts/v3/cms.poi-utility.js"></script>
 <title>9x9.tv - Episode Curation - Curation</title>
 </head>
 <body class="scrollable">
@@ -858,7 +860,7 @@
                     <div id="btn-add-poll-item" class="btn-gray">
                         <p class="left"></p>
                         <p class="center">
-                            <a href="#" class="langkey">Add Button</a>
+                            <a href="#" class="langkey">${nn._([cms.global.PAGE_ID, 'poi-event', 'Add Button'])}</a>
                         </p>
                         <p class="right"></p>
                     </div>
