@@ -600,13 +600,20 @@ $(function () {
                 theSeq = 0,
                 procList = [],
                 tmpItem = {},
-                newCatList = [], newCatCount = 0,
+                newCatList = [],
+                newCatCount = 0,
                 stSwitchOn = !$(".switch-on").hasClass("hide"),
                 stSwitchOff = !$(".switch-off").hasClass("hide"),
                 catMinus = $("#store-category-ul li.minus"),
                 catMinusList = [],
                 tmpMsoAdd = cms.global.USER_DATA["msoAdd"],
-                tmpMsoRemove = cms.global.USER_DATA["msoRemove"],currentCategoryId = parseInt($("#store-category-ul .catLi.on").attr("id").replace("catLi_", ""), 10);
+                tmpMsoRemove = cms.global.USER_DATA["msoRemove"],
+                currentCategoryId = 0,
+                tmpCat = $("#store-category-ul .catLi.on");
+
+                if(tmpCat.length === 1){
+                    currentCategoryId = parseInt($("#store-category-ul .catLi.on").attr("id").replace("catLi_", ""), 10)
+                }
 
             $common.showProcessingOverlay();
 
@@ -771,71 +778,74 @@ $(function () {
         // check if old ontop list if 
         function setChannelsOnTop() {
             var deferred = $.Deferred();
-            nn.log("2: now in setChannelsOnTop["+newCatCount+"]");
+            nn.log("2: now in setChannelsOnTop[" + newCatCount + "]");
             var testing = 0;
             // while (newCatCount > 0){
             //     testing ++;
             //     nn.log("2 - while:: "+ newCatCount);
             // }
             // currentCategoryId = parseInt($("#store-category-ul .catLi.on").attr("id").replace("catLi_", ""), 10);
-            nn.api('GET', cms.reapi('/api/category/{categoryId}/channels', {
-                categoryId: currentCategoryId
-            }), null, function(channels) {
+            if (currentCategoryId > 0) {
+                nn.api('GET', cms.reapi('/api/category/{categoryId}/channels', {
+                    categoryId: currentCategoryId
+                }), null, function(channels) {
 
-                var oldOnTop = $page.procOnTopList(channels, $page.sortingType),
-                    oldOnTopList = [],
-                    nowOnTopList = [],
-                    tmpSeq = 0,
-                    cntTotal = oldOnTop.length + $page.onTopList.length;
+                    var oldOnTop = $page.procOnTopList(channels, $page.sortingType),
+                        oldOnTopList = [],
+                        nowOnTopList = [],
+                        tmpSeq = 0,
+                        cntTotal = oldOnTop.length + $page.onTopList.length;
 
 
-                nn.log("1 : on top remove");
-                if (cntTotal != 0) {
-                    $.each(oldOnTop, function(eKey, eValue) {
+                    nn.log("1 : on top remove");
+                    if (cntTotal != 0) {
+                        $.each(oldOnTop, function(eKey, eValue) {
 
-                        nn.api('POST', cms.reapi('/api/category/{categoryId}/channels', {
-                            categoryId: currentCategoryId
-                        }), {
-                            channelId: eValue.id,
-                            alwaysOnTop: false
-                        }, function(msg) {
-                            cntTotal--;
-                            nn.log("1::0 ::" + cntTotal + "::" + msg);
-                            if (cntTotal < 1) {
-                                deferred.resolve();
-                            } else {
-                                // nn.log("1::0 ::" + cntTotal + "::" +  msg);
-                            }
+                            nn.api('POST', cms.reapi('/api/category/{categoryId}/channels', {
+                                categoryId: currentCategoryId
+                            }), {
+                                channelId: eValue.id,
+                                alwaysOnTop: false
+                            }, function(msg) {
+                                cntTotal--;
+                                nn.log("1::0 ::" + cntTotal + "::" + msg);
+                                if (cntTotal < 1) {
+                                    deferred.resolve();
+                                } else {
+                                    // nn.log("1::0 ::" + cntTotal + "::" +  msg);
+                                }
+                            });
+
+                            // oldOnTopList.push(eValue.id);
                         });
 
-                        // oldOnTopList.push(eValue.id);
-                    });
+                        nn.log("2 : on top add");
+                        $.each($page.onTopList, function(eKey, eValue) {
+                            tmpSeq = eKey + 1;
+                            nn.api('POST', cms.reapi('/api/category/{categoryId}/channels', {
+                                categoryId: currentCategoryId
+                            }), {
+                                channelId: eValue.id,
+                                seq: tmpSeq,
+                                alwaysOnTop: true
+                            }, function(msg) {
+                                cntTotal--;
+                                nn.log("2::0 ::" + cntTotal + "::" + msg);
+                                if (cntTotal < 1) {
 
-                    nn.log("2 : on top add");
-                    $.each($page.onTopList, function(eKey, eValue) {
-                        tmpSeq = eKey + 1;
-                        nn.api('POST', cms.reapi('/api/category/{categoryId}/channels', {
-                            categoryId: currentCategoryId
-                        }), {
-                            channelId: eValue.id,
-                            seq: tmpSeq,
-                            alwaysOnTop: true
-                        }, function(msg) {
-                            cntTotal--;
-                            nn.log("2::0 ::" + cntTotal + "::" + msg);
-                            if (cntTotal < 1) {
+                                    deferred.resolve();
+                                }
 
-                                deferred.resolve();
-                            }
-
+                            });
                         });
-                    });
-                } else {
-                    deferred.resolve();
-                }
+                    } else {
+                        deferred.resolve();
+                    }
 
-            });
-
+                });
+            } else {
+                deferred.resolve();
+            }
             return deferred.promise();
         }
 

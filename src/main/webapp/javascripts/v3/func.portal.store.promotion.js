@@ -350,7 +350,10 @@
             msoId: msoId
         }), null, function(categories) {
             var cntCategories = categories.length,
+                catId = 0;
+            if (cntCategories > 0) {
                 catId = categories[0].id;
+            }
             if (inCat > 0) {
                 catId = inCat;
             }
@@ -365,7 +368,10 @@
                 // $('#overlay-s').fadeOut("slow");
 
             } else {
-                location.href = "./";
+                $page.listCategory(categories, catId);
+                $("#store-category-ul li").show();
+                 $('#overlay-s').fadeOut("slow");
+                // location.href = "./";
             }
         });
     };
@@ -386,43 +392,53 @@
         $page._drawChannelLis();
     };
 
-    $page.listCatChannel = function (inMsoId, inCatId, inPageSize) {
+    $page.listCatChannel = function(inMsoId, inCatId, inPageSize) {
         // 用到
         if ($("#catLi_" + inCatId).hasClass("newCat")) {
             $page.emptyChannel();
             $('#overlay-s').fadeOut("slow");
         } else {
-            nn.api('GET', cms.reapi('/api/category/{categoryId}/channels', {
-                categoryId: inCatId
-            }), null, function(channels) {
-                var pageInfo = [];
-                var cntChannelSource = channels.length;
+            if (inCatId > 0) {
+                nn.log("abc::"+inCatId);
+                nn.api('GET', cms.reapi('/api/category/{categoryId}/channels', {
+                    categoryId: inCatId
+                }), null, function(channels) {
+                    var pageInfo = [];
+                    var cntChannelSource = channels.length;
+                    $page.currentList = [];
+                    $page.nomoList = [];
+                    $page.onTopList = [];
+
+                    $('.channel-list').empty();
+
+                    if (cntChannelSource > 0) {
+
+                        var tmpMsoName = tmpMsoName = cms.global.MSOINFO.name || "9x9";
+                        $.each(channels, function(i, channel) {
+                            if ('' === channel.imageUrl) {
+                                channel.imageUrl = "images/ch_default.png";
+                            }
+                            channel.msoName = tmpMsoName;
+                            $page.currentList.push(channel.id);
+                        });
+                        nn.log("+++++ Channels:::" + channels.length);
+
+                        $page.nomoList = $page.procNomoList(channels, $page.sortingType);
+                        $page.onTopList = $page.procOnTopList(channels, $page.sortingType);
+                        $page._drawChannelLis();
+                    } else {
+                        $page._drawChannelLis();
+                        $('#overlay-s').fadeOut("slow");
+                    }
+                });
+            } else {
                 $page.currentList = [];
                 $page.nomoList = [];
                 $page.onTopList = [];
-
                 $('.channel-list').empty();
-
-                if (cntChannelSource > 0) {
-
-                    var tmpMsoName = tmpMsoName = cms.global.MSOINFO.name || "9x9";
-                    $.each(channels, function(i, channel) {
-                        if ('' === channel.imageUrl) {
-                            channel.imageUrl = "images/ch_default.png";
-                        }
-                        channel.msoName = tmpMsoName;
-                        $page.currentList.push(channel.id);
-                    });
-                    nn.log("+++++ Channels:::" + channels.length);
-
-                    $page.nomoList = $page.procNomoList(channels, $page.sortingType);
-                    $page.onTopList = $page.procOnTopList(channels, $page.sortingType);
-                    $page._drawChannelLis();
-                } else {
-                    $page._drawChannelLis();
-                    $('#overlay-s').fadeOut("slow");
-                }
-            });
+                $page._drawChannelLis();
+                $('#overlay-s').fadeOut("slow");
+            }
         }
     };
 
