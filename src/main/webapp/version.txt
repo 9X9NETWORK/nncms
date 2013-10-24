@@ -1,3 +1,34 @@
+版本: 5716
+日期: 2013/10/24 17:49
+訊息:
+clear not use file
+1. remove portal-set.html (not use)
+2. move config.js form v2 to v3
+3. rmove folder javascripts\v2\
+4. set all images in folder "images"
+5. remove folder /WEB-INF/ and /thumbnail/
+----
+新增 : /javascripts/v3/config.js
+新增 : /images/brand_default.png
+新增 : /images/brand_loading.gif
+異動 : /favicon.ico
+異動 : /brand-setting.html
+異動 : /channel-add.html
+異動 : /channel-poi.html
+異動 : /channnel-setting.html
+異動 : /cms-settings.html
+異動 : /epcurate-curation.html
+異動 : /epcurate-publish.html
+異動 : /episode-list.html
+異動 : /index.html
+異動 : /portal-manage.html
+異動 : /signin.html
+異動 : /store-manage.html
+異動 : /store-promotion.html
+移除 : /portal-set.html
+移除 : /WEB-INF/
+移除 : /thumbnail/
+
 版本: 5698
 日期: 2013/10/23 14:49
 訊息:
