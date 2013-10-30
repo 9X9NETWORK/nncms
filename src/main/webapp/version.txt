@@ -1,3 +1,27 @@
+版本: 5727
+日期: 2013/10/30 16:00
+訊息:
+v 4.1.2
+1. css fix, remove folder stylesheetsv3
+2. add new feature - PCS search add new player url formate
+3. use jsLint chenck script
+
+v 4.1.1 
+yifan fix some bugs
+1. Fix poll event button text vertical alignment bug.
+2. Revise poi event plugin layout.
+3. Add jquery.poi.css.
+4. Add poll event buttons onHover handling.
+5. Correct poll event text restriction calculation.
+6. Correct btn-grey disabled style.
+7. Change default poll event button text to 'Button text'.
+8. Fix poll event button text empty check.
+9. Refine character count restriction.
+10. Add multi-language poll event text.
+11. Remove maxlength restriction in poll event.
+----
+
+
 版本: 5717
 日期: 2013/10/24 18:08
 訊息:

@@ -40,7 +40,11 @@ abbr, acronym {
     margin: -300px 0 0 -424px;
     border-radius: 10px;
     background-color: #000;
-    opacity: 0.6;
+    opacity: 0.9;
+}
+
+.validation-failed {
+    color: #f00;
 }
 
 /* loading overlay */
@@ -177,6 +181,7 @@ abbr, acronym {
 
 .lightbox-content .btns:hover span a {
     background: url(../images/popup_btn_middle_press.png) repeat-x !important;
+	color: #999;
 }
 
 #content-wrap     .btns         span input,
@@ -203,7 +208,7 @@ abbr, acronym {
 .slider-wrap {
     display: none;
     position: absolute;
-    top: 115px;
+    top: 70px;
     right: 15px;
     width: 5px;
     z-index: 5;
@@ -273,7 +278,7 @@ abbr, acronym {
     position: relative;
     z-index: 98;
     width: 100%;
-    min-width: 1010px;
+    min-width: 1001px;
     height: 50px;
     background: url(../images/bg_header.png) repeat-x;
 }
@@ -476,7 +481,7 @@ abbr, acronym {
     left: 0;
     z-index: 50;
     width: 100%;
-    min-width: 1010px;
+    min-width: 1001px;
     background: #fff url(../images/header_line.png) repeat-x 0 bottom;
 }
 
@@ -711,7 +716,7 @@ abbr, acronym {
     text-decoration: none;
 }
 
-#studio-nav .studio-nav-wrap .studio-setup .btn-middle a:hover {
+#studio-nav .studio-nav-wrap .studio-setup .btn-middle a:hover, #studio-nav .studio-nav-wrap .studio-setup.click .btn-middle a {
     color: #999;
 }
 
@@ -724,14 +729,18 @@ abbr, acronym {
 #epcurate-nav .epcurate-nav-wrap ul {
     position: relative;
     overflow: hidden;
-    width: 256px;
     margin: 0 auto;
     padding: 9px 0 0;
+    width: 30%;
+    min-width: 256px;
+    max-width: 484px;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li {
     float: left;
-    width: 128px;
+    width: 50%;
+    min-width: 128px;
+    max-width: 242px;
 }
 
 #epcurate-nav .epcurate-nav-wrap ul li.curation {
@@ -866,12 +875,13 @@ abbr, acronym {
 #content-wrap {
     position: absolute;
     top: 103px;
+    bottom: 0;
     left: 0;
     z-index: 49;
     overflow: hidden;
     width: 100%;
-    min-width: 1010px;
-    height: 100%;
+    min-width: 1001px;
+    /*height: 100%;*/
     background: url(../images/bg_main.png) repeat;
 }
 
@@ -885,25 +895,73 @@ abbr, acronym {
 }
 
 #content-main {
-    position: relative;
-    float: left;
-    min-width: 776px;
+    position: absolute;
+    min-width: 820px;
+    overflow: hidden;
+    left: 200px;
+    right: 0px;
+    top: 0;
+    bottom: 0;
 }
 
 /* content-main */
 #content-main-wrap {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    margin-top: 69px;
+    top: 75px;
+    bottom: 0;
+    overflow: hidden;
+    /*padding-bottom: 48px;*/
+}
+
+#content-main-wrap form {
+    position: relative;
+    padding: 0 0 56px 0;
+}
+
+#content-main-wrap form .form-btn {
+    overflow: hidden;
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+}
+
+#content-main-wrap form .form-btn .form-btn-wrap {
+    float: right;
+}
+
+/* Fixed Position for form-btn */
+#content-main-wrap.fixed {
+}
+
+#content-main-wrap.fixed .constrain {
+}
+
+#content-main-wrap.fixed form {
+}
+
+#content-main-wrap.fixed form .form-btn {
+    bottom: 15px;
+    right: 35px;
+    position: fixed;
+}
+
+#content-main-wrap.fixed form .form-btn {
+    bottom: 63px;
+	right: 35px;
+}
+
+
+div.constrain {
+    margin: 0 35px 0 0;
+    padding: 0 0 63px 0;
 }
 
 /* title-func */
 #title-func {
     position: relative;
-    z-index: 56;
+    margin-right: 35px;
+    z-index: 99;
     padding: 26px 0 17px;
     background: url(../images/bg_main.png) repeat -210px 0;
 }
@@ -978,14 +1036,40 @@ abbr, acronym {
     background-position: 0 -1010px;
 }
 
+#title-func ul {
+    float: right;
+    overflow: hidden;
+}
+
+#title-func ul li {
+    float: left;
+    margin-right: 10px;
+}
+
+#title-func ul li.last {
+    margin: 0;
+}
+
+#title-func ul li p span a {
+    padding: 4px 5px 0 !important;
+}
+
+body.mac #title-func ul li p span a {
+    font-weight: 300;
+}
+
+#title-func .btns p {
+    width: 167px;
+}
+
 #title-func .btns,
 #title-func .required {
     float: right;
 }
 
 #title-func .required {
-    margin: 5px 0 0;
     font-size: 13px;
+	line-height: 27px;
 }
 
 #title-func .btns span a {
@@ -995,7 +1079,8 @@ abbr, acronym {
 #title-func .caption {
     overflow: hidden;
     clear: both;
-    padding-top: 17px;
+    padding-top: 15px;
+	height: 15px;
 }
 
 #title-func .caption p.episode,
@@ -1030,7 +1115,7 @@ abbr, acronym {
 
 #func-nav ul li {
     overflow: hidden;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 #func-nav ul li a {
@@ -1168,7 +1253,7 @@ abbr, acronym {
 /* footer */
 #footer {
     width: 100%;
-    min-width: 1010px;
+    min-width: 1001px;
     height: 48px;
     background: url(../images/bg_footer.png) repeat-x;
     position: absolute;
@@ -1292,7 +1377,7 @@ abbr, acronym {
 }
 
 .cms-setup {
-    color: #c4c4c4;
+    color: #b4b4b4;
     font-size: 32px;
     font-weight: bold;
     text-align: center;
@@ -1317,6 +1402,72 @@ abbr, acronym {
 }
 
 /* Tip White */
+.tip-white {
+    position: relative;
+    top: -11px;
+    left: -1px;
+    display: none;
+    z-index: 5;
+    min-width: 60px;
+	font-size: 13px;
+}
+
+.tip-white .left {
+    position: relative;
+    float: left;
+    width: 7px;
+    height: 28px;
+    background: url(../images/bg_tip.png) no-repeat 0 0;
+}
+
+.tip-white .right {
+    position: relative;
+    float: left;
+    width: 7px;
+    height: 28px;
+    background: url(../images/bg_tip.png) no-repeat 0 -28px;
+}
+
+.tip-white .center {
+    position: relative;
+    float: left;
+    height: 28px;
+    white-space: nowrap;
+    background: url(../images/bg_tip.png) repeat-x 0 -56px;
+    padding: 7px 0 0;
+    text-align: center;
+}
+
+.tip-bottom {
+    width: 22px;
+    height: 9px;
+    margin: -30px 0 0 1px;
+    position: relative;
+    z-index: 6;
+    display: none;
+    background: url(../images/bg_tip_bottom.png) no-repeat center bottom;
+}
+
+.tip-top {
+    width: 22px;
+    height: 9px;
+    margin: -2px 0 0 1px;
+    position: relative;
+    z-index: 6;
+    display: none;
+    background: url(../images/bg_tip_top.png) no-repeat center top;
+}
+
+.tip-arrow-left {
+    width: 9px;
+    height: 22px;
+    margin: -30px 0 0 1px;
+    position: relative;
+    z-index: 6;
+    display: none;
+    background: url(../images/bg_tip_left.png) no-repeat center bottom;
+}
+
 .tip-white-l {
     font-size: 13px;
 }
@@ -1506,7 +1657,7 @@ abbr, acronym {
 
 .get-url .tip-white-l .title {
     width: 45px;
-    margin: 5px 0 0 5px;
+	margin: 5px 0 0 5px;
 }
 
 .get-url .input-gray {
@@ -1530,4 +1681,374 @@ abbr, acronym {
 
 .get-url .input-gray .center {
     height: 25px;
+}
+
+/* Btn Gray */
+.btn-gray {
+    cursor: pointer;
+    font-size: 15px;
+    color: #555;
+    display: inline-block;
+}
+.btn-gray .left {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 32px;
+    background: url(../images/btn_gray.png) no-repeat;
+}
+.btn-gray .right {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 32px;
+    background: url(../images/btn_gray.png) no-repeat 0 -32px;
+}
+.btn-gray .center {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    height: 26px;
+    white-space: nowrap;
+    background: url(../images/btn_gray.png) repeat-x 0 -64px;
+    padding: 5px 0 0;
+    text-align: center;
+}
+.btn-gray:hover .left, .btn-gray.disabled .left {
+    background: url(../images/btn_gray.png) no-repeat 0 -96px;
+}
+.btn-gray:hover .right, .btn-gray.disabled .right {
+    background: url(../images/btn_gray.png) no-repeat 0 -128px;
+}
+.btn-gray:hover .center, .btn-gray.disabled .center {
+    color: #999;
+    background: url(../images/btn_gray.png) repeat-x 0 -160px;
+}
+.btn-gray.disabled .left {
+    background: url(../images/btn_gray.png) no-repeat 0 -192px;
+}
+.btn-gray.disabled .right {
+    background: url(../images/btn_gray.png) no-repeat 0 -224px;
+}
+.btn-gray.disabled .center {
+    color: #999;
+    background: url(../images/btn_gray.png) repeat-x 0 -256px;
+}
+.btn-gray.disabled a {
+    cursor: default !important;
+}
+.center a, .center a {
+    text-decoration: none;
+    padding: 2px 24px 2px 24px;
+    color: #555;
+}
+.center a:hover, .center a:hover, .center:hover a, .center:hover a, .btn-gray.disabled .center a {
+    text-decoration: none;
+    color: #999;
+}
+/* Btn White */
+.btn-white {
+    cursor: pointer;
+    font-size: 15px;
+    display: inline-block;
+}
+.btn-white .left {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 32px;
+    background: url(../images/btn_white.png) no-repeat;
+}
+.btn-white .right {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 32px;
+    background: url(../images/btn_white.png) no-repeat 0 -32px;
+}
+.btn-white .center {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    height: 26px;
+    white-space: nowrap;
+    background: url(../images/btn_white.png) repeat-x 0 -64px;
+    padding: 5px 0 0;
+    text-align: center;
+    min-width: 64px;
+}
+.btn-white:hover .left {
+    background: url(../images/btn_white.png) no-repeat 0 -96px;
+}
+.btn-white:hover .right {
+    background: url(../images/btn_white.png) no-repeat 0 -128px;
+}
+.btn-white:hover .center {
+    background: url(../images/btn_white.png) repeat-x 0 -160px;
+    color: #999;
+}
+
+/* Btn large */
+.btn-large {
+    cursor: pointer;
+    font-size: 15px;
+    display: inline-block;
+}
+.btn-large .left {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    width: 6px;
+    height: 127px;
+    background: url(../images/bg_select_program.png) no-repeat;
+}
+.btn-large .right {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    width: 6px;
+    height: 127px;
+    background: url(../images/bg_select_program.png) no-repeat 0 -127px;
+}
+.btn-large .center {
+    cursor: pointer;
+    position: relative;
+    float: left;
+    height: 117px;
+    white-space: nowrap;
+    background: url(../images/bg_select_program.png) repeat-x 0 -254px;
+    padding: 10px 0 0;
+    text-align: center;
+    min-width: 64px;
+}
+.btn-large:hover .left {
+    background: url(../images/bg_select_program.png) no-repeat 0 -381px;
+}
+.btn-large:hover .right {
+    background: url(../images/bg_select_program.png) no-repeat 0 -508px;
+}
+.btn-large:hover .center {
+    background: url(../images/bg_select_program.png) repeat-x 0 -635px;
+    color: #999;
+}
+
+/* Input White */
+.input-white {
+    height: 30px;
+    position: relative;
+    margin: 0 8px 0 0;
+}
+.input-white .left {
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 30px;
+    background: url(../images/input_white.png) no-repeat;
+}
+.input-white .right {
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 30px;
+    background: url(../images/input_white.png) no-repeat 0 -30px;
+}
+.input-white .center {
+    position: relative;
+    float: left;
+    width: 230px;
+    height: 30px;
+    line-height: 30px;
+    text-indent:6px;
+    background: url(../images/input_white.png) repeat-x 0 -60px;
+    text-align:left;
+    border: 0;
+    color: #555;
+}
+.input-white.disabled .left {
+    background: url(../images/input_white.png) repeat-x 0 -90px;
+
+} 
+.input-white.disabled .right {
+    background: url(../images/input_white.png) repeat-x 0 -120px;
+} 
+.input-white.disabled .center {
+    background: url(../images/input_white.png) repeat-x 0 -150px;
+} 
+.icon-set {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 8px;
+    left: 7px;
+    z-index: 2;
+}
+.input-m-g .icon-set {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 8px;
+    left: 3px;
+    z-index: 2;
+}
+
+/* Input White Large for textarea */
+.input-white-large {
+    height: 92px;
+    position: relative;
+    margin: 0 8px 0 0;
+}
+.input-white-large .left {
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 92px;
+    background: url(../images/input_white_lg.png) no-repeat;
+}
+.input-white-large .right {
+    position: relative;
+    float: left;
+    width: 3px;
+    height: 92px;
+    background: url(../images/input_white_lg.png) no-repeat 0 -92px;
+}
+.input-white-large .center {
+    position: relative;
+    float: left;
+    width: 230px;
+    height: 92px;
+    line-height: 30px;
+    text-indent:6px;
+    background: url(../images/input_white_lg.png) repeat-x 0 -184px;
+    text-align:left;
+    border: 0;
+    color: #555;
+}
+.input-white-large.disabled .left {
+    background: url(../images/input_white_lg.png) repeat-x 0 -276px;
+
+} 
+.input-white-large.disabled .right {
+    background: url(../images/input_white_lg.png) repeat-x 0 -368px;
+} 
+.input-white-large.disabled .center {
+    background: url(../images/input_white_lg.png) repeat-x 0 -460px;
+} 
+
+/* Input Gray */
+#portal-add-layer .input-gray .center .textfield {
+    left: 30px;
+}
+.msg-error {
+    color: #ed1a1b;
+    display: none;
+}
+.required-field {
+    color: #ed1a1b;
+    left: 0;
+    position: absolute;
+    line-height: 50px;
+}
+.notice {
+    color: #555;
+}
+.left {
+    width: 50%;
+    float: left;
+    position: relative;
+}
+.right {
+    width: 50%;
+    float: right;
+    position: relative;
+}
+
+/* POI List */
+#epcurate-curation #cur-poi .poi-list ul li ol li, #poi-list .poi-info ul li ol li {
+	height: 33px;
+    background: url(../images/bg_divider.png) repeat-x bottom;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon, #poi-list .poi-info ul li ol li .icon {
+    float: left;
+	padding: 0 0 0 25px;
+	margin: 5px 0 4px 0;
+	cursor: pointer;
+	height: 24px;
+	background: url(../images/icon_check.png) no-repeat;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon:hover span a, #poi-list .poi-info ul li ol li .icon:hover span a {
+	color: #999;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon span a, #poi-list .poi-info ul li ol li .icon span a {
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -moz-binding: url('ellipsis.xml#ellipsis');
+	height: 24px;
+	line-height: 24px;
+	display: inline-block;
+	text-decoration: none;
+	color: #555;
+	font-size: 13px;
+	background: none;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon:hover .tip-white, #poi-list .poi-info ul li ol li .icon:hover .tip-white, #epcurate-curation #cur-poi .poi-list ul li .icon:hover .tip-bottom, #poi-list .poi-info ul li ol li .icon:hover .tip-bottom  {
+	display: block;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon.hyper, #poi-list .poi-info ul li ol li .icon.hyper {
+	background-position: 0 -72px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon.schedule, #poi-list .poi-info ul li ol li .icon.schedule {
+	background-position: 0 -96px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon.poll, #poi-list .poi-info ul li ol li .icon.poll {
+	background-position: 0 -120px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon.instant, #poi-list .poi-info ul li ol li .icon.instant {
+    background-position: 0 -144px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon.null-icon, #poi-list .poi-info ul li ol li .icon.null-icon {
+    background-position: 0 -10000px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .icon.error, #poi-list .poi-info ul li ol li .icon.error {
+	background-position: 0 -24px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .func, #poi-list .poi-info p.func  {
+    float: right;
+    width: auto;
+    padding: 0;
+	margin: 0 5px 0 10px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .btn-del, #poi-list .poi-info p.func .btn-del {
+    float: right;
+    width: 22px;
+    height: 25px;
+    margin: 3px 0 0 0;
+	background: url(../images/btns.png) no-repeat 0 -1060px;
+    text-indent: -100000px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .btn-del, #poi-list .poi-info p.func .btn-del {
+    background-position: 0 -856px;
+}
+
+#epcurate-curation #cur-poi .poi-list ul li .btn-del:hover, #poi-list .poi-info p.func .btn-del:hover  {
+    background-position: -23px -856px;
 }

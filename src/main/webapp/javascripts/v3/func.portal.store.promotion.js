@@ -24,7 +24,7 @@
     $page.onTopRemoveList = [];
 
     // set save button on or off
-    $page.setSaveButton = function(inAction) {
+    $page.setSaveButton = function (inAction) {
         if (inAction === "on") {
             $('body').addClass('has-change');
             $("#set-save p.btns").removeClass("disableBB");
@@ -32,9 +32,9 @@
             $('body').removeClass('has-change');
             $("#set-save p.btns").addClass("disableBB");
         }
-    }
+    };
 
-    $page._search_channel_clean = function() {
+    $page._search_channel_clean = function () {
         // 用到
         $("#msg-search").hide();
         $("#sRusult").html("");
@@ -46,8 +46,11 @@
     };
 
 
-   $page.prepareChannels = function (inList) {
-        var retValue = [], temp = [], tmpId = 0, tmpMsoName = cms.global.MSOINFO.name || "9x9";
+    $page.prepareChannels = function (inList) {
+        var retValue = [],
+            temp = [],
+            tmpId = 0,
+            tmpMsoName = cms.global.MSOINFO.name || "9x9";
 
         $.each(inList, function (i, channel) {
             temp = [];
@@ -119,13 +122,12 @@
     };
 
     // draw channels list
-    $page._drawChannelLis = function() {
+    $page._drawChannelLis = function () {
         // 用到
-
         var cntChanels = $page.onTopList.length + $page.nomoList.length;
 
         $('#store-list .channel-list').empty();
-        $("#cntChannelEmpty").addClass("hide")
+        $("#cntChannelEmpty").addClass("hide");
 
 
         $('#store-empty-chanels-tmpl').tmpl([{
@@ -142,7 +144,7 @@
                 cursor: 'move',
                 revert: true,
                 cancel: expSort,
-                change: function(event, ui) {
+                change: function (event, ui) {
                     $page.setSaveButton("on");
                     $('body').addClass('channel-change');
                 }
@@ -151,8 +153,7 @@
         }
         if (cntChanels < 1) {
             $("#cntChannelEmpty").removeClass("hide");
-        }
-        else{
+        } else {
             $("div.info .form-title").html(nn._([cms.global.PAGE_ID, 'channel-list', "Program List : ? Programs"], [cntChanels]));
         }
         $("#store-constrain").show();
@@ -177,8 +178,7 @@
     $page._categoryBlockSlide = function (inAction) {
         if ("down" === inAction) {
             $("#store-category ul").slideDown(400);
-            
-                        nn.log("#store-category.height(down)::"+$("#store-category-ul").height());
+            // nn.log("#store-category.height(down)::" + $("#store-category-ul").height());
 
             $('#store-constrain').animate({
                 top: '+=80'
@@ -186,7 +186,7 @@
                 complete: function () {
                     var ulHeight = $("#store-category").height();
                     // ulHeight += 8;
-                    nn.log("#store-category.height(down)::"+ulHeight);
+                    nn.log("#store-category.height(down)::" + ulHeight);
                     $('#store-constrain').animate({
                         top: ulHeight
                     });
@@ -195,7 +195,7 @@
             });
         } else {
             $("#store-category ul").slideUp(400);
-                                    nn.log("#store-category.height(down)::"+$("#store-category-ul").height());
+            // nn.log("#store-category.height(down)::" + $("#store-category-ul").height());
 
             $('#store-constrain').animate({
                 top: '-=80'
@@ -205,10 +205,10 @@
                     // $('#store-constrain').animate({
                     //     top: ulHeight
                     // }, 100);
-            var ulHeight = $("#store-category").height();
-            nn.log("#store-category.height(up)::"+ulHeight);
-            // ulHeight += 12;
-            $('#store-constrain').animate({
+                    var ulHeight = $("#store-category").height();
+                    nn.log("#store-category.height(up)::" + ulHeight);
+                    // ulHeight += 12;
+                    $('#store-constrain').animate({
                         top: ulHeight
                     });
                     if ($('#store-list').height() >= $('#store-list')[0].scrollHeight - $('#store-list .load').height() && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
@@ -299,7 +299,7 @@
         $page._drawChannels($page.channelPageSize, true);
     };
 
-    $page.emptyCategoryDisabled = function(inCatCount) {
+    $page.emptyCategoryDisabled = function (inCatCount) {
         // 用到
         if ($page.promoCatLimit > inCatCount) {
             $("#store-category-ul .addPromotionCategory").removeClass("disable");
@@ -311,7 +311,7 @@
     $page.listCategory = function (inCategory, inCatId) {
         // 用到
         $("#store-category-ul").html('');
-        
+
         $('#store-empty-category-li-tmpl').tmpl().appendTo('#store-category-ul');
         $page.emptyCategoryDisabled(inCategory.length);
         $('#store-category-li-tmpl').tmpl(inCategory, {
@@ -344,11 +344,11 @@
     };
 
 
-    $page.drawPromotionCategory = function(msoId, inCat) {
+    $page.drawPromotionCategory = function (msoId, inCat) {
         // 用到
         nn.api('GET', cms.reapi('/api/mso/{msoId}/categories', {
             msoId: msoId
-        }), null, function(categories) {
+        }), null, function (categories) {
             var cntCategories = categories.length,
                 catId = 0;
             if (cntCategories > 0) {
@@ -370,7 +370,7 @@
             } else {
                 $page.listCategory(categories, catId);
                 $("#store-category-ul li").show();
-                 $('#overlay-s').fadeOut("slow");
+                $('#overlay-s').fadeOut("slow");
                 // location.href = "./";
             }
         });
@@ -383,7 +383,7 @@
         $('#overlay-s').fadeOut("slow");
     };
 
-    $page.emptyChannel = function() {
+    $page.emptyChannel = function () {
         $page.currentList = [];
         $page.nomoList = [];
         $page.onTopList = [];
@@ -392,18 +392,17 @@
         $page._drawChannelLis();
     };
 
-    $page.listCatChannel = function(inMsoId, inCatId, inPageSize) {
+    $page.listCatChannel = function (inMsoId, inCatId, inPageSize) {
         // 用到
         if ($("#catLi_" + inCatId).hasClass("newCat")) {
             $page.emptyChannel();
             $('#overlay-s').fadeOut("slow");
         } else {
             if (inCatId > 0) {
-                nn.log("abc::"+inCatId);
+                // nn.log("abc::" + inCatId);
                 nn.api('GET', cms.reapi('/api/category/{categoryId}/channels', {
                     categoryId: inCatId
-                }), null, function(channels) {
-                    var pageInfo = [];
+                }), null, function (channels) {
                     var cntChannelSource = channels.length;
                     $page.currentList = [];
                     $page.nomoList = [];
@@ -413,8 +412,8 @@
 
                     if (cntChannelSource > 0) {
 
-                        var tmpMsoName = tmpMsoName = cms.global.MSOINFO.name || "9x9";
-                        $.each(channels, function(i, channel) {
+                        var tmpMsoName = cms.global.MSOINFO.name || "9x9";
+                        $.each(channels, function (i, channel) {
                             if ('' === channel.imageUrl) {
                                 channel.imageUrl = "images/ch_default.png";
                             }
@@ -442,24 +441,27 @@
         }
     };
 
-    $page.catGetNonNew = function() {
-        var retValue = 0 ,catList=$("#store-category-ul .catLi"),tmpCat;
+    $page.catGetNonNew = function () {
+        var retValue = 0,
+            catList = $("#store-category-ul .catLi"),
+            tmpCat,
+            i,
+            j;
 
-        for (var i = 0,j=catList.length; i < j; i++) {
+        for (i = 0, j = catList.length; i < j; i += 1) {
             tmpCat = catList[i];
-            if(!$(tmpCat).hasClass("newCat")){
+            if (!$(tmpCat).hasClass("newCat")) {
                 retValue = $(tmpCat).data("meta");
                 return retValue;
             }
-            
-        };
-        return retValue;
-    }
 
-    $page.catLiClick = function(inObj) {
+        }
+        return retValue;
+    };
+
+    $page.catLiClick = function (inObj) {
         // 用到
-        var msoId = 0,
-            isNewCat = $("#catLi_" + inObj).hasClass("newCat");
+        var msoId = 0;
         msoId = cms.global.MSO;
         $common.showProcessingOverlay();
         $(".catLi").removeClass("on");
@@ -473,7 +475,7 @@
     };
 
 
-    $page._setOnTop = function(inObj) {
+    $page._setOnTop = function (inObj) {
         var tmpArr = [];
         // if (1 === $page.sortingType) {
         //     tmpArr = $page.nomoList;
@@ -481,7 +483,7 @@
         //     tmpArr = $page.onTopList.concat($page.nomoList);
         // }
         tmpArr = $page.onTopList.concat($page.nomoList);
-        $.each(tmpArr, function(i, channel) {
+        $.each(tmpArr, function (i, channel) {
             if (undefined !== channel) {
                 if (inObj == channel.id) {
                     if (tmpArr[i].alwaysOnTop === true) {
@@ -517,12 +519,8 @@
                     }
                 }
             });
-
         }
-
     };
-
-
 
     // NOTE: page entry point (keep at the bottom of this file)
     $page.init = function (options) {
@@ -544,10 +542,7 @@
         cms.global.USER_DATA["msoSource"] = msoSource;
         cms.global.USER_DATA["msoCurrent"] = msoCurrent;
 
-        var lang = cms.global.USER_DATA.lang;
-        
-        nn.log("page id["+cms.global.PAGE_ID+"]");
-        
+        nn.log("page id[" + cms.global.PAGE_ID + "]");
         // /api/mso/{msoId}/store
         msoId = cms.global.MSO;
 
@@ -561,15 +556,12 @@
 
             $("#store-category .info").show();
 
-             
             $('#store-category-ul').sortable({
                 cancel: '.empty',
-                change: function(event, ui) {
+                change: function (event, ui) {
                     $page.setSaveButton("on");
                 }
             });
-
-
 
             $('#func-nav .langkey').each(function () {
                 $(this).text(nn._([cms.global.PAGE_ID, 'func-nav', $(this).data('langkey')]));
@@ -583,10 +575,10 @@
             $('#portal-add-layer .langkey').each(function () {
                 $(this).text(nn._([cms.global.PAGE_ID, 'portal-add-layer', $(this).data('langkey')]));
             });
-            $('#portal-add-layer .langkeyH').each(function() {
+            $('#portal-add-layer .langkeyH').each(function () {
                 $(this).html(nn._([cms.global.PAGE_ID, 'portal-add-layer', $(this).data('langkey')]));
             });
-            $('#portal-add-layer .langkeyVal').each(function() {
+            $('#portal-add-layer .langkeyVal').each(function () {
                 $(this).val(nn._([cms.global.PAGE_ID, 'channel-list', $(this).data('langkey')]));
                 $(this).data("tmpIn", $(this).val());
             });

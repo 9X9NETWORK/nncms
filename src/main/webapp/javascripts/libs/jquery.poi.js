@@ -30,11 +30,11 @@ var POI = {
     var opt;
     var selectedIndex = 0;
     var buttons, type;
-    var tp = '<!--[if lt IE 10]><style type="text/css">.manual-icon.enter-button ,.manual-icon.ok-button {background-image: none!important;} .poi-blue{background-color: #83B6CE;} .poi-red{ background-color: #BC7173;} .poi-yellow{background-color: #D6BD47;}.poi-green{background-color: #A4BA8E;}</style><![endif]--><div id="poi-layer">   <div id="poi-line" class="poi-blue"></div>     <h1 id="poi-msg"></h1>  <div id="poi-btn" >     <div id="poi-btn-holder" class="poi-blue-button">             <a  id="poi-enter" class="enter-button"></a>      <span class="poi-button-input-text"></span>     </div>      </div> </div>';
-    var container = '<!--[if lt IE 10]><style type="text/css">.manual-icon.enter-button ,.manual-icon.ok-button {background-image: none!important;} .poi-blue{background-color: #83B6CE;} .poi-red{ background-color: #BC7173;} .poi-yellow{background-color: #D6BD47;}.poi-green{background-color: #A4BA8E;}</style><![endif]--><div id="poi-layer">  <div id="poi-line" class="poi-blue"></div><h1 id="poi-msg"></h1><div id="poi-btn" ><div id="poi-btn-holder"></div></div></div>';
+    var tp = '<!--[if lt IE 10]><style type="text/css">.manual-icon.enter-button ,.manual-icon.ok-button {background-image: none!important;} .poi-blue{background-color: #83B6CE;} .poi-red{ background-color: #BC7173;} .poi-yellow{background-color: #D6BD47;}.poi-green{background-color: #A4BA8E;}</style><![endif]--><div id="poi-layer">   <div id="poi-line" class="poi-blue"></div>       <div id="poi-btn" >     <div id="poi-btn-holder" class="poi-blue-button">             <a  id="poi-enter" class="enter-button"></a>      <span class="poi-button-input-text"></span>     </div>      </div><h1 id="poi-msg"></h1> </div>';
+    var container = '<!--[if lt IE 10]><style type="text/css">.manual-icon.enter-button ,.manual-icon.ok-button {background-image: none!important;} .poi-blue{background-color: #83B6CE;} .poi-red{ background-color: #BC7173;} .poi-yellow{background-color: #D6BD47;}.poi-green{background-color: #A4BA8E;}</style><![endif]--><div id="poi-layer">  <div id="poi-line" class="poi-blue"></div><div id="poi-btn" ><div id="poi-btn-holder"></div></div><h1 id="poi-msg"></h1></div>';
     var sbtn = '<a id="poi-enter" class="enter-button"></a>        <span class="poi-button-input-text"></span>';
     var tp1;
-    var getClass = function(type) {
+    var getClass = function(type, isOn) {
         var _t;
         switch (type) {
             case "hyperChannel":
@@ -47,7 +47,7 @@ var POI = {
                 return "poi-red-button";
                 // break;
             case "poll":
-                return "poi-yellow-button";
+                return isOn ? "poi-yellow-button on" : "poi-yellow-button";
                 // break;
         }
     };
@@ -120,10 +120,19 @@ var POI = {
                 for (var i = 0; i < buttons.length; i++) {
                     btn = $("<div></div>").html(buttons[i]);
                     $("#poi-btn-holder").append(btn);
+                    $("#poi-btn-holder div").addClass(getClass(type, i === 0));
                 }
-                $("#poi-btn-holder div").addClass(getClass(type));
-                $("#poi-btn-holder div").each(function(i, e) {
-                    $(this).click(onBtnClick);
+                // $("#poi-btn-holder div").each(function(i, e) {
+                //     $(this).click(onBtnClick);
+                //     $(this).hover(function () {
+                //         $("#poi-btn-holder div").removeClass("on");
+                //         $(this).addClass('on');
+                //     });
+                // });
+                $("#poi-btn-holder div").click(onBtnClick);
+                $("#poi-btn-holder div").hover(function () {
+                    $("#poi-btn-holder div").removeClass("on");
+                    $(this).addClass('on');
                 });
             }
 
@@ -157,7 +166,13 @@ var POI = {
                 singleToMulti();
             }
 
+            $("#poi-btn-holder div").removeClass("on");
             btn = $("<div></div>").html(txt);
+            btn.addClass('on');
+            btn.hover(function () {
+                $("#poi-btn-holder div").removeClass("on");
+                $(this).addClass('on');
+            });
             $("#poi-btn-holder").append(btn);
             $("#poi-btn-holder div").addClass(getClass(type));
 

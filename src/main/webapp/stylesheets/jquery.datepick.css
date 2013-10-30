@@ -177,7 +177,8 @@ table.ui-datepicker-calendar td a.ui-state-active,
 table.ui-datepicker-calendar td a:hover,
 .datepick .datepick-month table td a.datepick-selected,
 .datepick .datepick-month table td a:hover {
-    background-position: 0 -21px;
+    background-position: 0 0;
+	color: #fff;
 }
 
 table.ui-datepicker-calendar td.ui-state-disabled span,

@@ -238,12 +238,10 @@ $(function () {
             $common.showProcessingOverlay();
             switch (searchType) {
             case "url":
-                var inURL = $.url(strInput);
-                var allPaths = ["/view", "/playback"];
-                var tmpChannel = inURL.param('ch');
-                if (tmpChannel > 0 && $.inArray(inURL.attr('path'), allPaths) != -1) {
+                var objUrl = $common.playerUrlParser(strInput);
+                if (objUrl.chId > 0 && objUrl.isAllow) {
                     nn.api('GET', cms.reapi('/api/channels'), {
-                        channels: tmpChannel
+                        channels: objUrl.chId
                     }, function (channels) {
                         var cntChannel = channels.length,
                             items = [];

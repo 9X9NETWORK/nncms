@@ -1,0 +1,294 @@
+/*-----------------------------------------------------------------------------
+[TABLE OF CONTENTS]
+    +content-main
+        =my-channel
+-----------------------------------------------------------------------------*/
+
+#content-wrap.library-first #content-main-wrap {
+    position: static !important;
+    margin: 0 !important;
+}
+
+#title-func .library-add-video {
+    clear: both;
+    overflow: hidden;
+    padding-top: 19px;
+}
+
+#title-func .library-add-video p.text {
+    float: left;
+    height: 29px;
+    margin: 0 10px 0 0;
+    padding-left: 4px;
+    background: url(../images/input_box_left.png) no-repeat 0 0;
+}
+
+#title-func .library-add-video p.text span {
+    display: block;
+    padding-right: 4px;
+    background: url(../images/input_box_right.png) no-repeat right 0;
+}
+
+#title-func .library-add-video p.text span .text {
+	display: block;
+    height: 29px;
+    padding: 0 0 0 5px;
+    border: none;
+    background: url(../images/input_box_middle.png) repeat-x;
+    color: #555;
+    font-family: Arial, Helvetica;
+    font-size: 13px;
+	line-height: 29px;
+}
+
+#title-func .library-add-video p.add-video {
+    float: left;
+    width: 100px;
+}
+
+#title-func .library-add-video p.error-notice {
+	padding: 5px 0 0 2px;
+    color: #f00;
+    font-size: 13px;
+}
+
+#title-func p.upload-audio {
+	float: left;
+	position: absolute;
+	top: 21px;
+	left: 0;
+}
+
+/**
+*
+* =video-list
+*
+**/
+
+.video-list {
+	padding-right: 106px;
+}
+
+.video-list .no-video {
+    margin: 144px 0 15px;
+    text-align: center;
+}
+
+.video-list .btn-upload-audio {
+    width: 135px;
+    margin: 0 auto;
+}
+
+.video-list ul {
+    padding: 5px 0 0 10px;
+    margin-bottom: 20px;
+}
+
+.video-list ul li {
+	position: relative;
+    float: left;
+    width: 100px;
+    margin: 0 14px 11px 0;
+}
+
+.video-list ul li img.warning {
+	position: absolute;
+    top: -5px;
+    left: -5px;
+    z-index: 40;
+}
+
+.video-list ul li p.img {
+    position: relative;
+    overflow: hidden;
+    width: 100px;
+    height: 65px;
+    margin-bottom: 3px;
+    background: url(../images/thumbnail_box_sm.png) no-repeat 0 0;
+}
+
+.video-list ul li p.img img {
+    display: block;
+    margin: 10px 0 0 10px;
+}
+
+.video-list ul li:hover p.img img {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+}
+
+.video-list ul li p.img span {
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 32px;
+    height: 14px;
+    background: url(../images/time_box.png) no-repeat 0 0;
+    color: #fff;
+    font-size: 11px;
+    line-height: 14px;
+    text-align: center;
+}
+
+.video-list ul li h4 {
+    padding-left: 5px;
+    font-weight: normal;
+    font-size: 13px;
+}
+
+.video-list ul li .hover-func {
+    display: none;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    z-index: 10;
+    width: 94px;
+    height: 59px;
+}
+
+.video-list ul li .hover-func img {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+}
+
+.video-list ul li .hover-func a.video-del {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -2px;
+    z-index: 50;
+    width: 15px;
+    height: 16px;
+    background: url(../images/btn_close.png) no-repeat 0 0;
+    text-indent: -100000px;
+}
+
+.video-list ul li .hover-func a.video-del:hover {
+    background: url(../images/btn_close_press.png) no-repeat 0 0;
+}
+
+.video-list ul li .hover-func a.video-play {
+    display: block;
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    width: 80px;
+    height: 45px;
+    background: url(../images/icon_play.png) no-repeat center;
+    text-indent: -100000px;
+}
+
+.video-list ul li .hover-func a.video-edit {
+    display: block;
+    position: absolute;
+    top: -1px;
+    left: 1px;
+    z-index: 50;
+    width: 22px;
+    height: 25px;
+    background: url(../images/btns.png) no-repeat 0 -1060px;
+    text-indent: -100000px;
+}
+
+.video-list ul li .hover-func a.video-edit:hover {
+	background-position: -24px -1060px;
+}
+
+.video-list ul li .video-tip,
+#uploads-video-list ul li .video-tip {
+    display: none;
+    position: absolute;
+    top: 3px;
+    left: 103px;
+    z-index: 49;
+    padding-left: 3px;
+    background: url(../images/bubble_left.png) no-repeat 0 0;
+    color: #fff;
+    font-family: Arial, Helvetica;
+    font-size: 13px;
+}
+
+#uploads-video-list ul li .video-tip {
+    background: url(../images/bubble_left_sm.png) no-repeat 0 0;
+}
+
+.video-list ul li p.tip-arrow {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 90px;
+}
+
+.video-list ul li .video-tip .video-bubble,
+#uploads-video-list ul li .video-tip .video-bubble {
+    padding-right: 3px;
+    background: url(../images/bubble_right.png) no-repeat right 0;
+}
+
+#uploads-video-list ul li .video-tip .video-bubble {
+    background: url(../images/bubble_right_sm.png) no-repeat right 0;
+}
+
+.video-list ul li .video-tip .video-bubble-wrap,
+#uploads-video-list ul li .video-tip .video-bubble-wrap {
+    width: 134px;
+    height: 280px;
+    padding: 10px 0 0 0;
+    background: url(../images/bubble_middle.png) repeat-x;
+}
+
+#uploads-video-list ul li .video-tip .video-bubble-wrap {
+    height: 120px;
+    background: url(../images/bubble_middle_sm.png) repeat-x;
+}
+
+.video-list ul li .video-tip .video-bubble-wrap p {
+    margin-bottom: 10px;
+    padding: 0 5px;
+}
+
+.video-list ul li .video-tip .video-bubble-wrap p.desc {
+	height: 66px;
+}
+
+.video-list ul li .video-tip .video-bubble-wrap p.region-no {
+    padding-left: 20px;
+    background: url(../images/icon_place.png) no-repeat 0 0;
+}
+
+.video-list ul li .video-tip .video-bubble-wrap p.mobile-no {
+    padding-left: 20px;
+    background: url(../images/icon_mobile.png) no-repeat 0 0;
+}
+
+.video-list ul li .video-tip .video-bubble-wrap p.play-no {
+    position: absolute;
+    bottom: 10px;
+    left: 6px;
+    padding-left: 20px;
+    background: url(../images/icon_not_playable.png) no-repeat 0 0;
+}
+
+.video-list ul li .video-tip .video-bubble-wrap p a {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.video-list ul li .video-tip .video-bubble-wrap p a:hover {
+    color: #ddd;
+}
+
+#content-wrap #content-main .video-list ul li:hover .video-tip,
+#content-wrap #content-main .video-list ul li:hover .tip-arrow,
+#content-wrap #content-main .video-list ul li:hover .hover-func {
+    display: block;
+}
+
+.video-list p.more {
+    width: 150px;
+	margin: 0 auto;
+}

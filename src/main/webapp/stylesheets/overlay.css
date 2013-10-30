@@ -1,0 +1,221 @@
+/* author yifan.9x9@gmail.com */
+
+/* Rounded corner overlay styles ordered by outer/inner shadow > height. */
+
+/* Need further refactoring to make these overlay generic. */
+
+/* Generic button style & position */
+.overlay-button-close {
+    position: absolute;
+    top: 7px;
+    right: -3px;
+    display: block;
+    width: 22px;
+    height: 24px;
+    background: url("../images/btn_close_l.png") no-repeat 0 0;
+    text-indent: -100000px;
+    cursor: pointer;
+    z-index: 199;
+}
+.overlay-button-close:hover {
+    background-position: 0 -24px;
+}
+.overlay-button-holder {
+    height: 35px;
+    display: block;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    text-align: center;
+    left: 0;
+}
+.overlay-button-holder .btn-gray {
+    margin: 0 10px;
+}
+.overlay-button-holder .btn-gray .center {
+    width: 65px;
+}
+
+/* Overlay title */
+.overlay-title {
+    font-size: 30px;
+    /*font-weight: bold;*/
+    text-align: center;
+    margin: 0 auto 15px auto;
+    color: #b4b4b4;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.4);
+    height: 40px;
+    line-height: 40px;
+}
+
+.overlay-subtitle {
+    font-size: 13px;
+    color: #555;
+}
+
+/* Overlay with height 60px */
+.overlay-h60 {
+    /*margin: -86px 0 0 -100px;
+    position: fixed;
+    left: 50%;
+    top: 50%;*/
+    /*min-width: 68px;*/
+    height: 60px;
+    /*display: inline-block;*/
+}
+.overlay-h60-left {
+    /*position: relative;*/
+    background: url(../images/bg_bubble_left_l.png) no-repeat;
+    height: 60px;
+    width: 4px;
+    float: left;
+}
+.overlay-h60-right {
+    /*position: relative;*/
+    background: url(../images/bg_bubble_right_l.png) no-repeat;
+    height: 60px;
+    width: 4px;
+    float: left;
+}
+.overlay-h60-center {
+    /*position: relative;*/
+    background: url(../images/bg_bubble_middle_l.png) repeat-x;
+    height: 52px;
+    /*width: 180px;*/
+    /*max-width: 95%;*/
+    /*min-width: 60px;*/
+    float: left;
+    padding: 4px 0;
+}
+
+/* Overlay with height 172px */
+.overlay-h172 {
+    /*margin: -86px 0 0 -100px;
+    position: fixed;
+    left: 50%;
+    top: 50%;*/
+    height: 172px;
+}
+.overlay-h172-left {
+    background: url(../images/bg_popup_box_s_left.png) no-repeat;
+    height: 172px;
+    width: 10px;
+    float: left;
+}
+.overlay-h172-right {
+    background: url(../images/bg_popup_box_s_right.png) no-repeat;
+    height: 172px;
+    width: 10px;
+    float: left;
+}
+.overlay-h172-center {
+    background: url(../images/bg_popup_box_s_middle.png) repeat-x;
+    height: 148px;
+    position: relative;
+    width: 180px;
+    float: left;
+    padding: 24px 0 0 0;
+}
+
+/* Overlay with height 316px */
+.overlay-h316 {
+}
+.overlay-h316-left {
+    background: url(../images/overlay_bg_m_l.png) no-repeat;
+    height: 316px;
+    width: 11px;
+    float: left;
+}
+.overlay-h316-right {
+    background: url(../images/overlay_bg_m_r.png) no-repeat;
+    height: 316px;
+    width: 11px;
+    float: left;
+}
+.overlay-h316-center {
+    background: url(../images/overlay_bg_m_c.png) repeat-x;
+    height: 292px;
+    position: relative;
+    width: 430px;
+    float: left;
+    padding: 24px 0 0px;
+}
+
+/* Overlay with height 501px */
+.overlay-h501 {
+}
+.overlay-h501-left {
+    display: block;
+    background: url(../images/overlay_bg_l_l.png) no-repeat;
+    float: left;
+    width: 10px;
+    height: 501px;
+}
+.overlay-h501-center {
+    background: url(../images/overlay_bg_l_c.png) repeat-x;
+    width: 650px;
+    padding: 20px 20px 0 20px;
+    height: 476px;
+    display: block;
+    position: relative;
+    float: left;
+    text-align: center;
+}
+.overlay-h501-right {
+    display: block;
+    background: url(../images/overlay_bg_l_r.png) no-repeat;
+    float: left;
+    width: 10px;
+    height: 501px;
+}
+
+/* Inner shadow style overlay with height 362px */
+.overlay-inner-h362 {
+    height: 362px;
+}
+.overlay-inner-h362-left {
+    display: block;
+    background: url(../images/bg_popup_box_l_inside.png) no-repeat;
+    float: left;
+    width: 10px;
+    height: 362px;
+}
+.overlay-inner-h362-center {
+    background: url(../images/bg_popup_box_l_inside.png) repeat-x 0 -724px;
+    width: 620px;
+    padding: 10px 5px;
+    height: 342px;
+    display: block;
+    position: relative;
+    float: left;
+    text-align: left;
+}
+.overlay-inner-h362-right {
+    display: block;
+    background: url(../images/bg_popup_box_l_inside.png) no-repeat 0 -362px;
+    float: left;
+    width: 10px;
+    height: 362px;
+}
+
+/* Page specific overlay styles */
+
+.terms-overlay,
+.create-program-overlay {
+    display: none;
+}
+
+.terms-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -250px 0 0 -355px;
+    overflow: hidden;
+}
+
+.create-program-overlay {
+    margin: -158px 0 0 -226px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+}

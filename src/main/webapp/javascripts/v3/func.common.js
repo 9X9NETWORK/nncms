@@ -3,6 +3,24 @@
 
 (function ($common) {
     'use strict';
+    // player url parser 
+    // dependency by purl
+    // return ch id
+    $common.playerUrlParser = function (inUrl) {
+        // default formate :: http://dev6.9x9.tv/view?mso=cts&ch=28082
+        var inURL = $.url(inUrl),
+            allPaths = ["/view", "/playback", "playback"],
+            tmpChannel = inURL.param('ch'),
+            isAllow = false;
+        if (undefined === tmpChannel || 1 > tmpChannel) {
+            // http://www.9x9.tv/tv#/playback/1564/ytzKcS9T61kh0
+            tmpChannel = inURL.fsegment(2);
+        }
+        if ($.inArray(inURL.attr('path'), allPaths) !== -1 || $.inArray(inURL.fsegment(1), allPaths) !== -1) {
+            isAllow = true;
+        }
+        return {chId: tmpChannel, isAllow: isAllow};
+    };
 
     $common.hideFbPageList = function (options) {
         if ($('#settingForm').length > 0 && ($('#content-wrap').hasClass('channel-add') || $('#content-wrap').hasClass('channel-setting'))) {

@@ -401,7 +401,7 @@
                             var cntChanels = chanels.length;
                             $('#channel-list').empty();
                             if (cntChanels > 0) {
-                                var tmpMsoName = tmpMsoName = cms.global.MSOINFO.name || "9x9";
+                                var tmpMsoName = cms.global.MSOINFO.name || "9x9";
                                 $.each(chanels, function (i, channel) {
                                     if ('' === channel.imageUrl) {
                                         channel.imageUrl = "images/ch_default.png";

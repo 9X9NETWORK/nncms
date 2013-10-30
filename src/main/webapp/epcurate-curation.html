@@ -6,18 +6,18 @@
 <meta http-equiv="pragma" content="no-cache" />
 <meta http-equiv="expires" content="0" />
 <link rel="stylesheet" href="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.css?v=1278" />
-<link rel="stylesheet" href="stylesheetsv3/style.css?v=1278" />
-<link rel="stylesheet" href="stylesheetsv3/lightbox.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/style.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/lightbox.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/uniform.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/playback.css?v=1278" />
 <link rel="stylesheet" href="stylesheets/jquery.datepick.css?v=1278" />
-<link rel="stylesheet" href="stylesheetsv3/perfect-scrollbar.css?v=1278" />
-<link rel="stylesheet" href="stylesheetsv3/epcurate.css?v=1278" />
-<link rel="stylesheet" href="stylesheetsv3/ep-curation.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/perfect-scrollbar.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/epcurate.css?v=1278" />
+<link rel="stylesheet" href="stylesheets/ep-curation.css?v=1278" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-<!--<script src="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.js?v=1278"></script>-->
-<script src="javascripts/libs/jquery.poi.js"></script>
+<script src="http://9x9ui.s3.amazonaws.com/poi/jquery.poi.js?v=1278"></script>
+<!-- <script src="javascripts/libs/jquery.poi.js"></script> -->
 <script src="javascripts/libs/nn-sdk.js?v=1278"></script>
 <script src="javascripts/libs/respond.min.js"></script>
 <script src="javascripts/libs/jquery.mousewheel.min.js?v=1278"></script>
@@ -852,7 +852,7 @@
                     {{each pollButtons}}
                     <p class="text poll">
                         <span>
-                            <input type="text" name="btnText1" maxlength="8" value="${$value}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text'])}" class="text poll-button" />
+                            <input type="text" name="btnText1" value="${$value}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Button text'])}" class="text poll-button" />
                         </span>
                         <a href="#" class="poll-button-del"></a>
                     </p>
@@ -860,7 +860,7 @@
                     <div id="btn-add-poll-item" class="btn-gray">
                         <p class="left"></p>
                         <p class="center">
-                            <a href="#" class="langkey">${nn._([cms.global.PAGE_ID, 'poi-event', 'Add Button'])}</a>
+                            <a href="#" class="langkey">${nn._([cms.global.PAGE_ID, 'poi-event', 'Add button'])}</a>
                         </p>
                         <p class="right"></p>
                     </div>
@@ -1240,7 +1240,7 @@
 <script id="poi-poll-button-tmpl-item" type="text/x-jquery-tmpl">
     <p class="text poll">
         <span>
-            <input type="text" name="${btnName}" maxlength="8" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Input button text'])}" class="text poll-button" />
+            <input type="text" name="${btnName}" placeholder="${nn._([cms.global.PAGE_ID, 'poi-event', 'Button text'])}" class="text poll-button" />
         </span>
         <a href="#" class="poll-button-del"></a>
     </p>

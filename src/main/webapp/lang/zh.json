@@ -741,11 +741,13 @@
             "Interactive event : Hyper Link": "互動事件 : 超連結節目",
             "Interactive event : Scheduled Notification": "互動事件 : 排程通知",
             "Interactive event : Instant Notification": "互動事件 : 即時通知",
+            "Interactive event : Poll": "互動事件 : 投票",
             "PREVIEW": "預覽畫面",
             "There is no valid video to preview.": "找不到可有效預覽的畫面。",
             "Display text": "訊息文字",
             "Input display text": "輸入訊息文字",
             "Button text": "按鈕文字",
+            "Add button": "新增按鈕",
             "Input button text": "輸入按鈕文字",
             "Hyper link": "連結網址",
             "Input 9x9 program or episode URL": "輸入9x9節目或劇集網址",
@@ -767,7 +769,8 @@
             "Hour": "時",
             "Minute": "分",
             "Mobile Notification Message": "行動裝置通知內容",
-            "If users press OK or Enter, the mobile notification will be send immediately.": "當使用者按下OK或Enter時，通知會即時送出。"
+            "If users press OK or Enter, the mobile notification will be send immediately.": "當使用者按下OK或Enter時，通知會即時送出。",
+            "Please decrease the number of text. The text of display text and button text are longer than the video width.": "訊息文字與按鈕文字總字數長度超過影片寬度，請縮減字數。"
         },
         "title-card": {
             "Text": "字卡內文",

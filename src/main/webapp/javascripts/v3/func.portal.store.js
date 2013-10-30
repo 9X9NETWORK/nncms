@@ -8,9 +8,8 @@
 
     $page.channelPageSize = 28;
 
-
     // set save button on or off
-    $page.setSaveButton = function(inAction) {
+    $page.setSaveButton = function (inAction) {
         if (inAction === "on") {
             $('body').addClass('has-change');
             $("#set-save p.btns").removeClass("disableBB");
@@ -18,8 +17,7 @@
             $('body').removeClass('has-change');
             $("#set-save p.btns").addClass("disableBB");
         }
-    }
-
+    };
 
     $page.categoryLocks = function (listCategory, listLock) {
         var retValue = [];

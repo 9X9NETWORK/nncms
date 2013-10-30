@@ -1,9 +1,4 @@
 /* CMS setting form */
-#content-main-wrap form {
-    position: relative;
-    padding: 0 0 56px 0;
-}
-
 #content-main-wrap form .login-notice {
     margin-bottom: 16px;
     padding: 0 0 0 10px;
@@ -129,6 +124,7 @@
 
 #content-main-wrap form .fminput .fmfield .connect .btns {
     position: relative;
+	margin: 0 0 7px 0;
 }
 
 #content-main-wrap form .fminput .fmfield .connect img {
@@ -168,17 +164,6 @@
 
 #content-main-wrap form .fminput .fmfield .notice {
     line-height: 20px;
-}
-
-#content-main-wrap form .form-btn {
-    overflow: hidden;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-
-#content-main-wrap form .form-btn .form-btn-wrap {
-    float: right;
 }
 
 #content-main-wrap form .form-btn .form-btn-wrap .notice,
