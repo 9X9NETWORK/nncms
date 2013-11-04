@@ -7,6 +7,7 @@
     var $common = cms.common;
 
     $page.channelPageSize = 28;
+    $page.inLiClick = false;
 
     // set save button on or off
     $page.setSaveButton = function (inAction) {
@@ -56,9 +57,11 @@
             }, {
                 complete: function () {
                     // If the page isn't filled with channels (no scrollbar && pageCurrent < pageTotal)
-                    if ($('#store-list').height() >= $('#store-list')[0].scrollHeight - $('#store-list .load').height() && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
-                        $('#store-list .load').fadeIn('slow');
-                        $page.getMoreChannels();
+                    if (!$page.inLiClick) {
+                        if ($('#store-list').height() >= $('#store-list')[0].scrollHeight - $('#store-list .load').height() && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
+                            $('#store-list .load').fadeIn('slow');
+                            $page.getMoreChannels();
+                        }
                     }
                 }
             }, 100);
@@ -66,7 +69,7 @@
         }
     };
 
-    $page._drawChannels = function (inPageSize, isEnd, callback) {
+    $page._drawChannels = function (inPageSize) {
         // /api/channels
         var cntStart = 0,
             cntEnd = 0,
@@ -127,10 +130,6 @@
             $('#overlay-s').fadeOut("slow");
             $(".load").hide();
 
-            if (typeof callback === 'function') {
-                callback();
-            }
-            // If the page isn't filled with channels (no scrollbar && pageCurrent < pageTotal)
             if ($('#store-list').outerHeight() >= $('#store-list')[0].scrollHeight - $('#store-list .load').height() && cms.global.USER_DATA["pageInfo"].pageCurrent < cms.global.USER_DATA["pageInfo"].pageTotal) {
                 $('#store-list .load').fadeIn('slow');
                 $page.getMoreChannels();
@@ -141,7 +140,10 @@
     $page.getMoreChannels = function () {
         cms.global.USER_DATA["pageInfo"].pageCurrent = cms.global.USER_DATA["pageInfo"].pageNext;
         cms.global.USER_DATA["pageInfo"].pageNext += 1;
-        $page._drawChannels($page.channelPageSize, true);
+        if (cms.global.USER_DATA["pageInfo"].pageNext > cms.global.USER_DATA["pageInfo"].pageTotal) {
+            cms.global.USER_DATA["pageInfo"].pageNext = cms.global.USER_DATA["pageInfo"].pageTotal;
+        }
+        $page._drawChannels($page.channelPageSize);
     };
 
     $page.listCategory = function (inCategory, inCatId) {
@@ -193,11 +195,11 @@
                 $(".form-title").text(nn._([cms.global.PAGE_ID, 'store-layer', "xxx programs in category:"], [cntChannelSource]));
 
                 pageInfo["pageTotal"] = Math.ceil(cntChannelSource / inPageSize);
-                pageInfo["pageCurrent"] = 1;
+                pageInfo["pageCurrent"] = 0;
                 if (pageInfo["pageTotal"] == 1) {
                     pageInfo["pageNext"] = 1;
                 } else {
-                    pageInfo["pageNext"] = 2;
+                    pageInfo["pageNext"] = 1;
                 }
 
                 cms.global.USER_DATA["pageInfo"] = pageInfo;
@@ -216,8 +218,8 @@
                         cms.global.USER_DATA["msoCurrent"] = [];
                     }
                     $('.channel-list').html("");
-                    $page._drawChannels(inPageSize, false);
-                    //alert(cntChanels);
+
+                    $page.getMoreChannels();
                 });
             } else {
                 $('#overlay-s').fadeOut("slow");
@@ -231,7 +233,15 @@
         $common.showProcessingOverlay();
         $(".catLi ").removeClass("on");
         $("#catLi_" + inObj).addClass("on");
-        var tmpCategoryName = $("#catLi_" + inObj + " span a").text();
+        var tmpCategoryName = $("#catLi_" + inObj + " span a").text(),
+            pageInfo = [];
+
+        pageInfo["pageTotal"] = pageInfo["pageCurrent"] = pageInfo["pageNext"] = 0;
+
+        cms.global.USER_DATA["pageInfo"] = pageInfo;
+        cms.global.USER_DATA["msoSource"] = [];
+        cms.global.USER_DATA["msoCurrent"] = [];
+
         $("#store-layer .cat_name").text(tmpCategoryName);
         $('.channel-list li').remove();
         $('#store-list').scrollTop(0);

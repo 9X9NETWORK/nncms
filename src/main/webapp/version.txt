@@ -1,3 +1,15 @@
+版本: 5738
+作者: mars
+日期: 2013/11/04 09:49
+訊息:
+1. program format add part 2 - http: //www.9x9.tv/tv#/streaming/promo/26907/96685521
+2. bug fix - system category program list fix
+----
+異動 : /javascripts/v3/domready.portal.store.js
+異動 : /javascripts/v3/func.portal.store.js
+異動 : /javascripts/v3/func.common.js
+
+
 版本: 5727
 日期: 2013/10/30 16:00
 訊息:

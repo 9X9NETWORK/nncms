@@ -9,12 +9,18 @@
     $common.playerUrlParser = function (inUrl) {
         // default formate :: http://dev6.9x9.tv/view?mso=cts&ch=28082
         var inURL = $.url(inUrl),
-            allPaths = ["/view", "/playback", "playback"],
+            allPaths = ["/view", "/playback", "playback", "streaming"],
             tmpChannel = inURL.param('ch'),
             isAllow = false;
         if (undefined === tmpChannel || 1 > tmpChannel) {
-            // http://www.9x9.tv/tv#/playback/1564/ytzKcS9T61kh0
-            tmpChannel = inURL.fsegment(2);
+            if ("streaming" === inURL.fsegment(1)) {
+                // http: //cts.9x9.tv/tv#/streaming/promo/28087/e49676
+                // http: //www.9x9.tv/tv#/streaming/promo/26907/96685521
+                tmpChannel = inURL.fsegment(3);
+            } else {
+                // http://www.9x9.tv/tv#/playback/1564/ytzKcS9T61kh0
+                tmpChannel = inURL.fsegment(2);
+            }
         }
         if ($.inArray(inURL.attr('path'), allPaths) !== -1 || $.inArray(inURL.fsegment(1), allPaths) !== -1) {
             isAllow = true;

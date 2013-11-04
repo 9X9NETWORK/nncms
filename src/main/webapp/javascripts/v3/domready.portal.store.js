@@ -204,6 +204,7 @@ $(function () {
             $common.showUnsaveOverlay();
         } else {
             if (!$("#store-layer").hasClass("collapse")) {
+                $page.inLiClick = true;
                 $page._categoryBlockSlide("up");
             }
             $page.catLiClick(thisMeta);
