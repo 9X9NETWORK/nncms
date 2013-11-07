@@ -85,6 +85,7 @@
                     $('#channel-list').sortable('disable');
                 } else {
                     $("p.order").hide();
+                    $(".curate").hide();
                     $('#content-main-wrap .constrain').empty();
                     $('#channel-list-empty-tmpl').tmpl({
                         id: cms.global.USER_DATA.id

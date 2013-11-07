@@ -1,3 +1,19 @@
+版本: 5739
+作者: mars
+日期: 2013/11/07 11:50
+訊息:
+new requirement :
+let PCS can manage us mso , before tw only
+bug fix :
+janet : 1. program list empty , don't show create program
+ivan : 1. in PCS program with TAG with title attribute
+----
+異動 : /javascripts/v3/func.portal.manage.js
+異動 : /javascripts/v3/func.index.js
+異動 : /protal-manage.html
+異動 : /store-promotion.html
+異動 : /store-manage.html
+
 版本: 5738
 作者: mars
 日期: 2013/11/04 09:49
@@ -8,7 +24,6 @@
 異動 : /javascripts/v3/domready.portal.store.js
 異動 : /javascripts/v3/func.portal.store.js
 異動 : /javascripts/v3/func.common.js
-
 
 版本: 5727
 日期: 2013/10/30 16:00

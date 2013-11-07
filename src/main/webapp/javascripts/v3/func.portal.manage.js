@@ -360,9 +360,7 @@
         });
         nn.api('GET', cms.reapi('/api/mso/{msoId}/sets', {
             msoId: msoId
-        }), {
-            lang: "zh"
-        }, function (sets) {
+        }), null, function (sets) {
             var cntSetsItem = sets.length;
             if (cntSetsItem > 0) {
                 $page.setId = setId;
