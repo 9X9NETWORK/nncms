@@ -1,3 +1,32 @@
+版本: 5785
+作者: mars
+日期: 2013/12/05 11:00
+訊息:
+PCS 4.2 add Channel set :
+1. manage Channel Set can add channle set, and channel set limit controll from cms.api.
+2. change name My Portal to My App
+----
+modified: /brand-setting.html
+modified: /channel-add.html
+modified: /channel-poi.html
+modified: /channel-setting.html
+modified: /cms-settings.html
+modified: /episode-list.html
+modified: /index.html
+modified: /javascripts/v3/domready.common.js
+modified: /javascripts/v3/domready.portal.manage.js
+modified: /javascripts/v3/domready.portal.store.promotion.js
+modified: /javascripts/v3/domready.signin.js
+modified: /javascripts/v3/func.get-url.js
+modified: /javascripts/v3/func.portal.manage.js
+modified: /lang/en.json
+modified: /lang/zh.json
+modified: /portal-manage.html
+modified: /store-manage.html
+modified: /store-promotion.html
+modified: /stylesheets/portal.css
+
+
 版本: 5739
 作者: mars
 日期: 2013/11/07 11:50

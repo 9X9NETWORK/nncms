@@ -7,7 +7,7 @@
         var strCid = '',
             strEid = '',
             strBrand = '',
-            strBaseURL = 'http://www.9x9.tv/view?',
+            strBaseURL = cms.config.API_BASE + '/view?',
             strSurl = '',
             userUrlFile = cms.global.USER_URL.attr('file');
 

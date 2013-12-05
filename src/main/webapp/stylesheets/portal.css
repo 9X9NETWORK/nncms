@@ -314,6 +314,18 @@
     float: left;
     cursor: pointer;
 }
+span.sType.on {
+    font-weight: bold;
+    background-position: 0 -38px;
+}
+span.sType {
+    height: 17px;
+    line-height: 17px;
+    margin: 5px 0 0 8px;
+    background: url(../images/btn_radio.png) no-repeat;
+    cursor: pointer;
+    padding-left: 20px;
+}
 .sort-list li.on {
     font-weight: bold;
     background-position: 0 -38px;
@@ -1402,7 +1414,7 @@ a.switch-off {
         width:1198px;
     }
     #portal-add-layer .input-gray .center {
-        width: 892px;
+        width: 863px;
     }
 	#portal-add-layer.store .input-gray .center {
     	width: 863px;

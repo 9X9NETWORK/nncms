@@ -39,7 +39,7 @@
         <h3><a href="index.html"><span class="cms-icon">CMS</span><span class="sub-title">Content Management System</span></a></h3>
         <ul>
             <li class="on"><span><a href="index.html">My Programs</a></span></li>
-            <li id="my-portal" class="hide"><span><a href="portal-manage.html">My Portal</a></span></li>
+            <li id="my-portal" class="hide"><span><a href="portal-manage.html">My App</a></span></li>
         </ul>
         <div class="studio-setup">
             <p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="cms-settings.html"><img src="images/icon_studio_setup.png" alt="" />CMS Settings</a></span></span></p>
@@ -303,14 +303,14 @@
     <div class="wrap">
         <div class="photo-list">
             <div class="ep">
-                <a href="/view?ch=${id}" target="_blank"><img src="${moreImageUrl_2}" alt="" /></a>
+                <a href="${cms.config.API_BASE}/view?ch=${id}&dddd" target="_blank"><img src="${moreImageUrl_2}" alt="" /></a>
             </div>
             <div class="ch">
                 <div class="img">
-                    <a href="/view?ch=${id}" target="_blank"><img src="${moreImageUrl_1}" alt="" /></a>
+                    <a href="${cms.config.API_BASE}/view?ch=${id}" target="_blank"><img src="${moreImageUrl_1}" alt="" /></a>
                 </div>
             </div>
-            <a href="/view?ch=${id}" target="_blank"><img src="images/icon_playlist.png" alt="" class="watermark" /></a>
+            <a href="${cms.config.API_BASE}/view?ch=${id}" target="_blank"><img src="images/icon_playlist.png" alt="" class="watermark" /></a>
         </div>
         <div class="info">
             <h3><a href="episode-list.html?id=${id}">${name}</a></h3>

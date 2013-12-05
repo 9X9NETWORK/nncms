@@ -32,9 +32,6 @@ $(function () {
 
     // add promotion category - cancel button
     $(document).on("click", "#change-category-overlay .btn-close, #change-category-overlay .btn-cancel", function (event) {
-        // 用到
-        // add promotion category
-        // $('#change-category-overlay').fadeOut("slow");
         $.unblockUI();
         return false;
     });
@@ -133,17 +130,12 @@ $(function () {
             }
             break;
         }
-        // add promotion category
-        // $('#change-category-overlay').fadeOut("slow");
-        // alert(actType);
         $.unblockUI();
         return false;
     });
 
 
 //// add channel search - start
-
-
     $(document).on("click", "#empty_channel", function (event) {
         // search layout
         var cntChannel = $("#channelCnt").text();
@@ -324,7 +316,8 @@ $(function () {
         // add chanel
         var lis = $("#search-channel-list li .on"),
             cntLis = lis.length,
-            tmpList = [];
+            tmpList = [],
+            tmpMsoName = cms.global.MSOINFO.name || "9x9";
 
         if (cntLis > 0) {
             $common.showProcessingOverlay();
@@ -355,6 +348,7 @@ $(function () {
                     $.each(channels, function (idx, channel) {
 
                         channel.seq = tmpSeq;
+                        channel.msoName = tmpMsoName;
                         tmpSeq += 1;
                         $page.nomoList.push(channel);
                         $page.currentList.push(channel.id);
@@ -437,8 +431,6 @@ $(function () {
         $(".select-gray").find(".select-dropdown").removeClass("on");
         $(".select-gray").find(".select-btn").removeClass("on");
     });
-
-
 //// add channel search - end
 
     // channel set on top
@@ -497,14 +489,8 @@ $(function () {
         $page.onTopAddList.splice($.inArray(this_id, $page.onTopAddList), 1);
         $page.onTopRemoveList.splice($.inArray(this_id, $page.onTopRemoveList), 1);
 
-        // up_li.remove();
         $page._drawChannelLis();
         $page.setSaveButton("on");
-        // $("#channelCnt").text($("#channelCnt").text() - 1);
-        // if ($("#channelCnt").text() == 0) {
-        //     $("#cntChannelEmpty").show();
-        // }
-        // $("#empty_channel").removeClass("disable");
     });
 
     // delete promotion category - show prompt window
@@ -582,12 +568,19 @@ $(function () {
 
 
     // promotion category save funtion
-    // done 1. process promotion category
-    // done   a. each li to generate update and new promotion category infomation
-    // done   b. $page.promoCatRemoveList to generate delete promotion category information 
-    // 2. process promotion category channels
     $(document).on("click", "#set-save", function (event) {
-        // 用到
+        var msoId = cms.global.MSO,
+            catLiLists = $("#store-category-ul li.catLi"),
+            tmpSeq = 0,
+            tmpHasChange = false,
+            theSeq = 0,
+            procList = [],
+            tmpItem = {},
+            newCatList = [],
+            newCatCount = 0,
+            currentCategoryId = 0,
+            tmpCat = $("#store-category-ul .catLi.on");
+
         function procPromotionCat(procList) {
             var deferred = $.Deferred(),
                 catDelLists = $page.promoCatRemoveList;
@@ -638,19 +631,15 @@ $(function () {
             $page.promoCatRemoveList = [];
 
             if (newCatCount === 0) {
-                // nn.log("newCatCount yes::" + newCatCount);
                 deferred.resolve();
             }
-            // else
-            // {
-            //     // nn.log("newCatCount no::"+newCatCount);
-            // }
 
             return deferred.promise();
         }
 
         function procEnd() {
             var deferred = $.Deferred();
+
             nn.log("4: now in removeChannels");
             $page.listCatChannel(msoId, currentCategoryId, $page.channelPageSize);
 
@@ -673,6 +662,7 @@ $(function () {
                     channels: $page.addList.join(',')
 
                 }, function (msg) {
+                    $page.addList = [];
                     deferred.resolve();
                 });
             } else {
@@ -693,6 +683,7 @@ $(function () {
                     channels: $page.removeList.join(',')
 
                 }, function (msg) {
+                    $page.removeList = [];
                     deferred.resolve();
                 });
 
@@ -707,24 +698,14 @@ $(function () {
         function setChannelsOnTop() {
             var deferred = $.Deferred();
             // nn.log("2: now in setChannelsOnTop[" + newCatCount + "]");
-            var testing = 0;
-            // while (newCatCount > 0){
-            //     testing ++;
-            //     nn.log("2 - while:: "+ newCatCount);
-            // }
-            // currentCategoryId = parseInt($("#store-category-ul .catLi.on").attr("id").replace("catLi_", ""), 10);
             if (currentCategoryId > 0) {
                 nn.api('GET', cms.reapi('/api/category/{categoryId}/channels', {
                     categoryId: currentCategoryId
                 }), null, function (channels) {
-
                     var oldOnTop = $page.procOnTopList(channels, $page.sortingType),
-                        oldOnTopList = [],
-                        nowOnTopList = [],
-                        tmpSeq = 0,
                         cntTotal = oldOnTop.length + $page.onTopList.length;
 
-
+                    tmpSeq = 0;
                     nn.log("1 : on top remove");
                     if (cntTotal != 0) {
                         $.each(oldOnTop, function (eKey, eValue) {
@@ -740,12 +721,7 @@ $(function () {
                                 if (cntTotal < 1) {
                                     deferred.resolve();
                                 }
-                                //  else {
-                                //     // nn.log("1::0 ::" + cntTotal + "::" +  msg);
-                                // }
                             });
-
-                            // oldOnTopList.push(eValue.id);
                         });
 
                         nn.log("2 : on top add");
@@ -780,23 +756,6 @@ $(function () {
 
 
         if (!$("#set-save p.btns").hasClass("disableBB")) {
-            var msoId = cms.global.MSO,
-                catLiLists = $("#store-category-ul li.catLi"),
-                tmpSeq = 0,
-                tmpHasChange = false,
-                theSeq = 0,
-                procList = [],
-                tmpItem = {},
-                newCatList = [],
-                newCatCount = 0,
-                stSwitchOn = !$(".switch-on").hasClass("hide"),
-                stSwitchOff = !$(".switch-off").hasClass("hide"),
-                catMinus = $("#store-category-ul li.minus"),
-                catMinusList = [],
-                tmpMsoAdd = cms.global.USER_DATA["msoAdd"],
-                tmpMsoRemove = cms.global.USER_DATA["msoRemove"],
-                currentCategoryId = 0,
-                tmpCat = $("#store-category-ul .catLi.on");
 
             if (tmpCat.length === 1) {
                 currentCategoryId = parseInt($("#store-category-ul .catLi.on").attr("id").replace("catLi_", ""), 10);

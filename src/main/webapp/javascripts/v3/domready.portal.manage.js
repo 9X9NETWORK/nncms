@@ -8,6 +8,187 @@ $(function () {
     var $page = cms['portal-manage'],
         $common = cms.common;
 
+    // add / edit channel set - action button
+    $(document).on("click", "#change-category-overlay .btn-chg-category", function (event) {
+        // 用到
+        var actType = $(this).data("acttype"),
+            inSetName = $("#setName").val(),
+            setId = $(this).data("setid"),
+            actLi = $("#catLi_" + setId);
+
+        switch (actType) {
+        case "add":
+            // add channel set
+            if ("" !== inSetName) {
+                var newId = new Date().getTime();
+                $('#store-category-li-tmpl').tmpl({
+                    name: inSetName,
+                    sortingType: 2,
+                    id: newId
+                }, {
+                    isNew: "new"
+                }).appendTo('#store-category-ul');
+
+                $('#store-category-ul li').show();
+
+                if (!$('body').hasClass('channel-change')) {
+                    $page.catLiClick(newId);
+                }
+            }
+            break;
+
+        case "edit":
+            // edit channel set
+            if (setId > 0 && "" !== inSetName && (actLi.data("name") != inSetName)) {
+                actLi.data("name", inSetName);
+                actLi.find("span a").text(inSetName);
+                actLi.addClass('has-change');
+            }
+            break;
+        }
+        $.unblockUI();
+        return false;
+    });
+
+    // channel set add/edit close button
+    $(document).on("click", "#change-category-overlay .btn-cancel, #change-category-overlay .btn-close, #message-prompt .btn-ok", function (event) {
+        $.unblockUI();
+        return false;
+    });
+
+    // add channel set
+    $(document).on("click", ".addChannelSet", function (event) {
+        var overLayInfo = {
+            actType: "add",
+            overLayTitle: nn._([cms.global.PAGE_ID, 'overlay', "Add Channel Set"]),
+            actButton: nn._([cms.global.PAGE_ID, 'overlay', "Add Channel Set"]),
+            setName: ""
+        };
+        if ($page.isChannelSetAdd()) {
+            $('#change-category-overlay .overlay-container').empty();
+            $('#change-category-overlay-tmpl').tmpl(overLayInfo).appendTo('#change-category-overlay .overlay-container');
+
+            $.blockUI({
+                message: $('#change-category-overlay')
+            });
+        } else {
+
+            $('#message-prompt .content').text(nn._([cms.global.PAGE_ID, 'prompt', "You channel set Quota was used."]));
+            $.blockUI({
+                message: $('#message-prompt')
+            });
+        }
+        return false;
+    });
+
+    // edit channel set
+    $(document).on("click", ".catLi .btn-edit", function (event) {
+        // 用到
+        var thisLi = $(this).parent("li"),
+            overLayInfo = {
+                actType: "edit",
+                setId:  parseInt(thisLi.attr("id").replace("catLi_", ""), 10),
+                overLayTitle: nn._([cms.global.PAGE_ID, 'overlay', "Edit Channel Set"]),
+                actButton: nn._([cms.global.PAGE_ID, 'overlay', "Yes"]),
+                setName: $(thisLi).data("name")
+            };
+        $('#change-category-overlay .overlay-container').empty();
+        $('#change-category-overlay-tmpl').tmpl(overLayInfo).appendTo('#change-category-overlay .overlay-container');
+        $.blockUI({
+            message: $('#change-category-overlay')
+        });
+        return false;
+    });
+
+    // delete channel set - show prompt window
+    $(document).on("click", ".catLi .btn-remove", function (event) {
+        // 用到
+        var thisLi = $(this).parent("li"),
+            catId = parseInt(thisLi.attr("id").replace("catLi_", ""), 10);
+
+        $('#confirm-prompt').addClass("btn2remove");
+        $('#confirm-prompt').removeClass("btn2change");
+
+        $('#confirm-prompt').data("actli", catId);
+        $('#confirm-prompt').data("actCat", "delete");
+
+        $('#confirm-prompt .content').text(nn._([cms.global.PAGE_ID, 'overlay', "Are you sure to remove this channel set?"]));
+        $.blockUI({
+            message: $('#confirm-prompt')
+        });
+
+        return false;
+    });
+
+    // unsave delete / change channel set - confirm to delete / change
+    $(document).on("click", "#confirm-prompt .btn-leave", function (event) {
+        // 用到
+        var catId = $('#confirm-prompt').data("actli"),
+            thisLi = $("#catLi_" + catId),
+            isNew = thisLi.hasClass("newCat"),
+            isOn = thisLi.hasClass("on"),
+            nonNewCat = 0,
+            isRemove = $('#confirm-prompt').hasClass("btn2remove"),
+            isChange = $('#confirm-prompt').hasClass("btn2change");
+
+        $('#confirm-prompt').data("actli", "");
+        $('#confirm-prompt').data("actCat", "");
+
+        if (isChange) {
+            // unsave - change channel set
+            $page.emptyChannel();
+            $page.sortingType = thisLi.data("sortingtype");
+            $page.catLiClick(catId);
+            $.unblockUI();
+        } else if (isRemove) {
+            // remove channel set
+            if (!isNew) {
+                $page.ChannelSetRemoveList.push(catId);
+            }
+            thisLi.remove();
+            if (isOn) {
+                $page.emptyChannel();
+                nonNewCat = $page.catGetNonNew();
+                if (nonNewCat > 0) {
+                    $page.catLiClick(nonNewCat);
+                }
+            }
+            if ($(".catLi").length < 1) {
+                $page.emptySet();
+            }
+            $.unblockUI();
+        }
+        $("body").addClass("has-change");
+
+        $('#confirm-prompt').removeClass("btn2change").removeClass("btn2remove");
+        return false;
+    });
+
+
+    // change channel set
+    $(document).on("click", "#store-category-ul .catLi", function (event) {
+        // 用到
+        var thisLi = $(this),
+            catId = parseInt(thisLi.attr("id").replace("catLi_", ""), 10);
+        if ($('body').hasClass('has-change')) {
+
+            $('#confirm-prompt').addClass("btn2change");
+            $('#confirm-prompt').removeClass("btn2remove");
+            // confirmExit();
+            $('#confirm-prompt').data("actli", catId);
+            $('#confirm-prompt').data("actCat", "change");
+
+            $('#confirm-prompt .content').text(nn._([cms.global.PAGE_ID, 'overlay', "Unsaved changes will be lost, are you sure you want to leave?"]));
+            $.blockUI({
+                message: $('#confirm-prompt')
+            });
+        } else {
+            $page.sortingType = thisLi.data("sortingtype");
+            $page.catLiClick(catId);
+        }
+        return false;
+    });
+
     $(document).on("click", "#set-preview", function (event) {
         // 2013/06/20 remove tv from URL
         var setId = cms.global.USER_URL.param('id'),
@@ -49,27 +230,139 @@ $(function () {
     });
 
     $(document).on("click", "#set-save", function (event) {
-        var setId = $page.setId;
-        $("#setName").val($.trim($("#setName").val()));
-        var inSetName = $("#setName").val();
-        var inSortingType = $("#sortingType").val();
+        var msoId = cms.global.MSO,
+            catLiLists = $("#store-category-ul li.catLi"),
+            theSeq = 0,
+            procList = [],
+            tmpItem = {},
+            newCatList = [],
+            currentSetId = 0,
+            tmpCat = $("#store-category-ul .catLi.on");
+        nn.log("000: save.....");
+        currentSetId = parseInt(tmpCat.data("meta"), 10);
+        // set Channel set
+        $.each(catLiLists, function (eKey, eValue) {
+            theSeq = eKey + 1;
+            $(eValue).data("seq", theSeq);
 
-        $("#msg-portal").text("");
-        $("#msg-portal").hide();
-        if ("" !== inSetName && setId > 0) {
-            $common.showProcessingOverlay();
-            nn.api('PUT', cms.reapi('/api/sets/{setId}', {
-                setId: setId
-            }), {
-                name: inSetName,
-                sortingType: inSortingType
-            }, function (set) {
-                $('#title-func .set_name').html(inSetName);
-                $('.sub-nav .active a').html(inSetName);
-                var actChannelCount = 0,
-                    actChannel = [];
+            tmpItem = {};
+            tmpItem.msoId = msoId;
+            tmpItem.id = $(eValue).data("meta");
+            tmpItem.seq = theSeq;
+            tmpItem.name = $(eValue).data("name");
+            tmpItem.sortingType = $(eValue).data("sortingtype");
 
-                nn.log("actChannelsssCount : " + $page.removeList);
+            if ($(eValue).hasClass("newCat")) {
+                tmpItem.id = 0;
+                newCatList.push(tmpItem);
+            } else {
+                procList.push(tmpItem);
+            }
+        });
+
+        // channel set delete
+        function channelSetDelete() {
+            var deferred = $.Deferred(),
+                cntRemove = $page.ChannelSetRemoveList.length;
+            nn.log("2: channel set delete");
+            if (cntRemove > 0) {
+                $.each($page.ChannelSetRemoveList, function (eKey, eValue) {
+                    nn.api('DELETE', cms.reapi('/api/sets/{setId}', {
+                        setId: eValue
+                    }), null, function (msg) {
+                        // nn.log(msg);
+                        cntRemove -= 1;
+                        if (cntRemove === 0) {
+                            $page.ChannelSetRemoveList = [];
+                            deferred.resolve();
+                        }
+                    });
+                });
+            } else {
+                deferred.resolve();
+            }
+            return deferred.promise();
+        }
+
+        // channel set add
+        function channelSetAdd() {
+            var deferred = $.Deferred(),
+                cntAdd = newCatList.length;
+            nn.log("3: channel set add");
+            if (cntAdd > 0) {
+
+                $.each(newCatList, function (eKey, eValue) {
+                    nn.api('POST', cms.reapi('/api/mso/{msoId}/sets', {
+                        msoId: msoId
+                    }), {
+                        name: eValue.name,
+                        sortingType: eValue.sortingType,
+                        seq: eValue.seq
+                    }, function (set) {
+                        var setLocate = set.seq - 1,
+                            tmpObj = catLiLists[setLocate],
+                            objId = "";
+                        cntAdd -= 1;
+                        objId = "catLi_" + set.id;
+                        $(tmpObj).attr("id", objId);
+                        $("#" + objId).data("meta", set.id);
+                        $("#" + objId).data("seq", set.seq);
+                        $(tmpObj).removeClass("newCat");
+                        if ($(tmpObj).hasClass("on")) {
+                            currentSetId = set.id;
+                        }
+                        if (cntAdd === 0) {
+                            newCatList = [];
+                            deferred.resolve();
+                        }
+                    });
+                });
+
+            } else {
+                deferred.resolve();
+            }
+            return deferred.promise();
+        }
+
+        // channel set update
+        function channelSetUpdate() {
+            var deferred = $.Deferred(),
+                cntUpdate = procList.length;
+            nn.log("4: channel set Update--" + cntUpdate);
+            if (cntUpdate > 0) {
+
+                $.each(procList, function (eKey, eValue) {
+                    nn.api('PUT', cms.reapi('/api/sets/{setId}', {
+                        setId: eValue.id
+                    }), {
+                        name: eValue.name,
+                        sortingType: eValue.sortingType,
+                        seq: eValue.seq
+                    }, function (set) {
+                        cntUpdate -= 1;
+                        nn.log("cntUpdate::::" + cntUpdate);
+                        if (cntUpdate === 0) {
+                            procList = [];
+                            deferred.resolve();
+                        }
+                    });
+                });
+
+            } else {
+                deferred.resolve();
+            }
+            return deferred.promise();
+        }
+
+        // channel set programs process
+        function channelSetPrograms() {
+            var deferred = $.Deferred(),
+                actChannelCount = 0,
+                actChannel = [],
+                setId = currentSetId;
+
+            nn.log("5: channelSetPrograms");
+            if (setId > 0) {
                 $.each($page.removeList, function (i, channel) {
                     if (channel > 0) {
                         actChannel.push({
@@ -89,42 +382,169 @@ $(function () {
                 });
 
                 $page.removeList = [];
+                $page.addList = [];
 
                 actChannelCount = actChannel.length;
 
                 if (actChannelCount > 0) {
                     $.each(actChannel, function (i, channel) {
 
-                        nn.log("actChannelCount : " + actChannelCount);
-
                         nn.api(channel.chAction, cms.reapi('/api/sets/{setId}/channels', {
                             setId: setId
                         }), {
                             channelId: channel.chId
-                        }, function (retValue) {
+                        }, function (msg) {
                             actChannelCount = actChannelCount - 1;
                             if (actChannelCount === 0) {
                                 // update channelCnt
                                 nn.api('PUT', cms.reapi('/api/sets/{setId}', {
                                     setId: setId
                                 }), null, null);
-                                $page._procSort(setId);
-                                nn.log("actChannelCount in API : " + actChannelCount);
+                                deferred.resolve();
                             }
                         });
 
                     });
                 } else {
-                    $page._procSort(setId);
+                    deferred.resolve();
                 }
+            } else {
+                $page.removeList = [];
+                $page.addList = [];
 
-            });
-            $("body").removeClass("has-change");
-        } else {
-            $("#msg-portal").text(nn._([cms.global.PAGE_ID, 'channel-list', "Please fill in your channel name."]));
-            $("#msg-portal").show();
+                deferred.resolve();
+            }
+            return deferred.promise();
         }
-        return false;
+
+        // channel set update
+        function channelSetProgramsSort() {
+            var deferred = $.Deferred(),
+                tmpDiv,
+                channels = [],
+                nowTopList = [],
+                this_id = 0,
+                setId = currentSetId;
+            nn.log("6: channelSetProgramsSort");
+            $("#channel-list li.itemList").each(function () {
+                this_id = $(this).attr("id").replace("set_", "");
+                if (this_id > 0) {
+                    channels.push(this_id);
+                }
+                tmpDiv = $(this).find(".btn-top");
+
+                if ($(tmpDiv[0]).hasClass("on")) {
+                    nowTopList.push(this_id);
+                }
+            });
+
+            if (channels.length > 0) {
+                nn.api('PUT', cms.reapi('/api/sets/{setId}/channels/sorting', {
+                    setId: setId
+                }), {
+                    channels: channels.join(',')
+                }, function (set) {
+
+                    if (2 === $page.sortingType) {
+                        nn.api('GET', cms.reapi('/api/sets/{setId}/channels', {
+                            setId: setId
+                        }), null, function (chanels) {
+                            var cntChanels = chanels.length,
+                                dbTopList = [],
+                                procListSort = [],
+                                tmpId = 0,
+                                actChannelCount2 = 0;
+
+                            if (cntChanels > 0) {
+                                dbTopList = $page._getItemIdArray($page.procOnTopList(chanels, $page.sortingType));
+                            }
+
+                            $.each(nowTopList, function (i, chId) {
+                                tmpId = parseInt(chId, 10);
+                                if ($.inArray(tmpId, dbTopList) > -1) {
+                                    dbTopList.splice($.inArray(tmpId, dbTopList), 1);
+                                } else {
+                                    procListSort.push({
+                                        onTop: true,
+                                        chId: tmpId
+                                    });
+                                }
+
+                            });
+
+                            $.each(dbTopList, function (i, chId) {
+                                tmpId = parseInt(chId, 10);
+                                if (tmpId > 0) {
+                                    procListSort.push({
+                                        onTop: false,
+                                        chId: tmpId
+                                    });
+                                }
+                            });
+                            actChannelCount2 = procListSort.length;
+
+                            if (actChannelCount2 > 0) {
+                                $.each(procListSort, function (i, channel) {
+                                    nn.api("POST", cms.reapi('/api/sets/{setId}/channels', {
+                                        setId: setId
+                                    }), {
+                                        channelId: channel.chId,
+                                        alwaysOnTop: channel.onTop
+                                    }, function (retValue) {
+                                        actChannelCount2 -= 1;
+                                        if (actChannelCount2 === 0) {
+
+                                            deferred.resolve();
+                                        }
+                                    });
+                                });
+                            } else {
+                                deferred.resolve();
+                            }
+                        });
+
+                    } else {
+                        deferred.resolve();
+                    }
+
+                });
+            } else {
+                deferred.resolve();
+            }
+            return deferred.promise();
+            // return deferred.promise();
+        }
+
+        // channel set sort
+        function procEnd() {
+            var deferred = $.Deferred();
+            nn.log("7: procEnd");
+            $('#overlay-s').fadeOut("slow");
+            $('body').removeClass('has-change');
+            deferred.resolve();
+            return deferred.promise();
+        }
+
+        // channel set update
+        function procStart() {
+            var deferred = $.Deferred();
+            nn.log("1: procStart");
+            $common.showProcessingOverlay();
+            deferred.resolve();
+            return deferred.promise();
+            // return deferred.promise();
+        }
+
+        if ($('body').hasClass('has-change')) {
+            procStart()
+                .then(channelSetDelete)
+                .then(channelSetAdd)
+                .then(channelSetUpdate)
+                .then(channelSetPrograms)
+                .then(channelSetProgramsSort)
+                .then(procEnd);
+            return false;
+        }
     });
 
     $(document).on("keyup", "#input-portal-ch", function (event) {
@@ -145,10 +565,15 @@ $(function () {
 
     $(document).on("click", "#empty_channel", function (event) {
         // search layout
-        var cntChannel = $("#channelCnt").text();
-        if (cntChannel < $page.setCanChannel) {
-            $("#search-title").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Add programs into your “<span>Set 2</span>”"], [$("#setName").val()]));
+        if ($page.isProgramAdd()) {
+            $("#search-title").html(nn._([cms.global.PAGE_ID, 'portal-add-layer', "Add programs into your “<span>Set 2</span>”"], [$("#store-category-ul .catLi.on").data("name")]));
             $("#portal-add-layer").fadeIn();
+        } else {
+
+            $('#message-prompt .content').text(nn._([cms.global.PAGE_ID, 'prompt', "You program Quota was used."]));
+            $.blockUI({
+                message: $('#message-prompt')
+            });
         }
     });
 
@@ -318,7 +743,8 @@ $(function () {
         // add chanel
         var lis = $("#search-channel-list li .on"),
             cntLis = lis.length,
-            tmpList = [];
+            tmpList = [],
+            tmpMsoName = cms.global.MSOINFO.name || "9x9";
 
         if (cntLis > 0) {
             $common.showProcessingOverlay();
@@ -348,12 +774,14 @@ $(function () {
                     $.each(channels, function (idx, channel) {
 
                         channel.seq = tmpSeq;
+                        channel.msoName = tmpMsoName;
                         tmpSeq += 1;
                         $page.nomoList.push(channel);
                         $page.currentList.push(channel.id);
 
                     });
-                    $("#channelCnt").text(parseInt($("#channelCnt").text(), 10) + tmpList.length);
+                    $("body").addClass("has-change");
+                    $("div.info .form-title").html(nn._([cms.global.PAGE_ID, 'channel-list', "Program List : ? Programs"], [$("#channel-list .itemList").length + tmpList.length]));
                     $page._drawChannelLis();
                     $("#portal-add-layer").fadeOut("slow");
                     $page._search_channel_clean();
@@ -365,7 +793,7 @@ $(function () {
     });
 
     $(document).on("click", "#search-channel-list .checkbox", function (event) {
-        var canAdd = $page.setCanChannel;//$("#sRusult").data("canAdd");
+        var canAdd = $page.setCanChannel;
         var li_on = 0;
         var this_li = $(this);
 
@@ -378,8 +806,7 @@ $(function () {
                 canAdd -= 1;
             }
         }
-
-        $("#sRusult").data("canAdd", canAdd);
+        $page.setCanChannel = canAdd;
         li_on = $("#search-channel-list li .on").length;
         if (li_on > 0) {
             $("#searchAdd").show();
@@ -388,10 +815,12 @@ $(function () {
         }
     });
 
-    $(document).on("click", ".sort-list .sType", function (event) {
+    // sorting type
+    $(document).on("click", "span.sType", function (event) {
 
         var tmpStrValue = "",
             tmpValue = 0,
+            thisLi = $(".catLi.on"),
             expSort = ".empty, .isSortable";
 
         tmpStrValue = $(this).attr("tvalue");
@@ -403,14 +832,14 @@ $(function () {
             $(".sType").removeClass("on");
             $(this).addClass("on");
             $page.sortingType = tmpValue;
-            $("#sortingType").val(tmpValue);
+            // $("#sortingType").val(tmpValue);
+            thisLi.data("sortingtype", tmpValue);
 
             if (1 === tmpValue) {
                 $page.nomoList = $page.onTopList.concat($page.nomoList);
                 $page.onTopList = [];
                 expSort = ".empty";
                 $(".btn-top").addClass("hide");
-                nn.log("btn-top on" + $(".btn-top").length);
                 $(".isSortable").css("cursor", "move");
                 $('#channel-list').sortable({
                     cursor: 'move',
@@ -421,12 +850,10 @@ $(function () {
                     }
                 });
             } else {
-                nn.log("nomoList" + $page.nomoList);
+
                 $page.onTopList = $page.procOnTopList($page.nomoList, $page.sortingType);
                 $page.nomoList = $page.procNomoList($page.nomoList, $page.sortingType);
 
-                nn.log("onTopList" + $page.onTopList);
-                nn.log("nomoList" + $page.nomoList);
                 $page._drawChannelLis();
                 $page._reListSeq();
 
@@ -451,7 +878,6 @@ $(function () {
         $("body").removeClass("has-change");
         var setId = $page.setId;
 
-        //$("#channel-list").sortable("destroy");
         $(".sType").removeClass("on");
         $(this).addClass("on");
         $("#sortingType").val($(this).attr("tvalue"));
@@ -493,7 +919,7 @@ $(function () {
         }
     });
 
-    $(document).on("click", ".btn-remove", function (event) {
+    $(document).on("click", "#channel-list .btn-remove", function (event) {
         // protal manage remove channel from channel set
         var this_li = $(this);
         var up_li = this_li.parents("li");
@@ -640,16 +1066,8 @@ $(function () {
         }
     }
     window.onbeforeunload = confirmExit;
-    /*
-    setTimeout(function () {
-        // set preview info
-        $("#set-preview").click();
-    }, 3000);
-    */
     // NOTE: Keep Window Resize Event at the bottom of this file
     $(window).resize(function () {
-        $('#portal-list').perfectScrollbar('update');
-        // $common.scrollbar("#portal-constrain", "#portal-list", "#portal-slider");
-        // $('#portal-slider .slider-vertical').slider('value', 100);
+        $('#store-list').perfectScrollbar('update');
     });
 });

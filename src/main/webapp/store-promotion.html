@@ -39,7 +39,7 @@
         <h3><a href="index.html"><span class="cms-icon">CMS</span><span class="sub-title">Content Management System</span></a></h3>
         <ul>
             <li><span><a href="index.html">My Programs</a></span></li>
-            <li class="on"><span><a href="portal-manage.html">My Portal</a></span></li>
+            <li class="on"><span><a href="portal-manage.html">My App</a></span></li>
         </ul>
         <div class="studio-setup">
             <p class="btn-left"><span class="btn-right"><span class="btn-middle"><a href="cms-settings.html"><img src="images/icon_studio_setup.png" alt="" />CMS Settings</a></span></span></p>
@@ -58,7 +58,7 @@
     <div id="content-nav">
         <div id="func-nav">
             <ul>
-                <li><a href="portal-manage.html" class="portal langkey">My Portal</a></li>
+                <li><a href="portal-manage.html" class="portal langkey">Main Channels</a></li>
                 <li>
                     <a href="store-promotion.html" class="store langkey">Program Store</a>
                     <ul class="sub-nav">
@@ -229,7 +229,7 @@
 <li id="sch_${id}">
     <div class="thumb">
         <div id="schk_${id}" class="checkbox{{if alreadyAdd === true}} hide{{/if}}"></div>
-        <a href="/view?mso=${msoName}&ch=${id}" target="_blank">
+        <a href="${cms.config.API_BASE}/view?mso=${msoName}&ch=${id}" target="_blank">
             <img src="images/icon_playlist.png" alt="" class="watermark" />
         </a>
         <div class="ch">
@@ -334,7 +334,7 @@
                 </div>
                 <div class="tip-top"></div>
             </div>
-            <a href="/view?mso=${msoName}&ch=${id}" target="_blank">
+            <a href="${cms.config.API_BASE}/view?mso=${msoName}&ch=${id}" target="_blank">
                 <img class="watermark" alt="" src="images/icon_playlist.png" />
             </a>
             <div class="ch">

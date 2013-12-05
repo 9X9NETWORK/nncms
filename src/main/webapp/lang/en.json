@@ -9,7 +9,7 @@
         "CMS": "<span class=\"cms-icon\">CMS</span><span class=\"sub-title\">Content Management System</span>",
         "CMSContent Management System": "<span class=\"cms-icon\">CMS</span><span class=\"sub-title\">Content Management System</span>",
         "My Programs": "My Programs",
-        "My Portal": "My Portal",
+        "My App": "My App",
         "CMS Settings": "<img src=\"images/icon_studio_setup.png\" alt=\"\" />CMS Settings",
         "Connection is inactive, click to restart it.": "Connection is inactive, click to restart it."
     },
@@ -163,7 +163,7 @@
             "9x9.tv - Brand Setting": "9x9.tv - Brand Setting"
         },
         "func-nav": {
-            "My Portal": "My Portal",
+            "Main Channels": "Main Channels",
             "Program Store": "Program Store",
             "Brand Settings": "Brand Settings"
         },
@@ -187,7 +187,7 @@
             "9x9.tv - Store Manage": "9x9.tv - Store Manage Promotion"
         },
         "func-nav": {
-            "My Portal": "My Portal",
+            "Main Channels": "Main Channels",
             "Program Store": "Program Store",
             "Brand Settings": "Brand Settings"
         },
@@ -232,7 +232,7 @@
             "9x9.tv - Store Manage": "9x9.tv - Store Manage"
         },
         "func-nav": {
-            "My Portal": "My Portal",
+            "Main Channels": "Main Channels",
             "Program Store": "Program Store",
             "Brand Settings": "Brand Settings"
         },
@@ -273,10 +273,10 @@
     },
     "portal-manage": {
         "html-title": {
-            "9x9.tv - My Portal": "9x9.tv - My Portal"
+            "9x9.tv - Main Channels": "9x9.tv - Main Channels"
         },
         "func-nav": {
-            "My Portal": "My Portal",
+            "Main Channels": "Main Channels",
             "Program Store": "Program Store",
             "Brand": "Brand"
         },
@@ -286,8 +286,9 @@
             "Edit": "Edit"
         },
         "title-func": {
-            "My Portal": "My Portal",
+            "Main Channels": "Main Channels",
             "Portal": "Portal",
+            "Main channels are the first thing sighted by your audience, which offer the great opportunity for your fine programs to gain visibility and exposure.": "Main channels are the first thing sighted by your audience, which offer the great opportunity for your fine programs to gain visibility and exposure.",
             "Preview": "Preview",
             "Save": "Save",
             "Channel Name": "Channel Name"
@@ -307,6 +308,22 @@
             "Please fill in the keywords to search.": "Please fill in the keywords to search.",
             "Processing...": "Processing..."
         },
+        "overlay": {
+            "Are you sure to remove this channel set?": "Are you sure to remove this channel set?",
+            "Unsaved changes will be lost, are you sure you want to leave?": "Unsaved changes will be lost, are you sure you want to leave?",
+            "Processing...": "處理中...",
+            "Add Channel Set": "Add Channel Set",
+            "Edit Channel Set": "Edit Channel Set",
+            "Cancel": "Cancel",
+            "Yes": "Yes",
+            "Channel Set Name": "Channel Set Name",
+            "Max length is 14 characters": "Max length is 14 characters",
+            "Max length is 8 chinese characters": "Max length is 8 chinese characters"
+        },
+        "prompt": {
+            "You channel set Quota was used.": "You channel set Quota was used.",
+            "You program Quota was used.": "You program Quota was used."
+        },
         "portal-layer": {
             "You can add 27 programs into your channel.": "You can add 27 programs into your channel.",
             "Processing...": "Processing..."
@@ -320,6 +337,7 @@
             "Channel Name": "Channel Name",
             "Program List": "Program List ",
             "Programs": "Programs",
+            "Add programs": "Add programs",
             "Add programs": "Add",
             "Add programs sub": "&nbsp;&nbsp;&nbsp;programs",
             "Please input program URL": "Please input program URL",
@@ -328,17 +346,18 @@
             "Remove from top": "Remove from top",
             "Remove program": "Remove program",
             "You can only set 4 programs on top": "You can only set 4 programs on top",
-            "Please fill in your channel name.": "Please fill in your channel name."
+            "Please fill in your channel name.": "Please fill in your channel name.",
+            "Program List : ? Programs": "Program List : {0} Programs"
         }
     },
     "portal-set": {
         "html-title": {
-            "9x9.tv - My Portal": "9x9.tv - My Portal"
+            "9x9.tv - Main Channels": "9x9.tv - Main Channels"
         },
         "func-nav": {
             "Portal": "Portal",
             "Program Store": "Program Store",
-            "My Portal": "My Portal",
+            "Main Channels": "Main Channels",
             "Brand Settings": "Brand Settings"
         },
         "sets-list": {
@@ -347,7 +366,7 @@
             "Edit": "Edit"
         },
         "title-func": {
-            "My Portal": "My Portal",
+            "Main Channels": "Main Channels",
             "Portal": "Portal"
         }
     },

@@ -38,7 +38,7 @@ $(function () {
                 cms.global.MSO = 0;
                 if (tmpPriv > 221 && user.msoId > 0) {
                     cms.global.MSO = user.msoId;
-                    if (-1 !== $.inArray(tmpUrl.attr('file'), ['store-manage.html', 'store-promotion.html', 'portal-manage.html'])) {
+                    if (-1 !== $.inArray(tmpUrl.attr('file'), ['store-manage.html', 'store-promotion.html', 'portal-manage.html', 'portal-set.html'])) {
                         // set mso info
                         nn.api('GET', cms.reapi('/api/mso/{msoId}', {
                             msoId: cms.global.MSO

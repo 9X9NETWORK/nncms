@@ -37,7 +37,7 @@ $(function () {
         if ("" === pass || pass != pass_re) {
             $("#reset-password-layer .msg-error").text(nn._(['signin', 'errMsg', "Two passwords don't match, please retype."])).show();
         } else {
-            var API_url = "/playerAPI/resetpwd";
+            var API_url = cms.config.API_BASE + "/playerAPI/resetpwd";
             var API_param = "?email=" + inEmail + "&token=" + inToken + "&password=" + pass + "&rx=g" + new Date().getTime() + "&v=32";
             API_url += API_param;
 
@@ -73,7 +73,7 @@ $(function () {
         $(".msg-error").hide();
         //log ('redirect to facebook login! bye');
         $.cookie("fb-return-hash", location.hash);
-        seamless_exit('/playerAPI/fbLogin');
+        seamless_exit(cms.config.API_BASE + '/playerAPI/fbLogin');
     });
 
     $("#btn-signup-close, #signup-cancel").on("click", function () {
@@ -140,7 +140,7 @@ $(function () {
             return false;
         }
 
-        var gurl = "/playerAPI/signup";
+        var gurl = cms.config.API_BASE + "/playerAPI/signup";
         //?email="+chk_email+"&rx=g"+mms+"&v=32";
 
         var posting = $.post(gurl, {
@@ -191,7 +191,7 @@ $(function () {
             $('#overlay-s').fadeOut();
             return false;
         }
-        var gurl = "/playerAPI/forgotpwd?email=" + chk_email + "&rx=g" + mms + "&v=32";
+        var gurl = cms.config.API_BASE + "/playerAPI/forgotpwd?email=" + chk_email + "&rx=g" + mms + "&v=32";
         $.get(gurl, function (result) {
             var ret = result.split("\t");
             if (ret[0] === "0") {

@@ -9,7 +9,7 @@
         "CMS": "<span class=\"cms-icon\">後台管理系統</span>",
         "CMSContent Management System": "<span class=\"cms-icon\">後台管理系統</span>",
         "My Programs": "我的節目",
-        "My Portal": "我的入口",
+        "My App": "App 管理",
         "CMS Settings": "<img src=\"images/icon_studio_setup.png\" alt=\"\" />管理系統設定",
         "Connection is inactive, click to restart it.": "連結授權已失效，請點此重啟連結。"
     },
@@ -163,7 +163,7 @@
             "9x9.tv - Brand Setting": "9x9.tv - 品牌設定"
         },
         "func-nav": {
-            "My Portal": "我的入口",
+            "Main Channels": "主頻道",
             "Program Store": "節目商店",
             "Brand Settings": "品牌設定"
         },
@@ -187,7 +187,7 @@
             "9x9.tv - Store Manage": "9x9.tv - 頻道商店 "
         },
         "func-nav": {
-            "My Portal": "我的入口",
+            "Main Channels": "主頻道",
             "Program Store": "節目商店",
             "Promotion Category": "推薦類別",
             "System Category": "系統類別",
@@ -263,7 +263,7 @@
             "9x9.tv - Store Manage": "9x9.tv - 節目商店 "
         },
         "func-nav": {
-            "My Portal": "我的入口",
+            "Main Channels": "主頻道",
             "Program Store": "節目商店",
             "Promotion Category": "推薦類別",
             "System Category": "系統類別",
@@ -310,10 +310,10 @@
     },
     "portal-manage": {
         "html-title": {
-            "9x9.tv - My Portal": "9x9.tv - 我的入口"
+            "9x9.tv - Main Channels": "9x9.tv - 主頻道"
         },
         "func-nav": {
-            "My Portal": "我的入口",
+            "Main Channels": "主頻道",
             "Program Store": "節目商店",
             "Brand Settings": "品牌"
         },
@@ -323,8 +323,9 @@
             "Edit": "編輯"
         },
         "title-func": {
-            "My Portal": "我的入口",
+            "Main Channels": "主頻道",
             "Portal": "我的入口",
+            "Main channels are the first thing sighted by your audience, which offer the great opportunity for your fine programs to gain visibility and exposure.": "主頻道是用戶使用app時第一眼看到的內容，提供了最佳的節目曝光。",
             "Preview": "預覽",
             "Save": "儲存",
             "Channel Name": "頻道名稱"
@@ -344,6 +345,22 @@
             "Please fill in the keywords to search.": "請輸入關鍵字搜尋",
             "Processing...": "處理中..."
         },
+        "overlay": {
+            "Are you sure to remove this channel set?": "你確定要刪除這個頻道？",
+            "Unsaved changes will be lost, are you sure you want to leave?": "未儲存資料將遺失，確定離開？",
+            "Processing...": "處理中...",
+            "Add Channel Set": "增加頻道",
+            "Edit Channel Set": "編輯頻道",
+            "Cancel": "取消",
+            "Yes": "確定",
+            "Channel Set Name": "頻道名稱",
+            "Max length is 14 characters": "最多14個英文字母",
+            "Max length is 8 chinese characters": "最多8個中文字"
+        },
+        "prompt": {
+            "You channel set Quota was used.": "你的頻道數已達上限。",
+            "You program Quota was used.": "你的節目數已達上限。"
+        },
         "portal-layer": {
             "You can add 27 programs into your channel.": "你可以增加27個節目到你的頻道",
             "Processing...": "處理中..."
@@ -357,6 +374,7 @@
             "Channel Name": "頻道名稱 ",
             "Program List": "節目列表 ",
             "Programs": "節目",
+            "Add Channel Set": "增加頻道",
             "Add programs": "新增節目",
             "Add programs sub": "",
             "Please input program URL": "請輸入節目網址",
@@ -365,17 +383,18 @@
             "Remove from top": "取消置頂",
             "Remove program": "移除此節目",
             "You can only set 4 programs on top": "只能設定4個置頂節目",
-            "Please fill in your channel name.": "請輸入頻道名稱"
+            "Please fill in your channel name.": "請輸入頻道名稱",
+            "Program List : ? Programs": "節目列表 : {0} 個節目"
         }
     },
     "portal-set": {
         "html-title": {
-            "9x9.tv - My Portal": "9x9.tv - 我的入口"
+            "9x9.tv - Main Channels": "9x9.tv - 主頻道"
         },
         "func-nav": {
             "Portal": "我的入口",
             "Program Store": "節目商店",
-            "My Portal": "我的入口",
+            "Main Channels": "主頻道",
             "Brand Settings": "品牌設定"
         },
         "sets-list": {
@@ -384,7 +403,7 @@
             "Edit": "編輯"
         },
         "title-func": {
-            "My Portal": "我的入口",
+            "Main Channels": "主頻道",
             "Portal": "我的入口"
         }
     },
